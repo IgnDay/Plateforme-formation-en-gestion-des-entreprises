@@ -1,23 +1,283 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Fiscalité</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Calcul impôt sur le revenu salarial</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:20px;
+}
+
+h1{
+font-size:34px;
+}
+
+table{
+border-collapse:collapse;
+width:100%;
+}
+
+td{
+border:1px solid #444;
+padding:12px;   /* hauteur ligne 200% */
+}
+
+input{
+width:240px;   /* largeur champs 200% */
+text-align:right;
+padding:6px;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+margin-bottom:15px;
+cursor:pointer;
+}
+
+.label{
+font-weight:bold;
+}
+
+.explain{
+font-size:14px;
+}
+
+.beige{background:#efe1b5;}
+.blue{background:#d6deea;}
+.green{background:#dfe9d8;}
+.green2{background:#c6d9a7;}
+.orange{background:#e5b596;}
+.grey{background:#efefef;}
+.yellow{background:#fff14a;font-weight:bold;}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>➗ Module Fiscalité</h1>
+<h1>Calcul impôt sur le revenu salarial</h1>
 
-<p>Exercice simple :</p>
+<button onclick="vider()">Vider les champs</button>
 
-<p>TVA </p>
+<table>
 
-<input type="text" placeholder="Votre réponse">
+<tr class="beige">
+<td class="label">A. Salaire Brut</td>
+<td><input id="A" oninput="calc()"></td>
+<td class="explain">
+(Les traitements + indemnités + salaires + allocations spéciales +
+remboursements forfaitaires + pensions + rentes viagères + avantages en nature)
+</td>
+</tr>
 
-<br><br>
+<tr class="beige">
+<td class="label">B. Exonérations</td>
+<td><input id="B" oninput="calc()"></td>
+<td class="explain">(Consulter la liste des exonérations)</td>
+</tr>
 
-<a href="index.html">⬅ Retour accueil</a>
+<tr class="beige">
+<td class="label">C. Salaire Brut Imposable (A-B)</td>
+<td id="C">-</td>
+<td></td>
+</tr>
+
+<tr class="blue">
+<td class="label">D. Frais professionnels</td>
+<td id="D">-</td>
+<td class="explain">
+(Inhérents à la fonction ou à l'emploi)
+&nbsp;&nbsp;
+<span class="yellow">Taux</span>
+<input id="tauxFP" value="0" oninput="calc()"> %
+</td>
+</tr>
+
+<tr class="blue">
+<td class="label">E. Retenues supportées</td>
+<td><input id="E" oninput="calc()"></td>
+<td class="explain">(Pour la constitution de pensions ou retraite)</td>
+</tr>
+
+<tr class="blue">
+<td class="label">F. Cotisations</td>
+<td><input id="F" oninput="calc()"></td>
+<td class="explain">
+(Cotisations organismes marocains de prévoyance sociale & sécurité sociale)
+</td>
+</tr>
+
+<tr class="blue">
+<td class="label">G. Assurance groupe</td>
+<td><input id="G" oninput="calc()"></td>
+<td class="explain">
+(couvrant maladie, maternité, invalidité et décès)
+</td>
+</tr>
+
+<tr class="blue">
+<td class="label">H. Remboursement prêts</td>
+<td><input id="H" oninput="calc()"></td>
+<td class="explain">
+(Contrat Mourabaha ou Ijara Mountahia Bitamlik pour logement principal)
+</td>
+</tr>
+
+<tr class="blue">
+<td class="label">I. Total déductions (D+E+F+G+H)</td>
+<td id="I">-</td>
+<td></td>
+</tr>
+
+<tr class="green">
+<td class="label">J. Abattement pensions</td>
+<td><input id="J" oninput="calc()"></td>
+<td></td>
+</tr>
+
+<tr class="green">
+<td class="label">K. Abattement artistes</td>
+<td><input id="K" oninput="calc()"></td>
+<td></td>
+</tr>
+
+<tr class="green">
+<td class="label">L. Abattement revenus salariaux</td>
+<td><input id="L" oninput="calc()"></td>
+<td class="explain">
+(versés aux sportifs professionnels, entraîneurs, éducateurs)
+</td>
+</tr>
+
+<tr class="green2">
+<td class="label">M. Total Abattements (J+K+L)</td>
+<td id="M">-</td>
+<td></td>
+</tr>
+
+<tr class="beige">
+<td class="label">N. Salaire Net Imposable (C-I-M)</td>
+<td id="N">-</td>
+<td></td>
+</tr>
+
+<tr class="orange">
+<td class="label">O. Impôt Brut</td>
+<td id="O">-</td>
+<td>
+<span class="yellow">Taux IR</span>
+<input id="tauxIR" value="0" oninput="calc()"> %
+
+<span class="yellow">Montant à déduire</span>
+<input id="deduction" oninput="calc()">
+(Suivant barème IR)
+</td>
+</tr>
+
+<tr class="grey">
+<td class="label">P. Charges famille</td>
+<td><input id="P" oninput="calc()"></td>
+<td></td>
+</tr>
+
+<tr class="grey">
+<td class="label">Q. Retraites étrangères</td>
+<td><input id="Q" oninput="calc()"></td>
+<td></td>
+</tr>
+
+<tr class="grey">
+<td class="label">R. Impôt étranger</td>
+<td><input id="R" oninput="calc()"></td>
+<td></td>
+</tr>
+
+<tr class="grey">
+<td class="label">S. Crédit impôt</td>
+<td><input id="S" oninput="calc()"></td>
+<td></td>
+</tr>
+
+<tr class="grey">
+<td class="label">T. Total déductions impôt</td>
+<td id="T">-</td>
+<td></td>
+</tr>
+
+<tr class="orange">
+<td class="label">U. Impôt Net (O-T)</td>
+<td id="U">-</td>
+<td></td>
+</tr>
+
+</table>
+
+<script>
+
+function calc(){
+
+let A=parseFloat(document.getElementById("A").value)||0;
+let B=parseFloat(document.getElementById("B").value)||0;
+let E=parseFloat(document.getElementById("E").value)||0;
+let F=parseFloat(document.getElementById("F").value)||0;
+let G=parseFloat(document.getElementById("G").value)||0;
+let H=parseFloat(document.getElementById("H").value)||0;
+
+let tauxFP=parseFloat(document.getElementById("tauxFP").value)||0;
+let tauxIR=parseFloat(document.getElementById("tauxIR").value)||0;
+let deduction=parseFloat(document.getElementById("deduction").value)||0;
+
+let J=parseFloat(document.getElementById("J").value)||0;
+let K=parseFloat(document.getElementById("K").value)||0;
+let L=parseFloat(document.getElementById("L").value)||0;
+
+let P=parseFloat(document.getElementById("P").value)||0;
+let Q=parseFloat(document.getElementById("Q").value)||0;
+let R=parseFloat(document.getElementById("R").value)||0;
+let S=parseFloat(document.getElementById("S").value)||0;
+
+let C=A-B;
+let D=C*(tauxFP/100);
+let I=D+E+F+G+H;
+let M=J+K+L;
+let N=C-I-M;
+let O=(N*(tauxIR/100))-deduction;
+let T=P+Q+R+S;
+let U=O-T;
+
+document.getElementById("C").innerHTML=C.toFixed(2);
+document.getElementById("D").innerHTML=D.toFixed(2);
+document.getElementById("I").innerHTML=I.toFixed(2);
+document.getElementById("M").innerHTML=M.toFixed(2);
+document.getElementById("N").innerHTML=N.toFixed(2);
+document.getElementById("O").innerHTML=O.toFixed(2);
+document.getElementById("T").innerHTML=T.toFixed(2);
+document.getElementById("U").innerHTML=U.toFixed(2);
+
+}
+
+function vider(){
+
+let inputs=document.querySelectorAll("input");
+
+inputs.forEach(i=>{
+if(i.id!="tauxFP" && i.id!="tauxIR"){
+i.value="";
+}
+});
+
+document.querySelectorAll("td[id]").forEach(td=>{
+td.innerHTML="-";
+});
+
+}
+
+</script>
 
 </body>
 </html>
