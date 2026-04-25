@@ -1,2 +1,2 @@
-# Plateforme-formation-en-gestion-des-entreprises-Formateur-ATAMNI-ABDERRAHIM
+# Plateforme-formation-en-gestion-des-entreprises
 Apprentissage avec démonstration en ligne 
