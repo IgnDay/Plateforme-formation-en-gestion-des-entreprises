@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Tableau de Compte Schématique</title>
+<title>Tableau Compte avec Solde</title>
 
 <style>
 body {
@@ -61,8 +61,11 @@ button {
 </head>
 
 <body>
+<br>
 
-<h2>Tableau de Compte Schématique</h2>
+<a href="compta.html">⬅ Retour</a>
+
+<h2>Tableau de Compte schématique</h2>
 
 <div id="tableauxContainer">
 
@@ -199,7 +202,7 @@ function ajouterCompte(){
   <td class="solde-debit"></td>
   <td class="solde-credit"></td>
   <td>Solde</td>
-  </tr>        
+  </tr>
 
   <tr class="total">
   <td class="total-debit">0</td>
@@ -221,9 +224,6 @@ function viderTous(){
   document.querySelectorAll('.total-debit, .total-credit').forEach(e => e.innerText = '0');
   document.querySelectorAll('.solde-debit, .solde-credit').forEach(e => e.innerText = '');
 }
-<br>
-
-<a href="compta.html">⬅ Retour</a>
 
 </script>
 
