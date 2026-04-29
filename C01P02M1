@@ -182,49 +182,25 @@ color:#38bdf8;
 
 <br>
 
-<a href="P01M1.html">⬅ Retour</a>
+<a href="P02M1.html">⬅ Retour</a>
 
 </header>
 
 <!-- CONTENU -->
 <div class="menu">
 <div class="section-title">Formation en Comptabilité générale : Les concepts de base</div>
-<a href="S01C01P01M1.html" class="card sub">
-➡️ Section 1 : Notion de la comptabilité générale 
+<a href="S01C01P02M1.html" class="card sub">
+➡️ Section 1 : L'enregistrement des opérations d'achat et de vente 
 </a>
 
-<a href="S02C01P01M1.html" class="card sub">
-➡️ Section 2 : Le bilan comptable
+<a href="S02C01P02M1.html" class="card sub">
+➡️ Section 2 : L'enregistrement des éléments courants divers
 </a>
 
-<a href="S03C01P01M1.html" class="card sub">
-➡️ Section 3 : L’analyse comptable des opérations
+<a href="S03C01P02M1.html" class="card sub">
+➡️ Section 3 : L’enregistrement des opérations relatives aux règlements finaciers
 </a>
 
-<a href="S04C01P01M1.html" class="card sub">
-➡️ Section 4 : Notion de compte
-</a>
-<a href="S05C01P01M1.html" class="card sub">
-➡️ Section 5 : Le compte des produits et charges
-</a>
-<a href="S06C01P01M1.html" class="card sub">
-➡️ Section 6 : Le cadre comptable marocain
-</a>
-<a href="S07C01P01M1.html" class="card sub">
-➡️ Section 7 : Le virement comptable
-</a>
-<a href="S08C01P01M1.html" class="card sub">
-➡️ Section 8 : L’organisation comptable
-</a>
-<a href="S09C01P01M1.html" class="card sub">
-➡️ Section 9 : Le journal comptable
-</a>
-<a href="S10C01P01M1.html" class="card sub">
-➡️ Section 10 : Le grand livre 
-</a>
-<a href="S11C01P01M1.html" class="card sub">
-➡️ Section 11 : La balance 
-</a>
 </div>
    
 <!-- ===== FOOTER ===== -->
