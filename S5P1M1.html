@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Le CPC - Compte de Produits et Charges</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+header{
+    background:#2c3e50;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:10px 15px;
+    border:none;
+    background:#27ae60;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:14px;
+}
+
+nav button:hover{
+    background:#1e8449;
+}
+
+section{
+    display:none;
+    padding:30px;
+    font-size:19px;
+}
+
+.active{
+    display:block;
+}
+
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#27ae60;
+}
+
+ul{
+    line-height:1.8;
+}
+
+.highlight{
+    background:#eafaf1;
+    padding:12px;
+    border-left:5px solid #27ae60;
+    margin:15px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+td{
+    border:1px solid #444;
+    padding:10px;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:10px;
+    background:#2c3e50;
+    color:white;
+}
+</style>
+
+<script>
+function showSection(id){
+    let sections = document.querySelectorAll("section");
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Compte de Produits et de Charges (CPC)</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('def')">Définition</button>
+    <button onclick="showSection('produits')">Produits</button>
+    <button onclick="showSection('charges')">Charges</button>
+    <button onclick="showSection('structure')">Structure</button>
+    <button onclick="showSection('fonctionnement')">Fonctionnement</button>
+</nav>
+
+<section id="def" class="active">
+    <h2>📘 Définition du CPC</h2>
+
+    <p>
+        Le Compte de Produits et de Charges (CPC) est un document comptable
+        qui permet de déterminer le résultat de l’entreprise.
+    </p>
+
+    <div class="highlight">
+        ✔ Il regroupe les PRODUITS et les CHARGES<br>
+        ✔ Il explique comment le résultat est formé
+    </div>
+
+    <p>
+        👉 Le CPC décrit les performances de l’entreprise pendant un exercice.
+    </p>
+</section>
+
+<section id="produits">
+    <h2>💰 Les Produits (Classe 7 dans le PCGM)</h2>
+
+    <p>
+        Les produits représentent les revenus générés par l’activité de l’entreprise.
+    </p>
+
+    <div class="highlight">
+        👉 Ce sont les entrées d’argent
+    </div>
+
+    <h3>Exemples :</h3>
+    <ul>
+        <li>Ventes de marchandises</li>
+        <li>Ventes de services</li>
+        <li>Intérêts reçus</li>
+        <li>Cession d’immobilisations</li>
+    </ul>
+</section>
+
+<section id="charges">
+    <h2>💸 Les Charges(Classe 6 dans le PCGM)</h2>
+
+    <p>
+        Les charges représentent les dépenses engagées pour le fonctionnement de l’entreprise.
+    </p>
+
+    <div class="highlight">
+        👉 Ce sont les sorties d’argent
+    </div>
+
+    <h3>Exemples :</h3>
+    <ul>
+        <li>Achats de marchandises</li>
+        <li>Charges de personnel</li>
+        <li>Intérêts versés</li>
+    </ul>
+</section>
+
+<section id="structure">
+    <h2>📊 Structure du CPC</h2>
+
+    <p>Le CPC est composé de 3 catégories :</p>
+
+    <h3>1️⃣ Exploitation</h3>
+    <ul>
+        <li><b>71 Produits d'exploitation :</b> ventes, services et d'autres produits d'exploitation</li>
+        <li><b>61 Charges d'exploitation :</b> Achats, loyers, transport et d'autres charges lièes à l'exploitation</li>
+    </ul>
+
+    <h3>2️⃣ Financier</h3>
+    <ul>
+        <li><b>73 Produits financiers :</b> intérêts reçus et d'autres produits financiers</li>
+        <li><b>63 Charges fiancières :</b> intérêts payés et d'autres charges financières</li>
+    </ul>
+
+    <h3>3️⃣ Non courant (Exceptionnel)</h3>
+    <ul>
+        <li><b>75 Produits non courants:</b> Cession d'immobilisations et d'autres prdouits exeptionnels</li>
+        <li><b>65 Charges non courantes :</b> Pénalités, pertes sur crénces et d'autres charges exeptionnelles</li>
+    </ul>
+
+    <div class="highlight">
+        ✔ Ces éléments permettent de calculer le résultat global
+    </div>
+</section>
+
+<section id="fonctionnement">
+    <h2>⚙️ Fonctionnement des comptes du CPC</h2>
+
+    <ul>
+        <li><b>Les comptes de produits :</b> augmentent au crédit et diminuent au débit</li>
+        <li><b>Les comptes de charges :</b> diminuent au crédit et augmentent au débit</li>
+    </ul>
+
+    <div class="highlight">
+        ✔ Résultat = Produits - Charges
+    </div>
+
+    <p>
+        👉 Si Produits > Charges → Bénéfice  
+        👉 Si Charges > Produits → Perte
+    </p>
+</section>
+
+<footer>
+    Formation en comptabilité générale
+<br>
+
+<a href="P1M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
