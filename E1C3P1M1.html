@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Le Bilan Comptable</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+header{
+    background: #2980b9;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:10px 15px;
+    border:none;
+    background:#3498db;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:14px;
+}
+
+nav button:hover{
+    background:#2980b9;
+}
+
+section{
+    display:none;
+    padding:30px;
+    font-size:19px;
+}
+
+.active{
+    display:block;
+}
+
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color: #2c3e50;
+}
+
+ul{
+    line-height:1.8;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+td{
+    border:1px solid #444;
+    padding:10px;
+    text-align:center;
+}
+
+.highlight{
+    background:#dff9fb;
+    padding:10px;
+    border-left:5px solid #00a8ff;
+    margin:15px 0;
+}
+
+footer{
+    text-align:center;
+    padding:10px;
+    background:#2c3e50;
+    color:white;
+}
+</style>
+
+<script>
+function showSection(id){
+    let sections = document.querySelectorAll("section");
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Exercice 1 : Le Bilan Comptable</h1>
+</header>
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    max-width:900px;
+    margin:auto;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1,h2{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th, td{
+    border:1px solid #444;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#d5e8d4;
+}
+
+.section{
+    margin-top:40px;
+}
+
+.total{
+    font-weight:bold;
+    background:#d5e8d4;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1></h1>
+
+<p>
+La situation de l’entreprise <strong>« AL FAJR »</strong> au <strong>05/02/2026</strong> se présente comme suit (en MAD) :
+</p>
+
+<table>
+<tr>
+<th>Éléments</th>
+<th>Montants</th>
+</tr>
+
+<tr><td>Matériel de transport</td><td>80 000</td></tr>
+<tr><td>Banque</td><td>52 000</td></tr>
+<tr><td>Marchandises</td><td>38 000</td></tr>
+<tr><td>Caisse</td><td>10 000</td></tr>
+<tr><td>Fournisseurs</td><td>20 000</td></tr>
+<tr><td>Clients</td><td>30 000</td></tr>
+
+<tr><td><strong>Capital</strong></td><td><strong>À déterminer</strong></td></tr>
+</table>
+
+<div class="section">
+<h2>Travail à faire :</h2>
+<ol>
+<li>Déterminer le capital de l’entreprise</li>
+<li>Établir le bilan initial (de démarrage)</li>
+</ol>
+</div>
+
+<!-- CORRECTION -->
+
+<div class="section">
+<h1>✅ Correction</h1>
+
+<h2>Bilan au 05/02/2026</h2>
+
+<table>
+<tr>
+<th>ACTIF</th>
+<th>Montants</th>
+<th>PASSIF</th>
+<th>Montants</th>
+</tr>
+
+<tr>
+<td><b>Actif Immobilisé</b><br>Matériel de transport</td>
+<td>80 000</td>
+<td><b>Capitaux propres</b><br>Capital</td>
+<td>190 000</td>
+</tr>
+
+<tr>
+<td><b>Actif Circulant</b><br>Marchandises<br>Clients</td>
+<td>38 000<br>30 000</td>
+<td><b>Passif circulant</b><br>Fournisseurs</td>
+<td>20 000</td>
+</tr>
+
+<tr>
+<td><b>Trésorerie Actif</b><br>Banque<br>Caisse</td>
+<td>52 000<br>10 000</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr class="total">
+<td>Total</td>
+<td>210 000</td>
+<td>Total</td>
+<td>210 000</td>
+</tr>
+
+</table>
+
+<p><strong>Calcul du capital :</strong></p>
+<p>
+Total Actif = 80 000 + 38 000 + 30 000 + 52 000 + 10 000 = <strong>210 000</strong><br>
+Capital = Total Actif - Dettes = 210 000 - 20 000 = <strong>190 000</strong>
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+</div>
+
+</body>
+</html>
+
+<footer>
+   Formation en comptabilité générale
+<br>
+
+<a href="C3P1M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
