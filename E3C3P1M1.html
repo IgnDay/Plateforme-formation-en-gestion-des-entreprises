@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Le CPC</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+header{
+    background:#f4f6f9;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:10px 15px;
+    border:none;
+    background:#f39c12;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:14px;
+}
+
+nav button:hover{
+    background:#d68910;
+}
+
+section{
+    display:none;
+    padding:30px;
+    font-size:19px;
+}
+
+.active{
+    display:block;
+}
+
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#f39c12;
+}
+
+ul{
+    line-height:1.8;
+}
+
+.highlight{
+    background:#fef5e7;
+    padding:12px;
+    border-left:5px solid #f39c12;
+    margin:15px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+td{
+    border:1px solid #444;
+    padding:10px;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:10px;
+    background:#2c3e50;
+    color:white;
+}
+
+</style>
+
+<script>
+function showSection(id){
+    let sections = document.querySelectorAll("section");
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Le Compte de Produits et de Charges CPC</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('EXE')">EXERCICE</button>
+    <button onclick="showSection('SOL')">SOLUTION</button>
+</nav>
+
+<section id="EXE" class="active">
+   
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Exercice CPC</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #444;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#d5e8d4;
+}
+
+/* Colonne Charges à gauche */
+td:nth-child(1){
+    text-align:left;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<p>
+Les comptes de résultat de l’entreprise <strong>« ATLAS COMMERCE.SARL »</strong> au <strong>31/12/2025</strong> présentent les éléments suivants :
+</p>
+
+<table>
+<tr><th>Charges</th><th>Montant (MAD)</th></tr>
+<tr><td>Achats de marchandises</td><td>320 000</td></tr>
+<tr><td>Entretien et réparation</td><td>6 000</td></tr>
+<tr><td>Transport</td><td>7 000</td></tr>
+<tr><td>Rémunération du personnel</td><td>100 000</td></tr>
+<tr><td>Intérêts des emprunts et dettes</td><td>5 000</td></tr>
+<tr><td>Pénalités et amendes</td><td>4 000</td></tr>
+</table>
+
+<table>
+<tr><th>Produits</th><th>Montant (MAD)</th></tr>
+<tr><td>Ventes de marchandises</td><td>450 000</td></tr>
+<tr><td>Escompte obtenu</td><td>5 000</td></tr>
+<tr><td>Intérêts et produits assimilés</td><td>6 000</td></tr>
+</table>
+
+<p><strong>Données complémentaires :</strong></p>
+<ul>
+<li>Stock initial de marchandises au 01/01/2025 : 30 000 MAD</li>
+<li>Stock final de marchandises au 31/12/2025 : 50 000 MAD</li>
+<li>Taux de l’impôt sur les sociétés : 10%</li>
+</ul>
+
+<h2>📝 Travail à faire :</h2>
+<ol>
+► Établir le Compte de Produits et Charges (CPC) au 31/12/2025
+</ol>
+
+</div>
+
+</body>
+</html>
+
+💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer le CPC. 
+</body>
+
+</section>
+
+<section id="SOL">
+  <!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    background:white;
+    padding:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+td, th{
+    border:1px solid #333;
+    padding:8px;
+}
+
+th{
+    background:#16a085;
+    color:white;
+    text-align:center;
+}
+
+.section{
+    background:#d5f5e3;
+    font-weight:bold;
+}
+
+.total{
+    background:#fcf3cf;
+    font-weight:bold;
+}
+
+.result{
+    background:#fadbd8;
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>CPC au 31/12/2025</h2>
+
+<table>
+
+<tr>
+<th>Libellé</th>
+<th>Montant (DH)</th>
+</tr>
+
+<tr class="section"><td colspan="2">Produits d'exploitation</td></tr>
+<tr><td>Ventes de marchandises en l'état</td><td class="right">450 000</td></tr>
+<tr><td>Ventes de biens et services produits</td><td class="right">0</td></tr>
+<tr class="total"><td>Chiffre d'affaires</td><td class="right">450 000</td></tr>
+<tr><td>Variation de stocks de produits</td><td class="right">0</td></tr>
+<tr><td>Immobilisations produites</td><td class="right">0</td></tr>
+<tr><td>Subvention d'exploitation</td><td class="right">0</td></tr>
+<tr><td>Autres produits d'exploitation</td><td class="right">0</td></tr>
+<tr><td>Reprises d'exploitation</td><td class="right">0</td></tr>
+<tr class="total"><td>Total Produits d'exploitation</td><td class="right">450 000</td></tr>
+
+<tr class="section"><td colspan="2">Charges d'exploitation</td></tr>
+<tr><td>Achats revendus de marchandises</td><td class="right">300 000</td></tr>
+<tr><td>Achats consommés</td><td class="right">0</td></tr>
+<tr><td>Autres charges externes</td><td class="right">13 000</td></tr>
+<tr><td>Impôts et taxes</td><td class="right">0</td></tr>
+<tr><td>Charges de personnel</td><td class="right">100 000</td></tr>
+<tr><td>Autres charges d'exploitation</td><td class="right">0</td></tr>
+<tr><td>Dotations d'exploitation</td><td class="right">0</td></tr>
+<tr class="total"><td>Total Charges d'exploitation</td><td class="right">413 000</td></tr>
+
+<tr class="result"><td>Résultat d'exploitation</td><td class="right">37 000</td></tr>
+
+<tr class="section"><td colspan="2">Produits financiers</td></tr>
+<tr><td>Intérêts et produits financiers</td><td class="right">11 000</td></tr>
+<tr class="total"><td>Total Produits financiers</td><td class="right">11 000</td></tr>
+
+<tr class="section"><td colspan="2">Charges financières</td></tr>
+<tr><td>Charges d'intérêts</td><td class="right">5 000</td></tr>
+<tr class="total"><td>Total Charges financières</td><td class="right">5 000</td></tr>
+
+<tr class="result"><td>Résultat financier</td><td class="right">6 000</td></tr>
+<tr class="result"><td>Résultat courant</td><td class="right">43 000</td></tr>
+
+<tr class="section"><td colspan="2">Produits non courants</td></tr>
+<tr class="total"><td>Total Produits non courants</td><td class="right">0</td></tr>
+
+<tr class="section"><td colspan="2">Charges non courantes</td></tr>
+<tr><td>Autres charges non courantes</td><td class="right">4 000</td></tr>
+<tr class="total"><td>Total Charges non courantes</td><td class="right">4 000</td></tr>
+
+<tr class="result"><td>Résultat non courant</td><td class="right">-4 000</td></tr>
+<tr class="result"><td>Résultat avant impôt</td><td class="right">39 000</td></tr>
+
+<tr><td>Impôt sur les résultats</td><td class="right">3 900</td></tr>
+
+<tr class="result">
+<td><strong>Résultat net</strong></td>
+<td class="right"><strong>35 100</strong></td>
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>
+
+</section>
+
+<footer>
+    Formation en comptabilité générale
+<br>
+
+<a href="C3P1M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
