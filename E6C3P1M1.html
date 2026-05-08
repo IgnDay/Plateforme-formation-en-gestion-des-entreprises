@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Le CPC</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+header{
+    background:#f4f6f9;
+    color:#34495e;
+    padding:20px;
+    text-align:center;
+}
+
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:10px 15px;
+    border:none;
+    background:#f39c12;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:14px;
+}
+
+nav button:hover{
+    background:#d68910;
+}
+
+section{
+    display:none;
+    padding:30px;
+    font-size:19px;
+}
+
+.active{
+    display:block;
+}
+
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#f39c12;
+}
+
+ul{
+    line-height:1.8;
+}
+
+.highlight{
+    background:#fef5e7;
+    padding:12px;
+    border-left:5px solid #f39c12;
+    margin:15px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+td{
+    border:1px solid #444;
+    padding:10px;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:10px;
+    background:#2c3e50;
+    color:white;
+}
+/* Journal : écritures à droite */
+.libelle{
+    text-align:left;
+}
+
+/* bilan : texte à gauche */
+.bilan td{
+    text-align:left;
+}
+
+</style>
+
+<script>
+function showSection(id){
+    let sections = document.querySelectorAll("section");
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 La Balance</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('EXE')">EXERCICE</button>
+    <button onclick="showSection('SOL')">SOLUTION</button>
+</nav>
+
+<section id="EXE" class="active">
+<p>
+► Élaborer la balance des comptes de la société SAHARA, objet de l'exercice N° 04.
+</p>
+💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer la balance. 
+
+</section>
+
+<section id="SOL">
+ 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:20px;
+    background:#f4f6f8;
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+    background:white;
+}
+
+th, td{
+    border:1px solid #444;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+.total{
+    font-weight:bold;
+    background:#dfe6e9;
+}
+
+/* Colonne Intitulé à gauche */
+td:nth-child(2){
+    text-align:left;
+}
+.balance td:nth-child(2){
+    text-align:left;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1></h1>
+
+<table class="balance">
+<tr>
+<th>Compte</th>
+<th>Intitulé</th>
+<th>Total Débit</th>
+<th>Total Crédit</th>
+<th>Solde Débiteur</th>
+<th>Solde Créditeur</th>
+</tr>
+
+<tr><td>1111</td><td>Capital social</td><td>0</td><td>2325000</td><td></td><td>2325000</td></tr>
+<tr><td>1481</td><td>Emprunts auprès des EC</td><td>0</td><td>250000</td><td></td><td>250000</td></tr>
+
+<tr><td>2230</td><td>Fonds commercial</td><td>350000</td><td>0</td><td>350000</td><td></td></tr>
+<tr><td>2321</td><td>Bâtiments</td><td>1100000</td><td>0</td><td>1100000</td><td></td></tr>
+<tr><td>2340</td><td>Matériel de transport</td><td>300000</td><td>0</td><td>300000</td><td></td></tr>
+<tr><td>2351</td><td>Mobilier de bureau</td><td>60000</td><td>0</td><td>60000</td><td></td></tr>
+<tr><td>2355</td><td>Matériel informatique</td><td>15000</td><td>0</td><td>15000</td><td></td></tr>
+
+<tr><td>3111</td><td>Marchandises</td><td>155000</td><td>95000</td><td>60000</td><td></td></tr>
+<tr><td>3421</td><td>Clients</td><td>70000</td><td>12000</td><td>58000</td><td></td></tr>
+<tr><td>3501</td><td>Actions</td><td>18000</td><td>0</td><td>18000</td><td></td></tr>
+
+<tr><td>4411</td><td>Fournisseurs</td><td>25000</td><td>120000</td><td></td><td>95000</td></tr>
+<tr><td>4452</td><td>État, impôts, taxes et assimilés</td><td>0</td><td>25000</td><td></td><td>25000</td></tr>
+<tr><td>4481</td><td>Dettes sur acquisitions d’immobilisations</td><td>0</td><td>7500</td><td></td><td>7500</td></tr>
+
+<tr><td>5141</td><td>Banques</td><td>735000</td><td>134500</td><td>600500</td><td></td></tr>
+<tr><td>5161</td><td>Caisses</td><td>185000</td><td>112400</td><td>72600</td><td></td></tr>
+
+<tr><td>6111</td><td>Achats de marchandises</td><td>65000</td><td>0</td><td>65000</td><td></td></tr>
+<tr><td>6114</td><td>Variation stocks de marchandises</td><td>95000</td><td>60000</td><td>35000</td><td></td></tr>
+<tr><td>6125</td><td>Achats non stockés de MF</td><td>1700</td><td>0</td><td>1700</td><td></td></tr>
+<tr><td>6131</td><td>Locations et charges locatives</td><td>5200</td><td>0</td><td>5200</td><td></td></tr>
+<tr><td>6133</td><td>Entretien et réparations</td><td>400</td><td>0</td><td>400</td><td></td></tr>
+<tr><td>6134</td><td>Primes d'assurances</td><td>31000</td><td>0</td><td>31000</td><td></td></tr>
+<tr><td>6136</td><td>Rémunérations d'intermédiaires et honoraires</td><td>21200</td><td>0</td><td>21200</td><td></td></tr>
+<tr><td>6141</td><td>Publicité, PRP</td><td>4000</td><td>0</td><td>4000</td><td></td></tr>
+<tr><td>6145</td><td>Frais postaux et frais de télécommunications</td><td>1500</td><td>0</td><td>1500</td><td></td></tr>
+<tr><td>6161</td><td>Impôts et taxes directs</td><td>4200</td><td>0</td><td>4200</td><td></td></tr>
+<tr><td>6167</td><td>Impôts, taxes et droits assimilés</td><td>200</td><td>0</td><td>200</td><td></td></tr>
+<tr><td>6171</td><td>Rémunérations du personnel </td><td>65000</td><td>0</td><td>65000</td><td></td></tr>
+<tr><td>6174</td><td>Charges sociales</td><td>32000</td><td>0</td><td>32000</td><td></td></tr>
+<tr><td>6176</td><td>Charges sociales diverses</td><td>10000</td><td>0</td><td>10000</td><td></td></tr>
+
+<tr><td>7111</td><td>Ventes de marchandises</td><td>12000</td><td>205000</td><td></td><td>193000</td></tr>
+<tr><td>7127</td><td>Ventes de produits accessoires</td><td>0</td><td>15000</td><td></td><td>15000</td></tr>
+
+<tr class="total">
+<td colspan="2">TOTAL</td>
+<td>3 253 400</td>
+<td>3 253 400</td>
+<td>2 910 500</td>
+<td>2 910 500</td>
+</tr>
+
+</table>
+
+</body>
+</html>
+
+</section>
+
+<footer>
+    Formation en comptabilité générale
+<br>
+
+<a href="C3P1M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
