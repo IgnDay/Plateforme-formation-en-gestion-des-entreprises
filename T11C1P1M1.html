@@ -108,7 +108,6 @@ function showSection(id){
     <button onclick="showSection('def')">Définition</button>
     <button onclick="showSection('role')">Rôle</button>
     <button onclick="showSection('presentation')">Présentation</button>
-    <button onclick="showSection('EA')">Exemple d'application</button>
     <button onclick="showSection('EE')">Exercice d’évaluation</button>
 
 </nav>
@@ -189,124 +188,11 @@ function showSection(id){
         ✔ La somme des soldes débiteurs = somme des soldes créditeurs
     </div>
 </section>
-<section id="EA">
-<h3>> Élaborer la balance des comptes de la société SAHARA, objet de l’exemple relatif au thème 9 : « Le journal comptable ».
-<h2>► Présentation de la balance de la STE SAHARA</h2></h3>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title></title>
-
-<style>
-body{
-    font-family: Arial;
-    margin:20px;
-    background:#f4f6f8;
-}
-
-h1{
-    text-align:center;
-    color:#2c3e50;
-}
-
-table{
-    border-collapse:collapse;
-    width:100%;
-    background:white;
-}
-
-th, td{
-    border:1px solid #444;
-    padding:8px;
-    text-align:center;
-}
-
-th{
-    background:#2c3e50;
-    color:white;
-}
-
-tr:nth-child(even){
-    background:#f2f2f2;
-}
-
-.total{
-    font-weight:bold;
-    background:#dfe6e9;
-}
-</style>
-
-</head>
-
-<body>
-
-<h1></h1>
-
-<table>
-<tr>
-<th>Compte</th>
-<th>Intitulé</th>
-<th>Total Débit</th>
-<th>Total Crédit</th>
-<th>Solde Débiteur</th>
-<th>Solde Créditeur</th>
-</tr>
-
-<tr><td>1111</td><td>Capital social</td><td>0</td><td>2325000</td><td></td><td>2325000</td></tr>
-<tr><td>1481</td><td>Emprunts</td><td>0</td><td>250000</td><td></td><td>250000</td></tr>
-
-<tr><td>2230</td><td>Fonds commercial</td><td>350000</td><td>0</td><td>350000</td><td></td></tr>
-<tr><td>2321</td><td>Bâtiments</td><td>1100000</td><td>0</td><td>1100000</td><td></td></tr>
-<tr><td>2340</td><td>Matériel de transport</td><td>300000</td><td>0</td><td>300000</td><td></td></tr>
-<tr><td>2351</td><td>Mobilier de bureau</td><td>60000</td><td>0</td><td>60000</td><td></td></tr>
-<tr><td>2355</td><td>Matériel informatique</td><td>15000</td><td>0</td><td>15000</td><td></td></tr>
-
-<tr><td>3111</td><td>Marchandises</td><td>155000</td><td>95000</td><td>60000</td><td></td></tr>
-<tr><td>3421</td><td>Clients</td><td>70000</td><td>12000</td><td>58000</td><td></td></tr>
-<tr><td>3501</td><td>Actions</td><td>18000</td><td>0</td><td>18000</td><td></td></tr>
-
-<tr><td>4411</td><td>Fournisseurs</td><td>25000</td><td>120000</td><td></td><td>95000</td></tr>
-<tr><td>4452</td><td>Etat, impôts</td><td>0</td><td>25000</td><td></td><td>25000</td></tr>
-<tr><td>4481</td><td>Dettes immobilisations</td><td>0</td><td>7500</td><td></td><td>7500</td></tr>
-
-<tr><td>5141</td><td>Banque</td><td>735000</td><td>134500</td><td>600500</td><td></td></tr>
-<tr><td>5161</td><td>Caisse</td><td>185000</td><td>112400</td><td>72600</td><td></td></tr>
-
-<tr><td>6111</td><td>Achats marchandises</td><td>65000</td><td>0</td><td>65000</td><td></td></tr>
-<tr><td>6114</td><td>Variation stocks</td><td>95000</td><td>60000</td><td>35000</td><td></td></tr>
-<tr><td>6125</td><td>Achats non stockés</td><td>1700</td><td>0</td><td>1700</td><td></td></tr>
-<tr><td>6131</td><td>Locations</td><td>5200</td><td>0</td><td>5200</td><td></td></tr>
-<tr><td>6133</td><td>Entretien</td><td>400</td><td>0</td><td>400</td><td></td></tr>
-<tr><td>6134</td><td>Assurances</td><td>31000</td><td>0</td><td>31000</td><td></td></tr>
-<tr><td>6136</td><td>Honoraires</td><td>21200</td><td>0</td><td>21200</td><td></td></tr>
-<tr><td>6141</td><td>Publicité</td><td>4000</td><td>0</td><td>4000</td><td></td></tr>
-<tr><td>6145</td><td>Frais postaux</td><td>1500</td><td>0</td><td>1500</td><td></td></tr>
-<tr><td>6161</td><td>Impôts directs</td><td>4200</td><td>0</td><td>4200</td><td></td></tr>
-<tr><td>6167</td><td>Impôts taxes</td><td>200</td><td>0</td><td>200</td><td></td></tr>
-<tr><td>6171</td><td>Rémunérations</td><td>65000</td><td>0</td><td>65000</td><td></td></tr>
-<tr><td>6174</td><td>Charges sociales</td><td>32000</td><td>0</td><td>32000</td><td></td></tr>
-<tr><td>6176</td><td>Charges sociales diverses</td><td>10000</td><td>0</td><td>10000</td><td></td></tr>
-
-<tr><td>7111</td><td>Ventes marchandises</td><td>12000</td><td>205000</td><td></td><td>193000</td></tr>
-<tr><td>7127</td><td>Ventes accessoires</td><td>0</td><td>15000</td><td></td><td>15000</td></tr>
-
-<tr class="total">
-<td colspan="2">TOTAL</td>
-<td>3 253 400</td>
-<td>3 253 400</td>
-<td>2 910 500</td>
-<td>2 910 500</td>
-</tr>
-
-</table>
-
-</body>
-</html>
-</section>
-
 <section id="EE">
+<p>
+► Élaborer la balance des comptes de la société AL AMAL, objet de l'exercice d'évaluation du thème N° 09 relatif au journal comptable.
+</p>
+💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer la balance. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème.
 </section>
 
 <footer>
