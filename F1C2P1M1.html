@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Journal Comptable</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+
+body{
+  font-family:Arial, sans-serif;
+  background:#f8fafc;
+  margin:30px;
+}
+
+h2{
+  text-align:center;
+  margin-top:30px;
+}
+
+.operation{
+  border:3px solid #ccc;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:25px;
+  background:#fff;
+  box-shadow:2px 2px 8px rgba(0,0,0,0.1);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+td{
+  border:1px solid #ccc;
+  padding:6px;
+  font-size:14px;
+}
+
+/* Largeurs */
+td:nth-child(1){ width:8%; }
+td:nth-child(2){ width:8%; }
+td:nth-child(3){ width:30%; }
+td:nth-child(4){ width:30%; }
+td:nth-child(5){ width:12%; }
+td:nth-child(6){ width:12%; }
+td:nth-child(7){ width:5%; }
+
+/* Couleurs colonnes impaires */
+td.col1,
+td.col3,
+td.col5{
+  background:#e6f2ff;
+}
+
+/* Couleurs colonnes paires */
+td.col2,
+td.col4,
+td.col6{
+  background:#ffe6ee;
+}
+
+input.cell{
+  width:100%;
+  border:none;
+  background:transparent;
+  outline:none;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.btn{
+  margin:6px 4px;
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-add-line{
+  background:#2563eb;
+  color:white;
+}
+
+.btn-del{
+  background:#dc2626;
+  color:white;
+}
+
+.btn-del-op{
+  background:#b91c1c;
+  color:white;
+}
+
+.btn-new-op{
+  background:#16a34a;
+  color:white;
+}
+
+.btn-export{
+  background:#f59e0b;
+  color:white;
+}
+
+.btn-clear{
+  background:#6b7280;
+  color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Le Journal</h2>
+
+<div id="operations"></div>
+
+<div style="text-align:center; margin-top:10px;">
+  <button class="btn btn-new-op" id="btnNewOp">➕ Nouvelle opération</button>
+  <button class="btn btn-export" id="btnExcel">📊 Export Excel</button>
+  <button class="btn btn-clear" id="btnClear">🧹 Vider</button>
+</div>
+
+<script>
+
+const container = document.getElementById("operations");
+
+// ---------------- AJOUT LIGNE ----------------
+function addLine(tbody, data=["","","","","",""]){
+
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td class="col1">
+      <input class="cell" value="${data[0]||""}">
+    </td>
+
+    <td class="col2">
+      <input class="cell" value="${data[1]||""}">
+    </td>
+
+    <td class="col3">
+      <input class="cell" value="${data[2]||""}">
+    </td>
+
+    <td class="col4">
+      <input class="cell" value="${data[3]||""}">
+    </td>
+
+    <td class="col5">
+      <input class="cell" value="${data[4]||""}">
+    </td>
+
+    <td class="col6">
+      <input class="cell" value="${data[5]||""}">
+    </td>
+
+    <td>
+      <button class="btn btn-del">❌</button>
+    </td>
+  `;
+
+  tr.querySelector(".btn-del").onclick = () => tr.remove();
+
+  tbody.appendChild(tr);
+}
+
+// ---------------- LIGNE DATE ----------------
+function addDateLine(tbody){
+
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td colspan="7"
+        style="text-align:center;
+               font-weight:bold;
+               background:#d1fae5;">
+
+      <input
+        class="cell"
+        type="text"
+        placeholder="JJ/MM/AAAA"
+        style="text-align:center;"
+      >
+
+    </td>
+  `;
+
+  tbody.appendChild(tr);
+}
+
+// ---------------- CREER OPERATION ----------------
+function createOperation(){
+
+  const div = document.createElement("div");
+
+  div.className = "operation";
+
+  div.innerHTML = `
+    <table>
+      <tbody></tbody>
+    </table>
+
+    <div style="text-align:center;">
+
+      <button class="btn btn-add-line">
+        + Ligne
+      </button>
+
+      <button class="btn btn-del-op">
+        ❌ Supprimer
+      </button>
+
+    </div>
+  `;
+
+  const tbody = div.querySelector("tbody");
+
+  div.querySelector(".btn-add-line").onclick =
+    () => addLine(tbody);
+
+  div.querySelector(".btn-del-op").onclick =
+    () => div.remove();
+
+  addDateLine(tbody);
+
+  addLine(tbody);
+
+  container.appendChild(div);
+}
+
+// ---------------- EXPORT EXCEL ----------------
+function exportExcel(){
+
+  let data = [];
+
+  document.querySelectorAll(".operation").forEach(op=>{
+
+    op.querySelectorAll("tr").forEach(tr=>{
+
+      let inputs = tr.querySelectorAll("input");
+
+      if(inputs.length){
+        data.push([...inputs].map(i=>i.value));
+      }
+
+    });
+
+  });
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+
+  const wb = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(wb, ws, "Journal");
+
+  XLSX.writeFile(wb, "journal_comptable.xlsx");
+}
+
+// ---------------- VIDER ----------------
+function clearAll(){
+
+  if(confirm("Vider tout le journal ?")){
+
+    container.innerHTML = "";
+
+    createOperation();
+  }
+}
+
+// ---------------- EVENTS ----------------
+document.getElementById("btnNewOp").onclick = createOperation;
+
+document.getElementById("btnExcel").onclick = exportExcel;
+
+document.getElementById("btnClear").onclick = clearAll;
+
+// ---------------- INIT ----------------
+createOperation();
+
+</script>
+<footer>
+    Formation en comptabilité générale
+<br>
+
+<a href="C2P1M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
