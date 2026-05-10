@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balance des Comptes</title>
+
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:20px;
+}
+
+.top-actions{
+    margin-bottom:15px;
+}
+
+.btn-save{
+    border:none;
+    padding:10px 18px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+    color:white;
+    background:#27ae60;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:12px;
+    border:1px solid #ddd;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:6px;
+}
+
+input{
+    width:100%;
+    border:none;
+    padding:8px;
+    box-sizing:border-box;
+}
+
+.input-number{
+    text-align:right;
+}
+
+select{
+    width:100%;
+    padding:8px;
+    border:none;
+    background:white;
+}
+
+.total-row{
+    background:#ecf0f1;
+    font-weight:bold;
+}
+
+.actions-cell{
+    text-align:center;
+    white-space:nowrap;
+}
+
+.icon-btn{
+    border:none;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    color:white;
+    margin:0 2px;
+}
+
+.btn-add{
+    background:#27ae60;
+}
+
+.btn-delete{
+    background:#c0392b;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1> La Balance-IgnDay-</h1>
+
+<div class="top-actions">
+
+<button class="btn-save" onclick="enregistrerBalance()">
+💾 Enregistrer
+</button>
+
+</div>
+
+<table id="balanceTable">
+
+<thead>
+
+<tr>
+
+<th style="width:35%">
+N° et Intitulé de Compte
+</th>
+
+<th>Total Débit</th>
+
+<th>Total Crédit</th>
+
+<th>Solde Débiteur</th>
+
+<th>Solde Créditeur</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+
+<tr>
+
+<td>
+
+<select>
+
+<option value="">
+-- Choisir un compte --
+</option>
+
+<option>
+1111 - Capital social
+</option>
+
+<option>
+1481 - Emprunts auprès des EC
+</option>
+
+<option>
+2111 - Frais préliminaires
+</option>
+
+<option>
+2340 - Matériel de transport
+</option>
+
+<option>
+3421 - Clients
+</option>
+
+<option>
+4411 - Fournisseurs
+</option>
+
+<option>
+5141 - Banque
+</option>
+
+<option>
+5161 - Caisse
+</option>
+
+<option>
+6111 - Achats de marchandises
+</option>
+
+<option>
+6125 - Achats non stockés
+</option>
+
+<option>
+6145 - Télécommunications
+</option>
+
+<option>
+6167 - Impôts et taxes
+</option>
+
+<option>
+7121 - Ventes de marchandises
+</option>
+
+</select>
+
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+value="0"
+oninput="calculerLigne(this)">
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+value="0"
+oninput="calculerLigne(this)">
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+readonly>
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+readonly>
+</td>
+
+<td class="actions-cell">
+
+<button class="icon-btn btn-add"
+onclick="ajouterLigne()">
++
+</button>
+
+<button class="icon-btn btn-delete"
+onclick="supprimerLigne(this)">
+−
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+<tfoot>
+
+<tr class="total-row">
+
+<td>TOTAUX</td>
+
+<td id="totalDebit">0</td>
+
+<td id="totalCredit">0</td>
+
+<td id="totalSoldeDebit">0</td>
+
+<td id="totalSoldeCredit">0</td>
+
+<td></td>
+
+</tr>
+
+</tfoot>
+
+</table>
+
+</div>
+
+<script>
+
+function calculerLigne(element){
+
+let row = element.parentElement.parentElement;
+
+let debit =
+parseFloat(
+row.cells[1]
+.querySelector('input')
+.value
+) || 0;
+
+let credit =
+parseFloat(
+row.cells[2]
+.querySelector('input')
+.value
+) || 0;
+
+let soldeDebit = 0;
+let soldeCredit = 0;
+
+if(debit > credit){
+
+    soldeDebit = debit - credit;
+
+}
+else if(credit > debit){
+
+    soldeCredit = credit - debit;
+
+}
+
+row.cells[3]
+.querySelector('input')
+.value = soldeDebit;
+
+row.cells[4]
+.querySelector('input')
+.value = soldeCredit;
+
+calculerTotaux();
+
+}
+
+function calculerTotaux(){
+
+let rows =
+document.querySelectorAll("#tbody tr");
+
+let totalDebit = 0;
+let totalCredit = 0;
+let totalSoldeDebit = 0;
+let totalSoldeCredit = 0;
+
+rows.forEach(row => {
+
+    totalDebit +=
+    parseFloat(
+    row.cells[1]
+    .querySelector('input')
+    .value
+    ) || 0;
+
+    totalCredit +=
+    parseFloat(
+    row.cells[2]
+    .querySelector('input')
+    .value
+    ) || 0;
+
+    totalSoldeDebit +=
+    parseFloat(
+    row.cells[3]
+    .querySelector('input')
+    .value
+    ) || 0;
+
+    totalSoldeCredit +=
+    parseFloat(
+    row.cells[4]
+    .querySelector('input')
+    .value
+    ) || 0;
+
+});
+
+document.getElementById("totalDebit")
+.innerText =
+totalDebit.toLocaleString('fr-FR');
+
+document.getElementById("totalCredit")
+.innerText =
+totalCredit.toLocaleString('fr-FR');
+
+document.getElementById("totalSoldeDebit")
+.innerText =
+totalSoldeDebit.toLocaleString('fr-FR');
+
+document.getElementById("totalSoldeCredit")
+.innerText =
+totalSoldeCredit.toLocaleString('fr-FR');
+
+}
+
+function ajouterLigne(){
+
+let tbody =
+document.getElementById("tbody");
+
+let ligne = `
+
+<tr>
+
+<td>
+
+<select>
+
+<option value="">
+-- Choisir un compte --
+</option>
+
+<option>
+1111 - Capital social
+</option>
+
+<option>
+1481 - Emprunts auprès des EC
+</option>
+
+<option>
+2111 - Frais préliminaires
+</option>
+
+<option>
+2340 - Matériel de transport
+</option>
+
+<option>
+3421 - Clients
+</option>
+
+<option>
+4411 - Fournisseurs
+</option>
+
+<option>
+5141 - Banque
+</option>
+
+<option>
+5161 - Caisse
+</option>
+
+<option>
+6111 - Achats de marchandises
+</option>
+
+<option>
+6125 - Achats non stockés
+</option>
+
+<option>
+6145 - Télécommunications
+</option>
+
+<option>
+6167 - Impôts et taxes
+</option>
+
+<option>
+7121 - Ventes de marchandises
+</option>
+
+</select>
+
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+value="0"
+oninput="calculerLigne(this)">
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+value="0"
+oninput="calculerLigne(this)">
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+readonly>
+</td>
+
+<td>
+<input class="input-number"
+type="number"
+readonly>
+</td>
+
+<td class="actions-cell">
+
+<button class="icon-btn btn-add"
+onclick="ajouterLigne()">
++
+</button>
+
+<button class="icon-btn btn-delete"
+onclick="supprimerLigne(this)">
+−
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+tbody.insertAdjacentHTML(
+"beforeend",
+ligne
+);
+
+}
+
+function supprimerLigne(button){
+
+let tbody =
+document.getElementById("tbody");
+
+if(tbody.rows.length > 1){
+
+    button.parentElement
+    .parentElement
+    .remove();
+
+    calculerTotaux();
+
+}
+
+}
+
+function enregistrerBalance(){
+
+let table =
+document.getElementById("balanceTable");
+
+let clone =
+table.cloneNode(true);
+
+/* Récupération des vraies valeurs */
+
+let vraisSelects =
+document.querySelectorAll("#balanceTable select");
+
+let fauxSelects =
+clone.querySelectorAll("select");
+
+fauxSelects.forEach((selectClone,index)=>{
+
+    let valeur =
+    vraisSelects[index]
+    .options[
+    vraisSelects[index].selectedIndex
+    ].text;
+
+    let td =
+    selectClone.parentElement;
+
+    td.innerHTML = valeur;
+
+});
+
+/* Récupération des vraies valeurs INPUT */
+
+let vraisInputs =
+document.querySelectorAll("#balanceTable input");
+
+let fauxInputs =
+clone.querySelectorAll("input");
+
+fauxInputs.forEach((inputClone,index)=>{
+
+    let valeur =
+    vraisInputs[index].value;
+
+    let td =
+    inputClone.parentElement;
+
+    td.innerHTML = valeur;
+
+});
+
+/* Supprimer les boutons */
+
+clone.querySelectorAll("button")
+.forEach(btn=>{
+
+    btn.remove();
+
+});
+
+/* Création du document HTML propre */
+
+let contenu = `
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Balance Comptable</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:20px;
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:10px;
+    border:1px solid #000;
+}
+
+td{
+    border:1px solid #000;
+    padding:8px;
+}
+
+.total-row{
+    background:#ecf0f1;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Balance des Comptes</h1>
+
+${clone.outerHTML}
+
+</body>
+
+</html>
+
+`;
+
+let blob =
+new Blob(
+[contenu],
+{type:"text/html"}
+);
+
+let lien =
+document.createElement("a");
+
+let nom =
+prompt(
+"Nom du fichier :",
+"Balance_Comptable"
+);
+
+if(nom == null || nom == "") return;
+
+lien.href =
+URL.createObjectURL(blob);
+
+lien.download =
+nom + ".html";
+
+lien.click();
+
+}
+
+window.onload = function(){
+
+document
+.querySelectorAll("input")
+.forEach(input => {
+
+    calculerLigne(input);
+
+});
+
+}
+
+</script>
+<footer>
+    Formation en comptabilité générale
+<br>
+
+<a href="C2P1M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
