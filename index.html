@@ -2,31 +2,71 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Plateforme de Formation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay ForLin | Plateforme de Formation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-font-family:Arial;
+
+*{
 margin:0;
-background:#f4f6f9;
+padding:0;
+box-sizing:border-box;
 }
 
-/* ===== HEADER ANIMÉ ===== */
+body{
+font-family:'Poppins',sans-serif;
+background:#f4f7fb;
+color:#1e293b;
+}
+
+/* ===== TOPBAR ===== */
 .topbar{
 display:flex;
-align-items:center;
 justify-content:space-between;
-background:#0f766e;
-color:white;
-padding:10px 20px;
+align-items:center;
+padding:15px 40px;
+background:linear-gradient(90deg,#0f172a,#0f766e);
 position:sticky;
 top:0;
 z-index:1000;
+box-shadow:0 2px 10px rgba(0,0,0,0.15);
 }
 
-.logo{
-font-size:20px;
+.logo-container{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-icon{
+width:55px;
+height:55px;
+border-radius:14px;
+background:linear-gradient(135deg,#14b8a6,#0ea5e9);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
 font-weight:bold;
+color:white;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.logo-text{
+color:white;
+}
+
+.logo-text h2{
+font-size:22px;
+font-weight:700;
+}
+
+.logo-text span{
+font-size:12px;
+opacity:0.8;
+letter-spacing:1px;
 }
 
 .nav{
@@ -37,189 +77,452 @@ gap:15px;
 .nav a{
 color:white;
 text-decoration:none;
-padding:6px 10px;
-border-radius:4px;
+padding:10px 16px;
+border-radius:8px;
 transition:0.3s;
+font-size:14px;
+font-weight:500;
 }
 
 .nav a:hover{
-background:#0e7490;
+background:rgba(255,255,255,0.15);
 transform:translateY(-2px);
 }
 
-/* Recherche */
 .search-box input{
-padding:5px;
-border-radius:4px;
+padding:10px 15px;
 border:none;
+border-radius:30px;
+width:220px;
+outline:none;
+font-family:Poppins;
 }
 
-/* HEADER */
-header{
-background:#0f766e;
-color:white;
-padding:20px;
+/* ===== HERO ===== */
+.hero{
+background:
+linear-gradient(rgba(15,23,42,0.82),rgba(15,118,110,0.75)),
+url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1400&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+padding:100px 20px;
 text-align:center;
+color:white;
 }
 
-/* MENU */
-.menu{
+.hero h1{
+font-size:48px;
+margin-bottom:20px;
+font-weight:700;
+}
+
+.hero p{
 max-width:900px;
-margin:20px auto;
-padding:10px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+opacity:0.95;
 }
 
-.section-title{
-background:#e0f2fe;
-padding:10px;
-font-weight:bold;
-margin-top:20px;
-border-left:6px solid #0f766e;
-}
-
-.card{
-display:block;
-background:white;
-padding:12px;
-margin:8px 0;
-text-decoration:none;
-color:#1e293b;
-border-radius:6px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-transition:0.2s;
-}
-
-.card:hover{
-transform:scale(1.02);
-background:#f1f5f9;
-}
-
-.icon{
-display:inline-block;
-width:10px;
-height:10px;
-border-radius:50%;
-margin-right:8px;
-}
-
-.red{background:#dc2626;}
-.blue{background:#2563eb;}
-.green{background:#16a34a;}
-
-/* ===== FOOTER ===== */
-footer{
-background:#1e293b;
-color:white;
-padding:20px;
-margin-top:40px;
-}
-
-.footer-container{
+.hero-buttons{
+margin-top:35px;
 display:flex;
+justify-content:center;
+gap:15px;
 flex-wrap:wrap;
-justify-content:space-between;
-gap:20px;
 }
 
-.footer-section{
-flex:1;
-min-width:200px;
-}
-
-.footer-section h3{
-margin-bottom:10px;
-}
-
-.social a{
-display:inline-block;
-margin-right:10px;
-color:white;
+.btn{
+padding:14px 28px;
+border-radius:40px;
 text-decoration:none;
-font-size:20px;
+font-weight:600;
 transition:0.3s;
 }
 
-.social a:hover{
-color:#38bdf8;
+.btn-primary{
+background:#14b8a6;
+color:white;
 }
 
-/* Responsive */
-@media(max-width:600px){
-.nav{flex-wrap:wrap;}
-.footer-container{flex-direction:column;}
+.btn-primary:hover{
+background:#0d9488;
+transform:translateY(-3px);
 }
+
+.btn-light{
+background:white;
+color:#0f172a;
+}
+
+.btn-light:hover{
+background:#e2e8f0;
+}
+
+/* ===== BANNIÈRE ===== */
+.banner{
+max-width:1200px;
+margin:-40px auto 40px;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+text-align:center;
+position:relative;
+z-index:5;
+}
+
+.banner h2{
+color:#0f766e;
+margin-bottom:15px;
+font-size:28px;
+}
+
+.banner p{
+font-size:16px;
+line-height:1.8;
+color:#475569;
+}
+
+/* ===== MODULES ===== */
+.menu{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.section-title{
+font-size:28px;
+font-weight:700;
+margin-bottom:25px;
+color:#0f172a;
+border-left:6px solid #14b8a6;
+padding-left:15px;
+}
+
+.modules-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+border-radius:18px;
+padding:25px;
+text-decoration:none;
+color:#1e293b;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+transition:0.35s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:6px;
+background:linear-gradient(90deg,#14b8a6,#2563eb);
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 14px 30px rgba(0,0,0,0.12);
+}
+
+.card-icon{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.card h3{
+margin-bottom:10px;
+font-size:20px;
+color:#0f172a;
+}
+
+.card p{
+font-size:14px;
+line-height:1.7;
+color:#64748b;
+}
+
+/* ===== STATISTIQUES ===== */
+.stats{
+background:linear-gradient(90deg,#0f172a,#134e4a);
+padding:60px 20px;
+margin-top:60px;
+}
+
+.stats-container{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:25px;
+text-align:center;
+color:white;
+}
+
+.stat-box h2{
+font-size:42px;
+margin-bottom:10px;
+color:#2dd4bf;
+}
+
+.stat-box p{
+font-size:16px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+background:#0f172a;
+color:white;
+padding:60px 30px 30px;
+margin-top:60px;
+}
+
+.footer-container{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+}
+
+.footer-section h3{
+margin-bottom:18px;
+font-size:20px;
+color:#2dd4bf;
+}
+
+.footer-section p{
+line-height:1.9;
+color:#cbd5e1;
+font-size:14px;
+}
+
+.social{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:10px;
+}
+
+.social a{
+text-decoration:none;
+background:#1e293b;
+padding:10px 14px;
+border-radius:8px;
+color:white;
+transition:0.3s;
+font-size:14px;
+}
+
+.social a:hover{
+background:#14b8a6;
+transform:translateY(-3px);
+}
+
+.footer-bottom{
+text-align:center;
+margin-top:40px;
+padding-top:20px;
+border-top:1px solid rgba(255,255,255,0.1);
+font-size:14px;
+color:#94a3b8;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+
+.topbar{
+flex-direction:column;
+gap:15px;
+padding:20px;
+}
+
+.nav{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.search-box input{
+width:100%;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.banner{
+margin:20px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ===== BARRE HAUT ===== -->
+<!-- ===== TOPBAR ===== -->
 <div class="topbar">
-<div class="logo"> IgnDay</div>
+
+<div class="logo-container">
+
+<div class="logo-icon">
+IF
+</div>
+
+<div class="logo-text">
+<h2>IgnDay ForLin</h2>
+<span>FORMATION • LEARNING • INNOVATION</span>
+</div>
+
+</div>
 
 <div class="nav">
+<a href="#">Accueil</a>
 <a href="#">Guide de formation</a>
 <a href="#">Filières</a>
+<a href="#">Modules</a>
+<a href="#">Contact</a>
 <a href="#">Langue 🌐</a>
 </div>
 
 <div class="search-box">
-<input type="text" placeholder="Rechercher...">
+<input type="text" placeholder="Rechercher un module...">
 </div>
+
 </div>
 
-<!-- HEADER -->
-<header>
-<h1>📘 Plateforme de formation et d'apprentissage interactif "IgnDay"</h1>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Plateforme de Formation</title>
+<!-- ===== HERO ===== -->
+<section class="hero">
 
+<h1>Plateforme de Formation Professionnelle</h1>
 
-
-<!-- ===== BANNIÈRE ANIMÉE ===== -->
-<div class="banner">
-<h2>🚀 Formation pratique & évolution rapide</h2>
 <p>
-Apprenez concrètement avec des exercices réels et développez des compétences directement utilisables en entreprise.<br>
-🎯 Objectif : être opérationnel rapidement | 📈 Progression rapide | 💼 Compétences professionnelles
+Développez vos compétences professionnelles grâce à une plateforme moderne,
+interactive et orientée vers la pratique réelle en entreprise.
+Formation adaptée aux stagiaires, étudiants et professionnels du domaine
+de gestion des entreprises.
 </p>
+
+<div class="hero-buttons">
+<a href="#" class="btn btn-primary">Commencer maintenant</a>
+<a href="#" class="btn btn-light">Découvrir les modules</a>
 </div>
 
-</header>
+</section>
 
-<!-- CONTENU -->
+<!-- ===== BANNIÈRE ===== -->
+<div class="banner">
+
+<h2>🚀 Formation pratique & évolution rapide</h2>
+
+<p>
+Apprenez concrètement avec des exercices réels et développez des compétences directement utilisables en entreprise.
+<br><br>
+🎯 Objectif : être opérationnel rapidement |
+📈 Progression rapide |
+💼 Compétences professionnelles solides
+</p>
+
+</div>
+
+<!-- ===== MODULES ===== -->
 <div class="menu">
 
-<div class="section-title">📚 Gestion des entreprises</div>
+<div class="section-title">
+📚 Gestion des entreprises
+</div>
+
+<div class="modules-grid">
 
 <a href="M1.html" class="card">
-<span class="icon red"></span> Module 1 : Comptabilité générale
+<div class="card-icon">📘</div>
+<h3>Module 1 : Comptabilité générale</h3>
+<p>
+Maîtrisez les bases de la comptabilité, les écritures comptables et les états financiers.
+</p>
 </a>
 
 <a href="M2.html" class="card">
-<span class="icon red"></span> Module 2 :Comptabilité analytique
+<div class="card-icon">📊</div>
+<h3>Module 2 : Comptabilité analytique</h3>
+<p>
+Analyse des coûts, calcul des marges et méthodes de gestion analytique.
+</p>
 </a>
 
 <a href="M3.html" class="card">
-<span class="icon blue"></span> Module 3 :Analyse financière
+<div class="card-icon">📈</div>
+<h3>Module 3 : Analyse financière</h3>
+<p>
+Étude des bilans, ratios financiers et interprétation des performances.
+</p>
 </a>
 
 <a href="M4.html" class="card">
-<span class="icon blue"></span> Module 4 :Fiscalité
+<div class="card-icon">💰</div>
+<h3>Module 4 : Fiscalité</h3>
+<p>
+Comprendre les règles fiscales, la TVA et les obligations des entreprises.
+</p>
 </a>
 
 <a href="M5.html" class="card">
-<span class="icon green"></span> Module 5 :Mathématiques financières
+<div class="card-icon">🧮</div>
+<h3>Module 5 : Mathématiques financières</h3>
+<p>
+Calculs financiers, intérêts simples et composés, actualisation et annuités.
+</p>
 </a>
 
 <a href="M6.html" class="card">
-<span class="icon green"></span> Module 6 :Statistiques
+<div class="card-icon">📉</div>
+<h3>Module 6 : Statistiques</h3>
+<p>
+Traitement des données statistiques et outils d'analyse décisionnelle.
+</p>
 </a>
 
 </div>
+
+</div>
+
+<!-- ===== STATISTIQUES ===== -->
+<section class="stats">
+
+<div class="stats-container">
+
+<div class="stat-box">
+<h2>6+</h2>
+<p>Modules interactifs</p>
+</div>
+
+<div class="stat-box">
+<h2>100%</h2>
+<p>Formation pratique</p>
+</div>
+
+<div class="stat-box">
+<h2>24/7</h2>
+<p>Accès à la plateforme</p>
+</div>
+
+<div class="stat-box">
+<h2>∞</h2>
+<p>Opportunités d'apprentissage</p>
+</div>
+
+</div>
+
+</section>
 
 <!-- ===== FOOTER ===== -->
 <footer>
@@ -227,28 +530,41 @@ Apprenez concrètement avec des exercices réels et développez des compétences
 <div class="footer-container">
 
 <div class="footer-section">
-<h3>Contact </h3>
-<p>📍 Adresse : Maroc</p>
-<p>📱 Téléphone : +212 00000000</p>
+<h3>📍 Contact</h3>
+<p>
+Adresse : Maroc<br>
+Téléphone : +212 00000000<br>
+Email : contact@igndayforlin.com
+</p>
 </div>
 
 <div class="footer-section">
 <h3>🌐 Réseaux sociaux</h3>
+
 <div class="social">
 <a href="#">Facebook</a>
-<a href="#">Twitter</a>
-<a href="#">WhatsApp</a>
 <a href="#">Instagram</a>
 <a href="#">YouTube</a>
-  <a href="#">TikTok</a>
+<a href="#">TikTok</a>
+<a href="#">LinkedIn</a>
+<a href="#">WhatsApp</a>
 </div>
+
 </div>
 
 <div class="footer-section">
 <h3>ℹ️ À propos</h3>
-<p>Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises </p>
+
+<p>
+IgnDay ForLin est une plateforme moderne de formation et d’apprentissage interactif dédiée aux stagiaires, étudiants et professionnels dans le domaine de la gestion des entreprises.
+</p>
+
 </div>
 
+</div>
+
+<div class="footer-bottom">
+© 2026 IgnDay ForLin — Tous droits réservés
 </div>
 
 </footer>
