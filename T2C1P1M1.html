@@ -2,22 +2,26 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Le Bilan Comptable</title>
+<title>Opérations d'Achat et de Vente</title>
 
 <style>
+
 body{
     font-family: Arial;
     margin:0;
     background:#f4f6f9;
 }
 
+/* HEADER */
 header{
-    background: #2980b9;
+    background: f4f6f9;
     color:white;
-    padding:20px;
+    padding:10px;
     text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
 }
 
+/* MENU */
 nav{
     background:#34495e;
     padding:10px;
@@ -26,74 +30,167 @@ nav{
 
 nav button{
     margin:5px;
-    padding:10px 15px;
+    padding:12px 18px;
     border:none;
-    background:#3498db;
+    background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:14px;
+    font-size:15px;
+    transition:0.3s;
 }
 
+/* Hover bouton */
 nav button:hover{
-    background:#2980b9;
+    background:#019875;
+    transform:translateY(-2px);
 }
 
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
 section{
     display:none;
     padding:30px;
-    font-size:19px;
+    margin:20px;
 }
 
+/* Section visible */
 .active{
     display:block;
 }
 
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
 h2{
     color:#2c3e50;
 }
 
 h3{
-    color: #2c3e50;
+    color:#00b894;
 }
 
-ul{
-    line-height:1.8;
-}
-
+/* TABLEAUX */
 table{
     width:100%;
     border-collapse:collapse;
+    background:white;
     margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
 td{
-    border:1px solid #444;
+    border:1px solid #ccc;
     padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
     text-align:center;
 }
 
-.highlight{
-    background:#dff9fb;
-    padding:10px;
-    border-left:5px solid #00a8ff;
-    margin:15px 0;
+.right{
+    text-align:right;
 }
 
+.header{
+    background:#dfe6e9;
+}
+
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
 footer{
     text-align:center;
-    padding:10px;
+    padding:15px;
     background:#2c3e50;
     color:white;
+    margin-top:20px;
 }
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
 </style>
 
 <script>
+
 function showSection(id){
+
+    /* Sections */
     let sections = document.querySelectorAll("section");
-    sections.forEach(sec => sec.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
 }
+
 </script>
 
 </head>
@@ -316,7 +413,7 @@ Le 10 juin 2025, trois associés décident de constituer une entreprise dénomm�
 </body>
 </html>
 💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer le bilan. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème.
-
+</section>
 <footer>
    Formation en comptabilité générale
 <br>
@@ -327,5 +424,4 @@ Le 10 juin 2025, trois associés décident de constituer une entreprise dénomm�
 
 </body>
 </html>
-
 
