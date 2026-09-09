@@ -2,22 +2,26 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Le Cadre Comptable</title>
+<title>Opérations d'Achat et de Vente</title>
 
 <style>
+
 body{
     font-family: Arial;
     margin:0;
-    background:#f4f6f9;
+    background: #f4f6f9;
 }
 
+/* HEADER */
 header{
-    background:#2c3e50;
-    color:white;
-    padding:20px;
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
     text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
 }
 
+/* MENU */
 nav{
     background:#34495e;
     padding:10px;
@@ -26,74 +30,254 @@ nav{
 
 nav button{
     margin:5px;
-    padding:10px 15px;
+    padding:12px 18px;
     border:none;
-    background:#f39c12;
+    background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:14px;
+    font-size:15px;
+    transition:0.3s;
 }
 
+/* Hover bouton */
 nav button:hover{
-    background:#d68910;
+    background:#019875;
+    transform:translateY(-2px);
 }
 
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
 section{
     display:none;
     padding:30px;
-    font-size:19px;
+    margin:20px;
 }
 
+/* Section visible */
 .active{
     display:block;
 }
 
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
 h2{
     color:#2c3e50;
 }
 
 h3{
-    color:#f39c12;
+    color:#00b894;
 }
 
-ul{
-    line-height:1.8;
-}
-
-.highlight{
-    background:#fef5e7;
-    padding:12px;
-    border-left:5px solid #f39c12;
-    margin:15px 0;
-}
-
+/* TABLEAUX */
 table{
     width:100%;
     border-collapse:collapse;
+    background:white;
     margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
 td{
-    border:1px solid #444;
+    border:1px solid #ccc;
     padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
     text-align:center;
 }
 
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
 footer{
     text-align:center;
-    padding:10px;
+    padding:15px;
     background:#2c3e50;
     color:white;
+    margin-top:20px;
 }
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
 </style>
 
 <script>
+
 function showSection(id){
+
+    /* Sections */
     let sections = document.querySelectorAll("section");
-    sections.forEach(sec => sec.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
 }
+
+
+
+/* QUESTIONS */
+
+const questions = [
+{q:"1. Le plan comptable est une liste organisée des comptes et de leurs règles de fonctionnement.", answer:true},
+{q:"2. Le modèle simplifié est destiné aux grandes entreprises.", answer:false},
+{q:"3. Les classes 1 à 8 concernent la comptabilité générale.", answer:true},
+{q:"4. La classe 9 est réservée à la comptabilité analytique.", answer:true},
+{q:"5. La classe 0 concerne les comptes de trésorerie.", answer:false},
+{q:"6. Le principe de prudence consiste à enregistrer les pertes probables.", answer:true},
+{q:"7. Le principe de continuité suppose que l’entreprise va cesser son activité.", answer:false},
+{q:"8. Le CPC permet de déterminer le résultat de l’entreprise.", answer:true},
+{q:"9. Le bilan présente uniquement les charges et produits.", answer:false},
+{q:"10. Les états de synthèse donnent une image fidèle de la situation de l’entreprise.", answer:true}
+];
+
+window.onload = function(){
+
+const quizDiv = document.getElementById("quiz");
+
+questions.forEach((q,i)=>{
+
+let html = `
+<div class="question">
+
+<p>${q.q}</p>
+
+<label>
+<input type="radio" name="q${i}" value="true">
+Vrai
+</label>
+
+<label>
+<input type="radio" name="q${i}" value="false">
+Faux
+</label>
+
+<p id="res${i}"></p>
+
+</div>
+`;
+
+quizDiv.innerHTML += html;
+
+});
+
+};
+
+function corriger(){
+
+let score = 0;
+
+questions.forEach((q,i)=>{
+
+let rep = document.querySelector(`input[name="q${i}"]:checked`);
+let res = document.getElementById(`res${i}`);
+
+if(rep){
+
+if((rep.value === "true") === q.answer){
+
+res.innerHTML = "✔ Bonne réponse";
+res.className = "correct";
+score++;
+
+}else{
+
+res.innerHTML = "❌ Mauvaise réponse";
+res.className = "wrong";
+
+}
+
+}else{
+
+res.innerHTML = "⚠ Non répondu";
+res.className = "wrong";
+
+}
+
+});
+
+document.getElementById("score").innerHTML =
+"🎯 Score : " + score + "/10";
+
+}
+
 </script>
 
 </head>
@@ -109,190 +293,145 @@ function showSection(id){
     <button onclick="showSection('classes')">Classes</button>
     <button onclick="showSection('principes')">Principes</button>
     <button onclick="showSection('etats')">États de synthèse</button>
-    <button onclick="showSection('EE')">Exercice d’évaluation</button>
+    <button onclick="showSection('EE')">Exercice</button>
 </nav>
 
+<!-- PLAN -->
+
 <section id="plan" class="active">
-    <h2>📘 Le Plan Comptable</h2>
 
-    <p>
-        Le plan comptable est un document qui regroupe l’ensemble des comptes utilisés
-        par l’entreprise ainsi que les règles de leur fonctionnement.
-    </p>
+<h2>📘 Le Plan Comptable</h2>
 
-    <div class="highlight">
-        ✔ Liste des comptes<br>
-        ✔ Règles de fonctionnement<br>
-        ✔ Organisation normalisée
-    </div>
+<p>
+Le plan comptable est un document qui regroupe
+l’ensemble des comptes utilisés par l’entreprise
+ainsi que les règles de leur fonctionnement.
+</p>
 
-    <h3>Deux modèles :</h3>
+<div class="highlight">
+✔ Liste des comptes<br>
+✔ Règles de fonctionnement<br>
+✔ Organisation normalisée
+</div>
 
-    <ul>
-        <li><b>Modèle normal :</b> grandes et moyennes entreprises</li>
-        <li><b>Modèle simplifié :</b> petites entreprises</li>
-    </ul>
+<h3>Deux modèles :</h3>
+
+<ul>
+<li><b>Modèle normal :</b> grandes et moyennes entreprises</li>
+<li><b>Modèle simplifié :</b> petites entreprises</li>
+</ul>
+
 </section>
+
+<!-- CLASSES -->
 
 <section id="classes">
-    <h2>📊 Les classes comptables</h2>
 
-    <p>Les comptes sont classés en 10 classes :</p>
+<h2>📊 Les classes comptables</h2>
 
-    <ul>
-        <li><b>Classes 1 à 8 :</b> Comptabilité générale</li>
-        Les casses de patrimoine ou de Bilan : les comptes de situation
-    <ul>
-        <li><b>Classe 1 :</b> Comptes du financement permanent</li>
-        <li><b>Classe 2 :</b> Compte d'actif immobilisé</li>
-        <li><b>Classe 3 :</b> Compte d’actif circulant hors trésorerie</li>
-        <li><b>Classe 4 :</b> Comptes de passif circulant hors trésorerie</li>
-        <li><b>Classe 5 :</b> comptes de trésorerie</li>
-    </ul>
-    Les classes de CPC : les comptes de gestion
+<p>Les comptes sont classés en 10 classes :</p>
+
 <ul>
-        <li><b>Classe 6 :</b> Comptes de charges</li>
-        <li><b>Classe 7 :</b> Comptes de produits</li>
-        <li><b>Classe 8 :</b> Comptes de résultat</li>
-    </ul>
 
-        <li><b>Classe 9 :</b> Comptabilité analytique</li>
-        <li><b>Classe 0 :</b> Comptes spéciaux</li>
-    </ul>
+<li><b>Classes 1 à 8 :</b> Comptabilité générale</li>
 
-    <div class="highlight">
-        ✔ Chaque compte possède un numéro (codification)
-        </ul>
+<li><b>Classe 1 :</b> Comptes du financement permanent</li>
 
-        <li><b>Le premier chiffre indique :</b> Classe ou Masse</li>
-        <li><b>Les 2 premiers chiffres indiquent :</b> Rubrique</li>
-        <li><b>Les 3 premiers chiffres indiquent :</b> Poste</li>
-        <li><b>Les 4 premiers chiffres indiquent :</b> Compte principal</li>
-        <li><b>Les 5 premiers chiffres indiquent :</b> Compte divisionnaire...</li>
-    </ul>
-    </ul>
+<li><b>Classe 2 :</b> Comptes d'actif immobilisé</li>
 
-        <li><b>Exemple :</b> 1 COMPTES DE FINANCEMENT PERMANENT>11 CAPITAUX PROPRES>111 Capital social ou personnel>1117 Capital personnel>11171 Capital individuel</li>
-    </ul>
-    </div>
+<li><b>Classe 3 :</b> Comptes d’actif circulant hors trésorerie</li>
+
+<li><b>Classe 4 :</b> Comptes de passif circulant hors trésorerie</li>
+
+<li><b>Classe 5 :</b> Comptes de trésorerie</li>
+
+<li><b>Classe 6 :</b> Comptes de charges</li>
+
+<li><b>Classe 7 :</b> Comptes de produits</li>
+
+<li><b>Classe 8 :</b> Comptes de résultat</li>
+
+<li><b>Classe 9 :</b> Comptabilité analytique</li>
+
+<li><b>Classe 0 :</b> Comptes spéciaux</li>
+
+</ul>
+
+<div class="highlight">
+
+✔ Chaque compte possède un numéro (codification)
+
+<ul>
+<li><b>1er chiffre :</b> Classe ou masse</li>
+<li><b>2 premiers chiffres :</b> Rubrique</li>
+<li><b>3 premiers chiffres :</b> Poste</li>
+<li><b>4 premiers chiffres :</b> Compte principal</li>
+<li><b>5 premiers chiffres :</b> Compte divisionnaire</li>
+</ul>
+
+</div>
+
 </section>
+
+<!-- PRINCIPES -->
 
 <section id="principes">
-    <h2>⚖️ Principes comptables fondamentaux</h2>
 
-    <p>
-        Pour garantir une image fidèle, l’entreprise doit respecter des principes comptables.
-    </p>
+<h2>⚖️ Principes comptables fondamentaux</h2>
 
-    <h3>Les 7 principes :</h3>
+<h3>Les 7 principes :</h3>
 
-    <ul>
-        <li>1-Principe de continuité d’exploitation : l'entreprise doit établir ses états de synthèse dans la perspective d'une poursuite normale de ses activités
-</li>
-        <li>2-Principe de permanence des méthodes : L’entreprise est censée établir ses états de synthèse en appliquant les mêmes règles d’évaluation et de présentation</li>
-        <li>3-Principe du coût historique : La valeur d’entrée d’un élément inscrit en comptabilité reste intangible quelle que soit l’évolution de cette valeur dans le temps, sous réserve du principe de prudence (amortissement & provisions).</li>
-        <li>4-Principe de spécialisation des exercices : En raison du découpage de la vie de l’entreprise en exercices comptables, les charges et les produits doivent être rattachés à l’exercice qui les concerne</li>
-        <li>5-Principe de prudence : Les produits ne sont pris en compte que s'ils sont définitivement acquis à l'entreprise ; les
-charges sont à enregistrer dès lors qu'elles sont probables
-</li>
-        <li>6-Principe de clarté : Les opérations comptables doivent être inscrites dans les comptes, sans compensation entre elles, sous la bonne rubrique et avec la bonne dénomination</li>
-        <li>7-Principe d’importance significative : Les états de synthèse doivent révéler tous les éléments dont l’importance susceptible d’influencer l’opinion que les lecteurs peuvent avoir sur le patrimoine, la situation financière et les résultats de l’entreprise.</li>
-    </ul>
+<ul>
 
-    <div class="highlight">
-        ✔ Ces principes assurent une comptabilité fiable et comparable
-    </div>
+<li>Principe de continuité d’exploitation</li>
+
+<li>Principe de permanence des méthodes</li>
+
+<li>Principe du coût historique</li>
+
+<li>Principe de spécialisation des exercices</li>
+
+<li>Principe de prudence</li>
+
+<li>Principe de clarté</li>
+
+<li>Principe d’importance significative</li>
+
+</ul>
+
+<div class="highlight">
+✔ Ces principes assurent une comptabilité fiable et comparable
+</div>
+
 </section>
+
+<!-- ETATS -->
 
 <section id="etats">
-    <h2>📑 Les états de synthèse</h2>
 
-    <p>
-        Les états de synthèse permettent de résumer les informations financières de l’entreprise.
-    </p>
+<h2>📑 Les états de synthèse</h2>
 
-    <h3>Principaux états :</h3>
+<ul>
 
-    <ul>
-        <li>Bilan</li>
-        <li>Compte de Produits et Charges (CPC)</li>
-        <li>État des Soldes de Gestion (ESG)</li>
-        <li>Tableau de financement</li>
-        <li>État des informations complémentaires (ETIC)</li>
-    </ul>
+<li>Bilan</li>
 
-    <div class="highlight">
-        ✔ Ils permettent d’analyser la situation et la performance de l’entreprise
-    </div>
+<li>Compte de Produits et Charges (CPC)</li>
+
+<li>État des Soldes de Gestion (ESG)</li>
+
+<li>Tableau de financement</li>
+
+<li>ETIC</li>
+
+</ul>
+
 </section>
+
+<!-- EXERCICE -->
+
 <section id="EE">
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Exercice Vrai/Faux - Cadre Comptable</title>
 
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    margin:0;
-}
-
-header{
-    background:#2c3e50;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-.container{
-    width:90%;
-    margin:auto;
-    padding:20px;
-}
-
-.question{
-    background:white;
-    padding:15px;
-    margin:15px 0;
-    border-left:5px solid #3498db;
-}
-
-button{
-    background:#27ae60;
-    color:white;
-    border:none;
-    padding:10px;
-    cursor:pointer;
-    margin-top:10px;
-    border-radius:5px;
-}
-
-button:hover{
-    background:#1e8449;
-}
-
-.correct{
-    color:green;
-    font-weight:bold;
-}
-
-.wrong{
-    color:red;
-    font-weight:bold;
-}
-</style>
-
-</head>
-
-<body>
-
-<header>
-<h1>📘 Exercice Vrai / Faux – Cadre Comptable</h1>
-</header>
-
-<div class="container">
+<h2>📘 Exercice Vrai / Faux</h2>
 
 <div id="quiz"></div>
 
@@ -300,76 +439,15 @@ button:hover{
 
 <h2 id="score"></h2>
 
-</div>
-
-<script>
-
-const questions = [
-{q:"1. Le plan comptable est une liste organisée des comptes et de leurs règles de fonctionnement.", answer:true},
-{q:"2. Le modèle simplifié est destiné aux grandes entreprises.", answer:false},
-{q:"3. Les classes 1 à 8 concernent la comptabilité générale.", answer:true},
-{q:"4. La classe 9 est réservée à la comptabilité analytique.", answer:true},
-{q:"5. La classe 0 concerne les comptes de trésorerie.", answer:false},
-{q:"6. Le principe de prudence consiste à enregistrer les pertes probables.", answer:true},
-{q:"7. Le principe de continuité suppose que l’entreprise va cesser son activité.", answer:false},
-{q:"8. Le CPC permet de déterminer le résultat de l’entreprise.", answer:true},
-{q:"9. Le bilan présente uniquement les charges et produits.", answer:false},
-{q:"10. Les états de synthèse donnent une image fidèle de la situation de l’entreprise.", answer:true}
-];
-
-const quizDiv = document.getElementById("quiz");
-
-questions.forEach((q,i)=>{
-let html = `
-<div class="question">
-<p>${q.q}</p>
-
-<label><input type="radio" name="q${i}" value="true"> Vrai</label>
-<label><input type="radio" name="q${i}" value="false"> Faux</label>
-
-<p id="res${i}"></p>
-</div>
-`;
-quizDiv.innerHTML += html;
-});
-
-function corriger(){
-let score = 0;
-
-questions.forEach((q,i)=>{
-let rep = document.querySelector(`input[name="q${i}"]:checked`);
-let res = document.getElementById(`res${i}`);
-
-if(rep){
-if((rep.value === "true") === q.answer){
-res.innerHTML = "✔ Bonne réponse";
-res.className="correct";
-score++;
-}else{
-res.innerHTML = "❌ Mauvaise réponse";
-res.className="wrong";
-}
-}else{
-res.innerHTML = "⚠ Non répondu";
-res.className="wrong";
-}
-});
-
-document.getElementById("score").innerHTML = "🎯 Score : " + score + "/10";
-}
-
-</script>
-
-</body>
-</html>
-
 </section>
 
 <footer>
-    Formation en comptabilité générale
-<br>
 
-<a href="C1P1M1.html">⬅ Retour </a>
+Formation en comptabilité générale
+
+<br><br>
+
+<a href="C1P1M1.html">⬅ Retour</a>
 
 </footer>
 
