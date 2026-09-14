@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>
+📘 L'enregistrement des opérations d'achat et de vente : Facture "Doit" comportant des Majorations
+</h1>
+</header>
+
+<nav>
+
+<button onclick="showSection('TVA')">Majoration de la TVA</button>
+<button onclick="showSection('TRS')">Majoration de Transport</button>
+<button onclick="showSection('EMB')">Majoration de l’Emballage </button>
+<button onclick="showSection('MF')">Facture avec Majorations </button>
+<button onclick="showSection('EC')">Enregistrement Comptable</button>
+
+</nav>
+
+<section id="TVA" class="active">
+<h2>Majoration de la TVA</h2>
+
+<table>
+
+<tr>
+<td class="bold">
+► Définition
+</td>
+</tr>
+
+<tr>
+<td>
+La T.V.A. (Taxe sur la Valeur Ajoutée) est une taxe indirecte appliquée sur la consommation des biens et services.
+</td>
+</tr>
+
+<tr>
+<td class="bold">
+► Formules importantes
+</td>
+</tr>
+
+<tr>
+<td>
+Montant TVA = Montant HT × Taux TVA
+</td>
+</tr>
+
+<tr>
+<td>
+Montant TTC = HT + TVA = HT × (1+t)
+</td>
+</tr>
+
+<tr>
+<td>
+Montant HT = TTC ÷ (1+t)
+</td>
+</tr>
+
+<tr>
+<td class="bold">
+► Exemple :
+</td>
+</tr>
+
+<tr>
+<td>
+Produit = 1 000 DH HT avec TVA 20%
+</td>
+</tr>
+
+<tr>
+<td>
+TVA = 1000 × 0.20 = 200 DH
+</td>
+</tr>
+
+<tr>
+<td>
+TTC = 1000 + 200 = 1200 DH
+</td>
+</tr>
+
+</table>
+</section>
+<section id="TRS">
+<h2>Majoration de Transport</h2>
+
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    background:#e9e9e9;
+    margin:0;
+    padding:30px;
+}
+
+.section-title{
+    font-size:22px;
+    font-weight:bold;
+    background:#cfcfcf;
+    display:inline-block;
+    padding:10px 20px;
+    margin-bottom:40px;
+}
+
+.schema{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:40px;
+    margin-bottom:80px;
+}
+
+.box{
+    border:3px solid #44546a;
+    border-radius:18px;
+    background:#f5f5f5;
+    color:#44546a;
+    font-weight:bold;
+    text-align:center;
+    padding:25px;
+    line-height:1.4;
+}
+
+.big{
+    width:280px;
+    font-size:24px;
+}
+
+.medium{
+    width:260px;
+    font-size:20px;
+}
+
+.small{
+    width:220px;
+    font-size:18px;
+}
+
+.column{
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+.line{
+    width:80px;
+    height:3px;
+    background:#44546a;
+}
+
+.row{
+    display:flex;
+    align-items:center;
+}
+
+</style>
+</head>
+
+
+<!-- ==================== CAS 1 ==================== -->
+
+<div class="section-title">
+1- Transport est assuré par des tiers transporteurs
+<p>
+</div>
+
+<div class="schema">
+
+    <div class="box ">
+        Les frais de transport sont payés par le fournisseur au départ des marchandises et restent à la charge du client
+    </div>
+
+    <div class="column">
+
+        <div class="row">
+    <span style="font-size:50px;color: black;"> ►
+</span>
+
+            <div class="box ">
+                Montant débours « Exacte » <br>  à récupérer <br> Ou <br> Montant débours « Forfaitaire » <br> Considéré comme une vente de produits accessoires
+
+            </div>
+
+            
+
+            
+        </div>
+
+        
+
+        </div>
+
+    </div>
+
+</div>
+</p>
+
+<!-- ==================== CAS 2 ==================== -->
+
+<div class="section-title">
+2- Transport est assuré par le fournisseur avec ses moyens de transport
+<p>
+
+</div>
+
+<div class="schema">
+
+    <div class="box ">
+        Frais de port non inclus<br>
+        dans le prix des<br>
+        marchandises
+    </div>
+
+            <span style="font-size:50px;color: black;"> ►
+</span>
+
+
+
+    <div class="box ">
+        Montant
+        « Forfaitaire » <br>Considéré comme une vente de produits accessoires
+    </div>
+
+    
+
+</div>
+</p>
+
+</section>
+<section id="EMB">
+<h2>Majoration de l’Emballage </h2>
+
+</div>
+
+<div class="schema">
+
+    <div class="box ">
+        Les emballages récupérables consignés : <br> La consignation de l’emballage est un prêt au client moyennant un dépôt d’argent comme garantie qui devra être restitué au client.
+    </div>
+
+        <span style="font-size:50px;color: black;"> ►
+</span>
+
+    <div class="box ">
+        
+Le montant de la consignation est un dépôt de garantie. <br>
+Normalement il ne doit pas être soumis
+à la TVA    </div>
+
+    
+
+</div>
+
+</section>
+
+<section id="MF">
+<h2>Facture avec Majorations </h2>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+/* Tableau principal */
+table{
+    width:70%;
+    margin:auto;
+    border-collapse:collapse;
+    border:3px solid black; /* Bordure extérieure épaisse */
+}
+
+/* Cellules */
+td{
+    border:1px solid black; /* Bordures internes */
+    padding:10px;
+}
+
+/* Styles */
+.titre{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+.center{
+    text-align:center;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.header{
+    background:#e6e6e6;
+}
+
+</style>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre">Facture</td>
+</tr>
+
+<tr>
+    <td class="bold">Société X (Frs)</td>
+    <td> DOIT </td>
+    <td class="bold right"> Société Y (Clt)</td>
+</tr>
+
+<tr>
+    <td colspan="3" class="bold">Facture DOIT N° ........</td>
+</tr>
+
+<tr>
+    <td colspan="3" class="bold">Lieu + Date : .......................................................</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">20.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Remise ou Rabais ou Ristourne (MB X 3%) </td>
+    <td class="right">600,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">19.400,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
+    <td class="right">388,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">19.012,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur ventes (NF x Taux de TVA de 20%) </td>
+    <td class="right">3.802,40</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais de Transport « HT »</td>
+    <td class="right">500,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 10%) </td>
+    <td class="right">50,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais d'emballages </td>
+    <td class="right">300,00</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA + Frais d’emballages) </td>
+    <td class="right">23.664,40</td>
+</tr>
+
+</table>
+
+</section>
+
+<section id="EC">
+<h2>Enregistrement Comptable</h2>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:70%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+
+
+<h3>Chez l'Acheteur (Client) </h3>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>611X</option>
+            <option>612X </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Achats de marchandises et/ou </option>
+            <option>Achats consommés de matières et fournitures</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant </option>
+<option>Montant </option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>6142</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Transports </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant </option>
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Etat - TVA récupérable (sur les achats et le transport)   </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant </option>
+</td>
+
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3413</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Fournisseurs - créances pour emballages et matériel à rendre</option>
+<option>(Emballages récupérables consignés)</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant </option>
+</td>
+
+</tr>
+
+
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141 </option>
+            <option>5161 </option>
+            <option>4411 </option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques et/ou</option>
+            <option>Caisses et/ou</option>
+            <option>Fournisseurs...</option>
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+
+</td>
+
+</tr>
+</tr>
+
+<tr><td></td>
+<td class="credit center" style="width:5%;">
+        
+            <option>7386</option>
+            
+    </td>
+
+
+<td></td>
+<td class="credit" style="width:30%;">
+        
+            <option>Escomptes obtenus</option>
+                   
+    </td>
+
+<td></td><td class="montant" style="width:10%;">
+<option>Montant </option>
+            
+
+</td></tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+
+</table>
+►Exemple : Achats de marchandises par chèque bancaire (Montant brut 20 000, Remise 3% et Escompte 2%, Transport 500, Emballages consignés 300, TVA sur ventes 20% et TVA sur transports 10%)
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">15/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>6111</option>
+            
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Achats de marchandises </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>19.400,00 </option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>6142</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Transports </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>500,00 </option>
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Etat - TVA récupérable   </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>3.852,40 </option>
+</td>
+
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3413</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Fournisseurs - créances pour emballages et matériel à rendre</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>300,00 </option>
+</td>
+
+</tr>
+
+
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141 </option>
+            
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques </option>
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>23.664,40</option>
+
+</td>
+
+</tr>
+</tr>
+
+<tr><td></td>
+<td class="credit center" style="width:5%;">
+        
+            <option>7386</option>
+            
+    </td>
+
+
+<td></td>
+<td class="credit" style="width:30%;">
+        
+            <option>Escomptes obtenus</option>
+                   
+    </td>
+
+<td></td><td class="montant" style="width:10%;">
+<option>388,00 </option>
+            
+
+</td></tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°70-2026 </td></tr>
+
+</table>
+
+<h3>Chez le Vendeur (Fournisseur)</h3>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center" style="width:5%;">
+        
+            <option>5141</option>
+            <option>5161</option>
+            <option>3421</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Banques et/ou</option>
+            <option>Caisses et/ou</option>
+            <option>Clients...</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>6386</option>
+            
+       
+    </td>
+
+<td></td>
+<td class="debit" style="width:30%;">
+                    <option>Escomptes accordés</option>
+            
+       
+    </td>
+
+<td></td><td class="montant" style="width:10%;">
+<option>Montant</option>
+            
+
+
+<td></tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>711X</option>
+            <option>712X</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Ventes de marchandises et/ou </option>
+            <option> Ventes de biens et services produits</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant </option>
+
+
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>6142</option>
+            <option>7127</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Transports (Cas des frais récupérés) ou </option>
+            <option> Ventes de produits accessoires (Cas de transport forfaitaire) </option>
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant </option>
+
+
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>4455</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Etat, TVA facturée (sur les ventes et le transport) </option>
+            
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>4425</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Clients - dettes pour emballages et matériel consignés</option>
+<option>(Emballages récupérables consignés) </option>
+
+            
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+
+</table>
+►Exemple : Ventes de marchandises par chèque bancaire (Montant brut 20 000, Remise 3% et Escompte 2%, Transport 500, Emballages consignés 300, TVA sur ventes 20% et TVA sur transports 10%)
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">15/04/2026</td></tr>
+
+<tr>
+
+<td class="debit center" style="width:5%;">
+        
+            <option>5141</option>
+            
+       
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Banques</option>
+            
+       
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>23.664,40</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>6386</option>
+            
+       
+    </td>
+
+<td></td>
+<td class="debit" style="width:30%;">
+                    <option>Escomptes accordés</option>
+            
+       
+    </td>
+
+<td></td><td class="montant" style="width:10%;">
+<option>388,00</option>
+            
+
+
+<td></tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>7111</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Ventes de marchandises </option>
+            
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>19.400,00</option>
+
+
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            
+            <option>7127</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            
+            <option> Ventes de produits accessoires </option>
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>500,00</option>
+
+
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>4455</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Etat, TVA facturée </option>
+            
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>3.852,40</option>
+
+
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>4425</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Clients - dettes pour emballages et matériel consignés</option>
+
+            
+            
+
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>300,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°70-2026 </td></tr>
+
+</table>
+
+
+
+</section>
+
+<footer>
+
+Formation en Comptabilité Générale
+
+<br><br>
+
+<a href="C1P2M1.html">
+⬅ Retour
+</a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
