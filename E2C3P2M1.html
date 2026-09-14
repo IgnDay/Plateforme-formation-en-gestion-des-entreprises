@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:90%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Exercice 2 / Les opérations de vente
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('EXE')">Exercice</button>
+<button onclick="showSection('SOL')"> Solution</button>
+</nav>
+
+<section id="EXE" class="active">
+    <h2> Exercice 2 
+</h2>
+<div class="note">
+<b>La société EXCELLENCE SARL</b> a réalisé les opérations suivantes durant le mois de décembre 2025.
+</div>
+
+
+<p>
+-Le 04/12/2025, la société <b>EXCELLENCE SARL</b> adresse à son client
+<b>ATLAS DISTRIBUTION</b> la facture Doit n° 10521 relative à une vente de marchandises.
+</p>
+
+<table>
+<tr>
+<td>Montant brut</td>
+<td>Remise</td>
+<td>Escompte</td>
+<td>Transport forfaitaire</td>
+<td>TVA</td>
+<td> Emballages consignés</td>
+<td>Règlement</td>
+</tr>
+
+<tr>
+<td>80 000 </td>
+<td>7 %</td>
+<td>2 %</td>
+<td>1 800 </td>
+<td>20 %</td>
+<td>5 000</td>
+
+<td>
+20 % par virement bancaire<br>
+80 % à crédit
+</td>
+</tr>
+</table>
+
+
+<p>
+-Le 10/12/2025, la société <b>EXCELLENCE SARL</b> adresse à son client
+<b>INDUSTRIE MODERNE SA</b> la facture Doit n° 10538 relative à une vente de produits finis.
+</p>
+
+<table>
+<tr>
+<td> Montant brut </td>
+<td>Rabais</td>
+<td>Escompte</td>
+<td>Transport débours</td>
+<td>TVA sur M/ses</td>
+<td>TVA sur Port</td>
+<td>Règlement</td>
+</tr>
+
+<tr>
+<td>120 000 </td>
+<td>5 %</td>
+<td>1 %</td>
+<td>2 500 </td>
+<td>20 %</td>
+<td>10 %</td>
+<td>
+50 % en espèce<br>
+50 % à crédit
+</td>
+</tr>
+</table>
+
+
+-<p>
+Le 17/12/2025, la société <b>EXCELLENCE SARL</b> réalise une prestation de maintenance informatique pour son client
+<b>TECHNOLOGIE PLUS SARL</b>.
+</p>
+
+<p><b>Facture Doit n° 10572</b></p>
+
+<table>
+<tr>
+<td> Montant brut </td>
+<td>Ristourne</td>
+<td>TVA</td>
+<td>Règlement</td>
+
+</tr>
+
+<tr>
+<td>35 000 </td>
+<td>4 %</td>
+<td>20 %</td>
+<td>100 % à crédit</td>
+</tr>
+</table>
+
+
+<p>
+-Le 22/12/2025, le client <b>ATLAS DISTRIBUTION</b> retourne une partie des marchandises vendues le 04/12/2025.
+</p>
+
+<p>
+La société <b>EXCELLENCE SARL</b> établit la facture Avoir n° 421 portant sur un montant brut de :
+<b>15 000 </b>.
+</p>
+
+
+<p>
+-Le 25/12/2025, afin de fidéliser son client <b>INDUSTRIE MODERNE SA</b>,
+la société <b>EXCELLENCE SARL</b> lui accorde une réduction commerciale supplémentaire.
+</p>
+
+<p>
+Facture Avoir n° 436 :
+<b>Ristourne de 3 %</b>.
+</p>
+
+
+<p>
+-Le 29/12/2025, le client <b>TECHNOLOGIE PLUS SARL</b> décide de régler sa dette avant l'échéance prévue.
+</p>
+
+<p>
+La société <b>EXCELLENCE SARL</b> lui accorde un escompte de règlement de
+<b>2 %</b> et établit la facture Avoir n° 452.
+</p>
+
+<h2>Travail à faire</h2>
+
+<ol>
+<li>Etablir et enregistrer au journal les factures Doit n° 10521, n° 10538 et n° 10572.</li>
+
+<li>Etablir et enregistrer au journal les factures Avoir n° 421, n° 436 et n° 452.</li>
+
+
+</ol>
+</section>
+
+<section id="SOL">
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+/* Tableau principal */
+table{
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
+    border:3px solid black; /* Bordure extérieure épaisse */
+}
+
+/* Cellules */
+td{
+    border:1px solid black; /* Bordures internes */
+    padding:10px;
+}
+
+/* Styles */
+.titre{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+.center{
+    text-align:center;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.header{
+    background:#e6e6e6;
+}
+
+</style>
+<h2>Solution de l’exercice 2</h2>
+
+<h3>1- Les factures Doit </h3>
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture DOIT N°10521</td>
+</tr>
+
+<tr>
+    <td class="bold">Société EXCELLENCE </td>
+    <td> DOIT </td>
+    <td class="bold right"> Société ATLAS DISTRIBUTION </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 04/12/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">80.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Remise (MB X 7%) </td>
+    <td class="right">5600,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">74.400,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
+    <td class="right">1.488,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">72.912,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur Marchandises (NF x Taux de TVA de 20%) </td>
+    <td class="right">14.582,40</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais de Transport « HT »</td>
+    <td class="right">1.800,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 20%) </td>
+    <td class="right">360,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais d'emballages </td>
+    <td class="right">5.000,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Montant total TVA + Total frais) </td>
+    <td class="right">94.654,40</td>
+</tr>
+
+</table>
+<table>
+<!-- 04/12/2025 -->
+<tr class="date"><td colspan="6">04/12/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>5141</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Banques (SD)</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>18.930,88</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3421</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Clients</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>75.723,52</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6386</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Escomptes accordés</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.488,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7111</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Ventes de marchandises </option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>74.400,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7127</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Ventes de produits accessoires</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.800,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>14.942,40</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4425</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Clients - dettes pour emballages et MC</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>5.000,00</option>
+</td>
+</tr>
+
+<!-- Facture de vente -->
+<tr class="date"><td colspan="6">Facture Doit N° 10521</td></tr>
+</table>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture DOIT N°10538</td>
+</tr>
+
+<tr>
+    <td class="bold">Société EXCELLENCE </td>
+    <td> DOIT </td>
+    <td class="bold right"> Société INDUSTRIE MODERNE </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 10/12/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">120.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Rabais (MB X 5%) </td>
+    <td class="right">6.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">114.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 1%) </td>
+    <td class="right">1.140,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">112.860,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur Produits finis (NF x Taux de TVA de 20%) </td>
+    <td class="right">22.572,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais de Transport « HT »</td>
+    <td class="right">2.500,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 10%) </td>
+    <td class="right">250,00</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA) </td>
+    <td class="right">138.182,00</td>
+</tr>
+
+</table>
+<table>
+<!-- 10/12/2025 -->
+<tr class="date"><td colspan="6">10/12/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>5161</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Caisses</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>69.091,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3421</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Clients</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>69.091,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6386</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Escomptes accordés</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.140,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7121</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Ventes de biens produits</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>114.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>22.572,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>6142</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Transport</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>2.500,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>250,00</option>
+</td>
+</tr>
+
+<!-- Facture de vente -->
+<tr class="date"><td colspan="6">Facture Doit N° 10538</td></tr>
+</table>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture DOIT N°10572</td>
+</tr>
+
+<tr>
+    <td class="bold">Société EXCELLENCE  </td>
+    <td> DOIT </td>
+    <td class="bold right"> Société TECHNOLOGIE PLUS </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 17/12/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">35.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Ristourne (MB X 4%) </td>
+    <td class="right">1.400,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">33.600,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 0%) </td>
+    <td class="right">00,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">33.600,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur prestation de services (NF x Taux de TVA de 20%) </td>
+    <td class="right">6.720,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Montant TVA) </td>
+    <td class="right">40.320,00</td>
+</tr>
+
+</table>
+
+<table>
+<!-- 17/12/2025 -->
+<tr class="date"><td colspan="6">17/12/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3421</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Clients</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>40.320,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7124</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Ventes de services produits </option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>33.600,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>6.720,00</option>
+</td>
+</tr>
+
+<!-- Facture de prestation de services -->
+<tr class="date"><td colspan="6">Facture Doit N° 10572</td></tr>
+</table>
+<h3>2- Les factures Avoir </h3>
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture AVOIR N°421</td>
+</tr>
+
+<tr>
+    <td class="bold">Société EXCELLENCE </td>
+    <td> AVOIR </td>
+    <td class="bold right"> Société ATLAS DISTRIBUTION </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 22/12/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">15.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Remise (MB X 7%) </td>
+    <td class="right">1.050,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">13.950,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
+    <td class="right">279,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">13.671,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA su Marchandises (NF x Taux de TVA de 20%) </td>
+    <td class="right">2.734,20</td> </tr>
+
+<tr>
+    <td colspan="2">Montant à déduire TTC (NF + Montant TVA) </td>
+    <td class="right">16.405,20</td>
+</tr>
+</table>
+<table>
+<!-- 22/12/2025 -->
+<tr class="date"><td colspan="6">22/12/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>7111</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Ventes de marchandises </option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>13.950,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>2.734,20</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3421</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Clients</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>16.405,20</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>6386</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Escomptes accordés</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>279,00</option>
+</td>
+</tr>
+
+<!-- Facture de vente -->
+<tr class="date"><td colspan="6">Avoir N° 421</td></tr>
+</table>
+<table>
+
+<tr>
+    <td colspan="3" class="titre">Facture Avoir N° 436</td>
+</tr>
+
+<tr>
+    <td class="bold">Société EXCELLENCE </td>
+    <td> AVOIR </td>
+    <td class="bold right"> Société INDUSTRIE MODERNE </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablanca le 25/12/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Ristourne Supplémentaire (114 000 X 3%)</td>
+    <td class="right">3.420,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA  (Montant RRR x Taux de TVA de 20%) </td>
+    <td class="right">684,00</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à déduire TTC (Mt RRR + Montant TVA) </td>
+    <td class="right">4.104,00</td>
+</tr>
+
+</table>
+<table>
+<!-- 25/12/2025 -->
+<tr class="date"><td colspan="6">25/12/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>7129</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>RRR accordées par l'entreprise</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>3.420,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>684,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3421</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Clients</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>4.104,00</option>
+</td>
+</tr>
+
+<!-- Avoir client -->
+<tr class="date"><td colspan="6">Avoir N°436</td></tr>
+</table>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre">Facture Avoir N° 522</td>
+</tr>
+
+<tr>
+    <td class="bold">Société EXCELLENCE </td>
+    <td> AVOIR </td>
+    <td class="bold right"> Société TECHNOLOGIE PLUS </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablanca le 29/12/2025 </td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Escompte (33 600  X 2%)</td>
+    <td class="right">672,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA  (Montant Escompte x Taux de TVA de 20%) </td>
+    <td class="right">134,40</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à déduire TTC (Mt Escompte + Montant TVA)</td>
+    <td class="right">806,40</td>
+</tr>
+
+</table>
+<table>
+<!-- 29/12/2025 -->
+<tr class="date"><td colspan="6">29/12/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6386</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Escomptes accordés</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>672,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>134,40</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3421</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Clients</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>806,40</option>
+</td>
+</tr>
+
+<!-- Escompte accordé -->
+<tr class="date"><td colspan="6">Avoir N° 522</td></tr>
+</table>
+
+
+
+
+
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:90%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P2M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
