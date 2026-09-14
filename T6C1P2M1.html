@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>
+        📘 L'enregistrement de l'acquisition des immobilisations
+    </h1>
+</header>
+
+<nav>
+
+•	<button class="btnActive"onclick="showSection('INV')">Les immobilisations en non-valeur</button>
+<button class="btnActive"onclick="showSection('IINC')"> Les immobilisations incorporelles</button>
+<button class="btnActive"onclick="showSection('ICOR')"> Les immobilisations corporelles</button>
+<button class="btnActive"onclick="showSection('IF')"> Les immobilisations financières</button>
+
+
+</nav>
+
+
+<section id="INV" class="active animationSection">
+
+<h2>► Enregistrement comptable des immobilisations en non-valeur</h2>
+<table>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align: left;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:70%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>21XX</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Immobilisations en non-valeurs</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+
+<option>Montant</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Etat - TVA récupérable (En cas de majoration de TVA)</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            <option>5161</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques et/ou</option>
+            <option>Caisses...</option>
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+
+</table>
+ 
+
+
+
+
+<h2>► Exemple  : Règlement des frais de constitution de 4.000,00 DH par chèque </h2>
+<table>
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">01/03/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>2111</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Frais de constitution</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>4.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>4.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°16-2026 </td></tr>
+
+</table>
+ 
+
+
+</section>
+
+<section id="IINC">
+
+<h2>► Enregistrement comptable des immobilisations incorporelles</h2>
+<table>
+
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>22XX</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Immobilisations incorporelles</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+
+<option>Montant</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Etat - TVA récupérable (En cas de majoration de TVA)</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            <option>5161</option>
+            <option>1486</option>
+<option>4481</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques et/ou</option>
+            <option>Caisses et/ou</option>
+            <option>Fournisseurs d’immobilisations (à crédit > 1 an) et /ou</option>
+<option>Dettes sur acquisitions d’immobilisations (à crédit < ou = 1 an) ...</option>
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+
+</table>
+ 
+
+
+
+
+<h2>► Exemple  : Paiement des droits de l’utilisation d’un brevet de 15.000,00 DH HT par chèque (TVA 20%) </h2>
+<table>
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">12/03/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>2220</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Brevets, marques, droits et valeurs similaires </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>15.000,00</option>
+
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Etat - TVA récupérable </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>3.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>18.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°18-2026 </td></tr>
+
+</table>
+ 
+
+
+</section>
+
+<section id="ICOR" >
+
+<h2>► Enregistrement comptable des immobilisations corporelles</h2>
+<table>
+
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>23XX</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Immobilisations corporelles</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+
+<option>Montant</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+           <option>Etat - TVA récupérable (En cas de majoration de TVA)</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            <option>5161</option>
+            <option>1486</option>
+<option>4481</option>
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques et/ou</option>
+            <option>Caisses et/ou</option>
+            <option>Fournisseurs d’immobilisations (à crédit > 1 an) et /ou</option>
+<option>Dettes sur acquisitions d’immobilisations (à crédit < ou = 1 an) ...</option>
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+
+</table>
+ 
+
+
+
+
+<h2>► Exemple : Acquisition d’un véhicule pour un montant de 180.000,00 DH HT par chèque (TVA 20%) </h2>
+<table>
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">14/03/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>2340</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Matériel de transport</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>180.000,00</option>
+
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>3455</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Etat - TVA récupérable </option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>36.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>216.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°21-2026 </td></tr>
+
+</table>
+ 
+
+
+</section>
+
+<section id="IF">
+
+<h2>► Enregistrement comptable des immobilisations financières</h2>
+<table>
+
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>24XX/25XX</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Immobilisations financières</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques</option>
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+
+</table>
+ 
+
+
+
+
+<h2>► Exemple  : Octroi d’un prêt à un salarié d’un montant de 50.000,00 DH HT par virement bancaire </h2>
+<table>
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">18/03/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+        
+            <option>2411</option>
+            
+
+
+            
+       
+    </td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+            <option>Prêts au personnel</option>
+            
+       
+    </td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>50.000,00</option>
+
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+        
+            <option>Banques</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+<option>50.000,00</option>
+
+
+</td>
+
+</tr>
+
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Virement N°22512 </td></tr>
+
+</table>
+
+</section>
+
+
+
+
+
+<footer>
+
+Formation en Comptabilité Générale
+
+<br><br>
+
+<a href="C1P2M1.html">
+⬅ Retour
+</a>
+
+</footer>
+
+</body>
+</html>
+
