@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:90%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Exercice 4 / L’enregistrement de différents autres produits
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('EXE')">Exercice</button>
+<button onclick="showSection('SOL')"> Solution</button>
+</nav>
+
+<section id="EXE" class="active">
+    <h2> Exercice 4
+</h2>
+<p> La société TECHNOMAR SARL a réalisé les opérations suivantes du mois de Avril 2026 : </p>
+
+<table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Opérations</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td class="date">05/04/2026</td>
+                <td>
+                    Encaissement par banque d'une subvention d'exploitation accordée par l'État
+                    pour soutenir l'emploi des jeunes : <strong>45 000 DH (TVA 20%)</strong>.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="date">15/04/2026</td>
+                <td>
+                    Achèvement de la construction d'un magasin de stockage réalisée par les moyens
+                    propres de l'entreprise. Coût de production :
+                    <strong>120 000 DH HT</strong>, TVA <strong>20 %</strong>.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="date">18/04/2026</td>
+                <td>
+                    Encaissement par banque de jetons de présence pour un montant de
+                    <strong>8 500 DH</strong>.
+                </td>
+            </tr>
+<tr>
+                <td class="date">20/04/2026</td>
+                <td>
+                    Encaissement par banque de loyer d’un magasin pour un montant de
+                    <strong>6 000 DH (TVA 20%) </strong>.
+                </td>
+            </tr>
+<tr>
+                <td class="date">22/04/2026</td>
+                <td>
+                    Réception de la banque d’un avis de crédit du remboursement d’une annuité sur prêt accordé à un salarié                    <strong>Principal 3 000 DH, Intérêts 500,00 (TVA 10%) </strong>.
+                </td>
+            </tr>
+<tr>
+                <td class="date">25/04/2026</td>
+                <td>
+                    Cession, à crédit sur 01 mois, d’un matériel de transport acquis en 2022    pour un montant de                  <strong>50 000 DH (TVA 20%) </strong>.
+                </td>
+            </tr>
+
+
+
+
+        </tbody>
+    </table>
+► Enregistrer ces opérations au journal de la société TECHNOMAR SARL
+
+
+
+</section>
+
+<section id="SOL">
+<h2>Solution de l’exercice 4 </h2>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+/* Tableau principal */
+table{
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
+    border:3px solid black; /* Bordure extérieure épaisse */
+}
+
+/* Cellules */
+td{
+    border:1px solid black; /* Bordures internes */
+    padding:10px;
+}
+
+/* Styles */
+.titre{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+.center{
+    text-align:center;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.header{
+    background:#e6e6e6;
+}
+
+</style>
+<table>
+<!-- 05/04/2026 --> 
+<tr class="date"><td colspan="6">05/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>5141</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Banques (SD)</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>54.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7161</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Subventions d'exploitation  </option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>45.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>9.000,00</option>
+</td>
+</tr>
+<!-- 15/04/2026 --> 
+<tr class="date"><td colspan="6">15/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>2321</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Bâtiments</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>144.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7143</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>IC produites</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>120.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>24.000,00</option>
+</td>
+</tr>
+<!-- 18/04/2026 --> 
+<tr class="date"><td colspan="6">18/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>5141</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Banques (SD)</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>8.500,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7181</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Jetons de présence reçus</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>8.500,00</option>
+</td>
+</tr>
+<!-- 20/04/2026 --> 
+<tr class="date"><td colspan="6">20/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>5141</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Banques (SD)</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>7.200,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7127</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Ventes de produits accessoires</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>6.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.200,00</option>
+</td>
+</tr>
+<!-- 22/04/2026 --> 
+<tr class="date"><td colspan="6">22/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>5141</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Banques (SD)</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>3.550,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>2411</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Prêts au personnel</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>3.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7381</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Intérêts et produits assimilés</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>500,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>50,00</option>
+</td>
+</tr>
+<!-- 25/04/2026 --> 
+<tr class="date"><td colspan="6">25/04/2026</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3481</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Créances sur cession d'IMM</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>60.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7513</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>PC des IC</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>50.000,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat, TVA facturée</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>10.000,00</option>
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:90%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P2M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
