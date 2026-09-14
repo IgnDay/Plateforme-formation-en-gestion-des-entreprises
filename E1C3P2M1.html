@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:90%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Exercice 1 / Les opérations d’achat
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('EXE')">Exercice</button>
+<button onclick="showSection('SOL')"> Solution</button>
+</nav>
+
+<section id="EXE" class="active">
+    <h2> Exercice 1 
+</h2>
+
+<div class="note">
+<b>La société HORIZON INDUSTRIE SARL</b> a réalisé les opérations suivantes au cours du mois de novembre 2025.
+</div>
+
+
+<p>
+-Le 03/11/2025, la société reçoit de son fournisseur
+<b>ATLAS NÉGOCE</b> la facture Doit n° 7845 relative à un achat de marchandises.
+</p>
+
+<table>
+<tr>
+<td> Montant Brut </td>
+<td> Remise</td>
+<td> Escompte</td>
+<td> Transport</td>
+<td> TVA sur M/ses</td>
+<td> TVA sur Port</td>
+<td> Règlement</td>
+</tr>
+
+<tr>
+<td>65 000 </td>
+<td>8 %</td>
+<td>2 %</td>
+<td>1 500 </td>
+<td>20 %</td>
+<td>10 %</td>
+<td>
+50 % par chèque<br>
+50 % à crédit
+</td>
+</tr>
+</table>
+
+
+
+<p>
+-Le 08/11/2025, la société reçoit de son fournisseur
+<b>MAROC MATIÈRES</b> la facture Doit n° 5218 relative à un achat de matières premières.
+</p>
+
+<table>
+<tr>
+<td>Montant Brut</td>
+<td>Rabais</td>
+<td>Escompte</td>
+<td>Transport</td>
+<td> TVA sur M/ses</td>
+<td>TVA sur Port</td>
+<td>Règlement</td>
+</tr>
+
+<tr>
+<td>90 000 </td>
+<td>6 %</td>
+<td>1 %</td>
+<td>2 500 </td>
+<td>20 %</td>
+<td>10 %</td>
+<td>
+40 % en espèce<br>
+60 % à crédit
+</td>
+</tr>
+</table>
+
+
+<p>
+-Le 14/11/2025, la société reçoit de son fournisseur
+<b>BUREAU SERVICE</b> la facture Doit n° 9632 relative à un achat de fournitures.
+</p>
+
+<table>
+<tr>
+<td>Montant Brut </td>
+<td>Ristourne</td>
+<td>Transport forfaitaire</td>
+<td>TVA 
+<td> Emballages consignés</td>
+<td>Règlement</td>
+</tr>
+
+<tr>
+<td>15 000</td>
+<td>5 %</td>
+<td>400 </td>
+<td>20 %</td>
+
+<td>800 </td>
+<td>
+30 % en espèce<br>
+70 % à crédit
+</td>
+</tr>
+</table>
+
+
+<p>
+-Le 20/11/2025, suite à un défaut de qualité, la société retourne une partie des marchandises achetées le 03/11/2025.
+</p>
+
+<p>
+Le fournisseur <b>ATLAS NÉGOCE</b> adresse la facture Avoir n° 318 portant sur un montant brut de :
+<b>12 000 </b>.
+</p>
+
+
+
+<p>
+-Le 24/11/2025, le fournisseur <b>MAROC MATIÈRES</b> accorde une réduction commerciale supplémentaire.
+</p>
+
+<p>
+Facture Avoir n° 447 :
+<b>Remise supplémentaire de 2 %</b>.
+</p>
+
+
+<p>
+-Le 28/11/2025, la société désire régler sa dette avant échéance.
+</p>
+
+<p>
+Le fournisseur <b>BUREAU SERVICE</b> lui adresse la facture Avoir n° 172 portant sur un :
+<b>Escompte de règlement de 1 %</b>.
+</p>
+
+<h2>Travail à faire</h2>
+
+<ol>
+<li>Etablir et enregistrer au journal les factures Doit n° 7845, n° 5218 et n° 9632. </li>
+
+<li>Etablir et enregistrer au journal les factures Avoir n° 318, n° 447 et n° 172. </li>
+
+</ol>
+
+</section>
+
+<section id="SOL">
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+/* Tableau principal */
+table{
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
+    border:3px solid black; /* Bordure extérieure épaisse */
+}
+
+/* Cellules */
+td{
+    border:1px solid black; /* Bordures internes */
+    padding:10px;
+}
+
+/* Styles */
+.titre{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+.center{
+    text-align:center;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.header{
+    background:#e6e6e6;
+}
+
+</style>
+<h2>Solution de l’exercice 1 </h2>
+
+<h3>1- Les factures Doit </h3>
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture DOIT N°7845</td>
+</tr>
+
+<tr>
+    <td class="bold">Société ATLAS NÉGOCE </td>
+    <td> DOIT </td>
+    <td class="bold right"> Société HORIZON INDUSTRIE  </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 03/11/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">65.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Remise (MB X 8%) </td>
+    <td class="right">5.200,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">59.800,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
+    <td class="right">1.196,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">58.604,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur Marchandises (NF x Taux de TVA de 20%) </td>
+    <td class="right">11.720,80</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais de Transport « HT »</td>
+    <td class="right">1.500,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 10%) </td>
+    <td class="right">150,00</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA) </td>
+    <td class="right">71.974,80</td>
+</tr>
+
+</table>
+<table>
+<!-- 03/11/2025 -->
+<tr class="date"><td colspan="6">03/11/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6111</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Achats de marchandises </option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>59.800,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6142</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Transport</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.500,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>11.870,80</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>5141</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Banques (SD)</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>35.987,40</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4411</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Fournisseurs</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>35.987,40</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7386</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Escomptes obtenus</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.196,00</option>
+</td>
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Facture Doit N°7845</td></tr>
+</table>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture DOIT N°5218</td>
+</tr>
+
+<tr>
+    <td class="bold">Société MAROC MATIÈRES</td>
+    <td> DOIT </td>
+    <td class="bold right"> Société HORIZON INDUSTRIE  </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 08/11/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">90.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Rabais (MB X 6%) </td>
+    <td class="right">5.400,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">84.600,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 1%) </td>
+    <td class="right">846,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">83.754,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur Matières premières (NF x Taux de TVA de 20%) </td>
+    <td class="right">16.750,80</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais de Transport « HT »</td>
+    <td class="right">2.500,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 10%) </td>
+    <td class="right">250,00</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA) </td>
+    <td class="right">103.254,80</td>
+</tr>
+
+</table>
+<table>
+<!-- 08/11/2025 -->
+<tr class="date"><td colspan="6">08/11/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6121</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Achats de matières premières</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>84.600,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6142</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Transport</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>2.500,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>17.000,80</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>5161</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Caisses</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>41.301,92</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4411</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Fournisseurs</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>61.952,88</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7386</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Escomptes obtenus</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>846,00</option>
+</td>
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Facture Doit N°5218</td></tr>
+</table>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture DOIT N°9632</td>
+</tr>
+
+<tr>
+    <td class="bold">Société BUREAU SERVICE</td>
+    <td> DOIT </td>
+    <td class="bold right"> Société HORIZON INDUSTRIE </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 14/11/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">15.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Ristourne (MB X 5%) </td>
+    <td class="right">750,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">14.250,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 0%) </td>
+    <td class="right">00,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">14.250,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA sur Fournitures (NF x Taux de TVA de 20%) </td>
+    <td class="right">2.850,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais de Transport « HT »</td>
+    <td class="right">400,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 20%) </td>
+    <td class="right">80,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Frais d'emballages </td>
+    <td class="right">800,00</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant à payer TTC (NF + Montant total TVA + Montant total des frais) </td>
+    <td class="right">18.380,00</td>
+</tr>
+
+</table>
+<table>
+<!-- 14/11/2025 -->
+<tr class="date"><td colspan="6">14/11/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6122</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Achats de matières et FC</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>14.250,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>6142</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Transport</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>400,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>2.930,00</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>3413</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Frs - créances pour emballages et M à rendre</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>800,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>5161</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Caisses</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>5.514,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>4411</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Fournisseurs</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>12.866,00</option>
+</td>
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Facture Doit N° 9632</td></tr>
+
+</table>
+
+
+<h3>2- Les factures Avoir </h3>
+<table>
+
+<tr>
+    <td colspan="3" class="titre"> Facture AVOIR N°318</td>
+</tr>
+
+<tr>
+    <td class="bold">Société ATLAS NÉGOCE </td>
+    <td> AVOIR </td>
+    <td class="bold right"> Société HORIZON INDUSTRIE </td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablance le 20/11/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Brut</td>
+    <td class="right">12.000,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Remise (MB X 8%) </td>
+    <td class="right">960,00</td>
+</tr>
+<tr>
+    <td colspan="2">Net commercial (MB-RRR) </td>
+    <td class="right">11.040,00</td>
+</tr>
+<tr>
+    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
+    <td class="right">220,80</td>
+</tr>
+<tr>
+    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
+    <td class="right">10.819,20</td>
+</tr>
+
+<tr>
+    <td colspan="2">(+)Montant TVA su Marchandises (NF x Taux de TVA de 20%) </td>
+    <td class="right">2.163,84</td> </tr>
+
+<tr>
+    <td colspan="2">Montant à déduire TTC (NF + Montant TVA) </td>
+    <td class="right">12.983,04</td>
+</tr>
+</table>
+<table>
+<!-- 20/11/2025 -->
+<tr class="date"><td colspan="6">20/11/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>4411</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Fournisseurs</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>12.983,04</option>
+</td>
+</tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>7386</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Escomptes obtenus</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>220,80</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>6111</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Achats de marchandises</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>11.040,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>2.163,84</option>
+</td>
+</tr>
+
+<!-- Retour de marchandises -->
+<tr class="date"><td colspan="6">Avoir N° 318</td></tr>
+</table>
+<table>
+
+<tr>
+    <td colspan="3" class="titre">Facture Avoir N° 447</td>
+</tr>
+
+<tr>
+    <td class="bold">Société MAROC MATIÈRES</td>
+    <td> AVOIR </td>
+    <td class="bold right"> Société HORIZON INDUSTRIE</td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablanca le 24/11/2025</td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Remise Supplémentaire (84 600 X 2%)</td>
+    <td class="right">1.692,00</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA  (Montant RRR x Taux de TVA de 20%) </td>
+    <td class="right">338,40</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à déduire TTC (Mt RRR + Montant TVA) </td>
+    <td class="right">2.030,40</td>
+</tr>
+
+</table>
+<table>
+<!-- 24/11/2025 -->
+<tr class="date"><td colspan="6">24/11/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>4411</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Fournisseurs</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>2.030,40</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>6119</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>RRR obtenues sur achats de marchandises</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>1.692,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>338,40</option>
+</td>
+</tr>
+
+<!-- Facture d'avoir -->
+<tr class="date"><td colspan="6">Avoir N° 447</td></tr>
+</table>
+
+<table>
+
+<tr>
+    <td colspan="3" class="titre">Facture Avoir N° 172</td>
+</tr>
+
+<tr>
+    <td class="bold">Société BUREAU SERVICE</td>
+    <td> AVOIR </td>
+    <td class="bold right"> Société HORIZON INDUSTRIE</td>
+</tr>
+
+
+<tr>
+    <td colspan="3" class="bold">Casablanca le 28/11/2025 </td>
+</tr>
+
+<tr class="header">
+    <td colspan="2" class="bold">Éléments</td>
+    <td class="bold center">Montant</td>
+</tr>
+
+<tr>
+    <td colspan="2">Montant Escompte (14 250  X 1%)</td>
+    <td class="right">142,50</td>
+</tr>
+<tr>
+    <td colspan="2">(+)Montant TVA  (Montant Escompte x Taux de TVA de 20%) </td>
+    <td class="right">28,50</td>
+</tr>
+<tr>
+    <td colspan="2">Montant à déduire TTC (Mt Escompte + Montant TVA)</td>
+    <td class="right">171,00</td>
+</tr>
+
+</table>
+<table>
+<!-- 28/11/2025 -->
+<tr class="date"><td colspan="6">28/11/2025</td></tr>
+
+<tr>
+<td class="debit center" style="width:5%;">
+    <option>4411</option>
+</td>
+
+<td></td>
+
+<td class="debit" style="width:30%;">
+    <option>Fournisseurs</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>171,00</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>7386</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Escomptes obtenus</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>142,50</option>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td class="credit center" style="width:5%;">
+    <option>3455</option>
+</td>
+
+<td></td>
+
+<td class="credit" style="width:30%;">
+    <option>Etat - TVA récupérable</option>
+</td>
+
+<td></td>
+
+<td class="montant" style="width:10%;">
+    <option>28,50</option>
+</td>
+</tr>
+
+<!-- Escompte obtenu -->
+<tr class="date"><td colspan="6">Avoir N° 172</td></tr>
+</table>
+
+
+
+
+
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:90%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P2M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
