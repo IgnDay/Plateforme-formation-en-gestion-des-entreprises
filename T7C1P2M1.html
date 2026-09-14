@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>
+        📘 L’enregistrement des opérations relatives aux règlements financiers
+    </h1>
+</header>
+
+<nav>
+
+<button class="btnActive"onclick="showSection('RE')">Les règlements en espèces</button>
+<button class="btnActive"onclick="showSection('RC')">Les règlements par chèque</button>
+<button class="btnActive"onclick="showSection('IF')">Les règlements par effets de commerce</button>
+
+
+</nav>
+
+
+<section id="RE" class="active animationSection">
+
+<h2>► Enregistrement comptable des règlements en espèces </h2>
+
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align: left;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:70%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+<h3>Chez l'Acheteur (Client)</h3>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>44XX</option>
+            <option>6XXX </option>
+            <option>51XX </option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Compte de dettes ou </option>
+            <option>Compte de charges ou</option>
+            <option>Compte de trésorerie</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+<option>Montant </option>
+<option>Montant </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>5161 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Caisses </option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Pièce N°..................... </td></tr>
+
+</table>
+►Exemple : Règlement d’une dette fournisseur en espèces
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">25/04/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4411 </option>
+                   
+    </td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Fournisseurs</option>
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>30.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>5161 </option>
+            
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Caisses </option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>30.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Pièce N°31-2026 </td></tr>
+
+</table>
+
+<h3>Chez le Vendeur (Fournisseur)</h3>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5161</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Caisses </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>34XX</option>
+            <option>7XXX</option>
+<option>51XX</option>
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Compte de créances </option>
+            <option> Comptes de produits</option>
+<option> Comptes de trésorerie</option>
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Pièce N°..................... </td></tr>
+
+</table>
+► Exemple : Encaissement d’une créance client en espèces
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">25/04/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;" >
+        
+            <option>5161</option>
+            
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Caisses </option>
+            
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>25.000,00</option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3421</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients </option>
+            
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>25.000,00</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Pièce N°40-2026 </td></tr>
+
+</table>
+
+
+
+
+
+
+</section>
+
+<section id="RC">
+
+<h2>► Enregistrement comptable des règlements par chèque</h2>
+<h3> Chez l’acheteur (Client)<h3>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>44XX</option>
+            <option>6XXX </option>
+            <option>51XX </option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Compte de dettes ou </option>
+            <option>Compte de charges ou</option>
+            <option>Compte de trésorerie</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+<option>Montant </option>
+<option>Montant </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>5141 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Banques </option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Chèque N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Règlement d’une dette fournisseur par chèque</h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">26/04/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4411 </option>
+                   
+    </td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Fournisseurs</option>
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>45.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>5141 </option>
+            
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Banques</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>45.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Pièce N°31-2026 </td></tr>
+
+</table>
+
+<h3>Chez le Vendeur (Fournisseur)</h3>
+<h4>1- Chèques à encaisser ou présentation chèque à l’encaissement </h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5111</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Chèques à encaisser ou à l'encaissement </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>34XX</option>
+            <option>7XXX</option>
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Compte de créances </option>
+            <option> Comptes de produits</option>
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Chèque N°..................... </td></tr>
+
+</table>
+<h4>2- Réception avis de crédit de l’encaissement du Chèque </h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5141</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Banques </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6147</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Services bancaires </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3455</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Etat - TVA récupérable</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>5111</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Chèques à encaisser ou à l'encaissement</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Avis de crédit N°..................... </td></tr>
+
+</table>
+
+<h4>► Exemple : 15/03/2026 Chèque à l’encaissement pour règlement d’une créance et 20/03/2026 Réception avis de crédit de l’encaissement de ce chèque (Commission bancaire 20 DH HT /TVA 10%)</h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">15/03/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5111</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Chèques à encaisser ou à l'encaissement</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>40.000,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3421</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:20%;">
+        
+            <option>Clients</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>40.000,00</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Chèque N°625384 </td></tr>
+
+</table>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">20/03/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5141</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:20%;">
+            <option>Banques </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>39.978,00</option>
+</td>
+
+</tr>
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6147</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:20%;">
+            <option>Services bancaires </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>20,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3455</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:20%;">
+            <option>Etat - TVA récupérable</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>2,00</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>5111</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:25%;">
+        
+            <option>Chèques à encaisser ou à l'encaissement</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>40.000,00</option>
+
+</td>
+
+</tr>
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Avis de crédit N°36-2026</td></tr>
+
+</table>
+
+
+</section>
+NB : Le même mécanisme s’applique en cas de règlement par chèques postaux (5146)
+<section id="IF">
+<h2>► Définition d’un effet de commerce : </h2>
+
+<h3>Un effet de commerce est un titre négociable représentant une créance payable à court terme et mobilisable. Il faut distinguer entre les 02 types suivants : <h3>
+<h4>
+<p>
+-La lettre de change : un document par lequel un créancier (Tireur) donne l'ordre à son débiteur (Tiré) de payer à son ordre ou à l'ordre d'un tiers (Bénéficiaire) une somme déterminée à une date fixée (Echéance).  
+
+
+
+</p>
+<p>
+-Le billet à ordre :  un document par lequel un débiteur (Souscripteur) s’engage à payer une somme déterminée à une date fixe [Echéance] à l'ordre d'une autre personne (Bénéficiaire).
+
+</p>
+
+</h4>
+
+<h2>► Enregistrement comptable </h2>
+<h3>1-Création d’un effet de commerce</h3>
+
+<h4> Chez l’acheteur (Client)<h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4411</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Fournisseurs</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>4415 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Fournisseurs - effets à payer</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Le client (A) a accepté la lettre de change n°15 (Echéance 30/07/2026) en règlement de sa dette envers son fournisseur (B)</h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">20/05/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4411</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Fournisseurs</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00 </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>4415 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Fournisseurs - effets à payer</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°15 </td></tr>
+
+</table>
+
+<h4>Chez le Vendeur (Fournisseur)</h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3425</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Clients - effets à recevoir</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3421</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Le client (A) accepte la lettre de change n°15.</h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">20/05/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3425</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Clients - effets à recevoir</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3421</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°15 </td></tr>
+
+</table>
+<h3>2-Circulation d’un effet de commerce</h3>
+<h3> a-Endossement au profit d’un Tiers </h3>
+<h4> Chez l’endosseur<h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4411</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Fournisseurs</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>3425 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Clients - effets à recevoir</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Le fournisseur (B) a transmis par endossement la lettre de change n°15 à son fournisseur (C).</h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">28/05/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4411</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Fournisseurs</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00 </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>3425 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option> Clients - effets à recevoir </option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°15 </td></tr>
+
+</table>
+
+<h4>Chez l’endossataire</h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3425</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Clients - effets à recevoir</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3421</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Le fournisseur (C) a reçu par endossement la lettre de change n°15 de son client (B).</h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">28/05/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3425</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Clients - effets à recevoir</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3421</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients</option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> LC N°15 </td></tr>
+
+</table>
+<h4> Chez le Signataire : Aucune écriture <h4>
+
+
+<h3> b-Escompte auprès de la Banque d’un effet de commerce </h3>
+<h4> Etape 1 : La date de remise à l’escompte (Aucune écriture )<h4>
+
+<h4> Etape 2 : Réception de bordereau d’escompte<h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Banques</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6311</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Intérêts des emprunts et dettes* </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6147</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Services bancaires </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3455</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Etat - TVA récupérable (sur les Agios**)</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>5520 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Crédits d'escompte</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Bordereau d’escompte de la LC N°..................... </td></tr>
+
+</table>
+*Intérêts Escompte=([Montant nominalxTaux d’intérêtxNombre de jours]/360)<p>
+** Agios = Intérêts + Services bancaires</p>
+<h4>►Exemple : Réception d’un bordereau d’escompte de la lettre de change N° 15 remis à l’escompte le 01/06/2026 (Taux d’intérêt 10%, Commission bancaire 30 DH et TVA 10%) </h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">05/06/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>5141</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Banques</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>34.336,03 </option>
+
+</td>
+
+</tr>
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6311</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Intérêts des emprunts et dettes*</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>573,61</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6147</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Services bancaires </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>30,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3455</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Etat - TVA récupérable</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>60,36</option>
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>5520 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Crédits d'escompte</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Bordereau d’escompte de la LC N°15 </td></tr>
+
+</table>
+*Intérêts Escompte=(35 000x10%x59)/360
+<h4> Etape 3 : A la date d’échéance de l’effet<h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>5520</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Crédits d'escompte</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>3425 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Clients - effets à recevoir</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Echéance LC N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Arrivée de la date d’échéance de la lettre de change N° 15 objet de l’escomptée </h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">30/07/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>5520</option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Crédits d'escompte</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00 </option>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>3425 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Clients - effets à recevoir</option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Echéance LC N°15 </td></tr>
+
+</table>
+
+<h3>3-Paiement et Encaissement d’un effet de commerce</h3>
+
+<h3> Chez le signataire<h3>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4415</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Fournisseurs - effets à payer </option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6147</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Services bancaires </option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>3455</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Etat - TVA récupérable </option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>5141 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Banques </option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Avis de débit N°..................... </td></tr>
+
+</table>
+<h4>►Exemple : Paiement normal de la lettre de change N° 15  (Commission prélevée 15 DH HT + TVA 10%)</h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">01/08/2026</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>4415</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Fournisseurs - effets à payer </option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00 </option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6147</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Services bancaires </option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>15,00 </option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>3455</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Etat - TVA récupérable </option>
+            
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>1,50 </option>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>5141 </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            
+            <option>Banques </option>
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.016,50</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Avis de débit N°25-2026 </td></tr>
+
+</table>
+
+<h3>Chez le Bénéficiare</h3>
+<h4>1- Effets à encaisser ou à l’encaissement </h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5113</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Effets à encaisser ou à l'encaissement </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3425</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients - effets à recevoir </option>
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Remise à l’encaissement LC N°..................... </td></tr>
+
+</table>
+<h4>2- Réception avis de crédit de l’encaissement de l’effet </h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5141</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Banques </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6147</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Services bancaires </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3455</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Etat - TVA récupérable</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>5113</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> Effets à encaisser ou à l'encaissement </option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Avis de crédit N°..................... </td></tr>
+
+</table>
+
+<h4>► Exemple : 29/07/2026 Remise LC N° 15 à l’encaissement et 01/08/2026 Réception avis de crédit de l’encaissement de cette lettre de change (Commission bancaire 25 DH HT /TVA 10%)</h4>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">29/07/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5113</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Effets à encaisser ou à l'encaissement </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3425</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Clients - effets à recevoir </option>
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Remise à l’encaissement LC N°15. </td></tr>
+
+</table>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">01/08/2026</td></tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>5141</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Banques </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>34.972,50</option>
+</td>
+
+</tr>
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>6147</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Services bancaires </option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>25,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td class="debit center"" style="width:5%;">
+        
+            
+            <option>3455</option>
+       
+</td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+            <option>Etat - TVA récupérable</option>
+       
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>2,50</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>5113</option>
+            
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> Effets à encaisser ou à l'encaissement </option>
+            
+
+
+
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>35.000,00</option>
+
+</td>
+
+</tr>
+
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Avis de crédit N°31-2026 </td></tr>
+
+</table>
+NB : Ce résumé ne traite pas certains incidents liés aux effets de commerce, notamment le renouvellement des effets et le retour des effets impayés.
+
+</section>
+
+
+
+<footer>
+
+Formation en Comptabilité Générale
+
+<br><br>
+
+<a href="C1P2M1.html">
+⬅ Retour
+</a>
+
+</footer>
+
+</body>
+</html>
+
