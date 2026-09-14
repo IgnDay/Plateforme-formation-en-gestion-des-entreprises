@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title> IgnDay Comptabilité Générale</title>
+
+<!-- LIBRAIRIES PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(135deg,#dbeafe,#f0fdf4);
+    padding:25px;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    border:3px solid #0f172a;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:38px;
+    margin-bottom:10px;
+    letter-spacing:2px;
+}
+
+.header p{
+    font-size:18px;
+    opacity:0.95;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#0f172a;
+    color:white;
+    padding:18px;
+    font-size:24px;
+    border:2px solid #cbd5e1;
+    text-align:left;
+}
+
+td{
+    border:2px solid #d1d5db;
+    padding:20px;
+    font-size:22px;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+.montant{
+    width:260px;
+    text-align:right;
+}
+
+/* INPUTS */
+
+input{
+    width:100%;
+    border:none;
+    background:transparent;
+    font-size:22px;
+    outline:none;
+    color:#0f172a;
+}
+
+.input-text{
+    text-align:left;
+    font-weight:500;
+}
+
+.montantInput,
+#totalTTC{
+    text-align:right;
+    font-weight:bold;
+}
+
+/* TOTAL */
+
+.total{
+    background:linear-gradient(135deg,#fef3c7,#fde68a);
+    font-weight:bold;
+}
+
+.total td{
+    font-size:24px;
+}
+
+/* NOTE */
+
+.note{
+    padding:20px;
+    margin:20px;
+    background:#eff6ff;
+    border-left:6px solid #2563eb;
+    border-radius:10px;
+    color:#1e293b;
+    font-size:18px;
+    line-height:1.6;
+}
+
+/* BUTTONS */
+
+.btn-zone{
+    text-align:center;
+    padding:25px;
+}
+
+button{
+    border:none;
+    padding:14px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    margin:8px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.btn-pdf{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-clear{
+    background:#ea580c;
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    td,th{
+        font-size:16px;
+        padding:12px;
+    }
+
+    .header h1{
+        font-size:28px;
+    }
+
+    .header p{
+        font-size:15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="zonePDF">
+
+<div class="header">
+
+    <h1>FACTURE AVOIR</h1>
+
+    <p>
+        Cas de réduction supplémentaire ou cas de l’escompte accordé
+    </p>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+    <th>Éléments</th>
+    <th class="montant">Montant</th>
+</tr>
+
+</thead>
+
+<tbody id="avoirContainer">
+
+<tr class="ligneAvoir">
+
+    <td>
+
+        <input type="text"
+               class="input-text"
+               value="Montant de réduction">
+
+    </td>
+
+    <td class="montant">
+
+        <input type="number"
+               class="montantInput"
+               value=""
+               oninput="calculerTotal()">
+
+    </td>
+
+</tr>
+
+<tr class="ligneAvoir">
+
+    <td>
+
+        <input type="text"
+               class="input-text"
+               value="(+) Montant TVA">
+
+    </td>
+
+    <td class="montant">
+
+        <input type="number"
+               class="montantInput"
+               value=""
+               oninput="calculerTotal()">
+
+    </td>
+
+</tr>
+
+<tr class="total">
+
+    <td>
+        Montant à déduire TTC
+    </td>
+
+    <td class="montant">
+
+        <input type="text"
+               id="totalTTC"
+               readonly>
+
+    </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="note">
+
+<strong>NB :</strong>
+
+Le calcul du montant à déduire en cas de retour de marchandises
+doit être effectué en se référant au même modèle
+que celui de la facture « Doit ».
+
+</div>
+
+<div class="btn-zone">
+
+<button class="btn-pdf"
+        onclick="exportPDF()">
+
+    Exporter PDF
+
+</button>
+
+<button class="btn-clear"
+        onclick="viderChamps()">
+
+    Vider les champs
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* FORMAT */
+
+function format(nombre){
+
+    return nombre.toLocaleString('fr-FR',{
+
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+
+    });
+
+}
+
+/* CALCUL */
+
+function calculerTotal(){
+
+    let total = 0;
+
+    document.querySelectorAll(".montantInput")
+    .forEach(input=>{
+
+        total += parseFloat(input.value) || 0;
+
+    });
+
+    document.getElementById("totalTTC").value =
+        format(total);
+
+}
+
+calculerTotal();
+
+/* VIDER */
+
+function viderChamps(){
+
+    let inputs =
+        document.querySelectorAll(".montantInput");
+
+    inputs.forEach(input=>{
+
+        input.value = "";
+
+    });
+
+    let textes =
+        document.querySelectorAll(".input-text");
+
+    textes[0].value =
+        "Montant de réduction";
+
+    textes[1].value =
+        "(+) Montant TVA";
+
+    calculerTotal();
+
+}
+
+/* EXPORT PDF */
+
+async function exportPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    let original =
+        document.getElementById("zonePDF");
+
+    let clone =
+        original.cloneNode(true);
+
+    // SUPPRIMER LES BOUTONS
+    clone.querySelectorAll("button")
+    .forEach(btn=>btn.remove());
+
+    clone.style.position = "absolute";
+    clone.style.top = "0";
+    clone.style.left = "-9999px";
+    clone.style.width = "1000px";
+
+    document.body.appendChild(clone);
+
+    const canvas =
+        await html2canvas(clone,{
+
+            scale:2,
+            useCORS:true
+
+        });
+
+    document.body.removeChild(clone);
+
+    const imgData =
+        canvas.toDataURL("image/png");
+
+    const pdf =
+        new jsPDF({
+
+            orientation:'portrait',
+            unit:'mm',
+            format:'a4'
+
+        });
+
+    const pdfWidth =
+        pdf.internal.pageSize.getWidth();
+
+    const pdfHeight =
+        (canvas.height * pdfWidth)
+        / canvas.width;
+
+    pdf.addImage(
+
+        imgData,
+        'PNG',
+        0,
+        0,
+        pdfWidth,
+        pdfHeight
+
+    );
+
+    pdf.save("Facture_Avoir.pdf");
+
+}
+
+</script>
+
+</body>
+</html>
+
