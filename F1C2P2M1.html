@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title> IgnDay Comptabilité Générale</title>
+
+<!-- LIBRAIRIES PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(135deg,#dbeafe,#f0fdf4);
+    padding:25px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+    border-radius:22px;
+    box-shadow:0 12px 35px rgba(0,0,0,0.18);
+    background:white;
+    border:3px solid #0f172a;
+}
+
+h1{
+    text-align:center;
+    color:white;
+    margin-bottom:30px;
+    padding:22px;
+    border-radius:16px;
+    font-size:38px;
+    letter-spacing:2px;
+    background:linear-gradient(135deg,#1d4ed8,#2563eb,#0f172a);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:16px;
+}
+
+th{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    padding:14px;
+    border:1px solid #cbd5e1;
+    font-size:18px;
+}
+
+td{
+    border:1px solid #d1d5db;
+    padding:10px;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+.section{
+    background:linear-gradient(135deg,#f59e0b,#facc15);
+    color:#111827;
+    font-weight:bold;
+    font-size:17px;
+}
+
+.total{
+    background:linear-gradient(135deg,#22c55e,#86efac);
+    color:#052e16;
+    font-weight:bold;
+    font-size:17px;
+}
+
+input{
+    width:100%;
+    border:2px solid #cbd5e1;
+    outline:none;
+    background:#fffef0;
+    text-align:right;
+    font-size:15px;
+    padding:10px;
+    border-radius:10px;
+}
+
+input[readonly]{
+    background:#f1f5f9;
+    font-weight:bold;
+    color:#0f172a;
+}
+
+td[contenteditable="true"]{
+    background:#fff7cc;
+    min-width:200px;
+}
+
+.action-cell{
+    text-align:center;
+}
+
+button{
+    border:none;
+    padding:9px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:3px;
+    font-size:14px;
+}
+
+.btn-add{
+    background:#22c55e;
+    color:white;
+}
+
+.btn-remove{
+    background:#ef4444;
+    color:white;
+}
+
+.btn-pdf{
+    background:#2563eb;
+    color:white;
+    padding:14px 24px;
+    margin-top:25px;
+}
+
+.btn-clear{
+    background:#f97316;
+    color:white;
+    padding:14px 24px;
+    margin-top:25px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="zonePDF">
+
+<h1>FACTURE DOIT</h1>
+
+<table>
+
+<thead>
+
+<tr>
+    <th>Éléments</th>
+    <th></th>
+    <th>Montant</th>
+    <th>Action</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="section">
+    <td colspan="4">Montant Brut (A)</td>
+</tr>
+
+<tr>
+
+    <td contenteditable="true">
+        Marchandises, Produits ou Services
+    </td>
+
+    <td></td>
+
+    <td>
+        <input type="number"
+               id="montantBrut"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)">
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr class="section">
+    <td colspan="4">Réductions Commerciales (B)</td>
+</tr>
+
+<tbody id="reductionsContainer">
+
+<tr class="reduction">
+
+    <td contenteditable="true">
+        Rabais ou Remise ou Ristourne
+    </td>
+
+    <td>
+        <input type="number"
+               class="reductionTaux"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)"> Taux %
+    </td>
+
+    <td>
+        <input type="number"
+               class="reductionMontant"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)">
+    </td>
+
+    <td class="action-cell">
+
+        <button class="btn-add"
+                onclick="ajouterReduction()">
+            +
+        </button>
+
+        <button class="btn-remove"
+                onclick="supprimerLigne(this)">
+            X
+        </button>
+
+    </td>
+
+</tr>
+
+</tbody>
+
+<tr class="section">
+<td colspan="4">Net commercial (C = A - B)</td>
+</tr>
+
+<tr>
+
+    <td>Net Commercial</td>
+
+    <td></td>
+
+    <td>
+        <input type="text"
+               id="netCommercial"
+               readonly>
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr class="section">
+    <td colspan="4">Réduction financière (D)</td>
+</tr>
+
+<tr>
+
+    <td>Montant Escompte</td>
+
+    <td>
+        <input type="number"
+               id="escompteT"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)"> Taux %
+    </td>
+
+    <td>
+        <input type="text"
+               id="escompte"
+               readonly>
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr class="section">
+<td colspan="4">Net financier (C - D)</td>
+</tr>
+
+<tr>
+
+    <td>Net Financier</td>
+
+    <td></td>
+
+    <td>
+        <input type="text"
+               id="netFinancier"
+               readonly>
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr class="section">
+<td colspan="4">(+) TVA (E)</td>
+</tr>
+
+<tr>
+
+    <td>Montant TVA</td>
+
+    <td>
+        <input type="number"
+               id="tvaTaux"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)"> Taux %
+    </td>
+
+    <td>
+        <input type="text"
+               id="tvaMontant"
+               readonly>
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr class="section">
+<td colspan="4">Transport et TVA/Transport</td>
+</tr>
+
+<tr>
+
+    <td>Frais de transport</td>
+
+    <td></td>
+
+    <td>
+        <input type="number"
+               id="transport"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)">
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr>
+
+    <td>TVA sur transport</td>
+
+    <td>
+        <input type="number"
+               id="tvaTransportTaux"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)"> Taux %
+    </td>
+
+    <td>
+        <input type="text"
+               id="tvaTransport"
+               readonly>
+    </td>
+
+    <td></td>
+
+</tr>
+
+<tr class="section">
+<td colspan="4">Autres Frais</td>
+</tr>
+
+<tbody id="fraisTTCContainer">
+
+<tr class="fraisTTC">
+
+    <td contenteditable="true"></td>
+
+    <td></td>
+
+    <td>
+        <input type="number"
+               class="fraisTTCMontant"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)">
+    </td>
+
+    <td class="action-cell">
+
+        <button class="btn-add"
+                onclick="ajouterFraisTTC()">
+            +
+        </button>
+
+        <button class="btn-remove"
+                onclick="supprimerLigne(this)">
+            X
+        </button>
+
+    </td>
+
+</tr>
+
+</tbody>
+
+<tr class="total">
+
+<td>Prix de Vente TTC</td>
+
+<td></td>
+
+<td>
+    <input type="text"
+           id="prixTTC"
+           readonly>
+</td>
+
+<td></td>
+
+</tr>
+
+<tr>
+
+<td>Acompte</td>
+
+<td></td>
+
+<td>
+    <input type="number"
+           id="acompte"
+           oninput="calculer()"
+           onblur="formatInputComptable(this)">
+</td>
+
+<td></td>
+
+</tr>
+
+<tr class="total">
+
+<td>Net à Payer</td>
+
+<td></td>
+
+<td>
+    <input type="text"
+           id="netAPayer"
+           readonly>
+</td>
+
+<td></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<button class="btn-pdf" onclick="exportPDF()">
+Exporter PDF
+</button>
+
+<button class="btn-clear" onclick="viderChamps()">
+Vider les champs
+</button>
+
+</div>
+
+<script>
+
+function format(nombre){
+
+    return parseFloat(nombre || 0)
+    .toLocaleString('fr-FR',{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    });
+
+}
+
+function formatInputComptable(input){
+
+    if(input.value !== ""){
+
+        input.value =
+        parseFloat(input.value).toFixed(2);
+
+    }
+
+}
+
+function calculer(){
+
+    let montantBrut =
+    parseFloat(document.getElementById("montantBrut").value) || 0;
+
+    let netCommercial = montantBrut;
+
+    document.querySelectorAll(".reduction")
+    .forEach(ligne=>{
+
+        let tauxInput =
+        ligne.querySelector(".reductionTaux");
+
+        let montantInput =
+        ligne.querySelector(".reductionMontant");
+
+        let taux =
+        parseFloat(tauxInput.value) || 0;
+
+        let reduction = 0;
+
+        if(tauxInput.value !== ""){
+
+            reduction =
+            netCommercial * taux / 100;
+
+            montantInput.value =
+            reduction.toFixed(2);
+
+        }else{
+
+            reduction =
+            parseFloat(montantInput.value) || 0;
+
+        }
+
+        netCommercial -= reduction;
+
+    });
+
+    document.getElementById("netCommercial").value =
+    format(netCommercial);
+
+    let escompteT =
+    parseFloat(document.getElementById("escompteT").value) || 0;
+
+    let escompte =
+    netCommercial * escompteT / 100;
+
+    document.getElementById("escompte").value =
+    format(escompte);
+
+    let netFinancier =
+    netCommercial - escompte;
+
+    document.getElementById("netFinancier").value =
+    format(netFinancier);
+
+    let tvaTaux =
+    parseFloat(document.getElementById("tvaTaux").value) || 0;
+
+    let tvaMontant =
+    netFinancier * tvaTaux / 100;
+
+    document.getElementById("tvaMontant").value =
+    format(tvaMontant);
+
+    let transport =
+    parseFloat(document.getElementById("transport").value) || 0;
+
+    let tvaTransportTaux =
+    parseFloat(document.getElementById("tvaTransportTaux").value) || 0;
+
+    let tvaTransport =
+    transport * tvaTransportTaux / 100;
+
+    document.getElementById("tvaTransport").value =
+    format(tvaTransport);
+
+    let totalFrais = 0;
+
+    document.querySelectorAll(".fraisTTCMontant")
+    .forEach(input=>{
+
+        totalFrais +=
+        parseFloat(input.value) || 0;
+
+    });
+
+    let prixTTC =
+    netFinancier +
+    tvaMontant +
+    transport +
+    tvaTransport +
+    totalFrais;
+
+    document.getElementById("prixTTC").value =
+    format(prixTTC);
+
+    let acompte =
+    parseFloat(document.getElementById("acompte").value) || 0;
+
+    let netAPayer =
+    prixTTC - acompte;
+
+    document.getElementById("netAPayer").value =
+    format(netAPayer);
+
+}
+
+function ajouterReduction(){
+
+    let container =
+    document.getElementById("reductionsContainer");
+
+    let tr = document.createElement("tr");
+
+    tr.className = "reduction";
+
+    tr.innerHTML = `
+
+    <td contenteditable="true"></td>
+
+    <td>
+        <input type="number"
+               class="reductionTaux"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)"> %
+    </td>
+
+    <td>
+        <input type="number"
+               class="reductionMontant"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)">
+    </td>
+
+    <td class="action-cell">
+
+        <button class="btn-add"
+                onclick="ajouterReduction()">
+            +
+        </button>
+
+        <button class="btn-remove"
+                onclick="supprimerLigne(this)">
+            X
+        </button>
+
+    </td>
+
+    `;
+
+    container.appendChild(tr);
+
+}
+
+function ajouterFraisTTC(){
+
+    let container =
+    document.getElementById("fraisTTCContainer");
+
+    let tr = document.createElement("tr");
+
+    tr.className = "fraisTTC";
+
+    tr.innerHTML = `
+
+    <td contenteditable="true"></td>
+
+    <td></td>
+
+    <td>
+        <input type="number"
+               class="fraisTTCMontant"
+               oninput="calculer()"
+               onblur="formatInputComptable(this)">
+    </td>
+
+    <td class="action-cell">
+
+        <button class="btn-add"
+                onclick="ajouterFraisTTC()">
+            +
+        </button>
+
+        <button class="btn-remove"
+                onclick="supprimerLigne(this)">
+            X
+        </button>
+
+    </td>
+
+    `;
+
+    container.appendChild(tr);
+
+}
+
+function supprimerLigne(btn){
+
+    let ligne = btn.closest("tr");
+
+    /* INTERDIRE SUPPRESSION 1ERE LIGNE REDUCTION */
+
+    if(
+        ligne.parentElement.id === "reductionsContainer"
+    ){
+
+        let premiereLigne =
+        document.querySelector(
+        "#reductionsContainer .reduction"
+        );
+
+        if(ligne === premiereLigne){
+
+            alert("La première ligne Réduction ne peut pas être supprimée.");
+
+            return;
+
+        }
+
+    }
+
+    /* INTERDIRE SUPPRESSION 1ERE LIGNE AUTRES FRAIS */
+
+    if(
+        ligne.parentElement.id === "fraisTTCContainer"
+    ){
+
+        let premiereLigne =
+        document.querySelector(
+        "#fraisTTCContainer .fraisTTC"
+        );
+
+        if(ligne === premiereLigne){
+
+            alert("La première ligne Autres frais ne peut pas être supprimée.");
+
+            return;
+
+        }
+
+    }
+
+    ligne.remove();
+
+    calculer();
+
+}
+function viderChamps(){
+
+    document.querySelectorAll('input:not([readonly])')
+    .forEach(input=>{
+
+        input.value = "";
+
+    });
+
+    document.querySelectorAll('input[readonly]')
+    .forEach(input=>{
+
+        input.value = "0,00";
+
+    });
+
+}
+
+async function exportPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    let original =
+        document.getElementById("zonePDF");
+
+    let clone =
+        original.cloneNode(true);
+
+    clone.querySelectorAll("tr").forEach(row=>{
+
+        if(row.cells.length > 3){
+
+            row.deleteCell(3);
+
+        }
+
+    });
+
+    let ths = clone.querySelectorAll("th");
+
+    if(ths.length > 3){
+
+        ths[3].remove();
+
+    }
+
+    clone.querySelectorAll("button")
+    .forEach(btn=>btn.remove());
+
+    clone.style.position = "absolute";
+    clone.style.left = "-9999px";
+
+    document.body.appendChild(clone);
+
+    html2canvas(clone,{
+        scale:2
+    }).then(canvas=>{
+
+        let imgData =
+            canvas.toDataURL("image/png");
+
+        let pdf =
+            new jsPDF('p','mm','a4');
+
+        let pdfWidth = 130;
+
+        let pdfHeight =
+            canvas.height * pdfWidth / canvas.width;
+
+        pdf.addImage(
+            imgData,
+            'PNG',
+            10,
+            10,
+            pdfWidth,
+            pdfHeight
+        );
+
+        pdf.save("Facture.pdf");
+
+        document.body.removeChild(clone);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
+
+
