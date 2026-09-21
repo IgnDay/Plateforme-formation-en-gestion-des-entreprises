@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+    margin:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
+h2{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #999;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#3498db;
+    color:white;
+}
+
+input,select{
+    width:160px;
+    padding:5px;
+}
+
+button{
+    padding:10px 15px;
+    margin:8px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.btn-g{background:#27ae60;color:white;}
+.btn-r{background:#e74c3c;color:white;}
+.btn-b{background:#2980b9;color:white;}
+
+.actions{
+    text-align:center;
+}
+
+/* ❌ CACHER LES 2 DERNIÈRES COLONNES */
+#tableau th:nth-child(8),
+#tableau td:nth-child(8),
+#tableau th:nth-child(9),
+#tableau td:nth-child(9){
+    display:none;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container" id="zonePDF">
+
+<h2>Tableau d'amortissement dégressif</h2>
+
+<table>
+<tr>
+<td>VO / VE</td>
+<td><input type="number" id="vo"></td>
+
+<td>Date acquisition</td>
+<td><input type="date" id="date"></td>
+</tr>
+
+<tr>
+<td>Durée (ans)</td>
+<td><input type="number" id="duree"></td>
+
+<td>Coefficient</td>
+<td><input type="number" id="coef"></td>
+</tr>
+
+<tr>
+<td>Mode</td>
+<td colspan="3">
+<select id="mode">
+<option value="entier">Années entières</option>
+<option value="prorata">Prorata temporis</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+<div class="actions">
+
+<button class="btn-g" onclick="calcul()">Calculer</button>
+
+<button class="btn-b" onclick="exportPDF()">Exporter PDF</button>
+
+<button class="btn-r" onclick="vider()">Vider</button>
+
+</div>
+
+<table id="tableau">
+<thead>
+<tr>
+<th>Années</th>
+<th>Mois</th>
+<th>VO / VE</th>
+<th>Taux</th>
+<th>Annuité</th>
+<th>Cumul amortissement</th>
+<th>VNA</th>
+<th>Durée restante</th>
+<th>Taux linéaire</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+</div>
+
+<script>
+
+function calcul(){
+
+let vo=parseFloat(document.getElementById("vo").value);
+let duree=parseFloat(document.getElementById("duree").value);
+let coef=parseFloat(document.getElementById("coef").value);
+let mode=document.getElementById("mode").value;
+
+let date=new Date(document.getElementById("date").value);
+
+let taux_lin=1/duree;
+let taux_deg=taux_lin*coef;
+
+let mois_total=duree*12;
+
+let mois_premiere = (mode==="prorata")
+? (12 - date.getMonth())
+: 12;
+
+let annee=date.getFullYear();
+
+let cumul=0;
+let vna=vo;
+
+let mode_lineaire=false;
+let taux_actuel=taux_deg;
+let base_lineaire=0;
+let taux_lineaire_fixe=0;
+
+let tbody=document.querySelector("#tableau tbody");
+tbody.innerHTML="";
+
+while(mois_total>0){
+
+let mois;
+
+if(annee==date.getFullYear())
+mois=mois_premiere;
+else if(mois_total>=12)
+mois=12;
+else
+mois=mois_total;
+
+let duree_restante=mois_total;
+let taux_lineaire_restant=12/duree_restante;
+
+if(!mode_lineaire && taux_lineaire_restant>taux_deg){
+mode_lineaire=true;
+taux_actuel=taux_lineaire_restant;
+taux_lineaire_fixe=taux_lineaire_restant;
+base_lineaire=vna;
+}
+
+let base=(mode_lineaire)?base_lineaire:vna;
+
+let annuite=base*taux_actuel*(mois/12);
+
+cumul+=annuite;
+vna=vo-cumul;
+
+tbody.innerHTML+=`
+<tr>
+<td>${annee}</td>
+<td>${mois}</td>
+<td>${base.toFixed(2)}</td>
+<td>${(taux_actuel*100).toFixed(2)}%</td>
+<td>${annuite.toFixed(2)}</td>
+<td>${cumul.toFixed(2)}</td>
+<td>${vna.toFixed(2)}</td>
+<td>${duree_restante}</td>
+<td>${(taux_lineaire_restant*100).toFixed(2)}%</td>
+</tr>
+`;
+
+annee++;
+mois_total-=mois;
+}
+
+}
+
+/* 📄 EXPORT PDF */
+function exportPDF(){
+
+let element=document.getElementById("zonePDF");
+
+html2pdf()
+.set({
+margin:0.5,
+filename:'amortissement_degressif.pdf',
+image:{type:'jpeg',quality:0.98},
+html2canvas:{scale:2},
+jsPDF:{unit:'in',format:'a4',orientation:'landscape'}
+})
+.from(element)
+.save();
+
+}
+
+/* 🧹 VIDER TOTAL */
+function vider(){
+
+document.getElementById("vo").value="";
+document.getElementById("date").value="";
+document.getElementById("duree").value="";
+document.getElementById("coef").value="";
+document.getElementById("mode").value="entier";
+
+document.querySelector("#tableau tbody").innerHTML="";
+
+}
+
+</script>
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C2P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
