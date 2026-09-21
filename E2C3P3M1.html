@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Exercice 2 / Les amortissements
+
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('EXE')">Exercice</button>
+<button onclick="showSection('SOL')"> Solution</button>
+</nav>
+
+<section id="EXE" class="active">
+    <h2> Exercice 2
+</h2>
+<div class="container">
+
+
+
+<p>
+La société <strong>TECHNOMAR SARL</strong> clôture ses comptes le <strong>31 décembre</strong> de chaque année.
+</p>
+
+<p>
+À l'occasion des travaux d'inventaire au <strong>31/12/2025</strong>, le chef comptable vous communique
+l'extrait de balance avant inventaire ainsi que les informations complémentaires suivantes :
+</p>
+
+<h3>Extrait de la balance avant inventaire au 31/12/2025</h3>
+
+<table>
+    <tr>
+        <th>Intitulé</th>
+        <th>S.D (DH)</th>
+        <th>S.C (DH)</th>
+    </tr>
+    <tr>
+        <td>Frais de constitution</td>
+        <td>120 000</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Constructions</td>
+        <td>1 200 000</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Matériel et outillage</td>
+        <td>850 000</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Matériel de transport</td>
+        <td>?</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Amortissement des frais de constitution</td>
+        <td></td>
+        <td>80 000</td>
+    </tr>
+    <tr>
+        <td>Amortissement des constructions</td>
+        <td></td>
+        <td>120 000</td>
+    </tr>
+    <tr>
+        <td>Amortissement du matériel et outillage</td>
+        <td></td>
+        <td><strong>?</strong></td>
+    </tr>
+    <tr>
+        <td>Amortissement du matériel de transport</td>
+        <td></td>
+        <td>96 000</td>
+    </tr>
+</table>
+
+<h3>Informations complémentaires</h3>
+
+<div class="info">
+    <h3>► Frais de constitution</h3>
+    <p>
+        Les frais de constitution ont été engagés à la date de création de l'entreprise.
+        Ils sont amortis selon le mode <strong>constant</strong> sur une durée de
+        <strong>3 ans</strong>.
+    </p>
+</div>
+
+<div class="info">
+    <h3>► Constructions</h3>
+    <p>
+        Les constructions ont été acquises à la date de création de l'entreprise.
+        L'entreprise pratique l'amortissement <strong>constant</strong>.
+    </p>
+</div>
+
+<div class="info">
+    <h3>► Matériel de transport</h3>
+    <p>
+        Le matériel de transport a été acquis le <strong>01/05/2024</strong>.
+        Il est amorti sur         <strong>5 ans</strong>selon le mode <strong>dégressif</strong>.
+    </p>
+</div>
+
+<div class="info">
+    <h3>► Matériel et outillage</h3>
+
+    <table>
+        <tr>
+            <th>Désignation</th>
+            <th>Valeur d'origine (DH)</th>
+            <th>Informations</th>
+        </tr>
+
+        <tr>
+            <td>Machine A</td>
+            <td>400 000</td>
+            <td>Acquise à la date de création de l'entreprise.</td>
+        </tr>
+
+        <tr>
+            <td>Machine B</td>
+            <td>250 000</td>
+            <td>
+                Acquise le 01/07/2023 et cédée le 05/09/2025 par chèque bancaire
+                à 160 000 DH . Le comptable n’a pas enregistré la cession.
+            </td>
+        </tr>
+
+        <tr>
+            <td>Machine C</td>
+            <td>200 000</td>
+            <td>
+                Acquise le 01/08/2025.
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        Les trois machines sont amortissables selon le mode
+        <strong>constant</strong> sur une durée de <strong>10 ans</strong>.
+    </p>
+</div>
+
+<h2>Travail à faire</h2>
+
+<ol>
+    <li>
+        Déterminer la date de création de l'entreprise.
+    </li>
+
+    <li>
+        Déterminer le taux d'amortissement des constructions.
+    </li>
+
+    <li>
+        Déterminer la valeur d’entrée (Valeur d’origine) du matériel de transport.
+    </li>
+
+    <li>
+        Retrouver le cumul des amortissements du matériel et outillage figurant
+        parmi les informations manquantes de la balance avant inventaire.
+    </li>
+
+    <li>
+        Calculer les dotations aux amortissements de l'exercice 2025 relatives :
+        <ul>
+            <li>aux frais de constitution ;</li>
+            <li>aux constructions ;</li>
+            <li>au matériel et outillage ;</li>
+            <li>au matériel de transport.</li>
+        </ul>
+    </li>
+
+    <li>
+        Passer au journal les écritures de régularisation au 31/12/2025.
+    </li>
+</ol>
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+<section id="SOL">
+<h2>Solution de l’exercice 2 </h2>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+/* Tableau principal */
+table{
+    width:100%;
+    margin:auto;
+    border-collapse:collapse;
+    border:3px solid black; /* Bordure extérieure épaisse */
+}
+
+/* Cellules */
+td{
+    border:1px solid black; /* Bordures internes */
+    padding:10px;
+}
+
+/* Styles */
+.titre{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.right{
+    text-align:right;
+}
+
+.center{
+    text-align:center;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.header{
+    background:#e6e6e6;
+}
+
+</style>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin: 30px;
+    background:#f4f6f9;
+    color:#333;
+    line-height:1.6;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#0d47a1;
+    border-bottom:3px solid #0d47a1;
+    padding-bottom:10px;
+}
+
+h2{
+    color:#1565c0;
+    margin-top:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    margin-bottom:25px;
+}
+
+table th{
+    background:#1565c0;
+    color:white;
+    padding:10px;
+    border:1px solid #ddd;
+}
+
+table td{
+    padding:10px;
+    border:1px solid #ddd;
+}
+
+table tr:nth-child(even){
+    background:#f8f9fa;
+}
+
+.info{
+    background:#eef5ff;
+    border-left:5px solid #1565c0;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+ol li{
+    margin-bottom:10px;
+}
+
+ul li{
+    margin-bottom:8px;
+}
+</style>
+
+<h3>1- Détermination de la date de création de l'entreprise </h3>
+<table>
+<tr><td>Ʃ Amort FC = [VE * T *N] / 12 →
+80 000 = [120 000 * 33,33% * N] / 12</td></tr>
+<tr><td>→ N = (80 000 * 12) / (120 000 * 0.3333) → N = 24 Mois</td></tr>
+<tr><td>N est le nombre de mois cumulés jusqu’au 31/12/2024 (Avant inventaire) → Ainsi, la date d’entrée des frais de constitution dans le patrimoine de l’entreprise correspond à la date de création de celle-ci, soit le 01/01/2023.</td></tr>
+</table>
+<p>*Taux d’amortissement FC (T) = 1/3 = 33.33%</p>
+<h3>2- Détermination du taux d’amortissement des constructions </h3>
+<table>
+<tr><td>Ʃ Amort C° = [VE * T *N] / 12 →
+120 000 = [1 200 000 * T * 24] / 12</td></tr>
+<tr><td>→ T = (120 000 * 12) / (1 200 000 * 24) → T = 0,05 = 5%</td></tr>
+
+</table>
+
+<p>*24 est le nombre de mois cumulés jusqu’au 31/12/2024 (Avant inventaire) </p>
+
+<h3>3- Détermination de la valeur d’entrée du matériel de transport</h3>
+<table>
+<tr><td>Ʃ Amort MT = [VE * T * n] / 12 →
+96 000 = [VE * 40% * 8] / 12</td></tr>
+<tr><td>→ VE = (96 000 * 12) / (0,4 * 8) → VE = 360 000 </td></tr>
+
+</table>
+
+<p>*Taux d’amortissement dégressif MT (T) = (1/5) * 2 = 0,4 = 40% (2 est le coefficient qui correspond à la durée de 5 ans) </p>
+<p>*8 est le nombre de mois du 01/05/2024 jusqu’au 31/12/2024 (Avant inventaire)  </p>
+
+
+<h3>4- Détermination du cumul des amortissements du matériel et outillage </h3>
+<table>
+<tr><td>Ʃ Amort MO = Ʃ Amort MA + Ʃ Amort MB = [(VEA * TA * NA) / 12] + [(VEB * TB * NB) / 12] →
+Ʃ Amort MO = [(400 000 * 10% * 24) / 12] + [(250 000 * 10% * 18) / 12] </td></tr>
+<tr><td>→ VE = 80 000 + 37 500 = 117 500 </td></tr>
+
+</table>
+<p>*24 est le nombre de mois cumulés jusqu’au 31/12/2024 (Avant inventaire) pour la machine A </p>
+<p>**18 est le nombre de mois cumulés jusqu’au 31/12/2024 (Avant inventaire) pour la machine B </p>
+<p>***Taux d’amortissement MO = TA = TB = 1/10 = 0,1 = 10%</p>
+
+
+<h3>5- Calcul des dotations d’amortissements de l’exercice 2025 </h3>
+<table>
+<tr><td> Dotation FC = [VE * T * n] / 12 = [120 000 * 33,33% * 12] / 12 = 40 000 </td></tr>
+<tr><td>Dotation C° = [VE * T * n] / 12 = [1 200 000 * 5% * 12] / 12 = 60 000 </td></tr>
+<tr><td>Dotation MT = [VE * T * n] / 12 = [(360 000 – 96 000)* 40% * 12] / 12 = 105 600 </td></tr>
+<tr><td>Dotation MO = [(VEA * TA * nA) / 12] + [(VEB * TB * nB) / 12] + [(VEC * TC * nC) / 12] = [(400 000 * 10% * 12) / 12] + [(250 000 * 10% * 8) / 12] + [(200 000 * 10% * 5) / 12] = 40 000 + 16 666,67 + 8 333,33 = 65 000 </td></tr>
+
+
+</table>
+
+
+<h3>6- Les écritures au 31/12/2025 </h3>
+
+
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2025</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6191 </option>
+<option>6193 </option>
+                   
+    </td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+    <option>DEA de l’I en NV</option>
+<option>DEA des IC</option>
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+    <option>40.000,00</option>
+<option>197.000,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>2811 </option>
+            <option>2832 </option>
+            <option>2833 </option>
+            <option>2834 </option>
+
+            
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+    <option>Amortissements des FP</option>
+<option>Amortissements des C°</option>
+<option>Amortissements du MT</option>
+<option>Amortissements des ITMO</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>40.000,00</option>
+    <option>60.000,00</option>
+    <option>72.000,00</option>
+    <option>65.000,00</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6594 </option>
+                   
+    </td>
+
+<td></td>
+
+<td class="debit" " style="width:30%;">
+    <option>DNC aux PR</option>
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+    <option>33.600,00</option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+            <option>1351 </option>
+
+            
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+<option>Provisions pour AD</option>
+            
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>33.600,00</option>
+    
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>5141</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Banques</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>160.000,00</option>
+</td>
+
+</tr>
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>7513</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>PC des IC</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>160.000,00</option>
+
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            
+<option>2833</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Amortissements des ITMO</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>54.166,67 </option>
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            
+<option>6513</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>VNA des IC cédées</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>195.833,33 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+<option>2332</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Matériel et outillage</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>250.000,00</option>
+
+</td>
+
+</tr>
+
+
+
+</table>
+
+<p>*(105 600 – 72 000) = 33 600 </p>
+<p>**(250 000* 10% * 26) / 12 = 54 166,67</p>
+<p>***(250 000 – 54 166,67) = 195 833,33</p>
+
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C3P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
