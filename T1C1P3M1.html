@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 L’intérêt des travaux de fin d’exercice et les différentes opérations de régularisation  
+</a>
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('INV')">L’inventaire</button>
+<button onclick="showSection('UTI')">Objectifs des travaux d’inventaire</button>
+<button onclick="showSection('BAI')">Etablissement de la balance avant inventaire</button>
+<button onclick="showSection('PRO')">Processus des travaux de fin d’exercice</button>
+
+</nav>
+
+<section id="INV" class="active">
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:70%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+
+    <h2>Définition de l’inventaire</h2>
+
+    <p>
+        L'inventaire consiste à établir une liste exhaustive des éléments figurant dans le bilan.
+    <p>
+Avant d’établir le bilan, il est nécessaire de procéder à un inventaire dans l’entreprise. Cet inventaire consiste à :
+    </p>
+
+    <div class="highlight">
+        ✔ Dénombrer les éléments de l’actif et du passif <br>
+        ✔ Evaluer ces éléments c'est-à-dire leur donner une valeur réelle exprimée en monnaie nationale.
+    </div>
+
+
+
+    <h3>a-Aspect légal de l’inventaire :</h3>
+    <p>
+La loi comptable impose à toutes les entreprises tenant une comptabilité 
+    </p>
+<div class="highlight">
+        ✔ D’arrêter les comptes en fin d’exercice <br>
+        ✔ D’établir les états de synthèse (Bilan, C.P.C, ESG ……)
+    </div>
+→	Si nécessaire des écritures de régularisation sont comptabilisées afin que les comptes représentent la situation réelle de l’entreprise « Image fidèle »
+
+<h1>Articles extraits de la loi N° 09-88 relative aux obligations comptables du commerçant</h1>
+
+    <p>
+
+    
+-Article 5 : Les éléments actif et passif de l'entreprise doivent faire l'objet d’un inventaire au moins une fois par exercice, à la fin de celui-ci.
+    
+    <p>
+
+    
+    
+      -Article 6 : Il doit être tenu un livre sur lequel sont transcrits le bilan et le compte de produits et de charges de chaque exercice.
+
+  
+    <p>
+
+        -Article 7 : La durée de l’exercice et de douze mois. Elle peut exceptionnellement être inférieure à douze mois, pour un exercice donné.
+    <p>
+    
+-Article 18 : L’établissement des états de synthèse, sauf circonstances exceptionnelles justifiées dans état des informations complémentaires, doit se faire au plus tard dans les trois mois suivant la date de clôture de l’exercice.
+    </p>
+
+<h3>b-Aspect comptable (Code général de normalisation comptable ) :</h3>
+    <p>
+Les travaux de fin d’exercice se font en application des principes comptables suivants :
+    </p>
+<div class="highlight">
+✔ Principe de spécialisation des exercices :  Les charges et les produits doivent être rattachés à l'exercice qui les concerne effectivement et à celui-là seulement    </p>
+
+<br>
+        ✔ Principe de prudence : Les produits ne sont pris en compte que s’ils sont certains et définitivement acquis à l'entreprise ; en revanche, les charges sont à prendre en compte dès lors qu'elles sont probables.     </p>
+<br>
+✔ Principe de continuité d'exploitation :  L'entreprise doit établir ses états de synthèse dans la perspective d'une poursuite normale de ses activités. </p>
+
+
+
+    </div>
+
+
+
+<h3>c-La périodicité des travaux d’inventaire :</h3>
+    <p>
+Les opérations de fin d’exercice ou « travaux d’inventaire » se réalisent en fin d’exercice comptable. 
+    </p>
+    <p>
+La plupart des entreprises clôturent l’exercice comptable le 31 décembre de chaque année civile. 
+    </p>
+→	Toutefois, comme aucun texte n’impose une date, il est possible de clôturer un exercice comptable à n’importe quelle date.
+
+
+</section>
+
+<section id="UTI">
+<h2>Objectifs des travaux d’inventaire</h2>
+
+
+
+
+<div class="section">
+
+    <div class="arrow">
+<h3>a- Objectifs comptables :</h3>
+    </div>
+
+    <div class="content">
+
+        Les travaux d'inventaire sont indispensables pour contrôler
+        et ajuster la comptabilité d'une entreprise en vue d'établir
+        les comptes annuels à la clôture d'un exercice.
+
+        <br><br>
+
+        Ces opérations permettent en effet de :
+
+        <ul>
+
+            <li>Déterminer le résultat comptable de l'entreprise</li>
+
+            <li>Évaluer le stock</li>
+
+            <li>Enregistrer en comptabilité les dépréciations de certains actifs</li>
+
+            <li>Comptabiliser les écritures d'amortissement et les provisions</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- OBJECTIFS FISCAUX -->
+
+<div class="section">
+
+    <div class="arrow">
+<h3>a- Objectifs fiscaux :</h3>
+        
+    </div>
+
+    <div class="content">
+
+        Les travaux d'inventaire ont également pour finalité
+        de déterminer le résultat fiscal et le montant de l'impôt à payer.
+
+    </div>
+
+</div>
+
+
+
+
+</section>
+<section id="BAI">
+<h2>La balance avant inventaire</h2>
+
+
+<div class="section">
+
+    <div class="arrow">
+    </div>
+
+    <div class="content">
+
+        Avant de commencer les travaux de fin d’exercice proprement dit, il est nécessaire d’établir une balance qui regroupe et synthétise toutes les opérations effectuées par l’entreprise durant l’exercice.
+
+        <br><br>
+
+Juste après son établissement, cette balance doit faire l’objet d’un contrôle arithmétique. Ce contrôle consiste à vérifier l’égalité entre le total des mouvements de la balance et le total des mouvements du journal général.
+
+
+Après vérification de la stricte concordance entre ces totaux, il y a lieu de procéder à un contrôle de vraisemblance et un pointage des comptes afin de déceler les erreurs éventuelles.
+Parmi ces erreurs nous pouvons citer :
+
+
+        <ul>
+ <li>Les erreurs d’imputation</li>
+
+ <li>Les erreurs d’oublis (il s’agit de la non-comptabilisation d’une pièce justificative ou d’une charge calculée).</li>
+
+  <li>Les erreurs de saisies (il s’agit de l’enregistrement d’une pièce pour un chiffre différent de celui qui y est porté).</li>
+
+           
+        </ul>
+
+    </div>
+
+</div>
+
+
+
+
+
+</section>
+
+<section id="PRO">
+<h2>Processus des travaux de fin d’exercice</h2>
+
+
+<p>Après l’étape de l’établissement de la balance avant inventaire, il faut effectuer les travaux d’inventaire pour pouvoir procéder aux différentes régularisations qui s’imposent à la fin de l’exercice comptable. Ceci a pour objectif de produire des états de synthèse qui reflètent l’image fidèle de l’entreprise et de son activité.</p>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:15px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border:3px solid #222;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.step{
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+    color:#0b2c5f;
+    margin:10px 0;
+}
+
+.arrow{
+    text-align:center;
+    font-size:24px;
+    margin:5px 0;
+}
+
+.row{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin:15px 0;
+}
+
+.box{
+    width:260px;
+    border:2px solid #444;
+    border-radius:8px;
+    background:#fafafa;
+    overflow:hidden;
+}
+
+.box h3{
+    background:#0b2c5f;
+    color:white;
+    margin:0;
+    padding:8px;
+    text-align:center;
+    font-size:15px;
+}
+
+.box ul{
+    margin:0;
+    padding:12px 25px;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.info{
+    border:2px solid #666;
+    border-radius:8px;
+    padding:12px;
+    background:#fff;
+    font-size:13px;
+    line-height:1.5;
+    margin:10px auto;
+    max-width:600px;
+}
+
+.formule{
+    margin-top:20px;
+    padding-top:10px;
+    border-top:2px solid #000;
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+    color:#0b2c5f;
+}
+
+.documents{
+    width:320px;
+    margin:auto;
+}
+
+@media(max-width:768px){
+
+    .box,
+    .documents{
+        width:100%;
+    }
+
+}
+
+</style>
+
+
+<div class="container">
+
+    <div class="step">
+        Balance avant inventaire
+    </div>
+
+    <div class="info">
+        Comptes issus des opérations courantes :
+        achats, ventes, salaires, loyers...
+    </div>
+
+    <div class="arrow">⬇</div>
+
+    <div class="step">
+        Écritures de régularisation
+    </div>
+
+    <div class="row">
+
+        <div class="box">
+            <h3>Comptes du bilan</h3>
+            <ul>
+                <li>Amortissements</li>
+                <li>Provisions</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>Comptes de CPC</h3>
+            <ul>
+                <li>Régularisation des stocks</li>
+                <li>Charges et produits</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="arrow">⬇</div>
+
+    <div class="step">
+        Balance après inventaire
+    </div>
+
+    <div class="info">
+        Balance obtenue après intégration des écritures de régularisation.
+    </div>
+
+    <div class="arrow">⬇</div>
+
+    <div class="step">
+        Détermination du résultat
+    </div>
+
+    <div class="arrow">⬇</div>
+
+    <div class="step">
+        Documents de synthèse
+    </div>
+
+    <div class="box documents">
+        <ul>
+            <li>Bilan</li>
+            <li>CPC</li>
+            <li>ESG</li>
+            <li>TF</li>
+            <li>ETIC</li>
+        </ul>
+    </div>
+
+    <div class="formule">
+        Balance avant inventaire + Écritures de régularisation = Balance après inventaire
+    </div>
+
+</div>
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P2M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
