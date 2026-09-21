@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 La régularisation des stocks
+</a>
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('DEF')">Définition de stock</button>
+<button onclick="showSection('INV')">Inventaire de stock</button>
+<button onclick="showSection('VAR')">Calcul et signification de la variation de stock</button>
+<button onclick="showSection('UTI')">Utilisation de la variation de stock</button>
+<button onclick="showSection('COMP')"> Comptabilisation de la régularisation de stock</button>
+
+
+
+</nav>
+
+<section id="DEF" class="active">
+
+    <h2>Définition de Stock</h2>
+
+    <p>
+        Le stock désigne l’ensemble des biens entrants dans le cycle d’exploitation de l’entreprise. 
+
+    <p>
+Ces éléments représentent des biens appartenant à l’entreprise et contribuent à l’augmentation de son patrimoine (actif circulant). Ils doivent être inventoriés à la clôture de l’exercice. Ils peuvent être classés comme suit :    </p>
+
+    <div class="highlight">
+        ✔ Vendus en l’état (marchandises).
+ <br>
+        ✔ Vendus après transformation (produits finis). 
+<br>
+
+✔ Utilisés pour obtenir des produits finis (matières premières et fournitures)
+</div>
+
+
+<div class="container">
+
+    <h2>Les principaux stocks</h2>
+
+    <table>
+
+        <tr>
+            <th>Type de stock</th>
+            <th>Description</th>
+        </tr>
+
+        <tr>
+            <td class="type">Le stock de marchandises</td>
+            <td class="description">
+                Stocks des commerçants destinés à la revente sans transformation.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="type">Le stock de matières premières</td>
+            <td class="description">
+                Articles achetés auprès des fournisseurs pour être transformés.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="type">
+                Le stock des produits en cours de fabrication (semi-finis)
+            </td>
+            <td class="description">
+                Articles non encore vendables et nécessitant des transformations supplémentaires.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="type">
+                Le stock des produits terminés (produits finis)
+            </td>
+            <td class="description">
+                Produits fabriqués prêts à être vendus par l’entreprise.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="type">Les emballages</td>
+            <td class="description">
+                Objets destinés à contenir les produits ou marchandises livrés aux clients.
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+</section>
+
+<section id="INV">
+
+    <h2>Définition de l’inventaire</h2>
+
+    <p>
+   L’inventaire comptable permanent est une « organisation des comptes qui, par l’enregistrement des mouvements permet de connaitre de façon constante, en cours de l’exercice, les existants chiffrés en quantité et en valeur. (Plan Comptable Marocain)
+
+ 
+
+<div class="container">
+
+    <h2> Les 03 Types d’inventaire de stock </h2>
+
+    <table>
+
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+
+        <tr>
+            <td class="type"> 1-L’inventaire permanent : 
+</td>
+            <td class="description">
+                Le stock est suivi en temps réel après chaque entrée et sortie
+            </td>
+        </tr>
+
+        <tr>
+            <td class="type"> 2-L'inventaire intermittent : 
+</td>
+            <td class="description">
+                Le stock est calculé à la fin d’une période. Généralement à la fin de l’exercice
+            </td>
+        </tr>
+
+        <tr>
+            <td class="type">
+                3-L’inventaire physique : 
+            </td>
+            <td class="description">
+                Comptage réel des articles en stock pour vérifier les quantités existantes.
+
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+
+</section>
+
+<section id="VAR">
+<h2>Calcul et signification de la variation de stock </h2>
+
+
+<style>
+
+
+
+/* TITRE */
+
+.title{
+
+    text-align:center;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:40px;
+
+    color:#082567;
+
+}
+
+
+/* FORMULE */
+
+.formule{
+
+    text-align:center;
+
+    font-size:46px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* CONTENU */
+
+.content{
+
+    flex:1;
+
+}
+
+
+/* BOITE */
+
+.box{
+
+    display:inline-block;
+
+    background:white;
+
+    border:3px solid #082567;
+
+    padding:18px 35px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.2);
+
+}
+
+/* LIGNES */
+
+.line{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    margin-bottom:25px;
+
+    flex-wrap:wrap;
+
+}
+
+/* TEXTE */
+
+.text{
+
+    font-size:16px;
+
+    flex:1;
+
+}
+
+/* FLECHE */
+
+.arrow{
+
+    font-size:50px;
+
+    font-weight:bold;
+
+}
+
+/* RESULTAT */
+
+.result{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+/* STOCKAGE */
+
+.stockage{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:30px;
+
+}
+
+/* DESTOCKAGE */
+
+.destockage{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-top:30px;
+
+}
+
+/* COULEURS */
+
+.green{
+
+    color:green;
+
+}
+
+.red{
+
+    color:red;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .schema{
+
+        flex-direction:column;
+
+    }
+
+    .vertical{
+
+        writing-mode:horizontal-tb;
+
+        transform:none;
+
+        width:100%;
+
+        height:auto;
+
+    }
+
+    .formule{
+
+        font-size:20px;
+
+    }
+
+    .line{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+}
+
+</style>
+
+<div class="container">
+
+<div class="formule">
+Variation des stocks = Stock final − Stock initial
+</div>
+
+<div class="schema">
+
+
+    <!-- CONTENU -->
+
+    <div class="content">
+
+        <!-- POSITIF -->
+
+        <div class="block">
+
+            
+
+            <div class="box green">
+               SI &lt; SF (Positive)
+                <br>↗ Stockage (augmentation du niveau de stock)
+
+            </div>
+
+            <div class="line">
+
+                <div class="text">
+                    M/ses, matières et fourni. Consommables
+                
+                    ➜
+                
+                    ↘ de charges C6
+                </div>
+
+            </div>
+
+            <div class="line">
+
+                <div class="text">
+                    Produits encours, produits finis, PI et R
+             
+                    ➜
+                
+                    ↗ de produits C7
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- NEGATIF -->
+
+        <div class="block">
+
+            <div class="box red">
+                SI &gt; SF (Négative)
+<br>  ↘ Déstockage (Diminution du niveau de stock)
+            </div>
+
+            <div class="line">
+
+                <div class="text">
+                    M/ses, matières et fourni. Consommables
+                
+                    ➜
+                    ↗ de charges C6
+                </div>
+
+            </div>
+
+            <div class="line">
+
+                <div class="text">
+                    Produits encours, produits finis, PI et R
+                
+                    ➜
+                
+                    ↘ de produits C7
+                </div>
+
+            </div>
+
+            
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+</section>
+
+<section id="UTI">
+<h2>Utilisation de la variation de stock </h2>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TITRE -->
+
+    
+
+    <!-- ENTREPRISE COMMERCIALE -->
+
+    <div class="block">
+
+        <h3>
+            Cas de l’entreprise commerciale :
+        </h3>
+
+        <div class="text">
+
+            Les comptes enregistrant les variations de stocks
+            sont les suivants :
+<table>
+
+                
+
+                <tr>
+                    <td>
+                        6114 - variation de stocks de marchandises.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        6124 – variation de stocks de matières et fournitures
+
+                    </td>
+                </tr>
+
+                
+
+            </table>
+
+            
+
+        </div>
+
+    </div>
+
+    <!-- FORMULE -->
+
+
+    
+    <!-- ENTREPRISE INDUSTRIELLE -->
+
+    <div class="block">
+
+        <h3>
+            Cas de l’entreprise industrielle
+        </h3>
+
+        <div class="text">
+
+            Outre le compte 6124 – variation de stocks de M/F,
+            on utilise les comptes :
+
+        </div>
+
+        
+
+            <table>
+
+                
+
+                <tr>
+                    <td>
+                        7131 : variation de stocks de produits en cours
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        7132 : variation de stocks de biens produits
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        7134 : variations de stocks de services en cours
+                    </td>
+                </tr>
+
+            </table>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
+</section>
+<section id="COMP">
+<h2>Comptabilisation de la régularisation de stock</h2>
+<h3>Annulation stock initial</h3>
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* TITRES */
+h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:35px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    letter-spacing:0.5px;
+}
+
+/* TABLEAUX */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:30px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* CELLULES */
+td{
+    border:1px solid #cfd8e3;
+    padding:8px;
+    font-size:14px;
+}
+
+/* DATE */
+.date{
+    text-align:center;
+    font-weight:bold;
+    background:#1e3a5f;
+    color:white;
+    font-size:15px;
+}
+
+/* COLONNES */
+.compte{
+    width:5%;
+    text-align:center;
+}
+
+.libelle{
+    width:30%;
+}
+
+.montant{
+    width:10%;
+    text-align:right;
+    white-space:nowrap;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+/* DEBIT */
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+/* CREDIT */
+.credit{
+    background:#fff2e6;
+    color:#b35400;
+    font-weight:bold;
+}
+
+/* CENTRAGE */
+.center{
+    text-align:center;
+}
+
+/* EFFET HOVER */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+</style>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/N</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6114</option>
+<option>6124</option>
+<option>7131</option>
+<option>7132</option>
+<option>7134</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Variation de stock de..... </option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>311X</option>
+<option>312X</option>
+<option>313X </option>
+<option>314X </option>
+<option>315X </option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Stocks de .....</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Annulation de stock initial </td></tr>
+
+</table>
+
+<h3>Constatation de stock initial</h3>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/N</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+           <option>311X</option>
+<option>312X</option>
+<option>313X </option>
+<option>314X </option>
+<option>315X </option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> Stocks de ..... </option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>6114</option>
+<option>6124</option>
+<option>7131</option>
+<option>7132</option>
+<option>7134</option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> Variation de stock de..... </option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>Montant</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Constatation de stock initial </td></tr>
+
+</table>
+<h5>NB : Si la balance avant inventaire comporte des comptes de variation de stocks, une seule écriture suffit : la constatation des stocks finaux, les stocks initiaux ayant déjà été annulés.
+</h5>
+
+<h3>►Exemple : Stock initial de marchandises au 01/01/2025 : 20 000 DH. Stock final au 31/12/2025 : 50 000 DH. </h3>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2025</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6114</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Variation de stock de marchandises </option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>20.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>3111</option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Marchandises</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>20.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Annulation de stock initial </td></tr>
+
+</table>
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2025</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+           <option>3111</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> Marchandises </option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>50.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>6114</option>
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> Variation de stock de marchandises </option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:10%;">
+<option>50.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Constatation de stock initial </td></tr>
+
+</table>
+Variation de stock = 50.000,00 – 20.000,00 = + 30.000,00
+
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
