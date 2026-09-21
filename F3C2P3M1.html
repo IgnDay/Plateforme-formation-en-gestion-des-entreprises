@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:30px;
+}
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #999;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#3498db;
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:5px;
+    box-sizing:border-box;
+    text-align:center;
+}
+
+.resultat{
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+.total{
+    background:#dff0d8;
+    font-weight:bold;
+}
+
+.actions{
+    text-align:center;
+    margin-top:15px;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.btn-g{
+    background:#27ae60;
+    color:white;
+}
+
+.btn-b{
+    background:#2980b9;
+    color:white;
+}
+
+.btn-r{
+    background:#e74c3c;
+    color:white;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container" id="zonePDF">
+
+<h1>TABLEAU DE CALCUL DE PROVISION POUR DEPRECIATION DES TITRES</h1>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Titres</th>
+<th>Nombre</th>
+<th>Prix d'achat</th>
+<th>Cours (N-1)</th>
+<th>Provision (N-1)</th>
+<th>Cours (N)</th>
+<th>Provision (N)</th>
+<th>Dotation</th>
+<th>Reprise</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td><strong>CONSERVÉES</strong></td>
+
+<td>
+<input type="number" id="nbC">
+</td>
+
+<td>
+<input type="number" id="achatC">
+</td>
+
+<td>
+<input type="number" id="coursN1C">
+</td>
+
+<td id="provN1C" class="resultat">0</td>
+
+<td>
+<input type="number" id="coursNC">
+</td>
+
+<td id="provNC" class="resultat">0</td>
+
+<td id="dotationC" class="resultat">0</td>
+
+<td id="repriseC" class="resultat">0</td>
+
+</tr>
+
+<tr>
+
+<td><strong>CÉDÉES</strong></td>
+
+<td>
+<input type="number" id="nbD">
+</td>
+
+<td>
+<input type="number" id="achatD">
+</td>
+
+<td>
+<input type="number" id="coursN1D">
+</td>
+
+<td id="provN1D" class="resultat">0</td>
+
+<td>-</td>
+
+<td id="provND" class="resultat">0</td>
+
+<td id="dotationD" class="resultat">0</td>
+
+<td id="repriseD" class="resultat">0</td>
+
+</tr>
+
+<tr class="total">
+
+<td>TOTAL</td>
+
+<td id="totalNombre">0</td>
+
+<td colspan="2"></td>
+
+<td id="totalProvN1">0</td>
+
+<td></td>
+
+<td id="totalProvN">0</td>
+
+<td id="totalDotation">0</td>
+
+<td id="totalReprise">0</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="actions">
+
+<button class="btn-g" onclick="calculer()">
+Calculer
+</button>
+
+<button class="btn-b" onclick="exportPDF()">
+Exporter PDF
+</button>
+
+<button class="btn-r" onclick="vider()">
+Vider
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function formatDH(valeur){
+
+return Number(valeur).toLocaleString('fr-FR',{
+
+minimumFractionDigits:2,
+maximumFractionDigits:2
+
+});
+
+}
+
+function calculer(){
+
+/* CONSERVÉES */
+
+let nbC=parseFloat(document.getElementById("nbC").value)||0;
+let achatC=parseFloat(document.getElementById("achatC").value)||0;
+let coursN1C=parseFloat(document.getElementById("coursN1C").value)||0;
+let coursNC=parseFloat(document.getElementById("coursNC").value)||0;
+
+let provN1C=Math.max(0,(achatC-coursN1C)*nbC);
+
+let provNC=Math.max(0,(achatC-coursNC)*nbC);
+
+let dotationC=0;
+let repriseC=0;
+
+if(provNC>provN1C){
+    dotationC=provNC-provN1C;
+}else{
+    repriseC=provN1C-provNC;
+}
+
+/* CÉDÉES */
+
+let nbD=parseFloat(document.getElementById("nbD").value)||0;
+let achatD=parseFloat(document.getElementById("achatD").value)||0;
+let coursN1D=parseFloat(document.getElementById("coursN1D").value)||0;
+
+let provN1D=Math.max(0,(achatD-coursN1D)*nbD);
+
+let provND=0;
+let dotationD=0;
+let repriseD=provN1D;
+
+/* AFFICHAGE */
+
+document.getElementById("provN1C").innerHTML=
+formatDH(provN1C);
+
+document.getElementById("provNC").innerHTML=
+formatDH(provNC);
+
+document.getElementById("dotationC").innerHTML=
+formatDH(dotationC);
+
+document.getElementById("repriseC").innerHTML=
+formatDH(repriseC);
+
+document.getElementById("provN1D").innerHTML=
+formatDH(provN1D);
+
+document.getElementById("provND").innerHTML=
+formatDH(provND);
+
+document.getElementById("dotationD").innerHTML=
+formatDH(dotationD);
+
+document.getElementById("repriseD").innerHTML=
+formatDH(repriseD);
+
+/* TOTAUX */
+
+let totalNombre=nbC+nbD;
+
+let totalProvN1=
+provN1C+provN1D;
+
+let totalProvN=
+provNC+provND;
+
+let totalDotation=
+dotationC+dotationD;
+
+let totalReprise=
+repriseC+repriseD;
+
+document.getElementById("totalNombre").innerHTML=
+formatDH(totalNombre);
+
+document.getElementById("totalProvN1").innerHTML=
+formatDH(totalProvN1);
+
+document.getElementById("totalProvN").innerHTML=
+formatDH(totalProvN);
+
+document.getElementById("totalDotation").innerHTML=
+formatDH(totalDotation);
+
+document.getElementById("totalReprise").innerHTML=
+formatDH(totalReprise);
+
+}
+
+function vider(){
+
+document.querySelectorAll("input").forEach(input=>{
+input.value="";
+});
+
+document.querySelectorAll(".resultat").forEach(cell=>{
+cell.innerHTML="0";
+});
+
+document.getElementById("totalNombre").innerHTML="0";
+document.getElementById("totalProvN1").innerHTML="0";
+document.getElementById("totalProvN").innerHTML="0";
+document.getElementById("totalDotation").innerHTML="0";
+document.getElementById("totalReprise").innerHTML="0";
+
+}
+
+function exportPDF(){
+
+let element=document.getElementById("zonePDF");
+
+html2pdf()
+.set({
+margin:0.5,
+filename:'TVP_Provision_Titres.pdf',
+image:{type:'jpeg',quality:0.98},
+html2canvas:{scale:2},
+jsPDF:{
+unit:'in',
+format:'a4',
+orientation:'landscape'
+}
+})
+.from(element)
+.save();
+
+}
+
+</script>
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C2P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
