@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:97%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Les provisions pour dépréciation des immobilisations
+</a>
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('DEF')">Définition de la provision</button>
+<button onclick="showSection('IF')">Les provisions pour dépréciation des immobilisations financières</button>
+
+<button onclick="showSection('IAF')">Les provisions pour dépréciation des immobilisations autres que financières</button>
+
+
+
+</nav>
+
+<section id="DEF" class="active">
+
+    <h2>Définition de la provision</h2>
+
+    <p>
+        Une provision est la constatation comptable : <ul>
+-Soit d’une diminution de valeur d’un élément d’actif  </ul>
+<ul>
+-Soit d’une augmentation du passif exigible à plus ou au moins long terme </ul>
+
+
+
+    <p>
+Au Maroc, selon le Code Général de la Normalisation Comptable (CGNC), les provisions sont généralement classées en trois grandes catégories :</p>
+<table>
+
+        <tr>
+            <th>1- Les Provisions Pour Dépréciation</th>
+        </tr>
+
+        <tr>
+            <td class="type"> Elles constatent une diminution de la valeur d’un élément d’actif.
+</td>
+        </tr>
+
+        
+        
+
+    </table>
+
+<table>
+
+        <tr>
+            <th>2- Les Provisions pour Risques et Charges  </th>
+        </tr>
+
+        <tr>
+            <td class="type"> Elles sont constituées pour faire face à des charges ou à des risques futurs probables dont le montant ou l’échéance demeure incertain.</td>
+        </tr>
+
+        
+
+        
+
+    </table>
+<table>
+
+        <tr>
+            <th>3- Les Provisions Réglementées </th>
+        </tr>
+
+        <tr>
+            <td class="type"> Ce sont des provisions créées par des dispositions fiscales ou réglementaires particulières. Elles ont un caractère fiscal plus que comptable.
+</td>
+        </tr>
+
+        
+
+        
+
+    </table>
+
+
+
+
+    
+
+</section>
+
+<section id="IF">
+
+    <h2> Cas des titres de participation </h2>
+<h3>1-Création ou constitution de la provision </h3>
+La dépréciation ou la moins-value est calculée par comparaison de deux valeurs : La valeur d’entrée et la valeur d’inventaire. <br>
+→	On constitue la provision lorsque la valeur d’entrée est supérieure à la valeur actuelle
+
+<h3>   ► Exemple : L’entreprise « IGNDAY » a acquis, le 15/03/2022, 1 000 actions de la société ABD au prix unitaire de 600 DH. Au 31/12/2022, la valeur boursière de ces actions s’élève à 500 DH par action.
+
+</h3>
+<table>
+
+<tr>
+            <td>Nombre </td>
+            <td>Prix unitaire d’achat </td>
+<td>Prix unitaire au 31/12/2022 </td>
+<td>Provision au 31/12/2022 </td>
+
+
+        </tr>
+
+<tr>
+            <td>1000</td>         <td> 
+600
+</td>
+<td> 500
+
+</td><td>
+100000</td>
+        </tr>
+</table>
+▐ (600-500)*1000=100000
+
+<h3>   ► Comptabilisation : 
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2022</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6392</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>DPPD des IF</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>100.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>2951</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>PPD des TP</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>100.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Création de provision TP </td></tr>
+
+</table>
+
+
+
+
+<h3>2-Ajustement de la provision </h3>
+Il est nécessaire de faire la distinction entre les deux cas suivants :
+<table>
+
+        <tr>
+            <td>Augmentation de la provision</td>
+        
+            <td class="type"> → Dotation.
+</td>
+        </tr>
+<tr>
+            <td>Diminution ou Annulation de la provision</td>
+        
+            <td class="type"> → Reprise.
+</td>
+        </tr>
+
+   
+        
+
+    </table>
+<h5> a- Cas de l’augmentation de la provision</h5>
+<h3>   ► Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2023, le cours boursier de l’action ABD s’établisse à 450 DH.
+
+
+</h3>
+<table>
+
+<tr>
+            <td>Nombre </td>
+            <td>PUA </td>
+<td>PU (31/12/22) </td>
+<td>PU (31/12/23) </td>
+<td>Provision (31/12/22) </td>
+<td>Provision (31/12/23) </td>
+<td>Dotation (+)</td>
+<td>Reprise (-)</td>
+
+
+
+
+        </tr>
+
+<tr>
+           
+<td>1000 </td>
+            <td>600 </td>
+<td>500 </td>
+<td>450 </td>
+<td>100000</td>
+<td>150000</td>
+<td>50000 </td>
+<td>X </td>
+</tr>
+</table>
+▐ (600-500)*1000=100000▐ (600-450)*1000=150000▐ (150000-100000)= + 50000 
+<h3>   ► Comptabilisation : 
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2023</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6392</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>DPPD des IF</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>50.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>2951</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>PPD des TP</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>50.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Augmentation de provision TP </td></tr>
+
+</table>
+<h5> b- Cas de la diminution ou de l’annulation de la provision</h5>
+<h3>   ► Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2024, le cours de l’action ABD s’établisse à 580 DH.
+</h3>
+<table>
+
+<tr>
+            <td>Nombre </td>
+            <td>PUA </td>
+<td>PU (31/12/23) </td>
+<td>PU (31/12/24) </td>
+<td>Provision (31/12/23) </td>
+<td>Provision (31/12/24) </td>
+<td>Dotation (+)</td>
+<td>Reprise (-)</td>
+
+
+
+
+        </tr>
+
+<tr>
+           
+<td>1000 </td>
+            <td>600 </td>
+<td>450 </td>
+<td>580 </td>
+<td>150000</td>
+<td>20000</td>
+<td>X </td>
+<td>130000</td>
+</tr>
+</table>
+▐ (600-450)*1000=150000▐ (600-580)*1000=20000▐ (20000-150000)= - 130000
+<h3>   ► Comptabilisation : 
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2024</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>2951</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> PPD des TP </option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>130.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>7392</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> RPPD des IF</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>130.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Diminution de provision TP </td></tr>
+
+</table>
+
+
+<h3>3-Cession des TP </h3>
+
+<h3>   ► Exemple : Supposons que les 1 000 actions ABD, acquises au prix unitaire de 600 DH et ayant fait l’objet d’une provision de 100 000 DH au 31/12/2022, soient cédées le 30/08/2023 au prix de 590 DH par action. L’avis de crédit établi par la banque mentionne une commission de 250 DH hors taxes, soumise à la TVA au taux de 10 %.</h3>
+<table>
+
+<tr>
+            <td>Nombre </td>
+            <td>PUA </td>
+<td>PU (31/12/22) </td>
+<td>PC (30/08/23) </td>
+<td>Provision (31/12/22) </td>
+<td>Produit de cession </td>
+<td>VNA</td>
+
+
+
+
+        </tr>
+
+<tr>
+           
+<td>1000 </td>
+            <td>600 </td>
+<td>500 </td>
+<td>590 </td>
+<td>100000</td>
+<td>5900000</td>
+<td>600000 </td>
+</tr>
+</table>
+▐ (600-500)*1000=100000▐ 590*1000=590000▐ 600*1000=600000
+<h4>   a- Comptabilisation le jour de cession : </h4>   
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">30/08/2023</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>5141</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Banques</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>589.725,00</option>
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6147</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Services bancaires</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>250,00</option>
+</td>
+
+</tr>
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>3455</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Etat - TVA récupérable</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>25,00</option>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>7514</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>PC des IF</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>590.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Cession TP « ABD » </td></tr>
+
+</table>
+➡️ Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2023. <br>
+➡️ En cas de cession des immobilisations à crédit, il convient de débiter le compte 3481 – Créances sur cessions d’immobilisations.
+
+<h4>   b- Comptabilisation de l’annulation de la provision : </h4>   
+
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2023</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>2951</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> PPD des TP </option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>100.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>7392</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> RPPD des IF </option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>100.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Annulation de provision TP </td></tr>
+
+</table>
+<h4>   c- Comptabilisation de la sortie des TP du patrimoine de l’entreprise : </h4>   
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2023</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6514</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> VNA des IF cédées</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>600.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>2510</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> Titres de participation</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>600.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Sortie TP </td></tr>
+
+</table>
+
+
+
+</section>
+
+<section id="IAF">
+<h2> Cas de Fonds commercial</h2>
+<h3>   ► Exemple : Lors des travaux d’inventaire au 31/12/2023, l’entreprise IGNDAY a estimé à 10 000 DH la dépréciation de son fonds commercial, en raison de la baisse importante de son chiffre d’affaires et de ses bénéfices. La valeur d’entrée du fonds commercial est de 30 000 DH et sa valeur actuelle de 20 000 DH.
+
+
+</h3>
+<h3>  ► Comptabilisation 
+</h3>   
+<table>
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2023</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6194</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> DEPPD des immobilisations</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>10.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>2920</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> PPD des I.INCOR</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>10.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Dépréciation de la valeur du FC </td></tr>
+
+</table>
+➡️ En cas de reprise, il convient de procéder à l’annulation de la provision en débitant le compte 2920 – PPD des immobilisations incorporelles et en créditant le compte 7596 – Reprises sur provisions pour dépréciation des immobilisations.
+
+<h2> Cas d’un terrain</h2>
+<h3>   ► Exemple : Lors de l’inventaire au 31/12/2023, l’entreprise a évalué à 25 000 DH la dépréciation non définitive d’un terrain aménagé partiellement détruit par des inondations, une partie de celui-ci ayant été emportée par les eaux d’une rivière en crue.
+
+
+</h3>
+<h3>  ► Comptabilisation 
+</h3>   
+<table>
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2023</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6596</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option> DNC aux provisions pour dépréciation</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>25.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>2930</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> PPD des I.COR</option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>25.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Dépréciation de la valeur du Terrain </td></tr>
+
+</table>
+➡️ En cas de reprise, il convient de procéder à l’annulation de la provision en débitant le compte 2930 – PPD des immobilisations corporelles et en créditant le compte 7596 – Reprises non courantes sur provisions pour dépréciation.
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
