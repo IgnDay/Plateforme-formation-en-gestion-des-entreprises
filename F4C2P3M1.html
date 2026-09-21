@@ -1,0 +1,241 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale</title>
+
+<style>
+body{font-family:Arial,sans-serif;background:#f4f6f9;margin:30px}
+.container{max-width:1500px;margin:auto;background:white;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,.15)}
+h1{text-align:center;color:#2c3e50}
+
+table{
+    width:auto;
+    table-layout:auto;
+}
+
+th,td{
+    white-space:nowrap;
+}
+input{width:100%;box-sizing:border-box;text-align:center;padding:5px}
+.resultat{background:#f8f9fa;font-weight:bold}
+.total{background:#dff0d8;font-weight:bold}
+
+.icon{cursor:pointer;font-size:10px;margin:0 4px}
+.add{color:#27ae60}
+.del{color:#e74c3c}
+
+.actions{text-align:center;margin-top:15px}
+.btn-g{background:#27ae60;color:white;padding:10px 15px;border:none;border-radius:5px;cursor:pointer}
+.btn-b{background:#2980b9;color:white;padding:10px 15px;border:none;border-radius:5px;cursor:pointer}
+.btn-r{background:#e74c3c;color:white;padding:10px 15px;border:none;border-radius:5px;cursor:pointer}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+
+<div class="container" id="zonePDF">
+
+<h1>TABLEAU DE CALCUL DE PROVISION POUR DEPRECIATION DES CRÉANCES CLIENTS </h1>
+
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Montant <br> Créance</th>
+<th>Règlements</th>
+<th>Solde </th>
+<th>%<br> TVA </th>
+<th>% Dépréciation <br> N-1 </th>
+<th>Provision <br> N-1</th>
+<th> % Dépréciation <br> N</th>
+<th>Provision <br> N</th>
+<th>Dotation</th>
+<th>Reprise</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody id="tbody">
+
+<tr>
+<td><input type="text"></td>
+<td><input type="number"></td>
+<td><input type="number"></td>
+<td class="solde resultat">0</td>
+<td><input type="number" value="20"></td>
+<td><input type="number"></td>
+<td class="provN1 resultat">0</td>
+<td><input type="number"></td>
+<td class="provN resultat">0</td>
+<td class="dotation resultat">0</td>
+<td class="reprise resultat">0</td>
+<td>
+<span class="icon add" onclick="addRowAfter(this)">➕</span>
+<span class="icon del" onclick="deleteRow(this)">❌</span>
+</td>
+</tr>
+
+</tbody>
+
+<tfoot>
+<tr class="total">
+<td>TOTAL</td>
+<td id="tCreances">0</td>
+<td id="tReglements">0</td>
+<td id="tSolde">0</td>
+<td></td>
+<td></td>
+<td id="tProvN1">0</td>
+<td></td>
+<td id="tProvN">0</td>
+<td id="tDotation">0</td>
+<td id="tReprise">0</td>
+<td></td>
+</tr>
+</tfoot>
+
+</table>
+
+<div class="actions">
+<button class="btn-g" onclick="calculer()">Calculer</button>
+<button class="btn-b" onclick="exportPDF()">Exporter PDF</button>
+<button class="btn-r" onclick="vider()">Vider</button>
+</div>
+
+</div>
+
+<script>
+
+function formatDH(x){
+ return Number(x).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+/* ➕ AJOUT LIGNE SOUS LA LIGNE ACTUELLE */
+function addRowAfter(btn){
+ let row = btn.closest("tr");
+
+ let newRow = document.createElement("tr");
+ newRow.innerHTML = `
+<td><input type="text"></td>
+<td><input type="number"></td>
+<td><input type="number"></td>
+<td class="solde resultat">0</td>
+<td><input type="number" value="20"></td>
+<td><input type="number"></td>
+<td class="provN1 resultat">0</td>
+<td><input type="number"></td>
+<td class="provN resultat">0</td>
+<td class="dotation resultat">0</td>
+<td class="reprise resultat">0</td>
+<td>
+<span class="icon add" onclick="addRowAfter(this)">➕</span>
+<span class="icon del" onclick="deleteRow(this)">❌</span>
+</td>
+`;
+
+ row.after(newRow);
+}
+
+/* ❌ SUPPRESSION (PROTECTION 1ère LIGNE) */
+function deleteRow(btn){
+ let tbody=document.getElementById("tbody");
+ let rows=tbody.querySelectorAll("tr");
+
+ if(rows.length <= 1){
+   alert("La première ligne ne peut pas être supprimée.");
+   return;
+ }
+
+ btn.closest("tr").remove();
+}
+
+/* CALCUL */
+function calculer(){
+ let lignes=document.querySelectorAll("#tbody tr");
+
+ let totalCreances=0,totalReglements=0,totalSolde=0;
+ let totalProvN1=0,totalProvN=0,totalDotation=0,totalReprise=0;
+
+ lignes.forEach(ligne=>{
+
+   let inputs=ligne.querySelectorAll("input");
+
+   let creance=parseFloat(inputs[1].value)||0;
+   let reglement=parseFloat(inputs[2].value)||0;
+   let tva=parseFloat(inputs[3].value)||0;
+   let tauxN1=parseFloat(inputs[4].value)||0;
+   let tauxN=parseFloat(inputs[5].value)||0;
+
+   let solde=creance-reglement;
+
+   let creanceHT=creance/(1+tva/100);
+   let soldeHT=solde/(1+tva/100);
+
+   let provN1=creanceHT*tauxN1/100;
+   let provN=soldeHT*tauxN/100;
+
+   let dotation=0,reprise=0;
+
+   if(provN>provN1){
+      dotation=provN-provN1;
+   }else{
+      reprise=provN1-provN;
+   }
+
+   ligne.querySelector(".solde").innerHTML=formatDH(solde);
+   ligne.querySelector(".provN1").innerHTML=formatDH(provN1);
+   ligne.querySelector(".provN").innerHTML=formatDH(provN);
+   ligne.querySelector(".dotation").innerHTML=formatDH(dotation);
+   ligne.querySelector(".reprise").innerHTML=formatDH(reprise);
+
+   totalCreances+=creance;
+   totalReglements+=reglement;
+   totalSolde+=solde;
+   totalProvN1+=provN1;
+   totalProvN+=provN;
+   totalDotation+=dotation;
+   totalReprise+=reprise;
+ });
+
+ document.getElementById("tCreances").innerHTML=formatDH(totalCreances);
+ document.getElementById("tReglements").innerHTML=formatDH(totalReglements);
+ document.getElementById("tSolde").innerHTML=formatDH(totalSolde);
+ document.getElementById("tProvN1").innerHTML=formatDH(totalProvN1);
+ document.getElementById("tProvN").innerHTML=formatDH(totalProvN);
+ document.getElementById("tDotation").innerHTML=formatDH(totalDotation);
+ document.getElementById("tReprise").innerHTML=formatDH(totalReprise);
+}
+
+/* VIDAGE */
+function vider(){
+ location.reload();
+}
+
+/* PDF */
+function exportPDF(){
+ html2pdf().set({
+   margin:0.5,
+   filename:'Creances_Douteuses.pdf',
+   image:{type:'jpeg',quality:0.98},
+   html2canvas:{scale:2},
+   jsPDF:{unit:'in',format:'a4',orientation:'landscape'}
+ }).from(document.getElementById("zonePDF")).save();
+}
+
+</script>
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C2P3M1.html">⬅ Retour </a>
+
+</footer>
+
+
+</body>
+</html>
+
