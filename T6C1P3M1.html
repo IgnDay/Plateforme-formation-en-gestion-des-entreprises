@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: #f4f6f9;
+    color: #2c3e50;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* MENU */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 18px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+/* Hover bouton */
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+/* Bouton actif */
+.btnActive{
+    background:#0984e3 !important;
+    transform:scale(1.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* SECTIONS */
+section{
+    display:none;
+    padding:30px;
+    margin:20px;
+}
+
+/* Section visible */
+.active{
+    display:block;
+}
+
+/* Animation section */
+.animationSection{
+    animation:apparition 0.6s ease;
+    background:#ffffff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+}
+
+/* Animation */
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* TITRES */
+h2{
+    color:#2c3e50;
+}
+
+h3{
+    color:#00b894;
+}
+
+/* TABLEAUX */
+table{
+    width:97%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header{
+    background:#dfe6e9;
+}
+
+/* JOURNAL */
+.date{
+    text-align:center;
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#eaf4ff;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff4e6;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8f9fa;
+    font-weight:bold;
+}
+
+/* Hover tableau */
+tr:hover td{
+    background:#f1f7ff;
+    transition:0.2s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* Highlight */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+</style>
+
+<script>
+
+function showSection(id){
+
+    /* Sections */
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        sec.classList.remove("active");
+        sec.classList.remove("animationSection");
+    });
+
+    let currentSection = document.getElementById(id);
+
+    currentSection.classList.add("active");
+    currentSection.classList.add("animationSection");
+
+    /* Boutons */
+    let buttons = document.querySelectorAll("nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btnActive");
+    });
+
+    event.target.classList.add("btnActive");
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📘 Les provisions pour risques et charges
+</a>
+</h1>
+</header>
+
+<nav>
+    <button onclick="showSection('DEF')">Définition des provisions pour risques et charges </button>
+<button onclick="showSection('PR')">Les diverses provisions constituées pour couvrir les risques</button>
+<button onclick="showSection('PC')">Les diverses provisions constituées pour couvrir les charges</button><button onclick="showSection('COMPT')">Comptabilisation</button>
+
+
+
+
+
+</nav>
+
+<section id="DEF" class="active">
+
+    <h2>Définition </h2>
+
+    <p>
+Les provisions pour risques et charges sont des provisions constatées à la date de clôture de l’exercice afin de couvrir des risques ou des charges résultant d’événements survenus au cours de l’exercice ou d’exercices antérieurs. Leur objet est clairement identifié, mais leur réalisation ainsi que leur montant ou leur échéance demeurent incertains.
+
+
+    <p>
+Il y a deux types de provisions : 
+</p>
+<table>
+
+        <tr>
+            <th>1- Les provisions durables </th>
+        </tr>
+
+        <tr>
+ <td class="type"> → Le délai de réalisation est supérieur à 12 mois à la date de clôture de l’exercice (Rubrique 15)
+
+</td>
+        </tr>
+
+        
+        
+
+    </table>
+
+<table>
+
+        <tr>
+            <th>2- Autres provisions (momentanées) </th>
+        </tr>
+
+        <tr>
+            <td class="type">→ Le délai de réalisation est inférieur ou égale à 12 mois à la date de clôture de l’exercice. (Rubrique 45)</td>
+        </tr>
+
+        
+
+        
+
+    </table>
+        
+
+        
+
+    </table>
+
+
+
+
+    
+
+</section>
+
+<section id="PR">
+
+    <h2> Les diverses provisions constituées pour couvrir les risques </h2>
+<table>
+
+        <tr>
+            <td>1511/4501- Les provisions pour litiges  (Avec créanciers, débiteurs, salariés…)</td>
+<td class="type"> → En cas de litige, une provision peut être constituée avant même le jugement afin de couvrir les charges probables liées au conflit, telles que les indemnités, dommages et intérêts et frais associés.
+</td>
+        </tr>
+
+        
+        
+
+    
+
+        <tr> <td>1512/4502- Les provisions pour garanties données aux clients </td>
+           <td class="type"> → Des provisions peuvent être constituées afin de couvrir les charges prévisibles liées aux ventes assorties d’une garantie.</td>        </tr>
+<tr> <td>1513- Les provisions pour propre assureur </td>
+           <td class="type"> → Certaines entreprises choisissent de ne pas s’assurer auprès de compagnies d’assurance pour couvrir les risques liés à leurs actifs et préfèrent, en totalité ou en partie, s’auto-assurer en constituant leurs propres provisions, en dehors du cadre réglementaire des assurances.</td>        </tr>
+<tr> <td>1514- Les provisions pour pertes sur marché à terme</td>
+           <td class="type"> → Un marché à terme est un contrat dont les conditions sont fixées à la date de conclusion, mais dont l’exécution (livraison et règlement) est reportée à une date ultérieure appelée date de liquidation. Afin de se prémunir contre les pertes probables liées à la clôture de ces opérations en fin d’exercice, l’entreprise peut constituer des provisions.</td>        </tr>
+<tr> <td>1515/4505- Les provisions pour amendes, doubles droits, pénalités</td>
+           <td class="type"> → Afin de couvrir les risques liés aux amendes et pénalités, qu’elles soient légales (fiscales ou pénales) ou contractuelles (pénalités de marché, dédits), l’entreprise peut constituer des provisions.</td>        </tr>
+<tr> <td>1516/4506- Les provisions pour pertes de change</td>
+           <td class="type"> → Des provisions pour pertes de change sont constituées lorsque la comparaison entre les valeurs comptabilisées au bilan et les valeurs de conversion à la date d’inventaire fait apparaître des pertes latentes, se traduisant par une hausse des dettes de financement ou une baisse des créances immobilisées.</td>        </tr>
+<tr>  <td>1518/4508- Autres provisions pour risques</td>
+           <td class="type"> → Les autres provisions pour risques regroupent les provisions constituées pour faire face à des risques divers, non spécifiquement identifiés dans les catégories habituelles, mais susceptibles d’entraîner des charges probables pour l’entreprise.</td>        </tr>
+
+
+
+
+
+
+        
+
+        
+
+    </table>
+        
+
+</section>
+<section id="PC">
+    <h2> Les diverses provisions constituées pour couvrir les charges </h2>
+<table>
+
+<tr>  <td>1551/4507- Les provisions pour impôts</td>
+           <td class="type"> → Elles correspondent à une charge d’impôt probable, rattachée à l’exercice mais dont le paiement est différé dans le temps et qui dépend des résultats futurs pour être définitivement déterminée.</td>        </tr>
+<tr>  <td>1552- Les provisions pour pensions de retraite et obligations similaires</td>
+           <td class="type"> → Elles concernent les charges probables liées aux obligations légales ou contractuelles accordant au personnel des droits à la retraite.</td>        </tr>
+<tr>  <td>1555- Les provisions pour charges à répartir sur plusieurs exercices</td>
+           <td class="type"> → Elles correspondent à des charges prévisibles, de nature et d’importance telles qu’elles ne doivent pas être supportées par un seul exercice. Il s’agit notamment de provisions pour grosses réparations ou travaux d’entretien périodiques, permettant de répartir par anticipation ces charges importantes sur plusieurs exercices afin d’éviter qu’elles ne pèsent uniquement sur l’exercice de leur réalisation.</td>        </tr>
+<tr>  <td>1558/4508- Autres provisions pour charges</td>
+           <td class="type"> → Les autres provisions pour charges concernent des charges probables, non classées dans les catégories spécifiques, et destinées à couvrir des dépenses futures dont la survenance est prévisible et qui doivent être réparties sur plusieurs exercices.</td>        </tr>
+
+</table>
+
+</section>
+
+<section id="COMPT">
+<h2> Traitement comptable des provisions pour risques et charges </h2>
+
+<h3>1-Création ou constitution de la provision </h3>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/N</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+              <option>6195</option>
+<option>6393</option>
+<option>6595</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>DEP pour R et C ou</option>
+<option>DP pour R et C financières ou </option>
+<option>DNCP pour R et C</option>
+
+         
+
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>Mt </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>151X</option>
+<option>155X</option>
+<option>450X</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Provisions pour risques ou</option>
+<option>Provisions pour charges ou</option>
+<option>Autres provisions pour R et C</option>
+
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>Mt</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Création de provision pour R ou C </td></tr>
+
+</table>
+
+<h4>   ► Exemple 1 : Au 31/12/2025, suite à un litige avec un salarié et après avis de son avocat, l’entreprise IGNDAY évalue à 13 000 DH le montant des dommages et intérêts à verser. L’issue de l’affaire est prévue au cours de l’exercice suivant. </h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2025</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6195</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>DEP pour R et C</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>13.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+<option>4501</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Provisions pour litiges</option>
+
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>13.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Création de provision pour litige salarié X </td></tr>
+
+</table>
+
+<h4>   ► Exemple 2 : À la suite d’un contrôle réalisé en mars 2025 par l’inspecteur du travail, l’entreprise évalue au 31/12/2025 à 3 000 DH le montant de la pénalité qui devra être payée au cours de l’exercice 2026.</h4>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/2025</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6595</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>DNCP pour R et C</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>3.000,00 </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            
+<option>4505</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Provisions pour amendes, DD et P</option>
+
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>3.000,00</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Création de provision pour pénalité </td></tr>
+
+</table>
+
+
+
+<h3>2-Ajustement de la provision </h3>
+Les provisions pour risques et charges sont réévaluées à la clôture de chaque exercice et font l’objet d’un ajustement, à la hausse ou à la baisse, selon l’évolution du risque ou de la charge estimée, à l’instar des provisions pour dépréciation.
+Il est nécessaire de faire la distinction entre les deux cas suivants :
+<table>
+
+        <tr>
+            <td>Augmentation de la provision</td>
+        
+            <td class="type"> → Dotation.
+</td>
+        </tr>
+<tr>
+            <td>Diminution ou Annulation de la provision</td>
+        
+            <td class="type"> → Reprise.
+</td>
+        </tr>
+
+   
+        
+
+    </table>
+<h2> a- Cas de l’augmentation de la provision</h2>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/N</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+            <option>6195</option>
+<option>6393</option>
+<option>6595</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>DEP pour R et C ou</option>
+<option>DP pour R et C financières ou </option>
+<option>DNCP pour R et C</option>
+
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>Mt </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>151X</option>
+<option>155X</option>
+<option>450X</option>
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option>Provisions pour risques ou</option>
+<option>Provisions pour charges ou</option>
+<option>Autres provisions pour R et C</option>
+
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>Mt</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6"> Création de provision pour R ou C </td></tr>
+
+</table>
+
+
+<h2> b- Cas de la diminution ou de l’annulation de la provision</h2>
+<table>
+
+<!-- 01/01/2025 -->
+<tr class="date"><td colspan="6">31/12/N</td></tr>
+
+<tr>
+<td class="debit center"" style="width:5%;">
+        
+<option>151X</option>
+<option>155X</option>
+<option>450X</option>
+
+       
+    </td>
+
+<td></td>
+
+<td class="debit"" style="width:30%;" >
+<option>Provisions pour risques ou</option>
+<option>Provisions pour charges ou</option>
+<option>Autres provisions pour R et C</option>
+           
+       
+    </td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>Mt  </option>
+</td>
+
+</tr>
+
+<tr>
+
+<td></td>
+
+<td class="credit center"" style="width:5%;">
+        
+            <option>7195</option>
+<option>7393</option>
+<option>7595</option>
+
+
+
+
+
+</td>
+
+<td></td>
+
+<td class="credit"" style="width:30%;">
+        
+            <option> RP pour R et C ou</option>
+<option> RP pour R et C financières ou </option>
+<option> RNCP pour R et C </option>
+            
+
+
+        
+</td>
+
+<td></td>
+
+<td class="montant"" style="width:7%;">
+<option>Mt</option>
+
+</td>
+
+</tr>
+
+<!-- Facture -->
+<tr class="date"><td colspan="6">Diminution  ou annulation de provision TP </td></tr>
+
+</table>
+
+
+
+
+
+</section>
+
+
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C1P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
+
+
+
