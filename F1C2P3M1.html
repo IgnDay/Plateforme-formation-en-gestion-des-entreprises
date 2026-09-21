@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title> IgnDay Comptabilité Générale</title>
+
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+    margin:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,td{
+    border:1px solid #999;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#3498db;
+    color:white;
+}
+
+input,select{
+    width:180px;
+    padding:6px;
+}
+
+button{
+    padding:10px 15px;
+    margin:10px;
+    cursor:pointer;
+    border:none;
+    border-radius:5px;
+    font-size:15px;
+}
+
+.btn-g{background:#27ae60;color:white;}
+.btn-p{background:#2980b9;color:white;}
+.btn-v{background:#e74c3c;color:white;}
+
+.actions{
+    text-align:center;
+}
+
+</style>
+
+<!-- LIB PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container" id="zonePDF">
+
+<h1>TABLEAU D'AMORTISSEMENT LINÉAIRE</h1>
+
+<table>
+
+<tr>
+<td>Valeur d'origine (VO)</td>
+<td><input type="number" id="vo"></td>
+
+<td>Date d'acquisition</td>
+<td><input type="date" id="date"></td>
+</tr>
+
+<tr>
+<td>Durée (années)</td>
+<td><input type="number" id="duree"></td>
+
+<td>Taux</td>
+<td><input type="text" id="taux" readonly></td>
+</tr>
+
+<tr>
+<td>Mode de calcul</td>
+
+<td colspan="3">
+<select id="mode">
+<option value="entier">Années entières</option>
+<option value="prorata">Prorata temporis</option>
+</select>
+</td>
+
+</tr>
+
+</table>
+
+<div class="actions">
+
+<button class="btn-g" onclick="generer()">Générer</button>
+
+<button class="btn-p" onclick="exportPDF()">Exporter PDF</button>
+
+<button class="btn-v" onclick="vider()">Vider</button>
+
+</div>
+
+<table id="tableau">
+
+<tr>
+<th>Année</th>
+<th>Mois</th>
+<th>VO</th>
+<th>Taux</th>
+<th>Annuité</th>
+<th>Cumul</th>
+<th>VNA</th>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+
+document.getElementById("duree").addEventListener("input",function(){
+
+let duree=parseFloat(this.value);
+
+if(duree>0){
+document.getElementById("taux").value=(100/duree).toFixed(2)+" %";
+}else{
+document.getElementById("taux").value="";
+}
+
+});
+
+function formatDH(valeur){
+return Number(valeur).toLocaleString('fr-FR',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+});
+}
+
+function generer(){
+
+let vo=parseFloat(document.getElementById("vo").value);
+let duree=parseInt(document.getElementById("duree").value);
+let date=document.getElementById("date").value;
+let mode=document.getElementById("mode").value;
+
+if(!vo || !duree || !date){
+alert("Veuillez remplir tous les champs");
+return;
+}
+
+let taux=100/duree;
+let annuiteNormale=vo/duree;
+let d=new Date(date);
+let anneeDepart=d.getFullYear();
+
+let table=document.getElementById("tableau");
+
+table.innerHTML=`
+<tr>
+<th>Année</th>
+<th>Mois</th>
+<th>VO</th>
+<th>Taux</th>
+<th>Annuité</th>
+<th>Cumul</th>
+<th>VNA</th>
+</tr>
+`;
+
+let cumul=0;
+
+if(mode==="entier"){
+
+for(let i=0;i<duree;i++){
+cumul+=annuiteNormale;
+let vna=Math.max(0,vo-cumul);
+
+table.innerHTML+=`
+<tr>
+<td>${anneeDepart+i}</td>
+<td>12</td>
+<td>${formatDH(vo)}</td>
+<td>${taux.toFixed(2)}%</td>
+<td>${formatDH(annuiteNormale)}</td>
+<td>${formatDH(cumul)}</td>
+<td>${formatDH(vna)}</td>
+</tr>
+`;
+}
+
+}else{
+
+let moisPremier=12-d.getMonth();
+let annuitePremier=annuiteNormale*(moisPremier/12);
+
+cumul+=annuitePremier;
+
+table.innerHTML+=`
+<tr>
+<td>${anneeDepart}</td>
+<td>${moisPremier}</td>
+<td>${formatDH(vo)}</td>
+<td>${taux.toFixed(2)}%</td>
+<td>${formatDH(annuitePremier)}</td>
+<td>${formatDH(cumul)}</td>
+<td>${formatDH(vo-cumul)}</td>
+</tr>
+`;
+
+for(let i=1;i<duree;i++){
+cumul+=annuiteNormale;
+
+table.innerHTML+=`
+<tr>
+<td>${anneeDepart+i}</td>
+<td>12</td>
+<td>${formatDH(vo)}</td>
+<td>${taux.toFixed(2)}%</td>
+<td>${formatDH(annuiteNormale)}</td>
+<td>${formatDH(cumul)}</td>
+<td>${formatDH(vo-cumul)}</td>
+</tr>
+`;
+}
+
+let derniereAnnuite=vo-cumul;
+cumul+=derniereAnnuite;
+
+table.innerHTML+=`
+<tr>
+<td>${anneeDepart+duree}</td>
+<td>${12-moisPremier}</td>
+<td>${formatDH(vo)}</td>
+<td>${taux.toFixed(2)}%</td>
+<td>${formatDH(derniereAnnuite)}</td>
+<td>${formatDH(cumul)}</td>
+<td>0,00</td>
+</tr>
+`;
+}
+
+}
+
+/* ✅ EXPORT PDF */
+function exportPDF(){
+let element=document.getElementById("zonePDF");
+
+html2pdf()
+.set({
+margin: 0.5,
+filename: 'amortissement.pdf',
+image: { type: 'jpeg', quality: 0.98 },
+html2canvas: { scale: 2 },
+jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+})
+.from(element)
+.save();
+}
+
+/* ✅ VIDER TOUT */
+function vider(){
+
+document.getElementById("vo").value="";
+document.getElementById("date").value="";
+document.getElementById("duree").value="";
+document.getElementById("taux").value="";
+document.getElementById("mode").value="entier";
+
+document.getElementById("tableau").innerHTML=`
+<tr>
+<th>Année</th>
+<th>Mois</th>
+<th>VO</th>
+<th>Taux</th>
+<th>Annuité</th>
+<th>Cumul</th>
+<th>VNA</th>
+</tr>
+`;
+}
+
+</script>
+<footer>
+    Formation en Comptabilité Générale
+<br>
+
+<a href="C2P3M1.html">⬅ Retour </a>
+
+</footer>
+
+</body>
+</html>
+
