@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bilan Interactif</title>
+<title>Bilan Interactif - IgnDay</title>
 
 <style>
 
@@ -15,7 +15,7 @@
 body{
     margin:0;
     padding:20px;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
     background:#f4f6f9;
 }
 
@@ -56,7 +56,11 @@ h1{
     background:#27ae60;
 }
 
-/* ================= TABLES ================= */
+.top-btn:hover{
+    opacity:0.85;
+}
+
+/* ================= TABLEAUX ================= */
 
 .container{
     display:grid;
@@ -98,7 +102,7 @@ td{
     vertical-align:top;
 }
 
-/* RUBRIQUES PRINCIPALES */
+/* ================= RUBRIQUES ================= */
 
 .rubrique-principale{
     background:#d6eaf8;
@@ -106,15 +110,13 @@ td{
     font-size:20px;
 }
 
-/* RUBRIQUES 2 CHIFFRES */
-
 .rubrique-2{
     background:#ebf5fb;
     font-weight:bold;
     font-size:17px;
 }
 
-/* POSTES */
+/* ================= POSTES ================= */
 
 .poste-row{
     background:#fafafa;
@@ -126,6 +128,10 @@ input{
     padding:6px;
     border:1px solid #999;
     border-radius:4px;
+}
+
+select{
+    background:white;
 }
 
 .actions{
@@ -150,7 +156,12 @@ button{
     color:white;
 }
 
-/* TOTALS */
+.add:hover,
+.delete:hover{
+    opacity:0.85;
+}
+
+/* ================= TOTALS ================= */
 
 .total{
     background:#2c3e50;
@@ -165,11 +176,33 @@ button{
     vertical-align:middle;
 }
 
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    padding:15px;
+    font-size:14px;
+    color:#555;
+}
+
+footer a{
+    text-decoration:none;
+    color:#2980b9;
+    font-weight:bold;
+}
+
+/* ================= RESPONSIVE ================= */
+
 @media(max-width:900px){
 
-.container{
-    grid-template-columns:1fr;
-}
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    th{
+        font-size:20px;
+    }
 
 }
 
@@ -178,7 +211,7 @@ button{
 
 <body>
 
-<h1>Bilan INTERACTIF-IgnDay-</h1>
+<h1>Bilan INTERACTIF - IgnDay</h1>
 
 <!-- ================= BOUTONS ================= -->
 
@@ -200,6 +233,7 @@ Enregistrer Bilan
 </button>
 
 </div>
+
 
 <div class="container">
 
@@ -233,6 +267,7 @@ Enregistrer Bilan
 
 </div>
 
+
 <!-- ================= PASSIF ================= -->
 
 <div class="table-zone">
@@ -264,6 +299,7 @@ Enregistrer Bilan
 </div>
 
 </div>
+
 
 <script>
 
@@ -310,31 +346,28 @@ postes:[
 "235 Mobilier, matériel de bureau et aménagements divers",
 "238 Autres immobilisations corporelles",
 "239 Immobilisations corporelles en cours"
-
 ]
 },
+
 {
-rubrique:" 24/25 Immobilisations Financières",
+rubrique:"24/25 Immobilisations Financières",
 
 postes:[
 "241 Prêts immobilisés",
-"248 Autres créances financières ",
+"248 Autres créances financières",
 "251 Titres de participation",
-"258 Autres titres immobilisés "
-
+"258 Autres titres immobilisés"
 ]
 },
+
 {
-rubrique:" 27 Ecarts de conversion Actif",
+rubrique:"27 Ecarts de conversion Actif",
 
 postes:[
 "271 Diminution des créances Immobilisées",
 "272 Augmentation des dettes de financement"
-
 ]
 }
-
-
 
 ]
 
@@ -352,10 +385,8 @@ postes:[
 "311 Marchandises",
 "312 Matières et fournitures consommables",
 "313 Produits en cours",
-"315 Produits finis",
 "314 Produits intermédiaires et produits résiduels",
-"315 Produits Finis"
-
+"315 Produits finis"
 ]
 },
 
@@ -363,32 +394,31 @@ postes:[
 rubrique:"34 Créances de l'actif circulant",
 
 postes:[
-"341 Fournisseurs débiteur, avances et acomptes",
+"341 Fournisseurs débiteurs, avances et acomptes",
 "342 Clients et comptes rattachés",
 "343 Personnel débiteur",
 "345 Etat débiteur",
 "346 Comptes d'associés - débiteurs",
 "348 Autres débiteurs",
-"349 Comptes de régularisation-Actif"
-
-]
-} ,
-{
-rubrique:" 35 Titres te valeurs de placement",
-
-postes:[
-"350 Titres te valeurs de placement"
+"349 Comptes de régularisation - Actif"
 ]
 },
+
 {
-rubrique:" 37 Ecarts de conversion-actif (éléments circulants)",
+rubrique:"35 Titres et valeurs de placement",
 
 postes:[
-"370 Ecarts de conversion-actif (éléments circulants)"
+"350 Titres et valeurs de placement"
+]
+},
+
+{
+rubrique:"37 Ecarts de conversion - actif",
+
+postes:[
+"370 Ecarts de conversion - actif (éléments circulants)"
 ]
 }
-
-
 
 ]
 
@@ -415,6 +445,7 @@ postes:[
 
 ];
 
+
 /* ======================================================
 PASSIF
 ====================================================== */
@@ -436,19 +467,19 @@ postes:[
 "114 Réserve légale",
 "115 Autres réserves",
 "116 Report à nouveau",
-"118 Résultat net en Instance d'Affectation",
+"118 Résultat net en instance d'affectation",
 "119 Résultat net de l'exercice"
 ]
 },
+
 {
-rubrique:" 13 Capitaux Propres et Assimilés",
+rubrique:"13 Capitaux Propres et Assimilés",
 
 postes:[
 "131 Subventions d'investissement",
 "135 Provisions réglementées"
 ]
 },
-
 
 {
 rubrique:"14 Dettes de Financement",
@@ -458,23 +489,24 @@ postes:[
 "148 Autres dettes de Financement"
 ]
 },
+
 {
-rubrique:" 15 Provisions Durables Pour Risques et Charges",
+rubrique:"15 Provisions Durables Pour Risques et Charges",
 
 postes:[
 "151 Provisions pour Risques",
 "155 Provisions pour charges"
 ]
 },
+
 {
-rubrique:" 17 Ecarts de conversion - Passif",
+rubrique:"17 Ecarts de conversion - Passif",
 
 postes:[
 "171 Augmentation des créances immobilisées",
 "172 Diminution des dettes de Financement"
 ]
 }
-
 
 ]
 
@@ -499,24 +531,22 @@ postes:[
 "449 Comptes de régularisation - passif"
 ]
 },
+
 {
-rubrique:" 45 Autres provisions pour risques et charges",
+rubrique:"45 Autres provisions pour risques et charges",
 
 postes:[
-"450 Autres provisions pour risque et charges"
-
+"450 Autres provisions pour risques et charges"
 ]
 },
+
 {
-rubrique:" 47 Ecarts de conversion - Passif  (éléments circulants)",
+rubrique:"47 Ecarts de conversion - Passif",
 
 postes:[
 "470 Ecarts de conversion - Passif (éléments circulants)"
-
 ]
 }
-
-
 
 ]
 
@@ -543,301 +573,664 @@ postes:[
 
 ];
 
+
 /* ======================================================
-CREATION TABLE
+CRÉATION DES TABLEAUX
 ====================================================== */
 
 function createTable(data, bodyId){
 
-const body = document.getElementById(bodyId);
+    const body = document.getElementById(bodyId);
 
-data.forEach(section=>{
+    data.forEach(section => {
 
-const principalRow = document.createElement("tr");
+        const principalRow = document.createElement("tr");
 
-principalRow.innerHTML = `
-<td class="rubrique-principale">
-> ${section.principal}
-</td>
-<td class="rubrique-principale"></td>
-`;
+        principalRow.innerHTML = `
+            <td class="rubrique-principale">
+                > ${section.principal}
+            </td>
+            <td class="rubrique-principale"></td>
+        `;
 
-body.appendChild(principalRow);
+        body.appendChild(principalRow);
 
-section.rubriques.forEach((rub,index)=>{
 
-const rubRow = document.createElement("tr");
+        section.rubriques.forEach((rub, index) => {
 
-rubRow.className = "rubrique-2";
+            const rubRow = document.createElement("tr");
 
-rubRow.dataset.group =
-bodyId + "_" + section.principal + "_" + index;
+            rubRow.className = "rubrique-2";
 
-rubRow.innerHTML = `
+            rubRow.dataset.group =
+                bodyId + "_" + section.principal + "_" + index;
 
-<td>
 
->> ${rub.rubrique}
+            rubRow.innerHTML = `
 
-<div class="actions">
+                <td>
 
-<button class="add add-poste-btn">
-+ Ajouter Poste
-</button>
+                    >> ${rub.rubrique}
 
-</div>
+                    <div class="actions">
 
-</td>
+                        <button
+                            type="button"
+                            class="add add-poste-btn">
+                            + Ajouter Poste
+                        </button>
 
-<td></td>
+                    </div>
 
-`;
+                </td>
 
-body.appendChild(rubRow);
+                <td></td>
 
-rubRow.querySelector(".add-poste-btn")
-.addEventListener("click", function(){
+            `;
 
-addPoste(this, rub.postes);
+            body.appendChild(rubRow);
 
-});
 
-});
+            rubRow.querySelector(".add-poste-btn")
+                .addEventListener("click", function(){
 
-});
+                    addPoste(this, rub.postes);
+
+                });
+
+        });
+
+    });
 
 }
 
+
 /* ======================================================
-AJOUT POSTE
+AJOUT D'UN POSTE
 ====================================================== */
 
 function addPoste(button, postes){
 
-const rubriqueRow = button.closest("tr");
+    const rubriqueRow = button.closest("tr");
 
-const groupId = rubriqueRow.dataset.group;
+    const groupId = rubriqueRow.dataset.group;
 
-const row = document.createElement("tr");
+    const row = document.createElement("tr");
 
-row.className = "poste-row";
+    row.className = "poste-row";
 
-row.dataset.group = groupId;
+    row.dataset.group = groupId;
 
-let options = "";
 
-postes.forEach(poste=>{
+    /* Création des options */
 
-options += `
-<option value="${poste}">
->>> ${poste}
-</option>
-`;
+    let options = "";
 
-});
+    postes.forEach(poste => {
 
-row.innerHTML = `
+        options += `
+            <option value="${poste}">
+                >>> ${poste}
+            </option>
+        `;
 
-<td>
+    });
 
-<select>
-${options}
-</select>
 
-</td>
+    row.innerHTML = `
 
-<td>
+        <td>
 
-<input type="number"
-class="amount"
-value="0"
-step="0.01"
-oninput="calculateTotals()">
+            <select class="poste-select">
 
-<div class="actions">
+                ${options}
 
-<button class="delete"
-onclick="deletePoste(this)">
-Supprimer
-</button>
+            </select>
 
-</div>
+        </td>
 
-</td>
 
-`;
+        <td>
 
-let lastGroupRow = rubriqueRow;
+            <input
+                type="number"
+                class="amount"
+                value="0"
+                step="0.01"
+                oninput="calculateTotals()"
+            >
 
-let next = rubriqueRow.nextElementSibling;
+            <div class="actions">
 
-while(next){
+                <button
+                    type="button"
+                    class="delete"
+                    onclick="deletePoste(this)">
+                    Supprimer
+                </button>
 
-if(
-next.classList.contains("rubrique-2") ||
-next.classList.contains("rubrique-principale")
-){
-break;
+            </div>
+
+        </td>
+
+    `;
+
+
+    /*
+       On cherche la dernière ligne appartenant
+       à la même rubrique afin d'insérer le
+       nouveau poste juste après les précédents.
+    */
+
+    let lastGroupRow = rubriqueRow;
+
+    let next = rubriqueRow.nextElementSibling;
+
+
+    while(next){
+
+        if(
+            next.classList.contains("rubrique-2") ||
+            next.classList.contains("rubrique-principale")
+        ){
+            break;
+        }
+
+
+        if(next.dataset.group === groupId){
+
+            lastGroupRow = next;
+
+        }
+
+
+        next = next.nextElementSibling;
+
+    }
+
+
+    lastGroupRow.after(row);
+
+    calculateTotals();
+
 }
 
-if(next.dataset.group === groupId){
-lastGroupRow = next;
-}
-
-next = next.nextElementSibling;
-
-}
-
-lastGroupRow.after(row);
-
-}
 
 /* ======================================================
-SUPPRESSION
+SUPPRESSION D'UN POSTE
 ====================================================== */
 
 function deletePoste(button){
 
-button.closest("tr").remove();
+    const row = button.closest(".poste-row");
 
-calculateTotals();
+    if(row){
+
+        row.remove();
+
+    }
+
+    calculateTotals();
 
 }
 
+
 /* ======================================================
-TOTALS
+CALCUL DES TOTAUX
 ====================================================== */
 
 function calculateTotals(){
 
-let totalActif = 0;
-let totalPassif = 0;
+    let totalActif = 0;
 
-document.querySelectorAll("#tableActif .amount")
-.forEach(input=>{
+    let totalPassif = 0;
 
-totalActif += parseFloat(input.value) || 0;
 
-});
+    document
+        .querySelectorAll("#tableActif .amount")
+        .forEach(input => {
 
-document.querySelectorAll("#tablePassif .amount")
-.forEach(input=>{
+            totalActif += parseFloat(input.value) || 0;
 
-totalPassif += parseFloat(input.value) || 0;
+        });
 
-});
 
-document.getElementById("totalActif")
-.innerText = totalActif.toLocaleString('fr-FR',{
-minimumFractionDigits:2
-});
+    document
+        .querySelectorAll("#tablePassif .amount")
+        .forEach(input => {
 
-document.getElementById("totalPassif")
-.innerText = totalPassif.toLocaleString('fr-FR',{
-minimumFractionDigits:2
-});
+            totalPassif += parseFloat(input.value) || 0;
+
+        });
+
+
+    document.getElementById("totalActif").innerText =
+        totalActif.toLocaleString("fr-FR", {
+
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+
+        });
+
+
+    document.getElementById("totalPassif").innerText =
+        totalPassif.toLocaleString("fr-FR", {
+
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+
+        });
 
 }
 
+
 /* ======================================================
-VIDER TABLEAU
+VIDER LE TABLEAU
 ====================================================== */
 
 function viderChamps(){
 
-document.querySelectorAll(".poste-row")
-.forEach(row=>row.remove());
+    if(!confirm("Voulez-vous vraiment vider tous les postes ?")){
 
-document.getElementById("totalActif")
-.innerText = "0,00";
+        return;
 
-document.getElementById("totalPassif")
-.innerText = "0,00";
+    }
+
+
+    document
+        .querySelectorAll(".poste-row")
+        .forEach(row => row.remove());
+
+
+    document.getElementById("totalActif")
+        .innerText = "0,00";
+
+
+    document.getElementById("totalPassif")
+        .innerText = "0,00";
 
 }
 
+
 /* ======================================================
-ENREGISTRER BILAN
+RÉCUPÉRER LA VRAIE SÉLECTION DU SELECT
+====================================================== */
+
+/*
+    IMPORTANT :
+
+    Cette fonction lit le SELECT du TABLEAU ORIGINAL.
+
+    Elle ne lit PAS le clone.
+
+    C'est précisément la correction du problème
+    de l'ancienne version.
+*/
+
+function getSelectedPoste(select){
+
+    if(!select){
+
+        return "";
+
+    }
+
+
+    /*
+       selectedIndex correspond à l'option
+       réellement sélectionnée par l'utilisateur.
+    */
+
+    const index = select.selectedIndex;
+
+
+    if(index < 0){
+
+        return "";
+
+    }
+
+
+    const option = select.options[index];
+
+
+    if(!option){
+
+        return "";
+
+    }
+
+
+    /*
+       textContent récupère exactement le texte
+       de l'option choisie.
+    */
+
+    return option.textContent.trim();
+
+}
+
+
+/* ======================================================
+RÉCUPÉRER LA VRAIE VALEUR DU MONTANT
+====================================================== */
+
+function getSaisieMontant(input){
+
+    if(!input){
+
+        return "0,00";
+
+    }
+
+
+    /*
+       On lit directement input.value
+       dans le tableau ORIGINAL.
+    */
+
+    const valeur = input.value;
+
+
+    if(
+        valeur === null ||
+        valeur === undefined ||
+        valeur === ""
+    ){
+
+        return "0,00";
+
+    }
+
+
+    const montant = parseFloat(valeur);
+
+
+    if(isNaN(montant)){
+
+        return "0,00";
+
+    }
+
+
+    return montant.toLocaleString("fr-FR", {
+
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+
+    });
+
+}
+
+
+/* ======================================================
+PRÉPARER UN TABLEAU POUR L'EXPORT
+====================================================== */
+
+/*
+   CORRECTION PRINCIPALE
+
+   1. On clone le tableau.
+   2. On récupère TOUTES les lignes .poste-row
+      du tableau ORIGINAL.
+   3. On récupère TOUTES les lignes .poste-row
+      du CLONE.
+   4. On parcourt chaque ligne avec son index.
+   5. On lit la sélection réelle dans l'original.
+   6. On lit le montant réel dans l'original.
+   7. On inscrit ces valeurs dans le clone.
+   8. Ensuite seulement, on supprime les select/input.
+
+*/
+
+function preparerTableauPourExport(tableOriginal){
+
+    /* =========================
+       CLONAGE
+    ========================= */
+
+    const clone = tableOriginal.cloneNode(true);
+
+
+    /* =========================
+       RÉCUPÉRATION DES LIGNES
+    ========================= */
+
+    const lignesOriginales =
+        tableOriginal.querySelectorAll(".poste-row");
+
+
+    const lignesClone =
+        clone.querySelectorAll(".poste-row");
+
+
+    /*
+       Vérification de sécurité :
+
+       On parcourt toutes les lignes originales.
+    */
+
+    for(let i = 0; i < lignesOriginales.length; i++){
+
+        const ligneOriginale = lignesOriginales[i];
+
+        const ligneClone = lignesClone[i];
+
+
+        if(!ligneClone){
+
+            continue;
+
+        }
+
+
+        /* =========================
+           POSTE
+        ========================= */
+
+        const selectOriginal =
+            ligneOriginale.querySelector(".poste-select");
+
+
+        const selectClone =
+            ligneClone.querySelector(".poste-select");
+
+
+        if(selectOriginal && selectClone){
+
+            /*
+               On lit la vraie sélection
+               dans le tableau original.
+            */
+
+            const posteSelectionne =
+                getSelectedPoste(selectOriginal);
+
+
+            /*
+               On inscrit cette valeur
+               directement dans le clone.
+            */
+
+            const cellulePoste =
+                selectClone.closest("td");
+
+
+            if(cellulePoste){
+
+                cellulePoste.textContent =
+                    posteSelectionne;
+
+            }
+
+        }
+
+
+        /* =========================
+           MONTANT
+        ========================= */
+
+        const inputOriginal =
+            ligneOriginale.querySelector(".amount");
+
+
+        const inputClone =
+            ligneClone.querySelector(".amount");
+
+
+        if(inputOriginal && inputClone){
+
+            /*
+               On récupère la valeur réelle
+               saisie dans l'original.
+            */
+
+            const montantSaisi =
+                getSaisieMontant(inputOriginal);
+
+
+            /*
+               On inscrit cette valeur
+               dans la cellule du clone.
+            */
+
+            const celluleMontant =
+                inputClone.closest("td");
+
+
+            if(celluleMontant){
+
+                celluleMontant.textContent =
+                    montantSaisi;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+       Suppression des éventuels boutons/actions
+       qui resteraient dans le clone.
+    */
+
+    clone
+        .querySelectorAll("button, .actions")
+        .forEach(element => element.remove());
+
+
+    /*
+       Sécurité supplémentaire :
+
+       aucun select ou input ne doit rester
+       dans le fichier exporté.
+    */
+
+    clone
+        .querySelectorAll("select, input")
+        .forEach(element => element.remove());
+
+
+    return clone;
+
+}
+
+
+/* ======================================================
+CONSTRUIRE LE CONTENU COMPLET DE L'EXPORT
+====================================================== */
+
+function construireExport(){
+
+    /*
+       IMPORTANT :
+
+       On travaille directement avec
+       les tableaux ORIGINAUX.
+    */
+
+    const tableActifOriginal =
+        document.getElementById("tableActif");
+
+
+    const tablePassifOriginal =
+        document.getElementById("tablePassif");
+
+
+    /*
+       Préparation indépendante des deux tableaux.
+    */
+
+    const actifClone =
+        preparerTableauPourExport(tableActifOriginal);
+
+
+    const passifClone =
+        preparerTableauPourExport(tablePassifOriginal);
+
+
+    /*
+       Retourne les deux tableaux prêts à exporter.
+    */
+
+    return {
+
+        actif: actifClone,
+        passif: passifClone
+
+    };
+
+}
+
+
+/* ======================================================
+ENREGISTRER LE BILAN EN HTML
 ====================================================== */
 
 function enregistrerBilan(){
 
-let nomFichier = prompt(
-"Nom du fichier :",
-"bilan"
-);
+    let nomFichier = prompt(
+        "Nom du fichier :",
+        "bilan"
+    );
 
-if(
-nomFichier === null ||
-nomFichier.trim() === ""
-){
-return;
-}
 
-let actifClone =
-document.getElementById("tableActif").cloneNode(true);
+    if(
+        nomFichier === null ||
+        nomFichier.trim() === ""
+    ){
 
-let passifClone =
-document.getElementById("tablePassif").cloneNode(true);
+        return;
 
-/* SUPPRIMER BOUTONS */
+    }
 
-actifClone.querySelectorAll("button,.actions")
-.forEach(el=>el.remove());
 
-passifClone.querySelectorAll("button,.actions")
-.forEach(el=>el.remove());
+    /*
+       Construction de l'export
+       à partir des valeurs réelles.
+    */
 
-/* INPUTS -> TEXTE */
+    const exportData =
+        construireExport();
 
-actifClone.querySelectorAll("input")
-.forEach(input=>{
 
-const td = input.parentElement;
+    const actifClone =
+        exportData.actif;
 
-td.innerHTML =
-parseFloat(input.value || 0)
-.toLocaleString('fr-FR',{
-minimumFractionDigits:2
-});
 
-});
+    const passifClone =
+        exportData.passif;
 
-passifClone.querySelectorAll("input")
-.forEach(input=>{
 
-const td = input.parentElement;
+    /*
+       Création du fichier HTML.
+    */
 
-td.innerHTML =
-parseFloat(input.value || 0)
-.toLocaleString('fr-FR',{
-minimumFractionDigits:2
-});
+    const contenu = `
 
-});
-
-/* SELECTS -> TEXTE */
-
-actifClone.querySelectorAll("select")
-.forEach(select=>{
-
-select.parentElement.innerHTML =
-select.value;
-
-});
-
-passifClone.querySelectorAll("select")
-.forEach(select=>{
-
-select.parentElement.innerHTML =
-select.value;
-
-});
-
-/* PAGE HTML */
-
-let contenu = `
 <!DOCTYPE html>
+
 <html lang="fr">
 
 <head>
@@ -849,55 +1242,109 @@ let contenu = `
 <style>
 
 body{
-font-family:Arial;
-padding:20px;
-background:#f4f6f9;
+
+    font-family:Arial,sans-serif;
+
+    padding:20px;
+
+    background:#f4f6f9;
+
 }
 
 h1{
-text-align:center;
-margin-bottom:25px;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
 }
 
 .container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-align-items:stretch;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+    align-items:start;
+
 }
 
 table{
-width:100%;
-border-collapse:collapse;
-background:white;
-height:100%;
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
 }
 
 td,th{
-border:1px solid #999;
-padding:8px;
+
+    border:1px solid #999;
+
+    padding:8px;
+
 }
 
 th{
-background:#2c3e50;
-color:white;
+
+    background:#2c3e50;
+
+    color:white;
+
 }
 
 .rubrique-principale{
-background:#d6eaf8;
-font-weight:bold;
+
+    background:#d6eaf8;
+
+    font-weight:bold;
+
 }
 
 .rubrique-2{
-background:#ebf5fb;
-font-weight:bold;
+
+    background:#ebf5fb;
+
+    font-weight:bold;
+
+}
+
+.poste-row{
+
+    background:#fafafa;
+
 }
 
 .total{
-background:#2c3e50;
-color:white;
-font-weight:bold;
-height:60px;
+
+    background:#2c3e50;
+
+    color:white;
+
+    font-weight:bold;
+
+    height:60px;
+
+}
+
+.total td{
+
+    padding:12px;
+
+}
+
+@media(max-width:900px){
+
+    .container{
+
+        grid-template-columns:1fr;
+
+    }
+
 }
 
 </style>
@@ -911,11 +1358,15 @@ height:60px;
 <div class="container">
 
 <div>
+
 ${actifClone.outerHTML}
+
 </div>
 
 <div>
+
 ${passifClone.outerHTML}
+
 </div>
 
 </div>
@@ -923,24 +1374,55 @@ ${passifClone.outerHTML}
 </body>
 
 </html>
+
 `;
 
-const blob = new Blob(
-[contenu],
-{
-type:"text/html"
+
+    const blob = new Blob(
+
+        [contenu],
+
+        {
+            type:"text/html;charset=utf-8"
+        }
+
+    );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+
+    link.download =
+        nomFichier + ".html";
+
+
+    document.body.appendChild(link);
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    setTimeout(
+
+        () => URL.revokeObjectURL(url),
+
+        1000
+
+    );
+
 }
-);
 
-const link = document.createElement("a");
-
-link.href = URL.createObjectURL(blob);
-
-link.download = nomFichier + ".html";
-
-link.click();
-
-}
 
 /* ======================================================
 EXPORT EXCEL
@@ -948,131 +1430,138 @@ EXPORT EXCEL
 
 function exportExcel(){
 
-let nomFichier = prompt(
-"Nom du fichier Excel :",
-"bilan_excel"
-);
+    let nomFichier = prompt(
+        "Nom du fichier Excel :",
+        "bilan_excel"
+    );
 
-if(
-nomFichier === null ||
-nomFichier.trim() === ""
-){
-return;
-}
 
-let actifClone =
-document.getElementById("tableActif").cloneNode(true);
+    if(
+        nomFichier === null ||
+        nomFichier.trim() === ""
+    ){
 
-let passifClone =
-document.getElementById("tablePassif").cloneNode(true);
+        return;
 
-/* SUPPRIMER BOUTONS */
+    }
 
-actifClone.querySelectorAll("button,.actions")
-.forEach(el=>el.remove());
 
-passifClone.querySelectorAll("button,.actions")
-.forEach(el=>el.remove());
+    /*
+       Construction de l'export
+       à partir des VALEURS RÉELLES.
+    */
 
-/* INPUTS -> TEXTE */
+    const exportData =
+        construireExport();
 
-actifClone.querySelectorAll("input")
-.forEach(input=>{
 
-const td = input.parentElement;
+    const actifClone =
+        exportData.actif;
 
-td.innerHTML =
-parseFloat(input.value || 0)
-.toLocaleString('fr-FR',{
-minimumFractionDigits:2
-});
 
-});
+    const passifClone =
+        exportData.passif;
 
-passifClone.querySelectorAll("input")
-.forEach(input=>{
 
-const td = input.parentElement;
+    /*
+       Création du fichier Excel.
+    */
 
-td.innerHTML =
-parseFloat(input.value || 0)
-.toLocaleString('fr-FR',{
-minimumFractionDigits:2
-});
+    const excelHTML = `
 
-});
-
-/* SELECTS -> TEXTE */
-
-actifClone.querySelectorAll("select")
-.forEach(select=>{
-
-select.parentElement.innerHTML =
-select.value;
-
-});
-
-passifClone.querySelectorAll("select")
-.forEach(select=>{
-
-select.parentElement.innerHTML =
-select.value;
-
-});
-
-/* EXCEL HTML */
-
-let excelHTML = `
-<html>
+<html
+xmlns:x="urn:schemas-microsoft-com:office:excel">
 
 <head>
 
 <meta charset="UTF-8">
 
+<meta
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8">
+
 <style>
 
 body{
-font-family:Arial;
+
+    font-family:Arial,sans-serif;
+
 }
 
 .container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-align-items:stretch;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+    align-items:start;
+
 }
 
 table{
-width:100%;
-border-collapse:collapse;
-height:100%;
+
+    width:100%;
+
+    border-collapse:collapse;
+
 }
 
 td,th{
-border:1px solid black;
-padding:8px;
+
+    border:1px solid black;
+
+    padding:8px;
+
 }
 
 th{
-background:#2c3e50;
-color:white;
+
+    background:#2c3e50;
+
+    color:white;
+
 }
 
 .rubrique-principale{
-background:#d6eaf8;
-font-weight:bold;
+
+    background:#d6eaf8;
+
+    font-weight:bold;
+
 }
 
 .rubrique-2{
-background:#ebf5fb;
-font-weight:bold;
+
+    background:#ebf5fb;
+
+    font-weight:bold;
+
+}
+
+.poste-row{
+
+    background:#fafafa;
+
 }
 
 .total{
-background:#2c3e50;
-color:white;
-font-weight:bold;
-height:60px;
+
+    background:#2c3e50;
+
+    color:white;
+
+    font-weight:bold;
+
+    height:60px;
+
+}
+
+.total td{
+
+    padding:12px;
+
 }
 
 </style>
@@ -1082,17 +1571,23 @@ height:60px;
 <body>
 
 <h2 style="text-align:center;">
+
 BILAN
+
 </h2>
 
 <div class="container">
 
 <div>
+
 ${actifClone.outerHTML}
+
 </div>
 
 <div>
+
 ${passifClone.outerHTML}
+
 </div>
 
 </div>
@@ -1100,40 +1595,92 @@ ${passifClone.outerHTML}
 </body>
 
 </html>
+
 `;
 
-const blob = new Blob(
-[excelHTML],
-{
-type:"application/vnd.ms-excel"
+
+    const blob = new Blob(
+
+        [excelHTML],
+
+        {
+            type:
+            "application/vnd.ms-excel;charset=utf-8"
+        }
+
+    );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+
+    link.download =
+        nomFichier + ".xls";
+
+
+    document.body.appendChild(link);
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    setTimeout(
+
+        () => URL.revokeObjectURL(url),
+
+        1000
+
+    );
+
 }
-);
 
-const link = document.createElement("a");
-
-link.href = URL.createObjectURL(blob);
-
-link.download = nomFichier + ".xls";
-
-link.click();
-
-}
 
 /* ======================================================
 INITIALISATION
 ====================================================== */
 
-createTable(actifData, "actifBody");
-createTable(passifData, "passifBody");
+createTable(
+    actifData,
+    "actifBody"
+);
+
+
+createTable(
+    passifData,
+    "passifBody"
+);
+
+
+/* ======================================================
+FIN
+====================================================== */
 
 </script>
-<footer>
-    Formation en comptabilité générale
-<br>
 
-<a href="C2P1M1.html">⬅ Retour </a>
+
+<footer>
+
+Formation en comptabilité générale
+
+<br><br>
+
+<a href="C2P1M1.html">
+⬅ Retour
+</a>
 
 </footer>
+
 
 </body>
 </html>
