@@ -234,7 +234,6 @@ Enregistrer Bilan
 
 </div>
 
-
 <div class="container">
 
 <!-- ================= ACTIF ================= -->
@@ -267,7 +266,6 @@ Enregistrer Bilan
 
 </div>
 
-
 <!-- ================= PASSIF ================= -->
 
 <div class="table-zone">
@@ -299,7 +297,6 @@ Enregistrer Bilan
 </div>
 
 </div>
-
 
 <script>
 
@@ -445,7 +442,6 @@ postes:[
 
 ];
 
-
 /* ======================================================
 PASSIF
 ====================================================== */
@@ -573,7 +569,6 @@ postes:[
 
 ];
 
-
 /* ======================================================
 CRÉATION DES TABLEAUX
 ====================================================== */
@@ -595,7 +590,6 @@ function createTable(data, bodyId){
 
         body.appendChild(principalRow);
 
-
         section.rubriques.forEach((rub, index) => {
 
             const rubRow = document.createElement("tr");
@@ -604,7 +598,6 @@ function createTable(data, bodyId){
 
             rubRow.dataset.group =
                 bodyId + "_" + section.principal + "_" + index;
-
 
             rubRow.innerHTML = `
 
@@ -630,7 +623,6 @@ function createTable(data, bodyId){
 
             body.appendChild(rubRow);
 
-
             rubRow.querySelector(".add-poste-btn")
                 .addEventListener("click", function(){
 
@@ -643,7 +635,6 @@ function createTable(data, bodyId){
     });
 
 }
-
 
 /* ======================================================
 AJOUT D'UN POSTE
@@ -661,7 +652,6 @@ function addPoste(button, postes){
 
     row.dataset.group = groupId;
 
-
     /* Création des options */
 
     let options = "";
@@ -676,7 +666,6 @@ function addPoste(button, postes){
 
     });
 
-
     row.innerHTML = `
 
         <td>
@@ -688,7 +677,6 @@ function addPoste(button, postes){
             </select>
 
         </td>
-
 
         <td>
 
@@ -715,7 +703,6 @@ function addPoste(button, postes){
 
     `;
 
-
     /*
        On cherche la dernière ligne appartenant
        à la même rubrique afin d'insérer le
@@ -726,7 +713,6 @@ function addPoste(button, postes){
 
     let next = rubriqueRow.nextElementSibling;
 
-
     while(next){
 
         if(
@@ -736,25 +722,21 @@ function addPoste(button, postes){
             break;
         }
 
-
         if(next.dataset.group === groupId){
 
             lastGroupRow = next;
 
         }
 
-
         next = next.nextElementSibling;
 
     }
-
 
     lastGroupRow.after(row);
 
     calculateTotals();
 
 }
-
 
 /* ======================================================
 SUPPRESSION D'UN POSTE
@@ -774,7 +756,6 @@ function deletePoste(button){
 
 }
 
-
 /* ======================================================
 CALCUL DES TOTAUX
 ====================================================== */
@@ -785,7 +766,6 @@ function calculateTotals(){
 
     let totalPassif = 0;
 
-
     document
         .querySelectorAll("#tableActif .amount")
         .forEach(input => {
@@ -793,7 +773,6 @@ function calculateTotals(){
             totalActif += parseFloat(input.value) || 0;
 
         });
-
 
     document
         .querySelectorAll("#tablePassif .amount")
@@ -803,7 +782,6 @@ function calculateTotals(){
 
         });
 
-
     document.getElementById("totalActif").innerText =
         totalActif.toLocaleString("fr-FR", {
 
@@ -811,7 +789,6 @@ function calculateTotals(){
             maximumFractionDigits:2
 
         });
-
 
     document.getElementById("totalPassif").innerText =
         totalPassif.toLocaleString("fr-FR", {
@@ -822,7 +799,6 @@ function calculateTotals(){
         });
 
 }
-
 
 /* ======================================================
 VIDER LE TABLEAU
@@ -836,21 +812,17 @@ function viderChamps(){
 
     }
 
-
     document
         .querySelectorAll(".poste-row")
         .forEach(row => row.remove());
 
-
     document.getElementById("totalActif")
         .innerText = "0,00";
-
 
     document.getElementById("totalPassif")
         .innerText = "0,00";
 
 }
-
 
 /* ======================================================
 RÉCUPÉRER LA VRAIE SÉLECTION DU SELECT
@@ -875,7 +847,6 @@ function getSelectedPoste(select){
 
     }
 
-
     /*
        selectedIndex correspond à l'option
        réellement sélectionnée par l'utilisateur.
@@ -883,23 +854,19 @@ function getSelectedPoste(select){
 
     const index = select.selectedIndex;
 
-
     if(index < 0){
 
         return "";
 
     }
 
-
     const option = select.options[index];
-
 
     if(!option){
 
         return "";
 
     }
-
 
     /*
        textContent récupère exactement le texte
@@ -909,7 +876,6 @@ function getSelectedPoste(select){
     return option.textContent.trim();
 
 }
-
 
 /* ======================================================
 RÉCUPÉRER LA VRAIE VALEUR DU MONTANT
@@ -923,14 +889,12 @@ function getSaisieMontant(input){
 
     }
 
-
     /*
        On lit directement input.value
        dans le tableau ORIGINAL.
     */
 
     const valeur = input.value;
-
 
     if(
         valeur === null ||
@@ -942,16 +906,13 @@ function getSaisieMontant(input){
 
     }
 
-
     const montant = parseFloat(valeur);
-
 
     if(isNaN(montant)){
 
         return "0,00";
 
     }
-
 
     return montant.toLocaleString("fr-FR", {
 
@@ -961,7 +922,6 @@ function getSaisieMontant(input){
     });
 
 }
-
 
 /* ======================================================
 PRÉPARER UN TABLEAU POUR L'EXPORT
@@ -991,7 +951,6 @@ function preparerTableauPourExport(tableOriginal){
 
     const clone = tableOriginal.cloneNode(true);
 
-
     /* =========================
        RÉCUPÉRATION DES LIGNES
     ========================= */
@@ -999,10 +958,8 @@ function preparerTableauPourExport(tableOriginal){
     const lignesOriginales =
         tableOriginal.querySelectorAll(".poste-row");
 
-
     const lignesClone =
         clone.querySelectorAll(".poste-row");
-
 
     /*
        Vérification de sécurité :
@@ -1016,13 +973,11 @@ function preparerTableauPourExport(tableOriginal){
 
         const ligneClone = lignesClone[i];
 
-
         if(!ligneClone){
 
             continue;
 
         }
-
 
         /* =========================
            POSTE
@@ -1031,10 +986,8 @@ function preparerTableauPourExport(tableOriginal){
         const selectOriginal =
             ligneOriginale.querySelector(".poste-select");
 
-
         const selectClone =
             ligneClone.querySelector(".poste-select");
-
 
         if(selectOriginal && selectClone){
 
@@ -1046,7 +999,6 @@ function preparerTableauPourExport(tableOriginal){
             const posteSelectionne =
                 getSelectedPoste(selectOriginal);
 
-
             /*
                On inscrit cette valeur
                directement dans le clone.
@@ -1054,7 +1006,6 @@ function preparerTableauPourExport(tableOriginal){
 
             const cellulePoste =
                 selectClone.closest("td");
-
 
             if(cellulePoste){
 
@@ -1065,7 +1016,6 @@ function preparerTableauPourExport(tableOriginal){
 
         }
 
-
         /* =========================
            MONTANT
         ========================= */
@@ -1073,10 +1023,8 @@ function preparerTableauPourExport(tableOriginal){
         const inputOriginal =
             ligneOriginale.querySelector(".amount");
 
-
         const inputClone =
             ligneClone.querySelector(".amount");
-
 
         if(inputOriginal && inputClone){
 
@@ -1088,7 +1036,6 @@ function preparerTableauPourExport(tableOriginal){
             const montantSaisi =
                 getSaisieMontant(inputOriginal);
 
-
             /*
                On inscrit cette valeur
                dans la cellule du clone.
@@ -1096,7 +1043,6 @@ function preparerTableauPourExport(tableOriginal){
 
             const celluleMontant =
                 inputClone.closest("td");
-
 
             if(celluleMontant){
 
@@ -1109,7 +1055,6 @@ function preparerTableauPourExport(tableOriginal){
 
     }
 
-
     /*
        Suppression des éventuels boutons/actions
        qui resteraient dans le clone.
@@ -1118,7 +1063,6 @@ function preparerTableauPourExport(tableOriginal){
     clone
         .querySelectorAll("button, .actions")
         .forEach(element => element.remove());
-
 
     /*
        Sécurité supplémentaire :
@@ -1131,11 +1075,9 @@ function preparerTableauPourExport(tableOriginal){
         .querySelectorAll("select, input")
         .forEach(element => element.remove());
 
-
     return clone;
 
 }
-
 
 /* ======================================================
 CONSTRUIRE LE CONTENU COMPLET DE L'EXPORT
@@ -1153,10 +1095,8 @@ function construireExport(){
     const tableActifOriginal =
         document.getElementById("tableActif");
 
-
     const tablePassifOriginal =
         document.getElementById("tablePassif");
-
 
     /*
        Préparation indépendante des deux tableaux.
@@ -1165,10 +1105,8 @@ function construireExport(){
     const actifClone =
         preparerTableauPourExport(tableActifOriginal);
 
-
     const passifClone =
         preparerTableauPourExport(tablePassifOriginal);
-
 
     /*
        Retourne les deux tableaux prêts à exporter.
@@ -1183,7 +1121,6 @@ function construireExport(){
 
 }
 
-
 /* ======================================================
 ENREGISTRER LE BILAN EN HTML
 ====================================================== */
@@ -1195,7 +1132,6 @@ function enregistrerBilan(){
         "bilan"
     );
 
-
     if(
         nomFichier === null ||
         nomFichier.trim() === ""
@@ -1205,7 +1141,6 @@ function enregistrerBilan(){
 
     }
 
-
     /*
        Construction de l'export
        à partir des valeurs réelles.
@@ -1214,14 +1149,11 @@ function enregistrerBilan(){
     const exportData =
         construireExport();
 
-
     const actifClone =
         exportData.actif;
 
-
     const passifClone =
         exportData.passif;
-
 
     /*
        Création du fichier HTML.
@@ -1377,7 +1309,6 @@ ${passifClone.outerHTML}
 
 `;
 
-
     const blob = new Blob(
 
         [contenu],
@@ -1388,30 +1319,22 @@ ${passifClone.outerHTML}
 
     );
 
-
     const url =
         URL.createObjectURL(blob);
-
 
     const link =
         document.createElement("a");
 
-
     link.href = url;
-
 
     link.download =
         nomFichier + ".html";
 
-
     document.body.appendChild(link);
-
 
     link.click();
 
-
     link.remove();
-
 
     setTimeout(
 
@@ -1422,7 +1345,6 @@ ${passifClone.outerHTML}
     );
 
 }
-
 
 /* ======================================================
 EXPORT EXCEL
@@ -1435,7 +1357,6 @@ function exportExcel(){
         "bilan_excel"
     );
 
-
     if(
         nomFichier === null ||
         nomFichier.trim() === ""
@@ -1445,7 +1366,6 @@ function exportExcel(){
 
     }
 
-
     /*
        Construction de l'export
        à partir des VALEURS RÉELLES.
@@ -1454,14 +1374,11 @@ function exportExcel(){
     const exportData =
         construireExport();
 
-
     const actifClone =
         exportData.actif;
 
-
     const passifClone =
         exportData.passif;
-
 
     /*
        Création du fichier Excel.
@@ -1598,7 +1515,6 @@ ${passifClone.outerHTML}
 
 `;
 
-
     const blob = new Blob(
 
         [excelHTML],
@@ -1610,30 +1526,22 @@ ${passifClone.outerHTML}
 
     );
 
-
     const url =
         URL.createObjectURL(blob);
-
 
     const link =
         document.createElement("a");
 
-
     link.href = url;
-
 
     link.download =
         nomFichier + ".xls";
 
-
     document.body.appendChild(link);
-
 
     link.click();
 
-
     link.remove();
-
 
     setTimeout(
 
@@ -1645,7 +1553,6 @@ ${passifClone.outerHTML}
 
 }
 
-
 /* ======================================================
 INITIALISATION
 ====================================================== */
@@ -1655,19 +1562,16 @@ createTable(
     "actifBody"
 );
 
-
 createTable(
     passifData,
     "passifBody"
 );
-
 
 /* ======================================================
 FIN
 ====================================================== */
 
 </script>
-
 
 <footer>
 
@@ -1681,6 +1585,6 @@ Formation en comptabilité générale
 
 </footer>
 
-
 </body>
 </html>
+
