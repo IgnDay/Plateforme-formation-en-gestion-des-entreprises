@@ -1,14 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale</title>
 
 <style>
 body{
-font-family:Arial;
+font-family:Arial,sans-serif;
 margin:0;
 background:#f4f6f9;
+color:#1e293b;
 }
 
 /* ===== HEADER ANIMÉ ===== */
@@ -16,6 +19,8 @@ background:#f4f6f9;
 display:flex;
 align-items:center;
 justify-content:space-between;
+flex-wrap:wrap;
+gap:12px;
 background:#0f766e;
 color:white;
 padding:10px 20px;
@@ -27,34 +32,118 @@ z-index:1000;
 .logo{
 font-size:20px;
 font-weight:bold;
+white-space:nowrap;
 }
 
 .nav{
 display:flex;
-gap:15px;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
 }
 
-.nav a{
+.nav a,.nav button{
 color:white;
 text-decoration:none;
-padding:6px 10px;
+padding:8px 10px;
 border-radius:4px;
 transition:0.3s;
+border:none;
+background:transparent;
+font-size:14px;
+cursor:pointer;
+font-family:inherit;
 }
 
-.nav a:hover{
+.nav a:hover,.nav button:hover{
 background:#0e7490;
 transform:translateY(-2px);
 }
 
-/* Recherche */
-.search-box input{
-padding:5px;
-border-radius:4px;
-border:none;
+/* ===== LISTES DÉROULANTES ===== */
+.dropdown{
+position:relative;
+display:inline-block;
 }
 
-/* HEADER */
+.dropdown-content{
+display:none;
+position:absolute;
+top:100%;
+left:0;
+min-width:245px;
+max-height:65vh;
+overflow-y:auto;
+background:white;
+box-shadow:0 5px 15px rgba(0,0,0,.18);
+border-radius:6px;
+padding:6px 0;
+z-index:2000;
+}
+
+.dropdown-content a,
+.dropdown-content button{
+display:block;
+width:100%;
+box-sizing:border-box;
+text-align:left;
+color:#1e293b;
+background:white;
+padding:10px 14px;
+text-decoration:none;
+border:none;
+border-radius:0;
+font-size:14px;
+cursor:pointer;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover{
+background:#ccfbf1;
+color:#0f766e;
+transform:none;
+}
+
+.dropdown.open .dropdown-content{
+display:block;
+}
+
+/* ===== RECHERCHE ===== */
+.search-box{
+display:flex;
+align-items:center;
+gap:5px;
+}
+
+.search-box input{
+width:165px;
+max-width:42vw;
+padding:8px;
+border-radius:4px;
+border:none;
+outline:none;
+}
+
+.search-box button{
+padding:8px 10px;
+border:0;
+border-radius:4px;
+background:#134e4a;
+color:white;
+cursor:pointer;
+}
+
+.search-box button:hover{
+background:#115e59;
+}
+
+#searchStatus{
+font-size:12px;
+color:white;
+margin-top:4px;
+}
+
+/* ===== HEADER PRINCIPAL ===== */
 header{
 background:#0f766e;
 color:white;
@@ -62,7 +151,27 @@ padding:20px;
 text-align:center;
 }
 
-/* MENU */
+header h1{
+font-size:25px;
+line-height:1.5;
+}
+
+header a{
+display:inline-block;
+margin-top:10px;
+padding:8px 12px;
+color:white;
+border:1px solid white;
+border-radius:5px;
+text-decoration:none;
+}
+
+header a:hover{
+background:white;
+color:#0f766e;
+}
+
+/* ===== CONTENU ===== */
 .menu{
 max-width:900px;
 margin:20px auto;
@@ -106,6 +215,19 @@ margin-right:8px;
 .blue{background:#2563eb;}
 .green{background:#16a34a;}
 
+/* Résultats de recherche */
+mark.search-highlight{
+background:#fde047;
+color:#111827;
+padding:2px;
+border-radius:2px;
+}
+
+mark.search-current{
+background:#fb923c;
+outline:2px solid #ea580c;
+}
+
 /* ===== FOOTER ===== */
 footer{
 background:#1e293b;
@@ -133,9 +255,10 @@ margin-bottom:10px;
 .social a{
 display:inline-block;
 margin-right:10px;
+margin-bottom:8px;
 color:white;
 text-decoration:none;
-font-size:20px;
+font-size:16px;
 transition:0.3s;
 }
 
@@ -143,114 +266,431 @@ transition:0.3s;
 color:#38bdf8;
 }
 
-/* Responsive */
-@media(max-width:600px){
-.nav{flex-wrap:wrap;}
-.footer-container{flex-direction:column;}
-}
-/* ===== RETOUR ACCUEIL ===== */
-.retour {
-    display: inline-block;
-    margin-top: 18px;
-    padding: 10px 16px;
-    background: white;
-    color: #0f766e;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+.topbar{
+position:relative;
+align-items:flex-start;
 }
 
-.retour:hover {
-    background: #e0f2fe;
-    transform: translateY(-2px);
+.nav{
+width:100%;
 }
 
+.search-box{
+width:100%;
+}
+
+.search-box input{
+width:100%;
+max-width:none;
+box-sizing:border-box;
+}
+
+.dropdown-content{
+position:absolute;
+left:0;
+min-width:220px;
+max-width:85vw;
+}
+
+header h1{
+font-size:20px;
+}
+
+.footer-container{
+flex-direction:column;
+}
+}
 </style>
 </head>
 
 <body>
 
-<!-- ===== BARRE HAUT ===== -->
+<!-- ===== BARRE DE NAVIGATION ===== -->
 <div class="topbar">
-<div class="logo"> IgnDay</div>
+
+<div class="logo">IgnDay</div>
 
 <div class="nav">
-<a href="#">Filières</a>
-<a href="#">Modules</a>
-<a href="#">Langue 🌐</a>
+
+
+<!-- MENU DÉROULANT DES MODULES -->
+<div class="dropdown" id="modulesDropdown">
+    <button type="button" id="modulesButton"
+            aria-expanded="false">
+        Modules ▼
+    </button>
+
+    <div class="dropdown-content">
+
+        <a href="M1.html">M1 – Comptabilité générale</a>
+        <a href="M2.html">M2 – Comptabilité analytique </a>
+        <a href="M3.html">M3 – Analyse financière</a>
+        <a href="M4.html">M4 – Fiscalité </a>
+        <a href="M5.html">M5 – Mathématiques financières </a>
+        <a href="M6.html">M6 – Statistiques </a>
+        <a href="M7.html">M7 – Marketing </a>
+        <a href="M8.html">M8 – Comptabilité approfondie </a>
+        <a href="M9.html">M9 – Management </a>
+
+    </div>
+</div>
+<!-- MENU DÉROULANT DES LANGUES -->
+<div class="dropdown" id="languageDropdown">
+<button type="button" id="languageButton"
+aria-expanded="false" aria-haspopup="true">
+Langue 🌐 ▼
+</button>
+
+<div class="dropdown-content">
+<button type="button" data-language="fr">🇫🇷 Français</button>
+<button type="button" data-language="en">🇬🇧 English</button>
+<button type="button" data-language="ar">🇸🇦 العربية</button>
+</div>
 </div>
 
+</div>
+
+<!-- RECHERCHE DANS LA PAGE -->
 <div class="search-box">
-<input type="text" placeholder="Rechercher...">
+<div>
+<input type="search" id="searchInput"
+placeholder="Rechercher dans la page..."
+aria-label="Rechercher dans la page">
+<div id="searchStatus" aria-live="polite"></div>
 </div>
+<button type="button" id="searchButton"
+aria-label="Lancer la recherche">🔍</button>
+<button type="button" id="clearSearch"
+aria-label="Effacer la recherche">✖</button>
 </div>
 
-<!-- HEADER -->
+</div>
+
+<!-- ===== HEADER ===== -->
 <header>
-<h1>📘 Plateforme de formation et d'apprentissage interactif "IgnDay"</h1>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
 
+<h1 data-fr="📘 Plateforme de formation et d'apprentissage interactif « IgnDay »"
+data-en="📘 IgnDay Interactive Learning and Training Platform"
+data-ar="📘 منصة IgnDay للتكوين والتعلم التفاعلي">
+📘 Plateforme de formation et d'apprentissage interactif "IgnDay"
+</h1>
 
-
-<br>
-
-    <a href="index.html" class="retour">
-        ⬅ Retour à l'accueil
-    </a>
-
+<a href="index.html"
+data-fr="⬅ Retour à l'accueil"
+data-en="⬅ Back to Home"
+data-ar="⬅ العودة إلى الصفحة الرئيسية">
+⬅ Retour Accueil
+</a>
 
 </header>
 
-<!-- CONTENU -->
-<div class="menu">
-<div class="section-title">Formation en Comptabilité générale</div>
-<a href="P1M1.html" class="card sub">
-➡️ Partie 1 : Concepts de base de la comptabilité générale 
+<!-- ===== CONTENU ===== -->
+<main class="menu" id="pageContent">
+
+<div class="section-title" id="comptabilite"
+data-fr="Formation en Comptabilité générale"
+data-en="General Accounting Training"
+data-ar="التكوين في المحاسبة العامة">
+Formation en Comptabilité générale
+</div>
+
+<a href="P1M1.html" class="card sub"
+data-fr="➡️ Partie 1 : Concepts de base de la comptabilité générale"
+data-en="➡️ Part 1: Basic Concepts of General Accounting"
+data-ar="➡️ الجزء الأول: المفاهيم الأساسية للمحاسبة العامة">
+➡️ Partie 1 : Concepts de base de la comptabilité générale
 </a>
-<a href="P2M1.html" class="card sub">
+
+<a href="P2M1.html" class="card sub"
+data-fr="➡️ Partie 2 : Les opérations courantes"
+data-en="➡️ Part 2: Current Operations"
+data-ar="➡️ الجزء الثاني: العمليات الجارية">
 ➡️ Partie 2 : Les opérations courantes
 </a>
-<a href="P3M1.html" class="card sub">
+
+<a href="P3M1.html" class="card sub"
+data-fr="➡️ Partie 3 : Les travaux de fin d'exercice (Les travaux d’inventaire)"
+data-en="➡️ Part 3: Year-End Work (Inventory Procedures)"
+data-ar="➡️ الجزء الثالث: أعمال نهاية السنة (أعمال الجرد)">
 ➡️ Partie 3 : Les travaux de fin d'exercice (Les travaux d’inventaire)
 </a>
- </div>
-    
+
+</main>
+
 <!-- ===== FOOTER ===== -->
 <footer>
 
 <div class="footer-container">
 
 <div class="footer-section">
-<h3>Contact </h3>
-<p>📍 Adresse : Maroc</p>
-<p>📱 Téléphone : +212 00000000</p>
+
+<h3 data-fr="Contact"
+data-en="Contact"
+data-ar="اتصل بنا">Contact</h3>
+
+<p data-fr="📍 Adresse : Maroc"
+data-en="📍 Address: Morocco"
+data-ar="📍 العنوان: المغرب">
+📍 Adresse : Maroc
+</p>
+
+<p data-fr="📱 Téléphone : +212 00000000"
+data-en="📱 Phone: +212 00000000"
+data-ar="📱 الهاتف: +212 00000000">
+📱 Téléphone : +212 00000000
+</p>
+
 </div>
 
 <div class="footer-section">
-<h3>🌐 Réseaux sociaux</h3>
+
+<h3 data-fr="🌐 Réseaux sociaux"
+data-en="🌐 Social Networks"
+data-ar="🌐 شبكات التواصل الاجتماعي">
+🌐 Réseaux sociaux
+</h3>
+
 <div class="social">
 <a href="#">Facebook</a>
 <a href="#">Twitter</a>
 <a href="#">WhatsApp</a>
 <a href="#">Instagram</a>
 <a href="#">YouTube</a>
-  <a href="#">TikTok</a>
+<a href="#">TikTok</a>
 </div>
+
 </div>
+
 <div class="footer-section">
-<h3>ℹ️ À propos</h3>
-<p>Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises </p>
+
+<h3 data-fr="ℹ️ À propos"
+data-en="ℹ️ About"
+data-ar="ℹ️ حول المنصة">
+ℹ️ À propos
+</h3>
+
+<p data-fr="Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises."
+data-en="An interactive training and learning platform for vocational trainees, students and professionals in business management."
+data-ar="منصة للتكوين والتعلم التفاعلي مخصصة للمتدربين في التكوين المهني والطلاب والمهنيين في مجال تدبير المقاولات.">
+Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises
+</p>
+
 </div>
 
 </div>
 
 </footer>
 
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+const dropdowns = document.querySelectorAll(".dropdown");
+
+dropdowns.forEach(dropdown => {
+const button = dropdown.querySelector("button");
+
+button.addEventListener("click", event => {
+event.stopPropagation();
+
+dropdowns.forEach(other => {
+if(other !== dropdown){
+other.classList.remove("open");
+other.querySelector("button").setAttribute("aria-expanded","false");
+}
+});
+
+const isOpen = dropdown.classList.toggle("open");
+button.setAttribute("aria-expanded", String(isOpen));
+});
+});
+
+document.addEventListener("click", event => {
+dropdowns.forEach(dropdown => {
+if(!dropdown.contains(event.target)){
+dropdown.classList.remove("open");
+dropdown.querySelector("button").setAttribute("aria-expanded","false");
+}
+});
+});
+
+/* ===== TRADUCTION DE LA PAGE ===== */
+const languageNames = {
+fr:"Langue 🌐 ▼",
+en:"Language 🌐 ▼",
+ar:"اللغة 🌐 ▼"
+};
+
+function changeLanguage(language){
+document.documentElement.lang = language;
+document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+
+document.querySelectorAll("[data-" + language + "]").forEach(element => {
+const translation = element.getAttribute("data-" + language);
+if(translation !== null){
+element.textContent = translation;
+}
+});
+
+document.getElementById("languageButton").textContent = languageNames[language];
+
+/* Actualiser le champ de recherche */
+const searchInput = document.getElementById("searchInput");
+const placeholders = {
+fr:"Rechercher dans la page...",
+en:"Search this page...",
+ar:"ابحث في الصفحة..."
+};
+searchInput.placeholder = placeholders[language];
+searchInput.setAttribute("aria-label", placeholders[language]);
+
+/* Fermer les menus après sélection */
+dropdowns.forEach(dropdown => {
+dropdown.classList.remove("open");
+dropdown.querySelector("button").setAttribute("aria-expanded","false");
+});
+
+/* Retirer les anciens surlignages avant la nouvelle langue */
+clearHighlights();
+}
+
+document.querySelectorAll("[data-language]").forEach(button => {
+button.addEventListener("click", () => {
+changeLanguage(button.dataset.language);
+});
+});
+
+/* ===== RECHERCHE DE MOTS DANS LA PAGE ===== */
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+const clearSearchButton = document.getElementById("clearSearch");
+const searchStatus = document.getElementById("searchStatus");
+
+let searchMatches = [];
+let currentMatch = 0;
+
+function clearHighlights(){
+document.querySelectorAll("mark.search-highlight").forEach(mark => {
+const parent = mark.parentNode;
+parent.replaceChild(document.createTextNode(mark.textContent), mark);
+parent.normalize();
+});
+
+searchMatches = [];
+currentMatch = 0;
+searchStatus.textContent = "";
+}
+
+function runSearch(){
+clearHighlights();
+
+const query = searchInput.value.trim();
+if(!query) return;
+
+const content = document.getElementById("pageContent");
+const walker = document.createTreeWalker(
+document.body,
+NodeFilter.SHOW_TEXT,
+{
+acceptNode(node){
+if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+
+const parent = node.parentElement;
+if(!parent) return NodeFilter.FILTER_REJECT;
+
+if(parent.closest("script,style,mark,input,button,select,textarea")) {
+return NodeFilter.FILTER_REJECT;
+}
+
+return NodeFilter.FILTER_ACCEPT;
+}
+}
+);
+
+const textNodes = [];
+while(walker.nextNode()){
+textNodes.push(walker.currentNode);
+}
+
+const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const regex = new RegExp(escapedQuery, "gi");
+
+textNodes.forEach(node => {
+const text = node.nodeValue;
+regex.lastIndex = 0;
+
+if(!regex.test(text)){
+return;
+}
+
+regex.lastIndex = 0;
+const fragment = document.createDocumentFragment();
+let lastIndex = 0;
+let match;
+
+while((match = regex.exec(text)) !== null){
+fragment.appendChild(
+document.createTextNode(text.slice(lastIndex, match.index))
+);
+
+const mark = document.createElement("mark");
+mark.className = "search-highlight";
+mark.textContent = match[0];
+fragment.appendChild(mark);
+searchMatches.push(mark);
+
+lastIndex = match.index + match[0].length;
+
+if(match[0].length === 0) regex.lastIndex++;
+}
+
+fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+node.parentNode.replaceChild(fragment, node);
+});
+
+if(searchMatches.length === 0){
+searchStatus.textContent = "Aucun résultat trouvé.";
+return;
+}
+
+currentMatch = 0;
+showCurrentMatch();
+}
+
+function showCurrentMatch(){
+searchMatches.forEach(mark => mark.classList.remove("search-current"));
+
+const current = searchMatches[currentMatch];
+if(!current) return;
+
+current.classList.add("search-current");
+current.scrollIntoView({behavior:"smooth", block:"center"});
+
+searchStatus.textContent =
+(currentMatch + 1) + " / " + searchMatches.length + " résultat(s)";
+}
+
+searchButton.addEventListener("click", runSearch);
+
+searchInput.addEventListener("keydown", event => {
+if(event.key === "Enter"){
+event.preventDefault();
+
+if(searchMatches.length && searchInput.value.trim()){
+currentMatch = (currentMatch + 1) % searchMatches.length;
+showCurrentMatch();
+}else{
+runSearch();
+}
+}
+});
+
+clearSearchButton.addEventListener("click", () => {
+searchInput.value = "";
+clearHighlights();
+searchInput.focus();
+});
+</script>
 
 </body>
 </html>
