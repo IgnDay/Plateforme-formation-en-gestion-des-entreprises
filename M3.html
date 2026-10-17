@@ -1,241 +1,874 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Analyse financière </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay Analyse financière</title>
 
 <style>
 body{
-font-family:Arial;
-margin:0;
-background:#f4f6f9;
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f4f6f9;
+    color:#1e293b;
 }
 
 /* ===== HEADER ANIMÉ ===== */
 .topbar{
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:#0f766e;
-color:white;
-padding:10px 20px;
-position:sticky;
-top:0;
-z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    background:#0f766e;
+    color:white;
+    padding:10px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-font-size:20px;
-font-weight:bold;
+    font-size:20px;
+    font-weight:bold;
+    white-space:nowrap;
 }
 
 .nav{
-display:flex;
-gap:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.nav a{
-color:white;
-text-decoration:none;
-padding:6px 10px;
-border-radius:4px;
-transition:0.3s;
+.nav a,.nav button{
+    color:white;
+    text-decoration:none;
+    padding:8px 10px;
+    border-radius:4px;
+    transition:0.3s;
+    border:none;
+    background:transparent;
+    font-size:14px;
+    cursor:pointer;
+    font-family:inherit;
 }
 
-.nav a:hover{
-background:#0e7490;
-transform:translateY(-2px);
+.nav a:hover,.nav button:hover{
+    background:#0e7490;
+    transform:translateY(-2px);
 }
 
-/* Recherche */
+/* ===== LISTES DÉROULANTES ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:245px;
+    max-height:65vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,.18);
+    border-radius:6px;
+    padding:6px 0;
+    z-index:2000;
+}
+
+.dropdown-content a,
+.dropdown-content button{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    text-align:left;
+    color:#1e293b;
+    background:white;
+    padding:10px 14px;
+    text-decoration:none;
+    border:none;
+    border-radius:0;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover{
+    background:#ccfbf1;
+    color:#0f766e;
+    transform:none;
+}
+
+.dropdown.open .dropdown-content{
+    display:block;
+}
+
+/* ===== RECHERCHE ===== */
+.search-box{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
 .search-box input{
-padding:5px;
-border-radius:4px;
-border:none;
+    width:165px;
+    max-width:42vw;
+    padding:8px;
+    border-radius:4px;
+    border:none;
+    outline:none;
 }
 
-/* HEADER */
+.search-box button{
+    padding:8px 10px;
+    border:0;
+    border-radius:4px;
+    background:#134e4a;
+    color:white;
+    cursor:pointer;
+}
+
+.search-box button:hover{
+    background:#115e59;
+}
+
+#searchStatus{
+    font-size:12px;
+    color:white;
+    margin-top:4px;
+}
+
+/* ===== HEADER PRINCIPAL ===== */
 header{
-background:#0f766e;
-color:white;
-padding:20px;
-text-align:center;
+    background:#0f766e;
+    color:white;
+    padding:20px;
+    text-align:center;
 }
 
-/* MENU */
+header h1{
+    font-size:25px;
+    line-height:1.5;
+}
+
+header a{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 12px;
+    color:white;
+    border:1px solid white;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+header a:hover{
+    background:white;
+    color:#0f766e;
+}
+
+/* ===== CONTENU ===== */
 .menu{
-max-width:900px;
-margin:20px auto;
-padding:10px;
+    max-width:900px;
+    margin:20px auto;
+    padding:10px;
 }
 
 .section-title{
-background:#e0f2fe;
-padding:10px;
-font-weight:bold;
-margin-top:20px;
-border-left:6px solid #0f766e;
+    background:#e0f2fe;
+    padding:10px;
+    font-weight:bold;
+    margin-top:20px;
+    border-left:6px solid #0f766e;
 }
 
 .card{
-display:block;
-background:white;
-padding:12px;
-margin:8px 0;
-text-decoration:none;
-color:#1e293b;
-border-radius:6px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-transition:0.2s;
+    display:block;
+    background:white;
+    padding:12px;
+    margin:8px 0;
+    text-decoration:none;
+    color:#1e293b;
+    border-radius:6px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    transition:0.2s;
 }
 
 .card:hover{
-transform:scale(1.02);
-background:#f1f5f9;
+    transform:scale(1.02);
+    background:#f1f5f9;
 }
 
-.icon{
-display:inline-block;
-width:10px;
-height:10px;
-border-radius:50%;
-margin-right:8px;
+/* ===== RECHERCHE : RÉSULTATS ===== */
+mark.search-highlight{
+    background:#fde047;
+    color:#111827;
+    padding:2px;
+    border-radius:2px;
 }
 
-.red{background:#dc2626;}
-.blue{background:#2563eb;}
-.green{background:#16a34a;}
+mark.search-current{
+    background:#fb923c;
+    outline:2px solid #ea580c;
+}
 
 /* ===== FOOTER ===== */
 footer{
-background:#1e293b;
-color:white;
-padding:20px;
-margin-top:40px;
+    background:#1e293b;
+    color:white;
+    padding:20px;
+    margin-top:40px;
 }
 
 .footer-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:space-between;
-gap:20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:20px;
 }
 
 .footer-section{
-flex:1;
-min-width:200px;
+    flex:1;
+    min-width:200px;
 }
 
 .footer-section h3{
-margin-bottom:10px;
+    margin-bottom:10px;
 }
 
 .social a{
-display:inline-block;
-margin-right:10px;
-color:white;
-text-decoration:none;
-font-size:20px;
-transition:0.3s;
+    display:inline-block;
+    margin-right:10px;
+    margin-bottom:8px;
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    transition:0.3s;
 }
 
 .social a:hover{
-color:#38bdf8;
+    color:#38bdf8;
 }
 
-/* Responsive */
-@media(max-width:600px){
-.nav{flex-wrap:wrap;}
-.footer-container{flex-direction:column;}
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+
+    .topbar{
+        position:relative;
+        align-items:flex-start;
+    }
+
+    .nav{
+        width:100%;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .search-box input{
+        width:100%;
+        max-width:none;
+        box-sizing:border-box;
+    }
+
+    .dropdown-content{
+        position:absolute;
+        left:0;
+        min-width:220px;
+        max-width:85vw;
+    }
+
+    header h1{
+        font-size:20px;
+    }
+
+    .footer-container{
+        flex-direction:column;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== BARRE HAUT ===== -->
+<!-- ===== BARRE DE NAVIGATION ===== -->
 <div class="topbar">
-<div class="logo"> IgnDay</div>
 
-<div class="nav">
-<a href="#">Filières</a>
-<a href="#">Modules</a>
-<a href="#">Langue 🌐</a>
+    <div class="logo">IgnDay</div>
+
+    <div class="nav">
+
+        <!-- MENU DÉROULANT DES MODULES -->
+        <div class="dropdown" id="modulesDropdown">
+
+            <button type="button" id="modulesButton"
+                    aria-expanded="false">
+                Modules ▼
+            </button>
+
+            <div class="dropdown-content">
+
+                <a href="M1.html">M1 – Comptabilité générale</a>
+                <a href="M2.html">M2 – Comptabilité analytique</a>
+                <a href="M3.html">M3 – Analyse financière</a>
+                <a href="M4.html">M4 – Fiscalité</a>
+                <a href="M5.html">M5 – Mathématiques financières</a>
+                <a href="M6.html">M6 – Statistiques</a>
+                <a href="M7.html">M7 – Marketing</a>
+                <a href="M8.html">M8 – Comptabilité approfondie</a>
+                <a href="M9.html">M9 – Management</a>
+
+            </div>
+        </div>
+
+        <!-- MENU DÉROULANT DES LANGUES -->
+        <div class="dropdown" id="languageDropdown">
+
+            <button type="button" id="languageButton"
+                    aria-expanded="false" aria-haspopup="true">
+                Langue 🌐 ▼
+            </button>
+
+            <div class="dropdown-content">
+
+                <button type="button" data-language="fr">
+                    🇫🇷 Français
+                </button>
+
+                <button type="button" data-language="en">
+                    🇬🇧 English
+                </button>
+
+                <button type="button" data-language="ar">
+                    🇸🇦 العربية
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RECHERCHE DANS LA PAGE -->
+    <div class="search-box">
+
+        <div>
+            <input type="search" id="searchInput"
+                   placeholder="Rechercher dans la page..."
+                   aria-label="Rechercher dans la page">
+
+            <div id="searchStatus" aria-live="polite"></div>
+        </div>
+
+        <button type="button" id="searchButton"
+                aria-label="Lancer la recherche">🔍</button>
+
+        <button type="button" id="clearSearch"
+                aria-label="Effacer la recherche">✖</button>
+
+    </div>
+
 </div>
 
-<div class="search-box">
-<input type="text" placeholder="Rechercher...">
-</div>
-</div>
-
-<!-- HEADER -->
+<!-- ===== HEADER ===== -->
 <header>
-<h1>📘 Plateforme de formation et d'apprentissage interactif "IgnDay"</h1>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>IgnDay Analyse financière </title>
 
+    <h1
+        data-fr="📘 Plateforme de formation et d'apprentissage interactif « IgnDay »"
+        data-en="📘 IgnDay Interactive Learning and Training Platform"
+        data-ar="📘 منصة IgnDay للتكوين والتعلم التفاعلي">
 
+        📘 Plateforme de formation et d'apprentissage interactif "IgnDay"
 
-<br>
+    </h1>
 
-<a href="index.html">⬅ Retour Accueil </a>
+    <a href="index.html"
+       data-fr="⬅ Retour à l'accueil"
+       data-en="⬅ Back to Home"
+       data-ar="⬅ العودة إلى الصفحة الرئيسية">
+
+        ⬅ Retour à l'accueil
+
+    </a>
 
 </header>
 
-<!-- CONTENU -->
-<div class="menu">
-<div class="section-title">Formation en Analyse financière</div>
-<a href="P1M3.html" class="card sub">
-➡️ Partie 1 : Les concepts de base et la démarche du diagnostic financier </a>
-<a href="P2M3.html" class="card sub">
-➡️ Partie 2 : Analyse de l’activité et de la rentabilité
-</a>
-<a href="P3M3.html" class="card sub">
-➡️ Partie 3 : Analyse des équilibres financiers
+<!-- ===== CONTENU ===== -->
+<main class="menu" id="pageContent">
 
-</a>
-<a href="P4M3.html" class="card sub">
-➡️ Partie 4 : Analyse des flux de trésorerie </a>
-<a href="P5M3.html" class="card sub">
-➡️ Partie 5 : L’analyse par les Ratios </a>
+    <div class="section-title"
+         id="analyse-financiere"
+         data-fr="Formation en Analyse financière"
+         data-en="Financial Analysis Training"
+         data-ar="التكوين في التحليل المالي">
 
+        Formation en Analyse financière
 
- </div>
-    
+    </div>
+
+    <a href="P1M3.html" class="card sub"
+       data-fr="➡️ Partie 1 : Les concepts de base et la démarche du diagnostic financier"
+       data-en="➡️ Part 1: Basic Concepts and the Financial Diagnosis Approach"
+       data-ar="➡️ الجزء الأول: المفاهيم الأساسية ومنهجية التشخيص المالي">
+
+        ➡️ Partie 1 : Les concepts de base et la démarche du diagnostic financier
+
+    </a>
+
+    <a href="P2M3.html" class="card sub"
+       data-fr="➡️ Partie 2 : Analyse de l’activité et de la rentabilité"
+       data-en="➡️ Part 2: Analysis of Activity and Profitability"
+       data-ar="➡️ الجزء الثاني: تحليل النشاط والربحية">
+
+        ➡️ Partie 2 : Analyse de l’activité et de la rentabilité
+
+    </a>
+
+    <a href="P3M3.html" class="card sub"
+       data-fr="➡️ Partie 3 : Analyse des équilibres financiers"
+       data-en="➡️ Part 3: Analysis of Financial Equilibrium"
+       data-ar="➡️ الجزء الثالث: تحليل التوازنات المالية">
+
+        ➡️ Partie 3 : Analyse des équilibres financiers
+
+    </a>
+
+    <a href="P4M3.html" class="card sub"
+       data-fr="➡️ Partie 4 : Analyse des flux de trésorerie"
+       data-en="➡️ Part 4: Cash Flow Analysis"
+       data-ar="➡️ الجزء الرابع: تحليل تدفقات الخزينة">
+
+        ➡️ Partie 4 : Analyse des flux de trésorerie
+
+    </a>
+
+    <a href="P5M3.html" class="card sub"
+       data-fr="➡️ Partie 5 : L’analyse par les ratios"
+       data-en="➡️ Part 5: Ratio Analysis"
+       data-ar="➡️ الجزء الخامس: التحليل باستخدام النسب المالية">
+
+        ➡️ Partie 5 : L’analyse par les ratios
+
+    </a>
+
+</main>
+
 <!-- ===== FOOTER ===== -->
 <footer>
 
-<div class="footer-container">
+    <div class="footer-container">
 
-<div class="footer-section">
-<h3>Contact </h3>
-<p>📍 Adresse : Maroc</p>
-<p>📱 Téléphone : +212 00000000</p>
-</div>
+        <div class="footer-section">
 
-<div class="footer-section">
-<h3>🌐 Réseaux sociaux</h3>
-<div class="social">
-<a href="#">Facebook</a>
-<a href="#">Twitter</a>
-<a href="#">WhatsApp</a>
-<a href="#">Instagram</a>
-<a href="#">YouTube</a>
-  <a href="#">TikTok</a>
-</div>
-</div>
-<div class="footer-section">
-<h3>ℹ️ À propos</h3>
-<p>Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises </p>
-</div>
+            <h3 data-fr="Contact"
+                data-en="Contact"
+                data-ar="اتصل بنا">
+                Contact
+            </h3>
 
-</div>
+            <p data-fr="📍 Adresse : Maroc"
+               data-en="📍 Address: Morocco"
+               data-ar="📍 العنوان: المغرب">
+                📍 Adresse : Maroc
+            </p>
+
+            <p data-fr="📱 Téléphone : +212 00000000"
+               data-en="📱 Phone: +212 00000000"
+               data-ar="📱 الهاتف: +212 00000000">
+                📱 Téléphone : +212 00000000
+            </p>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3 data-fr="🌐 Réseaux sociaux"
+                data-en="🌐 Social Networks"
+                data-ar="🌐 شبكات التواصل الاجتماعي">
+                🌐 Réseaux sociaux
+            </h3>
+
+            <div class="social">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+                <a href="#">TikTok</a>
+            </div>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3 data-fr="ℹ️ À propos"
+                data-en="ℹ️ About"
+                data-ar="ℹ️ حول المنصة">
+                ℹ️ À propos
+            </h3>
+
+            <p
+                data-fr="Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises."
+                data-en="An interactive training and learning platform for vocational trainees, students and professionals in business management."
+                data-ar="منصة للتكوين والتعلم التفاعلي مخصصة للمتدربين في التكوين المهني والطلاب والمهنيين في مجال تدبير المقاولات.">
+
+                Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises.
+
+            </p>
+
+        </div>
+
+    </div>
 
 </footer>
 
+<script>
+
+/* ===== MENUS DÉROULANTS ===== */
+const dropdowns = document.querySelectorAll(".dropdown");
+
+dropdowns.forEach(dropdown => {
+
+    const button = dropdown.querySelector("button");
+
+    button.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        dropdowns.forEach(other => {
+
+            if(other !== dropdown){
+                other.classList.remove("open");
+                other.querySelector("button")
+                     .setAttribute("aria-expanded","false");
+            }
+
+        });
+
+        const isOpen = dropdown.classList.toggle("open");
+
+        button.setAttribute("aria-expanded", String(isOpen));
+
+    });
+
+});
+
+document.addEventListener("click", event => {
+
+    dropdowns.forEach(dropdown => {
+
+        if(!dropdown.contains(event.target)){
+            dropdown.classList.remove("open");
+
+            dropdown.querySelector("button")
+                    .setAttribute("aria-expanded","false");
+        }
+
+    });
+
+});
+
+/* ===== TRADUCTION DE LA PAGE ===== */
+const languageNames = {
+    fr:"Langue 🌐 ▼",
+    en:"Language 🌐 ▼",
+    ar:"اللغة 🌐 ▼"
+};
+
+function changeLanguage(language){
+
+    document.documentElement.lang = language;
+    document.documentElement.dir =
+        language === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-" + language + "]")
+    .forEach(element => {
+
+        const translation =
+            element.getAttribute("data-" + language);
+
+        if(translation !== null){
+            element.textContent = translation;
+        }
+
+    });
+
+    document.getElementById("languageButton").textContent =
+        languageNames[language];
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const placeholders = {
+        fr:"Rechercher dans la page...",
+        en:"Search this page...",
+        ar:"ابحث في الصفحة..."
+    };
+
+    searchInput.placeholder = placeholders[language];
+
+    searchInput.setAttribute(
+        "aria-label",
+        placeholders[language]
+    );
+
+    dropdowns.forEach(dropdown => {
+
+        dropdown.classList.remove("open");
+
+        dropdown.querySelector("button")
+                .setAttribute("aria-expanded","false");
+
+    });
+
+    clearHighlights();
+
+}
+
+document.querySelectorAll("[data-language]").forEach(button => {
+
+    button.addEventListener("click", () => {
+        changeLanguage(button.dataset.language);
+    });
+
+});
+
+/* ===== RECHERCHE DE MOTS DANS LA PAGE ===== */
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+const clearSearchButton = document.getElementById("clearSearch");
+const searchStatus = document.getElementById("searchStatus");
+
+let searchMatches = [];
+let currentMatch = 0;
+
+function clearHighlights(){
+
+    document.querySelectorAll("mark.search-highlight")
+    .forEach(mark => {
+
+        const parent = mark.parentNode;
+
+        parent.replaceChild(
+            document.createTextNode(mark.textContent),
+            mark
+        );
+
+        parent.normalize();
+
+    });
+
+    searchMatches = [];
+    currentMatch = 0;
+    searchStatus.textContent = "";
+
+}
+
+function runSearch(){
+
+    clearHighlights();
+
+    const query = searchInput.value.trim();
+
+    if(!query) return;
+
+    const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        {
+            acceptNode(node){
+
+                if(!node.nodeValue.trim()){
+                    return NodeFilter.FILTER_REJECT;
+                }
+
+                const parent = node.parentElement;
+
+                if(!parent){
+                    return NodeFilter.FILTER_REJECT;
+                }
+
+                if(parent.closest(
+                    "script,style,mark,input,button,select,textarea"
+                )){
+                    return NodeFilter.FILTER_REJECT;
+                }
+
+                return NodeFilter.FILTER_ACCEPT;
+
+            }
+        }
+    );
+
+    const textNodes = [];
+
+    while(walker.nextNode()){
+        textNodes.push(walker.currentNode);
+    }
+
+    const escapedQuery = query.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+    );
+
+    const regex = new RegExp(escapedQuery, "gi");
+
+    textNodes.forEach(node => {
+
+        const text = node.nodeValue;
+
+        regex.lastIndex = 0;
+
+        if(!regex.test(text)){
+            return;
+        }
+
+        regex.lastIndex = 0;
+
+        const fragment = document.createDocumentFragment();
+
+        let lastIndex = 0;
+        let match;
+
+        while((match = regex.exec(text)) !== null){
+
+            fragment.appendChild(
+                document.createTextNode(
+                    text.slice(lastIndex, match.index)
+                )
+            );
+
+            const mark = document.createElement("mark");
+
+            mark.className = "search-highlight";
+            mark.textContent = match[0];
+
+            fragment.appendChild(mark);
+            searchMatches.push(mark);
+
+            lastIndex = match.index + match[0].length;
+
+            if(match[0].length === 0){
+                regex.lastIndex++;
+            }
+
+        }
+
+        fragment.appendChild(
+            document.createTextNode(text.slice(lastIndex))
+        );
+
+        node.parentNode.replaceChild(fragment, node);
+
+    });
+
+    if(searchMatches.length === 0){
+
+        searchStatus.textContent =
+            languageStatusNoResults();
+
+        return;
+
+    }
+
+    currentMatch = 0;
+    showCurrentMatch();
+
+}
+
+function languageStatusNoResults(){
+
+    const language = document.documentElement.lang;
+
+    if(language === "en"){
+        return "No results found.";
+    }
+
+    if(language === "ar"){
+        return "لم يتم العثور على نتائج.";
+    }
+
+    return "Aucun résultat trouvé.";
+
+}
+
+function showCurrentMatch(){
+
+    searchMatches.forEach(mark => {
+        mark.classList.remove("search-current");
+    });
+
+    const current = searchMatches[currentMatch];
+
+    if(!current) return;
+
+    current.classList.add("search-current");
+
+    current.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+    const language = document.documentElement.lang;
+
+    if(language === "en"){
+        searchStatus.textContent =
+            (currentMatch + 1) + " / " +
+            searchMatches.length + " result(s)";
+    }else if(language === "ar"){
+        searchStatus.textContent =
+            (currentMatch + 1) + " / " +
+            searchMatches.length + " نتيجة";
+    }else{
+        searchStatus.textContent =
+            (currentMatch + 1) + " / " +
+            searchMatches.length + " résultat(s)";
+    }
+
+}
+
+searchButton.addEventListener("click", runSearch);
+
+searchInput.addEventListener("keydown", event => {
+
+    if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        if(searchMatches.length && searchInput.value.trim()){
+
+            currentMatch =
+                (currentMatch + 1) % searchMatches.length;
+
+            showCurrentMatch();
+
+        }else{
+
+            runSearch();
+
+        }
+
+    }
+
+});
+
+clearSearchButton.addEventListener("click", () => {
+
+    searchInput.value = "";
+
+    clearHighlights();
+
+    searchInput.focus();
+
+});
+
+</script>
 
 </body>
 </html>
+
