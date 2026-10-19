@@ -1,239 +1,566 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
+
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>IgnDay Analyse financière</title>
 
 <style>
-body{
-font-family:Arial;
-margin:0;
-background:#f4f6f9;
+/* ===== STYLE GÉNÉRAL ===== */
+*{
+    box-sizing:border-box;
 }
 
-/* ===== HEADER ANIMÉ ===== */
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f4f6f9;
+    color:#1e293b;
+}
+
+/* ===== BARRE DE NAVIGATION ===== */
 .topbar{
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:#0f766e;
-color:white;
-padding:10px 20px;
-position:sticky;
-top:0;
-z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    background:#0f766e;
+    color:white;
+    padding:10px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-font-size:20px;
-font-weight:bold;
+    font-size:20px;
+    font-weight:bold;
+    white-space:nowrap;
 }
 
 .nav{
-display:flex;
-gap:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.nav a{
-color:white;
-text-decoration:none;
-padding:6px 10px;
-border-radius:4px;
-transition:0.3s;
+.nav button{
+    color:white;
+    padding:8px 10px;
+    border-radius:4px;
+    transition:0.3s;
+    border:none;
+    background:transparent;
+    font-size:14px;
+    cursor:pointer;
+    font-family:inherit;
 }
 
-.nav a:hover{
-background:#0e7490;
-transform:translateY(-2px);
+.nav button:hover,
+.nav button:focus-visible{
+    background:#0e7490;
+    transform:translateY(-2px);
+    outline:none;
 }
 
-/* Recherche */
-.search-box input{
-padding:5px;
-border-radius:4px;
-border:none;
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
 }
 
-/* HEADER */
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:280px;
+    max-width:85vw;
+    max-height:65vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,.18);
+    border-radius:6px;
+    padding:6px 0;
+    z-index:2000;
+}
+
+.dropdown-content a,
+.dropdown-content button{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    text-align:left;
+    color:#1e293b;
+    background:white;
+    padding:10px 14px;
+    text-decoration:none;
+    border:none;
+    border-radius:0;
+    font-size:14px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover{
+    background:#ccfbf1;
+    color:#0f766e;
+    transform:none;
+}
+
+.dropdown.open .dropdown-content{
+    display:block;
+}
+
+/* ===== EN-TÊTE PRINCIPAL ===== */
 header{
-background:#0f766e;
-color:white;
-padding:20px;
-text-align:center;
+    background:#0f766e;
+    color:white;
+    padding:20px;
+    text-align:center;
 }
 
-/* MENU */
+header h1{
+    font-size:25px;
+    line-height:1.5;
+    margin:0 0 15px;
+}
+
+header a{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 12px;
+    color:white;
+    border:1px solid white;
+    border-radius:5px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+header a:hover{
+    background:white;
+    color:#0f766e;
+}
+
+/* ===== CONTENU ===== */
 .menu{
-max-width:900px;
-margin:20px auto;
-padding:10px;
+    max-width:900px;
+    margin:20px auto;
+    padding:10px;
 }
 
 .section-title{
-background:#e0f2fe;
-padding:10px;
-font-weight:bold;
-margin-top:20px;
-border-left:6px solid #0f766e;
+    background:#e0f2fe;
+    padding:12px;
+    font-weight:bold;
+    margin-top:20px;
+    border-left:6px solid #0f766e;
+    border-radius:3px;
+    line-height:1.6;
 }
 
 .card{
-display:block;
-background:white;
-padding:12px;
-margin:8px 0;
-text-decoration:none;
-color:#1e293b;
-border-radius:6px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-transition:0.2s;
+    display:block;
+    background:white;
+    padding:14px;
+    margin:10px 0;
+    text-decoration:none;
+    color:#1e293b;
+    border-radius:6px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    transition:0.2s;
 }
 
 .card:hover{
-transform:scale(1.02);
-background:#f1f5f9;
+    transform:translateY(-2px);
+    background:#f1f5f9;
+    color:#0f766e;
 }
 
-.icon{
-display:inline-block;
-width:10px;
-height:10px;
-border-radius:50%;
-margin-right:8px;
-}
-
-.red{background:#dc2626;}
-.blue{background:#2563eb;}
-.green{background:#16a34a;}
-
-/* ===== FOOTER ===== */
+/* ===== PIED DE PAGE ===== */
 footer{
-background:#1e293b;
-color:white;
-padding:20px;
-margin-top:40px;
+    background:#1e293b;
+    color:white;
+    padding:20px;
+    margin-top:40px;
 }
 
 .footer-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:space-between;
-gap:20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:20px;
 }
 
 .footer-section{
-flex:1;
-min-width:200px;
+    flex:1;
+    min-width:200px;
 }
 
 .footer-section h3{
-margin-bottom:10px;
+    margin-bottom:10px;
+}
+
+.footer-section p{
+    line-height:1.6;
 }
 
 .social a{
-display:inline-block;
-margin-right:10px;
-color:white;
-text-decoration:none;
-font-size:20px;
-transition:0.3s;
+    display:inline-block;
+    margin-right:10px;
+    margin-bottom:8px;
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    transition:0.3s;
 }
 
 .social a:hover{
-color:#38bdf8;
+    color:#38bdf8;
 }
 
-/* Responsive */
-@media(max-width:600px){
-.nav{flex-wrap:wrap;}
-.footer-container{flex-direction:column;}
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+    .topbar{
+        position:relative;
+        align-items:flex-start;
+    }
+
+    .nav{
+        width:100%;
+    }
+
+    .dropdown-content{
+        min-width:230px;
+        max-width:85vw;
+    }
+
+    header h1{
+        font-size:20px;
+    }
+
+    .footer-container{
+        flex-direction:column;
+    }
+}
+
+@media(max-width:400px){
+    .topbar{
+        padding:10px;
+    }
+
+    .nav{
+        gap:4px;
+    }
+
+    .nav button{
+        padding:8px 6px;
+        font-size:12px;
+    }
+
+    .menu{
+        padding:10px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== BARRE HAUT ===== -->
+<!-- ===== BARRE DE NAVIGATION ===== -->
 <div class="topbar">
-<div class="logo"> IgnDay</div>
 
-<div class="nav">
-<a href="#">Filières</a>
-<a href="#">Modules</a>
-<a href="#">Parties </a>
-<a href="#">Langue 🌐</a>
+    <div class="logo">IgnDay</div>
+
+    <nav class="nav">
+
+        <!-- MENU DES PARTIES DU MODULE M3 -->
+        <div class="dropdown">
+
+            <button type="button" aria-expanded="false">
+                M3 - Analyse financière ▼
+            </button>
+
+            <div class="dropdown-content">
+
+                <a href="P1M3.html">
+                    P1 – Les concepts de base et la démarche du diagnostic financier
+                </a>
+
+                                <a href="P2M3.html">
+                    P2 – L’analyse de l’activité et de la rentabilité
+                </a>
+<a href="P3M3.html">
+                    P3 – L’analyse des équilibres financiers
+                </a>
+<a href="P4M3.html">
+                    P4 – L’analyse des flux de trésorerie
+                </a>
+<a href="P5M3.html">
+                    P5 – L’analyse par les ratios
+                </a>
+
+            </div>
+        </div>
+
+        <!-- MENU DES LANGUES -->
+        <div class="dropdown">
+
+            <button type="button"
+                    data-fr="Langue 🌐 ▼"
+                    data-en="Language 🌐 ▼"
+                    data-ar="اللغة 🌐 ▼"
+                    aria-expanded="false">
+                Langue 🌐 ▼
+            </button>
+
+            <div class="dropdown-content">
+
+                <button type="button" data-language="fr">
+                    🇫🇷 Français (FR)
+                </button>
+
+                <button type="button" data-language="en">
+                    🇬🇧 English (GB)
+                </button>
+
+                <button type="button" data-language="ar">
+                    🇸🇦 العربية (SA)
+                </button>
+
+            </div>
+        </div>
+
+    </nav>
+
 </div>
 
-<div class="search-box">
-<input type="text" placeholder="Rechercher...">
-</div>
-</div>
-
-<!-- HEADER -->
+<!-- ===== EN-TÊTE PRINCIPAL ===== -->
 <header>
-<h1>📘 Plateforme de formation et d'apprentissage interactif "IgnDay"</h1>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>IgnDay Analyse financière</title>
 
+    <h1
+        data-fr="📘 Plateforme de formation et d'apprentissage interactif « IgnDay »"
+        data-en="📘 IgnDay Interactive Learning and Training Platform"
+        data-ar="📘 منصة IgnDay للتكوين والتعلم التفاعلي">
 
+        📘 Plateforme de formation et d'apprentissage interactif « IgnDay »
+    </h1>
 
-<br>
-
-<a href="M3.html">⬅ Retour</a>
+    <a href="M3.html"
+       data-fr="⬅ Retour"
+       data-en="⬅ Back"
+       data-ar="⬅ رجوع">
+        ⬅ Retour
+    </a>
 
 </header>
 
-<!-- CONTENU -->
-<div class="menu">
-<div class="section-title">Formation en Analyse financière/Analyse de l’activité et de la rentabilité</div>
-  
+<!-- ===== CONTENU ===== -->
+<main class="menu">
 
-<a href="C1P2M3.html" class="card sub">
-➡️ Résumés des thèmes
-</a>
-<a href="C2P2M3.html" class="card sub">
-➡️Formulaires interactifs
- </a>
-<a href="C3P2M3.html" class="card sub">
-➡️Exercices corrigés
- </a>
-</div>
-   
-<!-- ===== FOOTER ===== -->
+    <div class="section-title"
+         data-fr="Formation en Analyse financière / Analyse de l’activité et de la rentabilité"
+         data-en="Financial Analysis Training / Activity and Profitability Analysis"
+         data-ar="التكوين في التحليل المالي / تحليل النشاط والربحية">
+
+        Formation en Analyse financière /
+        Analyse de l’activité et de la rentabilité
+    </div>
+
+    <a href="C1P2M3.html"
+       class="card"
+       data-fr="➡️ Résumés des thèmes"
+       data-en="➡️ Topic Summaries"
+       data-ar="➡️ ملخصات المحاور">
+
+        ➡️ Résumés des thèmes
+    </a>
+
+    <a href="C2P2M3.html"
+       class="card"
+       data-fr="➡️ Formulaires interactifs"
+       data-en="➡️ Interactive Forms"
+       data-ar="➡️ استمارات تفاعلية">
+
+        ➡️ Formulaires interactifs
+    </a>
+
+    <a href="C3P2M3.html"
+       class="card"
+       data-fr="➡️ Exercices corrigés"
+       data-en="➡️ Solved Exercises"
+       data-ar="➡️ تمارين مصححة">
+
+        ➡️ Exercices corrigés
+    </a>
+
+</main>
+
+<!-- ===== PIED DE PAGE ===== -->
 <footer>
 
-<div class="footer-container">
+    <div class="footer-container">
 
-<div class="footer-section">
-<h3>Contact </h3>
-<p>📍 Adresse : Maroc</p>
-<p>📱 Téléphone : +212 00000000</p>
-</div>
+        <div class="footer-section">
 
-<div class="footer-section">
-<h3>🌐 Réseaux sociaux</h3>
-<div class="social">
-<a href="#">Facebook</a>
-<a href="#">Twitter</a>
-<a href="#">WhatsApp</a>
-<a href="#">Instagram</a>
-<a href="#">YouTube</a>
-  <a href="#">TikTok</a>
-</div>
-</div>
+            <h3 data-fr="Contact"
+                data-en="Contact"
+                data-ar="اتصل بنا">
+                Contact
+            </h3>
 
-<div class="footer-section">
-<h3>ℹ️ À propos</h3>
-<p>Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises </p>
-</div>
+            <p data-fr="📍 Adresse : Maroc"
+               data-en="📍 Address: Morocco"
+               data-ar="📍 العنوان: المغرب">
+                📍 Adresse : Maroc
+            </p>
 
-</div>
+            <p data-fr="📱 Téléphone : +212 00000000"
+               data-en="📱 Phone: +212 00000000"
+               data-ar="📱 الهاتف: +212 00000000">
+                📱 Téléphone : +212 00000000
+            </p>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3 data-fr="🌐 Réseaux sociaux"
+                data-en="🌐 Social Networks"
+                data-ar="🌐 شبكات التواصل الاجتماعي">
+                🌐 Réseaux sociaux
+            </h3>
+
+            <div class="social">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+                <a href="#">TikTok</a>
+            </div>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3 data-fr="ℹ️ À propos"
+                data-en="ℹ️ About"
+                data-ar="ℹ️ حول المنصة">
+                ℹ️ À propos
+            </h3>
+
+            <p
+                data-fr="Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de gestion des entreprises."
+                data-en="An interactive training and learning platform dedicated to vocational trainees, students and professionals in business management."
+                data-ar="منصة للتكوين والتعلم التفاعلي مخصصة للمتدربين في التكوين المهني والطلاب والمهنيين في مجال تدبير المقاولات.">
+
+                Plateforme de formation et d'apprentissage interactif
+                dédiée aux stagiaires en formation professionnelle,
+                aux étudiants ou aux professionnels dans le domaine
+                de gestion des entreprises.
+            </p>
+
+        </div>
+
+    </div>
 
 </footer>
 
+<script>
+/* ===== GESTION DES MENUS DÉROULANTS ===== */
+const dropdowns = document.querySelectorAll(".dropdown");
+
+dropdowns.forEach(dropdown => {
+
+    const button = dropdown.querySelector(":scope > button");
+
+    button.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        dropdowns.forEach(other => {
+
+            if(other !== dropdown){
+                other.classList.remove("open");
+
+                other.querySelector(":scope > button")
+                    .setAttribute("aria-expanded", "false");
+            }
+
+        });
+
+        const isOpen = dropdown.classList.toggle("open");
+
+        button.setAttribute("aria-expanded", String(isOpen));
+
+    });
+
+});
+
+document.addEventListener("click", event => {
+
+    dropdowns.forEach(dropdown => {
+
+        if(!dropdown.contains(event.target)){
+
+            dropdown.classList.remove("open");
+
+            dropdown.querySelector(":scope > button")
+                .setAttribute("aria-expanded", "false");
+        }
+
+    });
+
+});
+
+/* ===== TRADUCTION FR / EN / AR ===== */
+function changeLanguage(language){
+
+    document.documentElement.lang = language;
+
+    document.documentElement.dir =
+        language === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-" + language + "]")
+        .forEach(element => {
+
+            const translation =
+                element.getAttribute("data-" + language);
+
+            if(translation !== null){
+                element.textContent = translation;
+            }
+
+        });
+
+    /* Fermer les menus après le choix */
+    dropdowns.forEach(dropdown => {
+
+        dropdown.classList.remove("open");
+
+        dropdown.querySelector(":scope > button")
+            .setAttribute("aria-expanded", "false");
+
+    });
+
+}
+
+/* ===== CHOIX DE LA LANGUE ===== */
+document.querySelectorAll("[data-language]").forEach(button => {
+
+    button.addEventListener("click", () => {
+        changeLanguage(button.dataset.language);
+    });
+
+});
+</script>
 
 </body>
 </html>
+
