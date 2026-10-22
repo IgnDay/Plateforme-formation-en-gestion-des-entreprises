@@ -1,409 +1,590 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale</title>
 
 <style>
-
-body{
-    font-family: Arial;
-    margin:0;
-    background:#f4f6f9;
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 10px #0003}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px}
+.brand small{display:block;font-size:10px;letter-spacing:1px;font-weight:normal;margin-top:4px}
+header h1{padding:20px 10px;margin:0}
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
+.site-menu>a,.site-menu summary{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;cursor:pointer;font-size:14px;list-style:none}
+.site-menu summary::-webkit-details-marker{display:none}
+.site-menu>a:hover,.site-menu summary:hover{background:#ffffff2b}
+.menu-dropdown{position:relative}
+.dropdown-content{position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;z-index:1000;padding:7px;border-radius:8px;background:white;box-shadow:0 6px 18px #0003}
+.dropdown-content a{display:block;padding:10px;color:#243447;text-decoration:none;border-radius:5px;font-size:14px}
+.dropdown-content a:hover{color:white;background:#0f766e}
+.language-box{display:flex;align-items:center;gap:8px;font-size:13px;white-space:nowrap}
+.language-box select{border:1px solid #ddd;border-radius:6px;padding:9px;background:white;color:#243447;font-size:14px}
+nav{background:#34495e;padding:10px;text-align:center}
+nav button,#quizForm button{margin:5px;padding:12px 18px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:15px;transition:.3s}
+nav button:hover,#quizForm button:hover{background:#019875;transform:translateY(-2px)}
+.btnActive{background:#0984e3!important;transform:scale(1.04);box-shadow:0 3px 10px #0003}
+section{display:none;padding:30px;margin:20px}
+section.active{display:block}
+.animationSection{animation:apparition .5s ease;background:white;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px #0002}
+@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+h2{color:#2c3e50}h3{color:#00b894}
+table{width:100%;border-collapse:collapse;background:white;margin-top:20px}
+td{border:1px solid #ccc;padding:10px}
+.titre{text-align:center;font-size:24px;font-weight:bold}
+.bold{font-weight:bold}.center{text-align:center}.right{text-align:right}.header{background:#dfe6e9}
+tr:hover td{background:#f1f7ff}
+.q{background:#f8fafc;padding:15px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+.q p{font-weight:bold}
+#resultat{padding:10px 0}
+footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}
+footer a{color:#00ffcc;text-decoration:none}
+.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
+[dir="rtl"] .animationSection{border-left:0;border-right:8px solid #00b894}
+[dir="rtl"] .dropdown-content{left:auto;right:0}
+@media(max-width:760px){
+.brandbar{justify-content:center;padding:12px}
+.site-menu{width:100%}
+.site-menu>a,.site-menu summary{padding:9px}
+.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}
+.language-box{width:100%;justify-content:center;flex-wrap:wrap}
+section{padding:18px;margin:12px}
+nav button{padding:10px;font-size:14px}
 }
 
-/* HEADER */
-header{
-    background:#2c3e50;
-    color:white;
-    padding:10px;
-    text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-/* MENU */
-nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
+.dropdown button {
+    padding: 10px 14px;
+    background: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    transition:0.3s;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    border-radius: 6px;
+    z-index: 1000;
 }
 
-/* Hover bouton */
-nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
+.dropdown-content a {
+    display: block;
+    padding: 11px 14px;
+    color: #1e293b;
+    text-decoration: none;
+text-align: left;
+
 }
 
-/* Bouton actif */
-.btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+.dropdown-content a:hover {
+    background: #0f766e;
+    color: white;
 }
-
-/* SECTIONS */
-section{
-    display:none;
-    padding:30px;
-    margin:20px;
-}
-
-/* Section visible */
-.active{
-    display:block;
-}
-
-/* Animation section */
-.animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
-}
-
-/* Animation */
-@keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* TITRES */
-h2{
-    color:#2c3e50;
-}
-
-h3{
-    color:#00b894;
-}
-
-/* TABLEAUX */
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-td{
-    border:1px solid #ccc;
-    padding:10px;
-}
-
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
-    background:#dfe6e9;
-}
-
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:15px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-}
-
-footer a{
-    color:#00ffcc;
-    text-decoration:none;
-}
-
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-}
-
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>Notion de la Comptabilité Générale</h1>
+<div class="brandbar">
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay </span>
+</a>
+
+<div class="site-menu">
+
+
+<!-- ===== MENU DÉROULANT : MODULE ET PARTIE ===== -->
+     <a href="index.html"
+       data-fr="Accueil " 
+       data-en="Welcome"
+       data-ar="مرحبا">
+
+        Accueil
+</a>
+      <div class="dropdown" id="modulesDropdown">
+    <button type="button" id="modulesButton"
+            aria-expanded="false" onclick="toggleDropdown(this)">
+        Modules ▼
+    </button>
+
+    <div class="dropdown-content">
+
+        <a href="M1.html">M1 – Comptabilité générale</a>
+        <a href="M2.html">M2 – Comptabilité analytique </a>
+        <a href="M3.html">M3 – Analyse financière</a>
+        <a href="M4.html">M4 – Fiscalité </a>
+        <a href="M5.html">M5 – Mathématiques financières </a>
+        <a href="M6.html">M6 – Statistiques </a>
+        <a href="M7.html">M7 – Marketing </a>
+        <a href="M8.html">M8 – Comptabilité approfondie </a>
+        <a href="M9.html">M9 – Management </a>
+
+    </div>
+</div>
+<div class="dropdown">
+
+            <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+                M1 - Comptabilité Générale ▼
+            </button>
+
+            <div class="dropdown-content">
+
+                <a href="P1M1.html">
+                    P1 – Concepts de base
+                </a>
+
+                <a href="P2M1.html">
+                    P2 – Opérations courantes
+                </a>
+
+                <a href="P3M1.html">
+                    P3 – Travaux de fin d’exercice
+                </a>
+
+                
+
+            </div>
+        </div>
+
+   <div class="dropdown">
+
+            <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+                P1 – Concepts de base▼
+            </button>
+
+            <div class="dropdown-content">
+
+                <a href="C1P1M1.html">
+                    ► Résumés des thèmes
+                </a>
+
+                <a href="C2P1M1.html">
+                    ► Formulaires interactifs
+                </a>
+
+                <a href="C3P1M1.html">
+                    ► Exercices corrigés
+                </a>
+
+            </div>
+        </div>
+
+<div class="dropdown">
+
+    <button type="button"
+            aria-expanded="false"
+            onclick="toggleDropdown(this)">
+        T1- Notion de la comptabilité générale ▼
+    </button>
+
+    <div class="dropdown-content">
+        <a href="T1C1P1M1.html">
+T1- Notion de la comptabilité générale 
+</a>
+
+<a href="T2C1P1M1">
+T2- Le bilan comptable
+</a>
+
+<a href="T3C1P1M1">
+T3- L’analyse comptable des opérations
+</a>
+
+<a href="T4C1P1M1">
+T4- Notion de compte
+</a>
+<a href="T5C1P1M1">
+T5- Le compte des produits et charges
+</a>
+<a href="T6C1P1M1">
+T6- Le cadre comptable marocain
+</a>
+<a href="T7C1P1M1">
+T7- Le virement comptable
+</a>
+<a href="T8C1P1M1">
+T8- L’organisation comptable
+</a>
+<a href="T9C1P1M1">
+T9- Le journal comptable
+</a>
+<a href="T10C1P1M1">
+T10- Le grand livre 
+</a>
+<a href="T11C1P1M1">
+T11- La balance 
+</a>
+
+    </div>
+</div>
+<a href="C1P1M1.html">
+
+        ⬅ Retour
+
+    </a>
+
+</div>
+
+
+
+<script>
+function toggleDropdown(button) {
+    const menu = button.nextElementSibling;
+    const isOpen = button.getAttribute("aria-expanded") === "true";
+
+    button.setAttribute("aria-expanded", String(!isOpen));
+    menu.style.display = isOpen ? "none" : "block";
+}
+
+/* Fermer la liste lorsqu'on clique à l'extérieur */
+document.addEventListener("click", function(event) {
+    document.querySelectorAll(".dropdown").forEach(function(dropdown) {
+        if (!dropdown.contains(event.target)) {
+            const button = dropdown.querySelector("button");
+            const menu = dropdown.querySelector(".dropdown-content");
+
+            if (button && menu) {
+                button.setAttribute("aria-expanded", "false");
+                menu.style.display = "none";
+            }
+        }
+    });
+});
+</script>
+<div class="language-box">
+<label for="languageSelect" data-i18n="language">Langue :</label>
+<select id="languageSelect" onchange="changeLanguage(this.value)">
+<option value="fr">Français (FR)</option>
+<option value="en">English (GB)</option>
+<option value="ar">العربية (SA)</option>
+</select>
+</div>
+</div>
+
+<h1 data-i18n="pageTitle">Thème 1 : Notion de la Comptabilité Générale</h1>
+
+
 </header>
 
 <nav>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('types')">Types</button>
-    <button onclick="showSection('role')">Rôle</button>
-    <button onclick="showSection('utilite')">Utilité</button>
-    <button onclick="showSection('obligation')">Obligation tenue de la comptabilité</button>
-    <button onclick="showSection('sources')">Sources</button>
-    <button onclick="showSection('regles')">Obligations de l’entreprise</button>
-    <button onclick="showSection('EE')">Exercice d'évaluation</button>
+<button onclick="showSection('def',this)" data-i18n="definition">Définition</button>
+<button onclick="showSection('types',this)" data-i18n="types">Types</button>
+<button onclick="showSection('role',this)" data-i18n="role">Rôle</button>
+<button onclick="showSection('utilite',this)" data-i18n="utility">Utilité</button>
+<button onclick="showSection('obligation',this)" data-i18n="obligation">Obligation de tenue</button>
+<button onclick="showSection('sources',this)" data-i18n="sources">Sources</button>
+<button onclick="showSection('regles',this)" data-i18n="rules">Obligations de l’entreprise</button>
+<button onclick="showSection('EE',this)" data-i18n="assessment">Exercice d’évaluation</button>
 </nav>
 
-<section id="def" class="active">
- <h2>📘 Définition</h2>
-<p>
-La comptabilité générale est une technique qui permet 
-d’enregistrer toutes les opérations financières de l’entreprise 
-durant une période appelée exercice comptable.
-</p>
+<section id="def" class="active animationSection">
+<h2 data-i18n="defTitle">📘 Définition</h2>
+<p data-i18n="defText">La comptabilité générale est une technique qui permet d’enregistrer toutes les opérations financières de l’entreprise durant une période appelée exercice comptable.</p>
 </section>
 
 <section id="types">
-    <h2>📊 Types de comptabilité</h2>
-    <ul>
-        <li><b>Comptabilité nationale :</b> analyse de l’économie globale</li>
-        <li><b>Comptabilité publique :</b> opérations de l’État</li>
-        <li><b>Comptabilité des entreprises :</b>
-            <ul>
-                <li>Comptabilité générale</li>
-                <li>Comptabilité analytique</li>
-                <li>Comptabilité des sociétés</li>
-            </ul>
-        </li>
-    </ul>
+<h2 data-i18n="typesTitle">📊 Types de comptabilité</h2>
+<ul>
+<li><b data-i18n="national">Comptabilité nationale :</b> <span data-i18n="nationalText">analyse de l’économie globale</span></li>
+<li><b data-i18n="public">Comptabilité publique :</b> <span data-i18n="publicText">opérations de l’État</span></li>
+<li><b data-i18n="business">Comptabilité des entreprises :</b>
+<ul>
+<li data-i18n="general">Comptabilité générale</li>
+<li data-i18n="analytical">Comptabilité analytique</li>
+<li data-i18n="corporate">Comptabilité des sociétés</li>
+</ul>
+</li>
+</ul>
 </section>
 
 <section id="role">
-    <h2>🎯 Rôle</h2>
-    <ul>
-        <li>Instrument d’information financière</li>
-        <li>Outil de gestion</li>
-        <li>Moyen de preuve juridique</li>
-    </ul>
+<h2 data-i18n="roleTitle">🎯 Rôle</h2>
+<ul>
+<li data-i18n="role1">Instrument d’information financière</li>
+<li data-i18n="role2">Outil de gestion</li>
+<li data-i18n="role3">Moyen de preuve juridique</li>
+</ul>
 </section>
 
 <section id="utilite">
-    <h2>💡 Utilité</h2>
-    <ul>
-        <li>Déterminer le résultat (bénéfice ou perte)</li>
-        <li>Aider à la prise de décision</li>
-        <li>Informer :</li>
-        <ul>
-            <li>Dirigeants</li>
-            <li>État</li>
-            <li>Partenaires</li>
-            <li>Créanciers</li>
-        </ul>
-    </ul>
+<h2 data-i18n="utilityTitle">💡 Utilité</h2>
+<ul>
+<li data-i18n="utility1">Déterminer le résultat (bénéfice ou perte)</li>
+<li data-i18n="utility2">Aider à la prise de décision</li>
+<li><span data-i18n="inform">Informer :</span>
+<ul>
+<li data-i18n="managers">Dirigeants</li>
+<li data-i18n="state">État</li>
+<li data-i18n="partners">Partenaires</li>
+<li data-i18n="creditors">Créanciers</li>
+</ul>
+</li>
+</ul>
 </section>
 
 <section id="obligation">
-    <h2>⚖️ Caractère obligatoire</h2>
-    <p>
-        Toute entreprise doit tenir une comptabilité selon la loi 9-88 
-        et le code de commerce.
-    </p>
-    <p>
-        Elle doit respecter le Plan Comptable Général pour garantir 
-        la normalisation.
-    </p>
+<h2 data-i18n="obligationTitle">⚖️ Caractère obligatoire</h2>
+<p data-i18n="obligation1">Toute entreprise doit tenir une comptabilité selon la loi 9-88 et le code de commerce.</p>
+<p data-i18n="obligation2">Elle doit respecter le Plan Comptable Général pour garantir la normalisation.</p>
 </section>
 
 <section id="sources">
-    <h2>📂 Sources</h2>
-    <ul>
-        <li>Cadre légal (loi 9-88, loi 44-03)</li>
-        <li>Code Général de Normalisation Comptable</li>
-        <li>Cadre comptable normal ou simplifié</li>
-    </ul>
+<h2 data-i18n="sourcesTitle">📂 Sources</h2>
+<ul>
+<li data-i18n="source1">Cadre légal (loi 9-88, loi 44-03)</li>
+<li data-i18n="source2">Code Général de Normalisation Comptable</li>
+<li data-i18n="source3">Cadre comptable normal ou simplifié</li>
+</ul>
 </section>
 
 <section id="regles">
-    <h2>📑 Obligations de l’entreprise</h2>
-    <ul>
-        <li>Établir et conserver les documents commerciaux</li>
-        <li>Établir et conserver les documents comptables</li>
-    </ul>
+<h2 data-i18n="rulesTitle">📑 Obligations de l’entreprise</h2>
+<ul>
+<li data-i18n="rule1">Établir et conserver les documents commerciaux</li>
+<li data-i18n="rule2">Établir et conserver les documents comptables</li>
+</ul>
 </section>
-<section id="EE">
-<h2>📝 Exercice d’évaluation (QCU)</h2>
 
+<section id="EE">
+<h2 data-i18n="quizTitle">📝 Exercice d’évaluation (QCU)</h2>
 <form id="quizForm">
 
 <div class="q">
-<p>1. La comptabilité générale permet principalement :</p>
-<label><input type="radio" name="q1" value="0"> D’analyser uniquement les coûts</label><br>
-<label><input type="radio" name="q1" value="1"> D’enregistrer toutes les opérations financières</label><br>
-<label><input type="radio" name="q1" value="0"> De prévoir le futur uniquement</label>
+<p data-i18n="q1">1. La comptabilité générale permet principalement :</p>
+<label><input type="radio" name="q1" value="0"><span data-i18n="q1a">D’analyser uniquement les coûts</span></label><br>
+<label><input type="radio" name="q1" value="1"><span data-i18n="q1b">D’enregistrer toutes les opérations financières</span></label><br>
+<label><input type="radio" name="q1" value="0"><span data-i18n="q1c">De prévoir le futur uniquement</span></label>
 </div>
 
 <div class="q">
-<p>2. L’exercice comptable correspond :</p>
-<label><input type="radio" name="q2" value="1"> À une période donnée d’activité</label><br>
-<label><input type="radio" name="q2" value="0"> À une seule opération</label><br>
-<label><input type="radio" name="q2" value="0"> À une facture</label>
+<p data-i18n="q2">2. L’exercice comptable correspond :</p>
+<label><input type="radio" name="q2" value="1"><span data-i18n="q2a">À une période donnée d’activité</span></label><br>
+<label><input type="radio" name="q2" value="0"><span data-i18n="q2b">À une seule opération</span></label><br>
+<label><input type="radio" name="q2" value="0"><span data-i18n="q2c">À une facture</span></label>
 </div>
 
 <div class="q">
-<p>3. La comptabilité analytique sert à :</p>
-<label><input type="radio" name="q3" value="1"> Analyser les coûts</label><br>
-<label><input type="radio" name="q3" value="0"> Calculer l’impôt</label><br>
-<label><input type="radio" name="q3" value="0"> Gérer la trésorerie</label>
+<p data-i18n="q3">3. La comptabilité analytique sert à :</p>
+<label><input type="radio" name="q3" value="1"><span data-i18n="q3a">Analyser les coûts</span></label><br>
+<label><input type="radio" name="q3" value="0"><span data-i18n="q3b">Calculer l’impôt</span></label><br>
+<label><input type="radio" name="q3" value="0"><span data-i18n="q3c">Gérer la trésorerie</span></label>
 </div>
 
 <div class="q">
-<p>4. La comptabilité est un moyen :</p>
-<label><input type="radio" name="q4" value="1"> De preuve juridique</label><br>
-<label><input type="radio" name="q4" value="0"> De publicité</label><br>
-<label><input type="radio" name="q4" value="0"> De marketing</label>
+<p data-i18n="q4">4. La comptabilité est un moyen :</p>
+<label><input type="radio" name="q4" value="1"><span data-i18n="q4a">De preuve juridique</span></label><br>
+<label><input type="radio" name="q4" value="0"><span data-i18n="q4b">De publicité</span></label><br>
+<label><input type="radio" name="q4" value="0"><span data-i18n="q4c">De marketing</span></label>
 </div>
 
 <div class="q">
-<p>5. Le résultat comptable permet :</p>
-<label><input type="radio" name="q5" value="1"> De savoir bénéfice ou perte</label><br>
-<label><input type="radio" name="q5" value="0"> D’acheter des produits</label><br>
-<label><input type="radio" name="q5" value="0"> D’augmenter le capital</label>
+<p data-i18n="q5">5. Le résultat comptable permet :</p>
+<label><input type="radio" name="q5" value="1"><span data-i18n="q5a">De savoir s’il y a bénéfice ou perte</span></label><br>
+<label><input type="radio" name="q5" value="0"><span data-i18n="q5b">D’acheter des produits</span></label><br>
+<label><input type="radio" name="q5" value="0"><span data-i18n="q5c">D’augmenter le capital</span></label>
 </div>
 
 <div class="q">
-<p>6. La loi 9-88 impose :</p>
-<label><input type="radio" name="q6" value="1"> La tenue de la comptabilité</label><br>
-<label><input type="radio" name="q6" value="0"> La fixation des prix</label><br>
-<label><input type="radio" name="q6" value="0"> La gestion du personnel</label>
+<p data-i18n="q6">6. La loi 9-88 impose :</p>
+<label><input type="radio" name="q6" value="1"><span data-i18n="q6a">La tenue de la comptabilité</span></label><br>
+<label><input type="radio" name="q6" value="0"><span data-i18n="q6b">La fixation des prix</span></label><br>
+<label><input type="radio" name="q6" value="0"><span data-i18n="q6c">La gestion du personnel</span></label>
 </div>
 
 <div class="q">
-<p>7. Le Plan Comptable Général sert à :</p>
-<label><input type="radio" name="q7" value="1"> Normaliser la comptabilité</label><br>
-<label><input type="radio" name="q7" value="0"> Fixer les salaires</label><br>
-<label><input type="radio" name="q7" value="0"> Calculer les stocks</label>
+<p data-i18n="q7">7. Le Plan Comptable Général sert à :</p>
+<label><input type="radio" name="q7" value="1"><span data-i18n="q7a">Normaliser la comptabilité</span></label><br>
+<label><input type="radio" name="q7" value="0"><span data-i18n="q7b">Fixer les salaires</span></label><br>
+<label><input type="radio" name="q7" value="0"><span data-i18n="q7c">Calculer les stocks</span></label>
 </div>
 
 <div class="q">
-<p>8. Les utilisateurs de l’information comptable sont :</p>
-<label><input type="radio" name="q8" value="1"> Dirigeants et partenaires</label><br>
-<label><input type="radio" name="q8" value="0"> Clients uniquement</label><br>
-<label><input type="radio" name="q8" value="0"> Fournisseurs uniquement</label>
+<p data-i18n="q8">8. Les utilisateurs de l’information comptable sont :</p>
+<label><input type="radio" name="q8" value="1"><span data-i18n="q8a">Dirigeants et partenaires</span></label><br>
+<label><input type="radio" name="q8" value="0"><span data-i18n="q8b">Clients uniquement</span></label><br>
+<label><input type="radio" name="q8" value="0"><span data-i18n="q8c">Fournisseurs uniquement</span></label>
 </div>
 
 <div class="q">
-<p>9. Les sources de la comptabilité incluent :</p>
-<label><input type="radio" name="q9" value="1"> Les lois et normes</label><br>
-<label><input type="radio" name="q9" value="0"> Les publicités</label><br>
-<label><input type="radio" name="q9" value="0"> Les réseaux sociaux</label>
+<p data-i18n="q9">9. Les sources de la comptabilité incluent :</p>
+<label><input type="radio" name="q9" value="1"><span data-i18n="q9a">Les lois et normes</span></label><br>
+<label><input type="radio" name="q9" value="0"><span data-i18n="q9b">Les publicités</span></label><br>
+<label><input type="radio" name="q9" value="0"><span data-i18n="q9c">Les réseaux sociaux</span></label>
 </div>
 
 <div class="q">
-<p>10. L’entreprise doit obligatoirement :</p>
-<label><input type="radio" name="q10" value="1"> Conserver les documents</label><br>
-<label><input type="radio" name="q10" value="0"> Supprimer les archives</label><br>
-<label><input type="radio" name="q10" value="0"> Ignorer les règles</label>
+<p data-i18n="q10">10. L’entreprise doit obligatoirement :</p>
+<label><input type="radio" name="q10" value="1"><span data-i18n="q10a">Conserver les documents</span></label><br>
+<label><input type="radio" name="q10" value="0"><span data-i18n="q10b">Supprimer les archives</span></label><br>
+<label><input type="radio" name="q10" value="0"><span data-i18n="q10c">Ignorer les règles</span></label>
 </div>
 
-<br>
-<button type="button" onclick="corrigerQuiz()">Corriger</button>
-
+<button type="button" onclick="corrigerQuiz()" data-i18n="correct">Corriger</button>
+<button type="reset" onclick="effacerResultat()" data-i18n="reset">Réinitialiser</button>
 </form>
-
 <h3 id="resultat"></h3>
-
 </section>
-<script>
-function corrigerQuiz(){
-    let score = 0;
-    let total = 10;
 
-    for(let i=1;i<=10;i++){
-        let q = document.querySelector('input[name="q'+i+'"]:checked');
-        if(q && q.value == "1"){
-            score++;
-        }
-    }
-
-    let msg = "";
-
-    if(score >= 8){
-        msg = "Excellent 👍";
-    }else if(score >=5){
-        msg = "Niveau moyen ⚠️";
-    }else{
-        msg = "À revoir ❌";
-    }
-
-    document.getElementById("resultat").innerHTML =
-        "Score : " + score + "/" + total + "<br>" + msg;
-}
-</script>
-</section>
 <footer>
-    Formation en comptabilité générale
-<br>
-
-<a href="C1P1M1.html">⬅ Retour </a>
+<span data-i18n="footer">Formation en comptabilité générale</span><br><br>
 </footer>
+
+<script>
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+    const current=document.getElementById(id);
+    if(current) current.classList.add("active","animationSection");
+    document.querySelectorAll("nav button").forEach(btn=>btn.classList.remove("btnActive"));
+    if(button) button.classList.add("btnActive");
+}
+
+function corrigerQuiz(){
+    let score=0;
+    for(let i=1;i<=10;i++){
+        const answer=document.querySelector('input[name="q'+i+'"]:checked');
+        if(answer && answer.value==="1") score++;
+    }
+    const lang=document.documentElement.lang;
+    const messages={
+        fr:{score:"Score",excellent:"Excellent 👍",medium:"Niveau moyen ⚠️",review:"À revoir ❌"},
+        en:{score:"Score",excellent:"Excellent 👍",medium:"Average level ⚠️",review:"Needs review ❌"},
+        ar:{score:"النتيجة",excellent:"ممتاز 👍",medium:"مستوى متوسط ⚠️",review:"يحتاج إلى المراجعة ❌"}
+    };
+    const m=messages[lang]||messages.fr;
+    const result=score>=8?m.excellent:score>=5?m.medium:m.review;
+    document.getElementById("resultat").textContent=m.score+" : "+score+"/10 — "+result;
+}
+
+function effacerResultat(){
+    document.getElementById("resultat").textContent="";
+}
+
+const translations={
+en:{
+home:"Home",modules:"Modules ▾",parts:"Sections ▾",language:"Language:",
+pageTitle:"Introduction to General Accounting",
+m1:"M1 – General Accounting",m2:"M2 – Cost Accounting",m3:"M3 – Financial Analysis",
+m4:"M4 – Taxation",m5:"M5 – Financial Mathematics",m6:"M6 – Statistics",
+m7:"M7 – Marketing",m8:"M8 – Advanced Accounting",m9:"M9 – Management",
+part1:"Part 1 – Introduction to General Accounting",
+definition:"Definition",types:"Types",role:"Role",utility:"Purpose",
+obligation:"Accounting requirements",sources:"Sources",rules:"Company obligations",
+assessment:"Assessment exercise",defTitle:"📘 Definition",
+defText:"General accounting is a method used to record all the company's financial transactions during an accounting period.",
+typesTitle:"📊 Types of accounting",national:"National accounting:",nationalText:"analysis of the overall economy",
+public:"Public accounting:",publicText:"government transactions",business:"Business accounting:",
+general:"General accounting",analytical:"Cost accounting",corporate:"Corporate accounting",
+roleTitle:"🎯 Role",role1:"A financial information tool",role2:"A management tool",role3:"A means of legal evidence",
+utilityTitle:"💡 Purpose",utility1:"Determine the result (profit or loss)",utility2:"Support decision-making",
+inform:"Provide information to:",managers:"Managers",state:"Government",partners:"Partners",creditors:"Creditors",
+obligationTitle:"⚖️ Legal requirement",
+obligation1:"Every company must keep accounts in accordance with Law 9-88 and the Commercial Code.",
+obligation2:"It must comply with the General Chart of Accounts to ensure standardization.",
+sourcesTitle:"📂 Sources",source1:"Legal framework (Law 9-88, Law 44-03)",
+source2:"General Accounting Standardization Code",source3:"Standard or simplified accounting framework",
+rulesTitle:"📑 Company obligations",rule1:"Prepare and retain commercial documents",rule2:"Prepare and retain accounting documents",
+quizTitle:"📝 Assessment exercise (single-answer quiz)",
+q1:"1. The main purpose of general accounting is to:",q1a:"Analyse costs only",q1b:"Record all financial transactions",q1c:"Forecast the future only",
+q2:"2. An accounting period is:",q2a:"A defined period of business activity",q2b:"A single transaction",q2c:"An invoice",
+q3:"3. Cost accounting is used to:",q3a:"Analyse costs",q3b:"Calculate tax",q3c:"Manage cash flow",
+q4:"4. Accounting is a means of:",q4a:"Legal evidence",q4b:"Advertising",q4c:"Marketing",
+q5:"5. The accounting result makes it possible to:",q5a:"Determine whether there is a profit or a loss",q5b:"Purchase products",q5c:"Increase share capital",
+q6:"6. Law 9-88 requires:",q6a:"Keeping accounting records",q6b:"Setting prices",q6c:"Managing staff",
+q7:"7. The General Chart of Accounts is used to:",q7a:"Standardize accounting",q7b:"Set salaries",q7c:"Calculate inventory",
+q8:"8. Users of accounting information include:",q8a:"Managers and partners",q8b:"Customers only",q8c:"Suppliers only",
+q9:"9. Accounting sources include:",q9a:"Laws and standards",q9b:"Advertisements",q9c:"Social networks",
+q10:"10. A company is required to:",q10a:"Retain documents",q10b:"Delete archives",q10c:"Ignore the rules",
+correct:"Check answers",reset:"Reset",footer:"General accounting training",back:"⬅ Back"
+},
+ar:{
+home:"الرئيسية",modules:"الوحدات ▾",parts:"الأجزاء ▾",language:"اللغة:",
+pageTitle:"مبادئ المحاسبة العامة",
+m1:"M1 – المحاسبة العامة",m2:"M2 – محاسبة التكاليف",m3:"M3 – التحليل المالي",
+m4:"M4 – الضرائب",m5:"M5 – الرياضيات المالية",m6:"M6 – الإحصاء",
+m7:"M7 – التسويق",m8:"M8 – المحاسبة المعمقة",m9:"M9 – التدبير",
+part1:"الجزء 1 – مبادئ المحاسبة العامة",
+definition:"التعريف",types:"الأنواع",role:"الدور",utility:"الأهمية",
+obligation:"إلزامية مسك المحاسبة",sources:"المصادر",rules:"التزامات المقاولة",
+assessment:"تمرين التقييم",defTitle:"📘 التعريف",
+defText:"المحاسبة العامة تقنية تُمكّن من تسجيل جميع العمليات المالية للمقاولة خلال فترة تُسمّى السنة المحاسبية.",
+typesTitle:"📊 أنواع المحاسبة",national:"المحاسبة الوطنية:",nationalText:"تحليل الاقتصاد ككل",
+public:"المحاسبة العمومية:",publicText:"عمليات الدولة",business:"محاسبة المقاولات:",
+general:"المحاسبة العامة",analytical:"محاسبة التكاليف",corporate:"محاسبة الشركات",
+roleTitle:"🎯 الدور",role1:"وسيلة للمعلومات المالية",role2:"أداة للتسيير",role3:"وسيلة للإثبات القانوني",
+utilityTitle:"💡 الأهمية",utility1:"تحديد النتيجة (ربح أو خسارة)",utility2:"المساعدة على اتخاذ القرار",
+inform:"توفير المعلومات لـ:",managers:"المسيرين",state:"الدولة",partners:"الشركاء",creditors:"الدائنين",
+obligationTitle:"⚖️ الطابع الإلزامي",
+obligation1:"يجب على كل مقاولة مسك المحاسبة وفق القانون 9-88 ومدونة التجارة.",
+obligation2:"يجب احترام المخطط المحاسبي العام لضمان توحيد المعايير.",
+sourcesTitle:"📂 المصادر",source1:"الإطار القانوني (القانون 9-88 والقانون 44-03)",
+source2:"المدونة العامة للتطبيع المحاسبي",source3:"الإطار المحاسبي العادي أو المبسط",
+rulesTitle:"📑 التزامات المقاولة",rule1:"إعداد الوثائق التجارية والاحتفاظ بها",rule2:"إعداد الوثائق المحاسبية والاحتفاظ بها",
+quizTitle:"📝 تمرين التقييم (اختيار جواب واحد)",
+q1:"1. تهدف المحاسبة العامة أساساً إلى:",q1a:"تحليل التكاليف فقط",q1b:"تسجيل جميع العمليات المالية",q1c:"التنبؤ بالمستقبل فقط",
+q2:"2. السنة المحاسبية هي:",q2a:"فترة محددة من النشاط",q2b:"عملية واحدة فقط",q2c:"فاتورة",
+q3:"3. تُستخدم محاسبة التكاليف من أجل:",q3a:"تحليل التكاليف",q3b:"حساب الضريبة",q3c:"تدبير الخزينة",
+q4:"4. المحاسبة وسيلة لـ:",q4a:"الإثبات القانوني",q4b:"الإشهار",q4c:"التسويق",
+q5:"5. تُمكّن النتيجة المحاسبية من:",q5a:"معرفة ما إذا كانت هناك أرباح أو خسائر",q5b:"شراء المنتجات",q5c:"زيادة رأس المال",
+q6:"6. يفرض القانون 9-88:",q6a:"مسك المحاسبة",q6b:"تحديد الأسعار",q6c:"تدبير الموظفين",
+q7:"7. يُستخدم المخطط المحاسبي العام من أجل:",q7a:"توحيد المعايير المحاسبية",q7b:"تحديد الأجور",q7c:"حساب المخزون",
+q8:"8. من مستخدمي المعلومات المحاسبية:",q8a:"المسيرون والشركاء",q8b:"الزبائن فقط",q8c:"الموردون فقط",
+q9:"9. تشمل مصادر المحاسبة:",q9a:"القوانين والمعايير",q9b:"الإعلانات",q9c:"شبكات التواصل الاجتماعي",
+q10:"10. يجب على المقاولة:",q10a:"الاحتفاظ بالوثائق",q10b:"حذف الأرشيف",q10c:"تجاهل القواعد",
+correct:"تصحيح الأجوبة",reset:"إعادة التعيين",footer:"التكوين في المحاسبة العامة",back:"⬅ رجوع"
+}
+};
+
+function changeLanguage(lang){
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+    document.querySelectorAll("[data-i18n]").forEach(element=>{
+        const key=element.dataset.i18n;
+        if(lang==="fr"){
+            if(element.dataset.frText!==undefined){
+                element.textContent=element.dataset.frText;
+            }else{
+                element.dataset.frText=element.textContent;
+            }
+        }else{
+            if(element.dataset.frText===undefined){
+                element.dataset.frText=element.textContent;
+            }
+            const value=translations[lang][key];
+            if(value!==undefined) element.textContent=value;
+        }
+    });
+    document.title=lang==="en"?"IgnDay General Accounting":
+                  lang==="ar"?"IgnDay المحاسبة العامة":
+                  "IgnDay Comptabilité Générale";
+}
+
+document.querySelectorAll("[data-i18n]").forEach(element=>{
+    element.dataset.frText=element.textContent;
+});
+</script>
 
 </body>
 </html>
+
+
+
