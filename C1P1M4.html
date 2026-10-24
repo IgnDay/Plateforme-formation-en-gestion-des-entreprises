@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
-
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Fiscalité de l’entreprise</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
 body{
     font-family:Arial,sans-serif;
     margin:0;
@@ -14,49 +17,70 @@ body{
     color:#1e293b;
 }
 
-/* ===== BARRE DE NAVIGATION ===== */
-.topbar{
+/* ===== EN-TÊTE ET IDENTITÉ ===== */
+header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    box-shadow:0 2px 10px #0003;
+}
+
+.brandbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:18px;
     flex-wrap:wrap;
-    gap:12px;
-    background:#0f766e;
-    color:white;
-    padding:10px 20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
 }
 
-.logo{
-    font-size:20px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.nav{
+.brand{
     display:flex;
     align-items:center;
     gap:10px;
-    flex-wrap:wrap;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
 }
 
-.nav button{
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a,
+.dropdown>button{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
     color:white;
-    padding:8px 10px;
-    border-radius:4px;
-    transition:0.3s;
-    border:none;
-    background:transparent;
-    font-size:14px;
+    text-decoration:none;
     cursor:pointer;
+    font-size:14px;
+    border:0;
+    background:transparent;
     font-family:inherit;
 }
 
-.nav button:hover{
-    background:#0e7490;
-    transform:translateY(-2px);
+.site-menu>a:hover,
+.dropdown>button:hover{
+    background:#ffffff2b;
 }
 
 /* ===== MENUS DÉROULANTS ===== */
@@ -70,164 +94,122 @@ body{
     position:absolute;
     top:100%;
     left:0;
-    min-width:260px;
-    max-height:65vh;
+    min-width:250px;
+    max-height:70vh;
     overflow-y:auto;
+    z-index:1000;
+    padding:7px;
+    border-radius:8px;
     background:white;
-    box-shadow:0 5px 15px rgba(0,0,0,.18);
-    border-radius:6px;
-    padding:6px 0;
-    z-index:2000;
-}
-
-.dropdown-content a,
-.dropdown-content button{
-    display:block;
-    width:100%;
-    box-sizing:border-box;
-    text-align:left;
-    color:#1e293b;
-    background:white;
-    padding:10px 14px;
-    text-decoration:none;
-    border:none;
-    border-radius:0;
-    font-size:14px;
-    cursor:pointer;
-    font-family:inherit;
-}
-
-.dropdown-content a:hover,
-.dropdown-content button:hover{
-    background:#ccfbf1;
-    color:#0f766e;
-    transform:none;
+    box-shadow:0 6px 18px #0003;
 }
 
 .dropdown.open .dropdown-content{
     display:block;
 }
 
-/* ===== HEADER PRINCIPAL ===== */
-header{
-    background:#0f766e;
+.dropdown-content a{
+    display:block;
+    padding:10px;
+    color:#243447;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:14px;
+    text-align:left;
+    white-space:normal;
+}
+
+.dropdown-content a:hover{
     color:white;
-    padding:20px;
-    text-align:center;
+    background:#0f766e;
 }
 
 header h1{
+    padding:20px 10px;
+    margin:0;
     font-size:25px;
     line-height:1.5;
 }
 
-header a{
-    display:inline-block;
-    margin-top:10px;
-    padding:8px 12px;
-    color:white;
-    border:1px solid white;
-    border-radius:5px;
-    text-decoration:none;
+/* ===== CONTENU PRINCIPAL ===== */
+main{
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 18px;
 }
 
-header a:hover{
-    background:white;
-    color:#0f766e;
-}
-
-/* ===== CONTENU ===== */
-.menu{
-    max-width:900px;
-    margin:20px auto;
-    padding:10px;
-}
-
-.section-title{
+.page-title{
     background:#e0f2fe;
-    padding:10px;
+    padding:14px 16px;
     font-weight:bold;
-    margin-top:20px;
+    margin-bottom:18px;
     border-left:6px solid #0f766e;
+    border-radius:5px;
+    line-height:1.6;
 }
 
 .card{
     display:block;
     background:white;
-    padding:12px;
-    margin:8px 0;
+    padding:15px 16px;
+    margin:10px 0;
     text-decoration:none;
     color:#1e293b;
-    border-radius:6px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    transition:0.2s;
+    border-radius:8px;
+    box-shadow:0 2px 6px #00000012;
+    transition:.2s;
+    border-left:4px solid #00b894;
+    line-height:1.6;
 }
 
 .card:hover{
-    transform:scale(1.02);
+    transform:translateY(-2px);
     background:#f1f5f9;
 }
 
 /* ===== PIED DE PAGE ===== */
 footer{
-    background:#1e293b;
+    text-align:center;
+    padding:18px;
+    background:#2c3e50;
     color:white;
-    padding:20px;
-    margin-top:40px;
-}
-
-.footer-container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.footer-section{
-    flex:1;
-    min-width:200px;
-}
-
-.footer-section h3{
-    margin-bottom:10px;
-}
-
-.social a{
-    display:inline-block;
-    margin-right:10px;
-    margin-bottom:8px;
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    transition:0.3s;
-}
-
-.social a:hover{
-    color:#38bdf8;
+    margin-top:35px;
 }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:700px){
-    .topbar{
-        position:relative;
-        align-items:flex-start;
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
     }
 
-    .nav{
+    .brand{
+        justify-content:center;
+    }
+
+    .site-menu{
         width:100%;
     }
 
+    .site-menu>a,
+    .dropdown>button{
+        padding:9px;
+    }
+
     .dropdown-content{
-        min-width:230px;
-        max-width:85vw;
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+        max-width:90vw;
     }
 
     header h1{
-        font-size:20px;
+        font-size:21px;
     }
 
-    .footer-container{
-        flex-direction:column;
+    main{
+        padding:0 12px;
     }
 }
 </style>
@@ -235,285 +217,180 @@ footer{
 
 <body>
 
-<!-- ===== BARRE DE NAVIGATION ===== -->
-<div class="topbar">
+<header>
 
-    <div class="logo">IgnDay</div>
+    <div class="brandbar">
 
-    <div class="nav">
+        <!-- IDENTITÉ IGNDay -->
+        <a class="brand" href="index.html">
+            <span class="brand-logo">IF</span>
+            <span>IgnDay</span>
+        </a>
 
-        <!-- ===== MENU DES PARTIES DU MODULE M4 ===== -->
-        <div class="dropdown">
+        <div class="site-menu">
 
-            <button type="button" aria-expanded="false">
-                P1 – Fiscalité de l’entreprise / Les concepts de base ▼
-            </button>
+            <!-- MENU ACCUEIL -->
+            <a href="index.html">Accueil</a>
 
-            <div class="dropdown-content">
+            <!-- MENU DES MODULES -->
+            <div class="dropdown">
 
-                <a href="C1P1M4.html">
-                    ► Résumés des thèmes
-                </a>
+                <button type="button" aria-expanded="false">
+                    Modules ▼
+                </button>
 
-                <a href="C2P1M4.html">
-                    ► Formulaires interactifs
-                </a>
-
-                <a href="C3P1M4.html">
-                    ► Exercices corrigés
-                </a>
+                <div class="dropdown-content">
+                    <a href="M1.html">M1 – Comptabilité générale</a>
+                    <a href="M2.html">M2 – Comptabilité analytique</a>
+                    <a href="M3.html">M3 – Analyse financière</a>
+                    <a href="M4.html">M4 – Fiscalité</a>
+                    <a href="M5.html">M5 – Mathématiques financières</a>
+                    <a href="M6.html">M6 – Statistiques</a>
+                    <a href="M7.html">M7 – Marketing</a>
+                    <a href="M8.html">M8 – Comptabilité approfondie</a>
+                    <a href="M9.html">M9 – Management</a>
+                </div>
 
             </div>
-        </div>
 
-        <!-- ===== MENU DES LANGUES ===== -->
-        <div class="dropdown">
+            <!-- MENU DES PARTIES DU MODULE M4 -->
+            <div class="dropdown">
 
-            <button type="button"
-                    aria-expanded="false"
-                    data-fr="Langue 🌐 ▼"
-                    data-en="Language 🌐 ▼"
-                    data-ar="اللغة 🌐 ▼">
-                Langue 🌐 ▼
-            </button>
-
-            <div class="dropdown-content">
-
-                <button type="button" data-language="fr">
-                    🇫🇷 Français (FR)
+                <button type="button" aria-expanded="false">
+                    M4 – Fiscalité ▼
                 </button>
 
-                <button type="button" data-language="en">
-                    🇬🇧 English (GB)
-                </button>
+                <div class="dropdown-content">
+                <a href="P1M4.html">
+                    P1 – Les concepts de base
+                </a>
 
-                <button type="button" data-language="ar">
-                    🇸🇦 العربية (SA)
-                </button>
+                <a href="P2M4.html">
+                    P2 –Taxe sur la valeur ajoutée (TVA)
+                </a>
+
+                <a href="P3M4.html">
+                    P3 - Impôt sur les sociétés (IS)
+                </a>
+
+                <a href="P4M4.html"                   >
+                    P4 - Impôt sur le revenu (IR)
+                </a>
+                </div>
 
             </div>
+
+            <!-- MENU DES CONTENUS DE LA PARTIE P1 -->
+            <div class="dropdown">
+
+                <button type="button" aria-expanded="false">
+                    P1 – Les concepts de base ▼
+                </button>
+
+                <div class="dropdown-content">
+
+                    <a href="C1P1M4.html">
+                        T – Résumés des thèmes
+                    </a>
+
+                    <a href="C2P1M4.html">
+                        F – Formulaires interactifs
+                    </a>
+
+                    <a href="C3P1M4.html">
+                        E – Exercices corrigés
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- RETOUR -->
+            <a href="P1M4.html">⬅ Retour</a>
+
         </div>
 
     </div>
-</div>
 
-<!-- ===== HEADER ===== -->
-<header>
-
-    <h1
-        data-fr="📘 Plateforme de formation et d'apprentissage interactif « IgnDay »"
-        data-en="📘 IgnDay Interactive Learning and Training Platform"
-        data-ar="📘 منصة IgnDay للتكوين والتعلم التفاعلي">
-
-        📘 Plateforme de formation et d'apprentissage interactif « IgnDay »
-
+    <h1>
+        M4 – Fiscalité de l’entreprise
+        &gt; P1 – Les concepts de base
+        &gt;&gt; T – Résumés des thèmes
     </h1>
-
-    <a href="P1M4.html"
-       data-fr="⬅ Retour"
-       data-en="⬅ Back"
-       data-ar="⬅ رجوع">
-
-        ⬅ Retour
-
-    </a>
 
 </header>
 
-<!-- ===== CONTENU ===== -->
-<main class="menu">
+<!-- ===== CONTENU CONSERVÉ DU CODE INITIAL ===== -->
+<main>
 
-    <div class="section-title"
-         data-fr="Formation en Fiscalité de l’entreprise / Les concepts de base / Résumés des thèmes"
-         data-en="Business Taxation / Basic Concepts / Topic Summaries"
-         data-ar="التكوين في جبايات المقاولة / المفاهيم الأساسية / ملخصات المواضيع">
+    
 
-        Formation en Fiscalité de l’entreprise // Les concepts de base / Résumés des thèmes
-
-    </div>
-
-    <a href="T1C1P1M4.html" class="card"
-       data-fr="➡️ Thème 1 : Notion de fiscalité et notion de l’impôt"
-       data-en="➡️ Topic 1: The Concepts of Taxation and Tax"
-       data-ar="➡️ الموضوع 1: مفهوم الجبايات ومفهوم الضريبة">
-
+    <a href="T1C1P1M4.html" class="card">
         ➡️ Thème 1 : Notion de fiscalité et notion de l’impôt
-
     </a>
 
-    <a href="T2C1P1M4" class="card"
-       data-fr="➡️ Thème 2 : La technique fiscale"
-       data-en="➡️ Topic 2: Taxation Techniques"
-       data-ar="➡️ الموضوع 2: التقنية الجبائية">
-
+    <a href="T2C1P1M4.html" class="card">
         ➡️ Thème 2 : La technique fiscale
-
     </a>
 
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer>
-
-    <div class="footer-container">
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="Contact"
-                data-en="Contact"
-                data-ar="اتصل بنا">
-                Contact
-            </h3>
-
-            <p
-                data-fr="📍 Adresse : Maroc"
-                data-en="📍 Address: Morocco"
-                data-ar="📍 العنوان: المغرب">
-                📍 Adresse : Maroc
-            </p>
-
-            <p
-                data-fr="📱 Téléphone : +212 00000000"
-                data-en="📱 Phone: +212 00000000"
-                data-ar="📱 الهاتف: +212 00000000">
-                📱 Téléphone : +212 00000000
-            </p>
-
-        </div>
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="🌐 Réseaux sociaux"
-                data-en="🌐 Social Networks"
-                data-ar="🌐 شبكات التواصل الاجتماعي">
-                🌐 Réseaux sociaux
-            </h3>
-
-            <div class="social">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">WhatsApp</a>
-                <a href="#">Instagram</a>
-                <a href="#">YouTube</a>
-                <a href="#">TikTok</a>
-            </div>
-
-        </div>
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="ℹ️ À propos"
-                data-en="ℹ️ About"
-                data-ar="ℹ️ حول المنصة">
-                ℹ️ À propos
-            </h3>
-
-            <p
-                data-fr="Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de la gestion des entreprises."
-                data-en="An interactive training and learning platform for vocational trainees, students and professionals in business management."
-                data-ar="منصة للتكوين والتعلم التفاعلي مخصصة للمتدربين في التكوين المهني والطلاب والمهنيين في مجال تدبير المقاولات.">
-
-                Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de la gestion des entreprises.
-
-            </p>
-
-        </div>
-
-    </div>
-
+    Formation en Fiscalité de l’entreprise
 </footer>
 
 <script>
-
 /* ===== GESTION DES MENUS DÉROULANTS ===== */
-const dropdowns = document.querySelectorAll(".dropdown");
 
-dropdowns.forEach(dropdown => {
+function closeDropdowns(except){
 
-    const button = dropdown.querySelector("button");
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-    button.addEventListener("click", event => {
+        if(dropdown !== except){
+
+            dropdown.classList.remove("open");
+
+            const button = dropdown.querySelector("button");
+
+            if(button){
+                button.setAttribute("aria-expanded","false");
+            }
+        }
+    });
+}
+
+document.querySelectorAll(".dropdown > button").forEach(button=>{
+
+    button.addEventListener("click",function(event){
 
         event.stopPropagation();
 
-        dropdowns.forEach(other => {
+        const dropdown = this.parentElement;
+        const wasOpen = dropdown.classList.contains("open");
 
-            if(other !== dropdown){
-                other.classList.remove("open");
+        closeDropdowns(dropdown);
 
-                other.querySelector("button")
-                     .setAttribute("aria-expanded","false");
-            }
+        dropdown.classList.toggle("open",!wasOpen);
 
-        });
-
-        const isOpen = dropdown.classList.toggle("open");
-
-        button.setAttribute("aria-expanded", String(isOpen));
-
+        this.setAttribute("aria-expanded",String(!wasOpen));
     });
-
 });
 
-document.addEventListener("click", event => {
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(){
 
-    dropdowns.forEach(dropdown => {
-
-        if(!dropdown.contains(event.target)){
-            dropdown.classList.remove("open");
-
-            dropdown.querySelector("button")
-                    .setAttribute("aria-expanded","false");
-        }
-
-    });
-
+    closeDropdowns(null);
 });
 
-/* ===== TRADUCTION FR / EN / AR ===== */
-function changeLanguage(language){
+/* Garder le menu ouvert lors d'un clic à l'intérieur */
+document.querySelectorAll(".dropdown-content").forEach(menu=>{
 
-    document.documentElement.lang = language;
-
-    document.documentElement.dir =
-        language === "ar" ? "rtl" : "ltr";
-
-    document.querySelectorAll("[data-" + language + "]")
-    .forEach(element => {
-
-        const translation = element.getAttribute("data-" + language);
-
-        if(translation !== null){
-            element.textContent = translation;
-        }
-
+    menu.addEventListener("click",function(event){
+        event.stopPropagation();
     });
-
-    /* Fermer les menus après le choix */
-    dropdowns.forEach(dropdown => {
-
-        dropdown.classList.remove("open");
-
-        dropdown.querySelector("button")
-                .setAttribute("aria-expanded","false");
-
-    });
-
-}
-
-/* ===== CHOIX DE LA LANGUE ===== */
-document.querySelectorAll("[data-language]").forEach(button => {
-
-    button.addEventListener("click", () => {
-        changeLanguage(button.dataset.language);
-    });
-
 });
-
 </script>
 
 </body>
 </html>
+
