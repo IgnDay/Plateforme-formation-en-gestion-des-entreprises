@@ -7,6 +7,10 @@
 <title>IgnDay Comptabilité Générale</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
 body{
     font-family:Arial,sans-serif;
     margin:0;
@@ -14,49 +18,70 @@ body{
     color:#1e293b;
 }
 
-/* ===== BARRE DE NAVIGATION ===== */
-.topbar{
+/* ===== EN-TÊTE ET IDENTITÉ ===== */
+header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    box-shadow:0 2px 10px #0003;
+}
+
+.brandbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:18px;
     flex-wrap:wrap;
-    gap:12px;
-    background:#0f766e;
-    color:white;
-    padding:10px 20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
 }
 
-.logo{
-    font-size:20px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.nav{
+.brand{
     display:flex;
     align-items:center;
     gap:10px;
-    flex-wrap:wrap;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
 }
 
-.nav button{
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a,
+.dropdown>button{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
     color:white;
-    padding:8px 10px;
-    border-radius:4px;
-    transition:0.3s;
-    border:none;
-    background:transparent;
-    font-size:14px;
+    text-decoration:none;
     cursor:pointer;
+    font-size:14px;
+    border:0;
+    background:transparent;
     font-family:inherit;
 }
 
-.nav button:hover{
-    background:#0e7490;
-    transform:translateY(-2px);
+.site-menu>a:hover,
+.dropdown>button:hover{
+    background:#ffffff2b;
 }
 
 /* ===== MENUS DÉROULANTS ===== */
@@ -70,164 +95,124 @@ body{
     position:absolute;
     top:100%;
     left:0;
-    min-width:260px;
-    max-height:65vh;
+    min-width:250px;
+    max-height:70vh;
     overflow-y:auto;
+    z-index:1000;
+    padding:7px;
+    border-radius:8px;
     background:white;
-    box-shadow:0 5px 15px rgba(0,0,0,.18);
-    border-radius:6px;
-    padding:6px 0;
-    z-index:2000;
-}
-
-.dropdown-content a,
-.dropdown-content button{
-    display:block;
-    width:100%;
-    box-sizing:border-box;
+    box-shadow:0 6px 18px #0003;
     text-align:left;
-    color:#1e293b;
-    background:white;
-    padding:10px 14px;
-    text-decoration:none;
-    border:none;
-    border-radius:0;
-    font-size:14px;
-    cursor:pointer;
-    font-family:inherit;
-}
-
-.dropdown-content a:hover,
-.dropdown-content button:hover{
-    background:#ccfbf1;
-    color:#0f766e;
-    transform:none;
 }
 
 .dropdown.open .dropdown-content{
     display:block;
 }
 
-/* ===== HEADER PRINCIPAL ===== */
-header{
-    background:#0f766e;
+.dropdown-content a{
+    display:block;
+    width:100%;
+    padding:10px;
+    color:#243447;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:14px;
+    text-align:left;
+}
+
+.dropdown-content a:hover{
     color:white;
-    padding:20px;
-    text-align:center;
+    background:#0f766e;
 }
 
 header h1{
+    padding:20px 10px;
+    margin:0;
     font-size:25px;
     line-height:1.5;
 }
 
-header a{
-    display:inline-block;
-    margin-top:10px;
-    padding:8px 12px;
-    color:white;
-    border:1px solid white;
-    border-radius:5px;
-    text-decoration:none;
+/* ===== CONTENU PRINCIPAL ===== */
+main{
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 18px;
 }
 
-header a:hover{
-    background:white;
-    color:#0f766e;
-}
-
-/* ===== CONTENU ===== */
-.menu{
-    max-width:900px;
-    margin:20px auto;
-    padding:10px;
-}
-
-.section-title{
+.page-title{
     background:#e0f2fe;
-    padding:10px;
+    padding:14px 16px;
     font-weight:bold;
-    margin-top:20px;
+    margin-bottom:18px;
     border-left:6px solid #0f766e;
+    border-radius:5px;
+    line-height:1.6;
 }
 
 .card{
     display:block;
     background:white;
-    padding:12px;
-    margin:8px 0;
+    padding:15px 16px;
+    margin:10px 0;
     text-decoration:none;
     color:#1e293b;
-    border-radius:6px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    transition:0.2s;
+    border-radius:8px;
+    box-shadow:0 2px 6px #00000012;
+    transition:.2s;
+    border-left:4px solid #00b894;
+    line-height:1.5;
 }
 
 .card:hover{
-    transform:scale(1.02);
+    transform:translateY(-2px);
     background:#f1f5f9;
 }
 
 /* ===== PIED DE PAGE ===== */
 footer{
-    background:#1e293b;
+    text-align:center;
+    padding:18px;
+    background:#2c3e50;
     color:white;
-    padding:20px;
-    margin-top:40px;
-}
-
-.footer-container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.footer-section{
-    flex:1;
-    min-width:200px;
-}
-
-.footer-section h3{
-    margin-bottom:10px;
-}
-
-.social a{
-    display:inline-block;
-    margin-right:10px;
-    margin-bottom:8px;
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    transition:0.3s;
-}
-
-.social a:hover{
-    color:#38bdf8;
+    margin-top:35px;
 }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:700px){
-    .topbar{
-        position:relative;
-        align-items:flex-start;
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
     }
 
-    .nav{
+    .brand{
+        justify-content:center;
+    }
+
+    .site-menu{
         width:100%;
     }
 
+    .site-menu>a,
+    .dropdown>button{
+        padding:9px;
+        font-size:13px;
+    }
+
     .dropdown-content{
-        min-width:230px;
-        max-width:85vw;
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+        max-width:90vw;
     }
 
     header h1{
-        font-size:20px;
+        font-size:21px;
     }
 
-    .footer-container{
-        flex-direction:column;
+    main{
+        padding:0 12px;
     }
 }
 </style>
@@ -235,330 +220,175 @@ footer{
 
 <body>
 
-<!-- ===== BARRE DE NAVIGATION ===== -->
-<div class="topbar">
-
-    <div class="logo">IgnDay</div>
-
-    <div class="nav">
-
-        <!-- ===== MENU DES PARTIES DU MODULE M1 ===== -->
-        <div class="dropdown">
-
-            <button type="button" aria-expanded="false">
-                P1 – Comptabilité générale / Concepts de base ▼
-            </button>
-
-            <div class="dropdown-content">
-
-                <a href="C1P1M1.html">
-                    ► Résumés des thèmes
-                </a>
-
-                <a href="C2P1M1.html">
-                    ► Formulaires interactifs
-                </a>
-
-                <a href="C3P1M1.html">
-                    ► Exercices corrigés
-                </a>
-
-            </div>
-        </div>
-
-        <!-- ===== MENU DES LANGUES ===== -->
-        <div class="dropdown">
-
-            <button type="button" aria-expanded="false">
-                Langue 🌐 ▼
-            </button>
-
-            <div class="dropdown-content">
-
-                <button type="button" data-language="fr">
-                    🇫🇷 Français (FR)
-                </button>
-
-                <button type="button" data-language="en">
-                    🇬🇧 English (GB)
-                </button>
-
-                <button type="button" data-language="ar">
-                    🇸🇦 العربية (SA)
-                </button>
-
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- ===== HEADER ===== -->
+<!-- ===== EN-TÊTE ET BARRE DE NAVIGATION ===== -->
 <header>
 
-    <h1
-        data-fr="📘 Plateforme de formation et d'apprentissage interactif « IgnDay »"
-        data-en="📘 IgnDay Interactive Learning and Training Platform"
-        data-ar="📘 منصة IgnDay للتكوين والتعلم التفاعلي">
+    <div class="brandbar">
 
-        📘 Plateforme de formation et d'apprentissage interactif « IgnDay »
+        <a class="brand" href="index.html">
+            <span class="brand-logo">IF</span>
+            <span>IgnDay</span>
+        </a>
 
+        <nav class="site-menu">
+
+            <!-- ACCUEIL -->
+            <a href="index.html">Accueil</a>
+
+            <!-- MENU DES MODULES -->
+            <div class="dropdown">
+
+                <button type="button" aria-expanded="false">
+                    Modules ▼
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="M1.html">M1 – Comptabilité générale</a>
+                    <a href="M2.html">M2 – Comptabilité analytique</a>
+                    <a href="M3.html">M3 – Analyse financière</a>
+                    <a href="M4.html">M4 – Fiscalité</a>
+                    <a href="M5.html">M5 – Mathématiques financières</a>
+                    <a href="M6.html">M6 – Statistiques</a>
+                    <a href="M7.html">M7 – Marketing</a>
+                    <a href="M8.html">M8 – Comptabilité approfondie</a>
+                    <a href="M9.html">M9 – Management</a>
+                </div>
+
+            </div>
+
+            <!-- MENU DES PARTIES DU MODULE M1 -->
+            <div class="dropdown">
+
+                <button type="button" aria-expanded="false">
+                    M1 – Comptabilité générale ▼
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="P1M1.html">P1 – Concepts de base</a>
+                    <a href="P2M1.html">P2 – Opérations courantes</a>
+                    <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+                </div>
+
+            </div>
+
+            <!-- MENU DES CONTENUS -->
+            <div class="dropdown">
+
+                <button type="button" aria-expanded="false">
+                    P1 – Concepts de base ▼
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="C1P1M1.html">T – Résumés des thèmes</a>
+                    <a href="C2P1M1.html">F – Formulaires interactifs</a>
+                    <a href="C3P1M1.html">E – Exercices corrigés</a>
+                </div>
+
+            </div>
+
+            <!-- RETOUR -->
+            <a href="P1M1.html">⬅ Retour</a>
+
+        </nav>
+
+    </div>
+
+    <h1>
+        M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; E - Exercices corrigés
     </h1>
-
-    <a href="P1M1.html"
-       data-fr="⬅ Retour"
-       data-en="⬅ Back"
-       data-ar="⬅ رجوع">
-
-        ⬅ Retour
-
-    </a>
 
 </header>
 
-<!-- ===== CONTENU ===== -->
-<main class="menu">
+<!-- ===== CONTENU DES EXERCICES ===== -->
+<main>
 
-    <div class="section-title"
-         data-fr="Formation en Comptabilité générale / Concepts de base / Exercices corrigés"
-         data-en="General Accounting / Basic Concepts / Corrected Exercises"
-         data-ar="التكوين في المحاسبة العامة / المفاهيم الأساسية / تمارين مصححة">
-
+    <div class="page-title">
         Formation en Comptabilité générale / Concepts de base / Exercices corrigés
-
     </div>
 
-    <a href="E1C3P1M1.html" class="card"
-       data-fr="➡️ Exercice 1 : Le bilan comptable"
-       data-en="➡️ Exercise 1: The Balance Sheet"
-       data-ar="➡️ التمرين 1: الميزانية المحاسبية">
-
+    <a href="E1C3P1M1.html" class="card">
         ➡️ Exercice 1 : Le bilan comptable
-
     </a>
 
-    <a href="E2C3P1M1.html" class="card"
-       data-fr="➡️ Exercice 2 : Le compte et le bilan comptable"
-       data-en="➡️ Exercise 2: Accounting Accounts and the Balance Sheet"
-       data-ar="➡️ التمرين 2: الحساب والميزانية المحاسبية">
-
+    <a href="E2C3P1M1.html" class="card">
         ➡️ Exercice 2 : Le compte et le bilan comptable
-
     </a>
 
-    <a href="E3C3P1M1.html" class="card"
-       data-fr="➡️ Exercice 3 : Le compte de produits et de charges (CPC)"
-       data-en="➡️ Exercise 3: The Income Statement"
-       data-ar="➡️ التمرين 3: حساب العائدات والتكاليف">
-
-        ➡️ Exercice 3 : Le compte de produits et de charges CPC
-
+    <a href="E3C3P1M1.html" class="card">
+        ➡️ Exercice 3 : Le compte de produits et de charges (CPC)
     </a>
 
-    <a href="E4C3P1M1.html" class="card"
-       data-fr="➡️ Exercice 4 : Le journal comptable"
-       data-en="➡️ Exercise 4: The General Journal"
-       data-ar="➡️ التمرين 4: دفتر اليومية">
-
+    <a href="E4C3P1M1.html" class="card">
         ➡️ Exercice 4 : Le journal comptable
-
     </a>
 
-    <a href="E5C3P1M1.html" class="card"
-       data-fr="➡️ Exercice 5 : Le grand livre"
-       data-en="➡️ Exercise 5: The General Ledger"
-       data-ar="➡️ التمرين 5: دفتر الأستاذ">
-
+    <a href="E5C3P1M1.html" class="card">
         ➡️ Exercice 5 : Le grand livre
-
     </a>
 
-    <a href="E6C3P1M1.html" class="card"
-       data-fr="➡️ Exercice 6 : La balance"
-       data-en="➡️ Exercise 6: The Trial Balance"
-       data-ar="➡️ التمرين 6: ميزان المراجعة">
-
+    <a href="E6C3P1M1.html" class="card">
         ➡️ Exercice 6 : La balance
-
     </a>
 
 </main>
 
-<!-- ===== FOOTER ===== -->
+<!-- ===== PIED DE PAGE IDENTIQUE AU MODÈLE FOURNI ===== -->
 <footer>
-
-    <div class="footer-container">
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="Contact"
-                data-en="Contact"
-                data-ar="اتصل بنا">
-                Contact
-            </h3>
-
-            <p
-                data-fr="📍 Adresse : Maroc"
-                data-en="📍 Address: Morocco"
-                data-ar="📍 العنوان: المغرب">
-                📍 Adresse : Maroc
-            </p>
-
-            <p
-                data-fr="📱 Téléphone : +212 00000000"
-                data-en="📱 Phone: +212 00000000"
-                data-ar="📱 الهاتف: +212 00000000">
-                📱 Téléphone : +212 00000000
-            </p>
-
-        </div>
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="🌐 Réseaux sociaux"
-                data-en="🌐 Social Networks"
-                data-ar="🌐 شبكات التواصل الاجتماعي">
-                🌐 Réseaux sociaux
-            </h3>
-
-            <div class="social">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">WhatsApp</a>
-                <a href="#">Instagram</a>
-                <a href="#">YouTube</a>
-                <a href="#">TikTok</a>
-            </div>
-
-        </div>
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="ℹ️ À propos"
-                data-en="ℹ️ About"
-                data-ar="ℹ️ حول المنصة">
-                ℹ️ À propos
-            </h3>
-
-            <p
-                data-fr="Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de la gestion des entreprises."
-                data-en="An interactive training and learning platform for vocational trainees, students and professionals in business management."
-                data-ar="منصة للتكوين والتعلم التفاعلي مخصصة للمتدربين في التكوين المهني والطلاب والمهنيين في مجال تدبير المقاولات.">
-
-                Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de la gestion des entreprises.
-
-            </p>
-
-        </div>
-
-    </div>
-
+    Formation en comptabilité générale
 </footer>
 
 <script>
-
 /* ===== GESTION DES MENUS DÉROULANTS ===== */
-const dropdowns = document.querySelectorAll(".dropdown");
 
-dropdowns.forEach(dropdown => {
+function closeDropdowns(except){
 
-    const button = dropdown.querySelector("button");
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-    button.addEventListener("click", event => {
+        if(dropdown !== except){
+
+            dropdown.classList.remove("open");
+
+            const button = dropdown.querySelector(":scope > button");
+
+            if(button){
+                button.setAttribute("aria-expanded","false");
+            }
+        }
+    });
+}
+
+document.querySelectorAll(".dropdown > button").forEach(button=>{
+
+    button.addEventListener("click",function(event){
 
         event.stopPropagation();
 
-        dropdowns.forEach(other => {
+        const dropdown = this.parentElement;
+        const wasOpen = dropdown.classList.contains("open");
 
-            if(other !== dropdown){
-                other.classList.remove("open");
+        closeDropdowns(dropdown);
 
-                other.querySelector("button")
-                     .setAttribute("aria-expanded","false");
-            }
+        dropdown.classList.toggle("open",!wasOpen);
 
-        });
-
-        const isOpen = dropdown.classList.toggle("open");
-
-        button.setAttribute("aria-expanded", String(isOpen));
-
+        this.setAttribute("aria-expanded",String(!wasOpen));
     });
-
 });
 
-document.addEventListener("click", event => {
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(){
 
-    dropdowns.forEach(dropdown => {
-
-        if(!dropdown.contains(event.target)){
-            dropdown.classList.remove("open");
-
-            dropdown.querySelector("button")
-                    .setAttribute("aria-expanded","false");
-        }
-
-    });
-
+    closeDropdowns(null);
 });
 
-/* ===== TRADUCTION FR / EN / AR ===== */
-const languageNames = {
-    fr:"Langue 🌐 ▼",
-    en:"Language 🌐 ▼",
-    ar:"اللغة 🌐 ▼"
-};
+/* Garder le menu ouvert lors d'un clic à l'intérieur */
+document.querySelectorAll(".dropdown-content").forEach(menu=>{
 
-function changeLanguage(language){
-
-    document.documentElement.lang = language;
-
-    document.documentElement.dir =
-        language === "ar" ? "rtl" : "ltr";
-
-    document.querySelectorAll("[data-" + language + "]")
-    .forEach(element => {
-
-        const translation = element.getAttribute("data-" + language);
-
-        if(translation !== null){
-            element.textContent = translation;
-        }
-
+    menu.addEventListener("click",function(event){
+        event.stopPropagation();
     });
-
-    /* Actualiser le bouton de langue */
-    const languageButton = document.querySelector(
-        ".nav .dropdown:last-child > button"
-    );
-
-    languageButton.textContent = languageNames[language];
-
-    /* Fermer les menus après le choix */
-    dropdowns.forEach(dropdown => {
-
-        dropdown.classList.remove("open");
-
-        dropdown.querySelector("button")
-                .setAttribute("aria-expanded","false");
-
-    });
-
-}
-
-/* ===== CHOIX DE LA LANGUE ===== */
-document.querySelectorAll("[data-language]").forEach(button => {
-
-    button.addEventListener("click", () => {
-        changeLanguage(button.dataset.language);
-    });
-
 });
-
 </script>
 
 </body>
 </html>
+
