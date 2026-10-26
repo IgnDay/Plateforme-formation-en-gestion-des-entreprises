@@ -1,235 +1,213 @@
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IgnDay Analyse financière</title>
+<title>IgnDay Résumés des thèmes - Analyse financière</title>
 
 <style>
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#f4f6f9;
-    color:#1e293b;
+* {
+    box-sizing: border-box;
 }
 
-/* ===== BARRE DE NAVIGATION ===== */
-.topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:12px;
-    background:#0f766e;
-    color:white;
-    padding:10px 20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f9;
+    color: #1e293b;
 }
 
-.logo{
-    font-size:20px;
-    font-weight:bold;
-    white-space:nowrap;
+/* ===== EN-TÊTE ET IDENTITÉ ===== */
+header {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 10px #0003;
 }
 
-.nav{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
+.brandbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 12px 22px;
+    background: linear-gradient(120deg, #0f172a, #0f766e);
 }
 
-.nav button{
-    color:white;
-    padding:8px 10px;
-    border-radius:4px;
-    transition:0.3s;
-    border:none;
-    background:transparent;
-    font-size:14px;
-    cursor:pointer;
-    font-family:inherit;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 19px;
 }
 
-.nav button:hover{
-    background:#0e7490;
-    transform:translateY(-2px);
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #00b894;
+    font-size: 19px;
+}
+
+.site-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.site-menu > a,
+.dropdown > button {
+    display: block;
+    padding: 10px 13px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+}
+
+.site-menu > a:hover,
+.dropdown > button:hover {
+    background: #ffffff2b;
 }
 
 /* ===== MENUS DÉROULANTS ===== */
-.dropdown{
-    position:relative;
-    display:inline-block;
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:260px;
-    max-height:65vh;
-    overflow-y:auto;
-    background:white;
-    box-shadow:0 5px 15px rgba(0,0,0,.18);
-    border-radius:6px;
-    padding:6px 0;
-    z-index:2000;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    max-height: 70vh;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 7px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 6px 18px #0003;
 }
 
-.dropdown-content a,
-.dropdown-content button{
-    display:block;
-    width:100%;
-    box-sizing:border-box;
-    text-align:left;
-    color:#1e293b;
-    background:white;
-    padding:10px 14px;
-    text-decoration:none;
-    border:none;
-    border-radius:0;
-    font-size:14px;
-    cursor:pointer;
-    font-family:inherit;
+.dropdown.open .dropdown-content {
+    display: block;
 }
 
-.dropdown-content a:hover,
-.dropdown-content button:hover{
-    background:#ccfbf1;
-    color:#0f766e;
-    transform:none;
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #243447;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 1.5;
 }
 
-.dropdown.open .dropdown-content{
-    display:block;
+.dropdown-content a:hover {
+    color: white;
+    background: #0f766e;
 }
 
-/* ===== HEADER PRINCIPAL ===== */
-header{
-    background:#0f766e;
-    color:white;
-    padding:20px;
-    text-align:center;
+header h1 {
+    padding: 20px 10px;
+    margin: 0;
+    font-size: 25px;
+    line-height: 1.4;
 }
 
-header h1{
-    font-size:25px;
-    line-height:1.5;
+/* ===== CONTENU PRINCIPAL ===== */
+main {
+    max-width: 1000px;
+    margin: 25px auto;
+    padding: 0 18px;
 }
 
-header a{
-    display:inline-block;
-    margin-top:10px;
-    padding:8px 12px;
-    color:white;
-    border:1px solid white;
-    border-radius:5px;
-    text-decoration:none;
+.page-title {
+    background: #e0f2fe;
+    padding: 14px 16px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    border-left: 6px solid #0f766e;
+    border-radius: 5px;
+    line-height: 1.6;
 }
 
-header a:hover{
-    background:white;
-    color:#0f766e;
+.card {
+    display: block;
+    background: white;
+    padding: 15px 16px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #1e293b;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #00000012;
+    transition: .2s;
+    border-left: 4px solid #00b894;
+    line-height: 1.6;
 }
 
-/* ===== CONTENU ===== */
-.menu{
-    max-width:900px;
-    margin:20px auto;
-    padding:10px;
-}
-
-.section-title{
-    background:#e0f2fe;
-    padding:10px;
-    font-weight:bold;
-    margin-top:20px;
-    border-left:6px solid #0f766e;
-    line-height:1.6;
-}
-
-.card{
-    display:block;
-    background:white;
-    padding:12px;
-    margin:8px 0;
-    text-decoration:none;
-    color:#1e293b;
-    border-radius:6px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    transition:0.2s;
-    line-height:1.6;
-}
-
-.card:hover{
-    transform:scale(1.02);
-    background:#f1f5f9;
+.card:hover {
+    transform: translateY(-2px);
+    background: #f1f5f9;
 }
 
 /* ===== PIED DE PAGE ===== */
-footer{
-    background:#1e293b;
-    color:white;
-    padding:20px;
-    margin-top:40px;
-}
-
-.footer-container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.footer-section{
-    flex:1;
-    min-width:200px;
-}
-
-.footer-section h3{
-    margin-bottom:10px;
-}
-
-.social a{
-    display:inline-block;
-    margin-right:10px;
-    margin-bottom:8px;
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    transition:0.3s;
-}
-
-.social a:hover{
-    color:#38bdf8;
+footer {
+    text-align: center;
+    padding: 18px;
+    background: #2c3e50;
+    color: white;
+    margin-top: 35px;
 }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:700px){
-    .topbar{
-        position:relative;
-        align-items:flex-start;
+@media (max-width: 760px) {
+
+    .brandbar {
+        justify-content: center;
+        padding: 12px;
     }
 
-    .nav{
-        width:100%;
+    .site-menu {
+        width: 100%;
     }
 
-    .dropdown-content{
-        min-width:230px;
-        max-width:85vw;
+    .site-menu > a,
+    .dropdown > button {
+        padding: 9px;
     }
 
-    header h1{
-        font-size:20px;
+    .dropdown-content {
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 220px;
+        max-width: 90vw;
     }
 
-    .footer-container{
-        flex-direction:column;
+    header h1 {
+        font-size: 21px;
+    }
+
+    main {
+        padding: 0 12px;
     }
 }
 </style>
@@ -237,329 +215,187 @@ footer{
 
 <body>
 
-<!-- ===== BARRE DE NAVIGATION ===== -->
-<div class="topbar">
+<header>
 
-    <div class="logo">IgnDay</div>
+    <div class="brandbar">
 
-    <div class="nav">
+        <a class="brand" href="index.html">
+            <span class="brand-logo">IF</span>
+            <span>IgnDay</span>
+        </a>
 
-        <!-- ===== MENU DES PARTIES DU MODULE M3 ===== -->
-        <div class="dropdown">
+        <div class="site-menu">
 
-            <button type="button" aria-expanded="false">
-                    
+            <!-- MENU ACCUEIL -->
+            <a href="index.html">Accueil</a>
 
-                P3 – Analyse des équilibres financiers ▼
+            <!-- MENU DES MODULES -->
+            <div class="dropdown">
 
-            </button>
+                <button type="button" aria-expanded="false">
+                    Modules ▼
+                </button>
 
-            <div class="dropdown-content">
-
-                <a href="C1P3M3.html">
-                   
-
-                    ► Résumés des thèmes
-
-                </a>
-
-                <a href="C2P3M3.html">
-                   
-
-                    ► Formulaires interactifs
-
-                </a>
-
-                <a href="C3P3M3.html">
-
-                    ► Exercices corrigés
-
-                </a>
+                <div class="dropdown-content">
+                    <a href="M1.html">M1 – Comptabilité générale</a>
+                    <a href="M2.html">M2 – Comptabilité analytique</a>
+                    <a href="M3.html">M3 – Analyse financière</a>
+                    <a href="M4.html">M4 – Fiscalité</a>
+                    <a href="M5.html">M5 – Mathématiques financières</a>
+                    <a href="M6.html">M6 – Statistiques</a>
+                    <a href="M7.html">M7 – Marketing</a>
+                    <a href="M8.html">M8 – Comptabilité approfondie</a>
+                    <a href="M9.html">M9 – Management</a>
+                </div>
 
             </div>
-        </div>
 
-        <!-- ===== MENU DES LANGUES ===== -->
-        <div class="dropdown">
+            <!-- MENU DES PARTIES DU MODULE M3 -->
+            <div class="dropdown">
 
-            <button type="button" aria-expanded="false"
-                    data-fr="Langue 🌐 ▼"
-                    data-en="Language 🌐 ▼"
-                    data-ar="اللغة 🌐 ▼">
-
-                Langue 🌐 ▼
-
-            </button>
-
-            <div class="dropdown-content">
-
-                <button type="button" data-language="fr">
-                    🇫🇷 Français (FR)
+                <button type="button" aria-expanded="false">
+                    M3 – Analyse financière ▼
                 </button>
 
-                <button type="button" data-language="en">
-                    🇬🇧 English (GB)
-                </button>
+                <div class="dropdown-content">
 
-                <button type="button" data-language="ar">
-                    🇸🇦 العربية (SA)
-                </button>
+                    <a href="P1M3.html">
+                        P1 – Les concepts de base et la démarche du diagnostic financier
+                    </a>
+
+                    <a href="P2M3.html">
+                        P2 – L’analyse de l’activité et de la rentabilité
+                    </a>
+
+                    <a href="P3M3.html">
+                        P3 – L’analyse des équilibres financiers
+                    </a>
+
+                    <a href="P4M3.html">
+                        P4 – L’analyse des flux de trésorerie
+                    </a>
+
+                    <a href="P5M3.html">
+                        P5 – L’analyse par les ratios
+                    </a>
+
+                </div>
 
             </div>
+
+            <!-- MENU DES CONTENUS -->
+            <div class="dropdown">
+
+                <button type="button" aria-expanded="false">
+                    P3 – Analyse des équilibres financiers ▼
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="C1P3M3.html">T – Résumés des thèmes</a>
+                    <a href="C2P3M3.html">F – Formulaires interactifs</a>
+                    <a href="C3P3M3.html">E – Exercices corrigés</a>
+                </div>
+
+            </div>
+
+            <!-- BOUTON RETOUR -->
+            <a href="P3M3.html">⬅ Retour</a>
+
         </div>
 
     </div>
-</div>
 
-<!-- ===== HEADER ===== -->
-<header>
-
-    <h1
-        data-fr="📘 Plateforme de formation et d'apprentissage interactif « IgnDay »"
-        data-en="📘 IgnDay Interactive Learning and Training Platform"
-        data-ar="📘 منصة IgnDay للتكوين والتعلم التفاعلي">
-
-        📘 Plateforme de formation et d'apprentissage interactif « IgnDay »
-
+    <h1>
+        M3 - Analyse financière &gt;
+        P3 - L’analyse des équilibres financiers &gt;&gt;
+        T - Résumés des thèmes
     </h1>
-
-    <a href="P3M3.html"
-       data-fr="⬅ Retour"
-       data-en="⬅ Back"
-       data-ar="⬅ رجوع">
-
-        ⬅ Retour
-
-    </a>
 
 </header>
 
-<!-- ===== CONTENU ===== -->
-<main class="menu">
+<!-- ===== CONTENU CONSERVÉ DU FICHIER SOURCE ===== -->
+<main>
 
-    <div class="section-title"
-         data-fr="Formation en Analyse financière / Analyse des équilibres financiers / Résumés des thèmes"
-         data-en="Financial Analysis / Analysis of Financial Equilibrium / Topic Summaries"
-         data-ar="التكوين في التحليل المالي / تحليل التوازنات المالية / ملخصات المحاور">
-
-        Formation en Analyse financière / Analyse des équilibres financiers / Résumés des thèmes
-
-    </div>
-
-    <a href="T1C1P3M3.html" class="card"
-       data-fr="➡️ Thème 1 : Le bilan comptable et ses limites"
-       data-en="➡️ Topic 1: The Accounting Balance Sheet and Its Limitations"
-       data-ar="➡️ المحور 1: الميزانية المحاسبية وحدودها">
-
+    <a href="T1C1P3M3.html" class="card">
         ➡️ Thème 1 : Le bilan comptable et ses limites
-
     </a>
 
-    <a href="T2C1P3M3.html" class="card"
-       data-fr="➡️ Thème 2 : L’analyse du bilan selon l’approche fonctionnelle : le passage du bilan comptable au bilan fonctionnel"
-       data-en="➡️ Topic 2: Functional Balance Sheet Analysis: From the Accounting Balance Sheet to the Functional Balance Sheet"
-       data-ar="➡️ المحور 2: تحليل الميزانية وفق المقاربة الوظيفية: الانتقال من الميزانية المحاسبية إلى الميزانية الوظيفية">
-
-        ➡️ Thème 2 : L’analyse du bilan selon l’approche fonctionnelle : le passage du bilan comptable au bilan fonctionnel
-
+    <a href="T2C1P3M3.html" class="card">
+        ➡️ Thème 2 : L’analyse du bilan selon l’approche fonctionnelle :
+        le passage du bilan comptable au bilan fonctionnel
     </a>
 
-    <a href="T3C1P3M3.html" class="card"
-       data-fr="➡️ Thème 3 : L’analyse du bilan selon l’approche patrimoniale (Liquidité/Exigibilité) : le passage du bilan comptable au bilan financier"
-       data-en="➡️ Topic 3: Balance Sheet Analysis Using the Asset-Based Approach (Liquidity/Due Dates): From the Accounting Balance Sheet to the Financial Balance Sheet"
-       data-ar="➡️ المحور 3: تحليل الميزانية وفق المقاربة المالية (السيولة والاستحقاق): الانتقال من الميزانية المحاسبية إلى الميزانية المالية">
-
-        ➡️ Thème 3 : L’analyse du bilan selon l’approche patrimoniale (Liquidité/Exigibilité) : le passage du bilan comptable au bilan financier
-
+    <a href="T3C1P3M3.html" class="card">
+        ➡️ Thème 3 : L’analyse du bilan selon l’approche patrimoniale
+        (Liquidité/Exigibilité) : le passage du bilan comptable au bilan financier
     </a>
 
 </main>
 
 <!-- ===== PIED DE PAGE ===== -->
 <footer>
-
-    <div class="footer-container">
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="Contact"
-                data-en="Contact"
-                data-ar="اتصل بنا">
-
-                Contact
-
-            </h3>
-
-            <p
-                data-fr="📍 Adresse : Maroc"
-                data-en="📍 Address: Morocco"
-                data-ar="📍 العنوان: المغرب">
-
-                📍 Adresse : Maroc
-
-            </p>
-
-            <p
-                data-fr="📱 Téléphone : +212 00000000"
-                data-en="📱 Phone: +212 00000000"
-                data-ar="📱 الهاتف: +212 00000000">
-
-                📱 Téléphone : +212 00000000
-
-            </p>
-
-        </div>
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="🌐 Réseaux sociaux"
-                data-en="🌐 Social Networks"
-                data-ar="🌐 شبكات التواصل الاجتماعي">
-
-                🌐 Réseaux sociaux
-
-            </h3>
-
-            <div class="social">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">WhatsApp</a>
-                <a href="#">Instagram</a>
-                <a href="#">YouTube</a>
-                <a href="#">TikTok</a>
-            </div>
-
-        </div>
-
-        <div class="footer-section">
-
-            <h3
-                data-fr="ℹ️ À propos"
-                data-en="ℹ️ About"
-                data-ar="ℹ️ حول المنصة">
-
-                ℹ️ À propos
-
-            </h3>
-
-            <p
-                data-fr="Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de la gestion des entreprises."
-                data-en="An interactive training and learning platform for vocational trainees, students and professionals in business management."
-                data-ar="منصة للتكوين والتعلم التفاعلي مخصصة للمتدربين في التكوين المهني والطلاب والمهنيين في مجال تدبير المقاولات.">
-
-                Plateforme de formation et d'apprentissage interactif dédiée aux stagiaires en formation professionnelle, aux étudiants ou aux professionnels dans le domaine de la gestion des entreprises.
-
-            </p>
-
-        </div>
-
-    </div>
-
+    Formation en Analyse financière
 </footer>
 
 <script>
 
 /* ===== GESTION DES MENUS DÉROULANTS ===== */
-const dropdowns = document.querySelectorAll(".dropdown");
 
-dropdowns.forEach(dropdown => {
+function closeDropdowns(except) {
 
-    const button = dropdown.querySelector("button");
+    document.querySelectorAll(".dropdown").forEach(dropdown => {
 
-    button.addEventListener("click", event => {
-
-        event.stopPropagation();
-
-        dropdowns.forEach(other => {
-
-            if(other !== dropdown){
-
-                other.classList.remove("open");
-
-                other.querySelector("button")
-                     .setAttribute("aria-expanded","false");
-
-            }
-
-        });
-
-        const isOpen = dropdown.classList.toggle("open");
-
-        button.setAttribute("aria-expanded", String(isOpen));
-
-    });
-
-});
-
-document.addEventListener("click", event => {
-
-    dropdowns.forEach(dropdown => {
-
-        if(!dropdown.contains(event.target)){
+        if (dropdown !== except) {
 
             dropdown.classList.remove("open");
 
-            dropdown.querySelector("button")
-                    .setAttribute("aria-expanded","false");
+            const button = dropdown.querySelector("button");
 
+            if (button) {
+                button.setAttribute("aria-expanded", "false");
+            }
         }
+    });
+}
 
+document.querySelectorAll(".dropdown > button").forEach(button => {
+
+    button.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        const dropdown = this.parentElement;
+        const wasOpen = dropdown.classList.contains("open");
+
+        closeDropdowns(dropdown);
+
+        dropdown.classList.toggle("open", !wasOpen);
+
+        this.setAttribute("aria-expanded", String(!wasOpen));
     });
 
 });
 
-/* ===== TRADUCTION FR / EN / AR ===== */
-const languageNames = {
-    fr:"Langue 🌐 ▼",
-    en:"Language 🌐 ▼",
-    ar:"اللغة 🌐 ▼"
-};
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click", function() {
+    closeDropdowns(null);
+});
 
-function changeLanguage(language){
+/* Garder le menu ouvert lors d'un clic à l'intérieur */
+document.querySelectorAll(".dropdown-content").forEach(menu => {
 
-    document.documentElement.lang = language;
-
-    document.documentElement.dir =
-        language === "ar" ? "rtl" : "ltr";
-
-    document.querySelectorAll("[data-" + language + "]")
-    .forEach(element => {
-
-        const translation = element.getAttribute("data-" + language);
-
-        if(translation !== null){
-            element.textContent = translation;
-        }
-
+    menu.addEventListener("click", function(event) {
+        event.stopPropagation();
     });
 
-    /* Actualiser le bouton du menu des langues */
-    const languageButton = document.querySelector(
-        ".nav .dropdown:last-child > button"
-    );
+});
 
-    languageButton.textContent = languageNames[language];
+/* Fermer les menus avec la touche Échap */
+document.addEventListener("keydown", function(event) {
 
-    /* Fermer les menus après le choix */
-    dropdowns.forEach(dropdown => {
-
-        dropdown.classList.remove("open");
-
-        dropdown.querySelector("button")
-                .setAttribute("aria-expanded","false");
-
-    });
-
-}
-
-/* ===== CHOIX DE LA LANGUE ===== */
-document.querySelectorAll("[data-language]").forEach(button => {
-
-    button.addEventListener("click", () => {
-        changeLanguage(button.dataset.language);
-    });
+    if (event.key === "Escape") {
+        closeDropdowns(null);
+    }
 
 });
 
@@ -567,4 +403,3 @@ document.querySelectorAll("[data-language]").forEach(button => {
 
 </body>
 </html>
-
