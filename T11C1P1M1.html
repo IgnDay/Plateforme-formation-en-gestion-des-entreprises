@@ -1,27 +1,146 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay - T11 La Balance des Comptes</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
-    background: #f4f6f9;
+    background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:20px 10px;
+    margin:0;
+    font-size:25px;
+}
+
+header h1 p{
+    margin:10px 0;
+    line-height:1.5;
+    font-size:20px;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== MENU DES RUBRIQUES ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -31,63 +150,57 @@ nav{
 nav button{
     margin:5px;
     padding:12px 18px;
-    border:none;
+    border:0;
     background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* TITRES */
+/* ===== CONTENU ===== */
 h2{
     color:#2c3e50;
 }
@@ -96,24 +209,60 @@ h3{
     color:#00b894;
 }
 
-/* TABLEAUX */
-table{
+p,li{
+    line-height:1.7;
+}
+
+ul,ol{
+    padding-left:25px;
+}
+
+/* ===== TABLEAU DE LA BALANCE ===== */
+.balance-wrapper{
     width:100%;
+    overflow-x:auto;
+    margin:15px 0 25px;
+}
+
+.balance-table{
+    width:100%;
+    min-width:750px;
     border-collapse:collapse;
     background:white;
     margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    box-shadow:0 2px 10px #00000014;
 }
 
-td{
+.balance-table td,
+.balance-table th{
     border:1px solid #ccc;
     padding:10px;
+    vertical-align:middle;
+}
+
+.balance-table th{
+    background:#dfe6e9;
+    text-align:center;
+}
+
+.balance-table td:first-child{
+    text-align:center;
+}
+
+.balance-table td:nth-child(n+3){
+    text-align:right;
+}
+
+.balance-table tbody tr:hover td{
+    background:#f1f7ff;
+    transition:.2s;
 }
 
 .titre{
     text-align:center;
-    font-size:24px;
+    font-size:20px;
     font-weight:bold;
+    margin:20px 0;
 }
 
 .bold{
@@ -128,18 +277,21 @@ td{
     text-align:right;
 }
 
-.header{
-    background:#dfe6e9;
+/* ===== ENCADRÉS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
 }
 
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
+/* ===== EXERCICE ===== */
+#EE .titre{
+    color:#0f766e;
 }
 
-/* FOOTER */
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
     padding:15px;
@@ -153,154 +305,382 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    header h1{
+        font-size:21px;
+    }
+
+    header h1 p{
+        font-size:16px;
+    }
+
+    .balance-table{
+        font-size:14px;
+    }
+
+    .balance-table td,
+    .balance-table th{
+        padding:7px;
+    }
+
+    .titre{
+        font-size:17px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
-
 </head>
 
 <body>
 
+<!-- ===== EN-TÊTE ET NAVIGATION PRINCIPALE ===== -->
 <header>
-    <h1>📘 La Balance des Comptes</h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+T - Résumés des thèmes ▼
+</button>
+
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 - Notion de compte</a>
+<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 - Le grand livre</a>
+<a href="T11C1P1M1.html">T11 - La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T11 - La Balance des Comptes</p>
+</h1>
+
 </header>
 
+<!-- ===== MENU DES RUBRIQUES ===== -->
 <nav>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('role')">Rôle</button>
-    <button onclick="showSection('presentation')">Présentation</button>
-    <button onclick="showSection('EE')">Exercice d’évaluation</button>
+<button class="btnActive"
+onclick="showSection('def',this)">
+Définition
+</button>
 
+<button onclick="showSection('role',this)">
+Rôle
+</button>
+
+<button onclick="showSection('presentation',this)">
+Présentation
+</button>
+
+<button onclick="showSection('EE',this)">
+Exercice d’évaluation
+</button>
 </nav>
 
-<section id="def" class="active">
-    <h2>📘 Définition de la balance</h2>
+<!-- ===== DÉFINITION ===== -->
+<section id="def" class="active animationSection">
 
-    <p>
-        La balance est un document comptable de synthèse qui présente,
-        à une date donnée, l’ensemble des comptes de l’entreprise.
-    </p>
+<h2>📘 Définition de la balance</h2>
 
-    <div class="highlight">
-        ✔ Document périodique<br>
-        ✔ Liste de tous les comptes<br>
-        ✔ Classement selon le plan comptable
-    </div>
-
-    <p>
-        👉 Pour chaque compte, on indique :
-    </p>
-
-    <ul>
-        <li>Total Débit</li>
-        <li>Total Crédit</li>
-        <li>Solde (Débiteur ou Créditeur)</li>
-    </ul>
-</section>
-
-<section id="role">
-    <h2>🎯 Rôle de la balance</h2>
-
-    <ul>
-        <li>✔ Vérifier l’égalité : Total Débit = Total Crédit</li>
-        <li>✔ Contrôler les erreurs comptables</li>
-        <li>✔ Préparer les états de synthèse</li>
-        <li>✔ Donner une vue globale des comptes</li>
-    </ul>
-
-    <div class="highlight">
-        ✔ Outil essentiel de contrôle et d’analyse
-    </div>
-</section>
-
-<section id="presentation">
-    <h2>📊 Présentation de la balance</h2>
-
-    <table>
-        <tr>
-            <td><b>Compte</b></td>
-            <td><b>Intitulé</b></td>
-            <td><b>Total Débit</b></td>
-            <td><b>Total Crédit</b></td>
-            <td><b>Solde Débiteur</b></td>
-            <td><b>Solde Créditeur</b></td>
-        </tr>
-
-        <tr>
-            <td>3421</td>
-            <td>Clients</td>
-            <td>15 000</td>
-            <td>10 000</td>
-            <td>5 000</td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>4411</td>
-            <td>Fournisseurs</td>
-            <td>5 000</td>
-            <td>12 000</td>
-            <td></td>
-            <td>7 000</td>
-        </tr>
-    </table>
-
-    <div class="highlight">
-<p>✔ La somme Total débit = somme Total crédit</p>
-        ✔ La somme des soldes débiteurs = somme des soldes créditeurs
-    </div>
-</section>
-<section id="EE">
 <p>
-► Élaborer la balance des comptes de la société AL AMAL, objet de l'exercice d'évaluation du thème N° 09 relatif au journal comptable.
+La balance est un document comptable de synthèse qui présente,
+à une date donnée, l’ensemble des comptes de l’entreprise.
 </p>
-💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer la balance. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème.
+
+<div class="highlight">
+✔ Document périodique<br>
+✔ Liste de tous les comptes<br>
+✔ Classement selon le plan comptable
+</div>
+
+<p>👉 Pour chaque compte, on indique :</p>
+
+<ul>
+<li>Total Débit</li>
+<li>Total Crédit</li>
+<li>Solde (Débiteur ou Créditeur)</li>
+</ul>
+
 </section>
 
+<!-- ===== RÔLE DE LA BALANCE ===== -->
+<section id="role">
+
+<h2>🎯 Rôle de la balance</h2>
+
+<ul>
+<li>✔ Vérifier l’égalité : Total Débit = Total Crédit</li>
+<li>✔ Contrôler les erreurs comptables</li>
+<li>✔ Préparer les états de synthèse</li>
+<li>✔ Donner une vue globale des comptes</li>
+</ul>
+
+<div class="highlight">
+✔ Outil essentiel de contrôle et d’analyse
+</div>
+
+</section>
+
+<!-- ===== PRÉSENTATION DE LA BALANCE ===== -->
+<section id="presentation">
+
+<h2>📊 Présentation de la balance</h2>
+
+<div class="balance-wrapper">
+
+<table class="balance-table">
+
+<thead>
+<tr>
+<th>Compte</th>
+<th>Intitulé</th>
+<th>Total Débit</th>
+<th>Total Crédit</th>
+<th>Solde Débiteur</th>
+<th>Solde Créditeur</th>
+</tr>
+</thead>
+
+<tbody>
+
+
+
+
+<tr>
+<td>1111</td>
+<td>Capital</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3421</td>
+<td>Clients</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>4411</td>
+<td>Fournisseurs</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+<div class="highlight">
+<p>✔ La somme Total débit = somme Total crédit</p>
+✔ La somme des soldes débiteurs = somme des soldes créditeurs
+</div>
+
+</section>
+
+<!-- ===== EXERCICE D'ÉVALUATION ===== -->
+<section id="EE">
+
+<h2>📝 Exercice d’évaluation</h2>
+
+<p>
+► Élaborer la balance des comptes de la société AL AMAL, objet de
+l'exercice d'évaluation du thème N° 09 relatif au journal comptable.
+</p>
+
+<div class="highlight">
+💡 Nous vous invitons à recourir à notre formulaire interactif afin
+d’élaborer la balance. Nous vous recommandons également de consulter
+les exercices corrigés mis à votre disposition sur notre site en lien
+avec ce thème.
+</div>
+
+</section>
+
+<!-- ===== PIED DE PAGE ===== -->
 <footer>
-Formation en comptabilité générale
-<br>
-
-<a href="C1P1M1.html">⬅ Retour </a>
-
+<span>Formation en comptabilité générale</span>
+<br><br>
 </footer>
+
+<script>
+
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* ===== FERMER LES MENUS EN CLIQUANT À L'EXTÉRIEUR ===== */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+
+        }
+
+    });
+
+});
+
+/* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+}
+
+</script>
 
 </body>
 </html>
+
+
