@@ -1,27 +1,146 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale - CPC</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
-    background: #f4f6f9;
+    background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
+    background:#2c3e50;
     color:white;
-    padding:10px;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:min(320px,90vw);
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+    line-height:1.5;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:20px;
+    line-height:1.6;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -37,77 +156,84 @@ nav button{
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
 }
 
-/* TABLEAUX */
+p{line-height:1.7}
+ul,ol{line-height:1.8}
+
+/* ===== TABLEAUX ===== */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin:20px 0;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
     margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    box-shadow:0 2px 10px #00000014;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    text-align:left;
+    line-height:1.6;
+}
+
+th{
+    background:#dfe6e9;
+    font-weight:bold;
 }
 
 .titre{
@@ -116,36 +242,52 @@ td{
     font-weight:bold;
 }
 
-.bold{
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+
+.header-cell{
+    background:#dfe6e9;
     font-weight:bold;
 }
 
-.center{
-    text-align:center;
+tr:hover td{background:#f1f7ff}
+
+/* ===== BLOCS IMPORTANTS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    line-height:1.9;
 }
 
-.right{
-    text-align:right;
+.container{
+    background:white;
+    padding:25px;
+    border-left:6px solid #3498db;
+    box-shadow:0 0 10px #0000001a;
+    border-radius:8px;
 }
 
-.header{
-    background:#dfe6e9;
+.container p:first-child{margin-top:0}
+
+.exercise-list li{margin-bottom:7px}
+
+.section-row td{
+    background:#ecf0f1;
+    font-weight:bold;
 }
 
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-/* FOOTER */
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
+    line-height:1.7;
 }
 
 footer a{
@@ -153,295 +295,546 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{text-decoration:underline}
+
+/* ===== TABLETTE ===== */
+@media(max-width:760px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+        justify-content:center;
+    }
+
+    .site-menu>a{padding:9px}
+    .dropdown button{padding:9px}
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:17px;
+        padding:15px 10px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav{padding:8px}
+    nav button{padding:10px;font-size:14px}
+    .container{padding:18px}
+    td,th{padding:8px}
 }
 
+/* ===== TÉLÉPHONE ===== */
+@media(max-width:480px){
+    .brand{font-size:18px}
+
+    .brand-logo{
+        width:40px;
+        height:40px;
+    }
+
+    .site-menu{gap:4px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:12px;
+        padding:8px 7px;
+    }
+
+    .dropdown-content{
+        position:fixed;
+        top:auto;
+        left:5%;
+        transform:none;
+        width:90%;
+        max-width:90%;
+        min-width:0;
+        max-height:65vh;
+        overflow-y:auto;
+    }
+
+    header h1{
+        font-size:15px;
+        overflow-wrap:anywhere;
+    }
+
+    section{
+        padding:14px;
+        margin:8px;
+        border-radius:8px;
+    }
+
+    .animationSection{border-left-width:5px}
+
+    h2{
+        font-size:20px;
+        line-height:1.4;
+    }
+
+    h3{font-size:17px}
+    p,li{font-size:14px}
+
+    nav button{
+        display:inline-block;
+        margin:4px 2px;
+        padding:10px 8px;
+        font-size:12px;
+        max-width:100%;
+    }
+
+    .container{padding:13px}
+
+    .highlight{
+        padding:11px;
+        font-size:13px;
+        line-height:1.7;
+    }
+
+    .table-wrapper{overflow-x:auto}
+
+    table{min-width:440px}
+
+    footer{
+        padding:15px 10px;
+        font-size:13px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Compte de Produits et de Charges (CPC)</h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T – Résumés des thèmes</a>
+<a href="C2P1M1.html">F – Formulaires interactifs</a>
+<a href="C3P1M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 – Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 – Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 – L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 – Notion de compte</a>
+<a href="T5C1P1M1.html">T5 – Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 – Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 – Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 – L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 – Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 – Le grand livre</a>
+<a href="T11C1P1M1.html">T11 – La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P1 – Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T5 – Le compte de produits et charges (CPC)</p>
+</h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('produits')">Produits</button>
-    <button onclick="showSection('charges')">Charges</button>
-    <button onclick="showSection('structure')">Structure</button>
-    <button onclick="showSection('fonctionnement')">Fonctionnement</button>
-   <button onclick="showSection('EE')">Exercice d’évaluation</button>
-
+<button class="btnActive" onclick="showSection('def',this)">Définition</button>
+<button onclick="showSection('produits',this)">Produits</button>
+<button onclick="showSection('charges',this)">Charges</button>
+<button onclick="showSection('structure',this)">Structure</button>
+<button onclick="showSection('fonctionnement',this)">Fonctionnement</button>
+<button onclick="showSection('evaluation',this)">Exercice d’évaluation</button>
 </nav>
 
-<section id="def" class="active">
-    <h2>📘 Définition du CPC</h2>
+<!-- ===== SECTION 1 : DÉFINITION ===== -->
+<section id="def" class="active animationSection">
 
-    <p>
-        Le Compte de Produits et de Charges (CPC) est un document comptable
-        qui permet de déterminer le résultat de l’entreprise.
-    </p>
+<h2>📘 Définition du CPC</h2>
 
-    <div class="highlight">
-        ✔ Il regroupe les PRODUITS et les CHARGES<br>
-        ✔ Il explique comment le résultat est formé
-    </div>
+<p>
+Le Compte de Produits et de Charges (CPC) est un document comptable
+qui permet de déterminer le résultat de l’entreprise.
+</p>
 
-    <p>
-        👉 Le CPC décrit les performances de l’entreprise pendant un exercice.
-    </p>
+<div class="highlight">
+✔ Il regroupe les <strong>produits</strong> et les <strong>charges</strong>.<br>
+✔ Il explique comment le résultat de l’exercice est formé.
+</div>
+
+<p>
+👉 Le CPC décrit les performances de l’entreprise pendant un exercice comptable.
+</p>
+
 </section>
 
+<!-- ===== SECTION 2 : PRODUITS ===== -->
 <section id="produits">
-    <h2>💰 Les Produits (Classe 7 dans le PCGM)</h2>
 
-    <p>
-        Les produits représentent les revenus générés par l’activité de l’entreprise.
-    </p>
+<h2>💰 Les produits (classe 7 dans le PCGM)</h2>
 
-    <div class="highlight">
-        👉 Ce sont les entrées d’argent
-    </div>
+<p>
+Les produits représentent les ressources générées par l’activité de l’entreprise.
+Ils contribuent à la formation du résultat.
+</p>
 
-    <h3>Exemples :</h3>
-    <ul>
-        <li>Ventes de marchandises</li>
-        <li>Ventes de services</li>
-        <li>Intérêts reçus</li>
-        <li>Cession d’immobilisations</li>
-    </ul>
+<div class="highlight">
+👉 Les produits augmentent le résultat de l’entreprise. Ils ne correspondent
+pas nécessairement à des entrées d’argent immédiates.
+</div>
+
+<h3>Exemples de produits</h3>
+
+<ul>
+<li>Ventes de marchandises.</li>
+<li>Ventes de services et prestations.</li>
+<li>Intérêts reçus.</li>
+<li>Subventions d’exploitation.</li>
+<li>Produits de cession d’immobilisations.</li>
+</ul>
+
 </section>
 
+<!-- ===== SECTION 3 : CHARGES ===== -->
 <section id="charges">
-    <h2>💸 Les Charges(Classe 6 dans le PCGM)</h2>
 
-    <p>
-        Les charges représentent les dépenses engagées pour le fonctionnement de l’entreprise.
-    </p>
+<h2>💸 Les charges (classe 6 dans le PCGM)</h2>
 
-    <div class="highlight">
-        👉 Ce sont les sorties d’argent
-    </div>
+<p>
+Les charges représentent les consommations et les coûts supportés par
+l’entreprise dans le cadre de son activité.
+</p>
 
-    <h3>Exemples :</h3>
-    <ul>
-        <li>Achats de marchandises</li>
-        <li>Charges de personnel</li>
-        <li>Intérêts versés</li>
-    </ul>
+<div class="highlight">
+👉 Les charges diminuent le résultat. Elles ne correspondent pas nécessairement
+à des sorties d’argent immédiates.
+</div>
+
+<h3>Exemples de charges</h3>
+
+<ul>
+<li>Achats de marchandises et de matières premières.</li>
+<li>Charges de personnel.</li>
+<li>Frais de transport et d’entretien.</li>
+<li>Intérêts versés.</li>
+<li>Dotations aux amortissements et aux provisions.</li>
+</ul>
+
 </section>
 
+<!-- ===== SECTION 4 : STRUCTURE DU CPC ===== -->
 <section id="structure">
-    <h2>📊 Structure du CPC</h2>
 
-    <p>Le CPC est composé de 3 catégories :</p>
+<h2>📊 Structure du CPC</h2>
 
-    <h3>1️⃣ Exploitation</h3>
-    <ul>
-        <li><b>71 Produits d'exploitation :</b> ventes, services et d'autres produits d'exploitation</li>
-        <li><b>61 Charges d'exploitation :</b> Achats, loyers, transport et d'autres charges lièes à l'exploitation</li>
-    </ul>
+<p>Le CPC marocain distingue principalement les catégories suivantes :</p>
 
-    <h3>2️⃣ Financier</h3>
-    <ul>
-        <li><b>73 Produits financiers :</b> intérêts reçus et d'autres produits financiers</li>
-        <li><b>63 Charges fiancières :</b> intérêts payés et d'autres charges financières</li>
-    </ul>
+<h3>1. Exploitation</h3>
+<ul>
+<li><strong>71 – Produits d’exploitation :</strong> ventes, prestations de services et autres produits d’exploitation.</li>
+<li><strong>61 – Charges d’exploitation :</strong> achats, loyers, transport et autres charges d’exploitation.</li>
+</ul>
 
-    <h3>3️⃣ Non courant (Exceptionnel)</h3>
-    <ul>
-        <li><b>75 Produits non courants:</b> Cession d'immobilisations et d'autres prdouits exeptionnels</li>
-        <li><b>65 Charges non courantes :</b> Pénalités, pertes sur crénces et d'autres charges exeptionnelles</li>
-    </ul>
+<h3>2. Financier</h3>
+<ul>
+<li><strong>73 – Produits financiers :</strong> intérêts reçus et autres produits financiers.</li>
+<li><strong>63 – Charges financières :</strong> intérêts payés et autres charges financières.</li>
+</ul>
 
-    <div class="highlight">
-        ✔ Ces éléments permettent de calculer le résultat global
-    </div>
+<h3>3. Non courant</h3>
+<ul>
+<li><strong>75 – Produits non courants :</strong> produits de cession d’immobilisations et autres produits non courants.</li>
+<li><strong>65 – Charges non courantes :</strong> pénalités, amendes et autres charges non courantes.</li>
+</ul>
+
+<div class="highlight">
+✔ Ces catégories contribuent au calcul du résultat de l’exercice.
+</div>
+
+<h3>Principe de calcul du résultat</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Rôle dans le résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Produits</td>
+<td>Augmentent le résultat.</td>
+</tr>
+<tr>
+<td>Charges</td>
+<td>Diminuent le résultat.</td>
+</tr>
+<tr>
+<td><strong>Résultat</strong></td>
+<td><strong>Total des produits − Total des charges</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
 </section>
 
+<!-- ===== SECTION 5 : FONCTIONNEMENT ===== -->
 <section id="fonctionnement">
-    <h2>⚙️ Fonctionnement des comptes du CPC</h2>
 
-    <ul>
-        <li><b>Les comptes de produits :</b> augmentent au crédit et diminuent au débit</li>
-        <li><b>Les comptes de charges :</b> diminuent au crédit et augmentent au débit</li>
-    </ul>
+<h2>⚙️ Fonctionnement des comptes du CPC</h2>
 
-    <div class="highlight">
-        ✔ Résultat = Produits - Charges
-    </div>
+<ul>
+<li><strong>Les comptes de produits :</strong> augmentent au crédit et diminuent au débit.</li>
+<li><strong>Les comptes de charges :</strong> augmentent au débit et diminuent au crédit.</li>
+</ul>
 
-    <p>
-        👉 Si Produits > Charges → Bénéfice  
-        👉 Si Charges > Produits → Perte
-    </p>
+<div class="highlight">
+<strong>Résultat = Total des produits − Total des charges</strong>
+</div>
+
+<p>
+👉 Si les produits sont supérieurs aux charges, l’entreprise réalise un bénéfice.<br>
+👉 Si les charges sont supérieures aux produits, l’entreprise enregistre une perte.<br>
+👉 Si les produits sont égaux aux charges, le résultat est nul.
+</p>
+
+<h3>Exemple simplifié</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Éléments</th>
+<th class="right">Montant (DH)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total des produits</td>
+<td class="right">150 000</td>
+</tr>
+<tr>
+<td>Total des charges</td>
+<td class="right">120 000</td>
+</tr>
+<tr>
+<td><strong>Résultat bénéficiaire</strong></td>
+<td class="right"><strong>30 000</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
 </section>
 
-<section id="EE">
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Exercice CPC Avancé</title>
+<!-- ===== SECTION 6 : EXERCICE D'ÉVALUATION ===== -->
+<section id="evaluation">
 
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
-
-.container{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:25px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-h1{
-    text-align:center;
-    color:#2c3e50;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-}
-
-th, td{
-    border:1px solid #444;
-    padding:10px;
-    text-align:center;
-}
-
-th{
-    background:#3498db;
-    color:white;
-}
-
-.section{
-    background:#ecf0f1;
-    font-weight:bold;
-}
-
-ul{
-    margin-top:20px;
-    line-height:1.8;
-}
-</style>
-
-</head>
-
-<body>
+<h2>📝 Exercice d’évaluation : Compte de Produits et Charges</h2>
 
 <div class="container">
 
-<h1>📘 EXERCICE : COMPTE DE PRODUITS ET CHARGES (CPC)</h1>
+<h3 style="margin-top:0;color:#2c3e50">Énoncé</h3>
 
 <p>
-Les éléments suivants sont extraits de la comptabilité de l’entreprise 
-<strong>« MAGHREB DISTRIBUTION.SARL »</strong> au <strong>31/12/2025</strong>.
+Les éléments suivants sont extraits de la comptabilité de l’entreprise
+<strong>« MAGHREB DISTRIBUTION.SARL »</strong> au
+<strong>31/12/2025</strong>.
 </p>
 
+<div class="table-wrapper">
 <table>
+<thead>
 <tr>
 <th>Libellé</th>
-<th>Montant (MAD)</th>
+<th class="right">Montant (MAD)</th>
+</tr>
+</thead>
+<tbody>
+
+<tr class="section-row">
+<td colspan="2">PRODUITS</td>
 </tr>
 
-<tr class="section"><td colspan="2">Produits</td></tr>
+<tr><td>Ventes de marchandises</td><td class="right">520 000</td></tr>
+<tr><td>Prestations de services</td><td class="right">80 000</td></tr>
+<tr><td>Produits financiers (intérêts)</td><td class="right">12 000</td></tr>
+<tr><td>Subvention d’exploitation</td><td class="right">10 000</td></tr>
+<tr><td>Autres produits d’exploitation</td><td class="right">5 000</td></tr>
+<tr><td>Produits de cession d’immobilisation</td><td class="right">15 000</td></tr>
+<tr><td>Variation de stocks (produits finis)</td><td class="right">3 000</td></tr>
 
-<tr><td>Ventes de marchandises</td><td>520 000</td></tr>
-<tr><td>Prestations de services</td><td>80 000</td></tr>
-<tr><td>Produits financiers (intérêts)</td><td>12 000</td></tr>
-<tr><td>Escomptes obtenus</td><td>6 000</td></tr>
-<tr><td>Subvention d’exploitation</td><td>10 000</td></tr>
-<tr><td>Autres produits d’exploitation</td><td>5 000</td></tr>
-<tr><td>Produits exceptionnels</td><td>7 000</td></tr>
-<tr><td>Reprises sur provisions</td><td>4 000</td></tr>
-<tr><td>Produits de cession d’immobilisation</td><td>15 000</td></tr>
-<tr><td>Variation de stocks (produits finis)</td><td>3 000</td></tr>
+<tr class="section-row">
+<td colspan="2">CHARGES</td>
+</tr>
 
-<tr class="section"><td colspan="2">Charges</td></tr>
+<tr><td>Achats de marchandises</td><td class="right">350 000</td></tr>
+<tr><td>Achats de matières premières</td><td class="right">40 000</td></tr>
+<tr><td>Charges de personnel</td><td class="right">160 000</td></tr>
+<tr><td>Charges de transport</td><td class="right">9 000</td></tr>
+<tr><td>Charges d’entretien</td><td class="right">8 000</td></tr>
+<tr><td>Charges financières (intérêts)</td><td class="right">7 000</td></tr>
+<tr><td>Impôts et taxes</td><td class="right">12 000</td></tr>
+<tr><td>Pénalités et amendes</td><td class="right">3 000</td></tr>
 
-<tr><td>Achats de marchandises</td><td>350 000</td></tr>
-<tr><td>Achats de matières premières</td><td>40 000</td></tr>
-<tr><td>Charges de personnel</td><td>160 000</td></tr>
-<tr><td>Charges de transport</td><td>9 000</td></tr>
-<tr><td>Charges d’entretien</td><td>8 000</td></tr>
-<tr><td>Charges financières (intérêts)</td><td>7 000</td></tr>
-<tr><td>Impôts et taxes</td><td>12 000</td></tr>
-<tr><td>Pénalités et amendes</td><td>3 000</td></tr>
-<tr><td>Dotations aux amortissements</td><td>20 000</td></tr>
-<tr><td>Autres charges non courantes</td><td>6 000</td></tr>
-
+</tbody>
 </table>
+</div>
 
-<p><strong>Données complémentaires :</strong></p>
-<ul>
-<li>Stock initial de marchandises: 40 000 MAD</li>
-<li>Stock final de marchandises : 55 000 MAD</li>
-<li>Taux de l’impôt sur les sociétés : 10%</li>
+<h3>Données complémentaires</h3>
+
+<ul class="exercise-list">
+<li>Stock initial de marchandises : 40 000 MAD.</li>
+<li>Stock final de marchandises : 55 000 MAD.</li>
+<li>Taux de l’impôt sur les sociétés : 10 %.</li>
 </ul>
 
-<h2>📝 Travail à faire :</h2>
+<h3>Travail à faire</h3>
 
-► Établir le Compte de Produits et Charges (CPC)
+<ol class="exercise-list">
+<li>Classer les différents produits et charges selon leur nature.</li>
+<li>Calculer la variation du stock de marchandises.</li>
+<li>Établir le Compte de Produits et Charges (CPC).</li>
+</ol>
 
 </div>
 
-</body>
-</html>
-💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer le CPC. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème.
+<div class="highlight">
+💡 Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer
+le CPC. Nous vous recommandons également de consulter les exercices corrigés
+mis à votre disposition sur notre site en lien avec ce thème.
+</div>
+
 </section>
 
 <footer>
-    Formation en comptabilité générale
-<br>
-
-<a href="C1P1M1.html">⬅ Retour </a>
-
+Formation en comptabilité générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
+
+
