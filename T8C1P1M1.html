@@ -1,93 +1,204 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay - T8 L’Organisation Comptable</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
-    background: #f4f6f9;
+    background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:20px 10px;
+    margin:0;
+    font-size:25px;
+}
+
+header h1 p{
+    margin:10px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== MENU DES RUBRIQUES ===== */
 nav{
     background:#34495e;
     padding:10px;
     text-align:center;
 }
 
-nav button{
+nav button,
+#quizForm button{
     margin:5px;
     padding:12px 18px;
-    border:none;
+    border:0;
     background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
-nav button:hover{
+nav button:hover,
+#quizForm button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* TITRES */
+/* ===== CONTENU ===== */
 h2{
     color:#2c3e50;
 }
@@ -96,18 +207,28 @@ h3{
     color:#00b894;
 }
 
-/* TABLEAUX */
+p,li{
+    line-height:1.7;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
     margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-td{
+td,th{
     border:1px solid #ccc;
     padding:10px;
+}
+
+th{
+    background:#dfe6e9;
+}
+
+tr:hover td{
+    background:#f1f7ff;
 }
 
 .titre{
@@ -128,18 +249,58 @@ td{
     text-align:right;
 }
 
-.header{
-    background:#dfe6e9;
+/* ===== ENCADRÉ ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
 }
 
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
+/* ===== EXERCICE VRAI / FAUX ===== */
+.q{
+    background:#f8fafc;
+    padding:15px;
+    margin:15px 0;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
 }
 
-/* FOOTER */
+.q p{
+    font-weight:bold;
+}
+
+.q label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin:9px 18px 9px 0;
+    line-height:1.6;
+    cursor:pointer;
+}
+
+.q input{
+    accent-color:#00b894;
+    cursor:pointer;
+}
+
+.correct{
+    color:#00804a;
+    font-weight:bold;
+}
+
+.wrong{
+    color:#d63031;
+    font-weight:bold;
+}
+
+#resultat{
+    padding:10px 0;
+    font-size:20px;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
     padding:15px;
@@ -153,271 +314,535 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:760px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    header h1{
+        font-size:21px;
+    }
+
+    table{
+        font-size:14px;
+    }
+
+    td,th{
+        padding:7px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
-
 </head>
 
 <body>
 
+<!-- ===== EN-TÊTE ET NAVIGATION PRINCIPALE ===== -->
 <header>
-    <h1>📘 L’Organisation Comptable</h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T - Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 - Notion de compte</a>
+<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 - Le grand livre</a>
+<a href="T11C1P1M1.html">T11 - La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T8 - L’Organisation Comptable</p>
+</h1>
+
 </header>
 
+<!-- ===== MENU DES RUBRIQUES ===== -->
 <nav>
-    <button onclick="showSection('importance')">Importance</button>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('pieces')">Pièces</button>
-    <button onclick="showSection('documents')">Documents</button>
-    <button onclick="showSection('systeme')">Système</button>
-    <button onclick="showSection('EE')">Exercice d’évaluation</button>
+<button class="btnActive" onclick="showSection('importance',this)">Importance</button>
+<button onclick="showSection('def',this)">Définition</button>
+<button onclick="showSection('pieces',this)">Pièces comptables</button>
+<button onclick="showSection('documents',this)">Documents comptables</button>
+<button onclick="showSection('systeme',this)">Système comptable</button>
+<button onclick="showSection('EE',this)">Exercice d’évaluation</button>
 </nav>
 
-<section id="importance" class="active">
-    <h2>🎯 Importance de l’organisation comptable</h2>
+<!-- ===== IMPORTANCE ===== -->
+<section id="importance" class="active animationSection">
 
-    <p>
-        Une entreprise réalise plusieurs opérations (achats, ventes, paiements…).
-    </p>
+<h2>🎯 Importance de l’organisation comptable</h2>
 
-    <div class="highlight">
-        ✔ Il est essentiel d’enregistrer ces opérations de manière organisée
-    </div>
+<p>
+Une entreprise réalise plusieurs opérations (achats, ventes, paiements…).
+</p>
 
-    <ul>
-        <li>Assurer un suivi précis des opérations</li>
-        <li>Éviter les erreurs</li>
-        <li>Faciliter le contrôle</li>
-        <li>Produire des informations fiables</li>
-    </ul>
+<div class="highlight">
+✔ Il est essentiel d’enregistrer ces opérations de manière organisée.
+</div>
+
+<ul>
+<li>Assurer un suivi précis des opérations</li>
+<li>Éviter les erreurs</li>
+<li>Faciliter le contrôle</li>
+<li>Produire des informations fiables</li>
+</ul>
+
 </section>
 
+<!-- ===== DÉFINITION ===== -->
 <section id="def">
-    <h2>📘 Définition de l’organisation comptable</h2>
 
-    <p>
-        L’organisation comptable est l’ensemble des moyens utilisés pour enregistrer,
-        classer et présenter les informations financières.
-    </p>
+<h2>📘 Définition de l’organisation comptable</h2>
 
-    <div class="highlight">
-        ✔ Basée sur des pièces comptables<br>
-        ✔ Et des documents comptables
-    </div>
+<p>
+L’organisation comptable est l’ensemble des moyens utilisés pour enregistrer,
+classer et présenter les informations financières.
+</p>
+
+<div class="highlight">
+✔ Basée sur des pièces comptables<br>
+✔ Et des documents comptables
+</div>
+
 </section>
 
+<!-- ===== PIÈCES COMPTABLES ===== -->
 <section id="pieces">
-    <h2>📄 Les pièces comptables</h2>
 
-    <p>
-        Ce sont les documents qui justifient les opérations comptables.
-    </p>
+<h2>📄 Les pièces comptables</h2>
 
-    <h3>Exemples :</h3>
-    <ul>
-        <li>Factures</li>
-        <li>Chèques</li>
-        <li>Bons de caisse</li>
-        <li>Quittances</li>
-    </ul>
+<p>
+Ce sont les documents qui justifient les opérations comptables.
+</p>
 
-    <div class="highlight">
-        ✔ Elles sont la base de l’information comptable
-    </div>
+<h3>Exemples :</h3>
+
+<ul>
+<li>Factures</li>
+<li>Chèques</li>
+<li>Bons de caisse</li>
+<li>Quittances</li>
+</ul>
+
+<div class="highlight">
+✔ Elles sont la base de l’information comptable.
+</div>
+
 </section>
 
+<!-- ===== DOCUMENTS COMPTABLES ===== -->
 <section id="documents">
-    <h2>📚 Les documents comptables</h2>
 
-    <p>
-        Ils permettent de classer et synthétiser les opérations.
-    </p>
+<h2>📚 Les documents comptables</h2>
 
-    <h3>Principaux documents :</h3>
-    <ul>
-        <li>Journal</li>
-        <li>Grand livre</li>
-        <li>Balance</li>
-        <li>Bilan</li>
-        <li>CPC</li>
-    </ul>
+<p>
+Ils permettent de classer et synthétiser les opérations.
+</p>
 
-    <div class="highlight">
-        ✔ Ils permettent d’analyser la situation financière
-    </div>
+<h3>Principaux documents :</h3>
+
+<ul>
+<li>Journal</li>
+<li>Grand livre</li>
+<li>Balance</li>
+<li>Bilan</li>
+<li>CPC</li>
+</ul>
+
+<div class="highlight">
+✔ Ils permettent d’analyser la situation financière.
+</div>
+
 </section>
 
+<!-- ===== SYSTÈME COMPTABLE ===== -->
 <section id="systeme">
-    <h2>⚙️ Le système comptable </h2>
 
-    <p>
-        Le système comptable suit plusieurs étapes :
-    </p>
+<h2>⚙️ Le système comptable</h2>
 
-    <table>
-        <tr><td>1</td><td>Collecte des pièces comptables</td></tr>
-        <tr><td>2</td><td>Enregistrement dans le journal</td></tr>
-        <tr><td>3</td><td>Report au grand livre</td></tr>
-        <tr><td>4</td><td>Établissement de la balance</td></tr>
-        <tr><td>5</td><td>Établissement du bilan</td></tr>
-        <tr><td>6</td><td>Établissement du CPC</td></tr>
-    </table>
+<p>
+Le système comptable suit plusieurs étapes :
+</p>
 
-    <div class="highlight">
-        ✔ Ce système garantit une comptabilité organisée et fiable
-    </div>
+<table>
+<thead>
+<tr>
+<th class="center">Étape</th>
+<th>Opération</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="center">1</td>
+<td>Collecte des pièces comptables</td>
+</tr>
+<tr>
+<td class="center">2</td>
+<td>Enregistrement dans le journal</td>
+</tr>
+<tr>
+<td class="center">3</td>
+<td>Report au grand livre</td>
+</tr>
+<tr>
+<td class="center">4</td>
+<td>Établissement de la balance</td>
+</tr>
+<tr>
+<td class="center">5</td>
+<td>Établissement du bilan</td>
+</tr>
+<tr>
+<td class="center">6</td>
+<td>Établissement du CPC</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight">
+✔ Ce système garantit une comptabilité organisée et fiable.
+</div>
+
 </section>
+
+<!-- ===== EXERCICE D'ÉVALUATION ===== -->
 <section id="EE">
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Vrai/Faux - Organisation Comptable</title>
 
+<h2>📝 Exercice d’évaluation – Vrai / Faux</h2>
 
-</head>
+<p>
+Lisez chaque affirmation, sélectionnez Vrai ou Faux, puis cliquez sur « Corriger ».
+</p>
 
-<body>
-
-<header>
-<h1>📘 Vrai / Faux - Organisation Comptable</h1>
-</header>
-
-<div class="container">
+<form id="quizForm">
 
 <div id="quiz"></div>
 
-<button onclick="corriger()">✅ Corriger</button>
+<button type="button" onclick="corrigerQuiz()">✅ Corriger</button>
+<button type="reset" onclick="effacerResultat()">↻ Réinitialiser</button>
 
-<h2 id="score"></h2>
+</form>
 
-</div>
+<h3 id="resultat"></h3>
+
+</section>
+
+<!-- ===== PIED DE PAGE ===== -->
+<footer>
+<span>Formation en comptabilité générale</span>
+<br><br>
+</footer>
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
 
-const questions = [
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
 
-{q:"1. L’organisation comptable permet d’assurer un enregistrement structuré des opérations.", answer:true},
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-{q:"2. Les pièces comptables servent uniquement à calculer le résultat.", answer:false},
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
 
-{q:"3. Les factures et chèques sont des pièces comptables.", answer:true},
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
 
-{q:"4. Le journal et le grand livre sont des documents comptables.", answer:true},
+    });
 
-{q:"5. La balance permet de vérifier l’égalité entre débit et crédit.", answer:true},
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
 
-{q:"6. Le système comptable commence par l’établissement du bilan.", answer:false},
+/* ===== FERMER LES MENUS EN CLIQUANT À L'EXTÉRIEUR ===== */
+document.addEventListener("click",function(event){
 
-{q:"7. Une bonne organisation comptable réduit les risques d’erreurs.", answer:true},
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-{q:"8. Les documents comptables ne servent pas à l’analyse financière.", answer:false},
+        if(!dropdown.contains(event.target)){
 
-{q:"9. Le CPC fait partie des documents de synthèse.", answer:true},
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
 
-{q:"10. L’organisation comptable n’a aucun impact sur la fiabilité des informations.", answer:false}
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
 
+        }
+
+    });
+
+});
+
+/* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+}
+
+/* ===== QUESTIONS VRAI / FAUX ===== */
+const questions=[
+{
+q:"1. L’organisation comptable permet d’assurer un enregistrement structuré des opérations.",
+answer:true
+},
+{
+q:"2. Les pièces comptables servent uniquement à calculer le résultat.",
+answer:false
+},
+{
+q:"3. Les factures et les chèques sont des pièces comptables.",
+answer:true
+},
+{
+q:"4. Le journal et le grand livre sont des documents comptables.",
+answer:true
+},
+{
+q:"5. La balance permet de vérifier l’égalité entre le total des débits et le total des crédits.",
+answer:true
+},
+{
+q:"6. Le système comptable commence par l’établissement du bilan.",
+answer:false
+},
+{
+q:"7. Une bonne organisation comptable réduit les risques d’erreurs.",
+answer:true
+},
+{
+q:"8. Les documents comptables ne servent pas à l’analyse financière.",
+answer:false
+},
+{
+q:"9. Le CPC fait partie des documents de synthèse.",
+answer:true
+},
+{
+q:"10. L’organisation comptable n’a aucun impact sur la fiabilité des informations.",
+answer:false
+}
 ];
 
-const quizDiv = document.getElementById("quiz");
+/* ===== GÉNÉRATION DU QUIZ ===== */
+function genererQuiz(){
 
-// Génération des questions
-questions.forEach((q,i)=>{
-let bloc = document.createElement("div");
-bloc.className="question";
+    const quizDiv=document.getElementById("quiz");
 
-bloc.innerHTML = `
-<p>${q.q}</p>
+    questions.forEach((question,i)=>{
 
-<label><input type="radio" name="q${i}" value="true"> Vrai</label>
-<label><input type="radio" name="q${i}" value="false"> Faux</label>
+        const bloc=document.createElement("div");
+        bloc.className="q";
 
-<p id="res${i}"></p>
-`;
+        bloc.innerHTML=`
+            <p>${question.q}</p>
 
-quizDiv.appendChild(bloc);
-});
+            <label>
+                <input type="radio" name="q${i}" value="true">
+                Vrai
+            </label>
 
-// Correction
-window.corriger = function(){
-let score = 0;
+            <label>
+                <input type="radio" name="q${i}" value="false">
+                Faux
+            </label>
 
-questions.forEach((q,i)=>{
-let rep = document.querySelector(`input[name="q${i}"]:checked`);
-let res = document.getElementById(`res${i}`);
+            <p id="res${i}"></p>
+        `;
 
-if(rep){
-if((rep.value === "true") === q.answer){
-res.innerHTML="✔ Bonne réponse";
-res.className="correct";
-score++;
-}else{
-res.innerHTML="❌ Mauvaise réponse";
-res.className="wrong";
+        quizDiv.appendChild(bloc);
+
+    });
+
 }
-}else{
-res.innerHTML="⚠ Non répondu";
-res.className="wrong";
+
+/* ===== CORRECTION AUTOMATIQUE ===== */
+function corrigerQuiz(){
+
+    let score=0;
+
+    questions.forEach((question,i)=>{
+
+        const reponse=document.querySelector(
+            'input[name="q'+i+'"]:checked'
+        );
+
+        const resultat=document.getElementById("res"+i);
+
+        resultat.className="";
+
+        if(!reponse){
+            resultat.textContent="⚠ Non répondu";
+            resultat.classList.add("wrong");
+            return;
+        }
+
+        if((reponse.value==="true")===question.answer){
+
+            resultat.textContent="✔ Bonne réponse";
+            resultat.classList.add("correct");
+            score++;
+
+        }else{
+
+            resultat.textContent="✘ Mauvaise réponse";
+            resultat.classList.add("wrong");
+
+        }
+
+    });
+
+    const appreciation=score>=8
+        ?"Excellent 👍"
+        :score>=5
+        ?"Bien, mais quelques points restent à revoir."
+        :"À revoir : relisez les rubriques du cours.";
+
+    document.getElementById("resultat").textContent=
+        "🎯 Score : "+score+"/10 — "+appreciation;
+
 }
-});
 
-document.getElementById("score").innerHTML="🎯 Score : "+score+"/10";
-};
+/* ===== RÉINITIALISATION DU QUIZ ===== */
+function effacerResultat(){
 
+    document.getElementById("resultat").textContent="";
+
+    questions.forEach((question,i)=>{
+
+        const resultat=document.getElementById("res"+i);
+
+        if(resultat){
+            resultat.textContent="";
+            resultat.className="";
+        }
+
+    });
+
+}
+
+/* ===== INITIALISATION ===== */
+document.addEventListener("DOMContentLoaded",function(){
+    genererQuiz();
 });
 
 </script>
 
 </body>
 </html>
-</section>
-<footer>
-    Formation en comptabilité générale
-<br>
 
-<a href="C1P1M1.html">⬅ Retour </a>
 
-</footer>
-
-</body>
-</html>
