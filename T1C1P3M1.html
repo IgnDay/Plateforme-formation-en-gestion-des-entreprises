@@ -2,26 +2,143 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale - Travaux de fin d’exercice</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.5;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+    line-height:1.5;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -37,87 +154,123 @@ nav button{
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
 }
 
-/* TABLEAUX */
+h4{
+    color:#0f766e;
+}
+
+p{
+    line-height:1.7;
+}
+
+ul{
+    line-height:1.8;
+}
+
+/* ===== BLOCS DE CONTENU ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin:15px 0;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.content-block{
+    background:#f8fafc;
+    padding:18px;
+    margin:15px 0;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
+}
+
+.legal{
+    background:#f8fafc;
+    border-left:5px solid #64748b;
+    padding:14px 18px;
+    margin:12px 0;
+    border-radius:6px;
+    line-height:1.8;
+}
+
+.legal strong{
+    color:#0f766e;
+}
+
+/* ===== TABLEAUX ===== */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin:20px 0 30px;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:15px auto 25px;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
-}
-
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
+    font-size:14px;
 }
 
 .center{
@@ -128,44 +281,120 @@ td{
     text-align:right;
 }
 
-.header{
+.bold{
+    font-weight:bold;
+}
+
+.header-cell{
     background:#dfe6e9;
+    font-weight:bold;
 }
 
-/* JOURNAL */
-.date{
+/* ===== OBJECTIFS ===== */
+.objective{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:9px;
+    padding:18px;
+    margin:18px 0;
+}
+
+.objective h3{
+    margin-top:0;
+}
+
+/* ===== SCHÉMA DU PROCESSUS ===== */
+.process-container{
+    max-width:850px;
+    margin:25px auto;
+    background:white;
+    padding:22px;
+    border:2px solid #cbd5e1;
+    border-radius:12px;
+    box-shadow:0 3px 12px #00000012;
+}
+
+.step{
     text-align:center;
-    background:#2c3e50;
+    font-size:17px;
+    font-weight:bold;
+    color:#0b2c5f;
+    margin:12px 0;
+    line-height:1.5;
+}
+
+.arrow{
+    text-align:center;
+    font-size:27px;
+    color:#00b894;
+    margin:8px 0;
+}
+
+.process-row{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:15px;
+    flex-wrap:wrap;
+    margin:18px 0;
+}
+
+.process-box{
+    flex:1 1 240px;
+    max-width:350px;
+    border:2px solid #0f766e;
+    border-radius:8px;
+    background:#fafafa;
+    overflow:hidden;
+}
+
+.process-box h3{
+    background:#0b2c5f;
     color:white;
+    margin:0;
+    padding:11px;
+    text-align:center;
+    font-size:15px;
+}
+
+.process-box ul{
+    margin:0;
+    padding:14px 30px;
+    font-size:14px;
+}
+
+.process-info{
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    padding:15px;
+    background:#f8fafc;
+    font-size:14px;
+    line-height:1.7;
+    margin:12px auto;
+    max-width:650px;
+    text-align:center;
+}
+
+.documents{
+    max-width:350px;
+    margin:15px auto;
+}
+
+.formule{
+    margin-top:25px;
+    padding:16px 8px 5px;
+    border-top:2px solid #0f766e;
+    text-align:center;
+    font-size:15px;
     font-weight:bold;
+    color:#0b2c5f;
+    line-height:1.8;
 }
 
-.debit{
-    background:#eaf4ff;
-    font-weight:bold;
-}
-
-.credit{
-    background:#fff4e6;
-    font-weight:bold;
-}
-
-.montant{
-    text-align:right;
-    background:#f8f9fa;
-    font-weight:bold;
-}
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-/* FOOTER */
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,536 +405,550 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:760px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    .process-container{
+        padding:12px;
+    }
+
+    .process-box{
+        flex-basis:100%;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 L’intérêt des travaux de fin d’exercice et les différentes opérations de régularisation  
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
 </a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+
+<div class="dropdown-content">
+<a href="C1P3M1.html">T – Résumés des thèmes</a>
+<a href="C2P3M1.html">F – Formulaires interactifs</a>
+<a href="C3P3M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+
+<div class="dropdown-content">
+<a href="T1C1P3M1.html" class="card">
+       T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation
+    </a>
+
+    <a href="T2C1P3M1.html" class="card">
+        T2 - La régularisation des stocks
+    </a>
+
+    <a href="T3C1P3M1.html" class="card">
+        T3 - Les amortissements
+    </a>
+
+    <a href="T4C1P3M1.html" class="card">
+       T4 - Les provisions pour dépréciation des immobilisations
+    </a>
+
+    <a href="T5C1P3M1.html" class="card">
+T5 - Les provisions pour dépréciation des éléments de l’actif circulant
+    </a>
+
+    <a href="T6C1P3M1.html" class="card">
+        T6 - Les provisions pour risques et charges
+    </a>
+
+    <a href="T7C1P3M1.html" class="card">
+        T7 - La régularisation des charges
+    </a>
+
+    <a href="T8C1P3M1.html" class="card">
+        T8 - La régularisation des produits
+    </a>
+
+</div>
+</div>
+
+<a href="C1P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
+<p>T1 – L’intérêt des travaux de fin d’exercice et les opérations de régularisation</p>
 </h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('INV')">L’inventaire</button>
-<button onclick="showSection('UTI')">Objectifs des travaux d’inventaire</button>
-<button onclick="showSection('BAI')">Etablissement de la balance avant inventaire</button>
-<button onclick="showSection('PRO')">Processus des travaux de fin d’exercice</button>
-
+<button onclick="showSection('INV',this)">L’inventaire</button>
+<button onclick="showSection('UTI',this)">Objectifs des travaux d’inventaire</button>
+<button onclick="showSection('BAI',this)">Balance avant inventaire</button>
+<button onclick="showSection('PRO',this)">Processus des travaux de fin d’exercice</button>
 </nav>
 
-<section id="INV" class="active">
-<style>
+<!-- ===== SECTION 1 : INVENTAIRE ===== -->
+<section id="INV" class="active animationSection">
 
-body{
-    font-family: Arial, sans-serif;
-    margin:20px;
-    background:#f4f7fb;
-    color:#222;
-}
+<h2>📘 Définition de l’inventaire</h2>
 
-/* TITRES */
-h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:35px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
-    letter-spacing:0.5px;
-}
+<p>
+L’inventaire consiste à établir une liste exhaustive des éléments figurant dans le bilan.
+</p>
 
-/* TABLEAUX */
-table{
-    width:70%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-    background:white;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* CELLULES */
-td{
-    border:1px solid #cfd8e3;
-    padding:8px;
-    font-size:14px;
-}
-
-/* DATE */
-.date{
-    text-align:center;
-    font-weight:bold;
-    background:#1e3a5f;
-    color:white;
-    font-size:15px;
-}
-
-/* COLONNES */
-.compte{
-    width:5%;
-    text-align:center;
-}
-
-.libelle{
-    width:30%;
-}
-
-.montant{
-    width:10%;
-    text-align:right;
-    white-space:nowrap;
-    background:#f9fbfd;
-    font-weight:bold;
-    color:#0b5e8e;
-}
-
-/* DEBIT */
-.debit{
-    background:#e8f4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
-
-/* CREDIT */
-.credit{
-    background:#fff2e6;
-    color:#b35400;
-    font-weight:bold;
-}
-
-/* CENTRAGE */
-.center{
-    text-align:center;
-}
-
-/* EFFET HOVER */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-</style>
-
-
-    <h2>Définition de l’inventaire</h2>
-
-    <p>
-        L'inventaire consiste à établir une liste exhaustive des éléments figurant dans le bilan.
-    <p>
+<p>
 Avant d’établir le bilan, il est nécessaire de procéder à un inventaire dans l’entreprise. Cet inventaire consiste à :
-    </p>
+</p>
 
-    <div class="highlight">
-        ✔ Dénombrer les éléments de l’actif et du passif <br>
-        ✔ Evaluer ces éléments c'est-à-dire leur donner une valeur réelle exprimée en monnaie nationale.
-    </div>
-
-
-
-    <h3>a-Aspect légal de l’inventaire :</h3>
-    <p>
-La loi comptable impose à toutes les entreprises tenant une comptabilité 
-    </p>
 <div class="highlight">
-        ✔ D’arrêter les comptes en fin d’exercice <br>
-        ✔ D’établir les états de synthèse (Bilan, C.P.C, ESG ……)
-    </div>
-→	Si nécessaire des écritures de régularisation sont comptabilisées afin que les comptes représentent la situation réelle de l’entreprise « Image fidèle »
+✔ Dénombrer les éléments de l’actif et du passif.<br>
+✔ Évaluer ces éléments, c’est-à-dire leur donner une valeur réelle exprimée en monnaie nationale.
+</div>
 
-<h1>Articles extraits de la loi N° 09-88 relative aux obligations comptables du commerçant</h1>
+<h3>a – Aspect légal de l’inventaire</h3>
 
-    <p>
+<p>
+La loi comptable impose aux entreprises qui tiennent une comptabilité de procéder aux opérations d’inventaire et d’établir les états de synthèse conformément aux dispositions légales applicables.
+</p>
 
-    
--Article 5 : Les éléments actif et passif de l'entreprise doivent faire l'objet d’un inventaire au moins une fois par exercice, à la fin de celui-ci.
-    
-    <p>
-
-    
-    
-      -Article 6 : Il doit être tenu un livre sur lequel sont transcrits le bilan et le compte de produits et de charges de chaque exercice.
-
-  
-    <p>
-
-        -Article 7 : La durée de l’exercice et de douze mois. Elle peut exceptionnellement être inférieure à douze mois, pour un exercice donné.
-    <p>
-    
--Article 18 : L’établissement des états de synthèse, sauf circonstances exceptionnelles justifiées dans état des informations complémentaires, doit se faire au plus tard dans les trois mois suivant la date de clôture de l’exercice.
-    </p>
-
-<h3>b-Aspect comptable (Code général de normalisation comptable ) :</h3>
-    <p>
-Les travaux de fin d’exercice se font en application des principes comptables suivants :
-    </p>
 <div class="highlight">
-✔ Principe de spécialisation des exercices :  Les charges et les produits doivent être rattachés à l'exercice qui les concerne effectivement et à celui-là seulement    </p>
+✔ Arrêter les comptes en fin d’exercice.<br>
+✔ Établir les états de synthèse : bilan, CPC et autres états requis.
+</div>
 
-<br>
-        ✔ Principe de prudence : Les produits ne sont pris en compte que s’ils sont certains et définitivement acquis à l'entreprise ; en revanche, les charges sont à prendre en compte dès lors qu'elles sont probables.     </p>
-<br>
-✔ Principe de continuité d'exploitation :  L'entreprise doit établir ses états de synthèse dans la perspective d'une poursuite normale de ses activités. </p>
+<p>
+Si nécessaire, des écritures de régularisation sont comptabilisées afin que les comptes représentent la situation réelle de l’entreprise et donnent une image fidèle de son patrimoine et de ses résultats.
+</p>
 
+<h3>Articles de la loi n° 9-88 relative aux obligations comptables du commerçant</h3>
 
+<div class="legal">
+<strong>Article 5 :</strong>
+Les éléments d’actif et de passif de l’entreprise doivent faire l’objet d’un inventaire au moins une fois par exercice, à la fin de celui-ci.
+</div>
 
-    </div>
+<div class="legal">
+<strong>Article 6 :</strong>
+Il doit être tenu un livre sur lequel sont transcrits le bilan et le compte de produits et de charges de chaque exercice.
+</div>
 
+<div class="legal">
+<strong>Article 7 :</strong>
+La durée de l’exercice est de douze mois. Elle peut exceptionnellement être inférieure à douze mois pour un exercice donné.
+</div>
 
+<div class="legal">
+<strong>Article 18 :</strong>
+L’établissement des états de synthèse doit respecter le délai légal applicable après la clôture de l’exercice, sous réserve des dispositions et exceptions prévues par la réglementation.
+</div>
 
-<h3>c-La périodicité des travaux d’inventaire :</h3>
-    <p>
-Les opérations de fin d’exercice ou « travaux d’inventaire » se réalisent en fin d’exercice comptable. 
-    </p>
-    <p>
-La plupart des entreprises clôturent l’exercice comptable le 31 décembre de chaque année civile. 
-    </p>
-→	Toutefois, comme aucun texte n’impose une date, il est possible de clôturer un exercice comptable à n’importe quelle date.
+<h3>b – Aspect comptable : Code général de normalisation comptable</h3>
 
+<p>
+Les travaux de fin d’exercice sont effectués conformément aux principes comptables suivants :
+</p>
+
+<div class="highlight">
+<strong>✔ Principe de spécialisation des exercices :</strong>
+les charges et les produits doivent être rattachés à l’exercice qui les concerne effectivement et à celui-là seulement.
+<br><br>
+
+<strong>✔ Principe de prudence :</strong>
+les produits ne sont pris en compte que s’ils sont certains et définitivement acquis à l’entreprise ; en revanche, les charges sont prises en compte dès lors qu’elles sont probables.
+<br><br>
+
+<strong>✔ Principe de continuité d’exploitation :</strong>
+l’entreprise établit ses états de synthèse dans la perspective d’une poursuite normale de ses activités.
+</div>
+
+<h3>c – Périodicité des travaux d’inventaire</h3>
+
+<p>
+Les opérations de fin d’exercice, ou « travaux d’inventaire », sont réalisées à la clôture de l’exercice comptable.
+</p>
+
+<p>
+La plupart des entreprises clôturent leur exercice comptable le 31 décembre de chaque année civile.
+</p>
+
+<div class="highlight">
+<strong>À retenir :</strong>
+la date de clôture dépend de la situation de l’entreprise et des règles qui lui sont applicables. Elle ne correspond pas nécessairement au 31 décembre.
+</div>
 
 </section>
 
+<!-- ===== SECTION 2 : OBJECTIFS ===== -->
 <section id="UTI">
-<h2>Objectifs des travaux d’inventaire</h2>
 
+<h2>🎯 Objectifs des travaux d’inventaire</h2>
 
+<div class="objective">
 
+<h3>a – Objectifs comptables</h3>
 
-<div class="section">
+<p>
+Les travaux d’inventaire sont indispensables pour contrôler et ajuster la comptabilité d’une entreprise en vue d’établir les comptes annuels à la clôture d’un exercice.
+</p>
 
-    <div class="arrow">
-<h3>a- Objectifs comptables :</h3>
-    </div>
+<p>Ces opérations permettent notamment de :</p>
 
-    <div class="content">
-
-        Les travaux d'inventaire sont indispensables pour contrôler
-        et ajuster la comptabilité d'une entreprise en vue d'établir
-        les comptes annuels à la clôture d'un exercice.
-
-        <br><br>
-
-        Ces opérations permettent en effet de :
-
-        <ul>
-
-            <li>Déterminer le résultat comptable de l'entreprise</li>
-
-            <li>Évaluer le stock</li>
-
-            <li>Enregistrer en comptabilité les dépréciations de certains actifs</li>
-
-            <li>Comptabiliser les écritures d'amortissement et les provisions</li>
-
-        </ul>
-
-    </div>
+<ul>
+<li>Déterminer le résultat comptable de l’entreprise.</li>
+<li>Évaluer les stocks à la clôture de l’exercice.</li>
+<li>Enregistrer les dépréciations de certains actifs.</li>
+<li>Comptabiliser les amortissements.</li>
+<li>Constater les provisions nécessaires.</li>
+<li>Régulariser les charges et les produits afin de respecter le principe de spécialisation des exercices.</li>
+<li>Présenter des états de synthèse donnant une image fidèle de la situation de l’entreprise.</li>
+</ul>
 
 </div>
 
-<!-- OBJECTIFS FISCAUX -->
+<div class="objective">
 
-<div class="section">
+<h3>b – Objectifs fiscaux</h3>
 
-    <div class="arrow">
-<h3>a- Objectifs fiscaux :</h3>
-        
-    </div>
+<p>
+Les travaux d’inventaire contribuent à déterminer le résultat fiscal et, selon les règles fiscales applicables, le montant de l’impôt à payer.
+</p>
 
-    <div class="content">
-
-        Les travaux d'inventaire ont également pour finalité
-        de déterminer le résultat fiscal et le montant de l'impôt à payer.
-
-    </div>
+<ul>
+<li>Identifier les charges et les produits de l’exercice.</li>
+<li>Tenir compte des réintégrations et des déductions fiscales nécessaires.</li>
+<li>Déterminer le résultat fiscal servant de base au calcul de l’impôt, conformément à la réglementation en vigueur.</li>
+</ul>
 
 </div>
 
-
-
+<div class="highlight">
+<strong>Synthèse :</strong>
+les travaux d’inventaire permettent de corriger les comptes, de déterminer le résultat de l’exercice et de préparer les états de synthèse.
+</div>
 
 </section>
+
+<!-- ===== SECTION 3 : BALANCE AVANT INVENTAIRE ===== -->
 <section id="BAI">
-<h2>La balance avant inventaire</h2>
 
+<h2>📊 La balance avant inventaire</h2>
 
-<div class="section">
+<div class="content-block">
 
-    <div class="arrow">
-    </div>
+<p>
+Avant de commencer les travaux de fin d’exercice proprement dits, il est nécessaire d’établir une balance qui regroupe et synthétise les opérations comptabilisées par l’entreprise durant l’exercice.
+</p>
 
-    <div class="content">
-
-        Avant de commencer les travaux de fin d’exercice proprement dit, il est nécessaire d’établir une balance qui regroupe et synthétise toutes les opérations effectuées par l’entreprise durant l’exercice.
-
-        <br><br>
-
+<p>
 Juste après son établissement, cette balance doit faire l’objet d’un contrôle arithmétique. Ce contrôle consiste à vérifier l’égalité entre le total des mouvements de la balance et le total des mouvements du journal général.
+</p>
 
-
-Après vérification de la stricte concordance entre ces totaux, il y a lieu de procéder à un contrôle de vraisemblance et un pointage des comptes afin de déceler les erreurs éventuelles.
-Parmi ces erreurs nous pouvons citer :
-
-
-        <ul>
- <li>Les erreurs d’imputation</li>
-
- <li>Les erreurs d’oublis (il s’agit de la non-comptabilisation d’une pièce justificative ou d’une charge calculée).</li>
-
-  <li>Les erreurs de saisies (il s’agit de l’enregistrement d’une pièce pour un chiffre différent de celui qui y est porté).</li>
-
-           
-        </ul>
-
-    </div>
+<p>
+Après vérification de la concordance entre ces totaux, il convient de procéder à un contrôle de vraisemblance et au pointage des comptes afin de déceler les erreurs éventuelles.
+</p>
 
 </div>
 
+<h3>Principales erreurs à rechercher</h3>
 
+<div class="objective">
 
+<ul>
+<li><strong>Les erreurs d’imputation :</strong> une opération est enregistrée dans un compte inapproprié.</li>
 
+<li><strong>Les erreurs d’omission :</strong> une pièce justificative ou une opération n’a pas été comptabilisée.</li>
+
+<li><strong>Les erreurs de saisie :</strong> une pièce est enregistrée pour un montant différent de celui qui y figure.</li>
+
+<li><strong>Les erreurs de calcul :</strong> une erreur arithmétique affecte un montant ou un total.</li>
+</ul>
+
+</div>
+
+<div class="highlight">
+<strong>Important :</strong>
+l’égalité de la balance ne garantit pas l’absence de toutes les erreurs comptables. Certaines erreurs d’imputation ou d’omission peuvent subsister malgré l’équilibre des totaux.
+</div>
+
+<h3>Étapes du contrôle de la balance</h3>
+
+<div class="content-block">
+
+<ol>
+<li>Vérifier l’égalité des mouvements débiteurs et créditeurs.</li>
+<li>Comparer les totaux de la balance avec ceux du journal général.</li>
+<li>Pointer les comptes et rapprocher les soldes avec les pièces justificatives.</li>
+<li>Identifier les anomalies et corriger les erreurs détectées.</li>
+<li>Préparer les travaux d’inventaire et les écritures de régularisation.</li>
+</ol>
+
+</div>
 
 </section>
 
+<!-- ===== SECTION 4 : PROCESSUS ===== -->
 <section id="PRO">
-<h2>Processus des travaux de fin d’exercice</h2>
 
+<h2>🔄 Processus des travaux de fin d’exercice</h2>
 
-<p>Après l’étape de l’établissement de la balance avant inventaire, il faut effectuer les travaux d’inventaire pour pouvoir procéder aux différentes régularisations qui s’imposent à la fin de l’exercice comptable. Ceci a pour objectif de produire des états de synthèse qui reflètent l’image fidèle de l’entreprise et de son activité.</p>
+<p>
+Après l’établissement de la balance avant inventaire, il faut effectuer les travaux d’inventaire pour procéder aux différentes régularisations nécessaires à la fin de l’exercice comptable.
+</p>
 
-<style>
+<p>
+Ces opérations ont pour objectif de produire des états de synthèse qui reflètent fidèlement le patrimoine, la situation financière et le résultat de l’entreprise.
+</p>
 
-body{
-    font-family: Arial, sans-serif;
-    background:#f4f4f4;
-    margin:0;
-    padding:15px;
-}
+<div class="process-container">
 
-.container{
-    max-width:800px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border:3px solid #222;
-    border-radius:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
+<div class="step">
+Balance avant inventaire
+</div>
 
-.step{
-    text-align:center;
-    font-size:16px;
-    font-weight:bold;
-    color:#0b2c5f;
-    margin:10px 0;
-}
+<div class="process-info">
+Comptes issus des opérations courantes : achats, ventes, salaires, loyers et autres opérations de l’exercice.
+</div>
 
-.arrow{
-    text-align:center;
-    font-size:24px;
-    margin:5px 0;
-}
+<div class="arrow">⬇</div>
 
-.row{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-    margin:15px 0;
-}
+<div class="step">
+Travaux d’inventaire et écritures de régularisation
+</div>
 
-.box{
-    width:260px;
-    border:2px solid #444;
-    border-radius:8px;
-    background:#fafafa;
-    overflow:hidden;
-}
+<div class="process-row">
 
-.box h3{
-    background:#0b2c5f;
-    color:white;
-    margin:0;
-    padding:8px;
-    text-align:center;
-    font-size:15px;
-}
+<div class="process-box">
+<h3>Comptes du bilan</h3>
+<ul>
+<li>Amortissements des immobilisations</li>
+<li>Provisions et dépréciations</li>
+<li>Évaluation des stocks</li>
+<li>Régularisation des comptes de tiers</li>
+</ul>
+</div>
 
-.box ul{
-    margin:0;
-    padding:12px 25px;
-    font-size:14px;
-    line-height:1.6;
-}
-
-.info{
-    border:2px solid #666;
-    border-radius:8px;
-    padding:12px;
-    background:#fff;
-    font-size:13px;
-    line-height:1.5;
-    margin:10px auto;
-    max-width:600px;
-}
-
-.formule{
-    margin-top:20px;
-    padding-top:10px;
-    border-top:2px solid #000;
-    text-align:center;
-    font-size:16px;
-    font-weight:bold;
-    color:#0b2c5f;
-}
-
-.documents{
-    width:320px;
-    margin:auto;
-}
-
-@media(max-width:768px){
-
-    .box,
-    .documents{
-        width:100%;
-    }
-
-}
-
-</style>
-
-
-<div class="container">
-
-    <div class="step">
-        Balance avant inventaire
-    </div>
-
-    <div class="info">
-        Comptes issus des opérations courantes :
-        achats, ventes, salaires, loyers...
-    </div>
-
-    <div class="arrow">⬇</div>
-
-    <div class="step">
-        Écritures de régularisation
-    </div>
-
-    <div class="row">
-
-        <div class="box">
-            <h3>Comptes du bilan</h3>
-            <ul>
-                <li>Amortissements</li>
-                <li>Provisions</li>
-            </ul>
-        </div>
-
-        <div class="box">
-            <h3>Comptes de CPC</h3>
-            <ul>
-                <li>Régularisation des stocks</li>
-                <li>Charges et produits</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class="arrow">⬇</div>
-
-    <div class="step">
-        Balance après inventaire
-    </div>
-
-    <div class="info">
-        Balance obtenue après intégration des écritures de régularisation.
-    </div>
-
-    <div class="arrow">⬇</div>
-
-    <div class="step">
-        Détermination du résultat
-    </div>
-
-    <div class="arrow">⬇</div>
-
-    <div class="step">
-        Documents de synthèse
-    </div>
-
-    <div class="box documents">
-        <ul>
-            <li>Bilan</li>
-            <li>CPC</li>
-            <li>ESG</li>
-            <li>TF</li>
-            <li>ETIC</li>
-        </ul>
-    </div>
-
-    <div class="formule">
-        Balance avant inventaire + Écritures de régularisation = Balance après inventaire
-    </div>
+<div class="process-box">
+<h3>Comptes de CPC</h3>
+<ul>
+<li>Régularisation des stocks</li>
+<li>Charges à payer et charges constatées d’avance</li>
+<li>Produits à recevoir et produits constatés d’avance</li>
+<li>Dotations aux amortissements et aux provisions</li>
+</ul>
+</div>
 
 </div>
 
-</section>
+<div class="arrow">⬇</div>
 
+<div class="step">
+Balance après inventaire
+</div>
+
+<div class="process-info">
+Balance établie après l’enregistrement et la vérification des écritures de régularisation.
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="step">
+Détermination du résultat comptable
+</div>
+
+<div class="process-info">
+Comparaison des produits et des charges de l’exercice pour déterminer le bénéfice ou la perte.
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="step">
+Établissement des états de synthèse
+</div>
+
+<div class="process-box documents">
+<h3>Documents de synthèse</h3>
+<ul>
+<li>Bilan</li>
+<li>Compte de produits et charges (CPC)</li>
+<li>État des soldes de gestion (ESG)</li>
+<li>Tableau de financement (TF)</li>
+<li>État des informations complémentaires (ETIC)</li>
+</ul>
+</div>
+
+<div class="formule">
+Balance avant inventaire + Écritures de régularisation = Balance après inventaire
+</div>
+
+</div>
+
+<div class="highlight">
+<strong>Conclusion :</strong>
+les travaux de fin d’exercice assurent la régularisation des comptes avant l’établissement des états de synthèse et la détermination du résultat définitif.
+</div>
+
+</section>
 
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C1P3M1.html">⬅ Retour </a>
-
+Formation en Comptabilité Générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
-
 
