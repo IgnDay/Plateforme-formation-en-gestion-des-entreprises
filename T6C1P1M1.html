@@ -1,305 +1,168 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale</title>
 
 <style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 10px #0003}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px}
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
+.site-menu>a{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;font-size:14px}
+.site-menu>a:hover{background:#ffffff2b}
+header h1{padding:20px 10px;margin:0}
+header h1 p{margin:10px 0}
 
-body{
-    font-family: Arial;
-    margin:0;
-    background: #f4f6f9;
+.dropdown{position:relative;display:inline-block}
+.dropdown button{padding:10px 14px;background:transparent;color:white;border:none;cursor:pointer;font-size:14px;border-radius:6px}
+.dropdown button:hover{background:#ffffff2b}
+.dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;background:white;box-shadow:0 5px 15px #0003;border-radius:6px;z-index:1000;padding:7px}
+.dropdown-content a{display:block;padding:11px 14px;color:#1e293b;text-decoration:none;text-align:left;font-size:14px;border-radius:5px}
+.dropdown-content a:hover{background:#0f766e;color:white}
+
+nav{background:#34495e;padding:10px;text-align:center}
+nav button,#quizForm button{margin:5px;padding:12px 18px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:15px;transition:.3s}
+nav button:hover,#quizForm button:hover{background:#019875;transform:translateY(-2px)}
+.btnActive{background:#0984e3!important;transform:scale(1.04);box-shadow:0 3px 10px #0003}
+
+section{display:none;padding:30px;margin:20px}
+section.active{display:block}
+.animationSection{animation:apparition .5s ease;background:white;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px #0002}
+@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+h2{color:#2c3e50}
+h3{color:#00b894}
+table{width:100%;border-collapse:collapse;background:white;margin-top:20px}
+td{border:1px solid #ccc;padding:10px}
+.titre{text-align:center;font-size:24px;font-weight:bold}
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+.header{background:#dfe6e9}
+tr:hover td{background:#f1f7ff}
+
+.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
+.q{background:#f8fafc;padding:15px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+.q p{font-weight:bold}
+.q label{display:inline-block;margin:7px 15px 7px 0;line-height:1.6}
+.correct{color:#00804a;font-weight:bold}
+.wrong{color:#d63031;font-weight:bold}
+#resultat{padding:10px 0;font-size:20px}
+footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}
+footer a{color:#00ffcc;text-decoration:none}
+
+@media(max-width:760px){
+.brandbar{justify-content:center;padding:12px}
+.site-menu{width:100%}
+.site-menu>a{padding:9px}
+.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}
+section{padding:18px;margin:12px}
+nav button{padding:10px;font-size:14px}
+header h1{font-size:21px}
 }
-
-/* HEADER */
-header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
-    text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
-}
-
-/* MENU */
-nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-}
-
-nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    transition:0.3s;
-}
-
-/* Hover bouton */
-nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
-}
-
-/* Bouton actif */
-.btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
-}
-
-/* SECTIONS */
-section{
-    display:none;
-    padding:30px;
-    margin:20px;
-}
-
-/* Section visible */
-.active{
-    display:block;
-}
-
-/* Animation section */
-.animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
-}
-
-/* Animation */
-@keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* TITRES */
-h2{
-    color:#2c3e50;
-}
-
-h3{
-    color:#00b894;
-}
-
-/* TABLEAUX */
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-td{
-    border:1px solid #ccc;
-    padding:10px;
-}
-
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
-    background:#dfe6e9;
-}
-
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:15px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-}
-
-footer a{
-    color:#00ffcc;
-    text-decoration:none;
-}
-
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-}
-
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-
-
-/* QUESTIONS */
-
-const questions = [
-{q:"1. Le plan comptable est une liste organisée des comptes et de leurs règles de fonctionnement.", answer:true},
-{q:"2. Le modèle simplifié est destiné aux grandes entreprises.", answer:false},
-{q:"3. Les classes 1 à 8 concernent la comptabilité générale.", answer:true},
-{q:"4. La classe 9 est réservée à la comptabilité analytique.", answer:true},
-{q:"5. La classe 0 concerne les comptes de trésorerie.", answer:false},
-{q:"6. Le principe de prudence consiste à enregistrer les pertes probables.", answer:true},
-{q:"7. Le principe de continuité suppose que l’entreprise va cesser son activité.", answer:false},
-{q:"8. Le CPC permet de déterminer le résultat de l’entreprise.", answer:true},
-{q:"9. Le bilan présente uniquement les charges et produits.", answer:false},
-{q:"10. Les états de synthèse donnent une image fidèle de la situation de l’entreprise.", answer:true}
-];
-
-window.onload = function(){
-
-const quizDiv = document.getElementById("quiz");
-
-questions.forEach((q,i)=>{
-
-let html = `
-<div class="question">
-
-<p>${q.q}</p>
-
-<label>
-<input type="radio" name="q${i}" value="true">
-Vrai
-</label>
-
-<label>
-<input type="radio" name="q${i}" value="false">
-Faux
-</label>
-
-<p id="res${i}"></p>
-
-</div>
-`;
-
-quizDiv.innerHTML += html;
-
-});
-
-};
-
-function corriger(){
-
-let score = 0;
-
-questions.forEach((q,i)=>{
-
-let rep = document.querySelector(`input[name="q${i}"]:checked`);
-let res = document.getElementById(`res${i}`);
-
-if(rep){
-
-if((rep.value === "true") === q.answer){
-
-res.innerHTML = "✔ Bonne réponse";
-res.className = "correct";
-score++;
-
-}else{
-
-res.innerHTML = "❌ Mauvaise réponse";
-res.className = "wrong";
-
-}
-
-}else{
-
-res.innerHTML = "⚠ Non répondu";
-res.className = "wrong";
-
-}
-
-});
-
-document.getElementById("score").innerHTML =
-"🎯 Score : " + score + "/10";
-
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Le Cadre Comptable</h1>
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité Générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T - Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 - Notion de compte</a>
+<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 - Le grand livre</a>
+<a href="T11C1P1M1.html">T11 - La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T6 - Le Cadre Comptable Marocain</p>
+</h1>
 </header>
 
 <nav>
-    <button onclick="showSection('plan')">Plan Comptable</button>
-    <button onclick="showSection('classes')">Classes</button>
-    <button onclick="showSection('principes')">Principes</button>
-    <button onclick="showSection('etats')">États de synthèse</button>
-    <button onclick="showSection('EE')">Exercice</button>
+<button onclick="showSection('plan',this)">Plan comptable</button>
+<button onclick="showSection('classes',this)">Classes</button>
+<button onclick="showSection('principes',this)">Principes</button>
+<button onclick="showSection('etats',this)">États de synthèse</button>
+<button onclick="showSection('EE',this)">Exercice d’évaluation</button>
 </nav>
 
-<!-- PLAN -->
+<!-- PLAN COMPTABLE -->
 
-<section id="plan" class="active">
-
+<section id="plan" class="active animationSection">
 <h2>📘 Le Plan Comptable</h2>
 
 <p>
@@ -320,47 +183,31 @@ ainsi que les règles de leur fonctionnement.
 <li><b>Modèle normal :</b> grandes et moyennes entreprises</li>
 <li><b>Modèle simplifié :</b> petites entreprises</li>
 </ul>
-
 </section>
 
-<!-- CLASSES -->
+<!-- CLASSES COMPTABLES -->
 
 <section id="classes">
-
 <h2>📊 Les classes comptables</h2>
 
 <p>Les comptes sont classés en 10 classes :</p>
 
 <ul>
-
 <li><b>Classes 1 à 8 :</b> Comptabilité générale</li>
-
-<li><b>Classe 1 :</b> Comptes du financement permanent</li>
-
-<li><b>Classe 2 :</b> Comptes d'actif immobilisé</li>
-
+<li><b>Classe 1 :</b> Comptes de financement permanent</li>
+<li><b>Classe 2 :</b> Comptes d’actif immobilisé</li>
 <li><b>Classe 3 :</b> Comptes d’actif circulant hors trésorerie</li>
-
 <li><b>Classe 4 :</b> Comptes de passif circulant hors trésorerie</li>
-
 <li><b>Classe 5 :</b> Comptes de trésorerie</li>
-
 <li><b>Classe 6 :</b> Comptes de charges</li>
-
 <li><b>Classe 7 :</b> Comptes de produits</li>
-
-<li><b>Classe 8 :</b> Comptes de résultat</li>
-
+<li><b>Classe 8 :</b> Comptes de résultats</li>
 <li><b>Classe 9 :</b> Comptabilité analytique</li>
-
 <li><b>Classe 0 :</b> Comptes spéciaux</li>
-
 </ul>
 
 <div class="highlight">
-
-✔ Chaque compte possède un numéro (codification)
-
+✔ Chaque compte possède un numéro (codification).
 <ul>
 <li><b>1er chiffre :</b> Classe ou masse</li>
 <li><b>2 premiers chiffres :</b> Rubrique</li>
@@ -368,88 +215,259 @@ ainsi que les règles de leur fonctionnement.
 <li><b>4 premiers chiffres :</b> Compte principal</li>
 <li><b>5 premiers chiffres :</b> Compte divisionnaire</li>
 </ul>
-
 </div>
-
 </section>
 
-<!-- PRINCIPES -->
+<!-- PRINCIPES COMPTABLES -->
 
 <section id="principes">
-
 <h2>⚖️ Principes comptables fondamentaux</h2>
 
 <h3>Les 7 principes :</h3>
 
 <ul>
-
-<li>Principe de continuité d’exploitation</li>
-
-<li>Principe de permanence des méthodes</li>
-
-<li>Principe du coût historique</li>
-
-<li>Principe de spécialisation des exercices</li>
-
-<li>Principe de prudence</li>
-
-<li>Principe de clarté</li>
-
-<li>Principe d’importance significative</li>
-
+<li><b>Principe de continuité d’exploitation :</b> l’entreprise est supposée poursuivre ses activités.</li>
+<li><b>Principe de permanence des méthodes :</b> les méthodes comptables doivent rester constantes pour faciliter les comparaisons.</li>
+<li><b>Principe du coût historique :</b> les éléments sont généralement enregistrés à leur coût d’entrée.</li>
+<li><b>Principe de spécialisation des exercices :</b> les charges et les produits sont rattachés à l’exercice concerné.</li>
+<li><b>Principe de prudence :</b> les pertes probables sont prises en compte selon les règles applicables.</li>
+<li><b>Principe de clarté :</b> les opérations doivent être enregistrées et présentées de façon compréhensible.</li>
+<li><b>Principe d’importance significative :</b> les informations importantes susceptibles d’influencer les décisions doivent être présentées.</li>
 </ul>
 
 <div class="highlight">
-✔ Ces principes assurent une comptabilité fiable et comparable
+✔ Ces principes contribuent à la fiabilité, à la comparabilité et à la sincérité de l’information comptable.
 </div>
-
 </section>
 
-<!-- ETATS -->
+<!-- ETATS DE SYNTHESE -->
 
 <section id="etats">
-
 <h2>📑 Les états de synthèse</h2>
 
+<p>Les états de synthèse présentent la situation patrimoniale et financière de l’entreprise ainsi que le résultat de son activité.</p>
+
 <ul>
-
-<li>Bilan</li>
-
-<li>Compte de Produits et Charges (CPC)</li>
-
-<li>État des Soldes de Gestion (ESG)</li>
-
-<li>Tableau de financement</li>
-
-<li>ETIC</li>
-
+<li><b>Bilan :</b> présente l’actif et le passif à une date donnée.</li>
+<li><b>Compte de Produits et Charges (CPC) :</b> récapitule les produits et les charges afin de déterminer le résultat.</li>
+<li><b>État des Soldes de Gestion (ESG) :</b> présente les principaux soldes de gestion.</li>
+<li><b>Tableau de financement :</b> présente les emplois et les ressources de l’exercice selon le modèle applicable.</li>
+<li><b>ETIC :</b> État des Informations Complémentaires qui précise et complète les autres états de synthèse.</li>
 </ul>
 
+<div class="highlight">
+✔ Les états de synthèse permettent de communiquer une information comptable structurée sur l’entreprise.
+</div>
 </section>
 
-<!-- EXERCICE -->
+<!-- EXERCICE VRAI / FAUX -->
 
 <section id="EE">
+<h2>📝 Exercice d’évaluation : Vrai / Faux</h2>
 
-<h2>📘 Exercice Vrai / Faux</h2>
+<p>Pour chaque affirmation, choisissez la bonne réponse puis cliquez sur « Corriger ».</p>
+
+<form id="quizForm">
 
 <div id="quiz"></div>
 
-<button onclick="corriger()">✅ Corriger</button>
+<button type="button" onclick="corrigerQuiz()">✅ Corriger</button>
+<button type="reset" onclick="effacerResultat()">↻ Réinitialiser</button>
 
-<h2 id="score"></h2>
+</form>
 
+<h3 id="resultat"></h3>
 </section>
 
 <footer>
-
-Formation en comptabilité générale
-
+<span>Formation en comptabilité générale</span>
 <br><br>
-
-<a href="C1P1M1.html">⬅ Retour</a>
-
 </footer>
+
+<script>
+/* MENU DEROULANT */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* FERMER LES MENUS EN CLIQUANT A L'EXTERIEUR */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* NAVIGATION ENTRE LES SECTIONS */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+}
+
+/* QUESTIONS VRAI / FAUX */
+const questions=[
+    {
+        q:"1. Le plan comptable regroupe les comptes utilisés par l’entreprise et les règles de leur fonctionnement.",
+        answer:true
+    },
+    {
+        q:"2. Le modèle simplifié est destiné principalement aux grandes entreprises.",
+        answer:false
+    },
+    {
+        q:"3. Les classes 1 à 8 concernent la comptabilité générale.",
+        answer:true
+    },
+    {
+        q:"4. La classe 9 est réservée à la comptabilité analytique.",
+        answer:true
+    },
+    {
+        q:"5. La classe 0 concerne les comptes de trésorerie.",
+        answer:false
+    },
+    {
+        q:"6. Le principe de prudence consiste notamment à prendre en compte les pertes probables.",
+        answer:true
+    },
+    {
+        q:"7. Le principe de continuité d’exploitation suppose que l’entreprise va nécessairement cesser son activité.",
+        answer:false
+    },
+    {
+        q:"8. Le CPC permet de déterminer le résultat de l’entreprise.",
+        answer:true
+    },
+    {
+        q:"9. Le bilan présente uniquement les charges et les produits.",
+        answer:false
+    },
+    {
+        q:"10. Les états de synthèse présentent des informations sur la situation et les résultats de l’entreprise.",
+        answer:true
+    }
+];
+
+/* GENERATION AUTOMATIQUE DU QUIZ */
+function genererQuiz(){
+    const quizDiv=document.getElementById("quiz");
+
+    questions.forEach((question,i)=>{
+        const div=document.createElement("div");
+        div.className="q";
+
+        div.innerHTML=`
+            <p>${question.q}</p>
+            <label>
+                <input type="radio" name="q${i}" value="true">
+                Vrai
+            </label>
+            <label>
+                <input type="radio" name="q${i}" value="false">
+                Faux
+            </label>
+            <p id="res${i}"></p>
+        `;
+
+        quizDiv.appendChild(div);
+    });
+}
+
+/* CORRECTION DU QUIZ */
+function corrigerQuiz(){
+    let score=0;
+
+    questions.forEach((question,i)=>{
+        const answer=document.querySelector('input[name="q'+i+'"]:checked');
+        const result=document.getElementById("res"+i);
+
+        result.className="";
+
+        if(!answer){
+            result.textContent="⚠ Non répondu";
+            result.classList.add("wrong");
+            return;
+        }
+
+        const reponseUtilisateur=answer.value==="true";
+
+        if(reponseUtilisateur===question.answer){
+            result.textContent="✔ Bonne réponse";
+            result.classList.add("correct");
+            score++;
+        }else{
+            result.textContent="✘ Mauvaise réponse";
+            result.classList.add("wrong");
+        }
+    });
+
+    const appreciation=score>=8
+        ?"Excellent 👍"
+        :score>=5
+        ?"Niveau moyen ⚠️"
+        :"À revoir ❌";
+
+    document.getElementById("resultat").textContent=
+        "🎯 Score : "+score+"/10 — "+appreciation;
+}
+
+/* REINITIALISATION */
+function effacerResultat(){
+    document.getElementById("resultat").textContent="";
+
+    questions.forEach((question,i)=>{
+        const result=document.getElementById("res"+i);
+
+        if(result){
+            result.textContent="";
+            result.className="";
+        }
+    });
+}
+
+/* INITIALISATION */
+document.addEventListener("DOMContentLoaded",function(){
+    genererQuiz();
+});
+</script>
 
 </body>
 </html>
+
+
