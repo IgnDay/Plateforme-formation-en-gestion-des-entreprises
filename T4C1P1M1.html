@@ -1,27 +1,146 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
+    background:#2c3e50;
     color:white;
-    padding:10px;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:min(320px,90vw);
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+    line-height:1.5;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:20px;
+    line-height:1.6;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -37,77 +156,79 @@ nav button{
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
 }
 
-/* TABLEAUX */
+p{line-height:1.7}
+ul,ol{line-height:1.8}
+
+/* ===== TABLEAUX ===== */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin:20px 0;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
     margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    box-shadow:0 2px 10px #00000014;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    text-align:left;
+    line-height:1.6;
 }
 
 .titre{
@@ -116,36 +237,81 @@ td{
     font-weight:bold;
 }
 
-.bold{
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+
+.header-cell{
+    background:#dfe6e9;
     font-weight:bold;
 }
 
-.center{
+tr:hover td{background:#f1f7ff}
+
+/* ===== BLOCS IMPORTANTS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.container{
+    background:white;
+    padding:25px;
+    border-left:6px solid #3498db;
+    box-shadow:0 0 10px #0000001a;
+    border-radius:8px;
+}
+
+.container p:first-child{margin-top:0}
+
+/* ===== EXEMPLES DE COMPTES ===== */
+.account-title{
     text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin:25px 0 10px;
 }
 
-.right{
-    text-align:right;
+.account-table{
+    width:100%;
+    max-width:650px;
+    margin:15px auto 25px;
+    border:2px solid #1e293b;
+    box-shadow:none;
 }
 
-.header{
+.account-table th{
+    text-align:center;
     background:#dfe6e9;
 }
 
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
+.account-table td{
+    height:38px;
 }
 
-/* FOOTER */
+.account-table .total-row td{
+    font-weight:bold;
+    background:#f1f5f9;
+}
+
+.account-table .account-half{
+    width:50%;
+}
+
+.exercise-list li{margin-bottom:7px}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
+    line-height:1.7;
 }
 
 footer a{
@@ -153,543 +319,760 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{text-decoration:underline}
+
+/* ===== TABLETTE ===== */
+@media(max-width:760px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+        justify-content:center;
+    }
+
+    .site-menu>a{padding:9px}
+    .dropdown button{padding:9px}
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:17px;
+        padding:15px 10px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav{padding:8px}
+    nav button{padding:10px;font-size:14px}
+    .container{padding:18px}
+    td,th{padding:8px}
 }
 
+/* ===== TÉLÉPHONE ===== */
+@media(max-width:480px){
+    .brand{font-size:18px}
+
+    .brand-logo{
+        width:40px;
+        height:40px;
+    }
+
+    .site-menu{gap:4px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:12px;
+        padding:8px 7px;
+    }
+
+    .dropdown-content{
+        position:fixed;
+        top:auto;
+        left:5%;
+        transform:none;
+        width:90%;
+        max-width:90%;
+        min-width:0;
+        max-height:65vh;
+        overflow-y:auto;
+    }
+
+    header h1{
+        font-size:15px;
+        overflow-wrap:anywhere;
+    }
+
+    section{
+        padding:14px;
+        margin:8px;
+        border-radius:8px;
+    }
+
+    .animationSection{border-left-width:5px}
+
+    h2{
+        font-size:20px;
+        line-height:1.4;
+    }
+
+    h3{font-size:17px}
+    p,li{font-size:14px}
+
+    nav button{
+        display:inline-block;
+        margin:4px 2px;
+        padding:10px 8px;
+        font-size:12px;
+        max-width:100%;
+    }
+
+    .container{padding:13px}
+
+    .highlight{
+        padding:11px;
+        font-size:13px;
+        line-height:1.7;
+    }
+
+    .table-wrapper{overflow-x:auto}
+
+    table{min-width:440px}
+
+    .account-table{min-width:0}
+
+    .account-table td,
+    .account-table th{
+        padding:7px 5px;
+        font-size:13px;
+    }
+
+    footer{
+        padding:15px 10px;
+        font-size:13px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Le Compte</h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T – Résumés des thèmes</a>
+<a href="C2P1M1.html">F – Formulaires interactifs</a>
+<a href="C3P1M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 – Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 – Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 – L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 – Notion de compte</a>
+<a href="T5C1P1M1.html">T5 – Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 – Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 – Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 – L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 – Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 – Le grand livre</a>
+<a href="T11C1P1M1.html">T11 – La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P1 – Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T4 – Notion de compte</p>
+</h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('structure')">Structure</button>
-    <button onclick="showSection('solde')">Solde</button>
-    <button onclick="showSection('tenue')">Tenue</button>
-    <button onclick="showSection('fonctionnement')">Fonctionnement</button>
-    <button onclick="showSection('double')">Partie double</button>
-   <button onclick="showSection('EE')">Exercice d’évaluation</button>
+<button class="btnActive" onclick="showSection('def',this)">Définition</button>
+<button onclick="showSection('structure',this)">Structure</button>
+<button onclick="showSection('solde',this)">Solde</button>
+<button onclick="showSection('tenue',this)">Tenue du compte</button>
+<button onclick="showSection('fonctionnement',this)">Fonctionnement des comptes du bilan</button>
+<button onclick="showSection('double',this)">Partie double</button>
+<button onclick="showSection('evaluation',this)">Exercice d’évaluation</button>
 </nav>
 
-<section id="def" class="active">
-    <h2>📘 Définition du compte</h2>
+<!-- ===== SECTION 1 : DÉFINITION ===== -->
+<section id="def" class="active animationSection">
 
-    <p>
-        Le compte est un tableau utilisé pour enregistrer les opérations comptables.
-    </p>
-
-    <div class="highlight">
-        ✔ Il permet de suivre les mouvements (entrées / sorties)<br>
-        ✔ Il enregistre toutes les opérations liées à un élément
-    </div>
-</section>
-
-<section id="structure">
-    <h2>📊 Structure du compte</h2>
-
-    <table>
-        <tr>
-            <td><b>DEBIT (gauche)</b></td>
-            <td><b>CREDIT (droite)</b></td>
-        </tr>
-    </table>
-
-    <ul>
-        <li>Débiter = enregistrer au débit</li>
-        <li>Créditer = enregistrer au crédit</li>
-    </ul>
-
-    <div class="highlight">
-        👉 L’enregistrement d’une opération s’appelle : IMPUTATION
-    </div>
-</section>
-
-<section id="solde">
-    <h2>⚖️ Le solde du compte</h2>
-
-    <p>
-        Le solde est la différence entre le total du débit et du crédit.
-    </p>
-
-    <h3>Cas possibles :</h3>
-
-    <ul>
-        <li><b>Total Débit > Crédit :</b> Solde Débiteur (SD)</li>
-        <li><b>Total Crédit > Débit :</b> Solde Créditeur (SC)</li>
-    </ul>
-
-    <div class="highlight">
-        ✔ Le solde est inscrit du côté opposé pour équilibrer le compte
-    </div>
-</section>
-
-<section id="tenue">
-    <h2>📝 La tenue du compte</h2>
-
-    <p>
-        Un compte doit contenir les informations suivantes :
-    </p>
-
-    <ul>
-        <li>Date des opérations</li>
-        <li>Libellé (description)</li>
-        <li>Montant</li>
-        <li>Solde</li>
-    </ul>
-
-    <div class="highlight">
-        👉 La présentation peut varier mais les informations restent obligatoires :
-        <ul>
-        <li>Compte à colonnes regroupées ou mariées </li>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Facture</title>
-
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
-
-/* Tableau principal */
-table{
-    width:80%;
-    margin:auto;
-    border-collapse:collapse;
-    border:3px solid black; /* Bordure extérieure épaisse */
-}
-
-/* Cellules */
-td{
-    border:1px solid black; /* Bordures internes */
-    padding:10px;
-}
-
-/* Styles */
-.titre{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.right{
-    text-align:right;
-}
-
-.center{
-    text-align:center;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.header{
-    background:#e6e6e6;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<table>
-
-<tr class="header">
-    <td colspan="2" class="bold">Dates</td>
-    <td class="bold center">Libellés</td>
-<td class="bold center">Débit</td>
-<td class="bold center">Crédit</td>
-
-</tr>
-
-<tr>
-        <td colspan="2" class="bold"></td>
-    <td class="bold center"></td>
-<td class="bold center"></td>
-<td class="bold center"></td>
-</tr>
-<tr>
-        <td colspan="2" class="bold">Totaux</td>
-    <td class="bold center"></td>
-<td class="bold center"></td>
-<td class="bold center"></td>
-</tr>
-
-</table>
-
-</body>
-</html>
-
-        <li>Compte à colonnes séparées</li>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Facture</title>
-
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
-
-/* Tableau principal */
-table{
-    width:80%;
-    margin:auto;
-    border-collapse:collapse;
-    border:3px solid black; /* Bordure extérieure épaisse */
-}
-
-/* Cellules */
-td{
-    border:1px solid black; /* Bordures internes */
-    padding:10px;
-}
-
-/* Styles */
-.titre{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.right{
-    text-align:right;
-}
-
-.center{
-    text-align:center;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.header{
-    background:#e6e6e6;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<table>
-
-<tr class="header">
-    <td colspan="2" class="bold">Dates</td>
-    <td class="bold center">Libellés</td>
-<td class="bold center">Débit</td>
-<td class="bold center">Dates</td>
-<td class="bold center">Libellés</td>
-<td class="bold center">Crédit</td>
-
-</tr>
-
-<tr>
-        <td colspan="2" class="bold"></td>
-    <td class="bold center"></td>
-<td class="bold center"></td>
-<td class="bold center"></td>
-<td class="bold center"></td>
-<td class="bold center"></td>
-
-</tr>
-<tr>
-        <td colspan="2" class="bold">♣♣♣♣♣</td>
-    <td class="bold center">Totaux</td>
-<td class="bold center"></td>
-<td class="bold center">♣♣♣♣♣</td>
-<td class="bold center">Totaux</td>
-<td class="bold center"></td>
-
-</tr>
-
-</table>
-
-</body>
-</html>
-
-        <li>Compte schématique (sous forme "T")</li>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Compte en T</title>
-
-<style>
-body{
-    font-family: Arial;
-    margin:40px;
-}
-
-table{
-    width:400px;
-    border-collapse:collapse;
-    margin:auto;
-}
-
-th, td{
-    border:2px solid black;
-    height:40px;
-    text-align:center;
-}
-
-.titre{
-    font-weight:bold;
-    background:#f2f2f2;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h2 style="text-align:center;">Compte : __________</h2>
-
-<table>
-<tr>
-<th>Débit</th>
-<th>Crédit</th>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td></td>
-</tr>
-
-</table>
-
-</body>
-</html>
-    </ul>
-    </div>
-</section>
-
-<section id="fonctionnement">
-    <h2>📚 Fonctionnement des comptes du bilan</h2>
-
-    <h3>Comptes d’actif :</h3>
-    <ul>
-        <li>Augmentation → Débit</li>
-        <li>Diminution → Crédit</li>
-    </ul>
-
-    <h3>Comptes de passif :</h3>
-    <ul>
-        <li>Augmentation → Crédit</li>
-        <li>Diminution → Débit</li>
-    </ul>
-
-    <div class="highlight">
-        ✔ Le fonctionnement dépend de la nature du compte
-    </div>
-</section>
-
-<section id="double">
-    <h2>🔁 Principe de la partie double</h2>
-
-    <p>
-        Chaque opération affecte au moins deux comptes :
-    </p>
-
-    <ul>
-        <li>Un compte est débité</li>
-        <li>Un autre compte est crédité</li>
-    </ul>
-
-    <div class="highlight">
-        ⚖️ Total Débit = Total Crédit
-    </div>
-
-    <p>
-        👉 Cela garantit l’équilibre de la comptabilité.
-    </p>
-</section>
-<section id="EE">
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Exercice Comptabilité Générale</title>
-
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
-
-.container{
-    max-width:1000px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-h1,h2{
-    text-align:center;
-    color:#2c3e50;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-}
-
-td,th{
-    border:1px solid #444;
-    padding:8px;
-    text-align:center;
-}
-
-th{
-    background:#d5e8d4;
-}
-
-.correction{
-    background:#eafaf1;
-    padding:15px;
-    margin-top:30px;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>📘 EXERCICE : COMPTE ET BILAN</h1>
+<h2>📘 Définition du compte</h2>
 
 <p>
-La situation patrimoniale de l’entreprise <strong>« SOLEIL.SARL »</strong>, créée le <strong>01/05/2025</strong>, se présente comme suit :
+Le compte est un tableau utilisé pour enregistrer les opérations comptables
+concernant un élément du patrimoine ou un élément de gestion de l’entreprise.
+</p>
+
+<div class="highlight">
+✔ Il permet de suivre les mouvements d’augmentation et de diminution d’un élément.<br>
+✔ Il enregistre toutes les opérations liées à cet élément.<br>
+✔ Il permet de déterminer le solde de chaque compte.
+</div>
+
+</section>
+
+<!-- ===== SECTION 2 : STRUCTURE ===== -->
+<section id="structure">
+
+<h2>📊 Structure du compte</h2>
+
+<p>
+Le compte est divisé en deux parties : le débit, situé à gauche, et le crédit,
+situé à droite.
+</p>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th class="center">DÉBIT (gauche)</th>
+<th class="center">CRÉDIT (droite)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enregistrement des montants au débit.</td>
+<td>Enregistrement des montants au crédit.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<ul>
+<li><strong>Débiter :</strong> inscrire un montant au débit du compte.</li>
+<li><strong>Créditer :</strong> inscrire un montant au crédit du compte.</li>
+</ul>
+
+<div class="highlight">
+👉 L’enregistrement d’une opération dans un compte s’appelle
+<strong>l’imputation comptable</strong>.
+</div>
+
+<h3>Les différentes présentations du compte</h3>
+
+<p>Le compte peut être présenté sous plusieurs formes :</p>
+
+<ul>
+<li>Compte à colonnes regroupées ou mariées.</li>
+<li>Compte à colonnes séparées.</li>
+<li>Compte schématique sous forme de « T ».</li>
+</ul>
+
+<h3>1. Compte à colonnes regroupées ou mariées</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th colspan="2">Dates</th>
+<th>Libellés</th>
+<th class="right">Débit</th>
+<th class="right">Crédit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" class="bold">Totaux</td>
+<td></td>
+<td class="right"></td>
+<td class="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3>2. Compte à colonnes séparées</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th colspan="2">Date</th>
+<th>Libellé</th>
+<th class="right">Débit</th>
+<th colspan="2">Date</th>
+<th>Libellé</th>
+<th class="right">Crédit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2"></td>
+<td></td>
+<td></td>
+<td colspan="2"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" class="bold">Totaux</td>
+<td></td>
+<td></td>
+<td colspan="2" class="bold">Totaux</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3>3. Compte schématique sous forme de « T »</h3>
+
+<p class="account-title">Compte : ____________________</p>
+
+<div class="table-wrapper">
+<table class="account-table">
+<thead>
+<tr>
+<th class="account-half">Débit</th>
+<th class="account-half">Crédit</th>
+</tr>
+</thead>
+<tbody>
+<tr><td></td><td></td></tr>
+<tr><td></td><td></td></tr>
+<tr><td></td><td></td></tr>
+<tr><td></td><td></td></tr>
+<tr class="total-row"><td>Totaux</td><td>Totaux</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<!-- ===== SECTION 3 : SOLDE ===== -->
+<section id="solde">
+
+<h2>⚖️ Le solde du compte</h2>
+
+<p>
+Le solde d’un compte est la différence entre le total des sommes inscrites
+au débit et le total des sommes inscrites au crédit.
+</p>
+
+<h3>Les cas possibles</h3>
+
+<ul>
+<li><strong>Total Débit supérieur au total Crédit :</strong> solde débiteur (SD).</li>
+<li><strong>Total Crédit supérieur au total Débit :</strong> solde créditeur (SC).</li>
+<li><strong>Total Débit égal au total Crédit :</strong> compte soldé.</li>
+</ul>
+
+<div class="highlight">
+✔ Le solde débiteur est inscrit au crédit pour équilibrer les deux côtés.<br>
+✔ Le solde créditeur est inscrit au débit pour équilibrer les deux côtés.<br>
+✔ Après équilibrage, le total du débit est égal au total du crédit.
+</div>
+
+<h3>Exemple de calcul du solde</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th>Éléments</th>
+<th class="right">Montant (DH)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total Débit</td>
+<td class="right">12 000</td>
+</tr>
+<tr>
+<td>Total Crédit</td>
+<td class="right">7 000</td>
+</tr>
+<tr>
+<td><strong>Solde débiteur</strong></td>
+<td class="right"><strong>5 000</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<!-- ===== SECTION 4 : TENUE DU COMPTE ===== -->
+<section id="tenue">
+
+<h2>📝 La tenue du compte</h2>
+
+<p>
+Pour assurer le suivi des opérations, un compte doit comporter les informations
+nécessaires à leur identification et à leur enregistrement.
 </p>
 
 <ul>
-<li>Matériel et outillage : 25 000 MAD</li>
-<li>Matériel de bureau : 12 000 MAD</li>
-<li>Caisse : 6 000 MAD</li>
-<li>Clients : 15 000 MAD</li>
-<li>Banque : 40 000 MAD</li>
-<li>Fournisseurs : 8 000 MAD</li>
-<li>Stock de marchandises : 25 000 MAD</li>
-<li>Local commercial : 220 000 MAD</li>
-<li>Emprunt : 60 000 MAD</li>
-<li>Capital : à déterminer</li>
+<li><strong>Date :</strong> date de l’opération comptable.</li>
+<li><strong>Libellé :</strong> description de l’opération.</li>
+<li><strong>Montant :</strong> somme portée au débit ou au crédit.</li>
+<li><strong>Solde :</strong> différence entre les totaux débiteur et créditeur.</li>
 </ul>
 
-<h2>📅 Opérations du mois de mai :</h2>
+<div class="highlight">
+👉 La présentation du compte peut varier, mais les informations nécessaires
+à l’enregistrement et au suivi des opérations doivent être conservées.
+</div>
+
+<h3>Exemple de tenue d’un compte Banque</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th>Date</th>
+<th>Libellé</th>
+<th class="right">Débit (DH)</th>
+<th class="right">Crédit (DH)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01/05</td>
+<td>Apport déposé en banque</td>
+<td class="right">10 000</td>
+<td class="right">—</td>
+</tr>
+<tr>
+<td>05/05</td>
+<td>Paiement par chèque</td>
+<td class="right">—</td>
+<td class="right">3 000</td>
+</tr>
+<tr>
+<td>10/05</td>
+<td>Encaissement client</td>
+<td class="right">2 000</td>
+<td class="right">—</td>
+</tr>
+<tr>
+<td colspan="2" class="bold">Totaux</td>
+<td class="right bold">12 000</td>
+<td class="right bold">3 000</td>
+</tr>
+<tr>
+<td colspan="2" class="bold">Solde débiteur</td>
+<td class="right bold">9 000</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<!-- ===== SECTION 5 : FONCTIONNEMENT ===== -->
+<section id="fonctionnement">
+
+<h2>📚 Fonctionnement des comptes du bilan</h2>
+
+<p>
+Le fonctionnement d’un compte dépend de sa nature. Pour les comptes du bilan,
+on distingue notamment les comptes d’actif et les comptes de passif.
+</p>
+
+<h3>Comptes d’actif</h3>
 
 <ul>
-<li>01/05 : Achat de marchandises 8 000 MAD (1/2 banque, reste à crédit) </li>
-<li>03/05 : Dépôt caution 4 000 MAD par chèque</li>
-<li>05/05 : Vente de marchandises 10 000 MAD (1/2 banque, reste caisse) </li>
-<li>07/05 : Intérêts bancaires reçus 2 500 MAD</li>
-<li>08/05 : Encaissement d’une créance client en espèces 3 500 MAD</li>
-<li>12/05 : Paiement frais de Publicité par chèque bancaire 3 000 MAD</li>
-<li>14/05 : Paiement frais de Transport en espèces 1 800 MAD</li>
-<li>18/05 : Remboursement d’une fraction de l’emprunt 20 000 MAD</li>
-<li>20/05 : Achat Timbres fiscaux en espèces 1 200 MAD</li>
-<li>22/05 : Paiement frais de Réparation en espèces 2 000 MAD</li>
-<li>24/05 : Vente de marchandises par chèque bancaire 7 000 MAD </li>
-<li>28/05 : Règlement d’une dette fournisseur par chèque bancaire3 000 MAD</li>
-<li>30/05 : Versement en banque 4 000 MAD</li>
-<li>30/05 : Règlement Salaires par virement bancaire 20 000 MAD</li>
-<li>31/05 : Stock final : 45 000 MAD</li>
+<li>Une augmentation de l’actif s’enregistre au débit.</li>
+<li>Une diminution de l’actif s’enregistre au crédit.</li>
 </ul>
 
-<h2>📝 Travail à faire :</h2>
+<div class="highlight">
+Exemples : matériel, mobilier, stock, clients, banque et caisse.
+</div>
+
+<h3>Comptes de passif</h3>
+
+<ul>
+<li>Une augmentation du passif s’enregistre au crédit.</li>
+<li>Une diminution du passif s’enregistre au débit.</li>
+</ul>
+
+<div class="highlight">
+Exemples : capital, emprunts et dettes fournisseurs.
+</div>
+
+<h3>Résumé</h3>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th>Nature du compte</th>
+<th>Augmentation</th>
+<th>Diminution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actif</td>
+<td>Débit</td>
+<td>Crédit</td>
+</tr>
+<tr>
+<td>Passif</td>
+<td>Crédit</td>
+<td>Débit</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="highlight">
+✔ Le fonctionnement du compte dépend de sa nature.
+</div>
+
+</section>
+
+<!-- ===== SECTION 6 : PARTIE DOUBLE ===== -->
+<section id="double">
+
+<h2>🔁 Principe de la partie double</h2>
+
+<p>
+En comptabilité, chaque opération est enregistrée dans au moins deux comptes,
+selon le principe de la partie double.
+</p>
+
+<ul>
+<li>Un ou plusieurs comptes sont débités.</li>
+<li>Un ou plusieurs comptes sont crédités.</li>
+<li>Le total des montants débités est toujours égal au total des montants crédités.</li>
+</ul>
+
+<div class="highlight">
+⚖️ <strong>Total Débit = Total Crédit</strong>
+</div>
+
+<h3>Exemple : Acquisition d’un matériel de transport payé par banque</h3>
+
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr class="header-cell">
+<th>Compte concerné</th>
+<th>Analyse</th>
+<th class="right">Débit (DH)</th>
+<th class="right">Crédit (DH)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Matériel de transport</td>
+<td>Enregistrement de l’acquisition</td>
+<td class="right">200 000</td>
+<td class="right">—</td>
+</tr>
+<tr>
+<td>Banque</td>
+<td>Diminution des disponibilités</td>
+<td class="right">—</td>
+<td class="right">200 000</td>
+</tr>
+<tr>
+<td colspan="2" class="bold">Totaux</td>
+<td class="right bold">200 000</td>
+<td class="right bold">200 000</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="highlight">
+👉 La partie double garantit l’équilibre des écritures comptables et permet
+de contrôler la cohérence des enregistrements.
+</div>
+
+</section>
+
+<!-- ===== SECTION 7 : EXERCICE D'ÉVALUATION ===== -->
+<section id="evaluation">
+
+<h2>📝 Exercice d’évaluation : compte et bilan</h2>
+
+<div class="container">
+
+<h3 style="margin-top:0;color:#2c3e50">Énoncé</h3>
+
+<p>
+La situation patrimoniale de l’entreprise <strong>« SOLEIL.SARL »</strong>,
+créée le <strong>01/05/2025</strong>, se présente comme suit :
+</p>
+
+<ul class="exercise-list">
+<li>Matériel et outillage : 25 000 DH.</li>
+<li>Matériel de bureau : 12 000 DH.</li>
+<li>Caisse : 6 000 DH.</li>
+<li>Clients : 15 000 DH.</li>
+<li>Banque : 40 000 DH.</li>
+<li>Fournisseurs : 8 000 DH.</li>
+<li>Stock de marchandises : 25 000 DH.</li>
+<li>Local commercial : 220 000 DH.</li>
+<li>Emprunt : 60 000 DH.</li>
+<li>Capital : à déterminer.</li>
+</ul>
+
+<h3>Opérations du mois de mai</h3>
+
+<ul class="exercise-list">
+<li><strong>01/05 :</strong> Achat de marchandises pour 8 000 DH, dont la moitié payée par banque, le reste à crédit.</li>
+<li><strong>03/05 :</strong> Dépôt d’une caution de 4 000 DH par chèque.</li>
+<li><strong>05/05 :</strong> Vente de marchandises pour 10 000 DH, dont la moitié encaissée par banque, le reste en caisse.</li>
+<li><strong>07/05 :</strong> Intérêts bancaires reçus : 2 500 DH.</li>
+<li><strong>08/05 :</strong> Encaissement en espèces d’une créance client : 3 500 DH.</li>
+<li><strong>12/05 :</strong> Paiement des frais de publicité par chèque bancaire : 3 000 DH.</li>
+<li><strong>14/05 :</strong> Paiement des frais de transport en espèces : 1 800 DH.</li>
+<li><strong>18/05 :</strong> Remboursement d’une fraction de l’emprunt : 20 000 DH.</li>
+<li><strong>20/05 :</strong> Achat de timbres fiscaux en espèces : 1 200 DH.</li>
+<li><strong>22/05 :</strong> Paiement des frais de réparation en espèces : 2 000 DH.</li>
+<li><strong>24/05 :</strong> Vente de marchandises par chèque bancaire : 7 000 DH.</li>
+<li><strong>28/05 :</strong> Règlement d’une dette fournisseur par chèque bancaire : 3 000 DH.</li>
+<li><strong>30/05 :</strong> Versement en banque : 4 000 DH.</li>
+<li><strong>30/05 :</strong> Règlement des salaires par virement bancaire : 20 000 DH.</li>
+<li><strong>31/05 :</strong> Stock final : 45 000 DH.</li>
+</ul>
+
+<h3>Travail à faire</h3>
+
 <ol>
-<li>Établir le bilan initial</li>
-<li>Présenter les comptes schématiques</li>
-<li>Établir le bilan final </li>
+<li>Établir le bilan initial.</li>
+<li>Présenter les comptes schématiques des opérations du mois.</li>
+<li>Établir le bilan final au 31/05/2025.</li>
 </ol>
 
 </div>
 
-</body>
-</html>
-💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer le bilan et les comptes schématiques. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème
+<div class="highlight">
+💡 Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer
+le bilan et les comptes schématiques. Nous vous recommandons également de
+consulter les exercices corrigés mis à votre disposition sur notre site en lien
+avec ce thème.
+</div>
+
 </section>
 
 <footer>
-    Formation en comptabilité générale
-<br>
-
-<a href="C1P1M1.html">⬅ Retour </a>
-
+Formation en comptabilité générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
+
+
