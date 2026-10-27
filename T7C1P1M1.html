@@ -1,484 +1,520 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale</title>
 
 <style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 10px #0003}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px}
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
+.site-menu>a{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;font-size:14px}
+.site-menu>a:hover{background:#ffffff2b}
+header h1{padding:20px 10px;margin:0}
+header h1 p{margin:10px 0}
 
-body{
-    font-family: Arial;
-    margin:0;
-    background: #f4f6f9;
+.dropdown{position:relative;display:inline-block}
+.dropdown button{padding:10px 14px;background:transparent;color:white;border:none;cursor:pointer;font-size:14px;border-radius:6px}
+.dropdown button:hover{background:#ffffff2b}
+.dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;background:white;box-shadow:0 5px 15px #0003;border-radius:6px;z-index:1000;padding:7px}
+.dropdown-content a{display:block;padding:11px 14px;color:#1e293b;text-decoration:none;text-align:left;font-size:14px;border-radius:5px}
+.dropdown-content a:hover{background:#0f766e;color:white}
+
+nav{background:#34495e;padding:10px;text-align:center}
+nav button,#quizForm button{margin:5px;padding:12px 18px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:15px;transition:.3s}
+nav button:hover,#quizForm button:hover{background:#019875;transform:translateY(-2px)}
+.btnActive{background:#0984e3!important;transform:scale(1.04);box-shadow:0 3px 10px #0003}
+
+section{display:none;padding:30px;margin:20px}
+section.active{display:block}
+.animationSection{animation:apparition .5s ease;background:white;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px #0002}
+@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+h2{color:#2c3e50}
+h3{color:#00b894}
+table{width:100%;border-collapse:collapse;background:white;margin-top:20px}
+td,th{border:1px solid #ccc;padding:10px}
+th{background:#dfe6e9}
+tr:hover td{background:#f1f7ff}
+.titre{text-align:center;font-size:24px;font-weight:bold}
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+
+.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
+.q{background:#f8fafc;padding:15px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+.q p{font-weight:bold}
+.q label{display:block;margin:9px 0;line-height:1.6;cursor:pointer}
+.q input{margin-right:7px}
+.correct{color:#00804a;font-weight:bold}
+.wrong{color:#d63031;font-weight:bold}
+#resultat{padding:10px 0;font-size:20px}
+footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}
+footer a{color:#00ffcc;text-decoration:none}
+
+@media(max-width:760px){
+.brandbar{justify-content:center;padding:12px}
+.site-menu{width:100%}
+.site-menu>a{padding:9px}
+.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}
+section{padding:18px;margin:12px}
+nav button{padding:10px;font-size:14px}
+header h1{font-size:21px}
 }
-
-/* HEADER */
-header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
-    text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
-}
-
-/* MENU */
-nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-}
-
-nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    transition:0.3s;
-}
-
-/* Hover bouton */
-nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
-}
-
-/* Bouton actif */
-.btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
-}
-
-/* SECTIONS */
-section{
-    display:none;
-    padding:30px;
-    margin:20px;
-}
-
-/* Section visible */
-.active{
-    display:block;
-}
-
-/* Animation section */
-.animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
-}
-
-/* Animation */
-@keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* TITRES */
-h2{
-    color:#2c3e50;
-}
-
-h3{
-    color:#00b894;
-}
-
-/* TABLEAUX */
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-td{
-    border:1px solid #ccc;
-    padding:10px;
-}
-
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
-    background:#dfe6e9;
-}
-
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:15px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-}
-
-footer a{
-    color:#00ffcc;
-    text-decoration:none;
-}
-
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-}
-
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Le Virement Comptable</h1>
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité Générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T - Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 - Notion de compte</a>
+<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 - Le grand livre</a>
+<a href="T11C1P1M1.html">T11 - La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T7 - Le Virement Comptable</p>
+</h1>
 </header>
 
 <nav>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('mecanisme')">Mécanisme</button>
-    <button onclick="showSection('utilite')">Utilité</button>
-    <button onclick="showSection('exemples')">Exemples</button>
-    <button onclick="showSection('EE')">Exercice d’évaluation</button>
+<button onclick="showSection('def',this)">Définition</button>
+<button onclick="showSection('mecanisme',this)">Mécanisme</button>
+<button onclick="showSection('utilite',this)">Utilité</button>
+<button onclick="showSection('exemples',this)">Exemples</button>
+<button onclick="showSection('EE',this)">Exercice d’évaluation</button>
 </nav>
 
-<section id="def" class="active">
-    <h2>📘 Définition du virement comptable</h2>
+<!-- DEFINITION -->
 
-    <p>
-        Le virement comptable est une opération qui consiste à transférer
-        une somme d’un compte à un autre.
-    </p>
+<section id="def" class="active animationSection">
+<h2>📘 Définition du virement comptable</h2>
 
-    <div class="highlight">
-        ✔ Passage d’un compte vers un autre<br>
-        ✔ Sans modifier le total global<br>
-        ✔ Simple changement de répartition
-    </div>
+<p>
+Le virement comptable est une opération qui consiste à transférer
+une somme d’un compte à un autre compte, sans modifier le montant
+total de l’écriture comptable concernée.
+</p>
+
+<div class="highlight">
+✔ Passage d’un compte vers un autre<br>
+✔ Sans modifier le total global de l’écriture<br>
+✔ Simple changement de répartition entre comptes
+</div>
 </section>
+
+<!-- MECANISME -->
 
 <section id="mecanisme">
-    <h2>⚙️ Mécanisme du virement</h2>
+<h2>⚙️ Mécanisme du virement</h2>
 
-    <p>
-        Le virement peut se faire de deux manières :
-    </p>
+<p>Le virement comptable peut notamment être utilisé pour transférer un montant entre comptes de même nature de mouvement :</p>
 
-    <ul>
-        <li>Du <b>débit d’un compte</b> vers le débit d’un autre compte</li>
-        <li>Du <b>crédit d’un compte</b> vers le crédit d’un autre compte</li>
-    </ul>
+<ul>
+<li>Du <b>débit d’un compte</b> vers le débit d’un autre compte</li>
+<li>Du <b>crédit d’un compte</b> vers le crédit d’un autre compte</li>
+</ul>
 
-    <div class="highlight">
-        👉 Il n’y a pas création de richesse, seulement un transfert
-    </div>
+<div class="highlight">
+👉 Le virement comptable ne crée pas, à lui seul, de richesse : il permet de corriger ou de modifier l’imputation comptable d’un montant.
+</div>
 </section>
+
+<!-- UTILITE -->
 
 <section id="utilite">
-    <h2>🎯 Utilité du virement comptable</h2>
+<h2>🎯 Utilité du virement comptable</h2>
 
-    <ul>
-        <li><b>✔ Rectification des erreurs :</b> corriger une mauvaise imputation</li>
-        <li><b>✔ Ordre de virement bancaire :</b> transfert d’argent entre comptes</li>
-        <li><b>✔ Division des comptes :</b> détailler les informations</li>
-        <li><b>✔ Regroupement des comptes :</b> simplifier la présentation</li>
-    </ul>
+<ul>
+<li><b>✔ Rectification des erreurs :</b> corriger une mauvaise imputation comptable.</li>
+<li><b>✔ Virement bancaire :</b> transfert d’argent entre comptes bancaires ; il s’agit d’une opération bancaire distincte du virement comptable au sens strict.</li>
+<li><b>✔ Division des comptes :</b> détailler les informations pour faciliter le suivi.</li>
+<li><b>✔ Regroupement des comptes :</b> simplifier la présentation des informations comptables.</li>
+</ul>
 
-    <div class="highlight">
-        ✔ Le virement améliore la précision et la clarté de la comptabilité
-    </div>
+<div class="highlight">
+✔ Le virement comptable contribue à améliorer la précision et la clarté des comptes.
+</div>
 </section>
+
+<!-- EXEMPLES -->
 
 <section id="exemples">
-    <h2>🧠 Exemples</h2>
+<h2>🧠 Exemples de virement comptable</h2>
 
-    <table>
-        <tr>
-            <td><b>Situation</b></td>
-            <td><b>Action</b></td>
-        </tr>
-        <tr>
-            <td>Erreur client (ALI / ADIL)</td>
-            <td>Virement pour corriger</td>
-        </tr>
-        <tr>
-            <td>Transfert bancaire</td>
-            <td>Déplacement d’argent</td>
-        </tr>
-        <tr>
-            <td>Suivi détaillé clients</td>
-            <td>Division des comptes</td>
-        </tr>
-        <tr>
-            <td>Présentation globale</td>
-            <td>Regroupement</td>
-        </tr>
-    </table>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Erreur d’imputation entre deux comptes clients (ALI / ADIL)</td>
+<td>Transférer le montant du compte client incorrect vers le compte client approprié.</td>
+</tr>
+<tr>
+<td>Transfert entre comptes bancaires</td>
+<td>Enregistrer le mouvement bancaire entre les comptes concernés, selon les pièces justificatives.</td>
+</tr>
+<tr>
+<td>Suivi détaillé des clients</td>
+<td>Utiliser des comptes divisionnaires pour identifier chaque client.</td>
+</tr>
+<tr>
+<td>Présentation globale</td>
+<td>Regrouper les informations de plusieurs comptes pour faciliter leur lecture.</td>
+</tr>
+</tbody>
+</table>
 
-    <div class="highlight">
-        ✔ Le virement = outil de correction et d’organisation
-    </div>
+<div class="highlight">
+✔ Le virement comptable est un outil de correction et d’organisation des comptes.
+</div>
 </section>
+
+<!-- EXERCICE QCU -->
+
 <section id="EE">
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>QCU - Virement Comptable</title>
+<h2>📝 Exercice d’évaluation (QCU)</h2>
 
+<p>Choisissez une seule réponse pour chaque question, puis cliquez sur « Corriger ».</p>
 
-</head>
+<form id="quizForm">
 
-<body>
-
-<header>
-<h1>📘 QCU - Le Virement Comptable</h1>
-</header>
-
-<div class="container">
 <div id="quiz"></div>
 
-<button onclick="corriger()">✅ Corriger</button>
-<h2 id="score"></h2>
-</div>
+<button type="button" onclick="corrigerQuiz()">✅ Corriger</button>
+<button type="reset" onclick="effacerResultat()">↻ Réinitialiser</button>
+
+</form>
+
+<h3 id="resultat"></h3>
+</section>
+
+<footer>
+<span>Formation en comptabilité générale</span>
+<br><br>
+<a href="C1P1M1.html">⬅ Retour</a>
+</footer>
 
 <script>
-// IMPORTANT : attendre le chargement de la page
-document.addEventListener("DOMContentLoaded", function(){
+/* MENU DEROULANT */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
 
-const questions = [
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* FERMER LES MENUS EN CLIQUANT A L'EXTERIEUR */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* NAVIGATION ENTRE LES SECTIONS */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+}
+
+/* QUESTIONS DU QCU */
+const questions=[
 {
 q:"1. Le virement comptable consiste à :",
 options:[
 "Créer une nouvelle richesse",
 "Transférer une somme d’un compte à un autre",
 "Supprimer une écriture comptable",
-"Modifier le résultat de l’entreprise"
+"Modifier automatiquement le résultat de l’entreprise"
 ],
 answer:1
 },
 {
-q:"2. Un virement comptable modifie :",
+q:"2. Le virement comptable permet principalement de modifier :",
 options:[
-"Le total du bilan",
-"Le résultat net",
-"La répartition des comptes uniquement",
-"Les charges uniquement"
+"Le total du bilan dans tous les cas",
+"Le résultat net automatiquement",
+"La répartition ou l’imputation d’un montant entre comptes",
+"Le montant de toutes les charges"
 ],
 answer:2
 },
 {
-q:"3. Le virement peut s’effectuer :",
+q:"3. Le virement comptable peut notamment s’effectuer :",
 options:[
 "Uniquement du débit vers le crédit",
-"Du débit vers débit ou du crédit vers crédit",
+"Du débit d’un compte vers le débit d’un autre, ou du crédit vers le crédit",
 "Seulement entre comptes bancaires",
-"Seulement en fin d’exercice"
+"Uniquement à la clôture de l’exercice"
 ],
 answer:1
 },
 {
-q:"4. Le virement comptable permet :",
+q:"4. Le virement comptable peut permettre :",
 options:[
-"D’augmenter le capital",
-"De corriger les erreurs d’imputation",
-"De créer des charges",
-"De calculer le résultat"
+"D’augmenter automatiquement le capital",
+"De corriger une erreur d’imputation",
+"De créer une charge sans opération réelle",
+"De calculer directement le résultat fiscal"
 ],
 answer:1
 },
 {
-q:"5. Une erreur sur le client se corrige par :",
+q:"5. Une somme imputée par erreur au compte d’un client peut être réaffectée :",
 options:[
-"Annulation simple",
-"Un virement comptable",
-"Une nouvelle facture",
-"Une charge exceptionnelle"
+"En supprimant systématiquement toutes les écritures",
+"Par un virement comptable approprié",
+"En établissant obligatoirement une nouvelle facture",
+"En enregistrant une charge exceptionnelle"
 ],
 answer:1
 },
 {
-q:"6. Le virement bancaire est :",
+q:"6. Un virement bancaire désigne généralement :",
 options:[
-"Une opération interne",
-"Un transfert réel entre comptes",
-"Une charge",
-"Un produit"
+"Une simple modification du libellé d’un compte",
+"Un transfert de fonds entre comptes bancaires",
+"Une charge d’exploitation",
+"Un produit financier dans tous les cas"
 ],
 answer:1
 },
 {
-q:"7. La division d’un compte permet :",
+q:"7. La division d’un compte permet de :",
 options:[
-"Regrouper les données",
-"Détailler les informations",
-"Supprimer des comptes",
-"Réduire les charges"
+"Regrouper toutes les données sans distinction",
+"Détailler les informations pour améliorer le suivi",
+"Supprimer les comptes divisionnaires",
+"Réduire automatiquement les charges"
 ],
 answer:1
 },
 {
-q:"8. Le regroupement permet :",
+q:"8. Le regroupement de comptes permet notamment de :",
 options:[
-"Augmenter les dettes",
-"Simplifier la présentation",
-"Créer des produits",
-"Modifier la trésorerie"
+"Augmenter automatiquement les dettes",
+"Simplifier la présentation des informations comptables",
+"Créer de nouveaux produits",
+"Modifier nécessairement la trésorerie"
 ],
 answer:1
 },
 {
-q:"9. Le virement impacte :",
+q:"9. Lorsqu’il corrige une imputation sans modifier le montant global concerné, le virement agit principalement sur :",
 options:[
-"La richesse globale",
-"La structure des comptes uniquement",
-"Le chiffre d’affaires",
-"Le résultat fiscal"
+"La richesse globale de l’entreprise",
+"La répartition comptable du montant",
+"Le chiffre d’affaires automatiquement",
+"Le résultat fiscal nécessairement"
 ],
 answer:1
 },
 {
-q:"10. Le virement est un outil :",
+q:"10. Le virement comptable est notamment un outil :",
 options:[
-"Fiscal",
-"De correction et d’organisation",
-"D’investissement",
-"De financement"
+"De calcul des impôts uniquement",
+"De correction et d’organisation des comptes",
+"D’investissement exclusivement",
+"De financement externe uniquement"
 ],
 answer:1
 }
 ];
 
-// AFFICHAGE
-const quizDiv = document.getElementById("quiz");
+/* GENERATION DU QCU */
+function genererQuiz(){
+    const quizDiv=document.getElementById("quiz");
 
-questions.forEach((q,i)=>{
-let bloc = document.createElement("div");
-bloc.className="question";
+    questions.forEach((question,i)=>{
+        const bloc=document.createElement("div");
+        bloc.className="q";
 
-let html = `<p>${q.q}</p>`;
+        let html=`<p>${question.q}</p>`;
 
-q.options.forEach((opt,j)=>{
-html += `
-<label>
-<input type="radio" name="q${i}" value="${j}"> ${opt}
-</label><br>`;
-});
+        question.options.forEach((option,j)=>{
+            html+=`
+                <label>
+                    <input type="radio" name="q${i}" value="${j}">
+                    ${option}
+                </label>
+            `;
+        });
 
-html += `<p id="res${i}"></p>`;
-bloc.innerHTML = html;
-
-quizDiv.appendChild(bloc);
-});
-
-// rendre la fonction globale
-window.corriger = function(){
-let score = 0;
-
-questions.forEach((q,i)=>{
-let rep = document.querySelector(`input[name="q${i}"]:checked`);
-let res = document.getElementById(`res${i}`);
-
-if(rep){
-if(parseInt(rep.value) === q.answer){
-res.innerHTML="✔ Bonne réponse";
-res.className="correct";
-score++;
-}else{
-res.innerHTML="❌ Mauvaise réponse";
-res.className="wrong";
+        html+=`<p id="res${i}"></p>`;
+        bloc.innerHTML=html;
+        quizDiv.appendChild(bloc);
+    });
 }
-}else{
-res.innerHTML="⚠ Non répondu";
-res.className="wrong";
+
+/* CORRECTION AUTOMATIQUE */
+function corrigerQuiz(){
+    let score=0;
+
+    questions.forEach((question,i)=>{
+        const reponse=document.querySelector('input[name="q'+i+'"]:checked');
+        const resultat=document.getElementById("res"+i);
+
+        resultat.className="";
+
+        if(!reponse){
+            resultat.textContent="⚠ Non répondu";
+            resultat.classList.add("wrong");
+            return;
+        }
+
+        if(Number(reponse.value)===question.answer){
+            resultat.textContent="✔ Bonne réponse";
+            resultat.classList.add("correct");
+            score++;
+        }else{
+            resultat.textContent="✘ Mauvaise réponse";
+            resultat.classList.add("wrong");
+        }
+    });
+
+    const appreciation=score>=8
+        ?"Excellent 👍"
+        :score>=5
+        ?"Niveau moyen ⚠️"
+        :"À revoir ❌";
+
+    document.getElementById("resultat").textContent=
+        "🎯 Score : "+score+"/10 — "+appreciation;
 }
-});
 
-document.getElementById("score").innerHTML="🎯 Score : "+score+"/10";
-};
+/* REINITIALISATION DU QCU */
+function effacerResultat(){
+    document.getElementById("resultat").textContent="";
 
+    questions.forEach((question,i)=>{
+        const resultat=document.getElementById("res"+i);
+
+        if(resultat){
+            resultat.textContent="";
+            resultat.className="";
+        }
+    });
+}
+
+/* INITIALISATION */
+document.addEventListener("DOMContentLoaded",function(){
+    genererQuiz();
 });
 </script>
-
-</body>
-</html>
-
-</section>
-<footer>
-    Formation en comptabilité générale
-<br>
-
-<a href="C1P1M1.html">⬅ Retour </a>
-
-</footer>
 
 </body>
 </html>
