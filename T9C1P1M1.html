@@ -1,145 +1,287 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay - T9 Le Journal Comptable</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
-    background: #f4f6f9;
+    background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:20px 10px;
+    margin:0;
+    font-size:25px;
+}
+
+header h1 p{
+    margin:10px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== MENU DES RUBRIQUES ===== */
 nav{
     background:#34495e;
     padding:10px;
     text-align:center;
 }
 
-nav button{
+nav button,
+#quizForm button{
     margin:5px;
     padding:12px 18px;
-    border:none;
+    border:0;
     background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
-nav button:hover{
+nav button:hover,
+#quizForm button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* TITRES */
-h2{
-    color:#2c3e50;
-}
+/* ===== CONTENU ===== */
+h2{color:#2c3e50}
+h3{color:#00b894}
 
-h3{
-    color:#00b894;
-}
+p,li{line-height:1.7}
 
-/* TABLEAUX */
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
     margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-td{
+td,th{
     border:1px solid #ccc;
     padding:10px;
+    vertical-align:top;
+}
+
+th{
+    background:#dfe6e9;
+}
+
+tr:hover td{
+    background:#f1f7ff;
 }
 
 .titre{
     text-align:center;
-    font-size:24px;
+    font-size:20px;
     font-weight:bold;
+    margin:20px 0;
 }
 
-.bold{
-    font-weight:bold;
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+
+/* ===== ENCADRÉS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
 }
 
-.center{
-    text-align:center;
+.note{
+    background:#fff8e6;
+    border-left:6px solid #f0ad4e;
+    padding:15px;
+    margin-top:20px;
+    border-radius:8px;
 }
 
-.right{
-    text-align:right;
+/* ===== EXERCICE ===== */
+.exercise-table{
+    min-width:650px;
 }
 
-.header{
-    background:#dfe6e9;
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin:15px 0 25px;
 }
 
-
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
+.operation-list{
+    margin:0;
+    padding-left:20px;
 }
 
-/* FOOTER */
+.operation-list li{
+    margin:4px 0;
+}
+
+#EE .titre{
+    color:#0f766e;
+}
+
+ol,ul{
+    padding-left:25px;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
     padding:15px;
@@ -153,263 +295,344 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:760px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    header h1{
+        font-size:21px;
+    }
+
+    table{
+        font-size:14px;
+    }
+
+    td,th{
+        padding:7px;
+    }
+
+    .titre{
+        font-size:17px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
+<!-- ===== EN-TÊTE ET NAVIGATION PRINCIPALE ===== -->
 <header>
-    <h1>📘 Le Journal Comptable</h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T - Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+<a href="T4C1P1M1.html">T4 - Notion de compte</a>
+<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+<a href="T10C1P1M1.html">T10 - Le grand livre</a>
+<a href="T11C1P1M1.html">T11 - La balance</a>
+</div>
+</div>
+
+<a href="C1P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
+<p>T9 - Le Journal Comptable</p>
+</h1>
+
 </header>
 
+<!-- ===== MENU DES RUBRIQUES ===== -->
 <nav>
-    <button onclick="showSection('def')">Définition</button>
-    <button onclick="showSection('utilite')">Utilité</button>
-    <button onclick="showSection('obligation')">Obligations</button>
-    <button onclick="showSection('presentation')">Présentation</button>
-    <button onclick="showSection('EE')">Exercice d’évaluation</button>
-
+<button class="btnActive" onclick="showSection('def',this)">Définition</button>
+<button onclick="showSection('utilite',this)">Utilité</button>
+<button onclick="showSection('obligation',this)">Obligations</button>
+<button onclick="showSection('presentation',this)">Présentation</button>
+<button onclick="showSection('EE',this)">Exercice d’évaluation</button>
 </nav>
 
-<section id="def" class="active">
-    <h2>📘 Définition du journal</h2>
+<!-- ===== DÉFINITION ===== -->
+<section id="def" class="active animationSection">
 
-    <p>
-        Le journal est un registre comptable dans lequel toutes les opérations 
-        de l’entreprise sont enregistrées par ordre chronologique.
-    </p>
+<h2>📘 Définition du journal comptable</h2>
 
-    <div class="highlight">
-        ✔ Enregistrement chronologique<br>
-        ✔ Suivi des opérations<br>
-        ✔ Base de la comptabilité
-    </div>
-</section>
-
-<section id="utilite">
-    <h2>🎯 Utilité du journal</h2>
-
-    <ul>
-        <li>Suivre toutes les opérations réalisées</li>
-        <li>Contrôler les enregistrements comptables</li>
-        <li>Assurer la transparence</li>
-        <li>Faciliter la vérification</li>
-    </ul>
-
-    <div class="highlight">
-        ✔ Le journal est un outil de contrôle essentiel
-    </div>
-</section>
-
-<section id="obligation">
-    <h2>⚖️ Obligations légales</h2>
-
-    <ul>
-        <li>✔ Tenue obligatoire</li>
-        <li>✔ Pages numérotées (côtées)</li>
-        <li>✔ Signé par un juge (paraphé)</li>
-        <li>✔ Sans ratures ni altérations</li>
-        <li>✔ Enregistrement chronologique</li>
-    </ul>
-
-    <div class="highlight">
-        ✔ Une comptabilité irrégulière peut entraîner des sanctions
-    </div>
-</section>
-
-<section id="presentation">
-    <h2>📊 Présentation du journal</h2>
-
-    <table>
-
-<tr class="date"><td colspan="6">Date Opération</td></tr>
-
-<tr><td>N° Compte D</td><td> </td><td>Intitulé de(s) compte(s) à débiter</td><td></td><td>Montant D</td><td></td></tr>
-<tr><td> </td><td> N° Compte C</td><td> </td> <td> Intitulé de(s) compte(s) à créditer </td><td> </td><td>Montant C</td></tr>
-<tr class="date"><td colspan="6">Libellé Opération</td></tr>
-
-</table>
-
-    <div class="highlight">
-        ✔ Chaque opération est enregistrée avec précision et avec son libellé
-    </div>
-</section>
-<section id="EE">
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Exercice N°2 - Journal</title>
-
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    margin:20px;
-}
-
-h1{
-    text-align:center;
-}
-
-table{
-    border-collapse:collapse;
-    width:100%;
-    margin-bottom:20px;
-    background:white;
-}
-
-th, td{
-    border:1px solid #333;
-    padding:8px;
-    text-align:center;
-}
-
-th{
-    background:#d5e0d0;
-}
-
-.titre{
-    font-weight:bold;
-    font-size:18px;
-    margin:15px 0;
-}
-
-ul{
-    margin-left:20px;
-}
-</style>
-
-</head>
-
-<body>
-
-<p class="titre">
-La situation de l’entreprise <b>AL AMAL.SA</b> se présente au <b>01/12/2025</b> ainsi :
+<p>
+Le journal est un registre comptable dans lequel toutes les opérations
+de l’entreprise sont enregistrées par ordre chronologique.
 </p>
 
+<div class="highlight">
+✔ Enregistrement chronologique<br>
+✔ Suivi des opérations<br>
+✔ Base de la comptabilité
+</div>
+
+</section>
+
+<!-- ===== UTILITÉ ===== -->
+<section id="utilite">
+
+<h2>🎯 Utilité du journal comptable</h2>
+
+<ul>
+<li>Suivre toutes les opérations réalisées</li>
+<li>Contrôler les enregistrements comptables</li>
+<li>Assurer la transparence</li>
+<li>Faciliter la vérification</li>
+</ul>
+
+<div class="highlight">
+✔ Le journal est un outil de contrôle essentiel.
+</div>
+
+</section>
+
+<!-- ===== OBLIGATIONS ===== -->
+<section id="obligation">
+
+<h2>⚖️ Obligations légales</h2>
+
+<ul>
+<li>✔ Tenue du journal conformément aux règles comptables applicables</li>
+<li>✔ Pages numérotées et journal coté selon les formalités légales applicables</li>
+<li>✔ Journal paraphé par l’autorité compétente lorsque la réglementation l’exige</li>
+<li>✔ Écritures régulières, justifiées et sans altérations non conformes</li>
+<li>✔ Enregistrement chronologique des opérations</li>
+</ul>
+
+<div class="highlight">
+✔ Une comptabilité irrégulière peut entraîner des conséquences juridiques et fiscales.
+</div>
+
+</section>
+
+<!-- ===== PRÉSENTATION DU JOURNAL ===== -->
+<section id="presentation">
+
+<h2>📊 Présentation du journal</h2>
+
 <table>
+
 <tr>
-    <th>Intitulé des comptes</th>
-    <th>Somme en MAD</th>
-    <th>Intitulé des comptes</th>
-    <th>Somme en MAD</th>
+<td colspan="6" class="center bold">Date Opération</td>
 </tr>
 
-<tr><td>Banque</td><td>160 000</td><td>Fournisseurs</td><td>110 000</td></tr>
-<tr><td>Caisse</td><td>45 000</td><td>Frais de constitution</td><td>50 000</td></tr>
-<tr><td>Titres de participation</td><td>70 000</td><td>Installations techniques</td><td>65 000</td></tr>
-<tr><td>Clients</td><td>52 000</td><td>Matières premières</td><td>100 000</td></tr>
-<tr><td>CNSS</td><td>18 000</td><td>Produits finis</td><td>55 000</td></tr>
-<tr><td>Fonds commercial</td><td>180 000</td><td>Local</td><td>300 000</td></tr>
+<tr>
+<td>N° Compte D</td>
+<td></td>
+<td>Intitulé de(s) compte(s) à débiter</td>
+<td></td>
+<td>Montant D</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>N° Compte C</td>
+<td></td>
+<td>Intitulé de(s) compte(s) à créditer</td>
+<td></td>
+<td>Montant C</td>
+</tr>
+
+<tr>
+<td colspan="6" class="center bold">Libellé Opération</td>
+</tr>
 
 </table>
 
-<p><b>Capital personnel à déterminer ?</b></p>
+<div class="highlight">
+✔ Chaque opération est enregistrée avec précision et avec son libellé
+</div>
 
-<p class="titre">Durant le mois de Décembre, l’entreprise a effectué les opérations suivantes :</p>
+</section>
 
-<table>
+<!-- ===== EXERCICE D'ÉVALUATION ===== -->
+<section id="EE">
+
+<h2>📝 Exercice d’évaluation – Entreprise AL AMAL.SA</h2>
+
+<p class="titre">
+La situation de l’entreprise <strong>AL AMAL.SA</strong> se présente au
+<strong>01/12/2025</strong> comme suit :
+</p>
+
+<div class="table-wrapper">
+<table class="exercise-table">
+<thead>
 <tr>
-    <th>Dates</th>
-    <th>Opérations</th>
-    <th>Montants</th>
+<th>Intitulé des comptes</th>
+<th>Somme en MAD</th>
+<th>Intitulé des comptes</th>
+<th>Somme en MAD</th>
 </tr>
+</thead>
+<tbody>
+<tr><td>Banque</td><td class="right">160 000</td><td>Fournisseurs</td><td class="right">110 000</td></tr>
+<tr><td>Caisse</td><td class="right">45 000</td><td>Frais de constitution</td><td class="right">50 000</td></tr>
+<tr><td>Titres de participation</td><td class="right">70 000</td><td>Installations techniques</td><td class="right">65 000</td></tr>
+<tr><td>Clients</td><td class="right">52 000</td><td>Matières premières</td><td class="right">100 000</td></tr>
+<tr><td>CNSS</td><td class="right">18 000</td><td>Produits finis</td><td class="right">55 000</td></tr>
+<tr><td>Fonds commercial</td><td class="right">180 000</td><td>Local</td><td class="right">300 000</td></tr>
+</tbody>
+</table>
+</div>
 
+<div class="highlight">
+<strong>Travail préalable :</strong> déterminer le capital personnel à partir des éléments du bilan d’ouverture, après avoir identifié les postes d’actif et de passif.
+</div>
+
+<p class="titre">
+Durant le mois de décembre, l’entreprise a effectué les opérations suivantes :
+</p>
+
+<div class="table-wrapper">
+<table class="exercise-table">
+<thead>
 <tr>
-<td>02/12</td>
-<td>Emprunt auprès d’une banque remboursable sur 10 ans</td>
-<td>180 000</td>
+<th style="width:12%">Date</th>
+<th>Opérations</th>
+<th style="width:20%">Montants (MAD)</th>
 </tr>
-
+</thead>
+<tbody>
 <tr>
-<td>04/12</td>
-<td>Achat de matières premières réglé 1/2 par chèque et le reste à crédit</td>
-<td>40 000</td>
+<td class="center">02/12</td>
+<td>Emprunt auprès d’une banque remboursable sur 10 ans.</td>
+<td class="right">180 000</td>
 </tr>
-
 <tr>
-<td>06/12</td>
-<td>Acquisition d’un véhicule utilitaire payable dans 12 mois</td>
-<td>85 000</td>
+<td class="center">04/12</td>
+<td>Achat de matières premières réglé pour moitié par chèque et pour le reste à crédit.</td>
+<td class="right">40 000</td>
 </tr>
-
 <tr>
-<td>08/12</td>
-<td>Vente de produits finis : 30% espèces, 40% chèque, reste à crédit</td>
-<td>70 000</td>
+<td class="center">06/12</td>
+<td>Acquisition d’un véhicule utilitaire payable dans 12 mois.</td>
+<td class="right">85 000</td>
 </tr>
-
 <tr>
-<td>10/12</td>
-<td>Règlement d’un fournisseur en espèces</td>
-<td>5 000</td>
+<td class="center">08/12</td>
+<td>Vente de produits finis : 30 % en espèces, 40 % par chèque et le reste à crédit.</td>
+<td class="right">70 000</td>
 </tr>
-
 <tr>
-<td>12/12</td>
-<td>Reçu chèque d’un client comme avance</td>
-<td>6 500</td>
+<td class="center">10/12</td>
+<td>Règlement d’un fournisseur en espèces.</td>
+<td class="right">5 000</td>
 </tr>
-
 <tr>
-<td>14/12</td>
-<td>Paiement en espèces :</td>
-<td></td>
+<td class="center">12/12</td>
+<td>Réception d’un chèque d’un client comme avance.</td>
+<td class="right">6 500</td>
 </tr>
-
 <tr>
-<td></td>
+<td class="center">14/12</td>
 <td>
-<ul>
+Paiement en espèces de :
+<ul class="operation-list">
 <li>Timbres postaux</li>
 <li>Timbres fiscaux</li>
 <li>Facture d’électricité</li>
-<li>Facture téléphone</li>
+<li>Facture de téléphone</li>
 <li>Frais de réparation</li>
 </ul>
 </td>
 <td>
-<ul>
+<ul class="operation-list right">
 <li>200</li>
 <li>450</li>
 <li>950</li>
@@ -418,89 +641,154 @@ La situation de l’entreprise <b>AL AMAL.SA</b> se présente au <b>01/12/2025</
 </ul>
 </td>
 </tr>
-
 <tr>
-<td>16/12</td>
-<td>Règlement des frais de publicité par chèque</td>
-<td>3 500</td>
+<td class="center">16/12</td>
+<td>Règlement des frais de publicité par chèque.</td>
+<td class="right">3 500</td>
 </tr>
-
 <tr>
-<td>18/12</td>
-<td>Réception d’intérêts bancaires (avis de crédit)</td>
-<td>2 200</td>
+<td class="center">18/12</td>
+<td>Réception d’intérêts bancaires (avis de crédit).</td>
+<td class="right">2 200</td>
 </tr>
-
 <tr>
-<td>20/12</td>
-<td>Encaissement du solde client par chèque</td>
-<td>12 000</td>
+<td class="center">20/12</td>
+<td>Encaissement du solde d’un client par chèque.</td>
+<td class="right">12 000</td>
 </tr>
-
 <tr>
-<td>22/12</td>
-<td>Paiement de la taxe locale en espèces</td>
-<td>1 200</td>
+<td class="center">22/12</td>
+<td>Paiement de la taxe locale en espèces.</td>
+<td class="right">1 200</td>
 </tr>
-
 <tr>
-<td>25/12</td>
-<td>Paiement des intérêts bancaires</td>
-<td>1 500</td>
+<td class="center">25/12</td>
+<td>Paiement des intérêts bancaires.</td>
+<td class="right">1 500</td>
 </tr>
-
 <tr>
-<td>26/12</td>
-<td>Achat de matières premières à crédit</td>
-<td>35 000</td>
+<td class="center">26/12</td>
+<td>Achat de matières premières à crédit.</td>
+<td class="right">35 000</td>
 </tr>
-
 <tr>
-<td>27/12</td>
-<td>Prêt accordé à un salarié par chèque</td>
-<td>18 000</td>
+<td class="center">27/12</td>
+<td>Prêt accordé à un salarié par chèque.</td>
+<td class="right">18 000</td>
 </tr>
-
 <tr>
-<td>29/12</td>
-<td>Livraison de la commande relative à l’avance reçue</td>
-<td>45 000</td>
+<td class="center">29/12</td>
+<td>Livraison de la commande relative à l’avance reçue.</td>
+<td class="right">45 000</td>
 </tr>
-
 <tr>
-<td>31/12</td>
-<td>Paiement des salaires par virement bancaire</td>
-<td>110 000</td>
+<td class="center">31/12</td>
+<td>Paiement des salaires par virement bancaire.</td>
+<td class="right">110 000</td>
 </tr>
-
+</tbody>
 </table>
+</div>
 
-<p class="titre">Travail à faire :</p>
+<h3>📌 Travail à faire</h3>
 
 <ol>
-<li>Établir le bilan au 01/12/2025</li>
-<li>Passer les écritures du mois 12 dans le journal</li>
-NB. Le stock au 31/12/2025 est estimé à :
+<li>Établir le bilan au 01/12/2025 et déterminer le capital personnel.</li>
+<li>Enregistrer les opérations du mois de décembre dans le journal comptable.</li>
 </ol>
 
+<div class="note">
+<strong>NB :</strong> le stock au 31/12/2025 est estimé à :
 <ul>
-<li>Matières premières : 95 000 MAD</li>
-<li>Produits finis : 60 000 MAD</li>
+<li>Matières premières : <strong>95 000 MAD</strong></li>
+<li>Produits finis : <strong>60 000 MAD</strong></li>
 </ul>
+Les écritures de variation des stocks doivent être enregistrées au journal en procédant à l’annulation du stock initial et à la constatation du stock final.
+</div>
 
-</body>
-</html>
-💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer le bilan et le journal. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème.
+<div class="highlight">
+💡 Nous vous invitons à utiliser notre formulaire interactif afin d’élaborer le bilan et le journal. Nous vous recommandons également de consulter les exercices corrigés disponibles sur notre site en lien avec ce thème.
+</div>
 
 </section>
 
+<!-- ===== PIED DE PAGE ===== -->
 <footer>
-    Formation en comptabilité générale
-<br>
-
-<a href="C1P1M1.html">⬅ Retour </a>
-
+<span>Formation en comptabilité générale</span>
+<br><br>
 </footer>
+
+<script>
+
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* ===== FERMER LES MENUS EN CLIQUANT À L'EXTÉRIEUR ===== */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+
+        }
+
+    });
+
+});
+
+/* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+}
+
+</script>
 
 </body>
 </html>
+
+
