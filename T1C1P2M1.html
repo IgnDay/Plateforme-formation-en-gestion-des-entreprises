@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -208,11 +209,13 @@ p{
     line-height:1.7;
 }
 
-/* ===== TABLEAUX ===== */
+/* ===== TABLEAUX GÉNÉRAUX ===== */
 .table-wrapper{
     width:100%;
+    max-width:100%;
     overflow-x:auto;
     margin:20px 0 30px;
+    -webkit-overflow-scrolling:touch;
 }
 
 table{
@@ -266,8 +269,23 @@ td,th{
     font-size:26px;
 }
 
+/* ===== TABLEAUX D'ENREGISTREMENT COMPTABLE ===== */
 .journal-table{
-    min-width:650px;
+    width:100%;
+    min-width:0;
+    table-layout:fixed;
+    border-collapse:collapse;
+}
+
+.journal-table td,
+.journal-table th{
+    padding:10px 6px;
+    font-size:14px;
+    line-height:1.5;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-wrap:break-word;
+    white-space:normal;
 }
 
 .journal-table .date td{
@@ -291,9 +309,10 @@ td,th{
 
 .journal-table .montant{
     text-align:right;
-    white-space:nowrap;
     font-weight:bold;
     background:#f8fafc;
+    white-space:normal;
+    overflow-wrap:anywhere;
 }
 
 .journal-table tr:hover td{
@@ -305,6 +324,7 @@ td,th{
     color:white;
 }
 
+/* ===== EXEMPLES ET SYNTHÈSE ===== */
 .example{
     background:#e8fff7;
     border-left:6px solid #00b894;
@@ -341,8 +361,9 @@ footer a:hover{
     text-decoration:underline;
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:760px){
+/* ===== ADAPTATION TABLETTE ===== */
+@media(max-width:768px){
+
     .brandbar{
         justify-content:center;
         padding:12px;
@@ -383,6 +404,103 @@ footer a:hover{
     .facture-table{
         width:100%;
     }
+
+    #journal{
+        padding:15px;
+        margin:10px;
+    }
+
+    #journal .journal-table{
+        width:100%;
+        min-width:0;
+        table-layout:fixed;
+    }
+
+    #journal .journal-table td,
+    #journal .journal-table th{
+        padding:7px 4px;
+        font-size:12px;
+        line-height:1.4;
+    }
+}
+
+/* ===== ADAPTATION TÉLÉPHONE ===== */
+@media(max-width:480px){
+
+    #journal{
+        padding:10px;
+        margin:6px;
+        border-left-width:4px;
+    }
+
+    #journal h2{
+        font-size:19px;
+        line-height:1.4;
+    }
+
+    #journal h3{
+        font-size:16px;
+    }
+
+    #journal p{
+        font-size:14px;
+    }
+
+    #journal .table-wrapper{
+        overflow-x:hidden;
+        width:100%;
+    }
+
+    #journal .journal-table{
+        width:100%;
+        min-width:0;
+        table-layout:fixed;
+    }
+
+    #journal .journal-table td,
+    #journal .journal-table th{
+        padding:6px 2px;
+        font-size:10px;
+        line-height:1.35;
+        overflow-wrap:anywhere;
+        word-break:normal;
+    }
+
+    #journal .journal-table .date td{
+        font-size:11px;
+        padding:8px 3px;
+    }
+
+    #journal .journal-table .montant{
+        text-align:center;
+        font-size:10px;
+    }
+
+    #journal .example,
+    #journal .highlight{
+        padding:10px;
+        font-size:12px;
+        line-height:1.6;
+    }
+}
+
+/* ===== TRÈS PETITS TÉLÉPHONES ===== */
+@media(max-width:360px){
+
+    #journal{
+        padding:8px;
+        margin:5px;
+    }
+
+    #journal .journal-table td,
+    #journal .journal-table th{
+        padding:4px 1px;
+        font-size:9px;
+    }
+
+    #journal .journal-table .montant{
+        font-size:9px;
+    }
 }
 </style>
 </head>
@@ -394,8 +512,8 @@ footer a:hover{
 <div class="brandbar">
 
 <a class="brand" href="index.html">
-<span class="brand-logo">IF</span>
-<span>IgnDay</span>
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
 </a>
 
 <div class="site-menu">
@@ -455,32 +573,36 @@ T – Résumés des thèmes ▼
 
 <div class="dropdown-content">
 <a href="T1C1P2M1.html" class="card">
-        T1 - L'enregistrement des opérations d'achat et de vente : Facture « Doit » simple (sans réductions ni majorations)
-    </a>
+T1 - L'enregistrement des opérations d'achat et de vente :
+Facture « Doit » simple (sans réductions ni majorations)
+</a>
 
-    <a href="T2C1P2M1.html" class="card">
-T2 - L'enregistrement des opérations d'achat et de vente : Facture « Doit » comportant des réductions
-    </a>
+<a href="T2C1P2M1.html" class="card">
+T2 - L'enregistrement des opérations d'achat et de vente :
+Facture « Doit » comportant des réductions
+</a>
 
-    <a href="T3C1P2M1.html" class="card">
-       T3 - L'enregistrement des opérations d'achat et de vente : Facture « Doit » comportant des majorations
-    </a>
+<a href="T3C1P2M1.html" class="card">
+T3 - L'enregistrement des opérations d'achat et de vente :
+Facture « Doit » comportant des majorations
+</a>
 
-    <a href="T4C1P2M1.html" class="card">
-       T4 - L'enregistrement des opérations d'achat et de vente : Facture « Avoir »
-    </a>
+<a href="T4C1P2M1.html" class="card">
+T4 - L'enregistrement des opérations d'achat et de vente :
+Facture « Avoir »
+</a>
 
-    <a href="T5C1P2M1.html" class="card">
-       T5 - L'enregistrement des autres éléments du compte de produits et de charges
-    </a>
+<a href="T5C1P2M1.html" class="card">
+T5 - L'enregistrement des autres éléments du compte de produits et de charges
+</a>
 
-    <a href="T6C1P2M1.html" class="card">
-       T6 - L'enregistrement de l'acquisition des immobilisations
-    </a>
+<a href="T6C1P2M1.html" class="card">
+T6 - L'enregistrement de l'acquisition des immobilisations
+</a>
 
-    <a href="T7C1P2M1.html" class="card">
+<a href="T7C1P2M1.html" class="card">
 T7 - L’enregistrement des opérations relatives aux règlements financiers
-    </a>
+</a>
 </div>
 </div>
 
@@ -491,7 +613,7 @@ T7 - L’enregistrement des opérations relatives aux règlements financiers
 
 <h1>
 <p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p>
-<p>T1 - Enregistrement des opérations d’achat et de vente : Facture « Doit » simple (sans réductions no majorations)</p>
+<p>T1 - Enregistrement des opérations d’achat et de vente : Facture « Doit » simple (sans réductions ni majorations)</p>
 </h1>
 
 </header>
@@ -570,7 +692,6 @@ Lieu + Date : .......................................................
 </tr>
 
 </table>
-
 </div>
 
 <div class="highlight">
@@ -585,7 +706,7 @@ le montant brut constitue le montant de la facture présenté dans cet exemple.
 
 <h2>📒 Enregistrement comptable au journal</h2>
 
-<h3>Chez l’acheteur (client)</h3>
+<h3>Chez l’Acheteur (Client)</h3>
 
 <p>
 Lors d’un achat, le compte d’achat concerné est débité et le compte
@@ -596,36 +717,36 @@ de trésorerie ou de fournisseur est crédité, selon le mode de règlement.
 <table class="journal-table">
 
 <tr class="date">
-<td colspan="6">Date de l’opération : XX/XX/XXXX</td>
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
 <tr>
-<td class="debit center">611X / 612X</td>
+<td class="debit center" style="width:5%;">611X / 612X</td>
 <td></td>
-<td class="debit">Achats de marchandises et/ou achats consommés de matières et fournitures</td>
+<td class="debit" style="width:30%;">Achats de marchandises et/ou achats consommés de matières et fournitures</td>
 <td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="montant" style="width:10%;">Montant</td>
+<td class="montant" style="width:10%;">—</td>
 </tr>
 
 <tr>
 <td></td>
-<td class="credit center">5141 / 5161 / 4411</td>
+<td class="credit center" style="width:5%;">5141 / 5161 / 4411</td>
 <td></td>
-<td class="credit">Banques / Caisses / Fournisseurs</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
+<td class="credit" style="width:30%;">Banques et/ou Caisses et/ou Fournisseurs</td>
+<td class="montant" style="width:10%;">—</td>
+<td class="montant" style="width:10%;">Montant</td>
 </tr>
 
 <tr class="date">
-<td colspan="6">Facture N° .....................</td>
+<td colspan="6">Facture N°.....................</td>
 </tr>
 
 </table>
 </div>
 
 <div class="example">
-► Exemple : achat de marchandises réglé par chèque bancaire
+► Exemple : Achats de marchandises par chèque bancaire
 </div>
 
 <div class="table-wrapper">
@@ -636,31 +757,31 @@ de trésorerie ou de fournisseur est crédité, selon le mode de règlement.
 </tr>
 
 <tr>
-<td class="debit center">6111</td>
+<td class="debit center" style="width:5%;">6111</td>
 <td></td>
-<td class="debit">Achats de marchandises</td>
+<td class="debit" style="width:30%;">Achats de marchandises</td>
 <td></td>
-<td class="montant">20 000,00</td>
-<td class="montant">—</td>
+<td class="montant" style="width:10%;">20 000,00</td>
+<td class="montant" style="width:10%;">—</td>
 </tr>
 
 <tr>
 <td></td>
-<td class="credit center">5141</td>
+<td class="credit center" style="width:5%;">5141</td>
 <td></td>
-<td class="credit">Banques</td>
-<td class="montant">—</td>
-<td class="montant">20 000,00</td>
+<td class="credit" style="width:30%;">Banques</td>
+<td class="montant" style="width:10%;">—</td>
+<td class="montant" style="width:10%;">20 000,00</td>
 </tr>
 
 <tr class="date">
-<td colspan="6">Facture N° 25-2026</td>
+<td colspan="6">Facture N°25-2026</td>
 </tr>
 
 </table>
 </div>
 
-<h3>Chez le vendeur (fournisseur)</h3>
+<h3>Chez le Vendeur (Fournisseur)</h3>
 
 <p>
 Lors d’une vente, le compte de trésorerie ou de client est débité
@@ -671,36 +792,36 @@ et le compte de vente concerné est crédité, selon le mode de règlement.
 <table class="journal-table">
 
 <tr class="date">
-<td colspan="6">Date de l’opération : XX/XX/XXXX</td>
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
 <tr>
-<td class="debit center">5141 / 5161 / 3421</td>
+<td class="debit center" style="width:5%;">5141 / 5161 / 3421</td>
 <td></td>
-<td class="debit">Banques / Caisses / Clients</td>
+<td class="debit" style="width:30%;">Banques et/ou Caisses et/ou Clients</td>
 <td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="montant" style="width:10%;">Montant</td>
+<td class="montant" style="width:10%;">—</td>
 </tr>
 
 <tr>
 <td></td>
-<td class="credit center">711X / 712X</td>
+<td class="credit center" style="width:5%;">711X / 712X</td>
 <td></td>
-<td class="credit">Ventes de marchandises et/ou ventes de biens et services produits</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
+<td class="credit" style="width:30%;">Ventes de marchandises et/ou ventes de biens et services produits</td>
+<td class="montant" style="width:10%;">—</td>
+<td class="montant" style="width:10%;">Montant</td>
 </tr>
 
 <tr class="date">
-<td colspan="6">Facture N° .....................</td>
+<td colspan="6">Facture N°.....................</td>
 </tr>
 
 </table>
 </div>
 
 <div class="example">
-► Exemple : vente de marchandises réglée par chèque bancaire
+► Exemple : Ventes de marchandises par chèque bancaire
 </div>
 
 <div class="table-wrapper">
@@ -711,34 +832,32 @@ et le compte de vente concerné est crédité, selon le mode de règlement.
 </tr>
 
 <tr>
-<td class="debit center">5141</td>
+<td class="debit center" style="width:5%;">5141</td>
 <td></td>
-<td class="debit">Banques</td>
+<td class="debit" style="width:30%;">Banques</td>
 <td></td>
-<td class="montant">20 000,00</td>
-<td class="montant">—</td>
+<td class="montant" style="width:10%;">20 000,00</td>
+<td class="montant" style="width:10%;">—</td>
 </tr>
 
 <tr>
 <td></td>
-<td class="credit center">7111</td>
+<td class="credit center" style="width:5%;">7111</td>
 <td></td>
-<td class="credit">Ventes de marchandises au Maroc</td>
-<td class="montant">—</td>
-<td class="montant">20 000,00</td>
+<td class="credit" style="width:30%;">Ventes de marchandises au Maroc</td>
+<td class="montant" style="width:10%;">—</td>
+<td class="montant" style="width:10%;">20 000,00</td>
 </tr>
 
 <tr class="date">
-<td colspan="6">Facture N° 25-2026</td>
+<td colspan="6">Facture N°25-2026</td>
 </tr>
 
 </table>
 </div>
 
 <div class="highlight">
-<strong>Remarque :</strong> les exemples, ci-dessus, reprennent les montants
-du contenu initial (sans réductions i majorations)
-.
+<strong>Remarque :</strong> les exemples reprennent les montants du contenu initial, sans réductions ni majorations.
 </div>
 
 </section>
@@ -748,12 +867,15 @@ Formation en Comptabilité Générale<br><br>
 </footer>
 
 <script>
+
 /* ===== MENUS DÉROULANTS ===== */
 function toggleDropdown(button){
+
     const menu=button.nextElementSibling;
     const isOpen=button.getAttribute("aria-expanded")==="true";
 
     document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
         const otherButton=dropdown.querySelector("button");
         const otherMenu=dropdown.querySelector(".dropdown-content");
 
@@ -769,8 +891,11 @@ function toggleDropdown(button){
 
 /* Fermer les menus en cliquant à l'extérieur */
 document.addEventListener("click",function(event){
+
     document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
         if(!dropdown.contains(event.target)){
+
             const button=dropdown.querySelector("button");
             const menu=dropdown.querySelector(".dropdown-content");
 
@@ -784,6 +909,7 @@ document.addEventListener("click",function(event){
 
 /* ===== NAVIGATION ENTRE LES SECTIONS ===== */
 function showSection(id,button){
+
     document.querySelectorAll("body > section").forEach(section=>{
         section.classList.remove("active","animationSection");
     });
@@ -811,4 +937,3 @@ function showSection(id,button){
 
 </body>
 </html>
-
