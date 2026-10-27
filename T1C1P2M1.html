@@ -2,26 +2,138 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale - Facture Doit Simple</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.5;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -37,77 +149,84 @@ nav button{
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
 }
 
-/* TABLEAUX */
+p{
+    line-height:1.7;
+}
+
+/* ===== TABLEAUX ===== */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin:20px 0 30px;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:15px auto 25px;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    font-size:14px;
 }
 
 .titre{
@@ -128,44 +247,86 @@ td{
     text-align:right;
 }
 
-.header{
+.header-cell{
     background:#dfe6e9;
+    font-weight:bold;
 }
 
-/* JOURNAL */
-.date{
+.facture-table{
+    width:75%;
+    min-width:450px;
+    border:2px solid #1e293b;
+}
+
+.facture-table td{
+    border:1px solid #1e293b;
+}
+
+.facture-table .titre{
+    font-size:26px;
+}
+
+.journal-table{
+    min-width:650px;
+}
+
+.journal-table .date td{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
 }
 
-.debit{
+.journal-table .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
-.credit{
-    background:#fff4e6;
+.journal-table .credit{
+    background:#fff2e6;
+    color:#a34b00;
     font-weight:bold;
 }
 
-.montant{
+.journal-table .montant{
     text-align:right;
-    background:#f8f9fa;
+    white-space:nowrap;
+    font-weight:bold;
+    background:#f8fafc;
+}
+
+.journal-table tr:hover td{
+    background:#f1f7ff;
+}
+
+.journal-table .date:hover td{
+    background:#2c3e50;
+    color:white;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:13px 16px;
+    margin:18px 0;
+    border-radius:7px;
     font-weight:bold;
 }
 
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    line-height:1.9;
 }
 
-/* FOOTER */
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,547 +337,478 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:760px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    .facture-table{
+        width:100%;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 L'enregistrement des opérations d'achat et de vente : Facture "Doit" Simple (Sans Réductions ni Majorations) </h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P2 – Opérations courantes ▼
+</button>
+
+<div class="dropdown-content">
+<a href="C1P2M1.html">T – Résumés des thèmes</a>
+<a href="C2P2M1.html">F – Formulaires interactifs</a>
+<a href="C3P2M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+
+<div class="dropdown-content">
+<a href="T1C1P2M1.html" class="card">
+        T1 - L'enregistrement des opérations d'achat et de vente : Facture « Doit » simple (sans réductions ni majorations)
+    </a>
+
+    <a href="T2C1P2M1.html" class="card">
+T2 - L'enregistrement des opérations d'achat et de vente : Facture « Doit » comportant des réductions
+    </a>
+
+    <a href="T3C1P2M1.html" class="card">
+       T3 - L'enregistrement des opérations d'achat et de vente : Facture « Doit » comportant des majorations
+    </a>
+
+    <a href="T4C1P2M1.html" class="card">
+       T4 - L'enregistrement des opérations d'achat et de vente : Facture « Avoir »
+    </a>
+
+    <a href="T5C1P2M1.html" class="card">
+       T5 - L'enregistrement des autres éléments du compte de produits et de charges
+    </a>
+
+    <a href="T6C1P2M1.html" class="card">
+       T6 - L'enregistrement de l'acquisition des immobilisations
+    </a>
+
+    <a href="T7C1P2M1.html" class="card">
+T7 - L’enregistrement des opérations relatives aux règlements financiers
+    </a>
+</div>
+</div>
+
+<a href="C1P2M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p>
+<p>T1 - Enregistrement des opérations d’achat et de vente : Facture « Doit » simple (sans réductions no majorations)</p>
+</h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('Définition de la facture')">Définition de la Facture</button>
-<button onclick="showSection('FSRNM')"> Facture sans Réductions ni Majorations</button>
-<button onclick="showSection('Enregistrement comptable au journal')">Enregistrement comptable au journal</button>
+<button onclick="showSection('definition',this)">Définition de la facture</button>
+<button onclick="showSection('facture',this)">Facture sans réductions ni majorations</button>
+<button onclick="showSection('journal',this)">Enregistrement comptable au journal</button>
 </nav>
 
-<section id="Définition de la facture" class="active">
-    <h2>Définition de la Facture</h2>
+<!-- ===== SECTION 1 : DÉFINITION ===== -->
+<section id="definition" class="active animationSection">
 
-    <p>
-        La facture est un document détaillant les biens ou services vendus.
-    </p>
+<h2>📘 Définition de la facture</h2>
 
-    <div class="highlight">
-        ✔ Preuve de la transaction<br>
-        ✔ Contient les conditions de vente
-    </div>
+<p>
+La facture est un document détaillant les biens ou services vendus.
+</p>
 
-    <h3>Facture « Doit » :</h3>
-    <p>
-        Montant que le client doit payer au fournisseur.
-    </p>
-</section>
+<div class="highlight">
+✔ Preuve de la transaction<br>
+✔ Contient les conditions de vente
+</div>
 
-<section id="FSRNM">
-<h2>Facture sans Réductions ni Majorations</h2>
+<h3>Facture « Doit »</h3>
 
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
-
-/* Tableau principal */
-table{
-    width:70%;
-    margin:auto;
-    border-collapse:collapse;
-    border:3px solid black; /* Bordure extérieure épaisse */
-}
-
-/* Cellules */
-td{
-    border:1px solid black; /* Bordures internes */
-    padding:10px;
-}
-
-/* Styles */
-.titre{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.right{
-    text-align:right;
-}
-
-.center{
-    text-align:center;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.header{
-    background:#e6e6e6;
-}
-
-</style>
-
-<table>
-
-<tr>
-    <td colspan="3" class="titre">Facture</td>
-</tr>
-
-<tr>
-    <td class="bold">Société X (Frs)</td>
-    <td> DOIT</td>
-    <td class="bold right"> Société Y (Clt)</td>
-</tr>
-
-<tr>
-    <td colspan="3" class="bold">Facture DOIT N° ........</td>
-</tr>
-
-<tr>
-    <td colspan="3" class="bold">Lieu + Date : .......................................................</td>
-</tr>
-
-<tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
-</tr>
-
-<tr>
-    <td colspan="2">Montant Brut</td>
-    <td class="right">20.000,00</td>
-</tr>
-
-</table>
+<p>
+La facture « Doit » constate une vente de biens ou de services.
+Elle indique le montant que le client doit payer au fournisseur.
+</p>
 
 </section>
 
-<section id="Enregistrement comptable au journal">
-<h2>Enregistrement comptable au journal</h2>
+<!-- ===== SECTION 2 : FACTURE ===== -->
+<section id="facture">
 
-<style>
+<h2>🧾 Facture sans réductions ni majorations</h2>
 
-body{
-    font-family: Arial, sans-serif;
-    margin:20px;
-    background:#f4f7fb;
-    color:#222;
-}
+<p>
+Une facture « Doit » simple, sans réductions ni majorations,
+présente le montant brut des biens ou services vendus.
+</p>
 
-/* TITRES */
-h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:35px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
-    letter-spacing:0.5px;
-}
+<div class="table-wrapper">
 
-/* TABLEAUX */
-table{
-    width:70%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-    background:white;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* CELLULES */
-td{
-    border:1px solid #cfd8e3;
-    padding:8px;
-    font-size:14px;
-}
-
-/* DATE */
-.date{
-    text-align:center;
-    font-weight:bold;
-    background:#1e3a5f;
-    color:white;
-    font-size:15px;
-}
-
-/* COLONNES */
-.compte{
-    width:5%;
-    text-align:center;
-}
-
-.libelle{
-    width:30%;
-}
-
-.montant{
-    width:10%;
-    text-align:right;
-    white-space:nowrap;
-    background:#f9fbfd;
-    font-weight:bold;
-    color:#0b5e8e;
-}
-
-/* DEBIT */
-.debit{
-    background:#e8f4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
-
-/* CREDIT */
-.credit{
-    background:#fff2e6;
-    color:#b35400;
-    font-weight:bold;
-}
-
-/* CENTRAGE */
-.center{
-    text-align:center;
-}
-
-/* EFFET HOVER */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-</style>
-
-<h3>Chez l'Acheteur (Client)</h3>
-
-<table>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+<table class="facture-table">
 
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>611X</option>
-            <option>612X </option>
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Achats de marchandises et/ou </option>
-            <option>Achats consommés de matières et fournitures</option>
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>Montant </option>
-<option>Montant </option>
-</td>
-
+<td colspan="3" class="titre">FACTURE</td>
 </tr>
 
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>5141 </option>
-            <option>5161 </option>
-            <option>4411 </option>
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Banques et/ou</option>
-            <option>Caisses et/ou</option>
-            <option>Fournisseurs...</option>
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>Montant</option>
-<option>Montant</option>
-<option>Montant</option>
-
-</td>
-
-</tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
-
-</table>
-►Exemple : Achats de marchandises par chèque bancaire
-
-<table>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">15/03/2026</td></tr>
-
-<tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6111 </option>
-                   
-    </td>
-
-<td></td>
-
-<td class="debit" " style="width:30%;">
-            <option>Achats de marchandises </option>
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>20.000,00 </option>
-</td>
-
+<td class="bold">Société X (Frs)</td>
+<td class="center bold">DOIT</td>
+<td class="bold right">Société Y (Clt)</td>
 </tr>
 
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>5141 </option>
-            
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Banques </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>20.000,00 </option>
-
-</td>
-
+<td colspan="3" class="bold">Facture DOIT N° ........</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N°25-2026 </td></tr>
+<tr>
+<td colspan="3" class="bold">
+Lieu + Date : .......................................................
+</td>
+</tr>
+
+<tr class="header-cell">
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant (DH)</td>
+</tr>
+
+<tr>
+<td colspan="2">Montant brut</td>
+<td class="right">20 000,00</td>
+</tr>
 
 </table>
 
-<h3>Chez le Vendeur (Fournisseur)</h3>
+</div>
 
-<table>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
-
-<tr>
-
-<td class="debit center"" style="width:5%;">
-        
-            <option>5141</option>
-            <option>5161</option>
-            <option>3421</option>
-       
-</td>
-
-<td></td>
-
-<td class="debit" " style="width:30%;">
-            <option>Banques et/ou</option>
-            <option>Caisses et/ou</option>
-            <option>Clients...</option>
-       
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>Montant</option>
-<option>Montant</option>
-<option>Montant</option>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>711X</option>
-            <option>712X</option>
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Ventes de marchandises et/ou </option>
-            <option> Ventes de biens et services produits</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>Montant</option>
-<option>Montant</option>
-
-</td>
-
-</tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
-
-</table>
-► Exemple : Ventes de marchandises par chèque bancaire
-
-<table>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">15/03/2026</td></tr>
-
-<tr>
-
-<td class="debit center"" style="width:5%;" >
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" " style="width:30%;">
-            <option>Banques </option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>20.000,00 </option>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7111</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Ventes de marchandises au Maroc </option>
-            
-
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:10%;">
-<option>20.000,00 </option>
-
-
-</td>
-
-</tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N°25-2026 </td></tr>
-
-</table>
-
-
-
+<div class="highlight">
+<strong>À retenir :</strong> en l’absence de réductions et de majorations,
+le montant brut constitue le montant de la facture présenté dans cet exemple.
+</div>
 
 </section>
 
+<!-- ===== SECTION 3 : JOURNAL ===== -->
+<section id="journal">
+
+<h2>📒 Enregistrement comptable au journal</h2>
+
+<h3>Chez l’acheteur (client)</h3>
+
+<p>
+Lors d’un achat, le compte d’achat concerné est débité et le compte
+de trésorerie ou de fournisseur est crédité, selon le mode de règlement.
+</p>
+
+<div class="table-wrapper">
+<table class="journal-table">
+
+<tr class="date">
+<td colspan="6">Date de l’opération : XX/XX/XXXX</td>
+</tr>
+
+<tr>
+<td class="debit center">611X / 612X</td>
+<td></td>
+<td class="debit">Achats de marchandises et/ou achats consommés de matières et fournitures</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">5141 / 5161 / 4411</td>
+<td></td>
+<td class="credit">Banques / Caisses / Fournisseurs</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Facture N° .....................</td>
+</tr>
+
+</table>
+</div>
+
+<div class="example">
+► Exemple : achat de marchandises réglé par chèque bancaire
+</div>
+
+<div class="table-wrapper">
+<table class="journal-table">
+
+<tr class="date">
+<td colspan="6">15/03/2026</td>
+</tr>
+
+<tr>
+<td class="debit center">6111</td>
+<td></td>
+<td class="debit">Achats de marchandises</td>
+<td></td>
+<td class="montant">20 000,00</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">5141</td>
+<td></td>
+<td class="credit">Banques</td>
+<td class="montant">—</td>
+<td class="montant">20 000,00</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Facture N° 25-2026</td>
+</tr>
+
+</table>
+</div>
+
+<h3>Chez le vendeur (fournisseur)</h3>
+
+<p>
+Lors d’une vente, le compte de trésorerie ou de client est débité
+et le compte de vente concerné est crédité, selon le mode de règlement.
+</p>
+
+<div class="table-wrapper">
+<table class="journal-table">
+
+<tr class="date">
+<td colspan="6">Date de l’opération : XX/XX/XXXX</td>
+</tr>
+
+<tr>
+<td class="debit center">5141 / 5161 / 3421</td>
+<td></td>
+<td class="debit">Banques / Caisses / Clients</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">711X / 712X</td>
+<td></td>
+<td class="credit">Ventes de marchandises et/ou ventes de biens et services produits</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Facture N° .....................</td>
+</tr>
+
+</table>
+</div>
+
+<div class="example">
+► Exemple : vente de marchandises réglée par chèque bancaire
+</div>
+
+<div class="table-wrapper">
+<table class="journal-table">
+
+<tr class="date">
+<td colspan="6">15/03/2026</td>
+</tr>
+
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">20 000,00</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">7111</td>
+<td></td>
+<td class="credit">Ventes de marchandises au Maroc</td>
+<td class="montant">—</td>
+<td class="montant">20 000,00</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Facture N° 25-2026</td>
+</tr>
+
+</table>
+</div>
+
+<div class="highlight">
+<strong>Remarque :</strong> les exemples, ci-dessus, reprennent les montants
+du contenu initial (sans réductions i majorations)
+.
+</div>
+
+</section>
 
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C1P2M1.html">⬅ Retour </a>
-
+Formation en Comptabilité Générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
-
 
