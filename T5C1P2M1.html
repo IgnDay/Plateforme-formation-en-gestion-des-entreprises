@@ -1,27 +1,140 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale - Autres éléments du compte de produits et de charges</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.5;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DES THÈMES ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -37,135 +150,165 @@ nav button{
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:25px;
+    margin-bottom:15px;
+    font-size:21px;
+    line-height:1.5;
 }
 
 h3{
-    color:#00b894;
+    color:#0f766e;
+    margin-top:22px;
+    font-size:18px;
 }
 
-/* TABLEAUX */
-table{
+p{
+    line-height:1.7;
+}
+
+.compte-intro{
+    margin:15px 0;
+    padding:12px 15px;
+    background:#eef7f5;
+    border-left:5px solid #00b894;
+    border-radius:6px;
+    line-height:1.7;
+}
+
+/* ===== TABLEAUX ===== */
+.table-wrapper{
     width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    margin:15px 0 30px;
+    -webkit-overflow-scrolling:touch;
+}
+
+.journal-table{
+    width:100%;
+    min-width:0;
+    table-layout:fixed;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:0 auto;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
-    padding:10px;
+.journal-table td,
+.journal-table th{
+    border:1px solid #cbd5e1;
+    padding:10px 6px;
+    font-size:14px;
+    line-height:1.5;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-wrap:break-word;
 }
 
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
-    background:#dfe6e9;
-}
-
-/* JOURNAL */
-.date{
+.journal-table .date td{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
 }
 
-.debit{
+.journal-table .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
-.credit{
-    background:#fff4e6;
+.journal-table .credit{
+    background:#fff2e6;
+    color:#a34b00;
     font-weight:bold;
 }
 
-.montant{
+.journal-table .montant{
     text-align:right;
-    background:#f8f9fa;
     font-weight:bold;
+    background:#f8fafc;
+    white-space:normal;
+    overflow-wrap:anywhere;
 }
 
-/* Hover tableau */
-tr:hover td{
+.journal-table .center{
+    text-align:center;
+}
+
+.journal-table tr:hover td{
     background:#f1f7ff;
-    transition:0.2s;
 }
 
-/* FOOTER */
+.journal-table .date:hover td{
+    background:#2c3e50;
+    color:white;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:13px 16px;
+    margin:22px 0 12px;
+    border-radius:7px;
+    font-weight:bold;
+    line-height:1.7;
+}
+
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,1717 +319,1080 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTES ===== */
+@media(max-width:768px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:13px;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        padding:7px 4px;
+        font-size:12px;
+    }
+}
+
+/* ===== TÉLÉPHONES ===== */
+@media(max-width:480px){
+    section{
+        padding:10px;
+        margin:7px;
+        border-left-width:5px;
+    }
+
+    section h2{
+        font-size:17px;
+        line-height:1.5;
+    }
+
+    section h3{
+        font-size:15px;
+    }
+
+    nav{
+        padding:7px;
+    }
+
+    nav button{
+        padding:9px 8px;
+        font-size:12px;
+        margin:3px;
+    }
+
+    .table-wrapper{
+        overflow-x:hidden;
+    }
+
+    .journal-table{
+        width:100%;
+        table-layout:fixed;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        padding:5px 2px;
+        font-size:10px;
+        line-height:1.4;
+        overflow-wrap:anywhere;
+        word-break:normal;
+    }
+
+    .journal-table .date td{
+        font-size:11px;
+        padding:8px 3px;
+    }
+
+    .journal-table .montant{
+        text-align:center;
+        font-size:10px;
+    }
+
+    .example,
+    .highlight,
+    .compte-intro{
+        padding:10px;
+        font-size:12px;
+        line-height:1.6;
+    }
+}
+
+@media(max-width:360px){
+    .journal-table td,
+    .journal-table th{
+        padding:4px 1px;
+        font-size:9px;
+    }
+
+    .journal-table .montant{
+        font-size:9px;
+    }
+
+    header h1{
+        font-size:17px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>
-        📘 L'enregistrement des autres éléments du compte de produits et de charges
-    </h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P2 – Opérations courantes ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P2M1.html">T – Résumés des thèmes</a>
+<a href="C2P2M1.html">F – Formulaires interactifs</a>
+<a href="C3P2M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P2M1.html">T1 - Facture « Doit » simple</a>
+<a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a>
+<a href="T3C1P2M1.html">T3 - Facture « Doit » comportant des majorations</a>
+<a href="T4C1P2M1.html">T4 - Facture « Avoir »</a>
+<a href="T5C1P2M1.html">T5 - Autres éléments du compte de produits et de charges</a>
+<a href="T6C1P2M1.html">T6 - Acquisition des immobilisations</a>
+<a href="T7C1P2M1.html">T7 - Règlements financiers</a>
+</div>
+</div>
+
+<a href="C1P2M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p>
+<p>T5 - L'enregistrement des autres éléments du compte de produits et de charges</p>
+</h1>
+
 </header>
 
 <nav>
-
-<button class="btnActive"onclick="showSection('CE')">Les charges d’exploitation 61</button>
-<button class="btnActive"onclick="showSection('PE')">Les produits d’exploitation 71</button>
-<button class="btnActive"onclick="showSection('CF')">Les charges financières 63</button>
-<button class="btnActive"onclick="showSection('PF')">Les produits financiers 73</button>
-<button class="btnActive"onclick="showSection('CNC')">Les charges non courantes 65</button>
-<button class="btnActive"onclick="showSection('PNC')">Les produits non courants 75</button>
-
-
+<button class="btnActive" onclick="showSection('CE',this)">Charges d’exploitation 61</button>
+<button onclick="showSection('PE',this)">Produits d’exploitation 71</button>
+<button onclick="showSection('CF',this)">Charges financières 63</button>
+<button onclick="showSection('PF',this)">Produits financiers 73</button>
+<button onclick="showSection('CNC',this)">Charges non courantes 65</button>
+<button onclick="showSection('PNC',this)">Produits non courants 75</button>
 </nav>
 
+<!-- ====================================================== -->
+<!-- SECTION 1 : CHARGES D'EXPLOITATION -->
+<!-- ====================================================== -->
 
 <section id="CE" class="active animationSection">
 
-<h2>► Enregistrement comptable des charges d’exploitation (611X et 612X sont déjà traités dans les opérations d’achat et de vente)</h2>
-<table>
+<h2>► Enregistrement comptable des charges d’exploitation</h2>
 
-<style>
+<p class="compte-intro">
+611X et 612X sont déjà traités dans les opérations d’achat et de vente.
+</p>
 
-body{
-    font-family: Arial, sans-serif;
-    margin:20px;
-    background:#f4f7fb;
-    color:#222;
-}
+<div class="table-wrapper">
+<table class="journal-table">
 
-/* TITRES */
-h2{
-    text-align: left;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:35px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
-    letter-spacing:0.5px;
-}
-
-/* TABLEAUX */
-table{
-    width:70%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-    background:white;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* CELLULES */
-td{
-    border:1px solid #cfd8e3;
-    padding:8px;
-    font-size:14px;
-}
-
-/* DATE */
-.date{
-    text-align:center;
-    font-weight:bold;
-    background:#1e3a5f;
-    color:white;
-    font-size:15px;
-}
-
-/* COLONNES */
-.compte{
-    width:5%;
-    text-align:center;
-}
-
-.libelle{
-    width:30%;
-}
-
-.montant{
-    width:10%;
-    text-align:right;
-    white-space:nowrap;
-    background:#f9fbfd;
-    font-weight:bold;
-    color:#0b5e8e;
-}
-
-/* DEBIT */
-.debit{
-    background:#e8f4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
-
-/* CREDIT */
-.credit{
-    background:#fff2e6;
-    color:#b35400;
-    font-weight:bold;
-}
-
-/* CENTRAGE */
-.center{
-    text-align:center;
-}
-
-/* EFFET HOVER */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-</style>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
-
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>613X</option>
-            <option>614X</option>
-<option>616X</option>
-<option>617X</option>
-<option>618X</option>
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Autres charges externes (613) et/ou</option>
-            <option>Autres charges externes (614) et/ou</option>
-<option>Impôts et taxes et/ou</option>
-<option>Charges de personnel et/ou</option>
-<option>Autres charges d'exploitation</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-<option>Montant</option>
-<option>Montant</option>
-<option>Montant</option>
-<option>Montant</option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>3455</option>
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-           <option>Etat - TVA récupérable (En cas de majoration de TVA)</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-
 <tr>
-
+<td class="debit center">613X<br>614X<br>616X<br>617X<br>618X</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>5141</option>
-            <option>5161</option>
-            <option>4411</option>
-</td>
-
+<td class="debit">Autres charges externes (613) ou (614) et/ou<br>
+Impôts et taxes et/ou<br>
+Charges de personnel et/ou<br>
+Autres charges d'exploitation</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Banques et/ou</option>
-            <option>Caisses et/ou</option>
-            <option>Fournisseurs...</option>
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-<option>Montant</option>
-<option>Montant</option>
-
-</td>
-
+<td class="montant">Montant</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td class="debit center">3455</td>
+<td></td>
+<td class="debit">Etat - TVA récupérable (En cas de majoration de TVA)</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
 
+<tr>
+<td></td>
+<td class="credit center">5141<br>5161<br>4411</td>
+<td></td>
+<td class="credit">Banques et/ou<br>Caisses et/ou<br>Fournisseurs...</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td></tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N°..................... </td></tr>
+<tr class="date">
+<td colspan="6">Facture N°.....................</td>
+</tr>
 
 </table>
- 
+</div>
 
+<div class="example">
+► Exemple 1 : Règlement du loyer de 5.000,00 DH par chèque
+</div>
 
+<div class="table-wrapper">
+<table class="journal-table">
 
-
-<h2>► Exemple 1 : Règlement du loyer de 5.000,00 DH par chèque </h2>
-<table>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">30/04/2026</td></tr>
-
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>6131</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Locations et charges locatives </option>
-           
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>5.000,00 </option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">30/04/2026</td>
 </tr>
 
-
 <tr>
-
+<td class="debit center">6131</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>5141 </option>
-            
-</td>
-
+<td class="debit">Locations et charges locatives</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Banques </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>5.000,00</option>
-
-</td>
-
+<td class="montant">5.000,00</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td></td>
+<td class="credit center">5141</td>
+<td></td>
+<td class="credit">Banques</td>
+<td class="montant">—</td>
+<td class="montant">5.000,00</td>
+</tr>
 
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Chèque  N°T720001 </td></tr>
+<tr class="date">
+<td colspan="6">Chèque N°T720001</td>
+</tr>
 
 </table>
+</div>
 
-<h2>► Exemple 2 : Paiement d’une annonce publicitaire de 3.500,00 DH HT par chèque (TVA 20%) </h2>
-<table>
+<div class="example">
+► Exemple 2 : Paiement d’une annonce publicitaire de 3.500,00 DH HT par chèque (TVA 20%)
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">02/05/2026</td></tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            
-            <option>6144 </option>
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Publicité, publications et relations publiques </option>
-            
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>3.500,00 </option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>3455</option>
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-           <option>Etat - TVA récupérable    </option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>700,00 </option>
-</td>
-
+<tr class="date">
+<td colspan="6">02/05/2026</td>
 </tr>
 
-
 <tr>
-
+<td class="debit center">6144</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>5141 </option>
-</td>
-
+<td class="debit">Publicité, publications et relations publiques</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Banques </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>4.200,00</option>
-
-</td>
-
+<td class="montant">3.500,00</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td class="debit center">3455</td>
+<td></td>
+<td class="debit">Etat - TVA récupérable</td>
+<td></td>
+<td class="montant">700,00</td>
+<td class="montant">—</td>
+</tr>
 
+<tr>
+<td></td>
+<td class="credit center">5141</td>
+<td></td>
+<td class="credit">Banques</td>
+<td class="montant">—</td>
+<td class="montant">4.200,00</td>
+</tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N°50-2026 </td></tr>
+<tr class="date">
+<td colspan="6">Facture N°50-2026</td>
+</tr>
 
 </table>
+</div>
 
 </section>
+
+<!-- ====================================================== -->
+<!-- SECTION 2 : PRODUITS D'EXPLOITATION -->
+<!-- ====================================================== -->
 
 <section id="PE">
 
-<h2>► Enregistrement comptable des produits d’exploitation (711X et 712X sont déjà traités dans les opérations d’achat et de vente) </h2>
-714X
-<table>
+<h2>► Enregistrement comptable des produits d’exploitation</h2>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+<p class="compte-intro">
+711X et 712X sont déjà traités dans les opérations d’achat et de vente.
+</p>
 
-<tr>
+<h3>714X – Immobilisations produites par l’entreprise pour elle-même</h3>
 
-<td class="debit center" style="width:5%;">
-        
-            <option>2XXX</option>
-            
-       
-</td>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Compte de l’immobilisation</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>714X</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Immobilisations produites par l’entreprise pour elle-même </option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>4455</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Etat, TVA facturée </option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Immobilisation ......livrée à soi-même </td></tr>
+<tr>
+<td class="debit center">2XXX</td>
+<td></td>
+<td class="debit">Compte de l’immobilisation</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">714X</td>
+<td></td>
+<td class="credit">Immobilisations produites par l’entreprise pour elle-même</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">4455</td>
+<td></td>
+<td class="credit">Etat, TVA facturée</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Immobilisation ...... livrée à soi-même</td>
+</tr>
 
 </table>
-716X
-<table>
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+<h3>716X – Subventions d’exploitation</h3>
 
-<tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Banques</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>716X</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Subventions d’exploitation </option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>4455</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Etat, TVA facturée </option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N°..................... </td></tr>
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">716X</td>
+<td></td>
+<td class="credit">Subventions d’exploitation</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">4455</td>
+<td></td>
+<td class="credit">Etat, TVA facturée</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de crédit N°.....................</td>
+</tr>
 
 </table>
-718X Autres produits d’exploitation à Créditer et à Débiter en contrepartie le(s) compte(s) adéquat(s)
+</div>
 
-<h2>► Exemple : Réception jetons de présence de 30.000,00</h2>
-<table>
+<div class="highlight">
+<strong>718X – Autres produits d’exploitation :</strong>
+à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">21/04/2026</td></tr>
+<div class="example">
+► Exemple : Réception jetons de présence de 30.000,00
+</div>
 
-<tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Banques </option>
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>30.000,00</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>7181</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Jetons de présence reçus</option>
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>30.000,00</option>
-
-</td>
-
+<tr class="date">
+<td colspan="6">21/04/2026</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N°08-2026 </td></tr>
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">30.000,00</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">7181</td>
+<td></td>
+<td class="credit">Jetons de présence reçus</td>
+<td class="montant">—</td>
+<td class="montant">30.000,00</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de crédit N°08-2026</td>
+</tr>
 
 </table>
+</div>
 
 </section>
+
+<!-- ====================================================== -->
+<!-- SECTION 3 : CHARGES FINANCIÈRES -->
+<!-- ====================================================== -->
 
 <section id="CF">
+
 <h2>► Enregistrement comptable des charges financières</h2>
-631X
-<table>
 
+<h3>631X – Charges d’intérêts</h3>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>631X</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Charges d’intérêts</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>3455</option>
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-           <option>Etat - TVA récupérable</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-
 <tr>
-
+<td class="debit center">631X</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-</td>
-
+<td class="debit">Charges d’intérêts</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Banques </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-</td>
-
+<td class="montant">Montant</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td class="debit center">3455</td>
+<td></td>
+<td class="debit">Etat - TVA récupérable</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
 
+<tr>
+<td></td>
+<td class="credit center">5141</td>
+<td></td>
+<td class="credit">Banques</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de débit N°..................... </td></tr>
+<tr class="date">
+<td colspan="6">Avis de débit N°.....................</td>
+</tr>
 
 </table>
+</div>
 
-633X
-<table>
+<h3>633X – Pertes de change</h3>
 
+<div class="table-wrapper">
+<table class="journal-table">
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
-
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>633X</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Pertes de change</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-           <option>Banques</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-
 <tr>
-
+<td class="debit center">633X</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>3421</option>
-            
-</td>
-
+<td class="debit">Pertes de change</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Clients</option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-</td>
-
+<td class="montant">Montant</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
 
+<tr>
+<td></td>
+<td class="credit center">3421</td>
+<td></td>
+<td class="credit">Clients</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N°..................... </td></tr>
+<tr class="date">
+<td colspan="6">Avis de crédit N°.....................</td>
+</tr>
 
 </table>
+</div>
 
- 618X Autres charges financières à Débiter et à Créditer en contrepartie le(s) compte(s) adéquat(s)
+<div class="highlight">
+<strong>618X – Autres charges financières :</strong>
+à débiter et à créditer en contrepartie le(s) compte(s) adéquat(s).
+</div>
 
+<div class="example">
+► Exemple 1 : Réception d’un avis de débit relatif au règlement d’une annuité de crédit (Principal 15 000 DH et intérêts 1 050 DH HT, TVA 10%)
+</div>
 
+<div class="table-wrapper">
+<table class="journal-table">
 
-
-
-<h2>► Exemple 1 : Réception d’un avis de Débit relatif au règlement d’une annuité de crédit ( Principal 15 000 DH et Intérêts 1 050 DH HT TVA  10%) </h2>
-<table>
-
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">01/05/2026</td></tr>
-
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>6311</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Intérêts des emprunts et dettes</option>
-           
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>1.050,00 </option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>3455</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Etat - TVA récupérable</option>
-           
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>105,00 </option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>1481</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Emprunts auprès des établissements de crédit</option>
-           
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>15.000,00 </option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">01/05/2026</td>
 </tr>
 
-
-
-
 <tr>
-
+<td class="debit center">6311</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>5141 </option>
-            
-</td>
-
+<td class="debit">Intérêts des emprunts et dettes</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Banques </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>16.155,00</option>
-
-</td>
-
+<td class="montant">1.050,00</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td class="debit center">3455</td>
+<td></td>
+<td class="debit">Etat - TVA récupérable</td>
+<td></td>
+<td class="montant">105,00</td>
+<td class="montant">—</td>
+</tr>
 
+<tr>
+<td class="debit center">1481</td>
+<td></td>
+<td class="debit">Emprunts auprès des établissements de crédit</td>
+<td></td>
+<td class="montant">15.000,00</td>
+<td class="montant">—</td>
+</tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de débit 03-2026 </td></tr>
+<tr>
+<td></td>
+<td class="credit center">5141</td>
+<td></td>
+<td class="credit">Banques</td>
+<td class="montant">—</td>
+<td class="montant">16.155,00</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de débit 03-2026</td>
+</tr>
 
 </table>
+</div>
 
-<h2>► Exemple 2 : Ventes de marchandises à l’étranger à crédit en date du 20/04/2026 (10 000 Euro/1Euro=10 DH). Le 03/05/2026 Réception du virement (1Euro=9 DH). </h2>
-<table>
+<div class="example">
+► Exemple 2 : Ventes de marchandises à l’étranger à crédit en date du 20/04/2026 (10 000 Euro / 1 Euro = 10 DH). Le 03/05/2026, réception du virement (1 Euro = 9 DH).
+</div>
 
+<div class="table-wrapper">
+<table class="journal-table">
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">03/05/2026</td></tr>
-
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>6331</option>
-            
-
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Pertes de change propres à l’exercice</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>10.000,00</option>
-
-
-</td>
-
-</tr>
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-           <option>Banques</option>
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>90.000,00</option>
-</td>
-
+<tr class="date">
+<td colspan="6">03/05/2026</td>
 </tr>
 
-
 <tr>
-
+<td class="debit center">6331</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>3421</option>
-            
-</td>
-
+<td class="debit">Pertes de change propres à l’exercice</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Clients</option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>100.000,00</option>
-
-</td>
-
+<td class="montant">10.000,00</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">90.000,00</td>
+<td class="montant">—</td>
+</tr>
 
+<tr>
+<td></td>
+<td class="credit center">3421</td>
+<td></td>
+<td class="credit">Clients</td>
+<td class="montant">—</td>
+<td class="montant">100.000,00</td>
+</tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N° 12-2026 </td></tr>
+<tr class="date">
+<td colspan="6">Avis de crédit N°12-2026</td>
+</tr>
 
 </table>
-
-
+</div>
 
 </section>
+
+<!-- ====================================================== -->
+<!-- SECTION 4 : PRODUITS FINANCIERS -->
+<!-- ====================================================== -->
+
 <section id="PF">
 
 <h2>► Enregistrement comptable des produits financiers</h2>
-732X
-<table>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+<h3>732X – Produits des titres de participation et des autres titres immobilisés</h3>
 
-<tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Banques</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>732X</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Produits des titres de participation et des autres titres immobilisés</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N° ...... </td></tr>
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">732X</td>
+<td></td>
+<td class="credit">Produits des titres de participation et des autres titres immobilisés</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de crédit N° ......</td>
+</tr>
 
 </table>
-733X
-<table>
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
+<h3>733X – Gains de change</h3>
 
-<tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Banques</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>733X</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Gains de change</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>3421</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Clients</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>Montant</option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">Date opération (XX/XX/XXXX)</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N° ...... </td></tr>
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">Montant</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">733X</td>
+<td></td>
+<td class="credit">Gains de change</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">3421</td>
+<td></td>
+<td class="credit">Clients</td>
+<td class="montant">—</td>
+<td class="montant">Montant</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de crédit N° ......</td>
+</tr>
 
 </table>
-738X Autres produits financiers à Créditer et à Débiter en contrepartie le(s) compte(s) adéquat(s)
+</div>
 
-<h2>► Exemple 1 : Ventes de marchandises à l’étranger à crédit en date du 25/04/2026 (10 000 Euro/1Euro=10 DH). Le 05/05/2026 Réception du virement (1Euro=11 DH). </h2>
-<table>
+<div class="highlight">
+<strong>738X – Autres produits financiers :</strong>
+à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">05/05/2026</td></tr>
+<div class="example">
+► Exemple 1 : Ventes de marchandises à l’étranger à crédit en date du 25/04/2026 (10 000 Euro / 1 Euro = 10 DH). Le 05/05/2026, réception du virement (1 Euro = 11 DH).
+</div>
 
-<tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Banques</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>110.000,00</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>7331</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Gains de change propres à l’exercice</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>10.000,00</option>
-
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>3421</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Clients</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>100.000,00</option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">05/05/2026</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N° 15-2026 </td></tr>
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">110.000,00</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">7331</td>
+<td></td>
+<td class="credit">Gains de change propres à l’exercice</td>
+<td class="montant">—</td>
+<td class="montant">10.000,00</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">3421</td>
+<td></td>
+<td class="credit">Clients</td>
+<td class="montant">—</td>
+<td class="montant">100.000,00</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de crédit N°15-2026</td>
+</tr>
 
 </table>
-<h2>► Exemple 2 : Réception d’un avis de crédit relatif au remboursement d’une annuité sur un prêt accordé à un salarié (Principal 1 500 DH, Intérêts 75 DH (TVA 10%). </h2>
-<table>
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">15/05/2026</td></tr>
+<div class="example">
+► Exemple 2 : Réception d’un avis de crédit relatif au remboursement d’une annuité sur un prêt accordé à un salarié (Principal 1 500 DH, intérêts 75 DH, TVA 10%).
+</div>
 
-<tr>
+<div class="table-wrapper">
+<table class="journal-table">
 
-<td class="debit center" style="width:5%;">
-        
-            <option>5141</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Banques</option>
-            
-       
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>1.582,50</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>7381</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Intérêts et produits assimilés</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>75,00</option>
-
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>4455</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Etat, TVA facturée</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>7,50</option>
-
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>2441</option>
-            
-
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Prêts au personnel</option>
-            
-            
-
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>1.500,00</option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">15/05/2026</td>
 </tr>
 
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Avis de crédit N° 17-2026 </td></tr>
+<tr>
+<td class="debit center">5141</td>
+<td></td>
+<td class="debit">Banques</td>
+<td></td>
+<td class="montant">1.582,50</td>
+<td class="montant">—</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">7381</td>
+<td></td>
+<td class="credit">Intérêts et produits assimilés</td>
+<td class="montant">—</td>
+<td class="montant">75,00</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">4455</td>
+<td></td>
+<td class="credit">Etat, TVA facturée</td>
+<td class="montant">—</td>
+<td class="montant">7,50</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">2441</td>
+<td></td>
+<td class="credit">Prêts au personnel</td>
+<td class="montant">—</td>
+<td class="montant">1.500,00</td>
+</tr>
+
+<tr class="date">
+<td colspan="6">Avis de crédit N°17-2026</td>
+</tr>
 
 </table>
+</div>
 
 </section>
+
+<!-- ====================================================== -->
+<!-- SECTION 5 : CHARGES NON COURANTES -->
+<!-- ====================================================== -->
+
 <section id="CNC">
+
 <h2>► Enregistrement comptable des charges non courantes</h2>
-65XX Compte charge non courante à Débiter et à Créditer en contrepartie le(s) compte(s) adéquat(s)
 
-<h2>► Exemple : Un groupe accorde par virement bancaire une subvention à une de ses filiales </h2>
-<table>
+<div class="highlight">
+<strong>65XX :</strong> compte de charge non courante à débiter et à créditer en contrepartie le(s) compte(s) adéquat(s).
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">07/05/2026</td></tr>
+<div class="example">
+► Exemple : Un groupe accorde par virement bancaire une subvention à une de ses filiales.
+</div>
 
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            
-            <option>6561 </option>
+<div class="table-wrapper">
+<table class="journal-table">
 
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Subventions accordées de l’exercice</option>
-            
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>200.000,00 </option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">07/05/2026</td>
 </tr>
 
 <tr>
-
+<td class="debit center">6561</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>5141 </option>
-</td>
-
+<td class="debit">Subventions accordées de l’exercice</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Banques </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>200.000,00</option>
-
-</td>
-
+<td class="montant">200.000,00</td>
+<td class="montant">—</td>
 </tr>
 
+<tr>
+<td></td>
+<td class="credit center">5141</td>
+<td></td>
+<td class="credit">Banques</td>
+<td class="montant">—</td>
+<td class="montant">200.000,00</td>
+</tr>
 
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Virement N° 123565 </td></tr>
+<tr class="date">
+<td colspan="6">Virement N°123565</td>
+</tr>
 
 </table>
+</div>
 
 </section>
+
+<!-- ====================================================== -->
+<!-- SECTION 6 : PRODUITS NON COURANTS -->
+<!-- ====================================================== -->
+
 <section id="PNC">
 
 <h2>► Enregistrement comptable des produits non courants</h2>
-75XX Compte produits non courants à Créditer et à Débiter en contrepartie le(s) compte(s) adéquat(s)
 
-<h2>► Exemple : Cession à crédit sur 02 mois d’un matériel (50 .000,00 DH/TVA 20%)</h2>
-<table>
+<div class="highlight">
+<strong>75XX :</strong> compte de produits non courants à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
+</div>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">10/05/2026</td></tr>
+<div class="example">
+► Exemple : Cession à crédit sur 02 mois d’un matériel (50.000,00 DH / TVA 20%).
+</div>
 
-<tr>
-<td class="debit center" style="width:5%;">
-        
-            
-            <option>3481 </option>
+<div class="table-wrapper">
+<table class="journal-table">
 
-
-            
-       
-    </td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-            <option>Créances sur cessions d'immobilisations</option>
-            
-            
-       
-    </td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>60.000,00 </option>
-
-
-</td>
-
+<tr class="date">
+<td colspan="6">10/05/2026</td>
 </tr>
 
 <tr>
-
+<td class="debit center">3481</td>
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>7513 </option>
-</td>
-
+<td class="debit">Créances sur cessions d'immobilisations</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Produits des cessions des immobilisations corporelles </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>50.000,00</option>
-
-</td>
-
+<td class="montant">60.000,00</td>
+<td class="montant">—</td>
 </tr>
+
 <tr>
-
 <td></td>
-
-<td class="credit center" style="width:5%;">
-        
-            <option>4455 </option>
-</td>
-
+<td class="credit center">7513</td>
 <td></td>
-
-<td class="credit" style="width:30%;">
-        
-            <option>Etat, TVA facturée </option>
-            
-        
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-<option>10.000,00</option>
-
-</td>
-
+<td class="credit">Produits des cessions des immobilisations corporelles</td>
+<td class="montant">—</td>
+<td class="montant">50.000,00</td>
 </tr>
 
+<tr>
+<td></td>
+<td class="credit center">4455</td>
+<td></td>
+<td class="credit">Etat, TVA facturée</td>
+<td class="montant">—</td>
+<td class="montant">10.000,00</td>
+</tr>
 
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Facture N° 25-2026 </td></tr>
+<tr class="date">
+<td colspan="6">Facture N°25-2026</td>
+</tr>
 
 </table>
+</div>
 
 </section>
 
-
-
-
-
 <footer>
-
 Formation en Comptabilité Générale
-
-<br><br>
-
-<a href="C1P2M1.html">
-⬅ Retour
-</a>
-
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
+
 
