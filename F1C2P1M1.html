@@ -1,8 +1,206 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Journal Comptable</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale</title>
+
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 10px #0003}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px}
+.brand small{display:block;font-size:10px;letter-spacing:1px;font-weight:normal;margin-top:4px}
+header h1{padding:20px 10px;margin:0}
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
+.site-menu>a,.site-menu summary{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;cursor:pointer;font-size:14px;list-style:none}
+.site-menu summary::-webkit-details-marker{display:none}
+.site-menu>a:hover,.site-menu summary:hover{background:#ffffff2b}
+.menu-dropdown{position:relative}
+.dropdown-content{position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;z-index:1000;padding:7px;border-radius:8px;background:white;box-shadow:0 6px 18px #0003}
+.dropdown-content a{display:block;padding:10px;color:#243447;text-decoration:none;border-radius:5px;font-size:14px}
+.dropdown-content a:hover{color:white;background:#0f766e}
+
+nav{background:#34495e;padding:10px;text-align:center}
+nav button,#quizForm button{margin:5px;padding:12px 18px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:15px;transition:.3s}
+nav button:hover,#quizForm button:hover{background:#019875;transform:translateY(-2px)}
+.btnActive{background:#0984e3!important;transform:scale(1.04);box-shadow:0 3px 10px #0003}
+section{display:none;padding:30px;margin:20px}
+section.active{display:block}
+.animationSection{animation:apparition .5s ease;background:white;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px #0002}
+@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+h2{color:#2c3e50}
+h3{color:#00b894}
+table{width:100%;border-collapse:collapse;background:white;margin-top:20px}
+td{border:1px solid #ccc;padding:10px}
+.titre{text-align:center;font-size:24px;font-weight:bold}
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+.header{background:#dfe6e9}
+tr:hover td{background:#f1f7ff}
+.q{background:#f8fafc;padding:15px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+.q p{font-weight:bold}
+#resultat{padding:10px 0}
+footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}
+footer a{color:#00ffcc;text-decoration:none}
+.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
+
+@media(max-width:760px){
+.brandbar{justify-content:center;padding:12px}
+.site-menu{width:100%}
+.site-menu>a,.site-menu summary{padding:9px}
+.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}
+section{padding:18px;margin:12px}
+nav button{padding:10px;font-size:14px}
+}
+
+.dropdown{
+position:relative;
+display:inline-block;
+}
+.dropdown button{
+padding:10px 14px;
+background:transparent;
+color:white;
+border:none;
+cursor:pointer;
+font-size:14px;
+}
+.dropdown-content{
+display:none;
+position:absolute;
+top:100%;
+left:0;
+min-width:230px;
+background:white;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+border-radius:6px;
+z-index:1000;
+}
+.dropdown-content a{
+display:block;
+padding:11px 14px;
+color:#1e293b;
+text-decoration:none;
+text-align:left;
+}
+.dropdown-content a:hover{
+background:#0f766e;
+color:white;
+}
+</style>
+</head>
+
+<body>
+<header>
+<div class="brandbar">
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+<a href="index.html">Accueil</a>
+
+<div class="dropdown" id="modulesDropdown">
+<button type="button" id="modulesButton" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité Générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+F – Formulaires interctifs ▼
+</button>
+<div class="dropdown-content">
+<a href="F1C2P1M1.html">F1 – Enregistrer des opérations au journal</a>
+<a href=" F2C2P1M1.html">F2 – Etablir des comptes du grand livre</a>
+<a href=" F3C2P1M1.html">F3 – Etablir la balance</a>
+<a href=" F4C2P1M1.html">F4 – Etablir le bilan</a>
+<a href=" F5C2P1M1.html">F5 – Etablir le CPC</a>
+</div>
+</div>
+
+<a href="C2P1M1.html">⬅ Retour</a>
+</div>
+
+<script>
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    // Fermer les autres menus avant d'ouvrir celui sélectionné
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+// Fermer les menus lorsqu'on clique à l'extérieur
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+</script>
+</div>
+
+<h1> <p>M1 - Comptabilité générale > P1 - Concepts de base >> F – Formulaires interactifs </p> <p> F1 - Enregistrer des opérations au journal</p></h1>
+</header>
+
 
 <!-- EXCEL -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
@@ -124,9 +322,7 @@ input.cell{
 </style>
 </head>
 
-<body>
 
-<h2>Le Journal-IgnDay-</h2>
 
 <div id="operations"></div>
 
@@ -789,88 +985,260 @@ function exportExcel(){
   );
 }
 
-/* ================= EXPORT PDF ================= */
+
+/* ================= EXPORT PDF SANS COUPER LES LIGNES ================= */
 
 async function exportPDF(){
 
   const { jsPDF } = window.jspdf;
 
-  const pdf = new jsPDF('l','mm','a4');
+  const pdf = new jsPDF("l", "mm", "a4");
 
-  /* CLONE */
+  const margin = 8;
 
-  const clone =
-    document.getElementById("operations")
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+
+  const usableWidth = pageWidth - margin * 2;
+  const usableHeight = pageHeight - margin * 2;
+
+  /* ================= CLONE DU JOURNAL ================= */
+
+  const clone = document
+    .getElementById("operations")
     .cloneNode(true);
 
-  /* SUPPRIMER BOUTONS */
+  /* Supprimer les boutons */
 
-  clone.querySelectorAll("button")
-  .forEach(btn => btn.remove());
+  clone.querySelectorAll("button").forEach(btn => {
+    btn.remove();
+  });
 
-  /* INPUT -> TEXTE */
+  /* Remplacer les champs par leur contenu */
 
-  clone.querySelectorAll("input")
-  .forEach(input=>{
+  clone.querySelectorAll("input").forEach(input => {
 
-    const span =
-      document.createElement("span");
+    const span = document.createElement("span");
 
-    span.innerText = input.value;
+    span.textContent = input.value;
 
+    span.style.display = "inline-block";
     span.style.fontWeight = "bold";
+    span.style.fontSize = "12px";
+    span.style.whiteSpace = "pre-wrap";
+    span.style.overflowWrap = "anywhere";
 
-    input.parentNode.replaceChild(
-      span,
-      input
-    );
+    input.parentNode.replaceChild(span, input);
 
   });
 
-  /* STYLE */
+  /* ================= STYLE DU CLONE ================= */
 
-  clone.style.background = "white";
-
+  clone.style.background = "#ffffff";
   clone.style.padding = "20px";
-
   clone.style.width = "1200px";
-
+  clone.style.boxSizing = "border-box";
   clone.style.position = "absolute";
+  clone.style.left = "-99999px";
+  clone.style.top = "0";
+  clone.style.margin = "0";
 
-  clone.style.left = "-9999px";
+  clone.querySelectorAll(".operation").forEach(op => {
+
+    op.style.background = "#ffffff";
+    op.style.marginBottom = "25px";
+    op.style.breakInside = "avoid";
+
+  });
 
   document.body.appendChild(clone);
 
-  /* IMAGE */
+  try {
 
-  const canvas =
-    await html2canvas(clone,{
-      scale:2
+    /* ================= CREATION DE L'IMAGE ================= */
+
+    const canvas = await html2canvas(clone, {
+      scale: 2,
+      backgroundColor: "#ffffff",
+      useCORS: true,
+      logging: false
     });
 
-  const imgData =
-    canvas.toDataURL("image/png");
+    /* Dimensions réelles du clone */
 
-  const pdfWidth = 297;
+    const cloneRect = clone.getBoundingClientRect();
 
-  const pdfHeight =
-    (canvas.height * pdfWidth)
-    / canvas.width;
+    const scaleY = canvas.height / cloneRect.height;
 
-  pdf.addImage(
-    imgData,
-    'PNG',
-    0,
-    0,
-    pdfWidth,
-    pdfHeight
-  );
+    /* ================= REPERAGE DES LIGNES ================= */
 
-  pdf.save("journal_comptable.pdf");
+    const rowPositions = Array.from(
+      clone.querySelectorAll("tr")
+    ).map(row => {
 
-  document.body.removeChild(clone);
+      const rect = row.getBoundingClientRect();
+
+      return {
+        top: Math.round(
+          (rect.top - cloneRect.top) * scaleY
+        ),
+
+        bottom: Math.round(
+          (rect.bottom - cloneRect.top) * scaleY
+        )
+      };
+
+    }).filter(row =>
+      row.top >= 0 &&
+      row.bottom <= canvas.height &&
+      row.bottom > row.top
+    );
+
+    /* ================= DECOUPAGE DES PAGES ================= */
+
+    const maxPagePixels = Math.floor(
+      canvas.width * usableHeight / usableWidth
+    );
+
+    let sourceY = 0;
+    let pageNumber = 0;
+
+    while (sourceY < canvas.height) {
+
+      const targetY = Math.min(
+        sourceY + maxPagePixels,
+        canvas.height
+      );
+
+      let endY = targetY;
+
+      if (targetY < canvas.height) {
+
+        /*
+          Chercher une limite de ligne avant
+          la fin théorique de la page.
+        */
+
+        const possibleCuts = rowPositions
+          .map(row => row.top)
+          .filter(y =>
+            y > sourceY &&
+            y <= targetY
+          );
+
+        if (possibleCuts.length > 0) {
+
+          endY = Math.max(...possibleCuts);
+
+        } else {
+
+          /*
+            Si aucune nouvelle ligne ne commence
+            avant la limite, terminer la ligne
+            qui traverse cette limite.
+          */
+
+          const crossingRow = rowPositions.find(row =>
+            row.top <= sourceY &&
+            row.bottom > targetY
+          );
+
+          if (crossingRow) {
+            endY = crossingRow.bottom;
+          }
+
+        }
+
+      }
+
+      /* Sécurité contre les pages vides */
+
+      if (endY <= sourceY) {
+        endY = targetY;
+      }
+
+      endY = Math.min(endY, canvas.height);
+
+      const sliceHeight = endY - sourceY;
+
+      /* ================= CREATION DE LA PAGE ================= */
+
+      const pageCanvas = document.createElement("canvas");
+
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = sliceHeight;
+
+      const ctx = pageCanvas.getContext("2d");
+
+      ctx.fillStyle = "#ffffff";
+
+      ctx.fillRect(
+        0,
+        0,
+        pageCanvas.width,
+        pageCanvas.height
+      );
+
+      ctx.drawImage(
+        canvas,
+        0,
+        sourceY,
+        canvas.width,
+        sliceHeight,
+        0,
+        0,
+        canvas.width,
+        sliceHeight
+      );
+
+      /* Ajouter une page PDF */
+
+      if (pageNumber > 0) {
+        pdf.addPage("a4", "landscape");
+      }
+
+      const imageData = pageCanvas.toDataURL(
+        "image/jpeg",
+        0.95
+      );
+
+      const renderedHeight =
+        sliceHeight * usableWidth / canvas.width;
+
+      pdf.addImage(
+        imageData,
+        "JPEG",
+        margin,
+        margin,
+        usableWidth,
+        renderedHeight,
+        undefined,
+        "FAST"
+      );
+
+      /* Passer à la partie suivante */
+
+      sourceY = endY;
+
+      pageNumber++;
+
+    }
+
+    /* ================= ENREGISTREMENT ================= */
+
+    pdf.save("journal_comptable.pdf");
+
+  } finally {
+
+    /* Toujours supprimer le clone */
+
+    if (clone.parentNode) {
+      document.body.removeChild(clone);
+    }
+
+  }
+
 }
-
 /* ================= VIDER ================= */
 
 function clearAll(){
@@ -903,16 +1271,51 @@ createOperation();
 
 </script>
 
+
+
 <footer>
-
-Formation en comptabilité générale
-
-<br>
-
-<a href="C2P1M1.html">⬅ Retour </a>
-
+<span>Formation en comptabilité générale</span><br><br>
 </footer>
 
+<script>
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+    if(current) current.classList.add("active","animationSection");
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button) button.classList.add("btnActive");
+}
+
+function corrigerQuiz(){
+    let score=0;
+
+    for(let i=1;i<=10;i++){
+        const answer=document.querySelector('input[name="q'+i+'"]:checked');
+        if(answer && answer.value==="1") score++;
+    }
+
+    const result=score>=8
+        ?"Excellent 👍"
+        :score>=5
+        ?"Niveau moyen ⚠️"
+        :"À revoir ❌";
+
+    document.getElementById("resultat").textContent=
+        "Score : "+score+"/10 — "+result;
+}
+
+function effacerResultat(){
+    document.getElementById("resultat").textContent="";
+}
+</script>
 </body>
 </html>
+
 
