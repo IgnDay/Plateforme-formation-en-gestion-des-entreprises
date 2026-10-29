@@ -1,27 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay Comptabilité Générale - Les amortissements</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.6;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -36,78 +153,115 @@ nav button{
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:16px;
-    transition:0.3s;
+    font-size:15px;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
+    line-height:1.5;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
+    line-height:1.5;
 }
 
-/* TABLEAUX */
+h4{
+    color:#0f766e;
+    margin-top:25px;
+}
+
+p,li{
+    line-height:1.7;
+}
+
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin:18px 0;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:13px 16px;
+    margin:18px 0;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+/* ===== TABLEAUX GÉNÉRAUX ===== */
+.table-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    margin:20px 0 30px;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
-    width:95%;
+    width:100%;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:15px auto 25px;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    font-size:14px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
+}
+
+th{
+    background:#dfe6e9;
+    font-weight:bold;
+    text-align:center;
 }
 
 .titre{
@@ -116,56 +270,105 @@ td{
     font-weight:bold;
 }
 
-.bold{
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+
+.header-cell{
+    background:#dfe6e9;
     font-weight:bold;
 }
 
-.center{
-    text-align:center;
+/* ===== TABLEAUX D'AMORTISSEMENT ===== */
+.amort-table{
+    min-width:650px;
 }
 
-.right{
-    text-align:right;
+.amort-table th{
+    background:#0f766e;
+    color:white;
 }
 
-.header{
-    background:#dfe6e9;
+.amort-table tr:nth-child(even) td{
+    background:#f8fafc;
 }
 
-/* JOURNAL */
-.date{
+.amort-table tr:hover td{
+    background:#e8fff7;
+}
+
+/* ===== TABLEAUX COMPTABLES ===== */
+.journal-table{
+    width:100%;
+    min-width:0;
+    table-layout:fixed;
+    border-collapse:collapse;
+}
+
+.journal-table td,
+.journal-table th{
+    padding:10px 6px;
+    font-size:14px;
+    line-height:1.5;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-wrap:break-word;
+    white-space:normal;
+}
+
+.journal-table .date td{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
 }
 
-.debit{
+.journal-table .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
-.credit{
-    background:#fff4e6;
+.journal-table .credit{
+    background:#fff2e6;
+    color:#a34b00;
     font-weight:bold;
+}
+
+.journal-table .montant{
+    text-align:right;
+    font-weight:bold;
+    background:#f8fafc;
+}
+
+.journal-table tr:hover td{
+    background:#f1f7ff;
+}
+
+.journal-table tr.date:hover td{
+    background:#2c3e50;
+    color:white;
+}
+
+.compte{
+    width:12%;
+    text-align:center;
+}
+
+.libelle{
+    width:48%;
 }
 
 .montant{
     text-align:right;
-    background:#f8f9fa;
     font-weight:bold;
+    white-space:nowrap;
 }
 
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-/* FOOTER */
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,1794 +379,907 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTE ===== */
+@media(max-width:768px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    .table-wrapper{
+        overflow-x:auto;
+    }
+
+    .amort-table{
+        min-width:650px;
+    }
+}
+
+/* ===== TÉLÉPHONE ===== */
+@media(max-width:480px){
+    header h1{
+        font-size:17px;
+        padding:14px 10px;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+        border-left-width:5px;
+    }
+
+    section h2{
+        font-size:20px;
+    }
+
+    section h3{
+        font-size:16px;
+    }
+
+    section h4{
+        font-size:15px;
+    }
+
+    nav{
+        padding:7px 4px;
+    }
+
+    nav button{
+        display:block;
+        width:100%;
+        margin:6px 0;
+        padding:11px 8px;
+        font-size:13px;
+        transform:none;
+    }
+
+    nav button:hover{
+        transform:none;
+    }
+
+    td,th{
+        padding:7px;
+        font-size:12px;
+    }
+
+    .table-wrapper{
+        overflow-x:auto;
+        width:100%;
+    }
+
+    .journal-table{
+        table-layout:fixed;
+        min-width:0;
+        width:100%;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        padding:6px 3px;
+        font-size:10px;
+        line-height:1.4;
+        overflow-wrap:anywhere;
+        word-break:normal;
+    }
+
+    .journal-table .date td{
+        font-size:11px;
+        padding:8px 3px;
+    }
+
+    .journal-table .montant{
+        text-align:center;
+        font-size:10px;
+    }
+
+    .amort-table{
+        min-width:650px;
+    }
+
+    .highlight,
+    .example{
+        padding:10px;
+        font-size:12px;
+        line-height:1.6;
+    }
+
+    footer{
+        font-size:13px;
+    }
+}
+
+@media(max-width:360px){
+    section{
+        padding:9px;
+        margin:5px;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        padding:4px 2px;
+        font-size:9px;
+    }
+
+    .journal-table .montant{
+        font-size:9px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Les amortissements
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P3M1.html">T – Résumés des thèmes</a>
+<a href="C2P3M1.html">F – Formulaires interactifs</a>
+<a href="C3P3M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P3M1.html" class="card">
+       T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation
+    </a>
+
+    <a href="T2C1P3M1.html" class="card">
+        T2 - La régularisation des stocks
+    </a>
+
+    <a href="T3C1P3M1.html" class="card">
+        T3 - Les amortissements
+    </a>
+
+    <a href="T4C1P3M1.html" class="card">
+       T4 - Les provisions pour dépréciation des immobilisations
+    </a>
+
+    <a href="T5C1P3M1.html" class="card">
+T5 - Les provisions pour dépréciation des éléments de l’actif circulant
+    </a>
+
+    <a href="T6C1P3M1.html" class="card">
+        T6 - Les provisions pour risques et charges
+    </a>
+
+    <a href="T7C1P3M1.html" class="card">
+        T7 - La régularisation des charges
+    </a>
+
+    <a href="T8C1P3M1.html" class="card">
+        T8 - La régularisation des produits
+    </a>
+</div>
+</div>
+
+<a href="C1P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
+<p>T3 – Les amortissements</p>
 </h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('DEF')">Définition de l’amortissement</button>
-<button onclick="showSection('TER')">Terminologie utilisée</button>
-
-<button onclick="showSection('TA')">Taux d’amortissement admis fiscalement au Maroc</button>
-
-<button onclick="showSection('AL')">Calcul des dotations selon l’amortissement linéaire ou constant </button>
-<button onclick="showSection('CAL')">Comptabilisation des dotations d’amortissements/Mode linéaire </button>
-
-
-<button onclick="showSection('AD')"> Calcul des dotations selon l’amortissement dégressif </button>
-<button onclick="showSection('CAD')">Comptabilisation des dotations d’amortissements/Mode dégressif</button>
-<button onclick="showSection('SOR')">Traitement de la cession d’une immobilisation</button>
-
-
-
-
+<button onclick="showSection('DEF',this)" class="btnActive">Définition de l’amortissement</button>
+<button onclick="showSection('TER',this)">Terminologie utilisée</button>
+<button onclick="showSection('TA',this)">Taux d’amortissement</button>
+<button onclick="showSection('AL',this)">Amortissement linéaire</button>
+<button onclick="showSection('CAL',this)">Comptabilisation linéaire</button>
+<button onclick="showSection('AD',this)">Amortissement dégressif</button>
+<button onclick="showSection('CAD',this)">Comptabilisation dégressive</button>
+<button onclick="showSection('SOR',this)">Cession d’immobilisation</button>
 </nav>
 
-<section id="DEF"class="active">
+<!-- ===== SECTION 1 : DÉFINITION ===== -->
+<section id="DEF" class="active animationSection">
 
-    <h2>Définition de l’amortissement</h2>
+<h2>📘 Définition de l’amortissement</h2>
 
-    <p>
-        L’amortissement pour dépréciation peut être défini comme la constatation comptable en fin d’exercice d’un amoindrissement de la valeur d’un élément d’actif résultant de l’usage, du temps ou le progrès technologique. 
-
-
-    <p>
-L’amortissement est aussi une technique de renouvellement des immobilisations (reconstitution du capital). Comme il permet de répartir le coût d’un élément d’actif immobilisé sur sa durée probable de vie.
+<p>
+L’amortissement pour dépréciation peut être défini comme la constatation comptable en fin d’exercice d’un amoindrissement de la valeur d’un élément d’actif résultant de l’usage, du temps ou du progrès technologique.
 </p>
+
+<p>
+L’amortissement est aussi une technique de renouvellement des immobilisations (reconstitution du capital). Il permet de répartir le coût d’un élément d’actif immobilisé sur sa durée probable de vie.
+</p>
+
+<div class="table-wrapper">
 <table>
-
-        <tr>
-            <th>Les immobilisations amortissables </th>
-        </tr>
-
-        <tr>
-            <td class="type"> Toutes les immobilisations en non-valeur 
-</td>
-        </tr>
-
-        <tr>
-            <td class="type"> Toutes les immobilisations incorporelles
- </td>
-        </tr>
-
-        <tr>
-            <td class="type">
-               Toutes les immobilisations corporelles 
-            </td>
-        </tr>
-
-        
-        
-
-    </table>
-
-<table>
-
-        <tr>
-            <th>Exception (Non amortissables) </th>
-        </tr>
-
-        <tr>
-            <td class="type"> Fonds commercial (Sauf dans certains cas)
-</td>
-        </tr>
-
-        <tr>
-            <td class="type"> Terrains (Sauf dans certains cas)
- </td>
-            
-        </tr>
-
-        <tr>
-            <td class="type">
-               Les immobilisations financières 
-            </td>
-            
-        </tr>
-
-
-        
-
-    </table>
-
-
-
-    
-
-</section>
-
-<section id="TER">
-
-    <h2>Terminologie utilisée</h2>
-
-
-
-<table>
-
-       <tr>
-            <th>Terme </th>
-            <th>Signification </th>
-<th>Détermination </th>
-        </tr>
-
-<tr>
-            <td> Valeur d’entrée (VE) ou <br>Valeur d’origine (VO) 
-</td>         <td> 
-Montant pour lequel un élément 
-est inscrit  au moment de son entrée dans le patrimoine.            
-</td>
-<td> Coût d’acquisition ou <br> Coût de production
-
-</td>
-
-        </tr>
-
-       <tr>
-            <td> Durée probable de vie ou <br>
-        Durée d’utilisation prévisionnelle (D) </td>         
-            <td> La durée sur laquelle le calcul de l’amortissement est basé.</td>
-<td> Elle dépend de la nature de l’immobilisation.</td>
-        </tr>
-       <tr>
-            <td> Taux d’amortissement (T)</td>         
-            <td> Un coefficient, exprimé sous forme d’une fraction ou d’un pourcentage.</td>
-<td> T=1/D (années) ou  <br>T=12/D (mois) </td>
-        </tr>
-<tr>
-            <td> Annuité (A) ou <br>Dotation (D)  </td>         
-            <td> Le montant d’amortissement d’une immobilisation, pratiqué à la fin d’un exercice donné
-</td>
-<td> A= [VO*Taux*n]/12 <br>
-        (n ≤ à 12 mois) 
-</td>
-        </tr>
-<tr>
-            <td> Amortissements cumulés (Σ Amort)   </td>         
-            <td> La somme des annuités d’amortissements pratiquées depuis l’entrée de l’immobilisation
-        dans le patrimoine.
-</td>
-<td> Σ Amort = [VO*Taux*N]/12     <br>           (N durée cumulée exprimée en mois)
-</td>
-        </tr>
-
-
-
-
-
-
-
-<tr>
-            <td>         Valeur nette d’amortissement
-        (VNA) </td>         
-            <td> Différence entre  la valeur d’entrée et le total des amortissements         (ou cumul des amortissements) pratiqués         depuis l’acquisition de l’immobilisation
-</td>
-<td> VNA = VO - Σ Amort
-</td>
-        </tr>
-<tr>
- <td>         Amortissement linéaire ou constant 
- </td>         
-            <td> Le montant de la dépréciation reste le même pour chacun des exercices formant la durée de vie de l’immobilisation
-
-</td>
-<td> Voir la section réservée à ce mode d’amortissement
-</td>
-        </tr>
-
-<tr>
- <td>         Amortissement dégressif 
- </td>         
-            <td> La dépréciation des biens est plus importante dans les premières années que dans les dernières 
-
-
-</td>
-<td> Voir la section réservée à ce mode d’amortissement 
-</td>
-        </tr>
-
-
-
-            
-
+<tr><th>Les immobilisations amortissables</th></tr>
+<tr><td>Toutes les immobilisations en non-valeur</td></tr>
+<tr><td>Toutes les immobilisations incorporelles</td></tr>
+<tr><td>Toutes les immobilisations corporelles</td></tr>
 </table>
-</section>
-
-<section id="TA">
-<h2>Taux d’amortissement admis fiscalement au Maroc</h2>
-<div class="table-container">
-
-<table>
-
-
-    <tr>
-        <th>Classes d’immobilisations</th>
-        <th>Taux d’amortissement</th>
-        <th>La durée</th>
-    </tr>
-
-    <tr>
-        <td>Frais préliminaire</td>
-        <td>20 %</td>
-        <td>5 ans</td>
-    </tr>
-
-    <tr>
-        <td>Charges à répartir sur plusieurs exercices</td>
-        <td>20 %</td>
-        <td>5 ans</td>
-    </tr>
-
-    <tr>
-        <td>Brevet, marque, droit et valeur similaire</td>
-        <td>20 %</td>
-        <td>5 ans</td>
-    </tr>
-
-    <tr>
-        <td>Construction</td>
-        <td>4 %</td>
-        <td>25 ans</td>
-    </tr>
-
-    <tr>
-        <td>Matériel et outillage</td>
-        <td>10 %</td>
-        <td>10 ans</td>
-    </tr>
-
-    <tr>
-        <td>Matériel de transport</td>
-        <td>20 %</td>
-        <td>5 ans</td>
-    </tr>
-
-    <tr>
-        <td>Mobilier de bureau</td>
-        <td>10 %</td>
-        <td>10 ans</td>
-    </tr>
-
-    <tr>
-        <td>Matériel de bureau</td>
-        <td>10 %</td>
-        <td>10 ans</td>
-    </tr>
-
-    <tr>
-        <td>Matériel informatique</td>
-        <td>20 %</td>
-        <td>5 ans</td>
-    </tr>
-
-    <tr>
-        <td>Agencement et aménagement divers</td>
-        <td>10 %</td>
-        <td>10 ans</td>
-    </tr>
-
-    <tr>
-        <td>Autre mobilier et matériel de bureau</td>
-        <td>10 %</td>
-        <td>10 ans</td>
-    </tr>
-
-</table>
-
 </div>
 
+<div class="table-wrapper">
+<table>
+<tr><th>Exceptions : immobilisations non amortissables</th></tr>
+<tr><td>Fonds commercial (sauf dans certains cas)</td></tr>
+<tr><td>Terrains (sauf dans certains cas)</td></tr>
+<tr><td>Les immobilisations financières</td></tr>
+</table>
+</div>
+
+<div class="highlight">
+À retenir : l’amortissement traduit comptablement la perte de valeur liée à l’utilisation, au temps ou à l’évolution technologique d’une immobilisation amortissable.
+</div>
 
 </section>
 
+<!-- ===== SECTION 2 : TERMINOLOGIE ===== -->
+<section id="TER">
+
+<h2>Terminologie utilisée</h2>
+
+<div class="table-wrapper">
+<table class="amort-table">
+<tr>
+<th>Terme</th>
+<th>Signification</th>
+<th>Détermination</th>
+</tr>
+
+<tr>
+<td>Valeur d’entrée (VE) ou valeur d’origine (VO)</td>
+<td>Montant pour lequel un élément est inscrit au moment de son entrée dans le patrimoine.</td>
+<td>Coût d’acquisition ou coût de production.</td>
+</tr>
+
+<tr>
+<td>Durée probable de vie ou durée d’utilisation prévisionnelle (D)</td>
+<td>La durée sur laquelle le calcul de l’amortissement est basé.</td>
+<td>Elle dépend de la nature de l’immobilisation.</td>
+</tr>
+
+<tr>
+<td>Taux d’amortissement (T)</td>
+<td>Un coefficient exprimé sous forme d’une fraction ou d’un pourcentage.</td>
+<td>T = 1 / D (années) ou T = 12 / D (mois).</td>
+</tr>
+
+<tr>
+<td>Annuité (A) ou dotation</td>
+<td>Le montant d’amortissement d’une immobilisation pratiqué à la fin d’un exercice donné.</td>
+<td>A = VO × taux × n / 12, avec n inférieur ou égal à 12 mois.</td>
+</tr>
+
+<tr>
+<td>Amortissements cumulés (Σ Amort)</td>
+<td>La somme des annuités d’amortissement pratiquées depuis l’entrée de l’immobilisation dans le patrimoine.</td>
+<td>Σ Amort = VO × taux × N / 12, N étant la durée cumulée exprimée en mois.</td>
+</tr>
+
+<tr>
+<td>Valeur nette d’amortissement (VNA)</td>
+<td>Différence entre la valeur d’entrée et le total des amortissements pratiqués depuis l’acquisition de l’immobilisation.</td>
+<td>VNA = VO − Σ Amort.</td>
+</tr>
+
+<tr>
+<td>Amortissement linéaire ou constant</td>
+<td>Le montant de la dépréciation reste le même pour chacun des exercices formant la durée de vie de l’immobilisation.</td>
+<td>Voir la section réservée à ce mode d’amortissement.</td>
+</tr>
+
+<tr>
+<td>Amortissement dégressif</td>
+<td>La dépréciation des biens est plus importante dans les premières années que dans les dernières.</td>
+<td>Voir la section réservée à ce mode d’amortissement.</td>
+</tr>
+</table>
+</div>
+
+</section>
+
+<!-- ===== SECTION 3 : TAUX ===== -->
+<section id="TA">
+
+<h2>Taux d’amortissement admis fiscalement au Maroc</h2>
+
+<div class="table-wrapper">
+<table class="amort-table">
+<tr>
+<th>Classes d’immobilisations</th>
+<th>Taux d’amortissement</th>
+<th>Durée</th>
+</tr>
+<tr><td>Frais préliminaires</td><td class="center">20 %</td><td class="center">5 ans</td></tr>
+<tr><td>Charges à répartir sur plusieurs exercices</td><td class="center">20 %</td><td class="center">5 ans</td></tr>
+<tr><td>Brevet, marque, droit et valeur similaire</td><td class="center">20 %</td><td class="center">5 ans</td></tr>
+<tr><td>Construction</td><td class="center">4 %</td><td class="center">25 ans</td></tr>
+<tr><td>Matériel et outillage</td><td class="center">10 %</td><td class="center">10 ans</td></tr>
+<tr><td>Matériel de transport</td><td class="center">20 %</td><td class="center">5 ans</td></tr>
+<tr><td>Mobilier de bureau</td><td class="center">10 %</td><td class="center">10 ans</td></tr>
+<tr><td>Matériel de bureau</td><td class="center">10 %</td><td class="center">10 ans</td></tr>
+<tr><td>Matériel informatique</td><td class="center">20 %</td><td class="center">5 ans</td></tr>
+<tr><td>Agencement et aménagement divers</td><td class="center">10 %</td><td class="center">10 ans</td></tr>
+<tr><td>Autre mobilier et matériel de bureau</td><td class="center">10 %</td><td class="center">10 ans</td></tr>
+</table>
+</div>
+
+<div class="highlight">
+Les taux présentés constituent des taux indicatifs du cours. Le taux fiscal applicable doit être vérifié selon la nature du bien et les règles fiscales en vigueur.
+</div>
+
+</section>
+
+<!-- ===== SECTION 4 : AMORTISSEMENT LINÉAIRE ===== -->
 <section id="AL">
-<h2>Calcul des dotations selon l’amortissement constant ou linéaire </h2>
 
-<h3>    Exemple 1 : Acquisition ou mise en service au début de l’exercice</h3>
+<h2>Calcul des dotations selon l’amortissement constant ou linéaire</h2>
+
+<h3>Exemple 1 : Acquisition ou mise en service au début de l’exercice</h3>
+
+<div class="table-wrapper">
 <table>
-
-<tr>
-            <th>Date d’acquisition ou mise en service </th>
-            <th>VO/VE </th>
-<th>Durée </th>
-
-        </tr>
-
-<tr>
-            <td> 01/01/2020</td>         <td> 
-190.000,00
-</td>
-<td> 5 Ans
-
-</td>
-
-        </tr>
+<tr><th>Date d’acquisition ou de mise en service</th><th>VO/VE</th><th>Durée</th></tr>
+<tr><td class="center">01/01/2020</td><td class="right">190.000,00</td><td class="center">5 ans</td></tr>
 </table>
+</div>
 
+<div class="table-wrapper">
+<table class="amort-table">
+<tr><th colspan="6">Tableau d’amortissement</th></tr>
+<tr><th>Années</th><th>VO ou VE</th><th>Taux</th><th>Annuité</th><th>Cumul d’amortissement</th><th>VNA</th></tr>
+<tr><td>2020</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>38.000,00</td><td>152.000,00</td></tr>
+<tr><td>2021</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>76.000,00</td><td>114.000,00</td></tr>
+<tr><td>2022</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>114.000,00</td><td>76.000,00</td></tr>
+<tr><td>2023</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>152.000,00</td><td>38.000,00</td></tr>
+<tr><td>2024</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>190.000,00</td><td>00,00</td></tr>
+</table>
+</div>
+
+<h3>Exemple 2 : Acquisition ou mise en service en cours d’exercice</h3>
+
+<div class="table-wrapper">
 <table>
-<tr>
-        
-
-<th colspan="6">Tableau d’amortissement  
-        </th>
-</tr>
-<tr>
-
-<td>Années</td>
-<td>VO ou VE</td>
-<td> Taux</td>
-<td>Annuité</td>
-<td>Cumul d'amortissement</td>
-<td>VNA</td>
-</tr>
-<tr>
-
-<td>2020</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>38.000,00</td>
-<td>152.000,00</td>
-</tr>
-<tr>
-
-<td>2021</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>76.000,00</td>
-<td>114.000,00</td>
-</tr>
-<tr>
-
-<td>2022</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>114.000,00</td>
-<td>76.000,00</td>
-</tr>
-<tr>
-
-<td>2023</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>152.000,00</td>
-<td>38.000,00</td>
-</tr>
-<tr>
-
-<td>2024</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>190.000,00</td>
-<td>00,00</td>
-</tr>
-
-
-
-
-
-
-
+<tr><th>Date d’acquisition ou de mise en service</th><th>VO/VE</th><th>Durée</th></tr>
+<tr><td class="center">01/04/2020</td><td class="right">190.000,00</td><td class="center">5 ans</td></tr>
 </table>
-<h3>    Exemple 2 : Acquisition ou mise en service en cours d’exercice </h3>
-<table>
+</div>
 
-<tr>
-            <th>Date d’acquisition ou mise en service </th>
-            <th>VO/VE </th>
-<th>Durée </th>
-
-        </tr>
-
-<tr>
-            <td> 01/04/2020</td>         <td> 
-190.000,00
-</td>
-<td> 5 Ans
-
-</td>
-
-        </tr>
+<div class="table-wrapper">
+<table class="amort-table">
+<tr><th colspan="6">Tableau d’amortissement</th></tr>
+<tr><th>Années</th><th>VO ou VE</th><th>Taux</th><th>Annuité</th><th>Cumul d’amortissement</th><th>VNA</th></tr>
+<tr><td>2020 (09 mois)</td><td>190.000,00</td><td>20 %</td><td>28.500,00</td><td>28.500,00</td><td>161.500,00</td></tr>
+<tr><td>2021</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>66.500,00</td><td>123.500,00</td></tr>
+<tr><td>2022</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>104.500,00</td><td>85.500,00</td></tr>
+<tr><td>2023</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>142.500,00</td><td>47.500,00</td></tr>
+<tr><td>2024</td><td>190.000,00</td><td>20 %</td><td>38.000,00</td><td>180.500,00</td><td>9.500,00</td></tr>
+<tr><td>2025 (03 mois)</td><td>190.000,00</td><td>20 %</td><td>9.500,00</td><td>190.000,00</td><td>00,00</td></tr>
 </table>
-
-<table>
-<tr>
-        
-
-<th colspan="6">Tableau d’amortissement 
-        </th>
-</tr>
-<tr>
-
-<td>Années</td>
-<td>VO ou VE</td>
-<td> Taux</td>
-<td>Annuité</td>
-<td>Cumul d'amortissement</td>
-<td>VNA</td>
-</tr>
-<tr>
-
-<td>2020 (09 mois)</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>28.500,00</td>
-<td>28.500,00</td>
-<td>161.500,00</td>
-</tr>
-<tr>
-
-<td>2021</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>66.500,00</td>
-<td>123.500,00</td>
-</tr>
-<tr>
-
-<td>2022</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>104.500,00</td>
-<td>85.500,00</td>
-</tr>
-<tr>
-
-<td>2023</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>142.500,00</td>
-<td>47.500,00</td>
-</tr>
-<tr>
-
-<td>2024</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>38.000,00</td>
-<td>180.500,00</td>
-<td>9.500,00</td>
-</tr>
-<tr>
-
-<td>2025 (03 mois)</td>
-<td>190.000,00</td>
-<td> 20 %</td>
-<td>9.500,00</td>
-<td>190.000,00</td>
-<td>00,00</td>
-
-</tr>
-
-
-
-
-
-
-
-</table>
-
+</div>
 
 </section>
+
+<!-- ===== SECTION 5 : COMPTABILISATION LINÉAIRE ===== -->
 <section id="CAL">
-<h2>Comptabilisation des dotations d’amortissement (Amortissement constant) </h2>
-<style>
 
-body{
-    font-family: Arial, sans-serif;
-    margin:20px;
-    background:#f4f7fb;
-    color:#222;
-}
+<h2>Comptabilisation des dotations d’amortissement (Amortissement constant)</h2>
 
-/* TITRES */
-h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:35px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
-    letter-spacing:0.5px;
-}
+<h3>Écriture générale au 31/12/N</h3>
 
-/* TABLEAUX */
-table{
-    width:95%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-    background:white;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* CELLULES */
-td{
-    border:1px solid #cfd8e3;
-    padding:8px;
-    font-size:14px;
-}
-
-/* DATE */
-.date{
-    text-align:center;
-    font-weight:bold;
-    background:#1e3a5f;
-    color:white;
-    font-size:15px;
-}
-
-/* COLONNES */
-.compte{
-    width:5%;
-    text-align:center;
-}
-
-.libelle{
-    width:30%;
-}
-
-.montant{
-    width:7%;
-    text-align:right;
-    white-space:nowrap;
-    background:#f9fbfd;
-    font-weight:bold;
-    color:#0b5e8e;
-}
-
-/* DEBIT */
-.debit{
-    background:#e8f4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
-
-/* CREDIT */
-.credit{
-    background:#fff2e6;
-    color:#b35400;
-    font-weight:bold;
-}
-
-/* CENTRAGE */
-.center{
-    text-align:center;
-}
-
-/* EFFET HOVER */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-</style>
-
-<table>
-
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/N</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6191</option>
-<option>6192</option>
-<option>6193</option>
-
-       
-    </td>
-
+<td class="debit center compte">6191<br>6192<br>6193</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations.... </option>
-           
-       
-    </td>
-
+<td class="debit libelle">DEA des immobilisations en non-valeur, incorporelles ou corporelles</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt </option>
-</td>
-
+<td class="montant">Montant</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>281X</option>
-<option>282X </option>
-<option>283X</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">281X<br>282X<br>283X</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements de... </option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">Amortissements des immobilisations concernées</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt</option>
-
-</td>
-
+<td class="montant">Montant</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice N </td></tr>
-
+<tr class="date"><td colspan="6">Dotation aux amortissements de l’exercice N</td></tr>
 </table>
+</div>
 
-<h3>►Exemple : Dotation d’amortissement calculée pour le Matériel de transport de l’Exercice 2025 : 50.000,00 DH </h3>
-<table>
+<div class="example">
+Exemple : Dotation d’amortissement calculée pour le matériel de transport de l’exercice 2025 : 50.000,00 DH.
+</div>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            
-<option>6193</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations corporelles </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>50.000,00 </option>
-</td>
-
+<td class="debit center compte">6193</td><td></td>
+<td class="debit libelle">DEA des immobilisations corporelles</td><td></td>
+<td class="montant">50.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-<option>2834</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements du MT </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>50.000,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">2834</td>
+<td></td><td class="credit libelle">Amortissements du matériel de transport</td>
+<td></td><td class="montant">50.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice 2025</td></tr>
-
+<tr class="date"><td colspan="6">Dotation aux amortissements de l’exercice 2025</td></tr>
 </table>
-
-
+</div>
 
 </section>
 
+<!-- ===== SECTION 6 : AMORTISSEMENT DÉGRESSIF ===== -->
 <section id="AD">
-<h2>Calcul des dotations d’amortissement selon l’amortissement dégressif </h2>
+
+<h2>Calcul des dotations d’amortissement selon l’amortissement dégressif</h2>
+
+<p>
 Dans le mode d’amortissement dégressif, le taux constant est multiplié par un coefficient fixé en fonction de la durée d’amortissement de l’immobilisation.
+</p>
+
+<div class="table-wrapper">
 <table>
-
-<tr>
-            <td>Durée d’amortissement </td>
-            <td> Coefficient </td>
-</tr>
-
-<tr>
-            <td> 3 à 4 Ans </td>         <td> 
-1.5
-</td>
-</tr>
-<tr>
-
-
-<td>5 à 6 Ans </td>
-<td> 2 </td>
-
-
-        </tr>
-<tr>
-
-<td> Plus de 6 ANS
-
-</td>
-<td> 3
-
-</td>
-
-
-        </tr>
+<tr><th>Durée d’amortissement</th><th>Coefficient</th></tr>
+<tr><td>3 à 4 ans</td><td class="center">1,5</td></tr>
+<tr><td>5 à 6 ans</td><td class="center">2</td></tr>
+<tr><td>Plus de 6 ans</td><td class="center">3</td></tr>
 </table>
+</div>
 
+<h3>Exemple 1 : Acquisition ou mise en service au début de l’exercice</h3>
 
-<h3>    Exemple 1 : Acquisition ou mise en service au début de l’exercice</h3>
+<div class="table-wrapper">
 <table>
-
-<tr>
-            <th>Date d’acquisition ou mise en service </th>
-            <th>VO/VE </th>
-<th>Durée </th>
-
-        </tr>
-
-<tr>
-            <td> 01/01/2020</td>         <td> 
-100.000,00
-</td>
-<td> 5 Ans
-
-</td>
-
-        </tr>
+<tr><th>Date d’acquisition ou de mise en service</th><th>VO/VE</th><th>Durée</th></tr>
+<tr><td class="center">01/01/2020</td><td class="right">100.000,00</td><td class="center">5 ans</td></tr>
 </table>
+</div>
 
+<div class="table-wrapper">
+<table class="amort-table">
+<tr><th colspan="6">Tableau d’amortissement</th></tr>
+<tr><th>Années</th><th>VO ou VE</th><th>Taux</th><th>Annuité</th><th>Cumul d’amortissement</th><th>VNA</th></tr>
+<tr><td>2020</td><td>100.000,00</td><td>40 %</td><td>40.000,00</td><td>40.000,00</td><td>60.000,00</td></tr>
+<tr><td>2021</td><td>60.000,00</td><td>40 %</td><td>24.000,00</td><td>64.000,00</td><td>36.000,00</td></tr>
+<tr><td>2022</td><td>36.000,00</td><td>40 %</td><td>14.400,00</td><td>78.400,00</td><td>21.600,00</td></tr>
+<tr><td>2023</td><td>21.600,00*</td><td>50 %*</td><td>10.800,00</td><td>89.200,00</td><td>10.800,00</td></tr>
+<tr><td>2024</td><td>10.800,00</td><td>100 % du solde*</td><td>10.800,00</td><td>100.000,00</td><td>00,00</td></tr>
+</table>
+</div>
+
+<div class="highlight">
+*On procède au passage à la méthode linéaire lorsque l’annuité calculée selon le mode linéaire sur la durée résiduelle devient plus élevée que l’annuité obtenue par la méthode dégressive.
+
+Sur une VNA de 21.600 DH et une durée résiduelle de 2 ans :
+
+Annuité dégressive = 21.600 × 40 % = 8.640 DH.
+
+Annuité linéaire = 21.600 × 1/2 = 10.800 DH.
+
+L’annuité linéaire étant supérieure, on retient la méthode linéaire pour la durée résiduelle.
+</div>
+
+<h3>Exemple 2 : Acquisition ou mise en service en cours d’exercice</h3>
+
+<div class="table-wrapper">
 <table>
-<tr>
-        
-
-<th colspan="6">Tableau d’amortissement  
-        </th>
-</tr>
-<tr>
-
-<td>Années</td>
-<td>VO ou VE</td>
-<td> Taux</td>
-<td>Annuité</td>
-<td>Cumul d'amortissement</td>
-<td>VNA</td>
-</tr>
-<tr>
-
-<td>2020</td>
-<td>100.000,00</td>
-<td> 40 %</td>
-<td>40.000,00</td>
-<td>40.000,00</td>
-<td>60.000,00</td>
-</tr>
-<tr>
-
-<td>2021</td>
-<td>60.000,00</td>
-<td> 40 %</td>
-<td>24.000,00</td>
-<td>64.000,00</td>
-<td>36.000,00</td>
-</tr>
-<tr>
-
-<td>2022</td>
-<td>36.000,00</td>
-<td> 40 %</td>
-<td>14.400,00</td>
-<td>78.400,00</td>
-<td>21.600,00</td>
-</tr>
-<tr>
-
-<td>2023</td>
-<td>21.600,00*</td>
-<td> 50 %*</td>
-<td>10.800,00</td>
-<td>89.200,00</td>
-<td>10.800,00</td>
-</tr>
-<tr>
-
-<td>2024</td>
-<td>21.600,00*</td>
-<td> 50 %*</td>
-<td>10.800,00</td>
-<td>100.000,00</td>
-<td>00,00</td>
-</tr>
-
-
-
-
-
-
-
+<tr><th>Date d’acquisition ou de mise en service</th><th>VO/VE</th><th>Durée</th></tr>
+<tr><td class="center">10/08/2020</td><td class="right">60.000,00</td><td class="center">5 ans</td></tr>
 </table>
-*On procède au passage à la méthode linéaire lorsque l’annuité calculée selon le mode linéaire sur la durée résiduelle (02 Ans) devient plus élevée que l’annuité obtenue par la méthode dégressive (21.600*40% = 8.640 (Annuité dégressive) < à 21.600*1/2 = 10.800 (Annuité constante ou linéaire).
-<h3>    Exemple 2 : Acquisition ou mise en service en cours d’exercice </h3>
-<table>
+</div>
 
-<tr>
-            <th>Date d’acquisition ou mise en service </th>
-            <th>VO/VE </th>
-<th>Durée </th>
-
-        </tr>
-
-<tr>
-            <td> 10/08/2020</td>         <td> 
-60.000,00
-</td>
-<td> 5 Ans
-
-</td>
-
-        </tr>
+<div class="table-wrapper">
+<table class="amort-table">
+<tr><th colspan="6">Tableau d’amortissement</th></tr>
+<tr><th>Années</th><th>VO ou VE</th><th>Taux</th><th>Annuité</th><th>Cumul d’amortissement</th><th>VNA</th></tr>
+<tr><td>2020 (05 mois)</td><td>60.000,00</td><td>40 %</td><td>10.000,00</td><td>10.000,00</td><td>50.000,00</td></tr>
+<tr><td>2021</td><td>50.000,00</td><td>40 %</td><td>20.000,00</td><td>30.000,00</td><td>30.000,00</td></tr>
+<tr><td>2022</td><td>30.000,00</td><td>40 %</td><td>12.000,00</td><td>42.000,00</td><td>18.000,00</td></tr>
+<tr><td>2023</td><td>18.000,00</td><td>40 %</td><td>7.200,00</td><td>49.200,00</td><td>10.800,00</td></tr>
+<tr><td>2024</td><td>10.800,00*</td><td>63,16 %*</td><td>6.821,05</td><td>56.021,05</td><td>3.978,95</td></tr>
+<tr><td>2025 (7 mois)</td><td>Solde restant</td><td>—</td><td>3.978,95</td><td>60.000,00</td><td>00,00</td></tr>
 </table>
+</div>
 
-<table>
-<tr>
-        
+<div class="highlight">
+*Le passage à la méthode linéaire intervient lorsque l’annuité linéaire calculée sur la durée résiduelle devient supérieure à l’annuité dégressive.
 
-<th colspan="6">Tableau d’amortissement 
-        </th>
-</tr>
-<tr>
+Annuité dégressive : 10.800 × 40 % = 4.320 DH.
 
-<td>Années</td>
-<td>VO ou VE</td>
-<td> Taux</td>
-<td>Annuité</td>
-<td>Cumul d'amortissement</td>
-<td>VNA</td>
-</tr>
-<tr>
-
-<td>2020 (05 mois)</td>
-<td>60.000,00</td>
-<td> 40 %</td>
-<td>10.000,00</td>
-<td>10.000,00</td>
-<td>50.000,00</td>
-</tr>
-<tr>
-
-<td>2021</td>
-<td>50.000,00</td>
-<td> 40 %</td>
-<td>20.000,00</td>
-<td>30.000,00</td>
-<td>30.000,00</td>
-</tr>
-<tr>
-
-<td>2022</td>
-<td>30.000,00</td>
-<td> 40 %</td>
-<td>12.000,00</td>
-<td>42.000,00</td>
-<td>18.000,00</td>
-</tr>
-<tr>
-
-<td>2023</td>
-<td>18.000,00</td>
-<td> 40 %</td>
-<td>7.200,00</td>
-<td>49.200,00</td>
-<td>10.800,00</td>
-</tr>
-<tr>
-
-<td>2024</td>
-<td>10.800,00*</td>
-<td> 63,16 %*</td>
-<td>6.821,05</td>
-<td>56.021,05</td>
-<td>3.978,95</td>
-</tr>
-<tr>
-
-<td>2025 (7 mois)</td>
-<td>10.800,00*</td>
-<td> 63,16%*</td>
-<td>3.978,95</td>
-<td>60.000,00</td>
-<td>00,00</td>
-
-</tr>
-
-
-
-
-
-
-
-</table>
-*On procède au passage à la méthode linéaire lorsque l’annuité calculée selon le mode linéaire sur la durée résiduelle (19 Mois) devient plus élevée que l’annuité obtenue par la méthode dégressive (10.800*40% = 4.320 (Annuité dégressive) < à 10.800*12/19 = 6.821,05 (Annuité constante ou linéaire) 
-
+Annuité linéaire sur 19 mois : 10.800 × 12 / 19 = 6.821,05 DH.
+</div>
 
 </section>
+
+<!-- ===== SECTION 7 : COMPTABILISATION DÉGRESSIVE ===== -->
 <section id="CAD">
-Le traitement comptable des amortissements dégressifs s’effectue selon 02 cas :
-<table>
 
-<tr>
-            <th>Cas 1 : Amortissement fiscal  (AF) > à l’amortissement économique  (AE) 
- </th>
-</tr>
-</table>
-<table>
+<h2>Comptabilisation des dotations d’amortissement dégressif</h2>
 
-<tr>
+<p>Le traitement comptable des amortissements dégressifs s’effectue selon deux cas :</p>
 
-            <th>Cas 2 : Amortissement fiscal (AF) < à l’amortissement économique (AE) 
-</th>
+<div class="highlight">
+<strong>Cas 1 :</strong> Amortissement fiscal (AF) supérieur à l’amortissement économique (AE).<br>
+<strong>Cas 2 :</strong> Amortissement fiscal (AF) inférieur à l’amortissement économique (AE).
+</div>
 
-        </tr>
-</table>
-*AF (représenté par l’amortissement dégressif) 
-*AE (représenté par l’amortissement constant ou linéaire) 
+<p>
+AF : amortissement fiscal, représenté dans cet exemple par l’amortissement dégressif.<br>
+AE : amortissement économique, représenté dans cet exemple par l’amortissement constant ou linéaire.
+</p>
 
-<h3>Cas 1 : AF > AE 
- </h3>
+<h3>Cas 1 : AF supérieur à AE</h3>
 
-<table>
+<h4>Écriture générale</h4>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/N</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6191</option>
-<option>6192</option>
-<option>6193</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations.... </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AE)</option>
-</td>
-
+<td class="debit center compte">6191<br>6192<br>6193</td><td></td>
+<td class="debit libelle">DEA des immobilisations</td><td></td>
+<td class="montant">Montant AE</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>281X</option>
-<option>282X </option>
-<option>283X</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements de... </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AE)</option>
-
-</td>
-
+<td></td><td class="credit center compte">281X<br>282X<br>283X</td>
+<td></td><td class="credit libelle">Amortissements des immobilisations</td>
+<td></td><td class="montant">Montant AE</td>
 </tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6594</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DNC aux provisions réglementées</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AF-AE)</option>
-</td>
-
+<td class="debit center compte">6594</td><td></td>
+<td class="debit libelle">DNC aux provisions réglementées</td><td></td>
+<td class="montant">AF − AE</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>1351</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Provisions pour AD</option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AF-AE)</option>
-
-</td>
-
+<td></td><td class="credit center compte">1351</td>
+<td></td><td class="credit libelle">Provisions pour amortissements dérogatoires</td>
+<td></td><td class="montant">AF − AE</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice N </td></tr>
-
+<tr class="date"><td colspan="6">Dotation de l’exercice N</td></tr>
 </table>
+</div>
 
-<h3>►Exemple : Dotation d’amortissement fiscal calculée pour le Matériel de transport de l’Exercice 2025 : 40.000,00 DH (Amortissement économique 20.000,00)</h3>
-<table>
+<div class="example">
+Exemple : Dotation d’amortissement fiscal calculée pour le matériel de transport de l’exercice 2025 : 40.000,00 DH. Amortissement économique : 20.000,00 DH.
+</div>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            
-<option>6193</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations corporelles </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00 </option>
-</td>
-
+<td class="debit center compte">6193</td><td></td>
+<td class="debit libelle">DEA des immobilisations corporelles</td><td></td>
+<td class="montant">20.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-<option>2834</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements du MT </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">2834</td>
+<td></td><td class="credit libelle">Amortissements du matériel de transport</td>
+<td></td><td class="montant">20.000,00</td>
 </tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6594</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DNC aux provisions réglementées</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00</option>
-</td>
-
+<td class="debit center compte">6594</td><td></td>
+<td class="debit libelle">DNC aux provisions réglementées</td><td></td>
+<td class="montant">20.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>1351</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Provisions pour AD</option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">1351</td>
+<td></td><td class="credit libelle">Provisions pour amortissements dérogatoires</td>
+<td></td><td class="montant">20.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice 2025</td></tr>
-
+<tr class="date"><td colspan="6">Dotation de l’exercice 2025</td></tr>
 </table>
-<h3>Cas 2 : AF < AE  </h3>
+</div>
 
-<table>
+<h3>Cas 2 : AF inférieur à AE</h3>
 
-<!-- 01/01/2025 -->
+<h4>Écriture générale</h4>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/N</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6191</option>
-<option>6192</option>
-<option>6193</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations.... </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AE)</option>
-</td>
-
+<td class="debit center compte">6191<br>6192<br>6193</td><td></td>
+<td class="debit libelle">DEA des immobilisations</td><td></td>
+<td class="montant">Montant AE</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>281X</option>
-<option>282X </option>
-<option>283X</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements de... </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AE)</option>
-
-</td>
-
+<td></td><td class="credit center compte">281X<br>282X<br>283X</td>
+<td></td><td class="credit libelle">Amortissements des immobilisations</td>
+<td></td><td class="montant">Montant AE</td>
 </tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>1351</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> Provisions pour AD </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AE-AF)</option>
-</td>
-
+<td class="debit center compte">1351</td><td></td>
+<td class="debit libelle">Provisions pour amortissements dérogatoires</td><td></td>
+<td class="montant">AE − AF</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7594</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RNC sur provisions réglementées </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>Mt (AE-AF)</option>
-
-</td>
-
+<td></td><td class="credit center compte">7594</td>
+<td></td><td class="credit libelle">RNC sur provisions réglementées</td>
+<td></td><td class="montant">AE − AF</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice N </td></tr>
-
+<tr class="date"><td colspan="6">Dotation de l’exercice N</td></tr>
 </table>
+</div>
 
-<h3>►Exemple : Dotation d’amortissement fiscal calculée pour le Matériel de transport de l’Exercice 2025 : 14.400,00 DH (Amortissement économique 20.000,00)</h3>
-<table>
+<div class="example">
+Exemple : Dotation d’amortissement fiscal calculée pour le matériel de transport de l’exercice 2025 : 14.400,00 DH. Amortissement économique : 20.000,00 DH.
+</div>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            
-<option>6193</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations corporelles </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00 </option>
-</td>
-
+<td class="debit center compte">6193</td><td></td>
+<td class="debit libelle">DEA des immobilisations corporelles</td><td></td>
+<td class="montant">20.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-<option>2834</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements du MT </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">2834</td>
+<td></td><td class="credit libelle">Amortissements du matériel de transport</td>
+<td></td><td class="montant">20.000,00</td>
 </tr>
-
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>1351</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> Provisions pour AD </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>5.600,00</option>
-</td>
-
+<td class="debit center compte">1351</td><td></td>
+<td class="debit libelle">Provisions pour amortissements dérogatoires</td><td></td>
+<td class="montant">5.600,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7594</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RNC sur provisions réglementées </option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>5.600,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">7594</td>
+<td></td><td class="credit libelle">RNC sur provisions réglementées</td>
+<td></td><td class="montant">5.600,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice 2025</td></tr>
-
+<tr class="date"><td colspan="6">Dotation de l’exercice 2025</td></tr>
 </table>
+</div>
+
 </section>
 
+<!-- ===== SECTION 8 : CESSION ===== -->
 <section id="SOR">
+
 <h2>Traitement de la cession d’une immobilisation</h2>
-<h3>   ► Exemple : L’entreprise a acquis, le 12/03/2022, une machine pour un montant de 100.000,00 DH. Cette immobilisation est amortie suivant le mode linéaire sur 5 ans. Elle a été cédée par chèque le 15/05/2025 au prix de 40.000,00 DH. </h3>
-<h4>1ère étape : Enregistrement du produit de cession</h4>
-<table>
 
-<!-- 01/01/2025 -->
+<div class="example">
+Exemple : L’entreprise a acquis, le 12/03/2022, une machine pour un montant de 100.000,00 DH. Cette immobilisation est amortie suivant le mode linéaire sur 5 ans. Elle a été cédée par chèque le 15/05/2025 au prix de 40.000,00 DH.
+</div>
+
+<h3>1ère étape : Enregistrement du produit de cession</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">15/05/2025</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>5141</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Banques</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>40.000,00</option>
-</td>
-
+<td class="debit center compte">5141</td><td></td>
+<td class="debit libelle">Banques</td><td></td>
+<td class="montant">40.000,00</td><td></td>
 </tr>
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7513</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PC des IC</option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>40.000,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">7513</td>
+<td></td><td class="credit libelle">Produits des cessions des immobilisations corporelles</td>
+<td></td><td class="montant">40.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Cession machine Facture N° 12-2025 </td></tr>
-
+<tr class="date"><td colspan="6">Cession machine – Facture N° 12-2025</td></tr>
 </table>
-➡️ Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2025. <br>
-➡️ En cas de cession des immobilisations en espèces, il convient de débiter le compte 5161 – Caisses<br>
-➡️ En cas de cession des immobilisations à crédit, il convient de débiter le compte 3481 – Créances sur cessions d’immobilisations<br>
-➡️ En cas de majoration de TVA, il convient de créditer le compte 4455 – Etat, TVA facturée
+</div>
 
-<h4>2ème : Constatation de la dotation de l’année de cession (Depuis le début de l’exercice jusqu’à la date de cession) </h4>
+<div class="highlight">
+Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2025.<br><br>
+En cas de cession des immobilisations en espèces, il convient de débiter le compte 5161 – Caisses.<br><br>
+En cas de cession des immobilisations à crédit, il convient de débiter le compte 3481 – Créances sur cessions d’immobilisations.<br><br>
+En cas de majoration de TVA, il convient de créditer le compte 4455 – État, TVA facturée.
+</div>
 
-<table>
+<h3>2ème étape : Constatation de la dotation de l’année de cession</h3>
 
-<!-- 01/01/2025 -->
+<p>La dotation est calculée depuis le début de l’exercice jusqu’à la date de cession.</p>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            
-<option>6193</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEA des immobilisations corporelles </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>8.333,33 </option>
-</td>
-
+<td class="debit center compte">6193</td><td></td>
+<td class="debit libelle">DEA des immobilisations corporelles</td><td></td>
+<td class="montant">8.333,33</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-<option>2833</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Amortissements des ITMO</option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>8.333,33</option>
-
-</td>
-
+<td></td><td class="credit center compte">2833</td>
+<td></td><td class="credit libelle">Amortissements des installations techniques, matériel et outillage</td>
+<td></td><td class="montant">8.333,33</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> DEA de l’exercice 2025</td></tr>
-
+<tr class="date"><td colspan="6">Dotation de l’exercice 2025 jusqu’à la cession</td></tr>
 </table>
-▐ Dotation = [100000*20%*5]/12 = 8333,33
-<h4>3ème étape : Enregistrement de la sortie de l’immobilisation</h4>
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+Dotation = (100.000 × 20 % × 5) / 12 = 8.333,33 DH.
+</div>
+
+<h3>3ème étape : Enregistrement de la sortie de l’immobilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            
-<option>2833</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Amortissements des ITMO</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>65.000,00 </option>
-</td>
-
+<td class="debit center compte">2833</td><td></td>
+<td class="debit libelle">Amortissements des installations techniques, matériel et outillage</td><td></td>
+<td class="montant">65.000,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            
-<option>6513</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>VNA des IC cédées</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>35.000,00 </option>
-</td>
-
+<td class="debit center compte">6513</td><td></td>
+<td class="debit libelle">Valeurs nettes d’amortissement des immobilisations corporelles cédées</td><td></td>
+<td class="montant">35.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-<option>2332</option>
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Matériel et outillage</option>
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>100.000,00</option>
-
-</td>
-
+<td></td><td class="credit center compte">2332</td>
+<td></td><td class="credit libelle">Matériel et outillage</td>
+<td></td><td class="montant">100.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Sortie de la machine</td></tr>
-
+<tr class="date"><td colspan="6">Sortie de la machine</td></tr>
 </table>
-▐ Σ Amort = [100000*20%*39]/12= 65000 ▐ VNA = [100000-65000] = 35000
+</div>
 
-
-
-
-
-
-
-
-
+<div class="highlight">
+Σ Amort = (100.000 × 20 % × 39) / 12 = 65.000,00 DH.<br>
+VNA = 100.000 − 65.000 = 35.000,00 DH.
+</div>
 
 </section>
-
 
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C1P3M1.html">⬅ Retour </a>
-
+Formation en Comptabilité Générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermeture en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
-
-
 
 
