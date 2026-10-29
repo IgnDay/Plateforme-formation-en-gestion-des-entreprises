@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,9 +11,18 @@
     box-sizing:border-box;
 }
 
+html{
+    width:100%;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:Arial,sans-serif;
     margin:0;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
     background:#f4f6f9;
     color:#1e293b;
 }
@@ -53,6 +61,7 @@ header{
     justify-content:center;
     width:44px;
     height:44px;
+    flex-shrink:0;
     border-radius:12px;
     background:#00b894;
     font-size:19px;
@@ -84,6 +93,7 @@ header h1{
     margin:0;
     font-size:23px;
     line-height:1.5;
+    overflow-wrap:anywhere;
 }
 
 header h1 p{
@@ -117,13 +127,16 @@ header h1 p{
     top:100%;
     left:0;
     min-width:230px;
+    max-width:min(300px,90vw);
     max-height:70vh;
     overflow-y:auto;
+    overflow-wrap:anywhere;
     background:white;
     box-shadow:0 5px 15px #0003;
     border-radius:7px;
     z-index:1000;
     padding:6px;
+    text-align:left;
 }
 
 .dropdown-content a{
@@ -134,6 +147,7 @@ header h1 p{
     text-align:left;
     font-size:14px;
     border-radius:5px;
+    line-height:1.5;
 }
 
 .dropdown-content a:hover{
@@ -146,10 +160,15 @@ nav{
     background:#34495e;
     padding:10px;
     text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:5px;
 }
 
 nav button{
-    margin:5px;
+    margin:3px;
     padding:12px 18px;
     border:none;
     background:#00b894;
@@ -157,7 +176,9 @@ nav button{
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
+    line-height:1.4;
     transition:.3s;
+    max-width:100%;
 }
 
 nav button:hover{
@@ -167,7 +188,7 @@ nav button:hover{
 
 .btnActive{
     background:#0984e3!important;
-    transform:scale(1.04);
+    transform:scale(1.02);
     box-shadow:0 3px 10px #0003;
 }
 
@@ -176,6 +197,8 @@ section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
+    max-width:100%;
 }
 
 section.active{
@@ -212,6 +235,7 @@ h2{
     background:#eef3f7;
     border-left:5px solid #0f766e;
     border-radius:6px;
+    overflow-wrap:anywhere;
 }
 
 h3{
@@ -226,11 +250,14 @@ p{
 
 /* ===== TABLEAUX COMPTABLES ===== */
 .table-wrapper{
+    display:block;
     width:100%;
     max-width:100%;
     overflow-x:auto;
+    overflow-y:hidden;
     margin:15px 0 30px;
     -webkit-overflow-scrolling:touch;
+    border-radius:4px;
 }
 
 .journal-table{
@@ -252,6 +279,7 @@ p{
     vertical-align:middle;
     overflow-wrap:anywhere;
     word-wrap:break-word;
+    white-space:normal;
 }
 
 .journal-table .date td{
@@ -302,6 +330,7 @@ p{
     border-radius:7px;
     font-weight:bold;
     line-height:1.7;
+    overflow-wrap:anywhere;
 }
 
 /* ===== PIED DE PAGE ===== */
@@ -311,6 +340,7 @@ footer{
     background:#2c3e50;
     color:white;
     margin-top:20px;
+    line-height:1.6;
 }
 
 footer a{
@@ -324,6 +354,7 @@ footer a:hover{
 
 /* ===== TABLETTES ===== */
 @media(max-width:768px){
+
     .brandbar{
         justify-content:center;
         padding:12px;
@@ -331,6 +362,7 @@ footer a:hover{
 
     .site-menu{
         width:100%;
+        justify-content:center;
     }
 
     .site-menu>a{
@@ -339,21 +371,28 @@ footer a:hover{
 
     .dropdown button{
         padding:9px;
+        font-size:13px;
     }
 
     .dropdown-content{
         left:50%;
         transform:translateX(-50%);
         min-width:220px;
+        max-width:90vw;
     }
 
     header h1{
         font-size:19px;
+        padding:15px 10px;
     }
 
     section{
         padding:18px;
         margin:12px;
+    }
+
+    nav{
+        padding:8px;
     }
 
     nav button{
@@ -370,77 +409,169 @@ footer a:hover{
 
 /* ===== TÉLÉPHONES ===== */
 @media(max-width:480px){
+
+    .brandbar{
+        gap:10px;
+    }
+
+    .brand{
+        font-size:18px;
+    }
+
+    .site-menu{
+        gap:4px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        padding:8px;
+        font-size:12px;
+    }
+
+    .dropdown-content{
+        min-width:200px;
+        max-width:90vw;
+    }
+
+    .dropdown-content a{
+        padding:10px;
+        font-size:13px;
+    }
+
+    header h1{
+        font-size:16px;
+        line-height:1.5;
+        padding:12px 8px;
+    }
+
     section{
         padding:10px;
         margin:7px;
         border-left-width:5px;
+        border-radius:8px;
     }
 
     section h2{
         font-size:17px;
         line-height:1.5;
+        padding:9px;
     }
 
     section h3{
         font-size:15px;
+        line-height:1.5;
     }
 
     nav{
-        padding:7px;
+        padding:7px 4px;
+        gap:3px;
     }
 
     nav button{
         padding:9px 8px;
         font-size:12px;
-        margin:3px;
+        margin:2px;
+        flex:1 1 140px;
+    }
+
+    /*
+       Le tableau garde une largeur adaptée aux 6 colonnes.
+       Le défilement se fait dans .table-wrapper uniquement.
+    */
+    .table-wrapper{
+        width:100%;
+        max-width:100%;
+        margin:12px 0 22px;
     }
 
     .journal-table{
-        min-width:520px;
+        width:600px;
+        min-width:600px;
+        table-layout:fixed;
     }
 
     .journal-table td,
     .journal-table th{
-        padding:5px 3px;
-        font-size:10px;
+        padding:6px 4px;
+        font-size:11px;
         line-height:1.4;
         overflow-wrap:anywhere;
+        word-break:normal;
     }
 
     .journal-table .date td{
         font-size:11px;
-        padding:8px 3px;
+        padding:8px 4px;
     }
 
     .journal-table .montant{
-        text-align:center;
-        font-size:10px;
+        text-align:right;
+        font-size:11px;
     }
 
     .example{
         padding:10px;
         font-size:12px;
         line-height:1.6;
+        margin:16px 0 10px;
+    }
+
+    footer{
+        padding:14px 8px;
+        font-size:13px;
     }
 }
 
+/* ===== TRÈS PETITS TÉLÉPHONES ===== */
 @media(max-width:360px){
+
+    header h1{
+        font-size:15px;
+    }
+
+    .brandbar{
+        padding:10px 6px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:11px;
+        padding:7px 6px;
+    }
+
+    section{
+        padding:8px;
+        margin:5px;
+    }
+
+    section h2{
+        font-size:16px;
+    }
+
+    nav button{
+        font-size:11px;
+        padding:8px 5px;
+        flex-basis:120px;
+    }
+
     .journal-table{
-        min-width:500px;
+        width:600px;
+        min-width:600px;
     }
 
     .journal-table td,
     .journal-table th{
-        padding:4px 2px;
-        font-size:9px;
+        padding:5px 3px;
+        font-size:10px;
     }
 
-    .journal-table .montant{
-        font-size:9px;
+    .journal-table .date td{
+        font-size:10px;
     }
 
-    header h1{
-        font-size:17px;
+    .example{
+        font-size:11px;
+        padding:8px;
     }
 }
 </style>
@@ -975,5 +1106,3 @@ function showSection(id,button){
 
 </body>
 </html>
-
-
