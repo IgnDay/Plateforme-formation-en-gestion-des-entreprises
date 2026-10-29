@@ -1,27 +1,146 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay Comptabilité Générale - Provisions pour dépréciation de l'actif circulant</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGNDay ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.6;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:90vw;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -36,136 +155,192 @@ nav button{
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:16px;
-    transition:0.3s;
+    font-size:15px;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:25px;
+    line-height:1.5;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
+    line-height:1.5;
 }
 
-/* TABLEAUX */
+h4{
+    color:#0f766e;
+    margin-top:20px;
+    line-height:1.7;
+}
+
+p,li{
+    line-height:1.7;
+}
+
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin:18px 0;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:13px 16px;
+    margin:18px 0;
+    border-radius:7px;
+    line-height:1.8;
+}
+
+/* ===== TABLEAUX RESPONSIVES ===== */
+.table-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    margin:20px 0 30px;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
-    width:97%;
+    width:100%;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:15px auto 25px;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    font-size:14px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
 }
 
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
+th{
     background:#dfe6e9;
+    font-weight:bold;
+    text-align:center;
 }
 
-/* JOURNAL */
-.date{
+.center{text-align:center}
+.right{text-align:right}
+.bold{font-weight:bold}
+
+.type{
+    line-height:1.7;
+}
+
+/* ===== JOURNAUX COMPTABLES ===== */
+.journal-table{
+    width:100%;
+    min-width:520px;
+    table-layout:fixed;
+    border-collapse:collapse;
+}
+
+.journal-table td{
+    padding:10px 6px;
+    font-size:14px;
+    line-height:1.5;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-wrap:break-word;
+    white-space:normal;
+}
+
+.journal-table .date td{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
 }
 
-.debit{
+.journal-table .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
-.credit{
-    background:#fff4e6;
+.journal-table .credit{
+    background:#fff2e6;
+    color:#a34b00;
     font-weight:bold;
 }
 
-.montant{
+.journal-table .montant{
     text-align:right;
-    background:#f8f9fa;
     font-weight:bold;
+    background:#f8fafc;
+    white-space:nowrap;
 }
 
-/* Hover tableau */
-tr:hover td{
+.journal-table tr:hover td{
     background:#f1f7ff;
-    transition:0.2s;
 }
 
-/* FOOTER */
+.journal-table tr.date:hover td{
+    background:#2c3e50;
+    color:white;
+}
+
+.compte{
+    width:12%;
+    text-align:center;
+}
+
+.libelle{
+    width:48%;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,1691 +351,894 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTE ===== */
+@media(max-width:768px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+}
+
+/* ===== TÉLÉPHONE ===== */
+@media(max-width:480px){
+    header h1{
+        font-size:17px;
+        padding:14px 10px;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+        border-left-width:5px;
+    }
+
+    section h2{font-size:20px}
+    section h3{font-size:16px}
+    section h4{font-size:14px}
+
+    nav{
+        padding:7px 4px;
+    }
+
+    nav button{
+        display:block;
+        width:100%;
+        margin:6px 0;
+        padding:11px 8px;
+        font-size:13px;
+        transform:none;
+    }
+
+    nav button:hover{transform:none}
+
+    td,th{
+        padding:7px;
+        font-size:12px;
+    }
+
+    .journal-table{
+        min-width:520px;
+        width:100%;
+    }
+
+    .journal-table td{
+        padding:6px 3px;
+        font-size:10px;
+        line-height:1.4;
+    }
+
+    .journal-table .date td{
+        font-size:11px;
+        padding:8px 3px;
+    }
+
+    .journal-table .montant{
+        text-align:center;
+        font-size:10px;
+    }
+
+    .highlight,.example{
+        padding:10px;
+        font-size:12px;
+        line-height:1.6;
+    }
+
+    footer{font-size:13px}
+}
+
+@media(max-width:360px){
+    section{
+        padding:9px;
+        margin:5px;
+    }
+
+    .journal-table td{
+        padding:4px 2px;
+        font-size:9px;
+    }
+
+    .journal-table .montant{font-size:9px}
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Les provisions pour dépréciation des éléments de l’actif circulant
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
 </a>
+
+<div class="site-menu">
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">Modules ▼</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">M1 - Comptabilité générale ▼</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">P3 – Travaux de fin d’exercice ▼</button>
+<div class="dropdown-content">
+<a href="C1P3M1.html">T – Résumés des thèmes</a>
+<a href="C2P3M1.html">F – Formulaires interactifs</a>
+<a href="C3P3M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">T – Résumés des thèmes ▼</button>
+<div class="dropdown-content">
+<a href="T1C1P3M1.html">T1 - Intérêt des travaux de fin d’exercice</a>
+<a href="T2C1P3M1.html">T2 - La régularisation des stocks</a>
+<a href="T3C1P3M1.html">T3 - Les amortissements</a>
+<a href="T4C1P3M1.html">T4 - Les provisions pour dépréciation des immobilisations</a>
+<a href="T5C1P3M1.html">T5 - Les provisions pour dépréciation des éléments de l’actif circulant</a>
+<a href="T6C1P3M1.html">T6 - Les provisions pour risques et charges</a>
+<a href="T7C1P3M1.html">T7 - La régularisation des charges</a>
+<a href="T8C1P3M1.html">T8 - La régularisation des produits</a>
+</div>
+</div>
+
+<a href="C1P3M1.html">⬅ Retour</a>
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
+<p>T5 – Les provisions pour dépréciation des éléments de l’actif circulant</p>
 </h1>
 </header>
 
 <nav>
-    
-<button onclick="showSection('TVP')">Provisions pour dépréciation des titres et valeurs de placement </button>
-
-<button onclick="showSection('CC')">Provisions pour dépréciation des créances clients</button>
-<button onclick="showSection('ST')">Provisions pour dépréciation des stocks</button>
-
-
-
+<button onclick="showSection('TVP',this)" class="btnActive">Provisions pour dépréciation des TVP</button>
+<button onclick="showSection('CC',this)">Provisions pour dépréciation des créances clients</button>
+<button onclick="showSection('ST',this)">Provisions pour dépréciation des stocks</button>
 </nav>
 
-<section id="TVP" class="active">
+<!-- =====================================================
+     SECTION 1 : PROVISIONS POUR DÉPRÉCIATION DES TVP
+===================================================== -->
+<section id="TVP" class="active animationSection">
 
-    <h2> Provisions pour dépréciation des titres et valeurs de placement TVP</h2>
+<h2>Provisions pour dépréciation des titres et valeurs de placement (TVP)</h2>
 
-    
-    
-<h3>1-Création ou constitution de la provision </h3>
-Les titres et valeurs de placement (TVP) sont acquis dans un objectif de spéculation. Ils sont enregistrés au bilan à leur prix d’acquisition. Toutefois, lorsque leur valeur à l’inventaire fait apparaître une moins-value, il convient de constituer une provision pour dépréciation.
-<h4>   ► Exemple : L’entreprise « IGNDAY » a acquis, le 25/04/2022, 300 actions SANAD au prix unitaire de 100 DH. Au 31/12/2022, Le cours de ces actions s’élève à 80 DH par action.
+<h3>1- Création ou constitution de la provision</h3>
 
-</h4>
+<p>Les titres et valeurs de placement (TVP) sont acquis dans un objectif de spéculation. Ils sont enregistrés au bilan à leur prix d’acquisition. Toutefois, lorsque leur valeur à l’inventaire fait apparaître une moins-value, il convient de constituer une provision pour dépréciation.</p>
+
+<div class="example">
+<strong>► Exemple :</strong> L’entreprise « IGNDAY » a acquis, le 25/04/2022, 300 actions SANAD au prix unitaire de 100 DH. Au 31/12/2022, le cours de ces actions s’élève à 80 DH par action.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>Prix unitaire d’achat </td>
-<td>Prix unitaire au 31/12/2022 </td>
-<td>Provision au 31/12/2022 </td>
-
-        </tr>
-
+<th>Nombre</th>
+<th>Prix unitaire d’achat</th>
+<th>Prix unitaire au 31/12/2022</th>
+<th>Provision au 31/12/2022</th>
+</tr>
 <tr>
-            <td>300</td>         <td> 
-100
-</td>
-<td> 80
-
-</td><td>
-6000</td>
-        </tr>
+<td class="center">300</td>
+<td class="right">100</td>
+<td class="right">80</td>
+<td class="right">6 000</td>
+</tr>
 </table>
-▐ (100-80)*300=6000
+</div>
 
-<h4>   ► Comptabilisation : </h4>   
-<table>
+<div class="highlight">Calcul : (100 − 80) × 300 = 6 000 DH.</div>
 
-<!-- 01/01/2025 -->
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2022</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6394</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DPPD des TVP</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>6.000,00 </option>
-</td>
-
+<td class="debit compte">6394</td><td></td>
+<td class="debit libelle">DPPD des TVP</td><td></td>
+<td class="montant">6.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3950</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PPD des TVP</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>6.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3950</td>
+<td></td><td class="credit libelle">PPD des TVP</td>
+<td></td><td class="montant">6.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Création de provision TVP </td></tr>
-
+<tr class="date"><td colspan="6">Création de provision TVP</td></tr>
 </table>
+</div>
 
+<h3>2- Ajustement de la provision</h3>
 
+<p>Il est nécessaire de faire la distinction entre les deux cas suivants :</p>
 
-<h3>2-Ajustement de la provision </h3>
-Il est nécessaire de faire la distinction entre les deux cas suivants :
+<div class="table-wrapper">
 <table>
+<tr><th>Situation</th><th>Traitement comptable</th></tr>
+<tr><td>Augmentation de la provision</td><td>→ Dotation.</td></tr>
+<tr><td>Diminution ou annulation de la provision</td><td>→ Reprise.</td></tr>
+</table>
+</div>
 
-        <tr>
-            <td>Augmentation de la provision</td>
-        
-            <td class="type"> → Dotation.
-</td>
-        </tr>
-<tr>
-            <td>Diminution ou Annulation de la provision</td>
-        
-            <td class="type"> → Reprise.
-</td>
-        </tr>
+<h2>a- Cas de l’augmentation de la provision</h2>
 
-   
-        
+<div class="example">
+<strong>► Exemple :</strong> Reprenons l’exemple précédent en supposant qu’au 31/12/2023, le cours boursier de l’action SANAD s’établisse à 70 DH.
+</div>
 
-    </table>
-<h2> a- Cas de l’augmentation de la provision</h2>
-<h4>   ► Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2023, le cours boursier de l’action SANAD s’établisse à 70 DH.
-
-</h4>
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/22) </td>
-<td>PU (31/12/23) </td>
-<td>Provision (31/12/22) </td>
-<td>Provision (31/12/23) </td>
-<td>Dotation (+)</td>
-<td>Reprise (-)</td>
-
-
-
-        </tr>
-
+<th>Nombre</th><th>PUA</th><th>PU (31/12/22)</th><th>PU (31/12/23)</th>
+<th>Provision (31/12/22)</th><th>Provision (31/12/23)</th>
+<th>Dotation (+)</th><th>Reprise (-)</th>
+</tr>
 <tr>
-           
-<td>300 </td>
-            <td>100 </td>
-<td>80</td>
-<td>70 </td>
-<td>6000</td>
-<td>9000</td>
-<td>3000 </td>
-<td>X </td>
+<td>300</td><td>100</td><td>80</td><td>70</td>
+<td>6 000</td><td>9 000</td><td>3 000</td><td>X</td>
 </tr>
 </table>
-▐ (100-80)*300=6000▐ (100-70)*300=9000▐ (9000-6000)= + 3000 
-<h4>   ► Comptabilisation : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+(100 − 80) × 300 = 6 000 DH.<br>
+(100 − 70) × 300 = 9 000 DH.<br>
+Dotation complémentaire : 9 000 − 6 000 = 3 000 DH.
+</div>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6394</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DPPD des TVP</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>3.000,00 </option>
-</td>
-
+<td class="debit compte">6394</td><td></td>
+<td class="debit libelle">DPPD des TVP</td><td></td>
+<td class="montant">3.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3950</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PPD des TVP</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>3.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3950</td>
+<td></td><td class="credit libelle">PPD des TVP</td>
+<td></td><td class="montant">3.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Augmentation de provision TVP </td></tr>
-
+<tr class="date"><td colspan="6">Augmentation de provision TVP</td></tr>
 </table>
-<h2> b- Cas de la diminution ou de l’annulation de la provision</h2>
-<h4>   ► Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2024, le cours de l’action SANAD s’établisse à 95 DH.
-</h4>
+</div>
+
+<h2>b- Cas de la diminution ou de l’annulation de la provision</h2>
+
+<div class="example">
+<strong>► Exemple :</strong> Reprenons l’exemple précédent en supposant qu’au 31/12/2024, le cours de l’action SANAD s’établisse à 95 DH.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/23) </td>
-<td>PU (31/12/24) </td>
-<td>Provision (31/12/23) </td>
-<td>Provision (31/12/24) </td>
-<td>Dotation (+)</td>
-<td>Reprise (-)</td>
-
-
-
-        </tr>
-
+<th>Nombre</th><th>PUA</th><th>PU (31/12/23)</th><th>PU (31/12/24)</th>
+<th>Provision (31/12/23)</th><th>Provision (31/12/24)</th>
+<th>Dotation (+)</th><th>Reprise (-)</th>
+</tr>
 <tr>
-           
-<td>300 </td>
-            <td>100 </td>
-<td>70</td>
-<td>95 </td>
-<td>9000</td>
-<td>1500</td>
-<td>X </td>
-<td>7500</td>
+<td>300</td><td>100</td><td>70</td><td>95</td>
+<td>9 000</td><td>1 500</td><td>X</td><td>7 500</td>
 </tr>
 </table>
-▐ (100-70)*300=9000▐ (100-95)*300=1500▐ (1500-9000)= - 7500
-<h4>   ► Comptabilisation : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+(100 − 70) × 300 = 9 000 DH.<br>
+(100 − 95) × 300 = 1 500 DH.<br>
+Reprise : 1 500 − 9 000 = −7 500 DH.
+</div>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3950</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> PPD des TVP </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>7.500,00 </option>
-</td>
-
+<td class="debit compte">3950</td><td></td>
+<td class="debit libelle">PPD des TVP</td><td></td>
+<td class="montant">7.500,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7394</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RPPD des TVP</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>7.500,00</option>
-
-</td>
-
+<td></td><td class="credit compte">7394</td>
+<td></td><td class="credit libelle">RPPD des TVP</td>
+<td></td><td class="montant">7.500,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6">Diminution de provision TVP </td></tr>
-
+<tr class="date"><td colspan="6">Diminution de provision TVP</td></tr>
 </table>
+</div>
 
-<h3>3-Cession des TVP </h3>
-<h2>3-1-Enregistrement de l’opération de cession et sortie des TVP du patrimoine</h2>
-<h2>a- Cession avec perte (Prix de cession < Prix d’achat) </h2>
+<h3>3- Cession des TVP</h3>
+<h2>3-1- Enregistrement de l’opération de cession et sortie des TVP du patrimoine</h2>
 
-<h4>   ► Exemple : Supposons que les 300 actions SANAD, acquises au prix unitaire de 100 DH et ayant fait l’objet d’une provision de 6 000 DH au 31/12/2022, soient cédées le 25/07/2023 au prix de 90 DH par action. L’avis de crédit établi par la banque mentionne une commission de 200 DH hors taxes, soumise à la TVA au taux de 10 %.</h4>
+<h2>a- Cession avec perte (Prix de cession &lt; Prix d’achat)</h2>
+
+<div class="example">
+<strong>► Exemple :</strong> Supposons que les 300 actions SANAD, acquises au prix unitaire de 100 DH et ayant fait l’objet d’une provision de 6 000 DH au 31/12/2022, soient cédées le 25/07/2023 au prix de 90 DH par action. L’avis de crédit établi par la banque mentionne une commission de 200 DH hors taxes, soumise à la TVA au taux de 10 %.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/22) </td>
-<td>PC (25/07/23) </td>
-<td>Provision (31/12/22) </td>
-<td>Produit net (+) </td>
-<td>Charge net  (-) </td>
-
-
-
-
-        </tr>
-
+<th>Nombre</th><th>PUA</th><th>PU (31/12/22)</th><th>PC (25/07/23)</th>
+<th>Provision (31/12/22)</th><th>Produit net (+)</th><th>Charge nette (-)</th>
+</tr>
 <tr>
-           
-<td>300 </td>
-            <td>100 </td>
-<td>80 </td>
-<td>90 </td>
-<td>6000</td>
-<td>X</td>
-<td>3000</td>
-
+<td>300</td><td>100</td><td>80</td><td>90</td><td>6 000</td><td>X</td><td>3 000</td>
 </tr>
 </table>
-▐ (100-80)*300=6000▐ (90-100)*300= - 3000
-<h4>   Comptabilisation le jour de cession : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+(100 − 80) × 300 = 6 000 DH.<br>
+(90 − 100) × 300 = −3 000 DH.
+</div>
+
+<h3>Comptabilisation le jour de cession</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">25/07/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>5141</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Banques</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>26.780,00</option>
-</td>
-
+<td class="debit compte">5141</td><td></td><td class="debit libelle">Banques</td><td></td><td class="montant">26.780,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6147</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Services bancaires</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>200,00</option>
-</td>
-
+<td class="debit compte">6147</td><td></td><td class="debit libelle">Services bancaires</td><td></td><td class="montant">200,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3455</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Etat - TVA récupérable</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20,00</option>
-</td>
-
+<td class="debit compte">3455</td><td></td><td class="debit libelle">État - TVA récupérable</td><td></td><td class="montant">20,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6385</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>CN/C de TVP</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>3.000,00</option>
-</td>
-
+<td class="debit compte">6385</td><td></td><td class="debit libelle">CN/C de TVP</td><td></td><td class="montant">3.000,00</td><td></td>
 </tr>
-
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3501</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Actions</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>30.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3501</td><td></td><td class="credit libelle">Actions</td><td></td><td class="montant">30.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Cession et sortie TVP « SANAD » </td></tr>
+<tr class="date"><td colspan="6">Cession et sortie TVP « SANAD »</td></tr>
 </table>
-➡️ Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2023. <br>
-➡️ En cas de cession d’actions à crédit, il convient de débiter le compte 3482 – Créances sur cessions d’éléments d’actif circulant.
+</div>
 
-<h2>b- Cession avec bénéfice (Prix de cession > Prix d’achat) </h2>
+<div class="highlight">
+Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2023.<br><br>
+En cas de cession d’actions à crédit, il convient de débiter le compte 3482 – Créances sur cessions d’éléments d’actif circulant.
+</div>
 
-<h4>   ► Exemple : Supposons que les 300 actions SANAD, acquises au prix unitaire de 100 DH et ayant fait l’objet d’une provision de 6 000 DH au 31/12/2022, soient cédées le 20/07/2023 au prix de 105 DH par action. L’avis de crédit établi par la banque mentionne une commission de 200 DH hors taxes, soumise à la TVA au taux de 10 %.</h4>
+<h2>b- Cession avec bénéfice (Prix de cession &gt; Prix d’achat)</h2>
+
+<div class="example">
+<strong>► Exemple :</strong> Supposons que les 300 actions SANAD, acquises au prix unitaire de 100 DH et ayant fait l’objet d’une provision de 6 000 DH au 31/12/2022, soient cédées le 20/07/2023 au prix de 105 DH par action. L’avis de crédit établi par la banque mentionne une commission de 200 DH hors taxes, soumise à la TVA au taux de 10 %.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/22) </td>
-<td>PC (20/07/23) </td>
-<td>Provision (31/12/22) </td>
-<td>Produit net (+) </td>
-<td>Charge net  (-) </td>
-
-
-
-
-        </tr>
-
+<th>Nombre</th><th>PUA</th><th>PU (31/12/22)</th><th>PC (20/07/23)</th>
+<th>Provision (31/12/22)</th><th>Produit net (+)</th><th>Charge nette (-)</th>
+</tr>
 <tr>
-           
-<td>300 </td>
-            <td>100 </td>
-<td>80 </td>
-<td>105 </td>
-<td>6000</td>
-<td>1500</td>
-<td>X</td>
-
+<td>300</td><td>100</td><td>80</td><td>105</td><td>6 000</td><td>1 500</td><td>X</td>
 </tr>
 </table>
-▐ (100-80)*300=6000▐ (105- 100)*300= + 1500
-<h4> Comptabilisation le jour de cession : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+(100 − 80) × 300 = 6 000 DH.<br>
+(105 − 100) × 300 = +1 500 DH.
+</div>
+
+<h3>Comptabilisation le jour de cession</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">20/07/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>5141</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Banques</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>31.280,00</option>
-</td>
-
+<td class="debit compte">5141</td><td></td><td class="debit libelle">Banques</td><td></td><td class="montant">31.280,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6147</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Services bancaires</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>200,00</option>
-</td>
-
+<td class="debit compte">6147</td><td></td><td class="debit libelle">Services bancaires</td><td></td><td class="montant">200,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3455</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Etat - TVA récupérable</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20,00</option>
-</td>
-
-</tr>
-
-<tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3501</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Actions</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>30.000,00</option>
-
-</td>
-
+<td class="debit compte">3455</td><td></td><td class="debit libelle">État - TVA récupérable</td><td></td><td class="montant">20,00</td><td></td>
 </tr>
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7385</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PN/C de TVP</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>1.500,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3501</td><td></td><td class="credit libelle">Actions</td><td></td><td class="montant">30.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Cession et sortie TVP « SANAD » </td></tr>
-
+<tr>
+<td></td><td class="credit compte">7385</td><td></td><td class="credit libelle">PN/C de TVP</td><td></td><td class="montant">1.500,00</td>
+</tr>
+<tr class="date"><td colspan="6">Cession et sortie TVP « SANAD »</td></tr>
 </table>
- 
-<h2>   3-2-Comptabilisation de l’annulation de la provision : </h2>   
+</div>
 
-<table>
+<h2>3-2- Comptabilisation de l’annulation de la provision</h2>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3950</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> PPD des TVP </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>6.000,00 </option>
-</td>
-
+<td class="debit compte">3950</td><td></td><td class="debit libelle">PPD des TVP</td><td></td><td class="montant">6.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7394</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RPPD des TVP </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>6.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">7394</td><td></td><td class="credit libelle">RPPD des TVP</td><td></td><td class="montant">6.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6">Annulation de provision TVP </td></tr>
-
+<tr class="date"><td colspan="6">Annulation de provision TVP</td></tr>
 </table>
+</div>
 
 </section>
+
+<!-- =====================================================
+     SECTION 2 : PROVISIONS POUR DÉPRÉCIATION DES CLIENTS
+===================================================== -->
 <section id="CC">
 
-    <h2> Provisions pour dépréciation des créances clients </h2>
-À la clôture de l’exercice, l’entreprise établit un état détaillé de ses créances clients et apprécie leur degré de solvabilité en examinant la situation particulière de chaque client. Les créances clients peuvent alors être classées en trois catégories : 
+<h2>Provisions pour dépréciation des créances clients</h2>
+
+<p>À la clôture de l’exercice, l’entreprise établit un état détaillé de ses créances clients et apprécie leur degré de solvabilité en examinant la situation particulière de chaque client. Les créances clients peuvent alors être classées en trois catégories :</p>
+
+<div class="table-wrapper">
 <table>
-
-        <tr>            <td>A- Créances ordinaires </dh>
-<td>→ Aucune écriture comptable</td>        </tr>
-        <tr>            <td>B- Créances douteuses 
-</td>
-<td>→ Perte probable
-</td>        </tr>
-<tr>            <td>C- Créances irrécouvrables 
-
-</td>
-<td>→ Perte définitive
-
-</td>        </tr>
+<tr><th>Catégorie</th><th>Traitement</th></tr>
+<tr><td>A- Créances ordinaires</td><td>→ Aucune écriture comptable</td></tr>
+<tr><td>B- Créances douteuses</td><td>→ Perte probable</td></tr>
+<tr><td>C- Créances irrécouvrables</td><td>→ Perte définitive</td></tr>
 </table>
+</div>
 
-        
+<h3>1- Création ou constitution de la provision</h3>
 
-    
+<div class="example">
+<strong>► Cas N° 01 :</strong> La créance sur le client MOUNIR est de 18.000,00 DH TTC au 31/12/2023 (TVA 20 %). Aucun règlement n’ayant été reçu au cours de l’exercice 2024, l’entreprise évalue au 31/12/2024 une perte probable de 40 % et constitue une dépréciation à hauteur de ce montant.
+</div>
 
-<h3>1-Création ou constitution de la provision </h3>
-<h4>   ► Cas N° 01 : La créance sur le client MOUNIR est de 18.000,00 DH TTC au 31/12/2023 (TVA 20 %). Aucun règlement n’ayant été reçu au cours de l’exercice 2024, l’entreprise évalue au 31/12/2024 une perte probable de 40 % et constitue une dépréciation à hauteur de ce montant.
-
-</h4>
+<div class="table-wrapper">
 <table>
-
 <tr>
-            
-            <td>Créance TTC </td>
-            <td>Créance HT </td>
-<td>Règlements en 2024 </td>
-<td>Solde TTC </td>
-<td>Solde HT </td>
-<td>Provision 31/12/23 </td>
-<td>Provision 31/12/24 </td>
-
-
-
-
-        </tr>
-
+<th>Créance TTC</th><th>Créance HT</th><th>Règlements en 2024</th>
+<th>Solde TTC</th><th>Solde HT</th><th>Provision 31/12/23</th><th>Provision 31/12/24</th>
+</tr>
 <tr>
-            <td> 18000       </td> <td>15000 </td><td>00</td><td>18000 </td><td>15000</td><td>00</td>     <td>6000</td>
-
-        </tr>
+<td>18 000</td><td>15 000</td><td>00</td><td>18 000</td><td>15 000</td><td>00</td><td>6 000</td>
+</tr>
 </table>
-▐ Créance HT=(18000/1,2)=15000 ▐ Solde TTC=18000-00=18000 ▐ Solde HT=(18000/1,2)=15000 ▐ Provision 31/12/24=15000*40%=6000
+</div>
 
-<h2>   a- Comptabilisation du reclassement de la créance (Constatation créance douteuse ou litigieuse) :  </h2>
-<table>
+<div class="highlight">
+Créance HT = 18 000 / 1,2 = 15 000 DH.<br>
+Solde TTC = 18 000 − 0 = 18 000 DH.<br>
+Solde HT = 18 000 / 1,2 = 15 000 DH.<br>
+Provision au 31/12/2024 = 15 000 × 40 % = 6 000 DH.
+</div>
 
-<!-- 01/01/2025 -->
+<h2>a- Comptabilisation du reclassement de la créance (constatation d’une créance douteuse ou litigieuse)</h2>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3424</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Clients douteux ou litigieux</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>18.000,00 </option>
-</td>
-
+<td class="debit compte">3424</td><td></td><td class="debit libelle">Clients douteux ou litigieux</td><td></td><td class="montant">18.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3421</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Clients</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>18.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3421</td><td></td><td class="credit libelle">Clients</td><td></td><td class="montant">18.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Reclassement de la créance client MOUNIR </td></tr>
-
+<tr class="date"><td colspan="6">Reclassement de la créance client MOUNIR</td></tr>
 </table>
-<h2>   b- Comptabilisation de la provision calculée au 31/12/2024 : </h2>
+</div>
 
-<table>
+<h2>b- Comptabilisation de la provision calculée au 31/12/2024</h2>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6196</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEPD de l’AC</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>6.000,00 </option>
-</td>
-
+<td class="debit compte">6196</td><td></td><td class="debit libelle">DEPD de l’AC</td><td></td><td class="montant">6.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3942</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PPD des clients et CR </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>6.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3942</td><td></td><td class="credit libelle">PPD des clients et CR</td><td></td><td class="montant">6.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Constitution provision créance client MOUNIR </td></tr>
-
+<tr class="date"><td colspan="6">Constitution provision créance client MOUNIR</td></tr>
 </table>
+</div>
 
+<h3>2- Ajustement de la provision</h3>
 
+<p>Il est nécessaire de faire la distinction entre les deux cas suivants :</p>
 
-
-<h3>2-Ajustement de la provision </h3>
-Il est nécessaire de faire la distinction entre les deux cas suivants :
+<div class="table-wrapper">
 <table>
-
-        <tr>
-            <td>Augmentation de la provision</td>
-        
-            <td class="type"> → Dotation.
-</td>
-        </tr>
-<tr>
-            <td>Diminution ou Annulation de la provision</td>
-        
-            <td class="type"> → Reprise.
-</td>
-        </tr>
-
-   
-        
-
-    </table>
-<h2> a- Cas de l’augmentation de la provision</h2>
-<h4>   ► Cas N° 02 : La créance sur le client AZIZ s’élève à 24.000,00 DH TTC au 31/12/2023 (TVA 20 %). Compte tenu du risque de non-recouvrement, une dépréciation de 30 % a été constatée. Au cours de l’exercice 2024, le client a versé 12.000,00 DH. À la date de l’inventaire du 31/12/2024, l’entreprise évalue le montant recouvrable à seulement 20 % du solde de la créance. </h4>
-<table>
-
-<tr>
-            
-            <td>Créance TTC </td>
-            <td>Créance HT </td>
-<td>Règlements en 2024 </td>
-<td>Solde TTC </td>
-<td>Solde HT </td>
-<td>Provision 31/12/23 </td>
-<td>Provision 31/12/24 </td>
-<td>Dotation (+) </td>
-<td>Reprise (-) </td>
-
-
-
-
-
-        </tr>
-
-<tr>
-            <td> 24000       </td> <td>20000 </td><td>12000</td><td>12000 </td><td>10000</td><td>6000</td>     <td>8000</td><td>2000</td>
-<td>X</td>
-
-        </tr>
+<tr><th>Situation</th><th>Traitement comptable</th></tr>
+<tr><td>Augmentation de la provision</td><td>→ Dotation.</td></tr>
+<tr><td>Diminution ou annulation de la provision</td><td>→ Reprise.</td></tr>
 </table>
-▐ Provision 31/12/23=20000*30%=6000 ▐ Provision 31/12/24=10000*80%=8000 ▐ (8000-6000) = + 2000
-<h4>   ► Comptabilisation de la dotation complémentaire : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<h2>a- Cas de l’augmentation de la provision</h2>
+
+<div class="example">
+<strong>► Cas N° 02 :</strong> La créance sur le client AZIZ s’élève à 24.000,00 DH TTC au 31/12/2023 (TVA 20 %). Compte tenu du risque de non-recouvrement, une dépréciation de 30 % a été constatée. Au cours de l’exercice 2024, le client a versé 12.000,00 DH. À la date de l’inventaire du 31/12/2024, l’entreprise évalue le montant recouvrable à seulement 20 % du solde de la créance.
+</div>
+
+<div class="table-wrapper">
+<table>
+<tr>
+<th>Créance TTC</th><th>Créance HT</th><th>Règlements en 2024</th>
+<th>Solde TTC</th><th>Solde HT</th><th>Provision 31/12/23</th>
+<th>Provision 31/12/24</th><th>Dotation (+)</th><th>Reprise (-)</th>
+</tr>
+<tr>
+<td>24 000</td><td>20 000</td><td>12 000</td><td>12 000</td><td>10 000</td><td>6 000</td><td>8 000</td><td>2 000</td><td>X</td>
+</tr>
+</table>
+</div>
+
+<div class="highlight">
+Provision au 31/12/2023 = 20 000 × 30 % = 6 000 DH.<br>
+Provision au 31/12/2024 = 10 000 × 80 % = 8 000 DH.<br>
+Dotation complémentaire = 8 000 − 6 000 = 2 000 DH.
+</div>
+
+<h3>► Comptabilisation de la dotation complémentaire</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6196</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEPD de l’AC</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>2.000,00 </option>
-</td>
-
+<td class="debit compte">6196</td><td></td><td class="debit libelle">DEPD de l’AC</td><td></td><td class="montant">2.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3942</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PPD des clients et CR </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>2.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3942</td><td></td><td class="credit libelle">PPD des clients et CR</td><td></td><td class="montant">2.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Augmentation de provision créance client AZIZ </td></tr>
-
+<tr class="date"><td colspan="6">Augmentation de provision créance client AZIZ</td></tr>
 </table>
-<h2> b- Cas de la diminution ou de l’annulation de la provision</h2>
-<h4>   ► Cas N° 03 : La créance sur le client JALAL s’élève à 15.000,00 DH TTC au 31/12/2023 (TVA 20 %). Compte tenu du risque de non-recouvrement, une dépréciation de 20 % a été constatée. Au cours de l’exercice 2024, le client a versé 9.000,00 DH. À la date de l’inventaire du 31/12/2024, l’entreprise espère récupérer 70 % du solde de la créance.
-</h4>
+</div>
+
+<h2>b- Cas de la diminution ou de l’annulation de la provision</h2>
+
+<div class="example">
+<strong>► Cas N° 03 :</strong> La créance sur le client JALAL s’élève à 15.000,00 DH TTC au 31/12/2023 (TVA 20 %). Compte tenu du risque de non-recouvrement, une dépréciation de 20 % a été constatée. Au cours de l’exercice 2024, le client a versé 9.000,00 DH. À la date de l’inventaire du 31/12/2024, l’entreprise espère récupérer 70 % du solde de la créance.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            
-            <td>Créance TTC </td>
-            <td>Créance HT </td>
-<td>Règlements en 2024 </td>
-<td>Solde TTC </td>
-<td>Solde HT </td>
-<td>Provision 31/12/23 </td>
-<td>Provision 31/12/24 </td>
-<td>Dotation (+) </td>
-<td>Reprise (-) </td>
-
-
-
-
-
-        </tr>
-
+<th>Créance TTC</th><th>Créance HT</th><th>Règlements en 2024</th>
+<th>Solde TTC</th><th>Solde HT</th><th>Provision 31/12/23</th>
+<th>Provision 31/12/24</th><th>Dotation (+)</th><th>Reprise (-)</th>
+</tr>
 <tr>
-            <td> 15000       </td> <td>12500 </td><td>9000</td><td>6000 </td><td>5000</td><td>2500</td>     <td>1500</td><td>X</td>
-<td>1000</td>
-
-        </tr>
+<td>15 000</td><td>12 500</td><td>9 000</td><td>6 000</td><td>5 000</td><td>2 500</td><td>1 500</td><td>X</td><td>1 000</td>
+</tr>
 </table>
-▐ Provision 31/12/23=12500*20%=2500 ▐ Provision 31/12/24=5000*30%=1500 ▐ (1500-2500) = - 1000
-<h4>   ► Comptabilisation de la reprise : </h4>   
+</div>
 
-<table>
+<div class="highlight">
+Provision au 31/12/2023 = 12 500 × 20 % = 2 500 DH.<br>
+Provision au 31/12/2024 = 5 000 × 30 % = 1 500 DH.<br>
+Reprise = 1 500 − 2 500 = −1 000 DH.
+</div>
 
-<!-- 01/01/2025 -->
+<h3>► Comptabilisation de la reprise</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3942</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> PPD des clients et CR </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>1.000,00 </option>
-</td>
-
+<td class="debit compte">3942</td><td></td><td class="debit libelle">PPD des clients et CR</td><td></td><td class="montant">1.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7196</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RPPD de l’AC </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>1.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">7196</td><td></td><td class="credit libelle">RPPD de l’AC</td><td></td><td class="montant">1.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Diminution de provision créance client JALAL </td></tr>
-
+<tr class="date"><td colspan="6">Diminution de provision créance client JALAL</td></tr>
 </table>
-<h3>3-Traitement des créances irrécouvrables</h3>
-Il est nécessaire de faire la distinction entre les deux cas suivants :
+</div>
+
+<h3>3- Traitement des créances irrécouvrables</h3>
+
+<div class="table-wrapper">
 <table>
-
-        <tr>
-            <td>Solde irrécouvrable</td>
-        
-            <td class="type"> → Perte d’une partie de la créance avec annulation de la provision constituée.
-</td>
-        </tr>
-<tr>
-            <td>Créance totale irrécouvrable </td>
-        
-            <td class="type"> → Perte de la totalité de la créance (Client insolvable).
-</td>
-        </tr>
-
-   
-        
-
-    </table>
-<h2> 3-1- Cas de solde irrécouvrable</h2>
-
-<h4>   ► Cas N° 04 : La créance sur le client FAOUZI s’élève à 8.400,00 DH TTC au 31/12/2023 (TVA 20 %). Compte tenu du risque de non-recouvrement, une dépréciation de 60 % a été constatée. Au cours de l’exercice 2024, le client a versé 6.000,00 DH. À la date de l’inventaire du 31/12/2024, l’entreprise évalue le solde est irrécouvrable. </h4>
-<table>
-
-<tr>
-            
-            <td>Créance TTC </td>
-            <td>Créance HT </td>
-<td>Règlements en 2024 </td>
-<td>Solde TTC </td>
-<td>Solde HT </td>
-<td>Provision 31/12/23 </td>
-<td>Provision 31/12/24 </td>
-<td>Dotation (+) </td>
-<td>Reprise (-) </td>
-
-
-
-
-
-        </tr>
-
-<tr>
-            <td> 8400       </td> <td>7000 </td><td>6000</td><td>2400 </td><td>2000</td><td>4200</td>     <td>00</td><td>X</td>
-<td>4200</td>
-
-        </tr>
+<tr><th>Situation</th><th>Traitement</th></tr>
+<tr><td>Solde irrécouvrable</td><td>→ Perte d’une partie de la créance avec annulation de la provision constituée.</td></tr>
+<tr><td>Créance totale irrécouvrable</td><td>→ Perte de la totalité de la créance (client insolvable).</td></tr>
 </table>
-▐ Provision 31/12/23=7000*60%=4200 ▐ Provision 31/12/24=00 ▐ (00-4200) = - 4200
-<h4>   a- Comptabilisation de la perte : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<h2>3-1- Cas de solde irrécouvrable</h2>
+
+<div class="example">
+<strong>► Cas N° 04 :</strong> La créance sur le client FAOUZI s’élève à 8.400,00 DH TTC au 31/12/2023 (TVA 20 %). Compte tenu du risque de non-recouvrement, une dépréciation de 60 % a été constatée. Au cours de l’exercice 2024, le client a versé 6.000,00 DH. À la date de l’inventaire du 31/12/2024, l’entreprise évalue le solde comme irrécouvrable.
+</div>
+
+<div class="table-wrapper">
+<table>
+<tr>
+<th>Créance TTC</th><th>Créance HT</th><th>Règlements en 2024</th>
+<th>Solde TTC</th><th>Solde HT</th><th>Provision 31/12/23</th>
+<th>Provision 31/12/24</th><th>Dotation (+)</th><th>Reprise (-)</th>
+</tr>
+<tr>
+<td>8 400</td><td>7 000</td><td>6 000</td><td>2 400</td><td>2 000</td><td>4 200</td><td>00</td><td>X</td><td>4 200</td>
+</tr>
+</table>
+</div>
+
+<div class="highlight">
+Provision au 31/12/2023 = 7 000 × 60 % = 4 200 DH.<br>
+Provision au 31/12/2024 = 0 DH.<br>
+Reprise de la provision antérieure : 0 − 4 200 = −4 200 DH.
+</div>
+
+<h3>a- Comptabilisation de la perte</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6182</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Pertes sur CI</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>2.000,00 </option>
-</td>
-
+<td class="debit compte">6182</td><td></td><td class="debit libelle">Pertes sur CI</td><td></td><td class="montant">2.000,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>4455</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> Etat, TVA facturée </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>400,00 </option>
-</td>
-
+<td class="debit compte">4455</td><td></td><td class="debit libelle">État, TVA facturée</td><td></td><td class="montant">400,00</td><td></td>
 </tr>
-
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3424</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Clients douteux ou litigieux</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>2.400,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3424</td><td></td><td class="credit libelle">Clients douteux ou litigieux</td><td></td><td class="montant">2.400,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Perte solde de la créance client FAOUZI </td></tr>
-
+<tr class="date"><td colspan="6">Perte solde de la créance client FAOUZI</td></tr>
 </table>
-<h4>   b- Comptabilisation de l’annulation de la provision : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<h3>b- Comptabilisation de l’annulation de la provision</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3942</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> PPD des clients et CR </option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>4.200,00 </option>
-</td>
-
+<td class="debit compte">3942</td><td></td><td class="debit libelle">PPD des clients et CR</td><td></td><td class="montant">4.200,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7196</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RPPD de l’AC </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>4.200,00</option>
-
-</td>
-
+<td></td><td class="credit compte">7196</td><td></td><td class="credit libelle">RPPD de l’AC</td><td></td><td class="montant">4.200,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Annulation de provision créance client FAOUZI</td></tr>
-
+<tr class="date"><td colspan="6">Annulation de provision créance client FAOUZI</td></tr>
 </table>
-➡️ Important : Il convient d’annuler systématiquement la provision lorsqu’elle existe.
+</div>
 
+<div class="highlight">
+<strong>Important :</strong> Il convient d’annuler systématiquement la provision lorsqu’elle existe.
+</div>
 
-<h2> 3-2- Cas de la créance totale irrécouvrable (Client insolvable) </h2>
-<h4>   ► Cas N° 05 : La créance sur le client SAMIR s’élève à 4.200,00 DH TTC au 31/12/2023 (TVA 20 %). À la date de l’inventaire du 31/12/2024, l’entreprise déclare que cette créance est irrécouvrable (Client SAMIR est insolvable).
-</h4>
+<h2>3-2- Cas de la créance totale irrécouvrable (client insolvable)</h2>
+
+<div class="example">
+<strong>► Cas N° 05 :</strong> La créance sur le client SAMIR s’élève à 4.200,00 DH TTC au 31/12/2023 (TVA 20 %). À la date de l’inventaire du 31/12/2024, l’entreprise déclare que cette créance est irrécouvrable (client SAMIR est insolvable).
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            
-            <td>Créance TTC </td>
-            <td>Créance HT </td>
-<td>Règlements en 2024 </td>
-<td>Solde TTC </td>
-<td>Solde HT </td>
-<td>Provision 31/12/23 </td>
-<td>Provision 31/12/24 </td>
-<td>Dotation (+) </td>
-<td>Reprise (-) </td>
-
-
-
-
-
-        </tr>
-
+<th>Créance TTC</th><th>Créance HT</th><th>Règlements en 2024</th>
+<th>Solde TTC</th><th>Solde HT</th><th>Provision 31/12/23</th>
+<th>Provision 31/12/24</th><th>Dotation (+)</th><th>Reprise (-)</th>
+</tr>
 <tr>
-            <td> 4200       </td> <td>3500 </td><td>00</td><td>4200 </td><td>3500</td><td>00</td>     <td>00</td><td>X</td>
-<td>X</td>
-
-        </tr>
+<td>4 200</td><td>3 500</td><td>00</td><td>4 200</td><td>3 500</td><td>00</td><td>00</td><td>X</td><td>X</td>
+</tr>
 </table>
-▐ Provision 31/12/23=00 ▐ Provision 31/12/24=00 
-<h4>   ► Comptabilisation de la perte : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+Provision au 31/12/2023 = 0 DH.<br>
+Provision au 31/12/2024 = 0 DH.
+</div>
+
+<h3>► Comptabilisation de la perte</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6182</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Pertes sur CI</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>3.500,00 </option>
-</td>
-
+<td class="debit compte">6182</td><td></td><td class="debit libelle">Pertes sur CI</td><td></td><td class="montant">3.500,00</td><td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>4455</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Etat, TVA facturée</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>700,00 </option>
-</td>
-
+<td class="debit compte">4455</td><td></td><td class="debit libelle">État, TVA facturée</td><td></td><td class="montant">700,00</td><td></td>
 </tr>
-
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3421</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>Clients </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>4.200,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3421</td><td></td><td class="credit libelle">Clients</td><td></td><td class="montant">4.200,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Perte totale de la créance client SAMIR </td></tr>
-
+<tr class="date"><td colspan="6">Perte totale de la créance client SAMIR</td></tr>
 </table>
-➡️ Lorsque la créance devenue irrécouvrable présente un caractère non courant, il convient de débiter les comptes 6585 – Créances devenues irrécouvrables et 4455 – Etat, TVA facturée, puis de créditer le compte 3488 – Divers débiteurs.
- 
+</div>
+
+<div class="highlight">
+Lorsque la créance devenue irrécouvrable présente un caractère non courant, il convient de débiter les comptes 6585 – Créances devenues irrécouvrables et 4455 – État, TVA facturée, puis de créditer le compte 3488 – Divers débiteurs.
+</div>
 
 </section>
+
+<!-- =====================================================
+     SECTION 3 : PROVISIONS POUR DÉPRÉCIATION DES STOCKS
+===================================================== -->
 <section id="ST">
-<h2> Provisions pour dépréciation des stocks </h2>
-Pour diverses raisons, les stocks peuvent perdre de la valeur et présenter, à la date d’inventaire, une valeur actuelle inférieure à leur valeur d’entrée. Cette moins-value probable doit être couverte par la constitution d’une provision pour dépréciation.
-<h4>   ► Exemple : <br>L’inventaire extracomptable de l’entreprise « IGNDAY » au 31/12/2023 fait ressortir un stock de marchandises de 50.000 DH nécessitant la constitution d’une provision pour dépréciation de 10 %. <br>Au 31/12/2024, l’inventaire physique met en évidence un stock de 100.000 DH pour lequel une provision pour dépréciation de 20.000 DH doit être constatée. </h4>  
-<h2>   1ère étape : Annulation de la provision ancienne (31/12/2023)
-</h2>
-<table>
 
-<!-- 01/01/2025 -->
+<h2>Provisions pour dépréciation des stocks</h2>
+
+<p>Pour diverses raisons, les stocks peuvent perdre de la valeur et présenter, à la date d’inventaire, une valeur actuelle inférieure à leur valeur d’entrée. Cette moins-value probable doit être couverte par la constitution d’une provision pour dépréciation.</p>
+
+<div class="example">
+<strong>► Exemple :</strong><br>
+L’inventaire extracomptable de l’entreprise « IGNDAY » au 31/12/2023 fait ressortir un stock de marchandises de 50.000 DH nécessitant la constitution d’une provision pour dépréciation de 10 %.<br><br>
+Au 31/12/2024, l’inventaire physique met en évidence un stock de 100.000 DH pour lequel une provision pour dépréciation de 20.000 DH doit être constatée.
+</div>
+
+<h2>1ère étape : Annulation de la provision ancienne (31/12/2023)</h2>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3911</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>PPD des marchandises</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>5.000,00 </option>
-</td>
-
+<td class="debit compte">3911</td><td></td><td class="debit libelle">PPD des marchandises</td><td></td><td class="montant">5.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7196</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>RPPD de l’AC</option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>5.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">7196</td><td></td><td class="credit libelle">RPPD de l’AC</td><td></td><td class="montant">5.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Annulation de la provision </td></tr>
-
+<tr class="date"><td colspan="6">Annulation de la provision</td></tr>
 </table>
-▐ Provision 31/12/23=50000*10%=5000
-<h2>   2ème étape : Constatation de nouvelle provision (31/12/2024) : </h2>
+</div>
 
-<table>
+<div class="highlight">Provision au 31/12/2023 = 50 000 × 10 % = 5 000 DH.</div>
 
-<!-- 01/01/2025 -->
+<h2>2ème étape : Constatation de la nouvelle provision (31/12/2024)</h2>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6196</option>
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DEPD de l’AC</option>
-           
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00 </option>
-</td>
-
+<td class="debit compte">6196</td><td></td><td class="debit libelle">DEPD de l’AC</td><td></td><td class="montant">20.000,00</td><td></td>
 </tr>
-
 <tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>3911</option>
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> PPD des marchandises </option>
-            
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>20.000,00</option>
-
-</td>
-
+<td></td><td class="credit compte">3911</td><td></td><td class="credit libelle">PPD des marchandises</td><td></td><td class="montant">20.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Constatation de la nouvelle provision </td></tr>
-
+<tr class="date"><td colspan="6">Constatation de la nouvelle provision</td></tr>
 </table>
-➡️ Le compte de provision à utiliser dépend de la nature du stock concerné : <br>
-•	3912 – Provisions pour dépréciation des matières et fournitures <br>
-•	3913 – Provisions pour dépréciation des produits en cours <br>
-•	3914 – Provisions pour dépréciation des produits intermédiaires <br>
-•	3915 – Provisions pour dépréciation des produits finis<br>
+</div>
 
-
-
-
+<div class="highlight">
+Le compte de provision à utiliser dépend de la nature du stock concerné :
+<ul>
+<li>3912 – Provisions pour dépréciation des matières et fournitures.</li>
+<li>3913 – Provisions pour dépréciation des produits en cours.</li>
+<li>3914 – Provisions pour dépréciation des produits intermédiaires.</li>
+<li>3915 – Provisions pour dépréciation des produits finis.</li>
+</ul>
+</div>
 
 </section>
-
-
-
 
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C1P3M1.html">⬅ Retour </a>
-
+Formation en Comptabilité Générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermeture des menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
-
-
-
 
 
