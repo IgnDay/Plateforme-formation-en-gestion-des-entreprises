@@ -2,26 +2,145 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay Comptabilité Générale - La régularisation des produits</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
+    overflow-x:hidden;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGNDay ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.6;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:90vw;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -36,78 +155,93 @@ nav button{
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:16px;
-    transition:0.3s;
+    font-size:15px;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:25px;
+    line-height:1.5;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
+    line-height:1.5;
 }
 
-/* TABLEAUX */
+h4{
+    color:#0f766e;
+    margin-top:20px;
+    line-height:1.7;
+}
+
+p{
+    line-height:1.7;
+}
+
+/* ===== TABLEAUX RESPONSIVES ===== */
+.table-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    margin:20px 0 30px;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
     width:97%;
+    min-width:520px;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:20px auto;
+    box-shadow:0 2px 10px #00000014;
 }
 
 td{
     border:1px solid #ccc;
     padding:10px;
+    font-size:14px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
 }
 
 .titre{
@@ -116,28 +250,24 @@ td{
     font-weight:bold;
 }
 
-.bold{
-    font-weight:bold;
-}
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+.header{background:#dfe6e9}
 
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
-    background:#dfe6e9;
-}
-
-/* JOURNAL */
+/* ===== JOURNAUX COMPTABLES ===== */
 .date{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
+}
+
+.date td{
+    background:#2c3e50;
+    color:white;
+    font-weight:bold;
+    text-align:center;
 }
 
 .debit{
@@ -154,18 +284,23 @@ td{
     text-align:right;
     background:#f8f9fa;
     font-weight:bold;
+    white-space:nowrap;
 }
 
-/* Hover tableau */
 tr:hover td{
     background:#f1f7ff;
-    transition:0.2s;
+    transition:.2s;
 }
 
-/* FOOTER */
+tr.date:hover td{
+    background:#2c3e50;
+    color:white;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,90 +311,228 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTE ===== */
+@media(max-width:768px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+}
+
+/* ===== TÉLÉPHONE ===== */
+@media(max-width:480px){
+    header h1{
+        font-size:17px;
+        padding:14px 10px;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+        border-left-width:5px;
+    }
+
+    section h2{font-size:20px}
+    section h3{font-size:16px}
+    section h4{font-size:14px}
+
+    nav{
+        padding:7px 4px;
+    }
+
+    nav button{
+        display:block;
+        width:100%;
+        margin:6px 0;
+        padding:11px 8px;
+        font-size:13px;
+        transform:none;
+    }
+
+    nav button:hover{transform:none}
+
+    .table-wrapper{
+        margin:15px 0 22px;
+    }
+
+    table{
+        width:100%;
+        min-width:520px;
+        margin:10px 0;
+    }
+
+    td{
+        padding:6px 4px;
+        font-size:11px;
+        line-height:1.4;
+    }
+
+    .montant{
+        font-size:10px;
+    }
+
+    footer{font-size:13px}
+}
+
+@media(max-width:360px){
+    section{
+        padding:9px;
+        margin:5px;
+    }
+
+    td{
+        padding:4px 2px;
+        font-size:10px;
+    }
+
+    .montant{font-size:9px}
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 La régularisation des produits </a>
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">Modules ▼</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">M1 - Comptabilité générale ▼</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">P3 – Travaux de fin d’exercice ▼</button>
+<div class="dropdown-content">
+<a href="C1P3M1.html">T – Résumés des thèmes</a>
+<a href="C2P3M1.html">F – Formulaires interactifs</a>
+<a href="C3P3M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">T – Résumés des thèmes ▼</button>
+<div class="dropdown-content">
+<a href="T1C1P3M1.html">T1 - Intérêt des travaux de fin d’exercice</a>
+<a href="T2C1P3M1.html">T2 - La régularisation des stocks</a>
+<a href="T3C1P3M1.html">T3 - Les amortissements</a>
+<a href="T4C1P3M1.html">T4 - Les provisions pour dépréciation des immobilisations</a>
+<a href="T5C1P3M1.html">T5 - Les provisions pour dépréciation des éléments de l’actif circulant</a>
+<a href="T6C1P3M1.html">T6 - Les provisions pour risques et charges</a>
+<a href="T7C1P3M1.html">T7 - La régularisation des charges</a>
+<a href="T8C1P3M1.html">T8 - La régularisation des produits</a>
+</div>
+</div>
+
+<a href="C1P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
+<p>T8 – La régularisation des produits</p>
 </h1>
 </header>
 
 <nav>
-    <button onclick="showSection('PAR')">Les produits à recevoir</button>
-<button onclick="showSection('IAPER')">Les intérêts courus et non échus à percevoir</button>
-<button onclick="showSection('PCA')">Les produits constatés d’avance </button>
-
-
-
-
-
+<button onclick="showSection('PAR',this)" class="btnActive">Les produits à recevoir</button>
+<button onclick="showSection('IAPER',this)">Les intérêts courus et non échus à percevoir</button>
+<button onclick="showSection('PCA',this)">Les produits constatés d’avance</button>
 </nav>
 
-<section id="PAR" class="active">
-<h2> Les produits à recevoir</h2>
+<!-- =====================================================
+     SECTION 1 : LES PRODUITS À RECEVOIR
+===================================================== -->
+<section id="PAR" class="active animationSection">
+
+<h2>Les produits à recevoir</h2>
+
 Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la clôture de l’exercice, mais qui n’ont pas encore été facturés ou inscrits dans les comptes de tiers débiteurs, leur montant n’étant pas encore définitivement arrêté.<br>
 → Les produits à recevoir correspondent à des créances à venir dont l’existence est connue à la clôture de l’exercice. Bien que leur montant ou leur échéance ne soit pas encore définitivement déterminé, elles se rapportent à l’exercice et doivent être prises en compte lors de l’inventaire.<br>
 → L’entreprise est tenue de recenser tous les produits relatifs à l’exercice qui s’achève et qui n’ont pas encore été enregistrés en comptabilité. Leur montant doit être estimé de manière fiable, malgré l’absence de justificatifs disponibles à la date de clôture.
-<h3> ► Comptabilisation</h3>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
 <table>
 
 <!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/N</td></tr>
 
 <tr><td class="debit center"" style="width:5%;">
-        
-              <option>3417</option>
-     
-    </td>
+
+<option>3417</option>
+
+</td>
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> RRR à obtenir - avoirs non encore reçus</option>
-
-         
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -274,68 +547,51 @@ Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>6119</option>
+
+<option>6119</option>
 <option>6129</option>
 <option>6149</option>
 
-
-
-
-
-
-
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> RRR obtenus/M/ses ou</option>
-            <option> RRR obtenus/MF ou</option>
 
-            <option> RRR obtenus/autres CE</option>
+<option> RRR obtenus/M/ses ou</option>
+<option> RRR obtenus/MF ou</option>
+<option> RRR obtenus/autres CE</option>
 
-
-
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>MT</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> RRR à obtenir - avoirs non encore reçus </td></tr>
 
 </table>
+</div>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/N</td></tr>
 
 <tr><td class="debit center"" style="width:5%;">
-        
-              <option>3427</option>
-     
-    </td>
+
+<option>3427</option>
+
+</td>
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Clts - factures à établir </option>
-
-         
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -350,66 +606,49 @@ Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>711X</option>
+
+<option>711X</option>
 <option>712X</option>
-
-
-
-
-
-
-
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Ventes de M/ses ou</option>
-            <option> Ventes de B et SP</option>
 
+<option> Ventes de M/ses ou</option>
+<option> Ventes de B et SP</option>
 
-
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>MT</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> Clients - factures à établir et créances sur travaux non encore facturés</td></tr>
 
 </table>
+</div>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/N</td></tr>
 
 <tr><td class="debit center"" style="width:5%;">
-        
-              <option>3467</option>
-     
-    </td>
+
+<option>3467</option>
+
+</td>
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Créances rattachées aux CA</option>
-
-         
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -424,66 +663,49 @@ Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>7381</option>
+
+<option>7381</option>
 <option>7XXX</option>
-
-
-
-
-
-
-
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Intérêts et produits assimilés ou</option>
-            <option> Autre produit concerné </option>
 
+<option> Intérêts et produits assimilés ou</option>
+<option> Autre produit concerné </option>
 
-
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>MT</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> Créances rattachées aux comptes d'associés</td></tr>
 
 </table>
+</div>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/N</td></tr>
 
 <tr><td class="debit center"" style="width:5%;">
-        
-              <option>3487</option>
-     
-    </td>
+
+<option>3487</option>
+
+</td>
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Créances rattachées aux autres D</option>
-
-         
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -498,71 +720,51 @@ Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>7XXX</option>
 
-
-
-
-
-
-
+<option>7XXX</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Produit concernée </option>
-            
 
+<option> Produit concernée </option>
 
-
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>MT</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> Créances rattachées aux autres débiteurs</td></tr>
 
 </table>
-
+</div>
 
 ➡️ En cas de majoration de TVA, il convient de débiter le compte 4458 – Etat - autres comptes créditeurs (TVA à régulariser).
 
-<h4> ► Exemple 1 : Le fournisseur a accordé à l’entreprise une remise de 600 DH HT (TVA 20%) sur la facture du 19/12/2025, relative à un achat de marchandises. Toutefois, l’avoir correspondant n’a pas encore été reçu.
-</h4>
+<h4>► Exemple 1 : Le fournisseur a accordé à l’entreprise une remise de 600 DH HT (TVA 20%) sur la facture du 19/12/2025, relative à un achat de marchandises. Toutefois, l’avoir correspondant n’a pas encore été reçu.</h4>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
 
 <tr><td class="debit center"" style="width:5%;">
-        
-              <option>3417</option>
-     
-    </td>
+
+<option>3417</option>
+
+</td>
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> RRR à obtenir - avoirs NER</option>
-
-         
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -577,104 +779,75 @@ Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>6119</option>
 
-
-
-
-
-
+<option>6119</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> RRR obtenus/Achats M/ses</option>
 
+<option> RRR obtenus/Achats M/ses</option>
 
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>600,00</option>
-
 </td>
 
 </tr>
+
 <tr>
 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>4458</option>
 
-
-
-
-
-
+<option>4458</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Etat - autres comptes C</option>
 
+<option> Etat - autres comptes C</option>
 
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>120,00</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> RRR à obtenir - avoirs non encore reçus </td></tr>
 
 </table>
+</div>
 
-<h4> ► Exemple 2 : Des marchandises livrées le 25 décembre 2025 pour une valeur de 6 500 DH HT (TVA 20%) n’ont pas encore fait l’objet d’une facturation.
-</h4>
+<h4>► Exemple 2 : Des marchandises livrées le 25 décembre 2025 pour une valeur de 6 500 DH HT (TVA 20%) n’ont pas encore fait l’objet d’une facturation.</h4>
 
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
 
 <tr><td class="debit center"" style="width:5%;">
-        
-              <option>3427</option>
-     
-    </td>
+
+<option>3427</option>
+
+</td>
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Clts - factures à établir </option>
-
-         
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -689,121 +862,89 @@ Les produits à recevoir sont des revenus déjà acquis par l’entreprise à la
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>7111</option>
 
-
-
-
-
-
-
+<option>7111</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Ventes de M/ses </option>
-            
 
+<option> Ventes de M/ses </option>
 
-
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>6.500,00</option>
-
 </td>
 
 </tr>
+
 <tr>
 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>4458</option>
 
-
-
-
-
-
-
+<option>4458</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Etat - autres comptes C</option>
-            
 
+<option> Etat - autres comptes C</option>
 
-
-
-            
-
-
-        
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>1.300,00</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> Clients - factures à établir et créances sur travaux non encore facturés</td></tr>
 
 </table>
-
-
+</div>
 
 </section>
 
+<!-- =====================================================
+     SECTION 2 : INTÉRÊTS COURUS ET NON ÉCHUS À PERCEVOIR
+===================================================== -->
 <section id="IAPER">
-<h2> Les intérêts courus et non échus à percevoir</h2>
+
+<h2>Les intérêts courus et non échus à percevoir</h2>
+
 Il s’agit des intérêts courus à la date de clôture de l’exercice et non encore échus, relatifs aux prêts et autres créances, y compris celles inscrites à l’actif immobilisé.<br>
 → À la clôture de l’exercice, l’entreprise doit identifier l’ensemble des intérêts courus et non échus relatifs à l’exercice qui s’achève et qui n’ont pas encore été enregistrés en comptabilité.<br>
-<h3> ► Comptabilisation</h3>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/N</td></tr>
 
 <tr>
 <td class="debit center"" style="width:5%;">
-        
-              <option>3493</option>
 
+<option>3493</option>
 
-       
-    </td>
+</td>
 
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Intérêts courus et non échus à P</option>
-
-         
-
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -818,71 +959,52 @@ Il s’agit des intérêts courus à la date de clôture de l’exercice et non 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>7381</option>
 
-
-
-
+<option>7381</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Intérêts et produits assimilés</option>
-
-
-            
-
-
-        
+<option> Intérêts et produits assimilés</option>
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>MT</option>
-
 </td>
 
 </tr>
-<!-- Facture -->
+
 <tr class="date"><td colspan="6"> Intérêts courus et non échus à percevoir</td></tr>
 
 </table>
+</div>
+
 ➡️ En cas de majoration de TVA, il convient de débiter le compte 4458 – Etat - autres comptes créditeurs (TVA à régulariser).
 
+<h4>► Exemple : L’entreprise a accordé un prêt de 30 000 DH à un salarié.
+Les intérêts de la période du 01/05/2025 au 30/04/2026, calculés au taux annuel de 1 % (TVA 10%). L’encaissement des intérêts interviendra le 01/05/2026.</h4>
 
-
-<h4> ► Exemple : L’entreprise a accordé un prêt de 30 000 DH à un salarié. 
-Les intérêts de la période du 01/05/2025 au 30/04/2026, calculés au taux annuel de 1 % (TVA 10%). L’encaissement des intérêts interviendra le 01/05/2026.
-
-</h4>
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
 
 <tr>
 <td class="debit center"" style="width:5%;">
-        
-              <option>3493</option>
 
+<option>3493</option>
 
-       
-    </td>
+</td>
 
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Intérêts courus et non échus à P</option>
-
-         
-
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -897,112 +1019,87 @@ Les intérêts de la période du 01/05/2025 au 30/04/2026, calculés au taux ann
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>7381</option>
 
-
-
-
+<option>7381</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Intérêts et produits assimilés</option>
-
-
-            
-
-
-        
+<option> Intérêts et produits assimilés</option>
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>200,00</option>
-
 </td>
 
 </tr>
+
 <tr>
 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>4458</option>
 
-
-
-
+<option>4458</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Etat - autres comptes C</option>
-
-
-            
-
-
-        
+<option> Etat - autres comptes C</option>
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>20,00</option>
-
 </td>
 
 </tr>
 
-<!-- Facture -->
 <tr class="date"><td colspan="6"> Intérêts courus et non échus à percevoir</td></tr>
 
 </table>
+</div>
 
 ▐ [30000*1%*8]/12=200
 
-
-
-
 </section>
+
+<!-- =====================================================
+     SECTION 3 : PRODUITS CONSTATÉS D'AVANCE
+===================================================== -->
 <section id="PCA">
-<h2> Les produits constatées d’avance </h2>
+
+<h2>Les produits constatées d’avance</h2>
+
 Ces produits sont perçus ou comptabilisés avant la réalisation effective des biens livrés ou des services rendus. Ils engendrent ainsi pour l’entreprise une obligation de fournir ultérieurement la prestation correspondante, constituant une dette en nature.<br>
 → L’entreprise est tenue de repérer les produits déjà comptabilisés qui se rattachent, partiellement ou totalement, à l’exercice suivant.
-.
-<h3> ► Comptabilisation</h3>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/N</td></tr>
 
 <tr>
 <td class="debit center"" style="width:5%;">
-        
-              <option>7XXX</option>
 
+<option>7XXX</option>
 
-       
-    </td>
+</td>
 
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Compte de produit concernée </option>
-
-         
-
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -1017,65 +1114,49 @@ Ces produits sont perçus ou comptabilisés avant la réalisation effective des 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>4491</option>
 
-
-
-
+<option>4491</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Produits constatés d'avance </option>
-
-
-            
-
-
-        
+<option> Produits constatés d'avance </option>
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>MT</option>
-
 </td>
 
 </tr>
-<!-- Facture -->
+
 <tr class="date"><td colspan="6"> Produits constatés d'avance </td></tr>
 
 </table>
+</div>
 
-<h4> ► Exemple 1 : Au 31/12/2025, le comptable a constaté qu’une facture adressée au client ISSAM porte sur un montant de 12 300 DH correspondant à des marchandises qui n’ont pas encore été livrées.</h4>
+<h4>► Exemple 1 : Au 31/12/2025, le comptable a constaté qu’une facture adressée au client ISSAM porte sur un montant de 12 300 DH correspondant à des marchandises qui n’ont pas encore été livrées.</h4>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
 
 <tr>
 <td class="debit center"" style="width:5%;">
-        
-              <option>7111</option>
 
+<option>7111</option>
 
-       
-    </td>
+</td>
 
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Ventes de marchandises </option>
-
-         
-
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -1090,64 +1171,49 @@ Ces produits sont perçus ou comptabilisés avant la réalisation effective des 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>4491</option>
 
-
-
-
+<option>4491</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> Produits constatés d'avance </option>
-
-
-            
-
-
-        
+<option> Produits constatés d'avance </option>
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>12.300,00</option>
-
 </td>
 
 </tr>
-<!-- Facture -->
+
 <tr class="date"><td colspan="6"> Produits constatés d'avance </td></tr>
 
 </table>
-<h4> ► Exemple 2 : Le 01/11/2025, l’entreprise IGNDAY a perçu un loyer d’avance couvrant une période de trois mois, pour un montant total de 7 500 DH.</h4>
+</div>
+
+<h4>► Exemple 2 : Le 01/11/2025, l’entreprise IGNDAY a perçu un loyer d’avance couvrant une période de trois mois, pour un montant total de 7 500 DH.</h4>
+
+<div class="table-wrapper">
 <table>
 
-<!-- 01/01/2025 -->
 <tr class="date"><td colspan="6">31/12/2025</td></tr>
 
 <tr>
 <td class="debit center"" style="width:5%;">
-        
-              <option>7127</option>
 
+<option>7127</option>
 
-       
-    </td>
+</td>
 
 <td></td>
 
-<td class="debit"" style="width:30%;" >
+<td class="debit"" style="width:30%;">
 <option> Ventes de produits accessoires</option>
-
-         
-
-       
-    </td>
+</td>
 
 <td></td>
 
@@ -1162,61 +1228,101 @@ Ces produits sont perçus ou comptabilisés avant la réalisation effective des 
 <td></td>
 
 <td class="credit center"" style="width:5%;">
-        
-            <option>4491</option>
 
-
-
-
+<option>4491</option>
 
 </td>
 
 <td></td>
 
 <td class="credit"" style="width:30%;">
-        
-            <option> PCA </option>
-
-
-            
-
-
-        
+<option> PCA </option>
 </td>
 
 <td></td>
 
 <td class="montant"" style="width:7%;">
 <option>2.500,00</option>
-
 </td>
 
 </tr>
-<!-- Facture -->
+
 <tr class="date"><td colspan="6"> Produits constatés d'avance </td></tr>
 
 </table>
+</div>
+
 ▐ [7500*1]/3=2500
-
-
-
-
-
 
 </section>
 
-
+<!-- ===== PIED DE PAGE : CONSERVÉ ===== -->
 <footer>
     Formation en Comptabilité Générale
-<br>
-
-<a href="C1P3M1.html">⬅ Retour </a>
-
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermeture des menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
-
-
-
 
