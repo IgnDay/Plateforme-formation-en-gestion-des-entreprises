@@ -4,69 +4,866 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale - Facture Avoir</title>
+
 <style>
-*{box-sizing:border-box}
-body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
-header{background:#2c3e50;color:white;padding:0;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-header h1{padding:16px 12px;margin:0;font-size:22px;line-height:1.5;color:white}
-.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
-.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
-.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px;color:white}
-.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
-.site-menu>a{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;font-size:14px}
-.site-menu>a:hover{background:#ffffff2b}
-.dropdown{position:relative;display:inline-block}
-.dropdown button{padding:10px 14px;background:transparent;color:white;border:none;cursor:pointer;font-size:14px;border-radius:6px}
-.dropdown button:hover,.dropdown button[aria-expanded="true"]{background:#ffffff2b}
-.dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;background:white;box-shadow:0 5px 15px #0003;border-radius:7px;z-index:1000;padding:6px;text-align:left}
-.dropdown-content a{display:block;padding:11px 14px;color:#1e293b;text-decoration:none;text-align:left;font-size:14px;border-radius:5px}
-.dropdown-content a:hover{background:#0f766e;color:white}
-.dropdown.open .dropdown-content{display:block}
-.site-menu .dropdown{align-self:center}
-nav{background:#34495e;padding:10px;text-align:center}
-nav button{margin:5px;padding:12px 16px;border:none;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:14px;transition:.3s}
-nav button:hover{background:#019875;transform:translateY(-2px)}
-.btnActive{background:#0984e3!important;transform:scale(1.03);box-shadow:0 3px 10px rgba(0,0,0,.25)}
-section{display:none;padding:28px;margin:20px}
-.active{display:block}
-.animationSection{animation:apparition .5s ease;background:#fff;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,.12)}
-@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-h2{color:#2c3e50;margin-top:0}h3{color:#0f766e;margin-top:25px}
-table{width:100%;border-collapse:collapse;background:white;margin:18px auto 26px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-td,th{border:1px solid #cbd5e1;padding:10px;vertical-align:top}
-.titre{text-align:center;font-size:24px;font-weight:bold}.bold{font-weight:bold}.center{text-align:center}.right{text-align:right}.header-cell{background:#dfe6e9}.date{text-align:center;background:#1e3a5f;color:white;font-weight:bold}
-.debit{background:#e8f4ff;color:#0b3d91;font-weight:bold}.credit{background:#fff2e6;color:#9a4b00;font-weight:bold}.montant{text-align:right;background:#f8fafc;font-weight:bold;white-space:nowrap}
-.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
-.section-title{font-size:20px;font-weight:bold;background:#cfcfcf;display:inline-block;padding:10px 18px;margin:15px 0 22px;border-radius:5px}
-.schema{display:flex;align-items:center;justify-content:center;gap:25px;margin:10px auto 45px;flex-wrap:wrap}.box{border:3px solid #44546a;border-radius:16px;background:#f5f5f5;color:#334155;font-weight:bold;text-align:center;padding:22px;line-height:1.5;max-width:420px;flex:1;min-width:230px}.arrow{font-size:42px;color:#0f766e;font-weight:bold}
-#MF table{width:75%;border:3px solid #111}#MF td{border:1px solid #111}#MF .header-cell{background:#e6e6e6}
-#EC h2{text-align:center;background:#1e3a5f;color:white;padding:12px;border-radius:8px;margin:15px 0 25px;box-shadow:0 2px 6px #0002;letter-spacing:.3px}
-#EC table{width:85%;margin-bottom:30px;border-radius:8px;overflow:hidden}#EC td{font-size:14px;padding:9px}#EC .date{background:#1e3a5f;color:white}
-footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}footer a{color:#00ffcc;text-decoration:none}
-@media(max-width:768px){.brandbar{justify-content:center;padding:12px}.site-menu{width:100%}.site-menu>a{padding:9px}.dropdown button{padding:9px}.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}header h1{font-size:18px}section{padding:16px;margin:10px}.schema{flex-direction:column;gap:15px}.box{width:100%;min-width:0}#MF table,#EC table{width:100%}table{font-size:13px}td,th{padding:7px}}
+*{
+    box-sizing:border-box;
+}
+
+html{
+    width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f4f6f9;
+    color:#1e293b;
+    width:100%;
+    overflow-x:hidden;
+}
+
+/* ===== EN-TÊTE ===== */
+header{
+    background:#2c3e50;
+    color:white;
+    padding:0;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+header h1{
+    padding:16px 12px;
+    margin:0;
+    font-size:22px;
+    line-height:1.5;
+    color:white;
+}
+
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+    color:white;
+}
+
+/* ===== MENU PRINCIPAL ===== */
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:90vw;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+    text-align:left;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    overflow-wrap:anywhere;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+.dropdown.open .dropdown-content{
+    display:block;
+}
+
+.site-menu .dropdown{
+    align-self:center;
+}
+
+/* ===== NAVIGATION DES THÈMES ===== */
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav button{
+    margin:5px;
+    padding:12px 16px;
+    border:none;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:14px;
+    transition:.3s;
+    max-width:100%;
+}
+
+nav button:hover{
+    background:#019875;
+    transform:translateY(-2px);
+}
+
+.btnActive{
+    background:#0984e3!important;
+    transform:scale(1.03);
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+/* ===== SECTIONS ===== */
+section{
+    display:none;
+    padding:28px;
+    margin:20px;
+    min-width:0;
+}
+
+.active{
+    display:block;
+}
+
+.animationSection{
+    animation:apparition .5s ease;
+    background:#fff;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h2{
+    color:#2c3e50;
+    margin-top:0;
+    overflow-wrap:anywhere;
+}
+
+h3{
+    color:#0f766e;
+    margin-top:25px;
+}
+
+/* ===== TABLEAUX RESPONSIVES ===== */
+table{
+    width:100%;
+    max-width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin:18px auto 26px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    table-layout:fixed;
+}
+
+td,th{
+    border:1px solid #cbd5e1;
+    padding:10px;
+    vertical-align:top;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    white-space:normal;
+}
+
+td option{
+    white-space:normal;
+}
+
+.titre{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+.header-cell{
+    background:#dfe6e9;
+}
+
+.date{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    font-weight:bold;
+}
+
+.debit{
+    background:#e8f4ff;
+    color:#0b3d91;
+    font-weight:bold;
+}
+
+.credit{
+    background:#fff2e6;
+    color:#9a4b00;
+    font-weight:bold;
+}
+
+.montant{
+    text-align:right;
+    background:#f8fafc;
+    font-weight:bold;
+    white-space:normal;
+    overflow-wrap:anywhere;
+}
+
+/* ===== ÉLÉMENTS COMPLÉMENTAIRES ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+.section-title{
+    font-size:20px;
+    font-weight:bold;
+    background:#cfcfcf;
+    display:inline-block;
+    padding:10px 18px;
+    margin:15px 0 22px;
+    border-radius:5px;
+}
+
+.schema{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    margin:10px auto 45px;
+    flex-wrap:wrap;
+}
+
+.box{
+    border:3px solid #44546a;
+    border-radius:16px;
+    background:#f5f5f5;
+    color:#334155;
+    font-weight:bold;
+    text-align:center;
+    padding:22px;
+    line-height:1.5;
+    max-width:420px;
+    flex:1;
+    min-width:230px;
+}
+
+.arrow{
+    font-size:42px;
+    color:#0f766e;
+    font-weight:bold;
+}
+
+/* ===== TABLEAU FACTURE ===== */
+#facture-retour{
+    width:100%;
+    table-layout:fixed;
+}
+
+#MF table{
+    width:75%;
+    border:3px solid #111;
+}
+
+#MF td{
+    border:1px solid #111;
+}
+
+#MF .header-cell{
+    background:#e6e6e6;
+}
+
+/* ===== TABLEAUX D'ÉCRITURES COMPTABLES ===== */
+#EC1 table,
+#EC2 table,
+#EC3 table{
+    width:100%;
+    margin-bottom:30px;
+    table-layout:fixed;
+}
+
+#EC1 td,
+#EC2 td,
+#EC3 td{
+    font-size:14px;
+    padding:9px;
+}
+
+#EC1 .date,
+#EC2 .date,
+#EC3 .date{
+    background:#1e3a5f;
+    color:white;
+}
+
+/* ===== TITRES DES SECTIONS COMPTABLES ===== */
+#EC1 h2,
+#EC2 h2,
+#EC3 h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin:15px 0 25px;
+    box-shadow:0 2px 6px #0002;
+    letter-spacing:.3px;
+    overflow-wrap:anywhere;
+}
+
+/* ===== PIED DE PAGE ===== */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* ==================================================
+   ADAPTATION TABLETTES ET TÉLÉPHONES
+   ================================================== */
+@media(max-width:768px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+        gap:12px;
+    }
+
+    .brand{
+        justify-content:center;
+    }
+
+    .site-menu{
+        width:100%;
+        justify-content:center;
+        gap:5px;
+    }
+
+    .site-menu>a{
+        padding:9px;
+        font-size:13px;
+    }
+
+    .dropdown button{
+        padding:9px;
+        font-size:13px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+        max-width:90vw;
+    }
+
+    header h1{
+        font-size:18px;
+        padding:12px 10px;
+    }
+
+    header h1 p{
+        margin:5px 0;
+    }
+
+    nav{
+        padding:8px;
+    }
+
+    nav button{
+        margin:4px;
+        padding:10px 12px;
+        font-size:13px;
+        max-width:100%;
+        white-space:normal;
+    }
+
+    section{
+        padding:16px;
+        margin:10px;
+    }
+
+    .schema{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .box{
+        width:100%;
+        min-width:0;
+    }
+
+    #MF table,
+    #EC table,
+    #facture-retour{
+        width:100%;
+    }
+
+    table{
+        width:100%;
+        font-size:13px;
+    }
+
+    td,th{
+        padding:7px;
+        font-size:13px;
+    }
+
+    .titre{
+        font-size:20px;
+    }
+
+    .montant{
+        font-size:12px;
+    }
+
+    #EC1 td,
+    #EC2 td,
+    #EC3 td{
+        font-size:12px;
+        padding:6px 4px;
+    }
+
+    #EC1 h2,
+    #EC2 h2,
+    #EC3 h2{
+        font-size:18px;
+        padding:10px;
+    }
+}
+
+/* ==================================================
+   ADAPTATION PETITS TÉLÉPHONES
+   ================================================== */
+@media(max-width:480px){
+
+    body{
+        font-size:14px;
+    }
+
+    .brandbar{
+        padding:10px 6px;
+    }
+
+    .brand-logo{
+        width:38px;
+        height:38px;
+        font-size:16px;
+    }
+
+    .brand{
+        font-size:17px;
+    }
+
+    .site-menu{
+        gap:3px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        padding:8px 6px;
+        font-size:12px;
+    }
+
+    .dropdown-content{
+        min-width:200px;
+        max-width:92vw;
+    }
+
+    .dropdown-content a{
+        padding:10px;
+        font-size:13px;
+    }
+
+    header h1{
+        font-size:15px;
+        line-height:1.5;
+        padding:10px 8px;
+    }
+
+    nav button{
+        display:block;
+        width:100%;
+        margin:6px 0;
+        padding:11px 8px;
+        font-size:13px;
+    }
+
+    section{
+        padding:12px 8px;
+        margin:8px 5px;
+        border-left-width:5px;
+    }
+
+    h2{
+        font-size:19px;
+        line-height:1.4;
+    }
+
+    h3{
+        font-size:16px;
+        line-height:1.4;
+    }
+
+    p,li{
+        line-height:1.6;
+    }
+
+    .highlight{
+        padding:11px;
+    }
+
+    table{
+        width:100%;
+        margin:14px auto 20px;
+        font-size:11px;
+    }
+
+    td,th{
+        padding:5px 3px;
+        font-size:11px;
+        overflow-wrap:anywhere;
+    }
+
+    .titre{
+        font-size:16px;
+    }
+
+    .date{
+        font-size:11px;
+        padding:6px 3px;
+    }
+
+    .montant{
+        font-size:10px;
+    }
+
+    /* Les tableaux de factures conservent leurs trois colonnes */
+    #RM table,
+    #RAF table,
+    #EA table,
+    #facture-retour{
+        table-layout:fixed;
+    }
+
+    /* Les écritures comptables restent dans la largeur du téléphone */
+    #EC1 table,
+    #EC2 table,
+    #EC3 table{
+        width:100%;
+        max-width:100%;
+        table-layout:fixed;
+    }
+
+    #EC1 td,
+    #EC2 td,
+    #EC3 td{
+        font-size:10px;
+        padding:5px 2px;
+        line-height:1.4;
+        overflow-wrap:anywhere;
+    }
+
+    #EC1 .date,
+    #EC2 .date,
+    #EC3 .date{
+        font-size:11px;
+        padding:7px 3px;
+    }
+
+    #EC1 h2,
+    #EC2 h2,
+    #EC3 h2{
+        font-size:16px;
+        padding:9px 6px;
+    }
+
+    .section-title{
+        font-size:16px;
+        padding:8px 10px;
+    }
+
+    footer{
+        font-size:13px;
+        padding:13px 8px;
+    }
+}
+
+/* ==================================================
+   TRÈS PETITS ÉCRANS
+   ================================================== */
+@media(max-width:360px){
+
+    header h1{
+        font-size:14px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:11px;
+        padding:7px 4px;
+    }
+
+    section{
+        padding:10px 6px;
+        margin:6px 3px;
+    }
+
+    table{
+        font-size:10px;
+    }
+
+    td,th{
+        padding:4px 2px;
+        font-size:10px;
+    }
+
+    #EC1 td,
+    #EC2 td,
+    #EC3 td{
+        font-size:9px;
+        padding:4px 1px;
+    }
+
+    .titre{
+        font-size:14px;
+    }
+
+    .montant{
+        font-size:9px;
+    }
+}
 </style>
+
 <script>
-function showSection(id,button){document.querySelectorAll('section').forEach(sec=>sec.classList.remove('active','animationSection'));const current=document.getElementById(id);if(current)current.classList.add('active','animationSection');document.querySelectorAll('nav button').forEach(btn=>btn.classList.remove('btnActive'));if(button)button.classList.add('btnActive')}
-function toggleDropdown(button){const dropdown=button.closest('.dropdown');const wasOpen=dropdown.classList.contains('open');document.querySelectorAll('.site-menu .dropdown').forEach(item=>{item.classList.remove('open');const b=item.querySelector('button');if(b)b.setAttribute('aria-expanded','false')});if(!wasOpen){dropdown.classList.add('open');button.setAttribute('aria-expanded','true')}}
-document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown'))document.querySelectorAll('.site-menu .dropdown').forEach(item=>{item.classList.remove('open');const b=item.querySelector('button');if(b)b.setAttribute('aria-expanded','false')})});
+function showSection(id,button){
+    document.querySelectorAll('section').forEach(sec=>{
+        sec.classList.remove('active','animationSection');
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add('active','animationSection');
+    }
+
+    document.querySelectorAll('nav button').forEach(btn=>{
+        btn.classList.remove('btnActive');
+    });
+
+    if(button){
+        button.classList.add('btnActive');
+    }
+}
+
+function toggleDropdown(button){
+    const dropdown=button.closest('.dropdown');
+    const wasOpen=dropdown.classList.contains('open');
+
+    document.querySelectorAll('.site-menu .dropdown').forEach(item=>{
+        item.classList.remove('open');
+
+        const b=item.querySelector('button');
+
+        if(b){
+            b.setAttribute('aria-expanded','false');
+        }
+    });
+
+    if(!wasOpen){
+        dropdown.classList.add('open');
+        button.setAttribute('aria-expanded','true');
+    }
+}
+
+document.addEventListener('click',e=>{
+    if(!e.target.closest('.site-menu .dropdown')){
+        document.querySelectorAll('.site-menu .dropdown').forEach(item=>{
+            item.classList.remove('open');
+
+            const b=item.querySelector('button');
+
+            if(b){
+                b.setAttribute('aria-expanded','false');
+            }
+        });
+    }
+});
 </script>
 </head>
+
 <body>
+
 <header>
 <div class="brandbar">
-<a class="brand" href="index.html"><span class="brand-logo">IF</span><span>IgnDay</span></a>
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
+</a>
+
 <div class="site-menu">
+
 <a href="index.html">Accueil</a>
-<div class="dropdown"><button type="button" aria-expanded="false" onclick="toggleDropdown(this)">Modules ▼</button><div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a><a href="M2.html">M2 – Comptabilité analytique</a><a href="M3.html">M3 – Analyse financière</a><a href="M4.html">M4 – Fiscalité</a><a href="M5.html">M5 – Mathématiques financières</a><a href="M6.html">M6 – Statistiques</a><a href="M7.html">M7 – Marketing</a><a href="M8.html">M8 – Comptabilité approfondie</a><a href="M9.html">M9 – Management</a>
-</div></div>
-<div class="dropdown"><button type="button" aria-expanded="false" onclick="toggleDropdown(this)">M1 - Comptabilité générale ▼</button><div class="dropdown-content"><a href="P1M1.html">P1 – Concepts de base</a><a href="P2M1.html">P2 – Opérations courantes</a><a href="P3M1.html">P3 – Travaux de fin d’exercice</a></div></div>
-<div class="dropdown"><button type="button" aria-expanded="false" onclick="toggleDropdown(this)">P2 – Opérations courantes ▼</button><div class="dropdown-content"><a href="C1P2M1.html">T – Résumés des thèmes</a><a href="C2P2M1.html">F – Formulaires interactifs</a><a href="C3P2M1.html">E – Exercices corrigés</a></div></div>
-<div class="dropdown"><button type="button" aria-expanded="false" onclick="toggleDropdown(this)">T – Résumés des thèmes ▼</button><div class="dropdown-content"><a href="T1C1P2M1.html">T1 - Facture « Doit » simple</a><a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a><a href="T3C1P2M1.html">T3 - Facture « Doit » comportant des majorations</a><a href="T4C1P2M1.html">T4 - Facture « Avoir »</a><a href="T5C1P2M1.html">T5 - Autres éléments du compte de produits et de charges</a><a href="T6C1P2M1.html">T6 - Acquisition des immobilisations</a><a href="T7C1P2M1.html">T7 - Règlements financiers</a></div></div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">Modules ▼</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">M1 - Comptabilité générale ▼</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">P2 – Opérations courantes ▼</button>
+<div class="dropdown-content">
+<a href="C1P2M1.html">T – Résumés des thèmes</a>
+<a href="C2P2M1.html">F – Formulaires interactifs</a>
+<a href="C3P2M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">T – Résumés des thèmes ▼</button>
+<div class="dropdown-content">
+<a href="T1C1P2M1.html">T1 - Facture « Doit » simple</a>
+<a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a>
+<a href="T3C1P2M1.html">T3 - Facture « Doit » comportant des majorations</a>
+<a href="T4C1P2M1.html">T4 - Facture « Avoir »</a>
+<a href="T5C1P2M1.html">T5 - Autres éléments du compte de produits et de charges</a>
+<a href="T6C1P2M1.html">T6 - Acquisition des immobilisations</a>
+<a href="T7C1P2M1.html">T7 - Règlements financiers</a>
+</div>
+</div>
+
 <a href="C1P2M1.html">⬅ Retour</a>
-</div></div>
-<h1><p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p><p>T4 - Enregistrement des opérations d’achat et de vente : Facture « Avoir »</p></h1>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p>
+<p>T4 - Enregistrement des opérations d’achat et de vente : Facture « Avoir »</p>
+</h1>
 </header>
+
 <nav>
 <button class="btnActive" onclick="showSection('AVOIR',this)">Définition de la facture « Avoir »</button>
 <button onclick="showSection('RM',this)">Retour de marchandises</button>
@@ -77,21 +874,43 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <button onclick="showSection('EC3',this)">Comptabilisation de l’escompte</button>
 </nav>
 
+<!-- ===== DÉFINITION ===== -->
 <section id="AVOIR" class="active animationSection">
+
 <h2>📘 Définition de la facture « Avoir »</h2>
+
 <p>Une facture d’avoir permet de corriger ou d’annuler une facture précédente. Dans ce thème, on va traiter les trois cas suivants :</p>
-<ul><li>Retour de marchandises et des produits.</li><li>Réduction commerciale après facturation.</li><li>Escompte accordé.</li></ul>
-<div class="highlight"><strong>À retenir :</strong> la facture « Avoir » vient diminuer tout ou partie du montant dû au titre d’une facture antérieure.</div>
+
+<ul>
+<li>Retour de marchandises et des produits.</li>
+<li>Réduction commerciale après facturation.</li>
+<li>Escompte accordé.</li>
+</ul>
+
+<div class="highlight">
+<strong>À retenir :</strong> la facture « Avoir » vient diminuer tout ou partie du montant dû au titre d’une facture antérieure.
+</div>
+
 </section>
 
+<!-- ===== RETOUR DE MARCHANDISES ===== -->
 <section id="RM">
+
 <h2>🧾 Facture Avoir : Retour de marchandises et des produits</h2>
+
 <table id="facture-retour">
 <tr><td colspan="3" class="titre">FACTURE</td></tr>
-<tr><td class="bold">Société X (Frs)</td><td class="center bold">AVOIR</td><td class="bold right">Société Y (Clt)</td></tr>
+<tr>
+<td class="bold">Société X (Frs)</td>
+<td class="center bold">AVOIR</td>
+<td class="bold right">Société Y (Clt)</td>
+</tr>
 <tr><td colspan="3" class="bold">Facture AVOIR N° ........</td></tr>
 <tr><td colspan="3" class="bold">Lieu + Date : .......................................................</td></tr>
-<tr class="header-cell"><td colspan="2" class="bold">Éléments</td><td class="bold center">Montant (DH)</td></tr>
+<tr class="header-cell">
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant (DH)</td>
+</tr>
 <tr><td colspan="2">Montant brut</td><td class="right">3 000,00</td></tr>
 <tr><td colspan="2">(−) Remise ou rabais ou ristourne (3 000 × 3 %)</td><td class="right">90,00</td></tr>
 <tr><td colspan="2"><strong>Net commercial</strong> (3 000 − 90)</td><td class="right"><strong>2 910,00</strong></td></tr>
@@ -100,11 +919,16 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <tr><td colspan="2">(+) TVA sur ventes (2 851,80 × 20 %)</td><td class="right">570,36</td></tr>
 <tr><td colspan="2"><strong>Montant à déduire TTC</strong></td><td class="right"><strong>3 422,16</strong></td></tr>
 </table>
+
 </section>
 
+<!-- ===== COMPTABILISATION DU RETOUR ===== -->
 <section id="EC1">
+
 <h2>Enregistrement comptable du Retour de marchandises et des produits</h2>
+
 <h3>Chez l'Acheteur (Client)</h3>
+
 <table>
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
@@ -112,9 +936,13 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <option>5141 </option><option>5161 </option><option>4411 </option>
 </td>
 <td></td>
-<td class="debit" style="width:30%;"><option>Banques et/ou</option><option>Caisses et/ou</option><option>Fournisseurs...</option></td>
+<td class="debit" style="width:30%;">
+<option>Banques et/ou</option><option>Caisses et/ou</option><option>Fournisseurs...</option>
+</td>
 <td></td>
-<td class="montant" style="width:10%;"><option>Montant</option><option>Montant</option><option>Montant</option></td>
+<td class="montant" style="width:10%;">
+<option>Montant</option><option>Montant</option><option>Montant</option>
+</td>
 </tr>
 <tr>
 <td class="debit center" style="width:5%;"><option>7386 </option></td>
@@ -127,7 +955,10 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <td></td>
 <td class="credit center" style="width:5%;"><option>611X</option><option>612X </option></td>
 <td></td>
-<td class="credit" style="width:30%;"><option>Achats de marchandises et/ou </option><option>Achats consommés de matières et fournitures</option></td>
+<td class="credit" style="width:30%;">
+<option>Achats de marchandises et/ou </option>
+<option>Achats consommés de matières et fournitures</option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant </option><option>Montant </option></td>
 </tr>
@@ -142,7 +973,8 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <tr class="date"><td colspan="6"> Facture Avoir N°..................... </td></tr>
 </table>
 
-►Exemple : Retour de marchandises achetées à crédit (Montant brut 3 000, Remise 3%, Escompte 2% et TVA 20%)
+<p>►Exemple : Retour de marchandises achetées à crédit (Montant brut 3 000, Remise 3%, Escompte 2% et TVA 20%)</p>
+
 <table>
 <tr class="date"><td colspan="6">01/03/2026</td></tr>
 <tr>
@@ -179,12 +1011,16 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 </table>
 
 <h3>Chez le Vendeur (Fournisseur)</h3>
+
 <table>
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
 <td class="debit center" style="width:5%;"><option>711X</option><option>712X</option></td>
 <td></td>
-<td class="debit" style="width:30%;"><option>Ventes de marchandises et/ou </option><option> Ventes de biens et services produits</option></td>
+<td class="debit" style="width:30%;">
+<option>Ventes de marchandises et/ou </option>
+<option> Ventes de biens et services produits</option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant</option><option>Montant</option></td>
 </tr>
@@ -199,7 +1035,9 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <td></td>
 <td class="credit center" style="width:5%;"><option>5141</option><option>5161</option><option>3421</option></td>
 <td></td>
-<td class="credit" style="width:30%;"><option>Banques et/ou</option><option>Caisses et/ou</option><option>Clients...</option></td>
+<td class="credit" style="width:30%;">
+<option>Banques et/ou</option><option>Caisses et/ou</option><option>Clients...</option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant</option><option>Montant </option><option>Montant </option></td>
 </tr>
@@ -214,7 +1052,8 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <tr class="date"><td colspan="6"> Facture Avoir N°..................... </td></tr>
 </table>
 
-►Exemple : Retour de marchandises vendues à crédit (Montant brut 3 000, Remise 3%, Escompte 2% et TVA 20%)
+<p>►Exemple : Retour de marchandises vendues à crédit (Montant brut 3 000, Remise 3%, Escompte 2% et TVA 20%)</p>
+
 <table>
 <tr class="date"><td colspan="6">01/03/2026</td></tr>
 <tr>
@@ -249,39 +1088,64 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 </tr>
 <tr class="date"><td colspan="6"> Facture Avoir N°05-2026 </td></tr>
 </table>
+
 </section>
 
+<!-- ===== RÉDUCTION COMMERCIALE ===== -->
 <section id="RAF">
+
 <h2>🧾 Facture Avoir : Réduction commerciale après facturation</h2>
+
 <table>
 <tr><td colspan="3" class="titre">FACTURE</td></tr>
-<tr><td class="bold">Société X (Frs)</td><td class="center bold">AVOIR</td><td class="bold right">Société Y (Clt)</td></tr>
+<tr>
+<td class="bold">Société X (Frs)</td>
+<td class="center bold">AVOIR</td>
+<td class="bold right">Société Y (Clt)</td>
+</tr>
 <tr><td colspan="3" class="bold">Facture AVOIR N° ........</td></tr>
 <tr><td colspan="3" class="bold">Lieu + Date : .......................................................</td></tr>
-<tr class="header-cell"><td colspan="2" class="bold">Éléments</td><td class="bold center">Montant (DH)</td></tr>
+<tr class="header-cell">
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant (DH)</td>
+</tr>
 <tr><td colspan="2">Montant de la remise supplémentaire (19 400 × 2 %)</td><td class="right">388,00</td></tr>
 <tr><td colspan="2">(+) TVA (388 × 20 %)</td><td class="right">77,60</td></tr>
 <tr><td colspan="2"><strong>Montant à déduire TTC</strong></td><td class="right"><strong>465,60</strong></td></tr>
 </table>
+
 </section>
 
+<!-- ===== COMPTABILISATION DE LA RÉDUCTION ===== -->
 <section id="EC2">
+
 <h2>Enregistrement comptable de la Réduction commerciale après facturation</h2>
+
 <h3>Chez l'Acheteur (Client)</h3>
+
 <table>
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center" style="width:5%;"><option>5141 </option><option>5161 </option><option>4411 </option></td>
+<td class="debit center" style="width:5%;">
+<option>5141 </option><option>5161 </option><option>4411 </option>
+</td>
 <td></td>
-<td class="debit" style="width:30%;"><option>Banques et/ou</option><option>Caisses et/ou</option><option>Fournisseurs...</option></td>
+<td class="debit" style="width:30%;">
+<option>Banques et/ou</option><option>Caisses et/ou</option><option>Fournisseurs...</option>
+</td>
 <td></td>
-<td class="montant" style="width:10%;"><option>Montant</option><option>Montant</option><option>Montant</option></td>
+<td class="montant" style="width:10%;">
+<option>Montant</option><option>Montant</option><option>Montant</option>
+</td>
 </tr>
 <tr>
 <td></td>
 <td class="credit center" style="width:5%;"><option>6119</option><option>6129</option></td>
 <td></td>
-<td class="credit" style="width:30%;"><option>RRR obtenus sur achats de marchandises et/ou</option><option>RRR obtenus sur achats consommés de matières et fournitures</option></td>
+<td class="credit" style="width:30%;">
+<option>RRR obtenus (sur achats de marchandises) et/ou</option>
+<option>(sur achats consommés de matières et fournitures)</option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant </option><option>Montant </option></td>
 </tr>
@@ -296,7 +1160,8 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <tr class="date"><td colspan="6"> Facture Avoir N°..................... </td></tr>
 </table>
 
-►Exemple : Obtention d’une remise supplémentaire de 2%.
+<p>►Exemple : Obtention d’une remise supplémentaire de 2%.</p>
+
 <table>
 <tr class="date"><td colspan="6">20/03/2026</td></tr>
 <tr>
@@ -326,12 +1191,16 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 </table>
 
 <h3>Chez le Vendeur (Fournisseur)</h3>
+
 <table>
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
 <td class="debit center" style="width:5%;"><option>7119</option><option>7129</option></td>
 <td></td>
-<td class="debit" style="width:30%;"><option>RRR accordés (sur ventes de marchandises) et/ou </option><option> RRR accordés (sur ventes de biens et services produits)</option></td>
+<td class="debit" style="width:30%;">
+<option>RRR accordés (sur ventes de marchandises) et/ou </option>
+<option>(sur ventes de biens et services produits) </option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant</option><option>Montant</option></td>
 </tr>
@@ -346,14 +1215,17 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <td></td>
 <td class="credit center" style="width:5%;"><option>5141</option><option>5161</option><option>3421</option></td>
 <td></td>
-<td class="credit" style="width:30%;"><option>Banques et/ou</option><option>Caisses et/ou</option><option>Clients...</option></td>
+<td class="credit" style="width:30%;">
+<option>Banques et/ou</option><option>Caisses et/ou</option><option>Clients...</option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant</option><option>Montant </option><option>Montant </option></td>
 </tr>
 <tr class="date"><td colspan="6"> Facture Avoir N°..................... </td></tr>
 </table>
 
-►Exemple : Octroi d’une remise supplémentaire de 2%
+<p>►Exemple : Octroi d’une remise supplémentaire de 2%</p>
+
 <table>
 <tr class="date"><td colspan="6">20/03/2026</td></tr>
 <tr>
@@ -380,33 +1252,55 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 </tr>
 <tr class="date"><td colspan="6"> Facture Avoir N°10-2026 </td></tr>
 </table>
+
 </section>
 
+<!-- ===== ESCOMPTE ACCORDÉ ===== -->
 <section id="EA">
+
 <h2>🧾 Facture Avoir : Escompte accordé</h2>
+
 <table>
 <tr><td colspan="3" class="titre">FACTURE</td></tr>
-<tr><td class="bold">Société X (Frs)</td><td class="center bold">AVOIR</td><td class="bold right">Société Y (Clt)</td></tr>
+<tr>
+<td class="bold">Société X (Frs)</td>
+<td class="center bold">AVOIR</td>
+<td class="bold right">Société Y (Clt)</td>
+</tr>
 <tr><td colspan="3" class="bold">Facture AVOIR N° ........</td></tr>
 <tr><td colspan="3" class="bold">Lieu + Date : .......................................................</td></tr>
-<tr class="header-cell"><td colspan="2" class="bold">Éléments</td><td class="bold center">Montant (DH)</td></tr>
+<tr class="header-cell">
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant (DH)</td>
+</tr>
 <tr><td colspan="2">Montant de l’escompte (19 012 × 1 %)</td><td class="right">190,12</td></tr>
 <tr><td colspan="2">(+) TVA (190,12 × 20 %)</td><td class="right">38,02</td></tr>
 <tr><td colspan="2"><strong>Montant à déduire TTC</strong></td><td class="right"><strong>228,14</strong></td></tr>
 </table>
+
 </section>
 
+<!-- ===== COMPTABILISATION DE L'ESCOMPTE ===== -->
 <section id="EC3">
+
 <h2>Enregistrement comptable de l’Escompte accordé</h2>
+
 <h3>Chez l'Acheteur (Client)</h3>
+
 <table>
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center" style="width:5%;"><option>5141 </option><option>5161 </option><option>4411 </option></td>
+<td class="debit center" style="width:5%;">
+<option>5141 </option><option>5161 </option><option>4411 </option>
+</td>
 <td></td>
-<td class="debit" style="width:30%;"><option>Banques et/ou</option><option>Caisses et/ou</option><option>Fournisseurs...</option></td>
+<td class="debit" style="width:30%;">
+<option>Banques et/ou</option><option>Caisses et/ou</option><option>Fournisseurs...</option>
+</td>
 <td></td>
-<td class="montant" style="width:10%;"><option>Montant</option><option>Montant</option><option>Montant</option></td>
+<td class="montant" style="width:10%;">
+<option>Montant</option><option>Montant</option><option>Montant</option>
+</td>
 </tr>
 <tr>
 <td></td>
@@ -427,7 +1321,8 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <tr class="date"><td colspan="6"> Facture Avoir N°..................... </td></tr>
 </table>
 
-►Exemple : Obtention d’un escompte de règlement de 1%.
+<p>►Exemple : Obtention d’un escompte de règlement de 1%.</p>
+
 <table>
 <tr class="date"><td colspan="6">25/04/2026</td></tr>
 <tr>
@@ -457,6 +1352,7 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 </table>
 
 <h3>Chez le Vendeur (Fournisseur)</h3>
+
 <table>
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
@@ -477,14 +1373,17 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 <td></td>
 <td class="credit center" style="width:5%;"><option>5141</option><option>5161</option><option>3421</option></td>
 <td></td>
-<td class="credit" style="width:30%;"><option>Banques et/ou</option><option>Caisses et/ou</option><option>Clients...</option></td>
+<td class="credit" style="width:30%;">
+<option>Banques et/ou</option><option>Caisses et/ou</option><option>Clients...</option>
+</td>
 <td></td>
 <td class="montant" style="width:10%;"><option>Montant</option><option>Montant </option><option>Montant </option></td>
 </tr>
 <tr class="date"><td colspan="6"> Facture Avoir N°..................... </td></tr>
 </table>
 
-►Exemple : Octroi d’un escompte de règlement de 1%
+<p>►Exemple : Octroi d’un escompte de règlement de 1%</p>
+
 <table>
 <tr class="date"><td colspan="6">25/04/2026</td></tr>
 <tr>
@@ -511,9 +1410,11 @@ document.addEventListener('click',e=>{if(!e.target.closest('.site-menu .dropdown
 </tr>
 <tr class="date"><td colspan="6"> Facture Avoir N°30-2026 </td></tr>
 </table>
+
 </section>
 
-<footer> Formation en Comptabilité Générale</footer>
+<footer>Formation en Comptabilité Générale</footer>
+
 </body>
 </html>
 
