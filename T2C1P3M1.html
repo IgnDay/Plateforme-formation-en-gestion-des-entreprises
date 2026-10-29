@@ -1,27 +1,156 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay Comptabilité Générale - Régularisation des stocks</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
+html{
+    width:100%;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
+    line-height:1.6;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.5;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:90vw;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -36,78 +165,188 @@ nav button{
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:16px;
-    transition:0.3s;
+    font-size:15px;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
-.btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+nav button.btnActive{
+    background:#0984e3!important;
+    transform:scale(1.03);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
+    line-height:1.4;
 }
 
 h3{
-    color:#00b894;
+    color:#0f766e;
+    margin-top:25px;
+    line-height:1.5;
 }
 
-/* TABLEAUX */
+h5{
+    line-height:1.7;
+    font-size:14px;
+}
+
+p{
+    line-height:1.8;
+}
+
+.container{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    margin:20px auto;
+}
+
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:13px 16px;
+    margin:18px 0;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+/* ===== FORMULE ET VARIATION ===== */
+.formule{
+    text-align:center;
+    font-size:clamp(18px,3vw,30px);
+    font-weight:bold;
+    margin:20px 0 30px;
+    color:#082567;
+    overflow-wrap:anywhere;
+}
+
+.content{
+    width:100%;
+    min-width:0;
+}
+
+.block{
+    width:100%;
+    min-width:0;
+    margin-bottom:25px;
+}
+
+.box{
+    display:block;
+    width:fit-content;
+    max-width:100%;
+    background:white;
+    border:3px solid #082567;
+    padding:18px 25px;
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:20px;
+    box-shadow:0 4px 12px #0002;
+    overflow-wrap:anywhere;
+}
+
+.line{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.text{
+    font-size:16px;
+    min-width:0;
+    overflow-wrap:anywhere;
+}
+
+.green{
+    color:green;
+}
+
+.red{
+    color:#c0392b;
+}
+
+/* ===== TABLEAUX GÉNÉRAUX ===== */
+.table-wrapper{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    margin:20px 0 30px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:15px auto 25px;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    font-size:14px;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-wrap:break-word;
+}
+
+th{
+    background:#dfe6e9;
+    font-weight:bold;
+    text-align:left;
 }
 
 .titre{
@@ -128,44 +367,92 @@ td{
     text-align:right;
 }
 
-.header{
+.header-cell{
     background:#dfe6e9;
+    font-weight:bold;
 }
 
-/* JOURNAL */
-.date{
+/* ===== TABLEAUX DE COMPTABILISATION ===== */
+.stock-table{
+    width:100%;
+    min-width:0;
+    table-layout:fixed;
+    border-collapse:collapse;
+    margin:15px auto 25px;
+    background:white;
+    box-shadow:0 4px 12px #0002;
+}
+
+.stock-table td{
+    border:1px solid #cfd8e3;
+    padding:9px 6px;
+    font-size:13px;
+    line-height:1.5;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    white-space:normal;
+}
+
+.stock-table .date td{
     text-align:center;
-    background:#2c3e50;
+    font-weight:bold;
+    background:#1e3a5f;
     color:white;
-    font-weight:bold;
+    font-size:14px;
+    padding:11px 5px;
 }
 
-.debit{
-    background:#eaf4ff;
-    font-weight:bold;
+.stock-table .compte{
+    width:12%;
+    text-align:center;
 }
 
-.credit{
-    background:#fff4e6;
-    font-weight:bold;
+.stock-table .libelle{
+    width:38%;
 }
 
-.montant{
+.stock-table .montant{
+    width:20%;
     text-align:right;
-    background:#f8f9fa;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    background:#f9fbfd;
+    font-weight:bold;
+    color:#0b5e8e;
+}
+
+.stock-table .debit{
+    background:#e8f4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
-/* Hover tableau */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
+.stock-table .credit{
+    background:#fff2e6;
+    color:#a34b00;
+    font-weight:bold;
 }
 
-/* FOOTER */
+.stock-table tr:hover td{
+    background:#f1f7ff;
+}
+
+.stock-table .date:hover td{
+    background:#1e3a5f;
+    color:white;
+}
+
+/* Les anciens éléments option sont affichés comme du texte.
+   Les menus déroulants HTML ne sont pas nécessaires aux écritures. */
+.stock-table option{
+    display:inline;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,397 +463,555 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== ADAPTATION TABLETTE ===== */
+@media(max-width:768px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    td,th{
+        padding:8px;
+        font-size:13px;
+    }
+
+    .stock-table td{
+        padding:7px 4px;
+        font-size:12px;
+    }
+
+    .stock-table .date td{
+        font-size:13px;
+    }
+
+    .box{
+        padding:14px;
+    }
+}
+
+/* ===== ADAPTATION TÉLÉPHONE ===== */
+@media(max-width:480px){
+
+    body{
+        font-size:14px;
+    }
+
+    .brandbar{
+        gap:10px;
+    }
+
+    .brand{
+        font-size:18px;
+    }
+
+    .brand-logo{
+        width:38px;
+        height:38px;
+    }
+
+    .site-menu{
+        gap:4px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:12px;
+        padding:8px;
+    }
+
+    .dropdown-content{
+        min-width:200px;
+        max-width:90vw;
+    }
+
+    .dropdown-content a{
+        font-size:13px;
+        padding:10px;
+    }
+
+    header h1{
+        font-size:17px;
+        padding:14px 10px;
+    }
+
+    header h1 p{
+        font-size:14px;
+    }
+
+    nav{
+        padding:7px 5px;
+    }
+
+    nav button{
+        display:inline-block;
+        max-width:100%;
+        margin:4px 2px;
+        padding:9px 10px;
+        font-size:12px;
+        line-height:1.5;
+        white-space:normal;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+        border-radius:8px;
+    }
+
+    .animationSection{
+        border-left-width:4px;
+    }
+
+    h2{
+        font-size:19px;
+    }
+
+    h3{
+        font-size:16px;
+    }
+
+    h5{
+        font-size:12px;
+    }
+
+    p{
+        font-size:14px;
+    }
+
+    .highlight,
+    .example{
+        padding:10px;
+        font-size:12px;
+        line-height:1.7;
+    }
+
+    .container{
+        margin:12px auto;
+    }
+
+    /* Tableaux pédagogiques : deux colonnes adaptatives */
+    .table-wrapper{
+        width:100%;
+        max-width:100%;
+        overflow-x:auto;
+    }
+
+    table:not(.stock-table){
+        width:100%;
+        table-layout:fixed;
+    }
+
+    table:not(.stock-table) td,
+    table:not(.stock-table) th{
+        padding:7px 5px;
+        font-size:12px;
+        overflow-wrap:anywhere;
+    }
+
+    /* Écritures comptables :
+       les 6 colonnes sont conservées sans défilement horizontal. */
+    .stock-table{
+        width:100%;
+        min-width:0;
+        table-layout:fixed;
+    }
+
+    .stock-table td{
+        padding:6px 2px;
+        font-size:10px;
+        line-height:1.4;
+        overflow-wrap:anywhere;
+        word-break:normal;
+    }
+
+    .stock-table .date td{
+        padding:8px 3px;
+        font-size:11px;
+    }
+
+    .stock-table .compte{
+        font-size:10px;
+    }
+
+    .stock-table .montant{
+        text-align:center;
+        font-size:10px;
+        padding:5px 1px;
+    }
+
+    .formule{
+        font-size:18px;
+        line-height:1.5;
+    }
+
+    .box{
+        font-size:14px;
+        padding:12px;
+    }
+
+    .text{
+        font-size:13px;
+    }
+
+    .line{
+        gap:8px;
+    }
+
+    footer{
+        padding:15px 8px;
+        font-size:13px;
+    }
+}
+
+/* ===== TRÈS PETITS TÉLÉPHONES ===== */
+@media(max-width:360px){
+
+    .brandbar{
+        padding:8px 5px;
+    }
+
+    .site-menu{
+        gap:2px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        padding:6px 5px;
+        font-size:11px;
+    }
+
+    header h1{
+        font-size:15px;
+    }
+
+    section{
+        padding:9px;
+        margin:5px;
+    }
+
+    nav button{
+        font-size:11px;
+        padding:8px 6px;
+    }
+
+    .stock-table td{
+        padding:4px 1px;
+        font-size:9px;
+        line-height:1.35;
+    }
+
+    .stock-table .date td{
+        font-size:10px;
+    }
+
+    .stock-table .montant{
+        font-size:9px;
+    }
+
+    table:not(.stock-table) td,
+    table:not(.stock-table) th{
+        padding:5px 3px;
+        font-size:11px;
+    }
+
+    .formule{
+        font-size:16px;
+    }
+}
+
+/* ===== ACCESSIBILITÉ : MOUVEMENTS RÉDUITS ===== */
+@media(prefers-reduced-motion:reduce){
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 La régularisation des stocks
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
 </a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+
+<div class="dropdown-content">
+<a href="C1P3M1.html">T – Résumés des thèmes</a>
+<a href="C2P3M1.html">F – Formulaires interactifs</a>
+<a href="C3P3M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+
+<div class="dropdown-content">
+<a href="T1C1P3M1.html" class="card">
+       T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation
+    </a>
+
+    <a href="T2C1P3M1.html" class="card">
+        T2 - La régularisation des stocks
+    </a>
+
+    <a href="T3C1P3M1.html" class="card">
+        T3 - Les amortissements
+    </a>
+
+    <a href="T4C1P3M1.html" class="card">
+       T4 - Les provisions pour dépréciation des immobilisations
+    </a>
+
+    <a href="T5C1P3M1.html" class="card">
+T5 - Les provisions pour dépréciation des éléments de l’actif circulant
+    </a>
+
+    <a href="T6C1P3M1.html" class="card">
+        T6 - Les provisions pour risques et charges
+    </a>
+
+    <a href="T7C1P3M1.html" class="card">
+        T7 - La régularisation des charges
+    </a>
+
+    <a href="T8C1P3M1.html" class="card">
+        T8 - La régularisation des produits
+    </a>
+
+</div>
+</div>
+
+<a href="C1P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
+<p>T2 - La régularisation des stocks</p>
 </h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('DEF')">Définition de stock</button>
-<button onclick="showSection('INV')">Inventaire de stock</button>
-<button onclick="showSection('VAR')">Calcul et signification de la variation de stock</button>
-<button onclick="showSection('UTI')">Utilisation de la variation de stock</button>
-<button onclick="showSection('COMP')"> Comptabilisation de la régularisation de stock</button>
-
-
-
+<button class="btnActive" onclick="showSection('DEF',this)">Définition de stock</button>
+<button onclick="showSection('INV',this)">Inventaire de stock</button>
+<button onclick="showSection('VAR',this)">Calcul et signification de la variation de stock</button>
+<button onclick="showSection('UTI',this)">Utilisation de la variation de stock</button>
+<button onclick="showSection('COMP',this)">Comptabilisation de la régularisation de stock</button>
 </nav>
 
-<section id="DEF" class="active">
+<!-- ===================================================== -->
+<!-- SECTION 1 : DÉFINITION DU STOCK                       -->
+<!-- ===================================================== -->
 
-    <h2>Définition de Stock</h2>
+<section id="DEF" class="active animationSection">
 
-    <p>
-        Le stock désigne l’ensemble des biens entrants dans le cycle d’exploitation de l’entreprise. 
+<h2>Définition de Stock</h2>
 
-    <p>
-Ces éléments représentent des biens appartenant à l’entreprise et contribuent à l’augmentation de son patrimoine (actif circulant). Ils doivent être inventoriés à la clôture de l’exercice. Ils peuvent être classés comme suit :    </p>
+<p>
+Le stock désigne l’ensemble des biens entrant dans le cycle d’exploitation de l’entreprise.
+</p>
 
-    <div class="highlight">
-        ✔ Vendus en l’état (marchandises).
- <br>
-        ✔ Vendus après transformation (produits finis). 
-<br>
+<p>
+Ces éléments représentent des biens appartenant à l’entreprise et contribuent à l’augmentation de son patrimoine (actif circulant). Ils doivent être inventoriés à la clôture de l’exercice. Ils peuvent être classés comme suit :
+</p>
 
-✔ Utilisés pour obtenir des produits finis (matières premières et fournitures)
+<div class="highlight">
+✔ Vendus en l’état (marchandises).<br>
+✔ Vendus après transformation (produits finis).<br>
+✔ Utilisés pour obtenir des produits finis (matières premières et fournitures).
 </div>
-
 
 <div class="container">
 
-    <h2>Les principaux stocks</h2>
+<h2>Les principaux stocks</h2>
 
-    <table>
+<div class="table-wrapper">
+<table>
 
-        <tr>
-            <th>Type de stock</th>
-            <th>Description</th>
-        </tr>
+<tr>
+<th>Type de stock</th>
+<th>Description</th>
+</tr>
 
-        <tr>
-            <td class="type">Le stock de marchandises</td>
-            <td class="description">
-                Stocks des commerçants destinés à la revente sans transformation.
-            </td>
-        </tr>
+<tr>
+<td class="bold">Le stock de marchandises</td>
+<td>Stocks des commerçants destinés à la revente sans transformation.</td>
+</tr>
 
-        <tr>
-            <td class="type">Le stock de matières premières</td>
-            <td class="description">
-                Articles achetés auprès des fournisseurs pour être transformés.
-            </td>
-        </tr>
+<tr>
+<td class="bold">Le stock de matières premières</td>
+<td>Articles achetés auprès des fournisseurs pour être transformés.</td>
+</tr>
 
-        <tr>
-            <td class="type">
-                Le stock des produits en cours de fabrication (semi-finis)
-            </td>
-            <td class="description">
-                Articles non encore vendables et nécessitant des transformations supplémentaires.
-            </td>
-        </tr>
+<tr>
+<td class="bold">Le stock des produits en cours de fabrication (semi-finis)</td>
+<td>Articles non encore vendables et nécessitant des transformations supplémentaires.</td>
+</tr>
 
-        <tr>
-            <td class="type">
-                Le stock des produits terminés (produits finis)
-            </td>
-            <td class="description">
-                Produits fabriqués prêts à être vendus par l’entreprise.
-            </td>
-        </tr>
+<tr>
+<td class="bold">Le stock des produits terminés (produits finis)</td>
+<td>Produits fabriqués prêts à être vendus par l’entreprise.</td>
+</tr>
 
-        <tr>
-            <td class="type">Les emballages</td>
-            <td class="description">
-                Objets destinés à contenir les produits ou marchandises livrés aux clients.
-            </td>
-        </tr>
+<tr>
+<td class="bold">Les emballages</td>
+<td>Objets destinés à contenir les produits ou marchandises livrés aux clients.</td>
+</tr>
 
-    </table>
-
+</table>
+</div>
 </div>
 
 </section>
+
+<!-- ===================================================== -->
+<!-- SECTION 2 : INVENTAIRE                                -->
+<!-- ===================================================== -->
 
 <section id="INV">
 
-    <h2>Définition de l’inventaire</h2>
+<h2>Définition de l’inventaire</h2>
 
-    <p>
-   L’inventaire comptable permanent est une « organisation des comptes qui, par l’enregistrement des mouvements permet de connaitre de façon constante, en cours de l’exercice, les existants chiffrés en quantité et en valeur. (Plan Comptable Marocain)
-
- 
+<p>
+L’inventaire comptable permanent est une « organisation des comptes qui, par l’enregistrement des mouvements permet de connaitre de façon constante, en cours de l’exercice, les existants chiffrés en quantité et en valeur. » (Plan Comptable Marocain)
+</p>
 
 <div class="container">
 
-    <h2> Les 03 Types d’inventaire de stock </h2>
+<h2>Les 03 Types d’inventaire de stock</h2>
 
-    <table>
+<div class="table-wrapper">
+<table>
 
-        <tr>
-            <th>Type</th>
-            <th>Description</th>
-        </tr>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
 
-        <tr>
-            <td class="type"> 1-L’inventaire permanent : 
-</td>
-            <td class="description">
-                Le stock est suivi en temps réel après chaque entrée et sortie
-            </td>
-        </tr>
+<tr>
+<td class="bold">1 - L’inventaire permanent</td>
+<td>Le stock est suivi en temps réel après chaque entrée et sortie.</td>
+</tr>
 
-        <tr>
-            <td class="type"> 2-L'inventaire intermittent : 
-</td>
-            <td class="description">
-                Le stock est calculé à la fin d’une période. Généralement à la fin de l’exercice
-            </td>
-        </tr>
+<tr>
+<td class="bold">2 - L'inventaire intermittent</td>
+<td>Le stock est calculé à la fin d’une période. Généralement à la fin de l’exercice.</td>
+</tr>
 
-        <tr>
-            <td class="type">
-                3-L’inventaire physique : 
-            </td>
-            <td class="description">
-                Comptage réel des articles en stock pour vérifier les quantités existantes.
+<tr>
+<td class="bold">3 - L’inventaire physique</td>
+<td>Comptage réel des articles en stock pour vérifier les quantités existantes.</td>
+</tr>
 
-            </td>
-        </tr>
-    </table>
+</table>
+</div>
 
 </div>
 
-
-
-
 </section>
 
+<!-- ===================================================== -->
+<!-- SECTION 3 : CALCUL ET SIGNIFICATION                   -->
+<!-- ===================================================== -->
+
 <section id="VAR">
-<h2>Calcul et signification de la variation de stock </h2>
 
-
-<style>
-
-
-
-/* TITRE */
-
-.title{
-
-    text-align:center;
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    margin-bottom:40px;
-
-    color:#082567;
-
-}
-
-
-/* FORMULE */
-
-.formule{
-
-    text-align:center;
-
-    font-size:46px;
-
-    font-weight:bold;
-
-    margin-bottom:20px;
-
-}
-
-
-
-/* CONTENU */
-
-.content{
-
-    flex:1;
-
-}
-
-
-/* BOITE */
-
-.box{
-
-    display:inline-block;
-
-    background:white;
-
-    border:3px solid #082567;
-
-    padding:18px 35px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    margin-bottom:25px;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,0.2);
-
-}
-
-/* LIGNES */
-
-.line{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:25px;
-
-    margin-bottom:25px;
-
-    flex-wrap:wrap;
-
-}
-
-/* TEXTE */
-
-.text{
-
-    font-size:16px;
-
-    flex:1;
-
-}
-
-/* FLECHE */
-
-.arrow{
-
-    font-size:50px;
-
-    font-weight:bold;
-
-}
-
-/* RESULTAT */
-
-.result{
-
-    font-size:20px;
-
-    font-weight:bold;
-
-}
-
-/* STOCKAGE */
-
-.stockage{
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    margin-bottom:30px;
-
-}
-
-/* DESTOCKAGE */
-
-.destockage{
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    margin-top:30px;
-
-}
-
-/* COULEURS */
-
-.green{
-
-    color:green;
-
-}
-
-.red{
-
-    color:red;
-
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-
-    .schema{
-
-        flex-direction:column;
-
-    }
-
-    .vertical{
-
-        writing-mode:horizontal-tb;
-
-        transform:none;
-
-        width:100%;
-
-        height:auto;
-
-    }
-
-    .formule{
-
-        font-size:20px;
-
-    }
-
-    .line{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
-
-}
-
-</style>
-
-<div class="container">
+<h2>📊 Calcul et signification de la variation de stock</h2>
 
 <div class="formule">
 Variation des stocks = Stock final − Stock initial
@@ -574,199 +1019,155 @@ Variation des stocks = Stock final − Stock initial
 
 <div class="schema">
 
+<div class="content">
 
-    <!-- CONTENU -->
+<!-- VARIATION POSITIVE -->
 
-    <div class="content">
+<div class="block">
 
-        <!-- POSITIF -->
+<div class="box green">
+SI &lt; SF (Variation positive)
+<br>
+↗ Stockage
+<br>
+Augmentation du niveau de stock
+</div>
 
-        <div class="block">
+<div class="line">
+<div class="text">
+<strong>Marchandises, matières et fournitures consommables</strong>
+<br>
+➜ Diminution des charges C6
+</div>
+</div>
 
-            
+<div class="line">
+<div class="text">
+<strong>Produits en cours, produits finis, produits intermédiaires et résiduels</strong>
+<br>
+➜ Augmentation des produits C7
+</div>
+</div>
 
-            <div class="box green">
-               SI &lt; SF (Positive)
-                <br>↗ Stockage (augmentation du niveau de stock)
+</div>
 
-            </div>
+<!-- VARIATION NÉGATIVE -->
 
-            <div class="line">
+<div class="block">
 
-                <div class="text">
-                    M/ses, matières et fourni. Consommables
-                
-                    ➜
-                
-                    ↘ de charges C6
-                </div>
+<div class="box red">
+SI &gt; SF (Variation négative)
+<br>
+↘ Déstockage
+<br>
+Diminution du niveau de stock
+</div>
 
-            </div>
+<div class="line">
+<div class="text">
+<strong>Marchandises, matières et fournitures consommables</strong>
+<br>
+➜ Augmentation des charges C6
+</div>
+</div>
 
-            <div class="line">
-
-                <div class="text">
-                    Produits encours, produits finis, PI et R
-             
-                    ➜
-                
-                    ↗ de produits C7
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- NEGATIF -->
-
-        <div class="block">
-
-            <div class="box red">
-                SI &gt; SF (Négative)
-<br>  ↘ Déstockage (Diminution du niveau de stock)
-            </div>
-
-            <div class="line">
-
-                <div class="text">
-                    M/ses, matières et fourni. Consommables
-                
-                    ➜
-                    ↗ de charges C6
-                </div>
-
-            </div>
-
-            <div class="line">
-
-                <div class="text">
-                    Produits encours, produits finis, PI et R
-                
-                    ➜
-                
-                    ↘ de produits C7
-                </div>
-
-            </div>
-
-            
-
-        </div>
-
-    </div>
+<div class="line">
+<div class="text">
+<strong>Produits en cours, produits finis, produits intermédiaires et résiduels</strong>
+<br>
+➜ Diminution des produits C7
+</div>
+</div>
 
 </div>
 
 </div>
+</div>
+
+<div class="highlight">
+<strong>À retenir :</strong>
+<br>
+Stock final supérieur au stock initial : stockage.
+<br>
+Stock final inférieur au stock initial : déstockage.
+</div>
+
 </section>
 
+<!-- ===================================================== -->
+<!-- SECTION 4 : UTILISATION                               -->
+<!-- ===================================================== -->
+
 <section id="UTI">
-<h2>Utilisation de la variation de stock </h2>
 
-
-</head>
-
-<body>
+<h2>Utilisation de la variation de stock</h2>
 
 <div class="container">
 
-    <!-- TITRE -->
+<!-- ENTREPRISE COMMERCIALE -->
 
-    
+<div class="block">
 
-    <!-- ENTREPRISE COMMERCIALE -->
+<h3>Cas de l’entreprise commerciale :</h3>
 
-    <div class="block">
+<div class="text">
+Les comptes enregistrant les variations de stocks sont les suivants :
+</div>
 
-        <h3>
-            Cas de l’entreprise commerciale :
-        </h3>
-
-        <div class="text">
-
-            Les comptes enregistrant les variations de stocks
-            sont les suivants :
+<div class="table-wrapper">
 <table>
 
-                
+<tr>
+<td>6114 - variation de stocks de marchandises.</td>
+</tr>
 
-                <tr>
-                    <td>
-                        6114 - variation de stocks de marchandises.
-                    </td>
-                </tr>
+<tr>
+<td>6124 – variation de stocks de matières et fournitures.</td>
+</tr>
 
-                <tr>
-                    <td>
-                        6124 – variation de stocks de matières et fournitures
-
-                    </td>
-                </tr>
-
-                
-
-            </table>
-
-            
-
-        </div>
-
-    </div>
-
-    <!-- FORMULE -->
-
-
-    
-    <!-- ENTREPRISE INDUSTRIELLE -->
-
-    <div class="block">
-
-        <h3>
-            Cas de l’entreprise industrielle
-        </h3>
-
-        <div class="text">
-
-            Outre le compte 6124 – variation de stocks de M/F,
-            on utilise les comptes :
-
-        </div>
-
-        
-
-            <table>
-
-                
-
-                <tr>
-                    <td>
-                        7131 : variation de stocks de produits en cours
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        7132 : variation de stocks de biens produits
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        7134 : variations de stocks de services en cours
-                    </td>
-                </tr>
-
-            </table>
-
-
-    </div>
+</table>
+</div>
 
 </div>
 
-</body>
-</html>
+<!-- ENTREPRISE INDUSTRIELLE -->
+
+<div class="block">
+
+<h3>Cas de l’entreprise industrielle</h3>
+
+<div class="text">
+Outre le compte 6124 – variation de stocks de M/F, on utilise les comptes :
+</div>
+
+<div class="table-wrapper">
+<table>
+
+<tr>
+<td>7131 : variation de stocks de produits en cours.</td>
+</tr>
+
+<tr>
+<td>7132 : variation de stocks de biens produits.</td>
+</tr>
+
+<tr>
+<td>7134 : variations de stocks de services en cours.</td>
+</tr>
+
+</table>
+</div>
+
+</div>
+
+</div>
 
 </section>
+
+<!-- ===================================================== -->
+<!-- SECTION 5 : COMPTABILISATION                          -->
+<!-- ===================================================== -->
+
 <section id="COMP">
 <h2>Comptabilisation de la régularisation de stock</h2>
 <h3>Annulation stock initial</h3>
@@ -1143,18 +1544,83 @@ Variation de stock = 50.000,00 – 20.000,00 = + 30.000,00
 
 </section>
 
-
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C1P3M1.html">⬅ Retour </a>
-
+Formation en Comptabilité Générale
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermer les menus en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    const navigation=document.querySelector("nav");
+
+    if(navigation){
+        window.scrollTo({
+            top:navigation.offsetTop,
+            behavior:"smooth"
+        });
+    }
+}
+</script>
 
 </body>
 </html>
-
-
 
 
