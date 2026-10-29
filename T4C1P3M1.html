@@ -1,27 +1,145 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay Comptabilité Générale - Les provisions pour dépréciation des immobilisations</title>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
+    color:#1e293b;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:18px 12px;
+    margin:0;
+    font-size:23px;
+    line-height:1.6;
+}
+
+header h1 p{
+    margin:5px 0;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+}
+
+.dropdown button:hover,
+.dropdown button[aria-expanded="true"]{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:7px;
+    z-index:1000;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    border-radius:5px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION DU COURS ===== */
 nav{
     background:#34495e;
     padding:10px;
@@ -36,78 +154,122 @@ nav button{
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:16px;
-    transition:0.3s;
+    font-size:15px;
+    transition:.3s;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.04);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== TITRES ET TEXTE ===== */
 h2{
     color:#2c3e50;
+    margin-top:0;
+    line-height:1.5;
 }
 
 h3{
     color:#00b894;
+    margin-top:25px;
+    line-height:1.5;
 }
 
-/* TABLEAUX */
+h4{
+    color:#0f766e;
+    margin-top:25px;
+}
+
+h5{
+    color:#334155;
+    font-size:16px;
+    margin-top:25px;
+}
+
+p,li{
+    line-height:1.7;
+}
+
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin:18px 0;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:13px 16px;
+    margin:18px 0;
+    border-radius:7px;
+    line-height:1.8;
+    font-weight:normal;
+}
+
+/* ===== TABLEAUX ===== */
+.table-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    margin:20px 0 30px;
+    -webkit-overflow-scrolling:touch;
+}
+
 table{
-    width:97%;
+    width:100%;
     border-collapse:collapse;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:15px auto 25px;
+    box-shadow:0 3px 10px #00000012;
 }
 
-td{
-    border:1px solid #ccc;
+td,th{
+    border:1px solid #cbd5e1;
     padding:10px;
+    font-size:14px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
+}
+
+th{
+    background:#dfe6e9;
+    font-weight:bold;
+    text-align:center;
 }
 
 .titre{
@@ -116,56 +278,86 @@ td{
     font-weight:bold;
 }
 
-.bold{
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+
+.header-cell{
+    background:#dfe6e9;
     font-weight:bold;
 }
 
-.center{
-    text-align:center;
+.type{
+    line-height:1.7;
 }
 
-.right{
-    text-align:right;
+/* ===== TABLEAUX COMPTABLES ===== */
+.journal-table{
+    width:100%;
+    min-width:520px;
+    table-layout:fixed;
+    border-collapse:collapse;
 }
 
-.header{
-    background:#dfe6e9;
+.journal-table td,
+.journal-table th{
+    padding:10px 6px;
+    font-size:14px;
+    line-height:1.5;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-wrap:break-word;
+    white-space:normal;
 }
 
-/* JOURNAL */
-.date{
+.journal-table .date td{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
 }
 
-.debit{
+.journal-table .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
-.credit{
-    background:#fff4e6;
+.journal-table .credit{
+    background:#fff2e6;
+    color:#a34b00;
     font-weight:bold;
 }
 
-.montant{
+.journal-table .montant{
     text-align:right;
-    background:#f8f9fa;
     font-weight:bold;
+    background:#f8fafc;
+    white-space:nowrap;
 }
 
-/* Hover tableau */
-tr:hover td{
+.journal-table tr:hover td{
     background:#f1f7ff;
-    transition:0.2s;
 }
 
-/* FOOTER */
+.journal-table tr.date:hover td{
+    background:#2c3e50;
+    color:white;
+}
+
+.compte{
+    width:12%;
+    text-align:center;
+}
+
+.libelle{
+    width:48%;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:15px;
+    padding:18px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
@@ -176,915 +368,788 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTE ===== */
+@media(max-width:768px){
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    .dropdown button{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:19px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    .table-wrapper{
+        overflow-x:auto;
+    }
+}
+
+/* ===== TÉLÉPHONE ===== */
+@media(max-width:480px){
+    header h1{
+        font-size:17px;
+        padding:14px 10px;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+        border-left-width:5px;
+    }
+
+    section h2{
+        font-size:20px;
+    }
+
+    section h3{
+        font-size:16px;
+    }
+
+    section h4{
+        font-size:15px;
+    }
+
+    nav{
+        padding:7px 4px;
+    }
+
+    nav button{
+        display:block;
+        width:100%;
+        margin:6px 0;
+        padding:11px 8px;
+        font-size:13px;
+        transform:none;
+    }
+
+    nav button:hover{
+        transform:none;
+    }
+
+    td,th{
+        padding:7px;
+        font-size:12px;
+    }
+
+    .table-wrapper{
+        overflow-x:auto;
+        width:100%;
+    }
+
+    .journal-table{
+        table-layout:fixed;
+        min-width:520px;
+        width:100%;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        padding:6px 3px;
+        font-size:10px;
+        line-height:1.4;
+        overflow-wrap:anywhere;
+        word-break:normal;
+    }
+
+    .journal-table .date td{
+        font-size:11px;
+        padding:8px 3px;
+    }
+
+    .journal-table .montant{
+        text-align:center;
+        font-size:10px;
+    }
+
+    .highlight,
+    .example{
+        padding:10px;
+        font-size:12px;
+        line-height:1.6;
+    }
+
+    footer{
+        font-size:13px;
+    }
+}
+
+@media(max-width:360px){
+    section{
+        padding:9px;
+        margin:5px;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        padding:4px 2px;
+        font-size:9px;
+    }
+
+    .journal-table .montant{
+        font-size:9px;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
 <header>
-    <h1>📘 Les provisions pour dépréciation des immobilisations
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+    <span class="brand-logo">IF</span>
+    <span>IgnDay</span>
 </a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P3M1.html">T – Résumés des thèmes</a>
+<a href="C2P3M1.html">F – Formulaires interactifs</a>
+<a href="C3P3M1.html">E – Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+T – Résumés des thèmes ▼
+</button>
+<div class="dropdown-content">
+<a href="T1C1P3M1.html">T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation</a>
+<a href="T2C1P3M1.html">T2 - La régularisation des stocks</a>
+<a href="T3C1P3M1.html">T3 - Les amortissements</a>
+<a href="T4C1P3M1.html">T4 - Les provisions pour dépréciation des immobilisations</a>
+<a href="T5C1P3M1.html">T5 - Les provisions pour dépréciation des éléments de l’actif circulant</a>
+<a href="T6C1P3M1.html">T6 - Les provisions pour risques et charges</a>
+<a href="T7C1P3M1.html">T7 - La régularisation des charges</a>
+<a href="T8C1P3M1.html">T8 - La régularisation des produits</a>
+</div>
+</div>
+
+<a href="C1P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
+<p>T4 – Les provisions pour dépréciation des immobilisations</p>
 </h1>
+
 </header>
 
 <nav>
-    <button onclick="showSection('DEF')">Définition de la provision</button>
-<button onclick="showSection('IF')">Les provisions pour dépréciation des immobilisations financières</button>
-
-<button onclick="showSection('IAF')">Les provisions pour dépréciation des immobilisations autres que financières</button>
-
-
-
+<button onclick="showSection('DEF',this)" class="btnActive">Définition de la provision</button>
+<button onclick="showSection('IF',this)">Provisions des immobilisations financières</button>
+<button onclick="showSection('IAF',this)">Provisions des autres immobilisations</button>
 </nav>
 
-<section id="DEF" class="active">
+<!-- ===== SECTION 1 : DÉFINITION ===== -->
+<section id="DEF" class="active animationSection">
 
-    <h2>Définition de la provision</h2>
+<h2>📘 Définition de la provision</h2>
 
-    <p>
-        Une provision est la constatation comptable : <ul>
--Soit d’une diminution de valeur d’un élément d’actif  </ul>
+<p>Une provision est la constatation comptable :</p>
+
 <ul>
--Soit d’une augmentation du passif exigible à plus ou au moins long terme </ul>
+<li>Soit d’une diminution de valeur d’un élément d’actif.</li>
+<li>Soit d’une augmentation du passif exigible à plus ou moins long terme.</li>
+</ul>
 
+<p>
+Au Maroc, selon le Code Général de la Normalisation Comptable (CGNC), les provisions sont généralement classées en trois grandes catégories :
+</p>
 
-
-    <p>
-Au Maroc, selon le Code Général de la Normalisation Comptable (CGNC), les provisions sont généralement classées en trois grandes catégories :</p>
+<div class="table-wrapper">
 <table>
+<tr>
+<th>1- Les provisions pour dépréciation</th>
+</tr>
+<tr>
+<td> Elles constatent une diminution de la valeur d’un élément d’actif.</td>
+</tr>
+</table>
+</div>
 
-        <tr>
-            <th>1- Les Provisions Pour Dépréciation</th>
-        </tr>
-
-        <tr>
-            <td class="type"> Elles constatent une diminution de la valeur d’un élément d’actif.
-</td>
-        </tr>
-
-        
-        
-
-    </table>
-
+<div class="table-wrapper">
 <table>
+<tr>
+<th>2- Les provisions pour risques et charges</th>
+</tr>
+<tr>
+<td> Elles sont constituées pour faire face à des charges ou à des risques futurs probables dont le montant ou l’échéance demeure incertain.</td>
+</tr>
+</table>
+</div>
 
-        <tr>
-            <th>2- Les Provisions pour Risques et Charges  </th>
-        </tr>
-
-        <tr>
-            <td class="type"> Elles sont constituées pour faire face à des charges ou à des risques futurs probables dont le montant ou l’échéance demeure incertain.</td>
-        </tr>
-
-        
-
-        
-
-    </table>
+<div class="table-wrapper">
 <table>
+<tr>
+<th>3- Les provisions réglementées</th>
+</tr>
+<tr>
+<td>Ce sont des provisions créées par des dispositions fiscales ou réglementaires particulières. Elles ont un caractère fiscal plus que comptable.</td>
+</tr>
+</table>
+</div>
 
-        <tr>
-            <th>3- Les Provisions Réglementées </th>
-        </tr>
-
-        <tr>
-            <td class="type"> Ce sont des provisions créées par des dispositions fiscales ou réglementaires particulières. Elles ont un caractère fiscal plus que comptable.
-</td>
-        </tr>
-
-        
-
-        
-
-    </table>
-
-
-
-
-    
+<div class="highlight">
+À retenir : la provision permet de constater comptablement une dépréciation probable d’un élément d’actif ou de prendre en compte certains risques et charges futurs.
+</div>
 
 </section>
 
+<!-- ===== SECTION 2 : IMMOBILISATIONS FINANCIÈRES ===== -->
 <section id="IF">
 
-    <h2> Cas des titres de participation </h2>
-<h3>1-Création ou constitution de la provision </h3>
-La dépréciation ou la moins-value est calculée par comparaison de deux valeurs : La valeur d’entrée et la valeur d’inventaire. <br>
-→	On constitue la provision lorsque la valeur d’entrée est supérieure à la valeur actuelle
+<h2>Cas des titres de participation</h2>
 
-<h3>   ► Exemple : L’entreprise « IGNDAY » a acquis, le 15/03/2022, 1 000 actions de la société ABD au prix unitaire de 600 DH. Au 31/12/2022, la valeur boursière de ces actions s’élève à 500 DH par action.
+<h3>1- Création ou constitution de la provision</h3>
 
-</h3>
+<p>
+La dépréciation ou la moins-value est calculée par comparaison de deux valeurs : la valeur d’entrée et la valeur d’inventaire.
+</p>
+
+<div class="highlight">
+On constitue la provision lorsque la valeur d’entrée est supérieure à la valeur actuelle.
+</div>
+
+<div class="example">
+Exemple : L’entreprise « IGNDAY » a acquis, le 15/03/2022, 1 000 actions de la société ABD au prix unitaire de 600 DH. Au 31/12/2022, la valeur boursière de ces actions s’élève à 500 DH par action.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>Prix unitaire d’achat </td>
-<td>Prix unitaire au 31/12/2022 </td>
-<td>Provision au 31/12/2022 </td>
-
-
-        </tr>
-
+<th>Nombre</th>
+<th>Prix unitaire d’achat</th>
+<th>Prix unitaire au 31/12/2022</th>
+<th>Provision au 31/12/2022</th>
+</tr>
 <tr>
-            <td>1000</td>         <td> 
-600
-</td>
-<td> 500
-
-</td><td>
-100000</td>
-        </tr>
+<td class="center">1 000</td>
+<td class="right">600</td>
+<td class="right">500</td>
+<td class="right">100 000</td>
+</tr>
 </table>
-▐ (600-500)*1000=100000
+</div>
 
-<h3>   ► Comptabilisation : 
-<table>
+<div class="highlight">
+Calcul : (600 − 500) × 1 000 = 100 000 DH.
+</div>
 
-<!-- 01/01/2025 -->
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2022</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6392</option>
-
-       
-    </td>
-
+<td class="debit center compte">6392</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DPPD des IF</option>
-           
-       
-    </td>
-
+<td class="debit libelle">DPPD des IF</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>100.000,00 </option>
-</td>
-
+<td class="montant">100.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>2951</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">2951</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PPD des TP</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">PPD des TP</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>100.000,00</option>
-
-</td>
-
+<td class="montant">100.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Création de provision TP </td></tr>
-
+<tr class="date"><td colspan="6">Création de provision TP</td></tr>
 </table>
+</div>
 
+<h3>2- Ajustement de la provision</h3>
 
+<p>Il est nécessaire de faire la distinction entre les deux cas suivants :</p>
 
-
-<h3>2-Ajustement de la provision </h3>
-Il est nécessaire de faire la distinction entre les deux cas suivants :
+<div class="table-wrapper">
 <table>
-
-        <tr>
-            <td>Augmentation de la provision</td>
-        
-            <td class="type"> → Dotation.
-</td>
-        </tr>
 <tr>
-            <td>Diminution ou Annulation de la provision</td>
-        
-            <td class="type"> → Reprise.
-</td>
-        </tr>
-
-   
-        
-
-    </table>
-<h5> a- Cas de l’augmentation de la provision</h5>
-<h3>   ► Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2023, le cours boursier de l’action ABD s’établisse à 450 DH.
-
-
-</h3>
-<table>
-
+<th>Situation</th>
+<th>Traitement comptable</th>
+</tr>
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/22) </td>
-<td>PU (31/12/23) </td>
-<td>Provision (31/12/22) </td>
-<td>Provision (31/12/23) </td>
-<td>Dotation (+)</td>
-<td>Reprise (-)</td>
-
-
-
-
-        </tr>
-
+<td>Augmentation de la provision</td>
+<td>Dotation</td>
+</tr>
 <tr>
-           
-<td>1000 </td>
-            <td>600 </td>
-<td>500 </td>
-<td>450 </td>
-<td>100000</td>
-<td>150000</td>
-<td>50000 </td>
-<td>X </td>
+<td>Diminution ou annulation de la provision</td>
+<td>Reprise</td>
 </tr>
 </table>
-▐ (600-500)*1000=100000▐ (600-450)*1000=150000▐ (150000-100000)= + 50000 
-<h3>   ► Comptabilisation : 
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<h4>a- Cas de l’augmentation de la provision</h4>
+
+<div class="example">
+Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2023, le cours boursier de l’action ABD s’établisse à 450 DH.
+</div>
+
+<div class="table-wrapper">
+<table>
+<tr>
+<th>Nombre</th>
+<th>PUA</th>
+<th>PU (31/12/22)</th>
+<th>PU (31/12/23)</th>
+<th>Provision (31/12/22)</th>
+<th>Provision (31/12/23)</th>
+<th>Dotation (+)</th>
+<th>Reprise (-)</th>
+</tr>
+<tr>
+<td>1 000</td>
+<td>600</td>
+<td>500</td>
+<td>450</td>
+<td>100 000</td>
+<td>150 000</td>
+<td>50 000</td>
+<td>X</td>
+</tr>
+</table>
+</div>
+
+<div class="highlight">
+Calcul de la provision au 31/12/2022 : (600 − 500) × 1 000 = 100 000 DH.<br>
+Calcul de la provision au 31/12/2023 : (600 − 450) × 1 000 = 150 000 DH.<br>
+Dotation complémentaire : 150 000 − 100 000 = 50 000 DH.
+</div>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6392</option>
-
-       
-    </td>
-
+<td class="debit center compte">6392</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>DPPD des IF</option>
-           
-       
-    </td>
-
+<td class="debit libelle">DPPD des IF</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>50.000,00 </option>
-</td>
-
+<td class="montant">50.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>2951</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">2951</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PPD des TP</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">PPD des TP</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>50.000,00</option>
-
-</td>
-
+<td class="montant">50.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Augmentation de provision TP </td></tr>
-
+<tr class="date"><td colspan="6">Augmentation de provision TP</td></tr>
 </table>
-<h5> b- Cas de la diminution ou de l’annulation de la provision</h5>
-<h3>   ► Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2024, le cours de l’action ABD s’établisse à 580 DH.
-</h3>
+</div>
+
+<h4>b- Cas de la diminution ou de l’annulation de la provision</h4>
+
+<div class="example">
+Exemple : Reprenons l’exemple précédent en supposant qu’au 31/12/2024, le cours de l’action ABD s’établisse à 580 DH.
+</div>
+
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/23) </td>
-<td>PU (31/12/24) </td>
-<td>Provision (31/12/23) </td>
-<td>Provision (31/12/24) </td>
-<td>Dotation (+)</td>
-<td>Reprise (-)</td>
-
-
-
-
-        </tr>
-
+<th>Nombre</th>
+<th>PUA</th>
+<th>PU (31/12/23)</th>
+<th>PU (31/12/24)</th>
+<th>Provision (31/12/23)</th>
+<th>Provision (31/12/24)</th>
+<th>Dotation (+)</th>
+<th>Reprise (-)</th>
+</tr>
 <tr>
-           
-<td>1000 </td>
-            <td>600 </td>
-<td>450 </td>
-<td>580 </td>
-<td>150000</td>
-<td>20000</td>
-<td>X </td>
-<td>130000</td>
+<td>1 000</td>
+<td>600</td>
+<td>450</td>
+<td>580</td>
+<td>150 000</td>
+<td>20 000</td>
+<td>X</td>
+<td>130 000</td>
 </tr>
 </table>
-▐ (600-450)*1000=150000▐ (600-580)*1000=20000▐ (20000-150000)= - 130000
-<h3>   ► Comptabilisation : 
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+Provision au 31/12/2023 : (600 − 450) × 1 000 = 150 000 DH.<br>
+Provision au 31/12/2024 : (600 − 580) × 1 000 = 20 000 DH.<br>
+Reprise : 150 000 − 20 000 = 130 000 DH.
+</div>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2024</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>2951</option>
-
-       
-    </td>
-
+<td class="debit center compte">2951</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> PPD des TP </option>
-           
-       
-    </td>
-
+<td class="debit libelle">PPD des TP</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>130.000,00 </option>
-</td>
-
+<td class="montant">130.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7392</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">7392</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RPPD des IF</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">RPPD des IF</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>130.000,00</option>
-
-</td>
-
+<td class="montant">130.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6">Diminution de provision TP </td></tr>
-
+<tr class="date"><td colspan="6">Diminution de provision TP</td></tr>
 </table>
+</div>
 
+<h3>3- Cession des TP</h3>
 
-<h3>3-Cession des TP </h3>
+<div class="example">
+Exemple : Supposons que les 1 000 actions ABD, acquises au prix unitaire de 600 DH et ayant fait l’objet d’une provision de 100 000 DH au 31/12/2022, soient cédées le 30/08/2023 au prix de 590 DH par action. L’avis de crédit établi par la banque mentionne une commission de 250 DH hors taxes, soumise à la TVA au taux de 10 %.
+</div>
 
-<h3>   ► Exemple : Supposons que les 1 000 actions ABD, acquises au prix unitaire de 600 DH et ayant fait l’objet d’une provision de 100 000 DH au 31/12/2022, soient cédées le 30/08/2023 au prix de 590 DH par action. L’avis de crédit établi par la banque mentionne une commission de 250 DH hors taxes, soumise à la TVA au taux de 10 %.</h3>
+<div class="table-wrapper">
 <table>
-
 <tr>
-            <td>Nombre </td>
-            <td>PUA </td>
-<td>PU (31/12/22) </td>
-<td>PC (30/08/23) </td>
-<td>Provision (31/12/22) </td>
-<td>Produit de cession </td>
-<td>VNA</td>
-
-
-
-
-        </tr>
-
+<th>Nombre</th>
+<th>PUA</th>
+<th>PU (31/12/22)</th>
+<th>PC (30/08/23)</th>
+<th>Provision (31/12/22)</th>
+<th>Produit de cession</th>
+<th>VNA</th>
+</tr>
 <tr>
-           
-<td>1000 </td>
-            <td>600 </td>
-<td>500 </td>
-<td>590 </td>
-<td>100000</td>
+<td>1 000</td>
+<td>600</td>
+<td>500</td>
+<td>590</td>
+<td>100 000</td>
 <td>5900000</td>
-<td>600000 </td>
+<td>600000</td>
 </tr>
 </table>
-▐ (600-500)*1000=100000▐ 590*1000=590000▐ 600*1000=600000
-<h4>   a- Comptabilisation le jour de cession : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<div class="highlight">
+Provision : (600 − 500) × 1 000 = 100 000 DH.<br>
+Produit de cession : 590 × 1 000 = 590 000 DH.<br>
+VNA : 600 × 1 000 = 600 000 DH.
+</div>
+
+<h4>a- Comptabilisation le jour de cession</h4>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">30/08/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>5141</option>
-
-       
-    </td>
-
+<td class="debit center compte">5141</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Banques</option>
-           
-       
-    </td>
-
+<td class="debit libelle">Banques</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>589.725,00</option>
-</td>
-
+<td class="montant">589.725,00</td>
+<td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6147</option>
-
-       
-    </td>
-
+<td class="debit center compte">6147</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Services bancaires</option>
-           
-       
-    </td>
-
+<td class="debit libelle">Services bancaires</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>250,00</option>
-</td>
-
+<td class="montant">250,00</td>
+<td></td>
 </tr>
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>3455</option>
-
-       
-    </td>
-
+<td class="debit center compte">3455</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option>Etat - TVA récupérable</option>
-           
-       
-    </td>
-
+<td class="debit libelle">État - TVA récupérable</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>25,00</option>
-</td>
-
+<td class="montant">25,00</td>
+<td></td>
 </tr>
-
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7514</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">7514</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option>PC des IF</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">PC des IF</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>590.000,00</option>
-
-</td>
-
+<td class="montant">590.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Cession TP « ABD » </td></tr>
-
+<tr class="date"><td colspan="6">Cession TP « ABD »</td></tr>
 </table>
-➡️ Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2023. <br>
-➡️ En cas de cession des immobilisations à crédit, il convient de débiter le compte 3481 – Créances sur cessions d’immobilisations.
+</div>
 
-<h4>   b- Comptabilisation de l’annulation de la provision : </h4>   
+<div class="highlight">
+Si cette écriture n’a pas été enregistrée à la date de la cession, le comptable devra la comptabiliser au 31/12/2023.<br><br>
+En cas de cession des immobilisations à crédit, il convient de débiter le compte 3481 – Créances sur cessions d’immobilisations.
+</div>
 
-<table>
+<h4>b- Comptabilisation de l’annulation de la provision</h4>
 
-<!-- 01/01/2025 -->
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>2951</option>
-
-       
-    </td>
-
+<td class="debit center compte">2951</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> PPD des TP </option>
-           
-       
-    </td>
-
+<td class="debit libelle">PPD des TP</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>100.000,00 </option>
-</td>
-
+<td class="montant">100.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7392</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">7392</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RPPD des IF </option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">RPPD des IF</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>100.000,00</option>
-
-</td>
-
+<td class="montant">100.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6">Annulation de provision TP </td></tr>
-
+<tr class="date"><td colspan="6">Annulation de provision TP</td></tr>
 </table>
-<h4>   c- Comptabilisation de la sortie des TP du patrimoine de l’entreprise : </h4>   
-<table>
+</div>
 
-<!-- 01/01/2025 -->
+<h4>c- Comptabilisation de la sortie des TP du patrimoine de l’entreprise</h4>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6514</option>
-
-       
-    </td>
-
+<td class="debit center compte">6514</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> VNA des IF cédées</option>
-           
-       
-    </td>
-
+<td class="debit libelle">VNA des IF cédées</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>600.000,00 </option>
-</td>
-
+<td class="montant">600.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>2510</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">2510</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> Titres de participation</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">Titres de participation</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>600.000,00</option>
-
-</td>
-
+<td class="montant">600.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6">Sortie TP </td></tr>
-
+<tr class="date"><td colspan="6">Sortie TP</td></tr>
 </table>
-
-
+</div>
 
 </section>
 
+<!-- ===== SECTION 3 : AUTRES IMMOBILISATIONS ===== -->
 <section id="IAF">
-<h2> Cas de Fonds commercial</h2>
-<h3>   ► Exemple : Lors des travaux d’inventaire au 31/12/2023, l’entreprise IGNDAY a estimé à 10 000 DH la dépréciation de son fonds commercial, en raison de la baisse importante de son chiffre d’affaires et de ses bénéfices. La valeur d’entrée du fonds commercial est de 30 000 DH et sa valeur actuelle de 20 000 DH.
 
+<h2>Cas du fonds commercial</h2>
 
-</h3>
-<h3>  ► Comptabilisation 
-</h3>   
-<table>
-<!-- 01/01/2025 -->
+<div class="example">
+Exemple : Lors des travaux d’inventaire au 31/12/2023, l’entreprise IGNDAY a estimé à 10 000 DH la dépréciation de son fonds commercial, en raison de la baisse importante de son chiffre d’affaires et de ses bénéfices. La valeur d’entrée du fonds commercial est de 30 000 DH et sa valeur actuelle de 20 000 DH.
+</div>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6194</option>
-
-       
-    </td>
-
+<td class="debit center compte">6194</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> DEPPD des immobilisations</option>
-           
-       
-    </td>
-
+<td class="debit libelle">DEPPD des immobilisations</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>10.000,00 </option>
-</td>
-
+<td class="montant">10.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>2920</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">2920</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> PPD des I.INCOR</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">PPD des immobilisations incorporelles</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>10.000,00</option>
-
-</td>
-
+<td class="montant">10.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Dépréciation de la valeur du FC </td></tr>
-
+<tr class="date"><td colspan="6">Dépréciation de la valeur du FC</td></tr>
 </table>
-➡️ En cas de reprise, il convient de procéder à l’annulation de la provision en débitant le compte 2920 – PPD des immobilisations incorporelles et en créditant le compte 7596 – Reprises sur provisions pour dépréciation des immobilisations.
+</div>
 
-<h2> Cas d’un terrain</h2>
-<h3>   ► Exemple : Lors de l’inventaire au 31/12/2023, l’entreprise a évalué à 25 000 DH la dépréciation non définitive d’un terrain aménagé partiellement détruit par des inondations, une partie de celui-ci ayant été emportée par les eaux d’une rivière en crue.
+<div class="highlight">
+En cas de reprise, il convient de procéder à l’annulation de la provision en débitant le compte 2920 – PPD des immobilisations incorporelles et en créditant le compte 7596 – Reprises sur provisions pour dépréciation des immobilisations.
+</div>
 
+<h2>Cas d’un terrain</h2>
 
-</h3>
-<h3>  ► Comptabilisation 
-</h3>   
-<table>
-<!-- 01/01/2025 -->
+<div class="example">
+Exemple : Lors de l’inventaire au 31/12/2023, l’entreprise a évalué à 25 000 DH la dépréciation non définitive d’un terrain aménagé partiellement détruit par des inondations, une partie de celui-ci ayant été emportée par les eaux d’une rivière en crue.
+</div>
+
+<h3>► Comptabilisation</h3>
+
+<div class="table-wrapper">
+<table class="journal-table">
 <tr class="date"><td colspan="6">31/12/2023</td></tr>
-
 <tr>
-<td class="debit center"" style="width:5%;">
-        
-            <option>6596</option>
-
-       
-    </td>
-
+<td class="debit center compte">6596</td>
 <td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> DNC aux provisions pour dépréciation</option>
-           
-       
-    </td>
-
+<td class="debit libelle">DNC aux provisions pour dépréciation</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>25.000,00 </option>
-</td>
-
+<td class="montant">25.000,00</td>
+<td></td>
 </tr>
-
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>2930</option>
-
-
-
-
-</td>
-
+<td class="credit center compte">2930</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> PPD des I.COR</option>
-            
-
-
-        
-</td>
-
+<td class="credit libelle">PPD des immobilisations corporelles</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>25.000,00</option>
-
-</td>
-
+<td class="montant">25.000,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6"> Dépréciation de la valeur du Terrain </td></tr>
-
+<tr class="date"><td colspan="6">Dépréciation de la valeur du terrain</td></tr>
 </table>
-➡️ En cas de reprise, il convient de procéder à l’annulation de la provision en débitant le compte 2930 – PPD des immobilisations corporelles et en créditant le compte 7596 – Reprises non courantes sur provisions pour dépréciation.
+</div>
+
+<div class="highlight">
+En cas de reprise, il convient de procéder à l’annulation de la provision en débitant le compte 2930 – PPD des immobilisations corporelles et en créditant le compte 7596 – Reprises non courantes sur provisions pour dépréciation.
+</div>
 
 </section>
-
 
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C1P3M1.html">⬅ Retour </a>
-
+Formation en Comptabilité Générale<br><br>
 </footer>
+
+<script>
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* Fermeture en cliquant à l'extérieur */
+document.addEventListener("click",function(event){
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+        if(!dropdown.contains(event.target)){
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+        }
+    });
+});
+
+/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
+function showSection(id,button){
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({
+        top:document.querySelector("nav").offsetTop,
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
-
-
-
-
