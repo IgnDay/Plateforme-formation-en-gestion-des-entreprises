@@ -168,7 +168,9 @@ header h1 p:last-child{
 .btn-pdf{
     background:#0984e3;
 }
-
+.btn-excel{
+    background:#217346;
+}
 .btn-vider{
     background:#c0392b;
 }
@@ -373,10 +375,12 @@ F – Formulaires interactifs ▼
 
 <!-- BOUTONS -->
 <div class="actions">
-<button class="btn-pdf" onclick="exportPDF()">📄 Export PDF</button>
-<button class="btn-vider" onclick="viderCPC()">🗑️ Vider</button>
-</div>
+    <button class="btn-pdf" onclick="exportPDF()">📄 Export PDF</button>
 
+    <button class="btn-excel" onclick="exportExcel()">📊 Export Excel</button>
+
+    <button class="btn-vider" onclick="viderCPC()">🗑️ Vider</button>
+</div>
 <!-- TABLEAU DU CPC -->
 <table id="compteResultat">
 
@@ -638,6 +642,7 @@ F – Formulaires interactifs ▼
 <!-- BIBLIOTHEQUES PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script>
 
@@ -963,6 +968,234 @@ async function exportPDF(){
         bouton.innerText=texteOriginal;
 
     }
+
+}
+
+function exportExcel(){
+
+    if(typeof XLSX==="undefined"){
+        alert("La bibliothèque Excel n'est pas disponible. Vérifiez votre connexion Internet.");
+        return;
+    }
+
+    // Mettre à jour les calculs avant l'export
+    calculerTotaux();
+
+    const tableau=document.getElementById("compteResultat");
+
+    const donnees=[];
+
+    // Titre du document
+    donnees.push(["COMPTE DE PRODUITS ET DE CHARGES"]);
+    donnees.push([""]);
+    donnees.push(["Rubriques","Montant (DH)"]);
+
+    // Récupération de toutes les lignes
+    tableau.querySelectorAll("tbody tr").forEach(ligne=>{
+
+        const cellules=ligne.querySelectorAll("td,th");
+
+        if(cellules.length===1 && cellules[0].colSpan===2){
+
+            donnees.push([
+                cellules[0].innerText.trim(),
+                ""
+            ]);
+
+            return;
+        }
+
+        if(cellules.length>=2){
+
+            const designation=cellules[0].innerText.trim();
+
+            const input=cellules[1].querySelector("input");
+
+            let montant;
+
+            if(input){
+                montant=input.value==="" ? "" : Number(input.value);
+            }else{
+                montant=Number(cellules[1].innerText.trim()) || 0;
+            }
+
+            donnees.push([
+                designation,
+                montant
+            ]);
+
+        }
+
+    });
+
+    // Création de la feuille Excel
+    const feuille=XLSX.utils.aoa_to_sheet(donnees);
+
+    // Largeur des colonnes
+    feuille["!cols"]=[
+        {wch:85},
+        {wch:20}
+    ];
+
+    // Fusion du titre
+    feuille["!merges"]=[
+        {
+            s:{r:0,c:0},
+            e:{r:0,c:1}
+        }
+    ];
+
+    // Mise en forme des cellules
+    donnees.forEach((ligne,index)=>{
+
+        const celluleA=XLSX.utils.encode_cell({r:index,c:0});
+        const celluleB=XLSX.utils.encode_cell({r:index,c:1});
+
+        if(index===0){
+
+            feuille[celluleA].s={
+                font:{bold:true,size:16,color:{rgb:"FFFFFF"}},
+                fill:{fgColor:{rgb:"0F766E"}},
+                alignment:{horizontal:"center",vertical:"center"}
+            };
+
+            feuille["!rows"]=[
+                {hpt:30}
+            ];
+
+        }
+
+        if(index===2){
+
+            [celluleA,celluleB].forEach(ref=>{
+
+                if(feuille[ref]){
+                    feuille[ref].s={
+                        font:{bold:true,color:{rgb:"FFFFFF"}},
+                        fill:{fgColor:{rgb:"34495E"}},
+                        alignment:{horizontal:"center"}
+                    };
+                }
+
+            });
+
+        }
+
+        // Rubriques principales
+        if(ligne[1]==="" && index>2 && ligne[0]){
+
+            if(feuille[celluleA]){
+                feuille[celluleA].s={
+                    font:{bold:true},
+                    fill:{fgColor:{rgb:"D9E2F3"}}
+                };
+            }
+
+            if(feuille[celluleB]){
+                feuille[celluleB].s={
+                    fill:{fgColor:{rgb:"D9E2F3"}}
+                };
+            }
+
+        }
+
+        // Lignes de totaux et résultats
+        if(ligne[0] && (
+            ligne[0].includes("Total") ||
+            ligne[0].includes("Résultat") ||
+            ligne[0].includes("Chiffre d'affaires")
+        )){
+
+            [celluleA,celluleB].forEach(ref=>{
+
+                if(feuille[ref]){
+                    feuille[ref].s={
+                        font:{bold:true},
+                        fill:{fgColor:{rgb:"FFF3CD"}},
+                        border:{
+                            top:{style:"thin",color:{rgb:"999999"}},
+                            bottom:{style:"thin",color:{rgb:"999999"}}
+                        }
+                    };
+                }
+
+            });
+
+        }
+
+        // Produits
+        if(ligne[0] && (
+            ligne[0].includes("Ventes") ||
+            ligne[0].includes("Subvention") ||
+            ligne[0].includes("Reprises") ||
+            ligne[0].includes("Gains de change") ||
+            ligne[0].includes("Produits")
+        )){
+
+            [celluleA,celluleB].forEach(ref=>{
+
+                if(feuille[ref] && !feuille[ref].s){
+                    feuille[ref].s={
+                        fill:{fgColor:{rgb:"D4EDDA"}}
+                    };
+                }
+
+            });
+
+        }
+
+        // Charges
+        if(ligne[0] && (
+            ligne[0].includes("Achats") ||
+            ligne[0].includes("Charges") ||
+            ligne[0].includes("Dotations") ||
+            ligne[0].includes("Impôts") ||
+            ligne[0].includes("Pertes de change")
+        )){
+
+            [celluleA,celluleB].forEach(ref=>{
+
+                if(feuille[ref] && !feuille[ref].s){
+                    feuille[ref].s={
+                        fill:{fgColor:{rgb:"F8D7DA"}}
+                    };
+                }
+
+            });
+
+        }
+
+    });
+
+    // Format numérique des montants
+    Object.keys(feuille).forEach(ref=>{
+
+        if(ref[0]==="!" || ref==="A1") return;
+
+        if(ref.startsWith("B")){
+
+            if(feuille[ref] && typeof feuille[ref].v==="number"){
+                feuille[ref].z='#,##0.00';
+            }
+
+        }
+
+    });
+
+    // Création du classeur
+    const classeur=XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        classeur,
+        feuille,
+        "CPC"
+    );
+
+    // Téléchargement
+    XLSX.writeFile(
+        classeur,
+        "F5_CPC_IgnDay.xlsx"
+    );
 
 }
 </script>
