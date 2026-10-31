@@ -1,108 +1,496 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> IgnDay Comptabilité Générale</title>
+
+<title>IgnDay - Provision pour dépréciation des titres</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
+*{box-sizing:border-box}
 
 body{
     font-family:Arial,sans-serif;
+    margin:0;
     background:#f4f6f9;
-    margin:30px;
+    color:#1e293b;
 }
 
-.container{
-    max-width:1300px;
-    margin:auto;
+/* HEADER IGNDay */
+
+header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    box-shadow:0 2px 10px #0003;
+}
+
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+/* MENU */
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a,
+.site-menu summary{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:14px;
+    list-style:none;
+}
+
+.site-menu>a:hover,
+.site-menu summary:hover{
+    background:#ffffff2b;
+}
+
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
     background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.15);
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
 }
 
-h1{
-    text-align:center;
-    color:#2c3e50;
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    border-radius:5px;
+    font-size:14px;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-}
-
-th,td{
-    border:1px solid #999;
-    padding:8px;
-    text-align:center;
-}
-
-th{
-    background:#3498db;
+.dropdown-content a:hover{
+    background:#0f766e;
     color:white;
 }
 
-input{
+/* CONTENU */
+
+.page-container{
+    padding:20px;
+    max-width:1500px;
+    margin:auto;
+}
+
+.form-wrapper{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 3px 12px #00000012;
+    padding:15px;
+    overflow-x:auto;
+}
+
+/* BOUTONS */
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.actions button{
+    padding:11px 22px;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.actions button:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+
+.actions button:disabled{
+    opacity:.6;
+    cursor:wait;
+}
+
+.btn-generer{background:#22a06b}
+.btn-pdf{background:#0984e3}
+.btn-excel{background:#217346}
+.btn-vider{background:#c0392b}
+
+/* TABLEAUX */
+
+table{
+    border-collapse:collapse;
     width:100%;
-    padding:5px;
-    box-sizing:border-box;
+    margin:15px auto;
+    background:white;
+    table-layout:auto;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:9px;
     text-align:center;
+    vertical-align:middle;
+}
+
+th{
+    background:#34495e;
+    color:white;
+    font-size:14px;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+/* TABLEAU DES PROVISIONS */
+
+#tableau{
+    min-width:1050px;
+}
+
+#tableau th{
+    background:#34495e;
+    color:white;
+}
+
+#tableau td{
+    font-size:14px;
+}
+
+#tableau tr:nth-child(even){
+    background:#eef6f9;
+}
+
+#tableau tr:hover{
+    background:#e2f0f5;
+}
+
+#tableau input{
+    width:100%;
+    min-width:65px;
+    padding:7px 4px;
+    border:1px solid #bbb;
+    border-radius:4px;
+    text-align:center;
+    font-size:14px;
 }
 
 .resultat{
-    background:#f8f9fa;
+    background:#e9f2f8;
     font-weight:bold;
 }
 
 .total{
-    background:#dff0d8;
+    background:#dff0d8!important;
     font-weight:bold;
 }
 
-.actions{
+/* FOOTER */
+
+footer{
     text-align:center;
-    margin-top:15px;
-}
-
-button{
-    padding:10px 15px;
-    margin:5px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:15px;
-}
-
-.btn-g{
-    background:#27ae60;
+    padding:15px;
+    background:#2c3e50;
     color:white;
+    margin-top:20px;
 }
 
-.btn-b{
-    background:#2980b9;
-    color:white;
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
 }
 
-.btn-r{
-    background:#e74c3c;
-    color:white;
+/* RESPONSIVE */
+
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a,
+    .site-menu summary{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:16px;
+    }
+
+    header h1 p:first-child{
+        font-size:12px;
+    }
+
+    header h1 p:last-child{
+        font-size:19px;
+    }
+
+    .page-container{
+        padding:10px;
+    }
+
+    .form-wrapper{
+        padding:7px;
+    }
+
+    #tableau{
+        min-width:1050px;
+    }
+
+    th,td{
+        padding:6px 5px;
+        font-size:12px;
+    }
+
+    #tableau input{
+        font-size:12px;
+        padding:6px 3px;
+    }
+
+    .actions button{
+        padding:10px 14px;
+        font-size:13px;
+    }
 }
 
+/* IMPRESSION */
+
+@media print{
+
+    .brandbar,
+    .actions,
+    footer{
+        display:none!important;
+    }
+
+    body{
+        background:white;
+        margin:0;
+    }
+
+    .page-container{
+        padding:0;
+    }
+
+    .form-wrapper{
+        box-shadow:none;
+    }
+}
 </style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 </head>
 
 <body>
 
-<div class="container" id="zonePDF">
+<header>
 
-<h1>TABLEAU DE CALCUL DE PROVISION POUR DEPRECIATION DES TITRES</h1>
+<div class="brandbar">
 
-<table>
+<a class="brand" href="index.html">
+
+<span class="brand-logo">IF</span>
+
+<span>IgnDay</span>
+
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown" id="modulesDropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+
+</div>
+</div>
+
+<div class="dropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité Générale ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+
+</div>
+</div>
+
+<div class="dropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="C1P3M1.html">T - Résumés des thèmes</a>
+<a href="C2P3M1.html">F - Formulaires interactifs</a>
+<a href="C3P3M1.html">E - Exercices corrigés</a>
+
+</div>
+</div>
+
+<div class="dropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+F – Formulaires interactifs ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="F1C2P3M1.html">F1 – Tableau d'amortissement linéaire ou constant</a>
+<a href="F2C2P3M1.html">F2 – Tableau d'amortissement dégressif</a>
+<a href="F3C2P3M1.html">F3 – Tableau de calcul des provisions des titres</a>
+<a href="F4C2P3M1.html">F4 – Tableau de calcul des provisions des créances clients</a>
+
+</div>
+</div>
+
+<a href="C2P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+
+<p>
+M1 - Comptabilité générale &gt; P3 - Travaux de fin d’exercice
+&gt;&gt; F – Formulaires interactifs
+</p>
+
+<p>F3 - Tableau de calcul des provisions pour dépréciation des titres</p>
+
+</h1>
+
+</header>
+
+<main class="page-container">
+
+<div class="actions">
+
+<button class="btn-generer" onclick="calculer()">
+⚙️ Calculer
+</button>
+
+<button class="btn-pdf" onclick="exportPDF()">
+📄 Export PDF
+</button>
+
+<button class="btn-excel" onclick="exportExcel()">
+📊 Export Excel
+</button>
+
+<button class="btn-vider" onclick="vider()">
+🗑️ Vider
+</button>
+
+</div>
+
+<div class="form-wrapper" id="zonePDF">
+
+<table id="tableau">
 
 <thead>
 
@@ -127,28 +515,28 @@ button{
 <td><strong>CONSERVÉES</strong></td>
 
 <td>
-<input type="number" id="nbC">
+<input type="number" id="nbC" min="0" step="any">
 </td>
 
 <td>
-<input type="number" id="achatC">
+<input type="number" id="achatC" min="0" step="any">
 </td>
 
 <td>
-<input type="number" id="coursN1C">
+<input type="number" id="coursN1C" min="0" step="any">
 </td>
 
-<td id="provN1C" class="resultat">0</td>
+<td id="provN1C" class="resultat">0,00</td>
 
 <td>
-<input type="number" id="coursNC">
+<input type="number" id="coursNC" min="0" step="any">
 </td>
 
-<td id="provNC" class="resultat">0</td>
+<td id="provNC" class="resultat">0,00</td>
 
-<td id="dotationC" class="resultat">0</td>
+<td id="dotationC" class="resultat">0,00</td>
 
-<td id="repriseC" class="resultat">0</td>
+<td id="repriseC" class="resultat">0,00</td>
 
 </tr>
 
@@ -157,26 +545,26 @@ button{
 <td><strong>CÉDÉES</strong></td>
 
 <td>
-<input type="number" id="nbD">
+<input type="number" id="nbD" min="0" step="any">
 </td>
 
 <td>
-<input type="number" id="achatD">
+<input type="number" id="achatD" min="0" step="any">
 </td>
 
 <td>
-<input type="number" id="coursN1D">
+<input type="number" id="coursN1D" min="0" step="any">
 </td>
 
-<td id="provN1D" class="resultat">0</td>
+<td id="provN1D" class="resultat">0,00</td>
 
 <td>-</td>
 
-<td id="provND" class="resultat">0</td>
+<td id="provND" class="resultat">0,00</td>
 
-<td id="dotationD" class="resultat">0</td>
+<td id="dotationD" class="resultat">0,00</td>
 
-<td id="repriseD" class="resultat">0</td>
+<td id="repriseD" class="resultat">0,00</td>
 
 </tr>
 
@@ -184,19 +572,19 @@ button{
 
 <td>TOTAL</td>
 
-<td id="totalNombre">0</td>
+<td id="totalNombre">0,00</td>
 
 <td colspan="2"></td>
 
-<td id="totalProvN1">0</td>
+<td id="totalProvN1">0,00</td>
 
 <td></td>
 
-<td id="totalProvN">0</td>
+<td id="totalProvN">0,00</td>
 
-<td id="totalDotation">0</td>
+<td id="totalDotation">0,00</td>
 
-<td id="totalReprise">0</td>
+<td id="totalReprise">0,00</td>
 
 </tr>
 
@@ -204,178 +592,650 @@ button{
 
 </table>
 
-<div class="actions">
-
-<button class="btn-g" onclick="calculer()">
-Calculer
-</button>
-
-<button class="btn-b" onclick="exportPDF()">
-Exporter PDF
-</button>
-
-<button class="btn-r" onclick="vider()">
-Vider
-</button>
-
 </div>
 
-</div>
+</main>
+
+<footer>
+
+<span>Formation en comptabilité générale</span>
+
+
+</footer>
 
 <script>
 
-function formatDH(valeur){
+/* =====================================================
+   MENU DÉROULANT
+===================================================== */
 
-return Number(valeur).toLocaleString('fr-FR',{
+function toggleDropdown(button){
 
-minimumFractionDigits:2,
-maximumFractionDigits:2
+    const menu=button.nextElementSibling;
+
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+
+        }
+
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+
+    menu.style.display=isOpen?"none":"block";
+}
+
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+
+            }
+
+        }
+
+    });
 
 });
 
+/* =====================================================
+   FORMATAGE DES MONTANTS
+===================================================== */
+
+function format(nombre){
+
+    return (Number(nombre)||0).toLocaleString("fr-FR",{
+
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+
+    });
+
 }
+
+/* =====================================================
+   CALCUL DES PROVISIONS
+===================================================== */
 
 function calculer(){
 
-/* CONSERVÉES */
+    /* TITRES CONSERVÉS */
 
-let nbC=parseFloat(document.getElementById("nbC").value)||0;
-let achatC=parseFloat(document.getElementById("achatC").value)||0;
-let coursN1C=parseFloat(document.getElementById("coursN1C").value)||0;
-let coursNC=parseFloat(document.getElementById("coursNC").value)||0;
+    let nbC=parseFloat(document.getElementById("nbC").value)||0;
 
-let provN1C=Math.max(0,(achatC-coursN1C)*nbC);
+    let achatC=parseFloat(document.getElementById("achatC").value)||0;
 
-let provNC=Math.max(0,(achatC-coursNC)*nbC);
+    let coursN1C=parseFloat(document.getElementById("coursN1C").value)||0;
 
-let dotationC=0;
-let repriseC=0;
+    let coursNC=parseFloat(document.getElementById("coursNC").value)||0;
 
-if(provNC>provN1C){
-    dotationC=provNC-provN1C;
-}else{
-    repriseC=provN1C-provNC;
+    /* PROVISION AU 31/12/N-1 */
+
+    let provN1C=Math.max(0,(achatC-coursN1C)*nbC);
+
+    /* PROVISION AU 31/12/N */
+
+    let provNC=Math.max(0,(achatC-coursNC)*nbC);
+
+    /* DOTATION ET REPRISE */
+
+    let dotationC=0;
+
+    let repriseC=0;
+
+    if(provNC>provN1C){
+
+        dotationC=provNC-provN1C;
+
+    }else{
+
+        repriseC=provN1C-provNC;
+
+    }
+
+    /* TITRES CÉDÉS */
+
+    let nbD=parseFloat(document.getElementById("nbD").value)||0;
+
+    let achatD=parseFloat(document.getElementById("achatD").value)||0;
+
+    let coursN1D=parseFloat(document.getElementById("coursN1D").value)||0;
+
+    /* PROVISION EXISTANTE AVANT CESSION */
+
+    let provN1D=Math.max(0,(achatD-coursN1D)*nbD);
+
+    /* LES TITRES CÉDÉS NE FIGURENT PLUS À L'INVENTAIRE FINAL */
+
+    let provND=0;
+
+    let dotationD=0;
+
+    let repriseD=provN1D;
+
+    /* AFFICHAGE : TITRES CONSERVÉS */
+
+    document.getElementById("provN1C").textContent=format(provN1C);
+
+    document.getElementById("provNC").textContent=format(provNC);
+
+    document.getElementById("dotationC").textContent=format(dotationC);
+
+    document.getElementById("repriseC").textContent=format(repriseC);
+
+    /* AFFICHAGE : TITRES CÉDÉS */
+
+    document.getElementById("provN1D").textContent=format(provN1D);
+
+    document.getElementById("provND").textContent=format(provND);
+
+    document.getElementById("dotationD").textContent=format(dotationD);
+
+    document.getElementById("repriseD").textContent=format(repriseD);
+
+    /* TOTAUX */
+
+    let totalNombre=nbC+nbD;
+
+    let totalProvN1=provN1C+provN1D;
+
+    let totalProvN=provNC+provND;
+
+    let totalDotation=dotationC+dotationD;
+
+    let totalReprise=repriseC+repriseD;
+
+    document.getElementById("totalNombre").textContent=format(totalNombre);
+
+    document.getElementById("totalProvN1").textContent=format(totalProvN1);
+
+    document.getElementById("totalProvN").textContent=format(totalProvN);
+
+    document.getElementById("totalDotation").textContent=format(totalDotation);
+
+    document.getElementById("totalReprise").textContent=format(totalReprise);
+
 }
 
-/* CÉDÉES */
-
-let nbD=parseFloat(document.getElementById("nbD").value)||0;
-let achatD=parseFloat(document.getElementById("achatD").value)||0;
-let coursN1D=parseFloat(document.getElementById("coursN1D").value)||0;
-
-let provN1D=Math.max(0,(achatD-coursN1D)*nbD);
-
-let provND=0;
-let dotationD=0;
-let repriseD=provN1D;
-
-/* AFFICHAGE */
-
-document.getElementById("provN1C").innerHTML=
-formatDH(provN1C);
-
-document.getElementById("provNC").innerHTML=
-formatDH(provNC);
-
-document.getElementById("dotationC").innerHTML=
-formatDH(dotationC);
-
-document.getElementById("repriseC").innerHTML=
-formatDH(repriseC);
-
-document.getElementById("provN1D").innerHTML=
-formatDH(provN1D);
-
-document.getElementById("provND").innerHTML=
-formatDH(provND);
-
-document.getElementById("dotationD").innerHTML=
-formatDH(dotationD);
-
-document.getElementById("repriseD").innerHTML=
-formatDH(repriseD);
-
-/* TOTAUX */
-
-let totalNombre=nbC+nbD;
-
-let totalProvN1=
-provN1C+provN1D;
-
-let totalProvN=
-provNC+provND;
-
-let totalDotation=
-dotationC+dotationD;
-
-let totalReprise=
-repriseC+repriseD;
-
-document.getElementById("totalNombre").innerHTML=
-formatDH(totalNombre);
-
-document.getElementById("totalProvN1").innerHTML=
-formatDH(totalProvN1);
-
-document.getElementById("totalProvN").innerHTML=
-formatDH(totalProvN);
-
-document.getElementById("totalDotation").innerHTML=
-formatDH(totalDotation);
-
-document.getElementById("totalReprise").innerHTML=
-formatDH(totalReprise);
-
-}
+/* =====================================================
+   VIDER LES CHAMPS
+===================================================== */
 
 function vider(){
 
-document.querySelectorAll("input").forEach(input=>{
-input.value="";
-});
+    if(!confirm("Voulez-vous vraiment vider tous les champs ?")){
 
-document.querySelectorAll(".resultat").forEach(cell=>{
-cell.innerHTML="0";
-});
+        return;
 
-document.getElementById("totalNombre").innerHTML="0";
-document.getElementById("totalProvN1").innerHTML="0";
-document.getElementById("totalProvN").innerHTML="0";
-document.getElementById("totalDotation").innerHTML="0";
-document.getElementById("totalReprise").innerHTML="0";
+    }
+
+    document.querySelectorAll("#tableau input").forEach(input=>{
+
+        input.value="";
+
+    });
+
+    document.querySelectorAll(".resultat").forEach(cell=>{
+
+        cell.textContent="0,00";
+
+    });
+
+    document.getElementById("totalNombre").textContent="0,00";
+
+    document.getElementById("totalProvN1").textContent="0,00";
+
+    document.getElementById("totalProvN").textContent="0,00";
+
+    document.getElementById("totalDotation").textContent="0,00";
+
+    document.getElementById("totalReprise").textContent="0,00";
 
 }
 
-function exportPDF(){
+/* =====================================================
+   EXPORT PDF - UNE SEULE PAGE A4 PAYSAGE
+===================================================== */
 
-let element=document.getElementById("zonePDF");
+async function exportPDF(){
 
-html2pdf()
-.set({
-margin:0.5,
-filename:'TVP_Provision_Titres.pdf',
-image:{type:'jpeg',quality:0.98},
-html2canvas:{scale:2},
-jsPDF:{
-unit:'in',
-format:'a4',
-orientation:'landscape'
+    const bouton=document.querySelector(".btn-pdf");
+
+    if(!window.html2canvas || !window.jspdf){
+
+        alert("Les bibliothèques PDF ne sont pas disponibles.");
+
+        return;
+
+    }
+
+    const ancienTexte=bouton.innerText;
+
+    bouton.disabled=true;
+
+    bouton.innerText="Création du PDF...";
+
+    let clone=null;
+
+    try{
+
+        const original=document.getElementById("zonePDF");
+
+        clone=original.cloneNode(true);
+
+        /* PRÉPARATION DU CLONE */
+
+        clone.style.position="fixed";
+
+        clone.style.left="-20000px";
+
+        clone.style.top="0";
+
+        clone.style.width="1400px";
+
+        clone.style.minWidth="0";
+
+        clone.style.maxWidth="none";
+
+        clone.style.padding="10px";
+
+        clone.style.margin="0";
+
+        clone.style.background="#fff";
+
+        clone.style.borderRadius="0";
+
+        clone.style.boxShadow="none";
+
+        clone.style.overflow="visible";
+
+        /* TABLEAU */
+
+        clone.querySelectorAll("table").forEach(table=>{
+
+            table.style.width="100%";
+
+            table.style.minWidth="0";
+
+            table.style.tableLayout="fixed";
+
+            table.style.margin="5px auto";
+
+            table.style.borderCollapse="collapse";
+
+        });
+
+        clone.querySelectorAll("th,td").forEach(cell=>{
+
+            cell.style.padding="8px 4px";
+
+            cell.style.fontSize="11px";
+
+            cell.style.lineHeight="1.2";
+
+            cell.style.whiteSpace="normal";
+
+            cell.style.overflowWrap="break-word";
+
+        });
+
+        /* REMPLACER LES CHAMPS PAR LEURS VALEURS */
+
+        const valeurs=original.querySelectorAll("input");
+
+        const champsClone=clone.querySelectorAll("input");
+
+        champsClone.forEach((champ,index)=>{
+
+            const span=document.createElement("span");
+
+            span.textContent=valeurs[index]?.value||"";
+
+            span.style.display="block";
+
+            span.style.width="100%";
+
+            span.style.textAlign="center";
+
+            span.style.padding="5px";
+
+            span.style.fontSize="11px";
+
+            span.style.fontWeight="bold";
+
+            champ.replaceWith(span);
+
+        });
+
+        document.body.appendChild(clone);
+
+        /* CAPTURE DU TABLEAU COMPLET */
+
+        const canvas=await html2canvas(clone,{
+
+            scale:2,
+
+            backgroundColor:"#ffffff",
+
+            useCORS:true,
+
+            logging:false,
+
+            windowWidth:1450,
+
+            width:clone.scrollWidth,
+
+            height:clone.scrollHeight
+
+        });
+
+        const {jsPDF}=window.jspdf;
+
+        const pdf=new jsPDF({
+
+            orientation:"landscape",
+
+            unit:"mm",
+
+            format:"a4",
+
+            compress:true
+
+        });
+
+        /* DIMENSIONS A4 PAYSAGE */
+
+        const largeurA4=297;
+
+        const hauteurA4=210;
+
+        const marge=5;
+
+        const largeurDisponible=largeurA4-(2*marge);
+
+        const hauteurDisponible=hauteurA4-(2*marge);
+
+        /* AJUSTEMENT SUR UNE SEULE PAGE */
+
+        const ratio=Math.min(
+
+            largeurDisponible/canvas.width,
+
+            hauteurDisponible/canvas.height
+
+        );
+
+        const largeur=canvas.width*ratio;
+
+        const hauteur=canvas.height*ratio;
+
+        const x=(largeurA4-largeur)/2;
+
+        const y=(hauteurA4-hauteur)/2;
+
+        pdf.addImage(
+
+            canvas.toDataURL("image/jpeg",0.98),
+
+            "JPEG",
+
+            x,
+
+            y,
+
+            largeur,
+
+            hauteur,
+
+            undefined,
+
+            "FAST"
+
+        );
+
+        pdf.save("Provision_Depreciation_Titres_IgnDay.pdf");
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Erreur lors de la création du PDF.");
+
+    }finally{
+
+        if(clone){
+
+            clone.remove();
+
+        }
+
+        bouton.disabled=false;
+
+        bouton.innerText=ancienTexte;
+
+    }
+
 }
-})
-.from(element)
-.save();
+
+/* =====================================================
+   EXPORT EXCEL
+===================================================== */
+
+function exportExcel(){
+
+    if(typeof XLSX==="undefined"){
+
+        alert("La bibliothèque Excel n'est pas disponible. Vérifiez votre connexion Internet.");
+
+        return;
+
+    }
+
+    const lignes=document.querySelectorAll("#tableau tbody tr");
+
+    if(lignes.length===0){
+
+        alert("Le tableau est vide.");
+
+        return;
+
+    }
+
+    /* RÉCUPÉRATION DES DONNÉES */
+
+    const nbC=Number(document.getElementById("nbC").value)||0;
+
+    const achatC=Number(document.getElementById("achatC").value)||0;
+
+    const coursN1C=Number(document.getElementById("coursN1C").value)||0;
+
+    const coursNC=Number(document.getElementById("coursNC").value)||0;
+
+    const nbD=Number(document.getElementById("nbD").value)||0;
+
+    const achatD=Number(document.getElementById("achatD").value)||0;
+
+    const coursN1D=Number(document.getElementById("coursN1D").value)||0;
+
+    /* CALCUL DES MONTANTS POUR EXCEL */
+
+    const provN1C=Math.max(0,(achatC-coursN1C)*nbC);
+
+    const provNC=Math.max(0,(achatC-coursNC)*nbC);
+
+    const dotationC=Math.max(0,provNC-provN1C);
+
+    const repriseC=Math.max(0,provN1C-provNC);
+
+    const provN1D=Math.max(0,(achatD-coursN1D)*nbD);
+
+    const provND=0;
+
+    const dotationD=0;
+
+    const repriseD=provN1D;
+
+    const totalNombre=nbC+nbD;
+
+    const totalProvN1=provN1C+provN1D;
+
+    const totalProvN=provNC+provND;
+
+    const totalDotation=dotationC+dotationD;
+
+    const totalReprise=repriseC+repriseD;
+
+    /* DONNÉES EXCEL */
+
+    const donnees=[
+
+        ["TABLEAU DE CALCUL DE PROVISION POUR DÉPRÉCIATION DES TITRES"],
+
+        [],
+
+        ["TITRES","Nombre","Prix d'achat","Cours (N-1)","Provision (N-1)","Cours (N)","Provision (N)","Dotation","Reprise"],
+
+        [
+            "CONSERVÉES",
+            nbC,
+            achatC,
+            coursN1C,
+            provN1C,
+            coursNC,
+            provNC,
+            dotationC,
+            repriseC
+        ],
+
+        [
+            "CÉDÉES",
+            nbD,
+            achatD,
+            coursN1D,
+            provN1D,
+            "-",
+            provND,
+            dotationD,
+            repriseD
+        ],
+
+        [
+            "TOTAL",
+            totalNombre,
+            "",
+            "",
+            totalProvN1,
+            "",
+            totalProvN,
+            totalDotation,
+            totalReprise
+        ]
+
+    ];
+
+    /* CRÉATION DE LA FEUILLE */
+
+    const feuille=XLSX.utils.aoa_to_sheet(donnees);
+
+    /* LARGEURS DES COLONNES */
+
+    feuille["!cols"]=[
+
+        {wch:18},
+
+        {wch:14},
+
+        {wch:18},
+
+        {wch:18},
+
+        {wch:20},
+
+        {wch:18},
+
+        {wch:20},
+
+        {wch:18},
+
+        {wch:18}
+
+    ];
+
+    /* FUSION DU TITRE */
+
+    feuille["!merges"]=[
+
+        {
+
+            s:{r:0,c:0},
+
+            e:{r:0,c:8}
+
+        }
+
+    ];
+
+    /* FORMAT DES NOMBRES */
+
+    Object.keys(feuille).forEach(reference=>{
+
+        if(reference[0]==="!") return;
+
+        const cellule=feuille[reference];
+
+        if(cellule && cellule.t==="n"){
+
+            cellule.z='#,##0.00';
+
+        }
+
+    });
+
+    /* CONFIGURATION DU CLASSEUR */
+
+    const classeur=XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+
+        classeur,
+
+        feuille,
+
+        "Provision des titres"
+
+    );
+
+    XLSX.writeFile(
+
+        classeur,
+
+        "Provision_Depreciation_Titres_IgnDay.xlsx"
+
+    );
 
 }
 
 </script>
-<footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C2P3M1.html">⬅ Retour </a>
-
-</footer>
 
 </body>
 </html>
+
 
