@@ -1,71 +1,266 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay - Tableau d'amortissement dégressif</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
+*{box-sizing:border-box}
 
 body{
-    font-family:Arial;
+    font-family:Arial,sans-serif;
+    margin:0;
     background:#f4f6f9;
-    margin:30px;
+    color:#1e293b;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.15);
-}
+/* HEADER IGNDay */
 
-h2{
+header{
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    color:#2c3e50;
+    box-shadow:0 2px 10px #0003;
 }
+
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+/* MENU */
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a,
+.site-menu summary{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:14px;
+    list-style:none;
+}
+
+.site-menu>a:hover,
+.site-menu summary:hover{
+    background:#ffffff2b;
+}
+
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-height:70vh;
+    overflow-y:auto;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    border-radius:5px;
+    font-size:14px;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+
+/* CONTENU */
+
+.page-container{
+    padding:20px;
+    max-width:1300px;
+    margin:auto;
+}
+
+.form-wrapper{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 3px 12px #00000012;
+    padding:15px;
+    overflow-x:auto;
+}
+
+/* BOUTONS */
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.actions button{
+    padding:11px 22px;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.actions button:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+
+.actions button:disabled{
+    opacity:.6;
+    cursor:wait;
+}
+
+.btn-generer{background:#22a06b}
+.btn-pdf{background:#0984e3}
+.btn-excel{background:#217346}
+.btn-vider{background:#c0392b}
+
+/* TABLEAUX */
 
 table{
     border-collapse:collapse;
     width:100%;
-    margin-top:20px;
+    margin:15px auto;
+    background:white;
+    table-layout:auto;
 }
 
 th,td{
-    border:1px solid #999;
-    padding:8px;
+    border:1px solid #ccc;
+    padding:9px;
     text-align:center;
+    vertical-align:middle;
 }
 
 th{
-    background:#3498db;
+    background:#34495e;
+    color:white;
+    font-size:14px;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+/* TABLEAU PARAMÈTRES */
+
+.parametres td{
+    font-weight:bold;
+    text-align:left;
+    background:#f8fafc;
+}
+
+.parametres input,
+.parametres select{
+    width:100%;
+    max-width:220px;
+    padding:8px;
+    border:1px solid #bbb;
+    border-radius:4px;
+    font-size:14px;
+}
+
+.parametres input[readonly]{
+    background:#e9f2f8;
+    font-weight:bold;
+    color:#0f766e;
+}
+
+/* TABLEAU AMORTISSEMENT */
+
+#tableau{
+    min-width:950px;
+}
+
+#tableau th{
+    background:#34495e;
     color:white;
 }
 
-input,select{
-    width:160px;
-    padding:5px;
+#tableau td{
+    font-size:14px;
 }
 
-button{
-    padding:10px 15px;
-    margin:8px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:15px;
+#tableau tr:nth-child(even){
+    background:#eef6f9;
 }
 
-.btn-g{background:#27ae60;color:white;}
-.btn-r{background:#e74c3c;color:white;}
-.btn-b{background:#2980b9;color:white;}
-
-.actions{
-    text-align:center;
+#tableau tr:hover{
+    background:#e2f0f5;
 }
 
-/* ❌ CACHER LES 2 DERNIÈRES COLONNES */
+/* MASQUER LES DEUX DERNIÈRES COLONNES À L'ÉCRAN */
+
 #tableau th:nth-child(8),
 #tableau td:nth-child(8),
 #tableau th:nth-child(9),
@@ -73,197 +268,1291 @@ button{
     display:none;
 }
 
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:20px;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a,
+    .site-menu summary{
+        padding:9px;
+    }
+
+    .dropdown-content{
+        left:50%;
+        transform:translateX(-50%);
+        min-width:220px;
+    }
+
+    header h1{
+        font-size:16px;
+    }
+
+    header h1 p:first-child{
+        font-size:12px;
+    }
+
+    header h1 p:last-child{
+        font-size:19px;
+    }
+
+    .page-container{
+        padding:10px;
+    }
+
+    .form-wrapper{
+        padding:7px;
+    }
+
+    .parametres{
+        min-width:550px;
+    }
+
+    #tableau{
+        min-width:950px;
+    }
+
+    th,td{
+        padding:6px 5px;
+        font-size:12px;
+    }
+
+    .parametres input,
+    .parametres select{
+        font-size:12px;
+        padding:6px;
+    }
+
+    .actions button{
+        padding:10px 14px;
+        font-size:13px;
+    }
+}
+
+/* IMPRESSION */
+
+@media print{
+
+    .brandbar,
+    .actions,
+    footer{
+        display:none!important;
+    }
+
+    body{
+        background:white;
+        margin:0;
+    }
+
+    .page-container{
+        padding:0;
+    }
+
+    .form-wrapper{
+        box-shadow:none;
+    }
+}
 </style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 </head>
 
 <body>
 
-<div class="container" id="zonePDF">
+<header>
 
-<h2>Tableau d'amortissement dégressif</h2>
+<div class="brandbar">
 
-<table>
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown" id="modulesDropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+
+</div>
+</div>
+
+<div class="dropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité Générale ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+
+</div>
+</div>
+
+<div class="dropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="C1P3M1.html">T - Résumés des thèmes</a>
+<a href="C2P3M1.html">F - Formulaires interactifs</a>
+<a href="C3P3M1.html">E - Exercices corrigés</a>
+
+</div>
+</div>
+
+<div class="dropdown">
+
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+F – Formulaires interactifs ▼
+</button>
+
+<div class="dropdown-content">
+
+<a href="F1C2P3M1.html">F1 – Tableau d'amortissement linéaire ou constant</a>
+<a href="F2C2P3M1.html">F2 – Tableau d'amortissement dégressif</a>
+<a href="F3C2P3M1.html">F3 – Tableau de calcul des provisions des titres</a>
+<a href="F4C2P3M1.html">F4 – Tableau de calcul des provisions des créances clients</a>
+
+</div>
+</div>
+
+<a href="C2P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+
+<p>
+M1 - Comptabilité générale &gt; P3 - Travaux de fin d’exercice
+&gt;&gt; F – Formulaires interactifs
+</p>
+
+<p>F2 - Tableau d'amortissement dégressif</p>
+
+</h1>
+
+</header>
+
+<main class="page-container">
+
+<div class="actions">
+
+<button class="btn-generer" onclick="generer()">
+⚙️ Générer
+</button>
+
+<button class="btn-pdf" onclick="exportPDF()">
+📄 Export PDF
+</button>
+
+<button class="btn-excel" onclick="exportExcel()">
+📊 Export Excel
+</button>
+
+<button class="btn-vider" onclick="vider()">
+🗑️ Vider
+</button>
+
+</div>
+
+<div class="form-wrapper" id="zonePDF">
+
+<table class="parametres">
+
 <tr>
-<td>VO / VE</td>
-<td><input type="number" id="vo"></td>
 
-<td>Date acquisition</td>
-<td><input type="date" id="date"></td>
+<td>Valeur d'origine (VO / VE)</td>
+
+<td>
+<input type="number" id="vo" min="0" step="any">
+</td>
+
+<td>Date d'acquisition</td>
+
+<td>
+<input type="date" id="date">
+</td>
+
 </tr>
 
 <tr>
-<td>Durée (ans)</td>
-<td><input type="number" id="duree"></td>
+
+<td>Durée (mois)</td>
+
+<td>
+<input type="number" id="duree" min="1" step="1">
+</td>
+
+<td>Taux linéaire</td>
+
+<td>
+<input type="text" id="taux" readonly>
+</td>
+
+</tr>
+
+<tr>
 
 <td>Coefficient</td>
-<td><input type="number" id="coef"></td>
+
+<td>
+<input type="number" id="coef" min="0.01" step="any">
+</td>
+
+<td>Taux dégressif</td>
+
+<td>
+<input type="text" id="tauxDeg" readonly>
+</td>
+
 </tr>
 
 <tr>
-<td>Mode</td>
+
+<td>Mode de calcul</td>
+
 <td colspan="3">
+
 <select id="mode">
+
 <option value="entier">Années entières</option>
+
 <option value="prorata">Prorata temporis</option>
+
 </select>
+
 </td>
+
 </tr>
 
 </table>
 
-<div class="actions">
-
-<button class="btn-g" onclick="calcul()">Calculer</button>
-
-<button class="btn-b" onclick="exportPDF()">Exporter PDF</button>
-
-<button class="btn-r" onclick="vider()">Vider</button>
-
-</div>
-
 <table id="tableau">
+
 <thead>
+
 <tr>
-<th>Années</th>
+<th>Année</th>
 <th>Mois</th>
 <th>VO / VE</th>
-<th>Taux</th>
+<th>Taux dégressif / linéaire</th>
 <th>Annuité</th>
 <th>Cumul amortissement</th>
 <th>VNA</th>
 <th>Durée restante</th>
-<th>Taux linéaire</th>
+<th>Taux linéaire restant</th>
 </tr>
+
 </thead>
-<tbody></tbody>
+
+<tbody id="resultats"></tbody>
+
 </table>
 
 </div>
 
+</main>
+
+<footer>
+Formation en comptabilité générale
+</footer>
+
 <script>
 
-function calcul(){
+/* =====================================================
+   MENU DÉROULANT
+===================================================== */
 
-let vo=parseFloat(document.getElementById("vo").value);
-let duree=parseFloat(document.getElementById("duree").value);
-let coef=parseFloat(document.getElementById("coef").value);
-let mode=document.getElementById("mode").value;
+function toggleDropdown(button){
 
-let date=new Date(document.getElementById("date").value);
+    const menu=button.nextElementSibling;
 
-let taux_lin=1/duree;
-let taux_deg=taux_lin*coef;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
 
-let mois_total=duree*12;
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-let mois_premiere = (mode==="prorata")
-? (12 - date.getMonth())
-: 12;
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
 
-let annee=date.getFullYear();
+        if(otherButton && otherMenu && otherButton!==button){
 
-let cumul=0;
-let vna=vo;
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
 
-let mode_lineaire=false;
-let taux_actuel=taux_deg;
-let base_lineaire=0;
-let taux_lineaire_fixe=0;
+        }
 
-let tbody=document.querySelector("#tableau tbody");
-tbody.innerHTML="";
+    });
 
-while(mois_total>0){
+    button.setAttribute("aria-expanded",String(!isOpen));
 
-let mois;
-
-if(annee==date.getFullYear())
-mois=mois_premiere;
-else if(mois_total>=12)
-mois=12;
-else
-mois=mois_total;
-
-let duree_restante=mois_total;
-let taux_lineaire_restant=12/duree_restante;
-
-if(!mode_lineaire && taux_lineaire_restant>taux_deg){
-mode_lineaire=true;
-taux_actuel=taux_lineaire_restant;
-taux_lineaire_fixe=taux_lineaire_restant;
-base_lineaire=vna;
+    menu.style.display=isOpen?"none":"block";
 }
 
-let base=(mode_lineaire)?base_lineaire:vna;
+document.addEventListener("click",function(event){
 
-let annuite=base*taux_actuel*(mois/12);
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-cumul+=annuite;
-vna=vo-cumul;
+        if(!dropdown.contains(event.target)){
 
-tbody.innerHTML+=`
-<tr>
-<td>${annee}</td>
-<td>${mois}</td>
-<td>${base.toFixed(2)}</td>
-<td>${(taux_actuel*100).toFixed(2)}%</td>
-<td>${annuite.toFixed(2)}</td>
-<td>${cumul.toFixed(2)}</td>
-<td>${vna.toFixed(2)}</td>
-<td>${duree_restante}</td>
-<td>${(taux_lineaire_restant*100).toFixed(2)}%</td>
-</tr>
-`;
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
 
-annee++;
-mois_total-=mois;
-}
+            if(button && menu){
+
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+
+            }
+
+        }
+
+    });
+
+});
+
+/* =====================================================
+   FORMATAGE
+===================================================== */
+
+function format(nombre){
+
+    return (Number(nombre)||0).toLocaleString("fr-FR",{
+
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+
+    });
 
 }
 
-/* 📄 EXPORT PDF */
-function exportPDF(){
+/* =====================================================
+   TAUX AUTOMATIQUES
+===================================================== */
 
-let element=document.getElementById("zonePDF");
+function actualiserTaux(){
 
-html2pdf()
-.set({
-margin:0.5,
-filename:'amortissement_degressif.pdf',
-image:{type:'jpeg',quality:0.98},
-html2canvas:{scale:2},
-jsPDF:{unit:'in',format:'a4',orientation:'landscape'}
-})
-.from(element)
-.save();
+    let duree=parseInt(document.getElementById("duree").value);
+
+    let coef=parseFloat(document.getElementById("coef").value);
+
+    if(Number.isInteger(duree) && duree>0){
+
+        let tauxLin=1200/duree;
+
+        document.getElementById("taux").value=
+        tauxLin.toFixed(2)+" %";
+
+        if(Number.isFinite(coef) && coef>0){
+
+            document.getElementById("tauxDeg").value=
+            (tauxLin*coef).toFixed(2)+" %";
+
+        }else{
+
+            document.getElementById("tauxDeg").value="";
+
+        }
+
+    }else{
+
+        document.getElementById("taux").value="";
+        document.getElementById("tauxDeg").value="";
+
+    }
 
 }
 
-/* 🧹 VIDER TOTAL */
+document.getElementById("duree").addEventListener("input",actualiserTaux);
+document.getElementById("coef").addEventListener("input",actualiserTaux);
+
+/* =====================================================
+   GÉNÉRATION DU TABLEAU D'AMORTISSEMENT DÉGRESSIF
+   DURÉE EXPRIMÉE EN MOIS
+===================================================== */
+
+function generer(){
+
+    let vo=parseFloat(document.getElementById("vo").value);
+
+    let duree=parseInt(document.getElementById("duree").value);
+
+    let coef=parseFloat(document.getElementById("coef").value);
+
+    let date=document.getElementById("date").value;
+
+    let mode=document.getElementById("mode").value;
+
+    if(!Number.isFinite(vo) || vo<=0 ||
+       !Number.isInteger(duree) || duree<=0 ||
+       !Number.isFinite(coef) || coef<=0 || !date){
+
+        alert("Veuillez saisir une valeur d'origine positive, une durée valide en mois, un coefficient positif et une date d'acquisition.");
+
+        return;
+    }
+
+    actualiserTaux();
+
+    /*
+       TAUX LINÉAIRE ANNUEL
+       = 1200 / DURÉE EN MOIS
+    */
+
+    let tauxLin=1200/duree;
+
+    /*
+       TAUX DÉGRESSIF
+       = TAUX LINÉAIRE × COEFFICIENT
+    */
+
+    let tauxDeg=tauxLin*coef;
+
+    /*
+       DOTATION MENSUELLE LINÉAIRE
+       = VO / DURÉE EN MOIS
+    */
+
+    let dotationMensuelle=vo/duree;
+
+    let d=new Date(date+"T00:00:00");
+
+    let anneeDepart=d.getFullYear();
+
+    let moisDepart=d.getMonth();
+
+    let table=document.getElementById("tableau");
+
+    table.innerHTML=`
+
+    <thead>
+
+    <tr>
+    <th>Année</th>
+    <th>Mois</th>
+    <th>VO / VE</th>
+    <th>Taux dégressif / linéaire</th>
+    <th>Annuité</th>
+    <th>Cumul amortissement</th>
+    <th>VNA</th>
+    <th>Durée restante</th>
+    <th>Taux linéaire restant</th>
+    </tr>
+
+    </thead>
+
+    <tbody id="resultats"></tbody>
+
+    `;
+
+    let tbody=document.getElementById("resultats");
+
+    let cumul=0;
+
+    let vna=vo;
+
+    let moisRestants=duree;
+
+    let annee=anneeDepart;
+
+    let modeLineaire=false;
+
+    let baseLineaire=0;
+
+    /*
+       NOUVEAU :
+       MÉMORISER LE TAUX LINÉAIRE AU MOMENT
+       DU PASSAGE AU MODE LINÉAIRE.
+    */
+
+    let tauxLineaireFixe=0;
+
+    /*
+       FONCTION DE CALCUL D'UNE PÉRIODE
+    */
+
+    function traiterPeriode(moisPeriode,anneePeriode){
+
+        let dureeRestante=moisRestants;
+
+        /*
+           TAUX LINÉAIRE SUR LA DURÉE RESTANTE
+        */
+
+        let tauxLineaireRestant=1200/dureeRestante;
+
+        /*
+           PASSAGE DU DÉGRESSIF AU LINÉAIRE
+
+           Le taux est calculé une seule fois
+           au moment du changement de méthode.
+        */
+
+        if(!modeLineaire && tauxLineaireRestant>=tauxDeg){
+
+            modeLineaire=true;
+
+            baseLineaire=vna;
+
+            /*
+               MÉMORISATION DU TAUX FIXE
+            */
+
+            tauxLineaireFixe=tauxLineaireRestant;
+
+        }
+
+        /*
+           BASE ET TAUX APPLIQUÉS
+        */
+
+        let base=modeLineaire?baseLineaire:vna;
+
+        let tauxActuel=modeLineaire?
+            tauxLineaireFixe:
+            tauxDeg;
+
+        /*
+           CALCUL DE L'ANNUITÉ
+        */
+
+        let annuite;
+
+        if(modeLineaire){
+
+            /*
+               APRÈS LE PASSAGE AU LINÉAIRE :
+               LE TAUX RESTE IDENTIQUE JUSQU'À LA FIN.
+
+               L'ANNUITÉ EST PRORATISÉE
+               SELON LE NOMBRE DE MOIS.
+            */
+
+            annuite=baseLineaire*
+                    (tauxLineaireFixe/100)*
+                    (moisPeriode/12);
+
+        }else{
+
+            /*
+               AMORTISSEMENT DÉGRESSIF
+            */
+
+            annuite=vna*
+                    (tauxDeg/100)*
+                    (moisPeriode/12);
+
+        }
+
+        /*
+           DERNIÈRE PÉRIODE :
+           AJUSTEMENT POUR OBTENIR UNE VNA NULLE.
+        */
+
+        if(moisPeriode===moisRestants){
+
+            annuite=vna;
+
+        }
+
+        cumul+=annuite;
+
+        vna=Math.max(0,vo-cumul);
+
+        ajouterLigne(
+
+            tbody,
+            anneePeriode,
+            moisPeriode,
+            base,
+            tauxActuel,
+            annuite,
+            cumul,
+            vna,
+            dureeRestante,
+            tauxLineaireRestant
+
+        );
+
+        moisRestants-=moisPeriode;
+
+    }
+
+    /*
+       MODE ANNÉES ENTIÈRES
+
+       Chaque période comprend 12 mois,
+       sauf la dernière période.
+    */
+
+    if(mode==="entier"){
+
+        let periode=0;
+
+        while(moisRestants>0){
+
+            let moisPeriode=Math.min(12,moisRestants);
+
+            traiterPeriode(
+
+                moisPeriode,
+
+                anneeDepart+periode
+
+            );
+
+            periode++;
+
+        }
+
+    }
+
+    /*
+       MODE PRORATA TEMPORIS
+
+       Première période :
+       du mois d'acquisition jusqu'à décembre.
+
+       Périodes suivantes :
+       12 mois au maximum.
+
+       Dernière période :
+       uniquement les mois restants.
+    */
+
+    else{
+
+        let premierePeriode=true;
+
+        while(moisRestants>0){
+
+            let moisPeriode;
+
+            if(premierePeriode){
+
+                moisPeriode=Math.min(
+                    12-moisDepart,
+                    moisRestants
+                );
+
+            }else{
+
+                moisPeriode=Math.min(
+                    12,
+                    moisRestants
+                );
+
+            }
+
+            traiterPeriode(
+
+                moisPeriode,
+
+                annee
+
+            );
+
+            annee++;
+
+            premierePeriode=false;
+
+        }
+
+    }
+
+}
+
+/* =====================================================
+   AJOUT D'UNE LIGNE
+===================================================== */
+
+function ajouterLigne(
+
+    tbody,
+    annee,
+    mois,
+    base,
+    taux,
+    annuite,
+    cumul,
+    vna,
+    dureeRestante,
+    tauxLineaireRestant
+
+){
+
+    let tr=document.createElement("tr");
+
+    tr.innerHTML=`
+
+    <td>${annee}</td>
+
+    <td>${mois}</td>
+
+    <td>${format(base)}</td>
+
+    <td>${taux.toFixed(2)} %</td>
+
+    <td>${format(annuite)}</td>
+
+    <td>${format(cumul)}</td>
+
+    <td>${format(vna)}</td>
+
+    <td>${dureeRestante}</td>
+
+    <td>${tauxLineaireRestant.toFixed(2)} %</td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+}
+
+/* =====================================================
+   VIDER LES CHAMPS
+===================================================== */
+
 function vider(){
 
-document.getElementById("vo").value="";
-document.getElementById("date").value="";
-document.getElementById("duree").value="";
-document.getElementById("coef").value="";
-document.getElementById("mode").value="entier";
+    if(!confirm("Voulez-vous vraiment vider tous les champs ?")){
 
-document.querySelector("#tableau tbody").innerHTML="";
+        return;
+
+    }
+
+    document.getElementById("vo").value="";
+
+    document.getElementById("date").value="";
+
+    document.getElementById("duree").value="";
+
+    document.getElementById("coef").value="";
+
+    document.getElementById("taux").value="";
+
+    document.getElementById("tauxDeg").value="";
+
+    document.getElementById("mode").value="entier";
+
+    document.getElementById("tableau").innerHTML=`
+
+    <thead>
+
+    <tr>
+    <th>Année</th>
+    <th>Mois</th>
+    <th>VO / VE</th>
+    <th>Taux dégressif / linéaire</th>
+    <th>Annuité</th>
+    <th>Cumul amortissement</th>
+    <th>VNA</th>
+    <th>Durée restante</th>
+    <th>Taux linéaire restant</th>
+    </tr>
+
+    </thead>
+
+    <tbody id="resultats"></tbody>
+
+    `;
+
+}
+
+/* =====================================================
+   EXPORT PDF - UNE SEULE PAGE A4 PAYSAGE
+===================================================== */
+
+async function exportPDF(){
+
+    const bouton=document.querySelector(".btn-pdf");
+
+    if(!window.html2canvas || !window.jspdf){
+
+        alert("Les bibliothèques PDF ne sont pas disponibles.");
+
+        return;
+
+    }
+
+    const ancienTexte=bouton.innerText;
+
+    bouton.disabled=true;
+
+    bouton.innerText="Création du PDF...";
+
+    let clone=null;
+
+    try{
+
+        const original=document.getElementById("zonePDF");
+
+        if(original.querySelectorAll("#tableau tbody tr").length===0){
+
+            alert("Veuillez d'abord générer le tableau d'amortissement.");
+
+            return;
+
+        }
+
+        clone=original.cloneNode(true);
+
+        clone.style.position="fixed";
+        clone.style.left="-20000px";
+        clone.style.top="0";
+        clone.style.width="1400px";
+        clone.style.minWidth="0";
+        clone.style.maxWidth="none";
+        clone.style.padding="10px";
+        clone.style.margin="0";
+        clone.style.background="#fff";
+        clone.style.borderRadius="0";
+        clone.style.boxShadow="none";
+        clone.style.overflow="visible";
+
+        /*
+           AFFICHER LES DEUX COLONNES MASQUÉES
+           DANS LE PDF.
+        */
+
+        clone.querySelectorAll("#tableau th,#tableau td").forEach(cell=>{
+
+            cell.style.display="table-cell";
+
+        });
+
+        clone.querySelectorAll("table").forEach(table=>{
+
+            table.style.width="100%";
+            table.style.minWidth="0";
+            table.style.tableLayout="fixed";
+            table.style.margin="5px auto";
+            table.style.borderCollapse="collapse";
+
+        });
+
+        clone.querySelectorAll("th,td").forEach(cell=>{
+
+            cell.style.padding="6px 3px";
+            cell.style.fontSize="10px";
+            cell.style.lineHeight="1.2";
+            cell.style.whiteSpace="normal";
+            cell.style.overflowWrap="break-word";
+
+        });
+
+        /*
+           REMPLACER LES CHAMPS PAR LEURS VALEURS
+        */
+
+        const valeurs=original.querySelectorAll("input,select");
+
+        const champsClone=clone.querySelectorAll("input,select");
+
+        champsClone.forEach((champ,index)=>{
+
+            const span=document.createElement("span");
+
+            span.textContent=valeurs[index]?.value||"";
+
+            span.style.display="block";
+            span.style.width="100%";
+            span.style.textAlign="center";
+            span.style.padding="5px";
+            span.style.fontSize="12px";
+            span.style.fontWeight="bold";
+
+            champ.replaceWith(span);
+
+        });
+
+        document.body.appendChild(clone);
+
+        /*
+           CAPTURE DU CONTENU COMPLET
+        */
+
+        const canvas=await html2canvas(clone,{
+
+            scale:2,
+            backgroundColor:"#ffffff",
+            useCORS:true,
+            logging:false,
+            windowWidth:1450,
+            width:clone.scrollWidth,
+            height:clone.scrollHeight
+
+        });
+
+        const {jsPDF}=window.jspdf;
+
+        const pdf=new jsPDF({
+
+            orientation:"landscape",
+            unit:"mm",
+            format:"a4",
+            compress:true
+
+        });
+
+        const largeurA4=297;
+        const hauteurA4=210;
+
+        const marge=5;
+
+        const largeurDisponible=largeurA4-(2*marge);
+
+        const hauteurDisponible=hauteurA4-(2*marge);
+
+        /*
+           AJUSTEMENT AUTOMATIQUE
+           SUR UNE SEULE PAGE A4 PAYSAGE.
+        */
+
+        const ratio=Math.min(
+
+            largeurDisponible/canvas.width,
+
+            hauteurDisponible/canvas.height
+
+        );
+
+        const largeur=canvas.width*ratio;
+
+        const hauteur=canvas.height*ratio;
+
+        const x=(largeurA4-largeur)/2;
+
+        const y=(hauteurA4-hauteur)/2;
+
+        pdf.addImage(
+
+            canvas.toDataURL("image/jpeg",0.98),
+
+            "JPEG",
+
+            x,
+            y,
+
+            largeur,
+            hauteur,
+
+            undefined,
+            "FAST"
+
+        );
+
+        pdf.save("Amortissement_Degressif_IgnDay.pdf");
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Erreur lors de la création du PDF.");
+
+    }finally{
+
+        if(clone){
+
+            clone.remove();
+
+        }
+
+        bouton.disabled=false;
+
+        bouton.innerText=ancienTexte;
+
+    }
+
+}
+
+/* =====================================================
+   EXPORT EXCEL
+===================================================== */
+
+function exportExcel(){
+
+    if(typeof XLSX==="undefined"){
+
+        alert("La bibliothèque Excel n'est pas disponible. Vérifiez votre connexion Internet.");
+
+        return;
+
+    }
+
+    const lignes=document.querySelectorAll("#tableau tbody tr");
+
+    if(lignes.length===0){
+
+        alert("Veuillez d'abord générer le tableau d'amortissement.");
+
+        return;
+
+    }
+
+    const vo=Number(document.getElementById("vo").value);
+
+    const duree=Number(document.getElementById("duree").value);
+
+    const coef=Number(document.getElementById("coef").value);
+
+    const date=document.getElementById("date").value;
+
+    const tauxLin=1200/duree;
+
+    const tauxDeg=tauxLin*coef;
+
+    const mode=document.getElementById("mode").selectedOptions[0].text;
+
+    const donnees=[
+
+        ["TABLEAU D'AMORTISSEMENT DÉGRESSIF"],
+
+        [],
+
+        ["Valeur d'origine (VO / VE)",vo],
+
+        ["Date d'acquisition",date],
+
+        ["Durée (mois)",duree],
+
+        ["Taux linéaire annuel",tauxLin],
+
+        ["Coefficient",coef],
+
+        ["Taux dégressif annuel",tauxDeg],
+
+        ["Mode de calcul",mode],
+
+        [],
+
+        [
+
+            "Année",
+            "Mois",
+            "VO / VE",
+            "Taux dégressif / linéaire",
+            "Annuité",
+            "Cumul amortissement",
+            "VNA",
+            "Durée restante",
+            "Taux linéaire restant"
+
+        ]
+
+    ];
+
+    lignes.forEach(ligne=>{
+
+        const cellules=ligne.querySelectorAll("td");
+
+        const nombre=valeur=>{
+
+            return Number(
+
+                valeur
+                .replace(/\s/g,"")
+                .replace("%","")
+                .replace(",", ".")
+
+            );
+
+        };
+
+        donnees.push([
+
+            Number(cellules[0].innerText),
+
+            Number(cellules[1].innerText),
+
+            nombre(cellules[2].innerText),
+
+            nombre(cellules[3].innerText),
+
+            nombre(cellules[4].innerText),
+
+            nombre(cellules[5].innerText),
+
+            nombre(cellules[6].innerText),
+
+            Number(cellules[7].innerText),
+
+            nombre(cellules[8].innerText)
+
+        ]);
+
+    });
+
+    /* CRÉATION DE LA FEUILLE */
+
+    const feuille=XLSX.utils.aoa_to_sheet(donnees);
+
+    /* LARGEURS DES COLONNES */
+
+    feuille["!cols"]=[
+
+        {wch:14},
+        {wch:12},
+        {wch:20},
+        {wch:25},
+        {wch:20},
+        {wch:22},
+        {wch:20},
+        {wch:18},
+        {wch:22}
+
+    ];
+
+    /* FUSION DU TITRE */
+
+    feuille["!merges"]=[
+
+        {
+
+            s:{r:0,c:0},
+
+            e:{r:0,c:8}
+
+        }
+
+    ];
+
+    /* FORMAT DES NOMBRES */
+
+    Object.keys(feuille).forEach(reference=>{
+
+        if(reference[0]==="!") return;
+
+        const cellule=feuille[reference];
+
+        if(cellule && cellule.t==="n"){
+
+            cellule.z='#,##0.00';
+
+        }
+
+    });
+
+    /*
+       FORMATS DES TAUX
+       B6 : taux linéaire
+       B8 : taux dégressif
+    */
+
+    if(feuille["B6"]){
+
+        feuille["B6"].z='0.00" %"';
+
+    }
+
+    if(feuille["B8"]){
+
+        feuille["B8"].z='0.00" %"';
+
+    }
+
+    /*
+       FORMAT DES TAUX DANS LE TABLEAU
+       LIGNE 12 ET SUIVANTES
+    */
+
+    for(let i=0;i<lignes.length;i++){
+
+        const ligneExcel=12+i;
+
+        const celluleTaux=feuille["D"+ligneExcel];
+
+        const celluleTauxLineaire=feuille["I"+ligneExcel];
+
+        if(celluleTaux){
+
+            celluleTaux.z='0.00" %"';
+
+        }
+
+        if(celluleTauxLineaire){
+
+            celluleTauxLineaire.z='0.00" %"';
+
+        }
+
+    }
+
+    /* CONFIGURATION DU CLASSEUR */
+
+    const classeur=XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+
+        classeur,
+
+        feuille,
+
+        "Amortissement dégressif"
+
+    );
+
+    XLSX.writeFile(
+
+        classeur,
+
+        "Amortissement_Degressif_IgnDay.xlsx"
+
+    );
 
 }
 
 </script>
-<footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C2P3M1.html">⬅ Retour </a>
-
-</footer>
 
 </body>
 </html>
+
 
