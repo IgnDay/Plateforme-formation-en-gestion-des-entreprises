@@ -2,203 +2,1462 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Le Bilan Comptable</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay – E1 Le Bilan Comptable</title>
 
 <style>
-body{
-    font-family: Arial;
-    margin:0;
-    background:#f4f6f9;
+*{
+    box-sizing:border-box;
 }
 
+html{
+    width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    width:100%;
+    background:#f4f6f9;
+    color:#1e293b;
+    overflow-x:hidden;
+}
+
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
     background:#2c3e50;
     color:white;
-    padding:20px;
     text-align:center;
+    box-shadow:0 2px 10px #0003;
 }
 
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:20px 10px;
+    margin:0;
+    font-size:35px;
+    overflow-wrap:break-word;
+}
+
+header h1 p{
+    margin:10px 0;
+    line-height:1.5;
+    font-size:35px;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+    font-family:inherit;
+}
+
+.dropdown button:hover{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:calc(100vw - 20px);
+    max-height:70vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+    -webkit-overflow-scrolling:touch;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    line-height:1.5;
+    border-radius:5px;
+    overflow-wrap:break-word;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== MENU DES RUBRIQUES ===== */
 nav{
     background:#34495e;
     padding:10px;
     text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:5px;
 }
 
 nav button{
     margin:5px;
-    padding:10px 15px;
-    border:none;
-    background:#f39c12;
+    padding:12px 18px;
+    border:0;
+    background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:14px;
+    font-size:15px;
+    font-family:inherit;
+    transition:.3s;
+    touch-action:manipulation;
 }
 
 nav button:hover{
-    background:#d68910;
+    background:#019875;
+    transform:translateY(-2px);
 }
 
+.btnActive{
+    background:#0984e3!important;
+    transform:scale(1.02);
+    box-shadow:0 3px 10px #0003;
+}
+
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
-    font-size:19px;
+    margin:20px;
+    min-width:0;
 }
 
-.active{
+section.active{
     display:block;
 }
 
+.animationSection{
+    animation:apparition .5s ease;
+    background:white;
+    border-left:8px solid #00b894;
+    border-radius:12px;
+    box-shadow:0 5px 15px #0002;
+}
+
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===== CONTENU ===== */
 h2{
     color:#2c3e50;
+    line-height:1.4;
+    overflow-wrap:break-word;
 }
 
 h3{
-    color:#f39c12;
+    color:#00b894;
+    line-height:1.4;
 }
 
-ul{
-    line-height:1.8;
+p,li{
+    line-height:1.7;
+    overflow-wrap:break-word;
 }
 
-.highlight{
-    background:#fef5e7;
-    padding:12px;
-    border-left:5px solid #f39c12;
-    margin:15px 0;
+ul,ol{
+    padding-left:25px;
 }
 
+/* ===== TOUS LES TABLEAUX ===== */
 table{
     width:100%;
+    max-width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
+    background:white;
     margin-top:20px;
+    box-shadow:0 2px 10px #00000014;
 }
 
-td{
-    border:1px solid #444;
+td,th{
+    border:1px solid #ccc;
     padding:10px;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    white-space:normal;
+}
+
+th{
+    background:#dfe6e9;
     text-align:center;
 }
 
+tbody tr:hover td{
+    background:#f1f7ff;
+    transition:.2s;
+}
+
+/* ===== TABLEAU DU BILAN ===== */
+.bilan-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:visible;
+    margin:15px 0 25px;
+}
+
+.bilan-table{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+    box-shadow:0 2px 10px #00000014;
+}
+
+.bilan-table td,
+.bilan-table th{
+    border:1px solid #ccc;
+    padding:10px 7px;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    white-space:normal;
+}
+
+.bilan-table th{
+    background:#dfe6e9;
+    text-align:center;
+}
+
+.bilan-table td{
+    text-align:left;
+}
+
+.bilan-table td:nth-child(2),
+.bilan-table td:nth-child(4){
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+}
+
+.bilan-table .total td{
+    background:#e8fff7;
+    font-weight:bold;
+    color:#0f766e;
+}
+
+.bilan-table tbody tr:hover td{
+    background:#f1f7ff;
+    transition:.2s;
+}
+
+.titre{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.center{
+    text-align:center;
+}
+
+.right{
+    text-align:right;
+}
+
+/* ===== ENCADRÉS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    overflow-wrap:break-word;
+}
+
+/* ===== EXERCICE ===== */
+#EXE .titre{
+    color:#0f766e;
+}
+
+/* ===== SOLUTION ===== */
+#SOL .titre{
+    color:#0f766e;
+}
+
+.calcul-capital{
+    background:#f1f7ff;
+    border-left:6px solid #0984e3;
+    padding:15px;
+    margin-top:20px;
+    border-radius:8px;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
-    padding:10px;
+    padding:15px;
     background:#2c3e50;
     color:white;
+    margin-top:20px;
+    line-height:1.6;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+footer a:hover{
+    text-decoration:underline;
+}
+
+/* ===== ADAPTATION TABLETTES ===== */
+@media(max-width:900px){
+
+    .brandbar{
+        justify-content:center;
+        gap:12px;
+    }
+
+    .site-menu{
+        width:100%;
+        justify-content:center;
+    }
+
+    header h1{
+        font-size:23px;
+    }
+
+    section{
+        padding:24px;
+        margin:15px;
+    }
+}
+
+/* ===== ADAPTATION AUX ÉCRANS DE 760 PX ===== */
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{
+        width:100%;
+    }
+
+    .site-menu>a{
+        padding:9px;
+    }
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    header h1{
+        font-size:21px;
+    }
+
+    header h1 p{
+        font-size:16px;
+    }
+
+    .titre{
+        font-size:17px;
+    }
+
+    .bilan-wrapper{
+        width:100%;
+        overflow-x:visible;
+    }
+
+    .bilan-table{
+        width:100%;
+        min-width:0;
+        table-layout:fixed;
+        font-size:13px;
+    }
+
+    .bilan-table td,
+    .bilan-table th{
+        padding:7px 4px;
+        overflow-wrap:anywhere;
+    }
+}
+
+/* ===== ADAPTATION AUX TÉLÉPHONES ===== */
+@media(max-width:600px){
+
+    body{
+        font-size:15px;
+    }
+
+    /* En-tête */
+    .brandbar{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+        padding:12px 10px;
+    }
+
+    .brand{
+        justify-content:center;
+        font-size:20px;
+    }
+
+    .brand-logo{
+        width:40px;
+        height:40px;
+    }
+
+    /* Menu principal */
+    .site-menu{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:5px;
+    }
+
+    .site-menu>a{
+        width:100%;
+        text-align:center;
+        padding:11px 8px;
+        background:#ffffff12;
+        font-size:14px;
+    }
+
+    .dropdown{
+        display:block;
+        width:100%;
+    }
+
+    .dropdown button{
+        display:block;
+        width:100%;
+        padding:12px 8px;
+        text-align:center;
+        background:#ffffff12;
+        font-size:14px;
+        line-height:1.5;
+        overflow-wrap:break-word;
+    }
+
+    /* Menus déroulants */
+    .dropdown-content{
+        position:static;
+        left:auto;
+        top:auto;
+        transform:none;
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        max-height:45vh;
+        margin-top:4px;
+        border-radius:6px;
+        box-shadow:inset 0 0 0 1px #e2e8f0;
+    }
+
+    .dropdown-content a{
+        padding:12px 10px;
+        font-size:14px;
+    }
+
+    /* Titres */
+    header h1{
+        padding:15px 12px;
+        font-size:20px;
+    }
+
+    header h1 p{
+        margin:8px 0;
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    /* Navigation */
+    nav{
+        padding:10px 8px;
+        gap:5px;
+    }
+
+    nav button{
+        flex:1 1 calc(50% - 10px);
+        min-width:0;
+        margin:3px;
+        padding:12px 8px;
+        font-size:14px;
+        line-height:1.4;
+        transform:none;
+    }
+
+    .btnActive{
+        transform:none;
+    }
+
+    /* Sections */
+    section{
+        padding:16px 13px;
+        margin:10px;
+        border-radius:9px;
+    }
+
+    .animationSection{
+        border-left-width:5px;
+    }
+
+    h2{
+        font-size:20px;
+        margin-top:5px;
+    }
+
+    h3{
+        font-size:17px;
+    }
+
+    p,li{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    ul,ol{
+        padding-left:21px;
+    }
+
+    /* Encadrés */
+    .highlight{
+        padding:12px;
+        margin-top:12px;
+        border-left-width:4px;
+        font-size:14px;
+    }
+
+    /* Tableaux */
+    table{
+        width:100%;
+        max-width:100%;
+        min-width:0;
+        table-layout:fixed;
+        font-size:12px;
+    }
+
+    td,th{
+        padding:6px 3px;
+        overflow-wrap:anywhere;
+        white-space:normal;
+    }
+
+    /* Tableau du bilan */
+    .bilan-wrapper{
+        width:100%;
+        max-width:100%;
+        overflow-x:visible;
+        margin:12px 0 20px;
+    }
+
+    .bilan-table{
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        table-layout:fixed;
+        font-size:11px;
+    }
+
+    .bilan-table th:nth-child(1),
+    .bilan-table td:nth-child(1){
+        width:29%;
+    }
+
+    .bilan-table th:nth-child(2),
+    .bilan-table td:nth-child(2){
+        width:21%;
+    }
+
+    .bilan-table th:nth-child(3),
+    .bilan-table td:nth-child(3){
+        width:29%;
+    }
+
+    .bilan-table th:nth-child(4),
+    .bilan-table td:nth-child(4){
+        width:21%;
+    }
+
+    .bilan-table td,
+    .bilan-table th{
+        padding:7px 3px;
+        overflow-wrap:anywhere;
+        word-break:normal;
+        white-space:normal;
+        line-height:1.4;
+    }
+
+    .bilan-table th{
+        font-size:10px;
+        text-align:center;
+    }
+
+    .bilan-table td{
+        font-size:11px;
+    }
+
+    .titre{
+        font-size:17px;
+        margin:15px 0;
+    }
+
+    /* Pied de page */
+    footer{
+        padding:14px 10px;
+        font-size:14px;
+    }
+}
+
+/* ===== TRÈS PETITS TÉLÉPHONES ===== */
+@media(max-width:360px){
+
+    body{
+        font-size:14px;
+    }
+
+    header h1{
+        font-size:18px;
+        padding:12px 8px;
+    }
+
+    header h1 p{
+        font-size:13px;
+    }
+
+    .brand{
+        font-size:18px;
+    }
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:13px;
+        padding:11px 6px;
+    }
+
+    nav{
+        padding:8px 5px;
+    }
+
+    nav button{
+        flex-basis:100%;
+        width:100%;
+        margin:3px 0;
+        font-size:14px;
+    }
+
+    section{
+        margin:7px;
+        padding:13px 10px;
+    }
+
+    h2{
+        font-size:18px;
+    }
+
+    h3{
+        font-size:16px;
+    }
+
+    .highlight{
+        padding:10px;
+    }
+
+    .bilan-table{
+        width:100%;
+        min-width:0;
+        font-size:9px;
+    }
+
+    .bilan-table th{
+        font-size:9px;
+        padding:5px 2px;
+    }
+
+    .bilan-table td{
+        font-size:10px;
+        padding:6px 2px;
+    }
+}
+
+/* ===== ACCESSIBILITÉ ===== */
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
 }
 </style>
-
-<script>
-function showSection(id){
-    let sections = document.querySelectorAll("section");
-    sections.forEach(sec => sec.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-}
-</script>
-
 </head>
 
 <body>
 
+<!-- ===== EN-TÊTE ET NAVIGATION PRINCIPALE ===== -->
 <header>
-    <h1>📘 Le Bilan Comptable</h1>
+
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+P1 – Concepts de base ▼
+</button>
+
+<div class="dropdown-content">
+<a href="C1P1M1.html">T - Résumés des thèmes</a>
+<a href="C2P1M1.html">F - Formulaires interactifs</a>
+<a href="C3P1M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false"
+onclick="toggleDropdown(this)">
+E - Exercices corrigés ▼
+</button>
+
+<div class="dropdown-content">
+<a href="E1C3P1M1.html">E1 – Le bilan comptable</a>
+<a href="E2C3P1M1.html">E2 - Le compte et le bilan comptable</a>
+<a href="E3C3P1M1.html">E3 – Le compte de produits et de charges « CPC » </a>
+<a href="E4C3P1M1.html">E4 – Le journal comptable</a>
+<a href="E5C3P1M1.html">E5 – Le grand livre</a>
+<a href="E6C3P1M1.html">E6 – La balance</a>
+</div>
+</div>
+
+<a href="C3P1M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; E - Exercices corrigés </p>
+<p>E1 - Le Bilan Comptable</p>
+</h1>
+
 </header>
 
+<!-- ===== MENU DES RUBRIQUES ===== -->
 <nav>
-    <button onclick="showSection('EXE')">EXERCICE</button>
-    <button onclick="showSection('SOL')">SOLUTION</button>
+
+<button class="btnActive"
+onclick="showSection('EXE',this)">
+Exercice
+</button>
+
+<button onclick="showSection('SOL',this)">
+Solution
+</button>
+
 </nav>
 
-<section id="EXE" class="active">
-    <p>
-La situation de l’entreprise <strong>« AL FAJR »</strong> au <strong>05/02/2026</strong> se présente comme suit (en MAD) :
+<!-- ===== EXERCICE ===== -->
+<section id="EXE" class="active animationSection">
+
+<h2>📘 Exercice : Établissement du bilan initial</h2>
+
+<p>
+La situation de l’entreprise <strong>« AL FAJR »</strong> au
+<strong>05/02/2026</strong> se présente comme suit (en MAD) :
 </p>
 
-<table>
+<div class="bilan-wrapper">
+
+<table class="bilan-table">
+
+<thead>
 <tr>
 <th>Éléments</th>
 <th>Montants</th>
 </tr>
+</thead>
 
-<tr><td>Matériel de transport</td><td>80 000</td></tr>
-<tr><td>Banque</td><td>52 000</td></tr>
-<tr><td>Marchandises</td><td>38 000</td></tr>
-<tr><td>Caisse</td><td>10 000</td></tr>
-<tr><td>Fournisseurs</td><td>20 000</td></tr>
-<tr><td>Clients</td><td>30 000</td></tr>
-
-<tr><td><strong>Capital</strong></td><td><strong>À déterminer</strong></td></tr>
-</table>
-
-<h2>Travail à faire :</h2>
-<ol>
-<li>Déterminer le capital de l’entreprise</li>
-<li>Établir le bilan initial (de démarrage)</li>
-</ol>
-💡Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer ce bilan. 
-</section>
-
-<section id="SOL">
-    <h2>Bilan au 05/02/2026</h2>
-
-<table>
-<tr>
-<th>ACTIF</th>
-<th>Montants</th>
-<th>PASSIF</th>
-<th>Montants</th>
-</tr>
+<tbody>
 
 <tr>
-<td><b>Actif Immobilisé</b><br>Matériel de transport</td>
+<td>Matériel de transport</td>
 <td>80 000</td>
-<td><b>Capitaux propres</b><br>Capital</td>
-<td>190 000</td>
 </tr>
 
 <tr>
-<td><b>Actif Circulant</b><br>Marchandises<br>Clients</td>
-<td>38 000<br>30 000</td>
-<td><b>Passif circulant</b><br>Fournisseurs</td>
+<td>Banque</td>
+<td>52 000</td>
+</tr>
+
+<tr>
+<td>Marchandises</td>
+<td>38 000</td>
+</tr>
+
+<tr>
+<td>Caisse</td>
+<td>10 000</td>
+</tr>
+
+<tr>
+<td>Fournisseurs</td>
 <td>20 000</td>
 </tr>
 
 <tr>
-<td><b>Trésorerie Actif</b><br>Banque<br>Caisse</td>
-<td>52 000<br>10 000</td>
+<td>Clients</td>
+<td>30 000</td>
+</tr>
+
+<tr>
+<td><strong>Capital</strong></td>
+<td><strong>À déterminer</strong></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<h2>Travail à faire :</h2>
+
+<ol>
+<li>Déterminer le capital de l’entreprise.</li>
+<li>Établir le bilan initial (de démarrage).</li>
+</ol>
+
+<div class="highlight">
+💡 Nous vous invitons à recourir à notre formulaire interactif afin
+d’élaborer ce bilan.
+</div>
+
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section id="SOL">
+
+<h2>📊 Solution : Bilan au 05/02/2026</h2>
+
+
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:10px;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    color:#000;
+}
+
+
+/* ===== CONTENEUR DES DEUX TABLEAUX ===== */
+.bilan-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    width:100%;
+    align-items:start;
+}
+
+/* ===== TABLEAUX ===== */
+.bilan-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    background:white;
+    font-size:16px;
+}
+
+.bilan-table th,
+.bilan-table td{
+    border:1px solid #999;
+    padding:9px 8px;
+    text-align:left;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+}
+
+.bilan-table thead th{
+    background:#2c4054;
+    color:white;
+    text-align:center;
+    font-weight:bold;
+    padding:9px 5px;
+}
+
+.bilan-table th:first-child,
+.bilan-table td:first-child{
+    width:83%;
+}
+
+.bilan-table th:last-child,
+.bilan-table td:last-child{
+    width:17%;
+}
+
+/* ===== RUBRIQUES PRINCIPALES ===== */
+.rubrique{
+    background:#d5e9f6;
+    font-weight:bold;
+}
+
+/* ===== SOUS-RUBRIQUES ===== */
+.sous-rubrique{
+    background:#eaf4fa;
+    font-weight:bold;
+}
+
+/* ===== LIGNES DES COMPTES ===== */
+.compte{
+    background:#fafafa;
+    font-weight:normal;
+}
+
+.compte td:last-child{
+    white-space:nowrap;
+    text-align:left;
+    font-variant-numeric:tabular-nums;
+}
+
+/* ===== LIGNES DES TOTAUX ===== */
+.total td{
+    background:#2c4054;
+    color:white;
+    font-weight:bold;
+    padding:20px 12px;
+}
+
+/* ===== RESPONSIVE TABLETTE ===== */
+@media(max-width:1000px){
+
+    .bilan-container{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .bilan-table{
+        font-size:15px;
+    }
+}
+
+/* ===== RESPONSIVE TÉLÉPHONE ===== */
+@media(max-width:600px){
+
+    body{
+        padding:7px;
+    }
+
+    h1{
+        font-size:24px;
+        margin:10px 0 20px;
+    }
+
+    .bilan-container{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .bilan-table{
+        font-size:12px;
+    }
+
+    .bilan-table th,
+    .bilan-table td{
+        padding:8px 5px;
+        line-height:1.4;
+    }
+
+    .bilan-table th:first-child,
+    .bilan-table td:first-child{
+        width:78%;
+    }
+
+    .bilan-table th:last-child,
+    .bilan-table td:last-child{
+        width:22%;
+    }
+
+    .total td{
+        padding:13px 6px;
+    }
+}
+
+/* ===== TRÈS PETITS ÉCRANS ===== */
+@media(max-width:360px){
+
+    .bilan-table{
+        font-size:11px;
+    }
+
+    .bilan-table th,
+    .bilan-table td{
+        padding:7px 3px;
+    }
+}
+</style>
+
+
+<div class="bilan-container">
+
+<!-- ================= ACTIF ================= -->
+<table class="bilan-table">
+
+<thead>
+<tr>
+<th>ACTIF</th>
+<th>Montant</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr class="rubrique">
+<td>&gt; 2 Actif immobilisé</td>
 <td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 21 Immobilisations en non-valeurs</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 22 Immobilisations Incorporelles</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 23 Immobilisations Corporelles</td>
+<td></td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 234 Matériel de transport</td>
+<td>80 000,00</td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 24/25 Immobilisations Financières</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 27 Écarts de conversion Actif</td>
+<td></td>
+</tr>
+
+<tr class="rubrique">
+<td>&gt; 3 Actif Circulant</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 31 Stocks</td>
+<td></td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 311 Marchandises</td>
+<td>38 000,00</td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 34 Créances de l'actif circulant</td>
+<td></td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 342 Clients et comptes rattachés</td>
+<td>30 000,00</td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 35 Titres et valeurs de placement</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 37 Écarts de conversion - actif</td>
+<td></td>
+</tr>
+
+<tr class="rubrique">
+<td>&gt; 5 Trésorerie</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 51 Trésorerie - Actif</td>
+<td></td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 514 Banques, Trésorerie Générale et Chèques Postaux débiteurs</td>
+<td>52 000,00</td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 516 Caisses, régies d'avances et accréditifs</td>
+<td>10 000,00</td>
+</tr>
+
+<tr class="total">
+<td>Total Actif</td>
+<td>210 000,00</td>
+</tr>
+
+</tbody>
+</table>
+
+<!-- ================= PASSIF ================= -->
+<table class="bilan-table">
+
+<thead>
+<tr>
+<th>PASSIF</th>
+<th>Montant</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr class="rubrique">
+<td>&gt; 1 Financement Permanent</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 11 Capitaux propres</td>
+<td></td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 111 Capital social ou personnel</td>
+<td>190 000,00</td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 13 Capitaux Propres et Assimilés</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 14 Dettes de Financement</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 15 Provisions Durables Pour Risques et Charges</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 17 Écarts de conversion - Passif</td>
+<td></td>
+</tr>
+
+<tr class="rubrique">
+<td>&gt; 4 Passif circulant</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 44 Dettes du passif circulant</td>
+<td></td>
+</tr>
+
+<tr class="compte">
+<td>&gt;&gt;&gt; 441 Fournisseurs et comptes rattachés</td>
+<td>20 000,00</td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 45 Autres provisions pour risques et charges</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 47 Écarts de conversion - Passif</td>
+<td></td>
+</tr>
+
+<tr class="rubrique">
+<td>&gt; 5 Trésorerie</td>
+<td></td>
+</tr>
+
+<tr class="sous-rubrique">
+<td>&gt;&gt; 55 Trésorerie - Passif</td>
 <td></td>
 </tr>
 
 <tr class="total">
-<td>Total</td>
-<td>210 000</td>
-<td>Total</td>
-<td>210 000</td>
+<td>Total Passif</td>
+<td>210 000,00</td>
 </tr>
 
+</tbody>
 </table>
 
-<p><strong>Calcul du capital :</strong></p>
+</div>
+
+<div class="calcul-capital">
+
+<h3>🧮 Calcul du capital</h3>
+
 <p>
-Total Actif = 80 000 + 38 000 + 30 000 + 52 000 + 10 000 = <strong>210 000</strong><br>
-Capital = Total Actif - Dettes = 210 000 - 20 000 = <strong>190 000</strong>
+<strong>1. Calcul du total de l'actif :</strong>
+</p>
+
+<p>
+Total Actif = 80 000 + 38 000 + 30 000 + 52 000 + 10 000
+</p>
+
+<p>
+<strong>Total Actif = 210 000 MAD</strong>
+</p>
+
+<p>
+<strong>2. Détermination du capital :</strong>
+</p>
+
+<p>
+Capital = Total Actif − Dettes
+</p>
+
+<p>
+Capital = 210 000 − 20 000
+</p>
+
+<p>
+<strong>Capital = 190 000 MAD</strong>
 </p>
 
 </div>
 
-</body>
-</html>
+<div class="highlight">
+✔ Le bilan est équilibré car :
+
+<strong>Total Actif = Total Passif = 210 000 MAD.</strong>
+</div>
 
 </section>
 
+<!-- ===== PIED DE PAGE ===== -->
 <footer>
-    Formation en comptabilité générale
-<br>
-
-<a href="C3P1M1.html">⬅ Retour </a>
-
+<span>Formation en comptabilité générale</span>
 </footer>
+
+<script>
+
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* ===== FERMER LES MENUS EN CLIQUANT À L'EXTÉRIEUR ===== */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+
+        }
+
+    });
+
+});
+
+/* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+}
+
+</script>
 
 </body>
 </html>
+
