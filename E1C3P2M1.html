@@ -1,152 +1,321 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay – E1 Enregistrement des achats</title>
 
 <style>
+*{box-sizing:border-box}
+
+html{
+    width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
+    width:100%;
     background:#f4f6f9;
+    color:#1e293b;
+    overflow-x:hidden;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:20px 10px;
+    margin:0;
+    font-size:35px;
+    overflow-wrap:break-word;
+}
+
+header h1 p{
+    margin:10px 0;
+    line-height:1.5;
+    font-size:35px;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+    font-family:inherit;
+}
+
+.dropdown button:hover{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:calc(100vw - 20px);
+    max-height:70vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+    -webkit-overflow-scrolling:touch;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    line-height:1.5;
+    border-radius:5px;
+    overflow-wrap:break-word;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION ===== */
 nav{
     background:#34495e;
     padding:10px;
     text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:5px;
 }
 
 nav button{
     margin:5px;
     padding:12px 18px;
-    border:none;
+    border:0;
     background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    font-family:inherit;
+    transition:.3s;
+    touch-action:manipulation;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.02);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== CONTENU ===== */
 h2{
     color:#2c3e50;
+    line-height:1.4;
+    overflow-wrap:break-word;
 }
 
 h3{
     color:#00b894;
+    line-height:1.4;
 }
 
-/* TABLEAUX */
+p,li{
+    line-height:1.7;
+    overflow-wrap:break-word;
+}
+
+ul,ol{
+    padding-left:25px;
+}
+
+/* ===== TABLEAUX ===== */
 table{
-    width:90%;
+    width:100%;
+    max-width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:20px 0 30px;
+    box-shadow:0 2px 10px #00000014;
 }
 
-td{
+td,th{
     border:1px solid #ccc;
     padding:10px;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    white-space:normal;
 }
 
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
+th{
     background:#dfe6e9;
+    text-align:center;
 }
 
-/* JOURNAL */
+tbody tr:hover td{
+    background:#f1f7ff;
+    transition:.2s;
+}
+
+/* ===== TABLEAUX DES FACTURES ===== */
+.facture-table{
+    border:2px solid #34495e;
+}
+
+.facture-table .titre{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:#0f766e;
+    background:#e8fff7;
+}
+
+.facture-table .header td{
+    background:#dfe6e9;
+    font-weight:bold;
+}
+
+.facture-table .right{
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+}
+
+.facture-table .bold{
+    font-weight:bold;
+}
+
+/* ===== TABLEAUX JOURNAL ===== */
+.journal-table{
+    border:2px solid #34495e;
+}
+
 .date{
     text-align:center;
-    background:#2c3e50;
-    color:white;
+    background:#2c3e50!important;
+    color:white!important;
     font-weight:bold;
 }
 
 .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
 .credit{
     background:#fff4e6;
+    color:#b35400;
     font-weight:bold;
 }
 
@@ -154,21 +323,60 @@ td{
     text-align:right;
     background:#f8f9fa;
     font-weight:bold;
+    font-variant-numeric:tabular-nums;
 }
 
-/* Hover tableau */
-tr:hover td{
+.center{text-align:center}
+.right{text-align:right}
+.bold{font-weight:bold}
+
+/* ===== ENCADRÉS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    overflow-wrap:break-word;
+}
+
+.note{
     background:#f1f7ff;
-    transition:0.2s;
+    border-left:6px solid #0984e3;
+    padding:15px;
+    margin:15px 0;
+    border-radius:8px;
 }
 
-/* FOOTER */
+/* ===== SOLUTION ===== */
+#SOL h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:30px;
+}
+
+#SOL h3{
+    color:#0f766e;
+    border-bottom:2px solid #00b894;
+    padding-bottom:8px;
+    margin-top:30px;
+}
+
+#SOL .titre{
+    color:#0f766e;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
     padding:15px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
+    line-height:1.6;
 }
 
 footer a{
@@ -176,1258 +384,898 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTES ===== */
+@media(max-width:900px){
+
+    .brandbar{
+        justify-content:center;
+        gap:12px;
+    }
+
+    .site-menu{
+        width:100%;
+        justify-content:center;
+    }
+
+    header h1{font-size:23px}
+
+    section{
+        padding:24px;
+        margin:15px;
+    }
+}
+
+/* ===== ÉCRANS DE 760 PX ===== */
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{width:100%}
+
+    .site-menu>a{padding:9px}
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    header h1{font-size:21px}
+
+    header h1 p{font-size:16px}
+}
+
+/* ===== TÉLÉPHONES ===== */
+@media(max-width:600px){
+
+    body{font-size:15px}
+
+    .brandbar{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+        padding:12px 10px;
+    }
+
+    .brand{
+        justify-content:center;
+        font-size:20px;
+    }
+
+    .brand-logo{
+        width:40px;
+        height:40px;
+    }
+
+    .site-menu{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:5px;
+    }
+
+    .site-menu>a{
+        width:100%;
+        text-align:center;
+        padding:11px 8px;
+        background:#ffffff12;
+        font-size:14px;
+    }
+
+    .dropdown{
+        display:block;
+        width:100%;
+    }
+
+    .dropdown button{
+        display:block;
+        width:100%;
+        padding:12px 8px;
+        text-align:center;
+        background:#ffffff12;
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .dropdown-content{
+        position:static;
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        max-height:45vh;
+        margin-top:4px;
+        border-radius:6px;
+        box-shadow:inset 0 0 0 1px #e2e8f0;
+    }
+
+    .dropdown-content a{
+        padding:12px 10px;
+        font-size:14px;
+    }
+
+    header h1{
+        padding:15px 12px;
+        font-size:20px;
+    }
+
+    header h1 p{
+        margin:8px 0;
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    nav{
+        padding:10px 8px;
+        gap:5px;
+    }
+
+    nav button{
+        flex:1 1 calc(50% - 10px);
+        min-width:0;
+        margin:3px;
+        padding:12px 8px;
+        font-size:14px;
+        transform:none;
+    }
+
+    .btnActive{transform:none}
+
+    section{
+        padding:16px 13px;
+        margin:10px;
+        border-radius:9px;
+    }
+
+    .animationSection{border-left-width:5px}
+
+    h2{font-size:20px}
+    h3{font-size:17px}
+
+    p,li{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    ul,ol{padding-left:21px}
+
+    .highlight,.note{
+        padding:12px;
+        font-size:14px;
+    }
+
+    table{
+        width:100%;
+        max-width:100%;
+        min-width:0;
+        table-layout:fixed;
+        font-size:12px;
+    }
+
+    td,th{
+        padding:6px 3px;
+        overflow-wrap:anywhere;
+        white-space:normal;
+        line-height:1.4;
+    }
+
+    .facture-table .titre{font-size:16px}
+
+    .journal-table{font-size:11px}
+
+    .journal-table td{
+        padding:6px 3px;
+    }
+
+    footer{
+        padding:14px 10px;
+        font-size:14px;
+    }
+}
+
+/* ===== TRÈS PETITS TÉLÉPHONES ===== */
+@media(max-width:360px){
+
+    body{font-size:14px}
+
+    header h1{
+        font-size:18px;
+        padding:12px 8px;
+    }
+
+    header h1 p{font-size:13px}
+
+    .brand{font-size:18px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:13px;
+        padding:11px 6px;
+    }
+
+    nav{
+        padding:8px 5px;
+    }
+
+    nav button{
+        flex-basis:100%;
+        width:100%;
+        margin:3px 0;
+        font-size:14px;
+    }
+
+    section{
+        margin:7px;
+        padding:13px 10px;
+    }
+
+    h2{font-size:18px}
+    h3{font-size:16px}
+
+    table{font-size:10px}
+
+    td,th{padding:5px 2px}
+
+    .facture-table .titre{font-size:14px}
+
+    .journal-table{font-size:9px}
+}
+
+/* ===== ACCESSIBILITÉ ===== */
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
+<!-- ===== EN-TÊTE IGN DAY ===== -->
 <header>
-    <h1>📘 Exercice 1 / Les opérations d’achat
-</h1>
-</header>
 
-<nav>
-    <button onclick="showSection('EXE')">Exercice</button>
-<button onclick="showSection('SOL')"> Solution</button>
-</nav>
+<div class="brandbar">
 
-<section id="EXE" class="active">
-    <h2> Exercice 1 
-</h2>
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
 
-<div class="note">
-<b>La société HORIZON INDUSTRIE SARL</b> a réalisé les opérations suivantes au cours du mois de novembre 2025.
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
 </div>
 
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P2 – Opérations courantes ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P2M1.html">T - Résumés des thèmes</a>
+<a href="C2P2M1.html">F - Formulaires interactifs</a>
+<a href="C3P2M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+E - Exercices corrigés ▼
+</button>
+<div class="dropdown-content">
+<a href="E1C3P2M1.html">E1 – Enregistrement des achats </a>
+<a href="E2C3P2M1.html">E2 – Enregistrement des ventes </a>
+<a href="E3C3P2M1.html">E3 – Enregistrement des autres charges </a>
+<a href="E4C3P2M1.html">E4 – Enregistrement des autres produits </a>
+<a href="E5C3P2M1.html">E5 – Enregistrement de l’acquisition des immobilisations </a>
+<a href="E6C3P2M1.html">E6 – Enregistrement des règlements financiers </a>
+
+
+</div>
+</div>
+
+<a href="C3P2M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P2 - Opérations courantes &gt;&gt; E - Exercices corrigés</p>
+<p>E1 - Enregistrement des achats </p>
+</h1>
+
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+
+<button class="btnActive" onclick="showSection('EXE',this)">
+Exercice
+</button>
+
+<button onclick="showSection('SOL',this)">
+Solution
+</button>
+
+</nav>
+
+<!-- ================================================== -->
+<!-- EXERCICE -->
+<!-- ================================================== -->
+
+<section id="EXE" class="active animationSection">
+
+
+<div class="note">
+<strong>La société HORIZON INDUSTRIE SARL</strong> a réalisé les opérations suivantes au cours du mois de novembre 2025.
+</div>
 
 <p>
--Le 03/11/2025, la société reçoit de son fournisseur
-<b>ATLAS NÉGOCE</b> la facture Doit n° 7845 relative à un achat de marchandises.
+Le 03/11/2025, la société reçoit de son fournisseur
+<strong>ATLAS NÉGOCE</strong> la facture Doit n° 7845 relative à un achat de marchandises.
 </p>
 
 <table>
+<thead>
 <tr>
-<td> Montant Brut </td>
-<td> Remise</td>
-<td> Escompte</td>
-<td> Transport</td>
-<td> TVA sur M/ses</td>
-<td> TVA sur Port</td>
-<td> Règlement</td>
+<th>Montant Brut</th>
+<th>Remise</th>
+<th>Escompte</th>
+<th>Transport</th>
+<th>TVA sur M/ses</th>
+<th>TVA sur Port</th>
+<th>Règlement</th>
 </tr>
-
+</thead>
+<tbody>
 <tr>
-<td>65 000 </td>
+<td>65 000</td>
 <td>8 %</td>
 <td>2 %</td>
-<td>1 500 </td>
+<td>1 500</td>
 <td>20 %</td>
 <td>10 %</td>
-<td>
-50 % par chèque<br>
-50 % à crédit
-</td>
+<td>50 % par chèque<br>50 % à crédit</td>
 </tr>
+</tbody>
 </table>
 
-
-
 <p>
--Le 08/11/2025, la société reçoit de son fournisseur
-<b>MAROC MATIÈRES</b> la facture Doit n° 5218 relative à un achat de matières premières.
+Le 08/11/2025, la société reçoit de son fournisseur
+<strong>MAROC MATIÈRES</strong> la facture Doit n° 5218 relative à un achat de matières premières.
 </p>
 
 <table>
+<thead>
 <tr>
-<td>Montant Brut</td>
-<td>Rabais</td>
-<td>Escompte</td>
-<td>Transport</td>
-<td> TVA sur M/ses</td>
-<td>TVA sur Port</td>
-<td>Règlement</td>
+<th>Montant Brut</th>
+<th>Rabais</th>
+<th>Escompte</th>
+<th>Transport</th>
+<th>TVA sur M/ses</th>
+<th>TVA sur Port</th>
+<th>Règlement</th>
 </tr>
-
+</thead>
+<tbody>
 <tr>
-<td>90 000 </td>
+<td>90 000</td>
 <td>6 %</td>
 <td>1 %</td>
-<td>2 500 </td>
+<td>2 500</td>
 <td>20 %</td>
 <td>10 %</td>
-<td>
-40 % en espèce<br>
-60 % à crédit
-</td>
+<td>40 % en espèce<br>60 % à crédit</td>
 </tr>
+</tbody>
 </table>
 
-
 <p>
--Le 14/11/2025, la société reçoit de son fournisseur
-<b>BUREAU SERVICE</b> la facture Doit n° 9632 relative à un achat de fournitures.
+Le 14/11/2025, la société reçoit de son fournisseur
+<strong>BUREAU SERVICE</strong> la facture Doit n° 9632 relative à un achat de fournitures.
 </p>
 
 <table>
+<thead>
 <tr>
-<td>Montant Brut </td>
-<td>Ristourne</td>
-<td>Transport forfaitaire</td>
-<td>TVA 
-<td> Emballages consignés</td>
-<td>Règlement</td>
+<th>Montant Brut</th>
+<th>Ristourne</th>
+<th>Transport forfaitaire</th>
+<th>TVA</th>
+<th>Emballages consignés</th>
+<th>Règlement</th>
 </tr>
-
+</thead>
+<tbody>
 <tr>
 <td>15 000</td>
 <td>5 %</td>
-<td>400 </td>
+<td>400</td>
 <td>20 %</td>
-
-<td>800 </td>
-<td>
-30 % en espèce<br>
-70 % à crédit
-</td>
+<td>800</td>
+<td>30 % en espèce<br>70 % à crédit</td>
 </tr>
+</tbody>
 </table>
 
-
 <p>
--Le 20/11/2025, suite à un défaut de qualité, la société retourne une partie des marchandises achetées le 03/11/2025.
+Le 20/11/2025, suite à un défaut de qualité, la société retourne une partie des marchandises achetées le 03/11/2025.
 </p>
 
 <p>
-Le fournisseur <b>ATLAS NÉGOCE</b> adresse la facture Avoir n° 318 portant sur un montant brut de :
-<b>12 000 </b>.
+Le fournisseur <strong>ATLAS NÉGOCE</strong> adresse la facture Avoir n° 318 portant sur un montant brut de :
+<strong>12 000</strong>.
 </p>
 
-
-
 <p>
--Le 24/11/2025, le fournisseur <b>MAROC MATIÈRES</b> accorde une réduction commerciale supplémentaire.
+Le 24/11/2025, le fournisseur <strong>MAROC MATIÈRES</strong> accorde une réduction commerciale supplémentaire.
 </p>
 
 <p>
 Facture Avoir n° 447 :
-<b>Remise supplémentaire de 2 %</b>.
-</p>
-
-
-<p>
--Le 28/11/2025, la société désire régler sa dette avant échéance.
+<strong>Remise supplémentaire de 2 %</strong>.
 </p>
 
 <p>
-Le fournisseur <b>BUREAU SERVICE</b> lui adresse la facture Avoir n° 172 portant sur un :
-<b>Escompte de règlement de 1 %</b>.
+Le 28/11/2025, la société désire régler sa dette avant échéance.
+</p>
+
+<p>
+Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 172 portant sur un :
+<strong>Escompte de règlement de 1 %</strong>.
 </p>
 
 <h2>Travail à faire</h2>
 
 <ol>
-<li>Etablir et enregistrer au journal les factures Doit n° 7845, n° 5218 et n° 9632. </li>
-
-<li>Etablir et enregistrer au journal les factures Avoir n° 318, n° 447 et n° 172. </li>
-
+<li>Établir et enregistrer au journal les factures Doit n° 7845, n° 5218 et n° 9632.</li>
+<li>Établir et enregistrer au journal les factures Avoir n° 318, n° 447 et n° 172.</li>
 </ol>
 
+<div class="highlight">
+💡 Consultez la rubrique Solution pour découvrir le détail des factures et les écritures comptables correspondantes.
+</div>
+
 </section>
+
+<!-- ================================================== -->
+<!-- SOLUTION -->
+<!-- ================================================== -->
 
 <section id="SOL">
 
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
 
-/* Tableau principal */
-table{
-    width:90%;
-    margin:auto;
-    border-collapse:collapse;
-    border:3px solid black; /* Bordure extérieure épaisse */
-}
+<h3>1- Les factures Doit</h3>
 
-/* Cellules */
-td{
-    border:1px solid black; /* Bordures internes */
-    padding:10px;
-}
-
-/* Styles */
-.titre{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.right{
-    text-align:right;
-}
-
-.center{
-    text-align:center;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.header{
-    background:#e6e6e6;
-}
-
-</style>
-<h2>Solution de l’exercice 1 </h2>
-
-<h3>1- Les factures Doit </h3>
-<table>
-
+<!-- FACTURE 7845 -->
+<table class="facture-table">
+<tr><td colspan="3" class="titre">Facture DOIT N°7845</td></tr>
 <tr>
-    <td colspan="3" class="titre"> Facture DOIT N°7845</td>
+<td class="bold">Société ATLAS NÉGOCE</td>
+<td class="center">DOIT</td>
+<td class="bold right">Société HORIZON INDUSTRIE</td>
 </tr>
-
-<tr>
-    <td class="bold">Société ATLAS NÉGOCE </td>
-    <td> DOIT </td>
-    <td class="bold right"> Société HORIZON INDUSTRIE  </td>
-</tr>
-
-
-<tr>
-    <td colspan="3" class="bold">Casablance le 03/11/2025</td>
-</tr>
-
+<tr><td colspan="3" class="bold">Casablanca le 03/11/2025</td></tr>
 <tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant</td>
 </tr>
-
-<tr>
-    <td colspan="2">Montant Brut</td>
-    <td class="right">65.000,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Remise (MB X 8%) </td>
-    <td class="right">5.200,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net commercial (MB-RRR) </td>
-    <td class="right">59.800,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
-    <td class="right">1.196,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
-    <td class="right">58.604,00</td>
-</tr>
-
-<tr>
-    <td colspan="2">(+)Montant TVA sur Marchandises (NF x Taux de TVA de 20%) </td>
-    <td class="right">11.720,80</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Frais de Transport « HT »</td>
-    <td class="right">1.500,00</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 10%) </td>
-    <td class="right">150,00</td>
-</tr>
-<tr>
-    <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA) </td>
-    <td class="right">71.974,80</td>
-</tr>
-
+<tr><td colspan="2">Montant Brut</td><td class="right">65.000,00</td></tr>
+<tr><td colspan="2">(-) Montant Remise (MB × 8 %)</td><td class="right">5.200,00</td></tr>
+<tr><td colspan="2">Net commercial (MB - RRR)</td><td class="right">59.800,00</td></tr>
+<tr><td colspan="2">(-) Montant Escompte (NC × 2 %)</td><td class="right">1.196,00</td></tr>
+<tr><td colspan="2">Net financier HT (NC - Escompte)</td><td class="right">58.604,00</td></tr>
+<tr><td colspan="2">TVA sur marchandises (NF × 20 %)</td><td class="right">11.720,80</td></tr>
+<tr><td colspan="2">Frais de transport HT</td><td class="right">1.500,00</td></tr>
+<tr><td colspan="2">TVA sur transport (1.500 × 10 %)</td><td class="right">150,00</td></tr>
+<tr><td colspan="2" class="bold">Montant à payer TTC</td><td class="right bold">71.974,80</td></tr>
 </table>
-<table>
-<!-- 03/11/2025 -->
+
+<!-- JOURNAL 7845 -->
+<table class="journal-table">
 <tr class="date"><td colspan="6">03/11/2025</td></tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>6111</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Achats de marchandises </option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>59.800,00</option>
-</td>
+<td class="debit center">6111</td><td></td>
+<td class="debit">Achats de marchandises</td><td></td>
+<td class="montant">59.800,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>6142</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Transport</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>1.500,00</option>
-</td>
+<td class="debit center">6142</td><td></td>
+<td class="debit">Transport</td><td></td>
+<td class="montant">1.500,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>3455</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Etat - TVA récupérable</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>11.870,80</option>
-</td>
+<td class="debit center">3455</td><td></td>
+<td class="debit">État - TVA récupérable</td><td></td>
+<td class="montant">11.870,80</td><td></td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>5141</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Banques (SD)</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>35.987,40</option>
-</td>
+<td></td><td class="credit center">5141</td>
+<td></td><td class="credit">Banques</td>
+<td></td><td class="montant">35.987,40</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>4411</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Fournisseurs</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>35.987,40</option>
-</td>
+<td></td><td class="credit center">4411</td>
+<td></td><td class="credit">Fournisseurs</td>
+<td></td><td class="montant">35.987,40</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>7386</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Escomptes obtenus</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>1.196,00</option>
-</td>
+<td></td><td class="credit center">7386</td>
+<td></td><td class="credit">Escomptes obtenus</td>
+<td></td><td class="montant">1.196,00</td>
 </tr>
-
-<!-- Facture -->
 <tr class="date"><td colspan="6">Facture Doit N°7845</td></tr>
 </table>
 
-<table>
-
+<!-- FACTURE 5218 -->
+<table class="facture-table">
+<tr><td colspan="3" class="titre">Facture DOIT N°5218</td></tr>
 <tr>
-    <td colspan="3" class="titre"> Facture DOIT N°5218</td>
+<td class="bold">Société MAROC MATIÈRES</td>
+<td class="center">DOIT</td>
+<td class="bold right">Société HORIZON INDUSTRIE</td>
 </tr>
-
-<tr>
-    <td class="bold">Société MAROC MATIÈRES</td>
-    <td> DOIT </td>
-    <td class="bold right"> Société HORIZON INDUSTRIE  </td>
-</tr>
-
-
-<tr>
-    <td colspan="3" class="bold">Casablance le 08/11/2025</td>
-</tr>
-
+<tr><td colspan="3" class="bold">Casablanca le 08/11/2025</td></tr>
 <tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant</td>
 </tr>
-
-<tr>
-    <td colspan="2">Montant Brut</td>
-    <td class="right">90.000,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Rabais (MB X 6%) </td>
-    <td class="right">5.400,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net commercial (MB-RRR) </td>
-    <td class="right">84.600,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Escompte (NC X 1%) </td>
-    <td class="right">846,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
-    <td class="right">83.754,00</td>
-</tr>
-
-<tr>
-    <td colspan="2">(+)Montant TVA sur Matières premières (NF x Taux de TVA de 20%) </td>
-    <td class="right">16.750,80</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Frais de Transport « HT »</td>
-    <td class="right">2.500,00</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 10%) </td>
-    <td class="right">250,00</td>
-</tr>
-<tr>
-    <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA) </td>
-    <td class="right">103.254,80</td>
-</tr>
-
+<tr><td colspan="2">Montant Brut</td><td class="right">90.000,00</td></tr>
+<tr><td colspan="2">(-) Montant Rabais (MB × 6 %)</td><td class="right">5.400,00</td></tr>
+<tr><td colspan="2">Net commercial (MB - RRR)</td><td class="right">84.600,00</td></tr>
+<tr><td colspan="2">(-) Montant Escompte (NC × 1 %)</td><td class="right">846,00</td></tr>
+<tr><td colspan="2">Net financier HT</td><td class="right">83.754,00</td></tr>
+<tr><td colspan="2">TVA sur matières premières (NF × 20 %)</td><td class="right">16.750,80</td></tr>
+<tr><td colspan="2">Frais de transport HT</td><td class="right">2.500,00</td></tr>
+<tr><td colspan="2">TVA sur transport (2.500 × 10 %)</td><td class="right">250,00</td></tr>
+<tr><td colspan="2" class="bold">Montant à payer TTC</td><td class="right bold">103.254,80</td></tr>
 </table>
-<table>
-<!-- 08/11/2025 -->
+
+<!-- JOURNAL 5218 -->
+<table class="journal-table">
 <tr class="date"><td colspan="6">08/11/2025</td></tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>6121</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Achats de matières premières</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>84.600,00</option>
-</td>
+<td class="debit center">6121</td><td></td>
+<td class="debit">Achats de matières premières</td><td></td>
+<td class="montant">84.600,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>6142</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Transport</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>2.500,00</option>
-</td>
+<td class="debit center">6142</td><td></td>
+<td class="debit">Transport</td><td></td>
+<td class="montant">2.500,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>3455</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Etat - TVA récupérable</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>17.000,80</option>
-</td>
+<td class="debit center">3455</td><td></td>
+<td class="debit">État - TVA récupérable</td><td></td>
+<td class="montant">17.000,80</td><td></td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>5161</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Caisses</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>41.301,92</option>
-</td>
+<td></td><td class="credit center">5161</td>
+<td></td><td class="credit">Caisses</td>
+<td></td><td class="montant">41.301,92</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>4411</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Fournisseurs</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>61.952,88</option>
-</td>
+<td></td><td class="credit center">4411</td>
+<td></td><td class="credit">Fournisseurs</td>
+<td></td><td class="montant">61.952,88</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>7386</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Escomptes obtenus</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>846,00</option>
-</td>
+<td></td><td class="credit center">7386</td>
+<td></td><td class="credit">Escomptes obtenus</td>
+<td></td><td class="montant">846,00</td>
 </tr>
-
-<!-- Facture -->
 <tr class="date"><td colspan="6">Facture Doit N°5218</td></tr>
 </table>
 
-<table>
-
+<!-- FACTURE 9632 -->
+<table class="facture-table">
+<tr><td colspan="3" class="titre">Facture DOIT N°9632</td></tr>
 <tr>
-    <td colspan="3" class="titre"> Facture DOIT N°9632</td>
+<td class="bold">Société BUREAU SERVICE</td>
+<td class="center">DOIT</td>
+<td class="bold right">Société HORIZON INDUSTRIE</td>
 </tr>
-
-<tr>
-    <td class="bold">Société BUREAU SERVICE</td>
-    <td> DOIT </td>
-    <td class="bold right"> Société HORIZON INDUSTRIE </td>
-</tr>
-
-
-<tr>
-    <td colspan="3" class="bold">Casablance le 14/11/2025</td>
-</tr>
-
+<tr><td colspan="3" class="bold">Casablanca le 14/11/2025</td></tr>
 <tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant</td>
 </tr>
-
-<tr>
-    <td colspan="2">Montant Brut</td>
-    <td class="right">15.000,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Ristourne (MB X 5%) </td>
-    <td class="right">750,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net commercial (MB-RRR) </td>
-    <td class="right">14.250,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Escompte (NC X 0%) </td>
-    <td class="right">00,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
-    <td class="right">14.250,00</td>
-</tr>
-
-<tr>
-    <td colspan="2">(+)Montant TVA sur Fournitures (NF x Taux de TVA de 20%) </td>
-    <td class="right">2.850,00</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Frais de Transport « HT »</td>
-    <td class="right">400,00</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Montant TVA sur le transport (NF x Taux de TVA de 20%) </td>
-    <td class="right">80,00</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Frais d'emballages </td>
-    <td class="right">800,00</td>
-</tr>
-
-<tr>
-    <td colspan="2">Montant à payer TTC (NF + Montant total TVA + Montant total des frais) </td>
-    <td class="right">18.380,00</td>
-</tr>
-
+<tr><td colspan="2">Montant Brut</td><td class="right">15.000,00</td></tr>
+<tr><td colspan="2">(-) Montant Ristourne (MB × 5 %)</td><td class="right">750,00</td></tr>
+<tr><td colspan="2">Net commercial</td><td class="right">14.250,00</td></tr>
+<tr><td colspan="2">(-) Montant Escompte (NC × 0 %)</td><td class="right">0,00</td></tr>
+<tr><td colspan="2">Net financier HT</td><td class="right">14.250,00</td></tr>
+<tr><td colspan="2">TVA sur fournitures (NF × 20 %)</td><td class="right">2.850,00</td></tr>
+<tr><td colspan="2">Frais de transport HT</td><td class="right">400,00</td></tr>
+<tr><td colspan="2">TVA sur transport (400 × 20 %)</td><td class="right">80,00</td></tr>
+<tr><td colspan="2">Frais d'emballages consignés</td><td class="right">800,00</td></tr>
+<tr><td colspan="2" class="bold">Montant à payer TTC</td><td class="right bold">18.380,00</td></tr>
 </table>
-<table>
-<!-- 14/11/2025 -->
+
+<!-- JOURNAL 9632 -->
+<table class="journal-table">
 <tr class="date"><td colspan="6">14/11/2025</td></tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>6122</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Achats de matières et FC</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>14.250,00</option>
-</td>
+<td class="debit center">6122</td><td></td>
+<td class="debit">Achats de matières et fournitures</td><td></td>
+<td class="montant">14.250,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>6142</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Transport</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>400,00</option>
-</td>
+<td class="debit center">6142</td><td></td>
+<td class="debit">Transport</td><td></td>
+<td class="montant">400,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>3455</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Etat - TVA récupérable</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>2.930,00</option>
-</td>
+<td class="debit center">3455</td><td></td>
+<td class="debit">État - TVA récupérable</td><td></td>
+<td class="montant">2.930,00</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>3413</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Frs - créances pour emballages et M à rendre</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>800,00</option>
-</td>
+<td class="debit center">3413</td><td></td>
+<td class="debit">Frs - créances pour emballages et matières à rendre</td><td></td>
+<td class="montant">800,00</td><td></td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>5161</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Caisses</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>5.514,00</option>
-</td>
+<td></td><td class="credit center">5161</td>
+<td></td><td class="credit">Caisses</td>
+<td></td><td class="montant">5.514,00</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>4411</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Fournisseurs</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>12.866,00</option>
-</td>
+<td></td><td class="credit center">4411</td>
+<td></td><td class="credit">Fournisseurs</td>
+<td></td><td class="montant">12.866,00</td>
 </tr>
-
-<!-- Facture -->
-<tr class="date"><td colspan="6">Facture Doit N° 9632</td></tr>
-
+<tr class="date"><td colspan="6">Facture Doit N°9632</td></tr>
 </table>
 
+<h3>2- Les factures Avoir</h3>
 
-<h3>2- Les factures Avoir </h3>
-<table>
-
+<!-- AVOIR 318 -->
+<table class="facture-table">
+<tr><td colspan="3" class="titre">Facture AVOIR N°318</td></tr>
 <tr>
-    <td colspan="3" class="titre"> Facture AVOIR N°318</td>
+<td class="bold">Société ATLAS NÉGOCE</td>
+<td class="center">AVOIR</td>
+<td class="bold right">Société HORIZON INDUSTRIE</td>
 </tr>
-
-<tr>
-    <td class="bold">Société ATLAS NÉGOCE </td>
-    <td> AVOIR </td>
-    <td class="bold right"> Société HORIZON INDUSTRIE </td>
-</tr>
-
-
-<tr>
-    <td colspan="3" class="bold">Casablance le 20/11/2025</td>
-</tr>
-
+<tr><td colspan="3" class="bold">Casablanca le 20/11/2025</td></tr>
 <tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant</td>
 </tr>
-
-<tr>
-    <td colspan="2">Montant Brut</td>
-    <td class="right">12.000,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Remise (MB X 8%) </td>
-    <td class="right">960,00</td>
-</tr>
-<tr>
-    <td colspan="2">Net commercial (MB-RRR) </td>
-    <td class="right">11.040,00</td>
-</tr>
-<tr>
-    <td colspan="2">(-)Montant Escompte (NC X 2%) </td>
-    <td class="right">220,80</td>
-</tr>
-<tr>
-    <td colspan="2">Net financier « HT »(NC-Escompte) </td>
-    <td class="right">10.819,20</td>
-</tr>
-
-<tr>
-    <td colspan="2">(+)Montant TVA su Marchandises (NF x Taux de TVA de 20%) </td>
-    <td class="right">2.163,84</td> </tr>
-
-<tr>
-    <td colspan="2">Montant à déduire TTC (NF + Montant TVA) </td>
-    <td class="right">12.983,04</td>
-</tr>
+<tr><td colspan="2">Montant Brut</td><td class="right">12.000,00</td></tr>
+<tr><td colspan="2">(-) Montant Remise (MB × 8 %)</td><td class="right">960,00</td></tr>
+<tr><td colspan="2">Net commercial</td><td class="right">11.040,00</td></tr>
+<tr><td colspan="2">(-) Montant Escompte (NC × 2 %)</td><td class="right">220,80</td></tr>
+<tr><td colspan="2">Net financier HT</td><td class="right">10.819,20</td></tr>
+<tr><td colspan="2">TVA sur marchandises (NF × 20 %)</td><td class="right">2.163,84</td></tr>
+<tr><td colspan="2" class="bold">Montant à déduire TTC</td><td class="right bold">12.983,04</td></tr>
 </table>
-<table>
-<!-- 20/11/2025 -->
+
+<!-- JOURNAL AVOIR 318 -->
+<table class="journal-table">
 <tr class="date"><td colspan="6">20/11/2025</td></tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>4411</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Fournisseurs</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>12.983,04</option>
-</td>
+<td class="debit center">4411</td><td></td>
+<td class="debit">Fournisseurs</td><td></td>
+<td class="montant">12.983,04</td><td></td>
 </tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>7386</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Escomptes obtenus</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>220,80</option>
-</td>
+<td class="debit center">7386</td><td></td>
+<td class="debit">Escomptes obtenus</td><td></td>
+<td class="montant">220,80</td><td></td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>6111</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Achats de marchandises</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>11.040,00</option>
-</td>
+<td></td><td class="credit center">6111</td>
+<td></td><td class="credit">Achats de marchandises</td>
+<td></td><td class="montant">11.040,00</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>3455</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Etat - TVA récupérable</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>2.163,84</option>
-</td>
+<td></td><td class="credit center">3455</td>
+<td></td><td class="credit">État - TVA récupérable</td>
+<td></td><td class="montant">2.163,84</td>
 </tr>
-
-<!-- Retour de marchandises -->
-<tr class="date"><td colspan="6">Avoir N° 318</td></tr>
+<tr class="date"><td colspan="6">Avoir N°318</td></tr>
 </table>
-<table>
 
+<!-- AVOIR 447 -->
+<table class="facture-table">
+<tr><td colspan="3" class="titre">Facture AVOIR N°447</td></tr>
 <tr>
-    <td colspan="3" class="titre">Facture Avoir N° 447</td>
+<td class="bold">Société MAROC MATIÈRES</td>
+<td class="center">AVOIR</td>
+<td class="bold right">Société HORIZON INDUSTRIE</td>
 </tr>
-
-<tr>
-    <td class="bold">Société MAROC MATIÈRES</td>
-    <td> AVOIR </td>
-    <td class="bold right"> Société HORIZON INDUSTRIE</td>
-</tr>
-
-
-<tr>
-    <td colspan="3" class="bold">Casablanca le 24/11/2025</td>
-</tr>
-
+<tr><td colspan="3" class="bold">Casablanca le 24/11/2025</td></tr>
 <tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant</td>
 </tr>
-
-<tr>
-    <td colspan="2">Montant Remise Supplémentaire (84 600 X 2%)</td>
-    <td class="right">1.692,00</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Montant TVA  (Montant RRR x Taux de TVA de 20%) </td>
-    <td class="right">338,40</td>
-</tr>
-<tr>
-    <td colspan="2">Montant à déduire TTC (Mt RRR + Montant TVA) </td>
-    <td class="right">2.030,40</td>
-</tr>
-
+<tr><td colspan="2">Remise supplémentaire (84.600 × 2 %)</td><td class="right">1.692,00</td></tr>
+<tr><td colspan="2">TVA (1.692 × 20 %)</td><td class="right">338,40</td></tr>
+<tr><td colspan="2" class="bold">Montant à déduire TTC</td><td class="right bold">2.030,40</td></tr>
 </table>
-<table>
-<!-- 24/11/2025 -->
+
+<!-- JOURNAL AVOIR 447 -->
+<table class="journal-table">
 <tr class="date"><td colspan="6">24/11/2025</td></tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>4411</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Fournisseurs</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>2.030,40</option>
-</td>
+<td class="debit center">4411</td><td></td>
+<td class="debit">Fournisseurs</td><td></td>
+<td class="montant">2.030,40</td><td></td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>6119</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>RRR obtenues sur achats de marchandises</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>1.692,00</option>
-</td>
+<td></td><td class="credit center">6119</td>
+<td></td><td class="credit">RRR obtenues sur achats de marchandises</td>
+<td></td><td class="montant">1.692,00</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>3455</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Etat - TVA récupérable</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>338,40</option>
-</td>
+<td></td><td class="credit center">3455</td>
+<td></td><td class="credit">État - TVA récupérable</td>
+<td></td><td class="montant">338,40</td>
 </tr>
-
-<!-- Facture d'avoir -->
-<tr class="date"><td colspan="6">Avoir N° 447</td></tr>
+<tr class="date"><td colspan="6">Avoir N°447</td></tr>
 </table>
 
-<table>
-
+<!-- AVOIR 172 -->
+<table class="facture-table">
+<tr><td colspan="3" class="titre">Facture AVOIR N°172</td></tr>
 <tr>
-    <td colspan="3" class="titre">Facture Avoir N° 172</td>
+<td class="bold">Société BUREAU SERVICE</td>
+<td class="center">AVOIR</td>
+<td class="bold right">Société HORIZON INDUSTRIE</td>
 </tr>
-
-<tr>
-    <td class="bold">Société BUREAU SERVICE</td>
-    <td> AVOIR </td>
-    <td class="bold right"> Société HORIZON INDUSTRIE</td>
-</tr>
-
-
-<tr>
-    <td colspan="3" class="bold">Casablanca le 28/11/2025 </td>
-</tr>
-
+<tr><td colspan="3" class="bold">Casablanca le 28/11/2025</td></tr>
 <tr class="header">
-    <td colspan="2" class="bold">Éléments</td>
-    <td class="bold center">Montant</td>
+<td colspan="2" class="bold">Éléments</td>
+<td class="bold center">Montant</td>
 </tr>
-
-<tr>
-    <td colspan="2">Montant Escompte (14 250  X 1%)</td>
-    <td class="right">142,50</td>
-</tr>
-<tr>
-    <td colspan="2">(+)Montant TVA  (Montant Escompte x Taux de TVA de 20%) </td>
-    <td class="right">28,50</td>
-</tr>
-<tr>
-    <td colspan="2">Montant à déduire TTC (Mt Escompte + Montant TVA)</td>
-    <td class="right">171,00</td>
-</tr>
-
+<tr><td colspan="2">Montant Escompte (14.250 × 1 %)</td><td class="right">142,50</td></tr>
+<tr><td colspan="2">TVA (142,50 × 20 %)</td><td class="right">28,50</td></tr>
+<tr><td colspan="2" class="bold">Montant à déduire TTC</td><td class="right bold">171,00</td></tr>
 </table>
-<table>
-<!-- 28/11/2025 -->
+
+<!-- JOURNAL AVOIR 172 -->
+<table class="journal-table">
 <tr class="date"><td colspan="6">28/11/2025</td></tr>
-
 <tr>
-<td class="debit center" style="width:5%;">
-    <option>4411</option>
-</td>
-
-<td></td>
-
-<td class="debit" style="width:30%;">
-    <option>Fournisseurs</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>171,00</option>
-</td>
+<td class="debit center">4411</td><td></td>
+<td class="debit">Fournisseurs</td><td></td>
+<td class="montant">171,00</td><td></td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>7386</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Escomptes obtenus</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>142,50</option>
-</td>
+<td></td><td class="credit center">7386</td>
+<td></td><td class="credit">Escomptes obtenus</td>
+<td></td><td class="montant">142,50</td>
 </tr>
-
 <tr>
-<td></td>
-
-<td class="credit center" style="width:5%;">
-    <option>3455</option>
-</td>
-
-<td></td>
-
-<td class="credit" style="width:30%;">
-    <option>Etat - TVA récupérable</option>
-</td>
-
-<td></td>
-
-<td class="montant" style="width:10%;">
-    <option>28,50</option>
-</td>
+<td></td><td class="credit center">3455</td>
+<td></td><td class="credit">État - TVA récupérable</td>
+<td></td><td class="montant">28,50</td>
 </tr>
-
-<!-- Escompte obtenu -->
-<tr class="date"><td colspan="6">Avoir N° 172</td></tr>
+<tr class="date"><td colspan="6">Avoir N°172</td></tr>
 </table>
-
-
-
-
-
-
-<style>
-
-body{
-    font-family: Arial, sans-serif;
-    margin:20px;
-    background:#f4f7fb;
-    color:#222;
-}
-
-/* TITRES */
-h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:35px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
-    letter-spacing:0.5px;
-}
-
-/* TABLEAUX */
-table{
-    width:90%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-    background:white;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* CELLULES */
-td{
-    border:1px solid #cfd8e3;
-    padding:8px;
-    font-size:14px;
-}
-
-/* DATE */
-.date{
-    text-align:center;
-    font-weight:bold;
-    background:#1e3a5f;
-    color:white;
-    font-size:15px;
-}
-
-/* COLONNES */
-.compte{
-    width:5%;
-    text-align:center;
-}
-
-.libelle{
-    width:30%;
-}
-
-.montant{
-    width:10%;
-    text-align:right;
-    white-space:nowrap;
-    background:#f9fbfd;
-    font-weight:bold;
-    color:#0b5e8e;
-}
-
-/* DEBIT */
-.debit{
-    background:#e8f4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
-
-/* CREDIT */
-.credit{
-    background:#fff2e6;
-    color:#b35400;
-    font-weight:bold;
-}
-
-/* CENTRAGE */
-.center{
-    text-align:center;
-}
-
-/* EFFET HOVER */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
-
-</style>
-
 
 </section>
 
-
+<!-- ===== PIED DE PAGE ===== -->
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C3P2M1.html">⬅ Retour </a>
-
+Formation en comptabilité générale
 </footer>
+
+<script>
+
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* ===== FERMER LES MENUS À L'EXTÉRIEUR ===== */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+
+        }
+
+    });
+
+});
+
+/* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+</script>
 
 </body>
 </html>
