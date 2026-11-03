@@ -323,125 +323,68 @@ footer a{
 
     .form-wrapper{
         padding:8px;
-        overflow:visible;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
     }
 
-    /* TRANSFORMATION DU TABLEAU EN CARTES */
+    /* CONSERVATION DU TABLEAU CLASSIQUE */
 
     #tableau{
-        display:block;
+        display:table;
         width:100%;
-        min-width:0;
-        border:none;
-        margin:10px auto;
+        min-width:850px;
+        table-layout:fixed;
+        border-collapse:collapse;
     }
 
     #tableau thead{
-        display:none;
+        display:table-header-group;
     }
 
     #tableau tbody{
-        display:block;
-        width:100%;
+        display:table-row-group;
     }
 
-    #tableau tbody tr{
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
-        width:100%;
-        margin-bottom:14px;
-        padding:10px;
-        border:1px solid #cbd5e1;
-        border-radius:9px;
-        background:#f8fafc;
-        box-shadow:0 2px 5px #00000010;
+    #tableau tr{
+        display:table-row;
     }
 
-    #tableau tbody td{
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        min-width:0;
-        padding:8px 5px;
-        border:1px solid #dce3e9;
-        border-radius:5px;
-        background:white;
+    #tableau th,
+    #tableau td{
+        display:table-cell;
+        padding:7px 4px;
         font-size:10px;
         text-align:center;
-        overflow-wrap:anywhere;
+        vertical-align:middle;
     }
 
-    /* TITRE DE CHAQUE CARTE */
+    #tableau th{
+        white-space:normal;
+        overflow-wrap:break-word;
+    }
 
-    #tableau tbody td:first-child{
-        grid-column:1 / -1;
-        background:#34495e;
-        color:white;
-        font-weight:bold;
+    #tableau td::before{
+        content:none;
+        display:none;
+    }
+
+    #tableau input{
+        width:100%;
+        min-width:60px;
+        padding:7px 3px;
         font-size:10px;
-        padding:11px;
     }
 
-    /* LIBELLÉS DES COLONNES */
-
-    #tableau tbody td:nth-child(2)::before{
-        content:"Nombre";
+    .actions{
+        gap:7px;
+        margin:12px 0;
     }
 
-    #tableau tbody td:nth-child(3)::before{
-        content:"Prix d'achat";
-    }
-
-    #tableau tbody td:nth-child(4)::before{
-        content:"Cours (N-1)";
-    }
-
-    #tableau tbody td:nth-child(5)::before{
-        content:"Provision (N-1)";
-    }
-
-    #tableau tbody td:nth-child(6)::before{
-        content:"Cours (N)";
-    }
-
-    #tableau tbody td:nth-child(7)::before{
-        content:"Provision (N)";
-    }
-
-    #tableau tbody td:nth-child(8)::before{
-        content:"Dotation";
-    }
-
-    #tableau tbody td:nth-child(9)::before{
-        content:"Reprise";
-    }
-
-    #tableau tbody td::before{
-        display:block;
-        margin-bottom:6px;
-        color:#475569;
+    .actions button{
+        padding:10px 12px;
         font-size:10px;
-        font-weight:bold;
     }
-
-    /* CARTE TOTAL */
-
-    #tableau tbody tr.total{
-        background:#dff0d8;
-        border:2px solid #82b987;
-    }
-
-    #tableau tbody tr.total td{
-        background:#f0f8ed;
-        font-weight:bold;
-    }
-
-    #tableau tbody tr.total td:first-child{
-        background:#217346;
-        color:white;
-    }
-
+}
     /* CHAMPS DE SAISIE */
 
     #tableau input{
