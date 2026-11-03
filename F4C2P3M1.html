@@ -343,229 +343,108 @@ footer a{
 
     .form-wrapper{
         padding:8px;
-        overflow:visible;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
     }
 
-    /* TRANSFORMATION DU TABLEAU EN CARTES */
+    /* CONSERVATION DU TABLEAU CLASSIQUE */
 
     #tableau{
-        display:block;
+        display:table;
         width:100%;
-        min-width:0;
-        border:none;
+        min-width:1100px;
+        table-layout:fixed;
+        border-collapse:collapse;
         margin:10px auto;
     }
 
     #tableau thead{
-        display:none;
+        display:table-header-group;
     }
 
     #tableau tbody{
-        display:block;
-        width:100%;
+        display:table-row-group;
+        width:auto;
     }
 
-    #tableau tbody tr{
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
-        width:100%;
-        margin-bottom:14px;
-        padding:10px;
-        border:1px solid #cbd5e1;
-        border-radius:9px;
-        background:#f8fafc;
-        box-shadow:0 2px 5px #00000010;
+    #tableau tfoot{
+        display:table-footer-group;
+        width:auto;
     }
 
-    #tableau tbody td{
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
+    #tableau tr{
+        display:table-row;
+        width:auto;
+    }
+
+    #tableau th,
+    #tableau td{
+        display:table-cell;
+        padding:7px 4px;
+        font-size:10px;
+        text-align:center;
+        vertical-align:middle;
+        border:1px solid #ccc;
+        overflow-wrap:normal;
+    }
+
+    #tableau th{
+        white-space:normal;
+        overflow-wrap:break-word;
+    }
+
+    #tableau td::before{
+        content:none!important;
+        display:none!important;
+    }
+
+    /* CHAMPS DE SAISIE */
+
+    #tableau input{
+        width:100%;
         min-width:0;
-        padding:8px 5px;
-        border:1px solid #dce3e9;
-        border-radius:5px;
-        background:white;
+        padding:7px 3px;
         font-size:10px;
-        text-align:center;
-        overflow-wrap:anywhere;
     }
 
-    /* TITRE DE CHAQUE CARTE */
-
-    #tableau tbody td:first-child{
-        grid-column:1 / -1;
-        background:#34495e;
-        color:white;
-        font-weight:bold;
-        font-size:11px;
-        padding:11px;
-    }
-
-    #tableau tbody td:first-child input{
-        text-align:center;
-        font-weight:bold;
-        font-size:12px;
-    }
-
-    /* LIBELLÉS DES COLONNES */
-
-    #tableau tbody td:nth-child(2)::before{
-        content:"Montant créance";
-    }
-
-    #tableau tbody td:nth-child(3)::before{
-        content:"Règlements";
-    }
-
-    #tableau tbody td:nth-child(4)::before{
-        content:"Solde";
-    }
-
-    #tableau tbody td:nth-child(5)::before{
-        content:"Taux TVA (%)";
-    }
-
-    #tableau tbody td:nth-child(6)::before{
-        content:"Dépréciation N-1 (%)";
-    }
-
-    #tableau tbody td:nth-child(7)::before{
-        content:"Provision N-1";
-    }
-
-    #tableau tbody td:nth-child(8)::before{
-        content:"Dépréciation N (%)";
-    }
-
-    #tableau tbody td:nth-child(9)::before{
-        content:"Provision N";
-    }
-
-    #tableau tbody td:nth-child(10)::before{
-        content:"Dotation";
-    }
-
-    #tableau tbody td:nth-child(11)::before{
-        content:"Reprise";
-    }
-
-    #tableau tbody td:nth-child(12)::before{
-        content:"Actions";
-    }
-
-    #tableau tbody td::before{
-        display:block;
-        margin-bottom:6px;
-        color:#475569;
-        font-size:10px;
-        font-weight:bold;
+    #tableau input[type="text"]{
+        text-align:left;
     }
 
     /* COLONNE ACTIONS */
 
-    #tableau tbody td.col-actions{
-        grid-column:1 / -1;
-        flex-direction:row;
-        align-items:center;
-        justify-content:center;
-        gap:20px;
-        background:#f1f5f9;
-    }
-
-    #tableau tbody td.col-actions::before{
-        content:"Actions";
-        margin:0;
+    #tableau .col-actions{
+        min-width:65px;
+        display:table-cell;
     }
 
     .icon{
-        font-size:18px;
-        margin:0 5px;
+        font-size:14px;
+        margin:0 2px;
     }
 
-    /* CARTE TOTAL */
+    /* LIGNE TOTAL */
 
-    #tableau tfoot{
-        display:block;
-        width:100%;
-    }
-
-    #tableau tfoot tr{
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
-        width:100%;
-        margin-top:10px;
-        padding:10px;
-        border:2px solid #82b987;
-        border-radius:9px;
-        background:#dff0d8;
+    #tableau tfoot tr.total{
+        display:table-row;
     }
 
     #tableau tfoot td{
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        min-width:0;
-        padding:9px 5px;
-        border:1px solid #c4ddc0;
-        border-radius:5px;
-        background:#f0f8ed;
-        font-size:11px;
+        display:table-cell;
+        font-size:10px;
         font-weight:bold;
-        text-align:center;
-        overflow-wrap:anywhere;
     }
 
-    #tableau tfoot td:first-child{
-        grid-column:1 / -1;
-        background:#217346;
-        color:white;
+    .actions{
+        gap:7px;
+        margin:12px 0;
     }
 
-    #tableau tfoot td:nth-child(2)::before{
-        content:"Total créances";
-    }
-
-    #tableau tfoot td:nth-child(3)::before{
-        content:"Total règlements";
-    }
-
-    #tableau tfoot td:nth-child(4)::before{
-        content:"Total solde";
-    }
-
-    #tableau tfoot td:nth-child(7)::before{
-        content:"Total provision N-1";
-    }
-
-    #tableau tfoot td:nth-child(9)::before{
-        content:"Total provision N";
-    }
-
-    #tableau tfoot td:nth-child(10)::before{
-        content:"Total dotation";
-    }
-
-    #tableau tfoot td:nth-child(11)::before{
-        content:"Total reprise";
-    }
-
-    #tableau tfoot td::before{
-        display:block;
-        margin-bottom:5px;
-        color:#475569;
+    .actions button{
+        padding:10px 12px;
         font-size:10px;
     }
-
-    #tableau tfoot td:nth-child(5),
-    #tableau tfoot td:nth-child(6),
-    #tableau tfoot td:nth-child(8),
-    #tableau tfoot td:nth-child(12){
-        display:none;
-    }
-
+}
     /* CHAMPS DE SAISIE */
 
     #tableau input{
@@ -1589,3 +1468,5 @@ function exportExcel(){
 
 </body>
 </html>
+
+
