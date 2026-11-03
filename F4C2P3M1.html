@@ -132,7 +132,6 @@ header{
     color:white;
 }
 
-
 /* CONTENU */
 
 .page-container{
@@ -205,7 +204,7 @@ th,td{
 th{
     background:#34495e;
     color:white;
-    font-size:13px;
+    font-size:12px;
 }
 
 tr:nth-child(even){
@@ -215,7 +214,9 @@ tr:nth-child(even){
 /* TABLEAU DES PROVISIONS */
 
 #tableau{
-    min-width:1450px;
+    width:100%;
+    min-width:1100px;
+    table-layout:fixed;
 }
 
 #tableau th{
@@ -224,7 +225,7 @@ tr:nth-child(even){
 }
 
 #tableau td{
-    font-size:13px;
+    font-size:12px;
 }
 
 #tableau tr:nth-child(even){
@@ -237,16 +238,16 @@ tr:nth-child(even){
 
 #tableau input{
     width:100%;
-    min-width:65px;
+    min-width:0;
     padding:7px 4px;
     border:1px solid #bbb;
     border-radius:4px;
-    text-align:center;
-    font-size:13px;
+    text-align:right;
+    font-size:12px;
 }
 
 #tableau input[type="text"]{
-    min-width:120px;
+    text-align:left;
 }
 
 .resultat{
@@ -271,8 +272,6 @@ tr:nth-child(even){
 .add{color:#27ae60}
 .del{color:#e74c3c}
 
-/* COLONNE ACTIONS */
-
 .col-actions{
     min-width:65px;
 }
@@ -292,22 +291,29 @@ footer a{
     text-decoration:none;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE TÉLÉPHONES */
 
 @media(max-width:760px){
 
     .brandbar{
         justify-content:center;
-        padding:12px;
+        padding:10px;
     }
 
     .site-menu{
         width:100%;
+        gap:3px;
     }
 
     .site-menu>a,
     .site-menu summary{
         padding:9px;
+        font-size:10px;
+    }
+
+    .dropdown button{
+        padding:9px;
+        font-size:10px;
     }
 
     .dropdown-content{
@@ -317,42 +323,266 @@ footer a{
     }
 
     header h1{
-        font-size:16px;
+        font-size:10px;
+        padding:0 8px;
     }
 
     header h1 p:first-child{
-        font-size:12px;
+        font-size:10px;
+        line-height:1.5;
     }
 
     header h1 p:last-child{
-        font-size:19px;
+        font-size:10px;
+        line-height:1.4;
     }
 
     .page-container{
-        padding:10px;
+        padding:8px;
     }
 
     .form-wrapper{
-        padding:7px;
+        padding:8px;
+        overflow:visible;
     }
+
+    /* TRANSFORMATION DU TABLEAU EN CARTES */
 
     #tableau{
-        min-width:1450px;
+        display:block;
+        width:100%;
+        min-width:0;
+        border:none;
+        margin:10px auto;
     }
 
-    th,td{
-        padding:6px 5px;
+    #tableau thead{
+        display:none;
+    }
+
+    #tableau tbody{
+        display:block;
+        width:100%;
+    }
+
+    #tableau tbody tr{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+        width:100%;
+        margin-bottom:14px;
+        padding:10px;
+        border:1px solid #cbd5e1;
+        border-radius:9px;
+        background:#f8fafc;
+        box-shadow:0 2px 5px #00000010;
+    }
+
+    #tableau tbody td{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        min-width:0;
+        padding:8px 5px;
+        border:1px solid #dce3e9;
+        border-radius:5px;
+        background:white;
+        font-size:10px;
+        text-align:center;
+        overflow-wrap:anywhere;
+    }
+
+    /* TITRE DE CHAQUE CARTE */
+
+    #tableau tbody td:first-child{
+        grid-column:1 / -1;
+        background:#34495e;
+        color:white;
+        font-weight:bold;
+        font-size:11px;
+        padding:11px;
+    }
+
+    #tableau tbody td:first-child input{
+        text-align:center;
+        font-weight:bold;
         font-size:12px;
     }
+
+    /* LIBELLÉS DES COLONNES */
+
+    #tableau tbody td:nth-child(2)::before{
+        content:"Montant créance";
+    }
+
+    #tableau tbody td:nth-child(3)::before{
+        content:"Règlements";
+    }
+
+    #tableau tbody td:nth-child(4)::before{
+        content:"Solde";
+    }
+
+    #tableau tbody td:nth-child(5)::before{
+        content:"Taux TVA (%)";
+    }
+
+    #tableau tbody td:nth-child(6)::before{
+        content:"Dépréciation N-1 (%)";
+    }
+
+    #tableau tbody td:nth-child(7)::before{
+        content:"Provision N-1";
+    }
+
+    #tableau tbody td:nth-child(8)::before{
+        content:"Dépréciation N (%)";
+    }
+
+    #tableau tbody td:nth-child(9)::before{
+        content:"Provision N";
+    }
+
+    #tableau tbody td:nth-child(10)::before{
+        content:"Dotation";
+    }
+
+    #tableau tbody td:nth-child(11)::before{
+        content:"Reprise";
+    }
+
+    #tableau tbody td:nth-child(12)::before{
+        content:"Actions";
+    }
+
+    #tableau tbody td::before{
+        display:block;
+        margin-bottom:6px;
+        color:#475569;
+        font-size:10px;
+        font-weight:bold;
+    }
+
+    /* COLONNE ACTIONS */
+
+    #tableau tbody td.col-actions{
+        grid-column:1 / -1;
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+        gap:20px;
+        background:#f1f5f9;
+    }
+
+    #tableau tbody td.col-actions::before{
+        content:"Actions";
+        margin:0;
+    }
+
+    .icon{
+        font-size:18px;
+        margin:0 5px;
+    }
+
+    /* CARTE TOTAL */
+
+    #tableau tfoot{
+        display:block;
+        width:100%;
+    }
+
+    #tableau tfoot tr{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+        width:100%;
+        margin-top:10px;
+        padding:10px;
+        border:2px solid #82b987;
+        border-radius:9px;
+        background:#dff0d8;
+    }
+
+    #tableau tfoot td{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        min-width:0;
+        padding:9px 5px;
+        border:1px solid #c4ddc0;
+        border-radius:5px;
+        background:#f0f8ed;
+        font-size:11px;
+        font-weight:bold;
+        text-align:center;
+        overflow-wrap:anywhere;
+    }
+
+    #tableau tfoot td:first-child{
+        grid-column:1 / -1;
+        background:#217346;
+        color:white;
+    }
+
+    #tableau tfoot td:nth-child(2)::before{
+        content:"Total créances";
+    }
+
+    #tableau tfoot td:nth-child(3)::before{
+        content:"Total règlements";
+    }
+
+    #tableau tfoot td:nth-child(4)::before{
+        content:"Total solde";
+    }
+
+    #tableau tfoot td:nth-child(7)::before{
+        content:"Total provision N-1";
+    }
+
+    #tableau tfoot td:nth-child(9)::before{
+        content:"Total provision N";
+    }
+
+    #tableau tfoot td:nth-child(10)::before{
+        content:"Total dotation";
+    }
+
+    #tableau tfoot td:nth-child(11)::before{
+        content:"Total reprise";
+    }
+
+    #tableau tfoot td::before{
+        display:block;
+        margin-bottom:5px;
+        color:#475569;
+        font-size:10px;
+    }
+
+    #tableau tfoot td:nth-child(5),
+    #tableau tfoot td:nth-child(6),
+    #tableau tfoot td:nth-child(8),
+    #tableau tfoot td:nth-child(12){
+        display:none;
+    }
+
+    /* CHAMPS DE SAISIE */
 
     #tableau input{
-        font-size:12px;
-        padding:6px 3px;
+        width:100%;
+        min-width:0;
+        padding:8px 3px;
+        font-size:11px;
+    }
+
+    .actions{
+        gap:7px;
+        margin:12px 0;
     }
 
     .actions button{
-        padding:10px 14px;
-        font-size:13px;
+        padding:10px 12px;
+        font-size:10px;
     }
 }
 
@@ -390,11 +620,8 @@ footer a{
 <div class="brandbar">
 
 <a class="brand" href="index.html">
-
 <span class="brand-logo">IF</span>
-
 <span>IgnDay</span>
-
 </a>
 
 <div class="site-menu">
@@ -592,27 +819,16 @@ onclick="deleteRow(this)">❌</span>
 <tr class="total">
 
 <td>TOTAL</td>
-
 <td id="tCreances">0,00</td>
-
 <td id="tReglements">0,00</td>
-
 <td id="tSolde">0,00</td>
-
 <td></td>
-
 <td></td>
-
 <td id="tProvN1">0,00</td>
-
 <td></td>
-
 <td id="tProvN">0,00</td>
-
 <td id="tDotation">0,00</td>
-
 <td id="tReprise">0,00</td>
-
 <td class="col-actions"></td>
 
 </tr>
@@ -626,10 +842,7 @@ onclick="deleteRow(this)">❌</span>
 </main>
 
 <footer>
-
 <span>Formation en comptabilité générale</span>
-
-
 </footer>
 
 <script>
@@ -701,7 +914,7 @@ function format(nombre){
 }
 
 /* =====================================================
-   AJOUT D'UNE LIGNE SOUS LA LIGNE SÉLECTIONNÉE
+   AJOUT D'UNE LIGNE
 ===================================================== */
 
 function addRowAfter(btn){
@@ -760,11 +973,12 @@ function addRowAfter(btn){
 
     row.after(newRow);
 
+    calculer();
+
 }
 
 /* =====================================================
    SUPPRESSION D'UNE LIGNE
-   PROTECTION DE LA PREMIÈRE LIGNE
 ===================================================== */
 
 function deleteRow(btn){
@@ -810,13 +1024,9 @@ function calculer(){
         let inputs=ligne.querySelectorAll("input");
 
         let creance=parseFloat(inputs[1].value)||0;
-
         let reglement=parseFloat(inputs[2].value)||0;
-
         let tva=parseFloat(inputs[3].value)||0;
-
         let tauxN1=parseFloat(inputs[4].value)||0;
-
         let tauxN=parseFloat(inputs[5].value)||0;
 
         /* SOLDE TTC */
@@ -826,7 +1036,6 @@ function calculer(){
         /* CONVERSION EN HT */
 
         let creanceHT=creance/(1+tva/100);
-
         let soldeHT=solde/(1+tva/100);
 
         /* PROVISION N-1 */
@@ -840,7 +1049,6 @@ function calculer(){
         /* DOTATION ET REPRISE */
 
         let dotation=0;
-
         let reprise=0;
 
         if(provN>provN1){
@@ -856,29 +1064,21 @@ function calculer(){
         /* AFFICHAGE DES RÉSULTATS */
 
         ligne.querySelector(".solde").textContent=format(solde);
-
         ligne.querySelector(".provN1").textContent=format(provN1);
-
         ligne.querySelector(".provN").textContent=format(provN);
-
         ligne.querySelector(".dotation").textContent=format(dotation);
-
         ligne.querySelector(".reprise").textContent=format(reprise);
 
         /* CUMUL DES TOTAUX */
 
         totalCreances+=creance;
-
         totalReglements+=reglement;
-
         totalSolde+=solde;
 
         totalProvN1+=provN1;
-
         totalProvN+=provN;
 
         totalDotation+=dotation;
-
         totalReprise+=reprise;
 
     });
@@ -886,17 +1086,13 @@ function calculer(){
     /* AFFICHAGE DES TOTAUX */
 
     document.getElementById("tCreances").textContent=format(totalCreances);
-
     document.getElementById("tReglements").textContent=format(totalReglements);
-
     document.getElementById("tSolde").textContent=format(totalSolde);
 
     document.getElementById("tProvN1").textContent=format(totalProvN1);
-
     document.getElementById("tProvN").textContent=format(totalProvN);
 
     document.getElementById("tDotation").textContent=format(totalDotation);
-
     document.getElementById("tReprise").textContent=format(totalReprise);
 
 }
@@ -915,7 +1111,8 @@ function vider(){
 
     document.querySelectorAll("#tableau tbody input").forEach(input=>{
 
-        if(input.type==="number" && input.getAttribute("aria-label")==="Taux TVA"){
+        if(input.type==="number" &&
+           input.getAttribute("aria-label")==="Taux TVA"){
 
             input.value="20";
 
@@ -934,17 +1131,13 @@ function vider(){
     });
 
     document.getElementById("tCreances").textContent="0,00";
-
     document.getElementById("tReglements").textContent="0,00";
-
     document.getElementById("tSolde").textContent="0,00";
 
     document.getElementById("tProvN1").textContent="0,00";
-
     document.getElementById("tProvN").textContent="0,00";
 
     document.getElementById("tDotation").textContent="0,00";
-
     document.getElementById("tReprise").textContent="0,00";
 
 }
@@ -965,14 +1158,11 @@ async function exportPDF(){
 
     }
 
-    /* ACTUALISER LES CALCULS AVANT EXPORT */
-
     calculer();
 
     const ancienTexte=bouton.innerText;
 
     bouton.disabled=true;
-
     bouton.innerText="Création du PDF...";
 
     let clone=null;
@@ -986,55 +1176,57 @@ async function exportPDF(){
         /* PRÉPARATION DU CLONE */
 
         clone.style.position="fixed";
-
         clone.style.left="-20000px";
-
         clone.style.top="0";
 
         clone.style.width="1600px";
-
         clone.style.minWidth="0";
-
         clone.style.maxWidth="none";
 
         clone.style.padding="10px";
-
         clone.style.margin="0";
 
         clone.style.background="#fff";
-
         clone.style.borderRadius="0";
-
         clone.style.boxShadow="none";
-
         clone.style.overflow="visible";
 
-        /* TABLEAU */
+        /* RESTAURATION DU TABLEAU CLASSIQUE */
 
         clone.querySelectorAll("table").forEach(table=>{
 
+            table.style.display="table";
             table.style.width="100%";
-
             table.style.minWidth="0";
-
             table.style.tableLayout="fixed";
-
             table.style.margin="5px auto";
-
             table.style.borderCollapse="collapse";
 
         });
 
+        clone.querySelectorAll("thead").forEach(el=>{
+            el.style.display="table-header-group";
+        });
+
+        clone.querySelectorAll("tbody").forEach(el=>{
+            el.style.display="table-row-group";
+        });
+
+        clone.querySelectorAll("tfoot").forEach(el=>{
+            el.style.display="table-footer-group";
+        });
+
+        clone.querySelectorAll("tr").forEach(el=>{
+            el.style.display="table-row";
+        });
+
         clone.querySelectorAll("th,td").forEach(cell=>{
 
+            cell.style.display="table-cell";
             cell.style.padding="7px 3px";
-
-            cell.style.fontSize="10px";
-
+            cell.style.fontSize="8px";
             cell.style.lineHeight="1.2";
-
             cell.style.whiteSpace="normal";
-
             cell.style.overflowWrap="break-word";
 
         });
@@ -1042,7 +1234,6 @@ async function exportPDF(){
         /* REMPLACER LES CHAMPS PAR LEURS VALEURS */
 
         const valeurs=original.querySelectorAll("input");
-
         const champsClone=clone.querySelectorAll("input");
 
         champsClone.forEach((champ,index)=>{
@@ -1052,15 +1243,10 @@ async function exportPDF(){
             span.textContent=valeurs[index]?.value||"";
 
             span.style.display="block";
-
             span.style.width="100%";
-
             span.style.textAlign="center";
-
             span.style.padding="4px 2px";
-
-            span.style.fontSize="10px";
-
+            span.style.fontSize="8px";
             span.style.fontWeight="bold";
 
             champ.replaceWith(span);
@@ -1070,9 +1256,13 @@ async function exportPDF(){
         /* MASQUER LA COLONNE ACTIONS */
 
         clone.querySelectorAll(".col-actions").forEach(cell=>{
-
             cell.remove();
+        });
 
+        /* SUPPRIMER LES STYLES RESPONSIVE DES CARTES */
+
+        clone.querySelectorAll("tbody tr").forEach(row=>{
+            row.style.display="table-row";
         });
 
         document.body.appendChild(clone);
@@ -1082,17 +1272,12 @@ async function exportPDF(){
         const canvas=await html2canvas(clone,{
 
             scale:2,
-
             backgroundColor:"#ffffff",
-
             useCORS:true,
-
             logging:false,
 
             windowWidth:1650,
-
             width:clone.scrollWidth,
-
             height:clone.scrollHeight
 
         });
@@ -1102,11 +1287,8 @@ async function exportPDF(){
         const pdf=new jsPDF({
 
             orientation:"landscape",
-
             unit:"mm",
-
             format:"a4",
-
             compress:true
 
         });
@@ -1114,13 +1296,11 @@ async function exportPDF(){
         /* DIMENSIONS A4 PAYSAGE */
 
         const largeurA4=297;
-
         const hauteurA4=210;
 
         const marge=5;
 
         const largeurDisponible=largeurA4-(2*marge);
-
         const hauteurDisponible=hauteurA4-(2*marge);
 
         /* AJUSTEMENT SUR UNE SEULE PAGE */
@@ -1128,35 +1308,25 @@ async function exportPDF(){
         const ratio=Math.min(
 
             largeurDisponible/canvas.width,
-
             hauteurDisponible/canvas.height
 
         );
 
         const largeur=canvas.width*ratio;
-
         const hauteur=canvas.height*ratio;
 
         const x=(largeurA4-largeur)/2;
-
         const y=(hauteurA4-hauteur)/2;
 
         pdf.addImage(
 
             canvas.toDataURL("image/jpeg",0.98),
-
             "JPEG",
-
             x,
-
             y,
-
             largeur,
-
             hauteur,
-
             undefined,
-
             "FAST"
 
         );
@@ -1172,13 +1342,10 @@ async function exportPDF(){
     }finally{
 
         if(clone){
-
             clone.remove();
-
         }
 
         bouton.disabled=false;
-
         bouton.innerText=ancienTexte;
 
     }
@@ -1198,8 +1365,6 @@ function exportExcel(){
         return;
 
     }
-
-    /* ACTUALISER LES CALCULS */
 
     calculer();
 
@@ -1224,25 +1389,15 @@ function exportExcel(){
         [
 
             "Client",
-
             "Montant créance",
-
             "Règlements",
-
             "Solde",
-
             "% TVA",
-
             "% Dépréciation N-1",
-
             "Provision N-1",
-
             "% Dépréciation N",
-
             "Provision N",
-
             "Dotation",
-
             "Reprise"
 
         ]
@@ -1256,51 +1411,35 @@ function exportExcel(){
         const inputs=ligne.querySelectorAll("input");
 
         const creance=Number(inputs[1].value)||0;
-
         const reglement=Number(inputs[2].value)||0;
 
         const tva=Number(inputs[3].value)||0;
-
         const tauxN1=Number(inputs[4].value)||0;
-
         const tauxN=Number(inputs[5].value)||0;
 
         const solde=creance-reglement;
 
         const creanceHT=creance/(1+tva/100);
-
         const soldeHT=solde/(1+tva/100);
 
         const provN1=Math.max(0,creanceHT*tauxN1/100);
-
         const provN=Math.max(0,soldeHT*tauxN/100);
 
         const dotation=Math.max(0,provN-provN1);
-
         const reprise=Math.max(0,provN1-provN);
 
         donnees.push([
 
             inputs[0].value,
-
             creance,
-
             reglement,
-
             solde,
-
             tva,
-
             tauxN1,
-
             provN1,
-
             tauxN,
-
             provN,
-
             dotation,
-
             reprise
 
         ]);
@@ -1310,76 +1449,52 @@ function exportExcel(){
     /* TOTAUX */
 
     const totalCreances=Number(
-
         document.getElementById("tCreances").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     const totalReglements=Number(
-
         document.getElementById("tReglements").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     const totalSolde=Number(
-
         document.getElementById("tSolde").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     const totalProvN1=Number(
-
         document.getElementById("tProvN1").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     const totalProvN=Number(
-
         document.getElementById("tProvN").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     const totalDotation=Number(
-
         document.getElementById("tDotation").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     const totalReprise=Number(
-
         document.getElementById("tReprise").textContent
-        .replace(/\s/g,"").replace(",", ".")
-
+        .replace(/\s/g,"").replace(",",".")
     )||0;
 
     donnees.push([
 
         "TOTAL",
-
         totalCreances,
-
         totalReglements,
-
         totalSolde,
-
         "",
-
         "",
-
         totalProvN1,
-
         "",
-
         totalProvN,
-
         totalDotation,
-
         totalReprise
 
     ]);
@@ -1393,25 +1508,15 @@ function exportExcel(){
     feuille["!cols"]=[
 
         {wch:25},
-
         {wch:18},
-
         {wch:16},
-
         {wch:16},
-
         {wch:12},
-
         {wch:20},
-
         {wch:18},
-
         {wch:20},
-
         {wch:18},
-
         {wch:16},
-
         {wch:16}
 
     ];
@@ -1421,11 +1526,8 @@ function exportExcel(){
     feuille["!merges"]=[
 
         {
-
             s:{r:0,c:0},
-
             e:{r:0,c:10}
-
         }
 
     ];
@@ -1439,9 +1541,7 @@ function exportExcel(){
         const cellule=feuille[reference];
 
         if(cellule && cellule.t==="n"){
-
             cellule.z='#,##0.00';
-
         }
 
     });
@@ -1457,9 +1557,7 @@ function exportExcel(){
             const cellule=XLSX.utils.encode_cell({r:r,c:c});
 
             if(feuille[cellule]){
-
                 feuille[cellule].z='0.00" %"';
-
             }
 
         });
@@ -1473,9 +1571,7 @@ function exportExcel(){
     XLSX.utils.book_append_sheet(
 
         classeur,
-
         feuille,
-
         "Provision créances clients"
 
     );
@@ -1483,7 +1579,6 @@ function exportExcel(){
     XLSX.writeFile(
 
         classeur,
-
         "Provision_Depreciation_Creances_Clients_IgnDay.xlsx"
 
     );
@@ -1494,5 +1589,3 @@ function exportExcel(){
 
 </body>
 </html>
-
-
