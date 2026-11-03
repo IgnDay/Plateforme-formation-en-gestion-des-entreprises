@@ -2,151 +2,299 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title> IgnDay Comptabilité Générale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IgnDay – E10 La régularisation des produits</title>
 
 <style>
+*{box-sizing:border-box}
+
+html{
+    width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+}
 
 body{
-    font-family: Arial;
+    font-family:Arial,sans-serif;
     margin:0;
+    width:100%;
     background:#f4f6f9;
+    color:#1e293b;
+    overflow-x:hidden;
 }
 
-/* HEADER */
+/* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background: #f4f6f9;
-    color: #2c3e50;
-    padding:10px;
+    background:#2c3e50;
+    color:white;
     text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    box-shadow:0 2px 10px #0003;
 }
 
-/* MENU */
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:12px 22px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:19px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#00b894;
+    font-size:19px;
+}
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:10px 13px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.site-menu>a:hover{
+    background:#ffffff2b;
+}
+
+header h1{
+    padding:20px 10px;
+    margin:0;
+    font-size:35px;
+    overflow-wrap:break-word;
+}
+
+header h1 p{
+    margin:10px 0;
+    line-height:1.5;
+    font-size:35px;
+}
+
+/* ===== MENUS DÉROULANTS ===== */
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:10px 14px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    border-radius:6px;
+    font-family:inherit;
+}
+
+.dropdown button:hover{
+    background:#ffffff2b;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:230px;
+    max-width:calc(100vw - 20px);
+    max-height:70vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:white;
+    box-shadow:0 5px 15px #0003;
+    border-radius:6px;
+    z-index:1000;
+    padding:7px;
+    -webkit-overflow-scrolling:touch;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:11px 14px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:14px;
+    line-height:1.5;
+    border-radius:5px;
+    overflow-wrap:break-word;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* ===== NAVIGATION ===== */
 nav{
     background:#34495e;
     padding:10px;
     text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:5px;
 }
 
 nav button{
     margin:5px;
     padding:12px 18px;
-    border:none;
+    border:0;
     background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
     font-size:15px;
-    transition:0.3s;
+    font-family:inherit;
+    transition:.3s;
+    touch-action:manipulation;
 }
 
-/* Hover bouton */
 nav button:hover{
     background:#019875;
     transform:translateY(-2px);
 }
 
-/* Bouton actif */
 .btnActive{
-    background:#0984e3 !important;
-    transform:scale(1.05);
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    background:#0984e3!important;
+    transform:scale(1.02);
+    box-shadow:0 3px 10px #0003;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
     display:none;
     padding:30px;
     margin:20px;
+    min-width:0;
 }
 
-/* Section visible */
-.active{
+section.active{
     display:block;
 }
 
-/* Animation section */
 .animationSection{
-    animation:apparition 0.6s ease;
-    background:#ffffff;
+    animation:apparition .5s ease;
+    background:white;
     border-left:8px solid #00b894;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+    box-shadow:0 5px 15px #0002;
 }
 
-/* Animation */
 @keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* TITRES */
+/* ===== CONTENU ===== */
 h2{
     color:#2c3e50;
+    line-height:1.4;
+    overflow-wrap:break-word;
 }
 
 h3{
     color:#00b894;
+    line-height:1.4;
 }
 
-/* TABLEAUX */
+p,li{
+    line-height:1.7;
+    overflow-wrap:break-word;
+}
+
+ul,ol{
+    padding-left:25px;
+}
+
+/* ===== TABLEAUX ===== */
 table{
     width:100%;
+    max-width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
     background:white;
-    margin-top:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    margin:20px 0 30px;
+    box-shadow:0 2px 10px #00000014;
 }
 
-td{
+td,th{
     border:1px solid #ccc;
     padding:10px;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    white-space:normal;
 }
 
-.titre{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.header{
+th{
     background:#dfe6e9;
+    text-align:center;
 }
 
-/* JOURNAL */
+tbody tr:hover td{
+    background:#f1f7ff;
+    transition:.2s;
+}
+
+/* ===== TABLEAUX JOURNAL ===== */
+.journal-table{
+    border:2px solid #34495e;
+}
+
+.journal-table col.code{width:10%}
+.journal-table col.code2{width:10%}
+.journal-table col.libelle{width:23%}
+.journal-table col.libelle2{width:23%}
+.journal-table col.montant{width:17%}
+.journal-table col.montant2{width:17%}
+
 .date{
     text-align:center;
-    background:#2c3e50;
-    color:white;
+    background:#2c3e50!important;
+    color:white!important;
     font-weight:bold;
 }
 
 .debit{
     background:#eaf4ff;
+    color:#0b3d91;
     font-weight:bold;
 }
 
 .credit{
     background:#fff4e6;
+    color:#b35400;
     font-weight:bold;
 }
 
@@ -154,21 +302,82 @@ td{
     text-align:right;
     background:#f8f9fa;
     font-weight:bold;
+    font-variant-numeric:tabular-nums;
 }
 
-/* Hover tableau */
-tr:hover td{
+.center{text-align:center}
+.right{text-align:right}
+.bold{font-weight:bold}
+
+/* ===== ENCADRÉS ===== */
+.highlight{
+    background:#e8fff7;
+    border-left:6px solid #00b894;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+    overflow-wrap:break-word;
+}
+
+.note{
     background:#f1f7ff;
-    transition:0.2s;
+    border-left:6px solid #0984e3;
+    padding:15px;
+    margin:15px 0;
+    border-radius:8px;
 }
 
-/* FOOTER */
+.info{
+    background:#f1f7ff;
+    border-left:5px solid #0984e3;
+    padding:15px;
+    margin:15px 0;
+    border-radius:8px;
+}
+
+/* ===== SOLUTION ===== */
+#SOL h2{
+    text-align:center;
+    background:#1e3a5f;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-top:30px;
+}
+
+#SOL h3{
+    color:#0f766e;
+    border-bottom:2px solid #00b894;
+    padding-bottom:8px;
+    margin-top:30px;
+}
+
+#SOL .formule{
+    background:#f1f7ff;
+    border-left:5px solid #0984e3;
+    padding:12px;
+    margin:12px 0;
+    border-radius:6px;
+    overflow-wrap:anywhere;
+}
+
+#SOL .resultat{
+    background:#e8fff7;
+    border-left:5px solid #00b894;
+    padding:12px;
+    margin:12px 0;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+/* ===== PIED DE PAGE ===== */
 footer{
     text-align:center;
     padding:15px;
     background:#2c3e50;
     color:white;
     margin-top:20px;
+    line-height:1.6;
 }
 
 footer a{
@@ -176,658 +385,891 @@ footer a{
     text-decoration:none;
 }
 
-/* Highlight */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
+footer a:hover{
+    text-decoration:underline;
 }
 
+/* ===== TABLETTES ===== */
+@media(max-width:900px){
+
+    .brandbar{
+        justify-content:center;
+        gap:12px;
+    }
+
+    .site-menu{
+        width:100%;
+        justify-content:center;
+    }
+
+    header h1{font-size:23px}
+
+    section{
+        padding:24px;
+        margin:15px;
+    }
+}
+
+/* ===== ÉCRANS DE 760 PX ===== */
+@media(max-width:760px){
+
+    .brandbar{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .site-menu{width:100%}
+
+    .site-menu>a{padding:9px}
+
+    section{
+        padding:18px;
+        margin:12px;
+    }
+
+    nav button{
+        padding:10px;
+        font-size:14px;
+    }
+
+    header h1{font-size:21px}
+
+    header h1 p{font-size:16px}
+}
+
+/* ===== TÉLÉPHONES ===== */
+@media(max-width:600px){
+
+    body{font-size:15px}
+
+    .brandbar{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+        padding:12px 10px;
+    }
+
+    .brand{
+        justify-content:center;
+        font-size:20px;
+    }
+
+    .brand-logo{
+        width:40px;
+        height:40px;
+    }
+
+    .site-menu{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:5px;
+    }
+
+    .site-menu>a{
+        width:100%;
+        text-align:center;
+        padding:11px 8px;
+        background:#ffffff12;
+        font-size:14px;
+    }
+
+    .dropdown{
+        display:block;
+        width:100%;
+    }
+
+    .dropdown button{
+        display:block;
+        width:100%;
+        padding:12px 8px;
+        text-align:center;
+        background:#ffffff12;
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .dropdown-content{
+        position:static;
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        max-height:45vh;
+        margin-top:4px;
+        border-radius:6px;
+        box-shadow:inset 0 0 0 1px #e2e8f0;
+    }
+
+    .dropdown-content a{
+        padding:12px 10px;
+        font-size:14px;
+    }
+
+    header h1{
+        padding:15px 12px;
+        font-size:20px;
+    }
+
+    header h1 p{
+        margin:8px 0;
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    nav{
+        padding:10px 8px;
+        gap:5px;
+    }
+
+    nav button{
+        flex:1 1 calc(50% - 10px);
+        min-width:0;
+        margin:3px;
+        padding:12px 8px;
+        font-size:14px;
+        transform:none;
+    }
+
+    .btnActive{transform:none}
+
+    section{
+        padding:16px 13px;
+        margin:10px;
+        border-radius:9px;
+    }
+
+    .animationSection{border-left-width:5px}
+
+    h2{font-size:20px}
+    h3{font-size:17px}
+
+    p,li{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    ul,ol{padding-left:21px}
+
+    .highlight,.note,.info{
+        padding:12px;
+        font-size:14px;
+    }
+
+    table{
+        width:100%;
+        max-width:100%;
+        min-width:0;
+        table-layout:fixed;
+        font-size:12px;
+    }
+
+    td,th{
+        padding:6px 3px;
+        overflow-wrap:anywhere;
+        white-space:normal;
+        line-height:1.4;
+    }
+
+    .journal-table{
+        font-size:11px;
+    }
+
+    .journal-table td{
+        padding:6px 3px;
+    }
+
+    footer{
+        padding:14px 10px;
+        font-size:14px;
+    }
+}
+
+/* ===== TRÈS PETITS TÉLÉPHONES ===== */
+@media(max-width:360px){
+
+    body{font-size:14px}
+
+    header h1{
+        font-size:18px;
+        padding:12px 8px;
+    }
+
+    header h1 p{font-size:13px}
+
+    .brand{font-size:18px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:13px;
+        padding:11px 6px;
+    }
+
+    nav{
+        padding:8px 5px;
+    }
+
+    nav button{
+        flex-basis:100%;
+        width:100%;
+        margin:3px 0;
+        font-size:14px;
+    }
+
+    section{
+        margin:7px;
+        padding:13px 10px;
+    }
+
+    h2{font-size:18px}
+    h3{font-size:16px}
+
+    table{font-size:10px}
+
+    td,th{padding:5px 2px}
+
+    .journal-table{font-size:9px}
+}
+
+/* ===== ACCESSIBILITÉ ===== */
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
+}
 </style>
-
-<script>
-
-function showSection(id){
-
-    /* Sections */
-    let sections = document.querySelectorAll("section");
-
-    sections.forEach(sec => {
-        sec.classList.remove("active");
-        sec.classList.remove("animationSection");
-    });
-
-    let currentSection = document.getElementById(id);
-
-    currentSection.classList.add("active");
-    currentSection.classList.add("animationSection");
-
-    /* Boutons */
-    let buttons = document.querySelectorAll("nav button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("btnActive");
-    });
-
-    event.target.classList.add("btnActive");
-}
-
-</script>
-
 </head>
 
 <body>
 
+<!-- ===== EN-TÊTE IGN DAY ===== -->
 <header>
-    <h1>📘 Exercice 10 / La régularisation des produits
 
+<div class="brandbar">
+
+<a class="brand" href="index.html">
+<span class="brand-logo">IF</span>
+<span>IgnDay</span>
+</a>
+
+<div class="site-menu">
+
+<a href="index.html">Accueil</a>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+Modules ▼
+</button>
+<div class="dropdown-content">
+<a href="M1.html">M1 – Comptabilité générale</a>
+<a href="M2.html">M2 – Comptabilité analytique</a>
+<a href="M3.html">M3 – Analyse financière</a>
+<a href="M4.html">M4 – Fiscalité</a>
+<a href="M5.html">M5 – Mathématiques financières</a>
+<a href="M6.html">M6 – Statistiques</a>
+<a href="M7.html">M7 – Marketing</a>
+<a href="M8.html">M8 – Comptabilité approfondie</a>
+<a href="M9.html">M9 – Management</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+M1 - Comptabilité générale ▼
+</button>
+<div class="dropdown-content">
+<a href="P1M1.html">P1 – Concepts de base</a>
+<a href="P2M1.html">P2 – Opérations courantes</a>
+<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+P3 – Travaux de fin d’exercice ▼
+</button>
+<div class="dropdown-content">
+<a href="C1P3M1.html">T - Résumés des thèmes</a>
+<a href="C2P3M1.html">F - Formulaires interactifs</a>
+<a href="C3P3M1.html">E - Exercices corrigés</a>
+</div>
+</div>
+
+<div class="dropdown">
+<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
+E - Exercices corrigés ▼
+</button>
+<div class="dropdown-content">
+<a href="E1C3P3M1.html">E1 – La régularisation des stocks</a>
+<a href="E2C3P3M1.html">E2 – Les amortissements</a>
+<a href="E3C3P3M1.html">E3 – Les provisions pour dépréciation des immobilisations financières : Cas des titres de participation</a>
+<a href="E4C3P3M1.html">E4 – Les provisions pour dépréciation des immobilisations autres que financières</a>
+<a href="E5C3P3M1.html">E5 – Les provisions pour dépréciation des titres et valeurs de placement</a>
+<a href="E6C3P3M1.html">E6 – Les provisions pour dépréciation des créances clients</a>
+<a href="E7C3P3M1.html">E7 – Les provisions pour dépréciation des stocks</a>
+<a href="E8C3P3M1.html">E8 – Les provisions pour risques et charges</a>
+<a href="E9C3P3M1.html">E9 – La régularisation des charges</a>
+<a href="E10C3P3M1.html">E10 – La régularisation des produits</a>
+</div>
+</div>
+
+<a href="C3P3M1.html">⬅ Retour</a>
+
+</div>
+</div>
+
+<h1>
+<p>M1 - Comptabilité générale &gt; P3 - Travaux de fin d’exercice &gt;&gt; E - Exercices corrigés</p>
+<p>E10 - La régularisation des produits</p>
 </h1>
+
 </header>
 
+<!-- ===== NAVIGATION ===== -->
 <nav>
-    <button onclick="showSection('EXE')">Exercice</button>
-<button onclick="showSection('SOL')"> Solution</button>
+
+<button class="btnActive" onclick="showSection('EXE',this)">
+Exercice
+</button>
+
+<button onclick="showSection('SOL',this)">
+Solution
+</button>
+
 </nav>
 
-<section id="EXE" class="active">
-    <h2> Exercice 10
-</h2>
+<!-- ================================================== -->
+<!-- EXERCICE -->
+<!-- ================================================== -->
 
-<p>1- Le 18 décembre 2025, l'entreprise ATLAS DISTRIBUTION SARL a reçu une facture d'achat de marchandises.
-À la suite d'un accord commercial conclu avec le fournisseur, celui-ci s'est engagé à accorder une remise de 1 200 DH HT (TVA 20 %) sur cette facture.
-Toutefois, au 31/12/2025, l'avoir correspondant n'est toujours pas parvenu à l'entreprise.
+<section id="EXE" class="active animationSection">
 
+<div class="note">
+
+<strong>Entreprise ATLAS DISTRIBUTION SARL</strong>
+
+<p>
+Dans le cadre des travaux de fin d’exercice, l'entreprise
+ATLAS DISTRIBUTION SARL vous communique les informations suivantes
+relatives à différentes opérations de régularisation des produits
+au 31/12/2025.
 </p>
-	
-<p>2- Au 31/12/2025, l’expert-comptable de l’entreprise ATLAS DISTRIBUTION SARL constate qu’une facture non encore établie correspond à des marchandises livrées avant la clôture de l’exercice, pour un montant de 14 500 DH HT (TVA 20 %). </p>
-<p>3- Au 31/12/2025, l’expert-comptable de l’entreprise ATLAS DISTRIBUTION SARL constate qu’une facture envoyée au client BADR a été comptabilisée en ventes alors que les marchandises correspondantes, d’un montant de 10 900 DH HT, n’ont pas encore été livrées à la clôture de l’exercice. </p>
 
-<p>4- Le 01/11/2025, l’entreprise ATLAS DISTRIBUTION SARL a encaissé par chèque bancaire un loyer reçu d’avance de 9 000 DH, correspondant à 5 mois de location couvrant la période du 01/11/2025 au 31/03/2026. </p>
+</div>
 
+<h3>1- RRR à obtenir sur achats</h3>
 
+<div class="info">
 
-    
-         ► Passer au journal de l’entreprise les écritures nécessaires au 31/12/2025
+<p>
+Le 18 décembre 2025, l'entreprise ATLAS DISTRIBUTION SARL a reçu
+une facture d'achat de marchandises.
+</p>
 
+<p>
+À la suite d'un accord commercial conclu avec le fournisseur,
+celui-ci s'est engagé à accorder une remise de
+<strong>1 200 DH HT</strong> sur cette facture (TVA 20 %).
+</p>
 
-   
+<p>
+Toutefois, au 31/12/2025, l'avoir correspondant n'est toujours
+pas parvenu à l'entreprise.
+</p>
+
+</div>
+
+<h3>2- Facture à établir</h3>
+
+<div class="info">
+
+<p>
+Au 31/12/2025, l'expert-comptable de l'entreprise
+ATLAS DISTRIBUTION SARL constate qu'une facture non encore établie
+correspond à des marchandises livrées avant la clôture de l'exercice.
+</p>
+
+<p>
+Le montant de cette vente est estimé à
+<strong>14 500 DH HT</strong> (TVA 20 %).
+</p>
+
+</div>
+
+<h3>3- Produits constatés d'avance : marchandises non livrées</h3>
+
+<div class="info">
+
+<p>
+Au 31/12/2025, l'expert-comptable de l'entreprise
+ATLAS DISTRIBUTION SARL constate qu'une facture envoyée au client
+BADR a été comptabilisée en ventes.
+</p>
+
+<p>
+Cependant, les marchandises correspondantes, d'un montant de
+<strong>10 900 DH HT</strong>, n'ont pas encore été livrées
+à la clôture de l'exercice.
+</p>
+
+</div>
+
+<h3>4- Produits constatés d'avance : loyer reçu d'avance</h3>
+
+<div class="info">
+
+<p>
+Le 01/11/2025, l'entreprise ATLAS DISTRIBUTION SARL a encaissé
+par chèque bancaire un loyer reçu d'avance de
+<strong>9 000 DH</strong>.
+</p>
+
+<p>
+Ce loyer correspond à 5 mois de location couvrant la période
+du 01/11/2025 au 31/03/2026.
+</p>
+
+</div>
+
+<div class="highlight">
+
+<h2>Travail à faire</h2>
+
+<ol>
+<li>
+Passer au journal de l'entreprise les écritures nécessaires au 31/12/2025.
+</li>
 </ol>
 
+</div>
 
-
-
+<div class="note">
+💡 Consultez la rubrique Solution pour découvrir les calculs et les écritures comptables de régularisation.
+</div>
 
 </section>
+
+<!-- ================================================== -->
+<!-- SOLUTION -->
+<!-- ================================================== -->
 
 <section id="SOL">
-<h2>Solution de l’exercice 10 </h2>
-
-<style>
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-    padding:20px;
-}
-
-/* Tableau principal */
-table{
-    width:100%;
-    margin:auto;
-    border-collapse:collapse;
-    border:3px solid black; /* Bordure extérieure épaisse */
-}
-
-/* Cellules */
-td{
-    border:1px solid black; /* Bordures internes */
-    padding:10px;
-}
-
-/* Styles */
-.titre{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-}
-
-.right{
-    text-align:right;
-}
-
-.center{
-    text-align:center;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.header{
-    background:#e6e6e6;
-}
-
-</style>
-<style>
-body{
-    font-family: Arial, sans-serif;
-    margin: 30px;
-    background:#f4f6f9;
-    color:#333;
-    line-height:1.6;
-}
-
-.container{
-    max-width:1100px;
-    margin:auto;
-    background:#fff;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-h1{
-    text-align:center;
-    color:#0d47a1;
-    border-bottom:3px solid #0d47a1;
-    padding-bottom:10px;
-}
-
-h2{
-    color:#1565c0;
-    margin-top:30px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
-    margin-bottom:25px;
-}
-
-table th{
-    background:#1565c0;
-    color:white;
-    padding:10px;
-    border:1px solid #ddd;
-}
-
-table td{
-    padding:10px;
-    border:1px solid #ddd;
-}
-
-table tr:nth-child(even){
-    background:#f8f9fa;
-}
-
-.info{
-    background:#eef5ff;
-    border-left:5px solid #1565c0;
-    padding:15px;
-    margin-bottom:20px;
-}
-
-ol li{
-    margin-bottom:10px;
-}
-
-ul li{
-    margin-bottom:8px;
-}
-</style>
 
 
-<table>
+<h3>1- Régularisation des RRR à obtenir sur achats</h3>
 
-<!-- 01/01/2025 -->
-<tr class="date"><td colspan="6">31/12/2025</td></tr>
+<div class="formule">
 
-<tr><td class="debit center"" style="width:5%;">
-        
-              <option>3417</option>
-     
-    </td>
-<td></td>
+<strong>Calcul de la TVA :</strong>
 
-<td class="debit"" style="width:30%;" >
-<option> RRR à obtenir - avoirs NER</option>
+<br><br>
 
-         
-       
-    </td>
+Montant de la remise HT = 1 200 DH
 
-<td></td>
+<br>
 
-<td class="montant"" style="width:7%;">
-<option>1.440,00 </option>
-</td>
+Taux de TVA = 20 %
 
+<br>
+
+TVA = 1 200 × 20 % = 240 DH
+
+<br><br>
+
+<strong>Montant TTC de l'avoir = 1 200 + 240 = 1 440 DH</strong>
+
+</div>
+
+<h3>1.1- Écriture comptable au 31/12/2025</h3>
+
+<table class="journal-table">
+
+<colgroup>
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
+</colgroup>
+
+<tbody>
+
+<tr class="date">
+<td colspan="6">31/12/2025 – RRR à obtenir</td>
 </tr>
 
 <tr>
-
+<td class="debit center">3417</td>
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>6119</option>
-
-
-
-
-
-
-
-</td>
-
+<td class="debit">RRR à obtenir – Avoirs non encore reçus</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> RRR obtenus/Achats M/ses</option>
-
-
-
-            
-
-
-        
-</td>
-
+<td class="montant">1.440,00</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>1.200,00</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>4458</option>
-
-
-
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> Etat - autres comptes C</option>
-
-
-
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>240,00</option>
-
-</td>
-
-</tr>
-
-<tr><td class="debit center"" style="width:5%;">
-        
-              <option>3427</option>
-     
-    </td>
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> Clts - factures à établir </option>
-
-         
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>17.400,00 </option>
-</td>
-
 </tr>
 
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>7111</option>
-
-
-
-
-
-
-
-
-</td>
-
+<td class="credit center">6119</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> Ventes de M/ses </option>
-            
-
-
-
-
-            
-
-
-        
-</td>
-
+<td class="credit">RRR obtenus sur achats de marchandises</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>14.500,00</option>
-
-</td>
-
-</tr>
-<tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>4458</option>
-
-
-
-
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> Etat - autres comptes C</option>
-            
-
-
-
-
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>2.900,00</option>
-
-</td>
-
-</tr>
-
-
-<tr>
-<td class="debit center"" style="width:5%;">
-        
-              <option>7111</option>
-
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> Ventes de marchandises </option>
-
-         
-
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>10.900,00 </option>
-</td>
-
+<td class="montant">1.200,00</td>
 </tr>
 
 <tr>
-
 <td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>4491</option>
-
-
-
-
-
-</td>
-
+<td class="credit center">4458</td>
 <td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> PCA </option>
-
-
-            
-
-
-        
-</td>
-
+<td class="credit">État – Autres comptes créditeurs</td>
 <td></td>
-
-<td class="montant"" style="width:7%;">
-<option>10.900,00</option>
-
-</td>
-
+<td class="montant">240,00</td>
 </tr>
 
-<tr>
-<td class="debit center"" style="width:5%;">
-        
-              <option>7127</option>
-
-
-       
-    </td>
-
-<td></td>
-
-<td class="debit"" style="width:30%;" >
-<option> Ventes de produits accessoires</option>
-
-         
-
-       
-    </td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>5.400,00 </option>
-</td>
-
-</tr>
-
-<tr>
-
-<td></td>
-
-<td class="credit center"" style="width:5%;">
-        
-            <option>4491</option>
-
-
-
-
-
-</td>
-
-<td></td>
-
-<td class="credit"" style="width:30%;">
-        
-            <option> PCA </option>
-
-
-            
-
-
-        
-</td>
-
-<td></td>
-
-<td class="montant"" style="width:7%;">
-<option>5.400,00</option>
-
-</td>
-
-</tr>
-
-
-
+</tbody>
 </table>
 
+<h3>2- Régularisation des factures à établir</h3>
 
+<div class="formule">
 
-<style>
+<strong>Calcul de la TVA :</strong>
 
-body{
-    font-family: Arial, sans-serif;
-    margin:20px;
-    background:#f4f7fb;
-    color:#222;
-}
+<br><br>
 
-/* TITRES */
-h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:35px;
-    margin-bottom:15px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
-    letter-spacing:0.5px;
-}
+Montant HT de la vente = 14 500 DH
 
-/* TABLEAUX */
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-    background:white;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-    border-radius:10px;
-    overflow:hidden;
-}
+<br>
 
-/* CELLULES */
-td{
-    border:1px solid #cfd8e3;
-    padding:8px;
-    font-size:14px;
-}
+Taux de TVA = 20 %
 
-/* DATE */
-.date{
-    text-align:center;
-    font-weight:bold;
-    background:#1e3a5f;
-    color:white;
-    font-size:15px;
-}
+<br>
 
-/* COLONNES */
-.compte{
-    width:5%;
-    text-align:center;
-}
+TVA = 14 500 × 20 % = 2 900 DH
 
-.libelle{
-    width:30%;
-}
+<br><br>
 
-.montant{
-    width:10%;
-    text-align:right;
-    white-space:nowrap;
-    background:#f9fbfd;
-    font-weight:bold;
-    color:#0b5e8e;
-}
+<strong>Montant TTC = 14 500 + 2 900 = 17 400 DH</strong>
 
-/* DEBIT */
-.debit{
-    background:#e8f4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
+<br><br>
 
-/* CREDIT */
-.credit{
-    background:#fff2e6;
-    color:#b35400;
-    font-weight:bold;
-}
+La vente concerne l'exercice 2025. La facture n'étant pas encore
+établie, le produit doit être rattaché à cet exercice.
 
-/* CENTRAGE */
-.center{
-    text-align:center;
-}
+</div>
 
-/* EFFET HOVER */
-tr:hover td{
-    background:#f1f7ff;
-    transition:0.2s;
-}
+<h3>2.1- Écriture comptable au 31/12/2025</h3>
 
-</style>
+<table class="journal-table">
+
+<colgroup>
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
+</colgroup>
+
+<tbody>
+
+<tr class="date">
+<td colspan="6">31/12/2025 – Facture à établir</td>
+</tr>
+
+<tr>
+<td class="debit center">3427</td>
+<td></td>
+<td class="debit">Clients – Factures à établir</td>
+<td></td>
+<td class="montant">17.400,00</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">7111</td>
+<td></td>
+<td class="credit">Ventes de marchandises</td>
+<td></td>
+<td class="montant">14.500,00</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">4458</td>
+<td></td>
+<td class="credit">État – Autres comptes créditeurs</td>
+<td></td>
+<td class="montant">2.900,00</td>
+</tr>
+
+</tbody>
+</table>
+
+<h3>3- Régularisation des produits constatés d'avance : marchandises non livrées</h3>
+
+<div class="formule">
+
+<strong>Informations :</strong>
+
+<br><br>
+
+Montant HT de la vente comptabilisée = 10 900 DH
+
+<br>
+
+Les marchandises n'ont pas encore été livrées au client BADR
+au 31/12/2025.
+
+<br><br>
+
+Le produit ne concerne donc pas l'exercice 2025.
+
+<br>
+
+<strong>Montant à régulariser = 10 900 DH</strong>
+
+</div>
+
+<h3>3.1- Écriture comptable au 31/12/2025</h3>
+
+<table class="journal-table">
+
+<colgroup>
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
+</colgroup>
+
+<tbody>
+
+<tr class="date">
+<td colspan="6">31/12/2025 – Marchandises non livrées</td>
+</tr>
+
+<tr>
+<td class="debit center">7111</td>
+<td></td>
+<td class="debit">Ventes de marchandises</td>
+<td></td>
+<td class="montant">10.900,00</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">4491</td>
+<td></td>
+<td class="credit">Produits constatés d'avance</td>
+<td></td>
+<td class="montant">10.900,00</td>
+</tr>
+
+</tbody>
+</table>
+
+<h3>4- Régularisation des produits constatés d'avance : loyer reçu d'avance</h3>
+
+<div class="formule">
+
+<strong>Calcul du produit constaté d'avance :</strong>
+
+<br><br>
+
+Montant total du loyer = 9 000 DH
+
+<br>
+
+Période totale = 5 mois
+
+<br>
+
+Période couverte : du 01/11/2025 au 31/03/2026
+
+<br>
+
+Période concernant l'exercice 2026 : janvier, février et mars = 3 mois
+
+<br><br>
+
+Loyer mensuel = 9 000 / 5 = 1 800 DH
+
+<br>
+
+PCA = 1 800 × 3
+
+<br>
+
+<strong>PCA = 5 400 DH</strong>
+
+</div>
+
+<h3>4.1- Écriture comptable au 31/12/2025</h3>
+
+<table class="journal-table">
+
+<colgroup>
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
+</colgroup>
+
+<tbody>
+
+<tr class="date">
+<td colspan="6">31/12/2025 – Loyer reçu d'avance</td>
+</tr>
+
+<tr>
+<td class="debit center">7127</td>
+<td></td>
+<td class="debit">Ventes de produits accessoires</td>
+<td></td>
+<td class="montant">5.400,00</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td class="credit center">4491</td>
+<td></td>
+<td class="credit">Produits constatés d'avance</td>
+<td></td>
+<td class="montant">5.400,00</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="highlight">
+
+<strong>Synthèse :</strong>
+
+<ul>
+
+<li>
+Les RRR à obtenir correspondent aux réductions commerciales
+accordées par les fournisseurs, mais dont les avoirs ne sont
+pas encore reçus à la clôture de l'exercice.
+</li>
+
+<li>
+Les factures à établir concernent les produits acquis au titre
+de l'exercice, mais dont les factures ne sont pas encore établies.
+</li>
+
+<li>
+Les produits constatés d'avance correspondent aux produits déjà
+comptabilisés ou encaissés, mais qui concernent totalement ou
+partiellement l'exercice suivant.
+</li>
+
+<li>
+Les produits relatifs à des marchandises non encore livrées
+ne doivent pas être rattachés à l'exercice en cours.
+</li>
+
+<li>
+À chaque clôture, l'entreprise doit rattacher les produits à
+l'exercice auquel ils se rapportent, conformément au principe
+de spécialisation des exercices.
+</li>
+
+</ul>
+
+</div>
 
 </section>
 
+<!-- ===== PIED DE PAGE ===== -->
 
 <footer>
-    Formation en Comptabilité Générale
-<br>
-
-<a href="C3P3M1.html">⬅ Retour </a>
-
+Formation en comptabilité générale
 </footer>
+
+<script>
+
+/* ===== MENUS DÉROULANTS ===== */
+function toggleDropdown(button){
+
+    const menu=button.nextElementSibling;
+    const isOpen=button.getAttribute("aria-expanded")==="true";
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const otherButton=dropdown.querySelector("button");
+        const otherMenu=dropdown.querySelector(".dropdown-content");
+
+        if(otherButton && otherMenu && otherButton!==button){
+            otherButton.setAttribute("aria-expanded","false");
+            otherMenu.style.display="none";
+        }
+
+    });
+
+    button.setAttribute("aria-expanded",String(!isOpen));
+    menu.style.display=isOpen?"none":"block";
+}
+
+/* ===== FERMER LES MENUS À L'EXTÉRIEUR ===== */
+document.addEventListener("click",function(event){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        if(!dropdown.contains(event.target)){
+
+            const button=dropdown.querySelector("button");
+            const menu=dropdown.querySelector(".dropdown-content");
+
+            if(button && menu){
+                button.setAttribute("aria-expanded","false");
+                menu.style.display="none";
+            }
+
+        }
+
+    });
+
+});
+
+/* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
+function showSection(id,button){
+
+    document.querySelectorAll("body > section").forEach(section=>{
+        section.classList.remove("active","animationSection");
+    });
+
+    const current=document.getElementById(id);
+
+    if(current){
+        current.classList.add("active","animationSection");
+    }
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("btnActive");
+    });
+
+    if(button){
+        button.classList.add("btnActive");
+    }
+
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+</script>
 
 </body>
 </html>
-
 
