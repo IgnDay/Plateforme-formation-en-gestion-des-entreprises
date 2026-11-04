@@ -4,311 +4,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>IgnDay – E4 Enregistrement des autres produits</title>
 
 <style>
 *{box-sizing:border-box}
 
 html{
-    width:100%;
-    overflow-x:hidden;
-    -webkit-text-size-adjust:100%;
+width:100%;
+overflow-x:hidden;
+-webkit-text-size-adjust:100%;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    width:100%;
-    background:#f4f6f9;
-    color:#1e293b;
-    overflow-x:hidden;
+font-family:Arial,sans-serif;
+margin:0;
+width:100%;
+background:#f4f6f9;
+color:#1e293b;
+overflow-x:hidden;
 }
 
 /* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    box-shadow:0 2px 10px #0003;
+background:#2c3e50;
+color:white;
+text-align:center;
+box-shadow:0 2px 10px #0003;
 }
 
 .brandbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    flex-wrap:wrap;
-    padding:12px 22px;
-    background:linear-gradient(120deg,#0f172a,#0f766e);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+flex-wrap:wrap;
+padding:12px 22px;
+background:linear-gradient(120deg,#0f172a,#0f766e);
 }
 
 .brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:19px;
+display:flex;
+align-items:center;
+gap:10px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+font-size:19px;
 }
 
 .brand-logo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:44px;
-    height:44px;
-    flex-shrink:0;
-    border-radius:12px;
-    background:#00b894;
-    font-size:19px;
+display:flex;
+align-items:center;
+justify-content:center;
+width:44px;
+height:44px;
+flex-shrink:0;
+border-radius:12px;
+background:#00b894;
+font-size:19px;
 }
 
 .site-menu{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
+gap:7px;
 }
 
 .site-menu>a{
-    display:block;
-    padding:10px 13px;
-    border-radius:6px;
-    color:white;
-    text-decoration:none;
-    font-size:14px;
+display:block;
+padding:10px 13px;
+border-radius:6px;
+color:white;
+text-decoration:none;
+font-size:14px;
 }
 
-.site-menu>a:hover{background:#ffffff2b}
+.site-menu>a:hover{
+background:#ffffff2b;
+}
 
 header h1{
-    padding:20px 10px;
-    margin:0;
-    font-size:35px;
-    overflow-wrap:break-word;
+padding:20px 10px;
+margin:0;
+font-size:35px;
+overflow-wrap:break-word;
 }
 
 header h1 p{
-    margin:10px 0;
-    line-height:1.5;
-    font-size:35px;
+margin:10px 0;
+line-height:1.5;
+font-size:35px;
 }
 
 /* ===== MENUS DÉROULANTS ===== */
 .dropdown{
-    position:relative;
-    display:inline-block;
+position:relative;
+display:inline-block;
 }
 
 .dropdown button{
-    padding:10px 14px;
-    background:transparent;
-    color:white;
-    border:none;
-    cursor:pointer;
-    font-size:14px;
-    border-radius:6px;
-    font-family:inherit;
+padding:10px 14px;
+background:transparent;
+color:white;
+border:none;
+cursor:pointer;
+font-size:14px;
+border-radius:6px;
+font-family:inherit;
 }
 
-.dropdown button:hover{background:#ffffff2b}
+.dropdown button:hover{
+background:#ffffff2b;
+}
 
 .dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:230px;
-    max-width:calc(100vw - 20px);
-    max-height:70vh;
-    overflow-y:auto;
-    overflow-x:hidden;
-    background:white;
-    box-shadow:0 5px 15px #0003;
-    border-radius:6px;
-    z-index:1000;
-    padding:7px;
-    -webkit-overflow-scrolling:touch;
+display:none;
+position:absolute;
+top:100%;
+left:0;
+min-width:230px;
+max-width:calc(100vw - 20px);
+max-height:70vh;
+overflow-y:auto;
+overflow-x:hidden;
+background:white;
+box-shadow:0 5px 15px #0003;
+border-radius:6px;
+z-index:1000;
+padding:7px;
+-webkit-overflow-scrolling:touch;
 }
 
 .dropdown-content a{
-    display:block;
-    padding:11px 14px;
-    color:#1e293b;
-    text-decoration:none;
-    text-align:left;
-    font-size:14px;
-    line-height:1.5;
-    border-radius:5px;
-    overflow-wrap:break-word;
+display:block;
+padding:11px 14px;
+color:#1e293b;
+text-decoration:none;
+text-align:left;
+font-size:14px;
+line-height:1.5;
+border-radius:5px;
+overflow-wrap:break-word;
 }
 
 .dropdown-content a:hover{
-    background:#0f766e;
-    color:white;
+background:#0f766e;
+color:white;
 }
 
 /* ===== NAVIGATION ===== */
 nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:5px;
+background:#34495e;
+padding:10px;
+text-align:center;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
+gap:5px;
 }
 
 nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:0;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    font-family:inherit;
-    transition:.3s;
-    touch-action:manipulation;
+margin:5px;
+padding:12px 18px;
+border:0;
+background:#00b894;
+color:white;
+cursor:pointer;
+border-radius:5px;
+font-size:15px;
+font-family:inherit;
+transition:.3s;
+touch-action:manipulation;
 }
 
 nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
+background:#019875;
+transform:translateY(-2px);
 }
 
 .btnActive{
-    background:#0984e3!important;
-    transform:scale(1.02);
-    box-shadow:0 3px 10px #0003;
+background:#0984e3!important;
+transform:scale(1.02);
+box-shadow:0 3px 10px #0003;
 }
 
 /* ===== SECTIONS ===== */
 section{
-    display:none;
-    padding:30px;
-    margin:20px;
-    min-width:0;
+display:none;
+padding:30px;
+margin:20px;
+min-width:0;
 }
 
-section.active{display:block}
+section.active{
+display:block;
+}
 
 .animationSection{
-    animation:apparition .5s ease;
-    background:white;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px #0002;
+animation:apparition .5s ease;
+background:white;
+border-left:8px solid #00b894;
+border-radius:12px;
+box-shadow:0 5px 15px #0002;
 }
 
 @keyframes apparition{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 /* ===== CONTENU ===== */
 h2{
-    color:#2c3e50;
-    line-height:1.4;
-    overflow-wrap:break-word;
+color:#2c3e50;
+line-height:1.4;
+overflow-wrap:break-word;
 }
 
 h3{
-    color:#00b894;
-    line-height:1.4;
+color:#00b894;
+line-height:1.4;
 }
 
 p,li{
-    line-height:1.7;
-    overflow-wrap:break-word;
+line-height:1.7;
+overflow-wrap:break-word;
 }
 
-ul,ol{padding-left:25px}
+ul,ol{
+padding-left:25px;
+}
 
 /* ===== TABLEAUX ===== */
 table{
-    width:100%;
-    max-width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
-    background:white;
-    margin:20px 0 30px;
-    box-shadow:0 2px 10px #00000014;
+width:100%;
+max-width:100%;
+border-collapse:collapse;
+table-layout:fixed;
+background:white;
+margin:20px 0 30px;
+box-shadow:0 2px 10px #00000014;
 }
 
 td,th{
-    border:1px solid #ccc;
-    padding:10px;
-    vertical-align:middle;
-    overflow-wrap:anywhere;
-    word-break:normal;
-    white-space:normal;
+border:1px solid #ccc;
+padding:10px;
+vertical-align:middle;
+overflow-wrap:anywhere;
+word-break:normal;
+white-space:normal;
 }
 
 th{
-    background:#dfe6e9;
-    text-align:center;
+background:#dfe6e9;
+text-align:center;
 }
 
 tbody tr:hover td{
-    background:#f1f7ff;
-    transition:.2s;
+background:#f1f7ff;
+transition:.2s;
 }
 
-/* ===== TABLEAU DE L'EXERCICE ===== */
-#EXE table th:first-child,
-#EXE table td:first-child{
-    width:18%;
-    text-align:center;
+/* ===== TABLEAUX DES FACTURES ===== */
+.facture-table{
+border:2px solid #34495e;
 }
 
-#EXE table td:first-child{
-    font-weight:bold;
+.facture-table .titre{
+text-align:center;
+font-size:20px;
+font-weight:bold;
+color:#0f766e;
+background:#e8fff7;
+}
+
+.facture-table .header td{
+background:#dfe6e9;
+font-weight:bold;
+}
+
+.facture-table .right{
+text-align:right;
+font-variant-numeric:tabular-nums;
+}
+
+.facture-table .bold{
+font-weight:bold;
 }
 
 /* ===== TABLEAUX JOURNAL ===== */
 .journal-table{
-    border:2px solid #34495e;
+width:100%;
+max-width:100%;
+table-layout:fixed;
+border:2px solid #34495e;
 }
 
-.journal-table col:nth-child(1),
-.journal-table col:nth-child(2){width:10%}
-
-.journal-table col:nth-child(3),
-.journal-table col:nth-child(4){width:23%}
-
-.journal-table col:nth-child(5),
-.journal-table col:nth-child(6){width:17%}
+/* Largeurs des 6 colonnes */
+.journal-table col.code{width:12%}
+.journal-table col.code2{width:12%}
+.journal-table col.libelle{width:23%}
+.journal-table col.libelle2{width:23%}
+.journal-table col.montant{width:20%}
+.journal-table col.montant2{width:20%}
 
 .date{
-    text-align:center;
-    background:#2c3e50!important;
-    color:white!important;
-    font-weight:bold;
+text-align:center;
+background:#2c3e50!important;
+color:white!important;
+font-weight:bold;
 }
 
 .debit{
-    background:#eaf4ff;
-    color:#0b3d91;
-    font-weight:bold;
+background:#eaf4ff;
+color:#0b3d91;
+font-weight:bold;
 }
 
 .credit{
-    background:#fff4e6;
-    color:#b35400;
-    font-weight:bold;
+background:#fff4e6;
+color:#b35400;
+font-weight:bold;
 }
 
 .montant{
-    text-align:right;
-    background:#f8f9fa;
-    font-weight:bold;
-    font-variant-numeric:tabular-nums;
+text-align:right;
+background:#f8f9fa;
+font-weight:bold;
+font-variant-numeric:tabular-nums;
 }
 
 .center{text-align:center}
@@ -317,298 +342,312 @@ tbody tr:hover td{
 
 /* ===== ENCADRÉS ===== */
 .highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-    overflow-wrap:break-word;
+background:#e8fff7;
+border-left:6px solid #00b894;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+overflow-wrap:break-word;
 }
 
 .note{
-    background:#f1f7ff;
-    border-left:6px solid #0984e3;
-    padding:15px;
-    margin:15px 0;
-    border-radius:8px;
+background:#f1f7ff;
+border-left:6px solid #0984e3;
+padding:15px;
+margin:15px 0;
+border-radius:8px;
 }
 
 /* ===== SOLUTION ===== */
 #SOL h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:30px;
+text-align:center;
+background:#1e3a5f;
+color:white;
+padding:12px;
+border-radius:8px;
+margin-top:30px;
 }
 
 #SOL h3{
-    color:#0f766e;
-    border-bottom:2px solid #00b894;
-    padding-bottom:8px;
-    margin-top:30px;
+color:#0f766e;
+border-bottom:2px solid #00b894;
+padding-bottom:8px;
+margin-top:30px;
+}
+
+#SOL .titre{
+color:#0f766e;
 }
 
 /* ===== PIED DE PAGE ===== */
 footer{
-    text-align:center;
-    padding:15px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-    line-height:1.6;
+text-align:center;
+padding:15px;
+background:#2c3e50;
+color:white;
+margin-top:20px;
+line-height:1.6;
 }
 
 footer a{
-    color:#00ffcc;
-    text-decoration:none;
+color:#00ffcc;
+text-decoration:none;
 }
 
-footer a:hover{text-decoration:underline}
+footer a:hover{
+text-decoration:underline;
+}
 
 /* ===== TABLETTES ===== */
 @media(max-width:900px){
-    .brandbar{
-        justify-content:center;
-        gap:12px;
-    }
+.brandbar{
+justify-content:center;
+gap:12px;
+}
 
-    .site-menu{
-        width:100%;
-        justify-content:center;
-    }
+.site-menu{
+width:100%;
+justify-content:center;
+}
 
-    header h1{font-size:23px}
+header h1{font-size:23px}
 
-    section{
-        padding:24px;
-        margin:15px;
-    }
+section{
+padding:24px;
+margin:15px;
+}
 }
 
 /* ===== ÉCRANS DE 760 PX ===== */
 @media(max-width:760px){
-    .brandbar{
-        justify-content:center;
-        padding:12px;
-    }
+.brandbar{
+justify-content:center;
+padding:12px;
+}
 
-    .site-menu{width:100%}
-    .site-menu>a{padding:9px}
+.site-menu{width:100%}
 
-    section{
-        padding:18px;
-        margin:12px;
-    }
+.site-menu>a{padding:9px}
 
-    nav button{
-        padding:10px;
-        font-size:14px;
-    }
+section{
+padding:18px;
+margin:12px;
+}
 
-    header h1{font-size:21px}
-    header h1 p{font-size:16px}
+nav button{
+padding:10px;
+font-size:14px;
+}
+
+header h1{font-size:21px}
+
+header h1 p{font-size:16px}
 }
 
 /* ===== TÉLÉPHONES ===== */
 @media(max-width:600px){
-    body{font-size:15px}
+body{font-size:12px}
 
-    .brandbar{
-        flex-direction:column;
-        align-items:stretch;
-        gap:12px;
-        padding:12px 10px;
-    }
+.brandbar{
+flex-direction:column;
+align-items:stretch;
+gap:12px;
+padding:12px 10px;
+}
 
-    .brand{
-        justify-content:center;
-        font-size:20px;
-    }
+.brand{
+justify-content:center;
+font-size:20px;
+}
 
-    .brand-logo{
-        width:40px;
-        height:40px;
-    }
+.brand-logo{
+width:40px;
+height:40px;
+}
 
-    .site-menu{
-        width:100%;
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
-        gap:5px;
-    }
+.site-menu{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:stretch;
+gap:5px;
+}
 
-    .site-menu>a{
-        width:100%;
-        text-align:center;
-        padding:11px 8px;
-        background:#ffffff12;
-        font-size:14px;
-    }
+.site-menu>a{
+width:100%;
+text-align:center;
+padding:11px 8px;
+background:#ffffff12;
+font-size:12px;
+}
 
-    .dropdown{
-        display:block;
-        width:100%;
-    }
+.dropdown{
+display:block;
+width:100%;
+}
 
-    .dropdown button{
-        display:block;
-        width:100%;
-        padding:12px 8px;
-        text-align:center;
-        background:#ffffff12;
-        font-size:14px;
-        line-height:1.5;
-    }
+.dropdown button{
+display:block;
+width:100%;
+padding:12px 8px;
+text-align:center;
+background:#ffffff12;
+font-size:12px;
+line-height:1.5;
+}
 
-    .dropdown-content{
-        position:static;
-        width:100%;
-        min-width:0;
-        max-width:100%;
-        max-height:45vh;
-        margin-top:4px;
-        border-radius:6px;
-        box-shadow:inset 0 0 0 1px #e2e8f0;
-    }
+.dropdown-content{
+position:static;
+width:100%;
+min-width:0;
+max-width:100%;
+max-height:45vh;
+margin-top:4px;
+border-radius:6px;
+box-shadow:inset 0 0 0 1px #e2e8f0;
+}
 
-    .dropdown-content a{
-        padding:12px 10px;
-        font-size:14px;
-    }
+.dropdown-content a{
+padding:12px 10px;
+font-size:12px;
+}
 
-    header h1{
-        padding:15px 12px;
-        font-size:20px;
-    }
+header h1{
+padding:15px 12px;
+font-size:20px;
+}
 
-    header h1 p{
-        margin:8px 0;
-        font-size:15px;
-        line-height:1.6;
-    }
+header h1 p{
+margin:8px 0;
+font-size:12px;
+line-height:1.6;
+}
 
-    nav{
-        padding:10px 8px;
-        gap:5px;
-    }
+nav{
+padding:10px 8px;
+gap:5px;
+}
 
-    nav button{
-        flex:1 1 calc(50% - 10px);
-        min-width:0;
-        margin:3px;
-        padding:12px 8px;
-        font-size:14px;
-        transform:none;
-    }
+nav button{
+flex:1 1 calc(50% - 10px);
+min-width:0;
+margin:3px;
+padding:12px 8px;
+font-size:12px;
+transform:none;
+}
 
-    .btnActive{transform:none}
+.btnActive{transform:none}
 
-    section{
-        padding:16px 13px;
-        margin:10px;
-        border-radius:9px;
-    }
+section{
+padding:16px 13px;
+margin:10px;
+border-radius:9px;
+}
 
-    .animationSection{border-left-width:5px}
+.animationSection{border-left-width:5px}
 
-    h2{font-size:20px}
-    h3{font-size:17px}
+h2{font-size:12px}
 
-    p,li{
-        font-size:15px;
-        line-height:1.7;
-    }
+h3{font-size:12px}
 
-    ul,ol{padding-left:21px}
+p,li{
+font-size:12px;
+line-height:1.7;
+}
 
-    .highlight,.note{
-        padding:12px;
-        font-size:14px;
-    }
+ul,ol{padding-left:21px}
 
-    table{
-        width:100%;
-        max-width:100%;
-        min-width:0;
-        table-layout:fixed;
-        font-size:12px;
-    }
+.highlight,.note,.info{
+padding:12px;
+font-size:12px;
+}
 
-    td,th{
-        padding:6px 3px;
-        overflow-wrap:anywhere;
-        white-space:normal;
-        line-height:1.4;
-    }
+table{
+width:100%;
+max-width:100%;
+min-width:0;
+table-layout:fixed;
+font-size:10px;
+}
 
-    .journal-table{font-size:11px}
-    .journal-table td{padding:6px 3px}
+td,th{
+padding:6px 3px;
+overflow-wrap:anywhere;
+white-space:normal;
+line-height:1.4;
+}
 
-    .montant{
-        overflow-wrap:normal;
-        word-break:normal;
-    }
+.journal-table{
+font-size:10px;
+}
 
-    footer{
-        padding:14px 10px;
-        font-size:14px;
-    }
+.journal-table td{
+padding:6px 3px;
+}
+
+footer{
+padding:14px 10px;
+font-size:10px;
+}
 }
 
 /* ===== TRÈS PETITS TÉLÉPHONES ===== */
 @media(max-width:360px){
-    body{font-size:14px}
+body{font-size:12px}
 
-    header h1{
-        font-size:18px;
-        padding:12px 8px;
-    }
+header h1{
+font-size:12px;
+padding:12px 8px;
+}
 
-    header h1 p{font-size:13px}
-    .brand{font-size:18px}
+header h1 p{font-size:12px}
 
-    .site-menu>a,
-    .dropdown button{
-        font-size:13px;
-        padding:11px 6px;
-    }
+.brand{font-size:12px}
 
-    nav{padding:8px 5px}
+.site-menu>a,
+.dropdown button{
+font-size:12px;
+padding:11px 6px;
+}
 
-    nav button{
-        flex-basis:100%;
-        width:100%;
-        margin:3px 0;
-        font-size:14px;
-    }
+nav{
+padding:8px 5px;
+}
 
-    section{
-        margin:7px;
-        padding:13px 10px;
-    }
+nav button{
+flex-basis:100%;
+width:100%;
+margin:3px 0;
+font-size:12px;
+}
 
-    h2{font-size:18px}
-    h3{font-size:16px}
+section{
+margin:7px;
+padding:13px 10px;
+}
 
-    table{font-size:10px}
-    td,th{padding:5px 2px}
+h2{font-size:12px}
 
-    .journal-table{font-size:9px}
+h3{font-size:12px}
+
+table{font-size:8px}
+
+td,th{padding:5px 2px}
+
+.journal-table{font-size:8px}
 }
 
 /* ===== ACCESSIBILITÉ ===== */
 @media(prefers-reduced-motion:reduce){
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-        scroll-behavior:auto!important;
-        transition-duration:.01ms!important;
-    }
+*,
+*::before,
+*::after{
+animation-duration:.01ms!important;
+animation-iteration-count:1!important;
+scroll-behavior:auto!important;
+transition-duration:.01ms!important;
+}
 }
 </style>
 </head>
@@ -633,6 +672,7 @@ footer a:hover{text-decoration:underline}
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 Modules ▼
 </button>
+
 <div class="dropdown-content">
 <a href="M1.html">M1 – Comptabilité générale</a>
 <a href="M2.html">M2 – Comptabilité analytique</a>
@@ -650,6 +690,7 @@ Modules ▼
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 M1 - Comptabilité générale ▼
 </button>
+
 <div class="dropdown-content">
 <a href="P1M1.html">P1 – Concepts de base</a>
 <a href="P2M1.html">P2 – Opérations courantes</a>
@@ -661,6 +702,7 @@ M1 - Comptabilité générale ▼
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 P2 – Opérations courantes ▼
 </button>
+
 <div class="dropdown-content">
 <a href="C1P2M1.html">T - Résumés des thèmes</a>
 <a href="C2P2M1.html">F - Formulaires interactifs</a>
@@ -672,6 +714,7 @@ P2 – Opérations courantes ▼
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 E - Exercices corrigés ▼
 </button>
+
 <div class="dropdown-content">
 <a href="E1C3P2M1.html">E1 – Enregistrement des achats</a>
 <a href="E2C3P2M1.html">E2 – Enregistrement des ventes</a>
@@ -728,7 +771,7 @@ Solution
 <tbody>
 
 <tr>
-<td class="date">05/04/2026</td>
+<td class="date">05/04/26</td>
 <td>
 Encaissement par banque d'une subvention d'exploitation accordée par l'État
 pour soutenir l'emploi des jeunes : <strong>45 000 DH (TVA 20 %)</strong>.
@@ -736,7 +779,7 @@ pour soutenir l'emploi des jeunes : <strong>45 000 DH (TVA 20 %)</strong>.
 </tr>
 
 <tr>
-<td class="date">15/04/2026</td>
+<td class="date">15/04/26</td>
 <td>
 Achèvement de la construction d'un magasin de stockage réalisée par les moyens
 propres de l'entreprise. Coût de production :
@@ -745,7 +788,7 @@ propres de l'entreprise. Coût de production :
 </tr>
 
 <tr>
-<td class="date">18/04/2026</td>
+<td class="date">18/04/26</td>
 <td>
 Encaissement par banque de jetons de présence pour un montant de
 <strong>8 500 DH</strong>.
@@ -753,7 +796,7 @@ Encaissement par banque de jetons de présence pour un montant de
 </tr>
 
 <tr>
-<td class="date">20/04/2026</td>
+<td class="date">20/04/26</td>
 <td>
 Encaissement par banque de loyer d’un magasin pour un montant de
 <strong>6 000 DH (TVA 20 %)</strong>.
@@ -761,7 +804,7 @@ Encaissement par banque de loyer d’un magasin pour un montant de
 </tr>
 
 <tr>
-<td class="date">22/04/2026</td>
+<td class="date">22/04/26</td>
 <td>
 Réception de la banque d’un avis de crédit relatif au remboursement d’une annuité
 sur prêt accordé à un salarié :
@@ -770,7 +813,7 @@ sur prêt accordé à un salarié :
 </tr>
 
 <tr>
-<td class="date">25/04/2026</td>
+<td class="date">25/04/26</td>
 <td>
 Cession à crédit sur un mois d’un matériel de transport acquis en 2022,
 pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
@@ -793,23 +836,23 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 
 <section id="SOL">
 
-<h2>Solution de l’exercice 4</h2>
-
 <h3>Journal de la société TECHNOMAR SARL</h3>
 
+<!-- 05/04/2026 -->
 <table class="journal-table">
 
 <colgroup>
-<col>
-<col>
-<col>
-<col>
-<col>
-<col>
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
-<!-- 05/04/2026 -->
-<tr class="date"><td colspan="6">05/04/2026</td></tr>
+<tr class="date">
+<td colspan="6">05/04/2026</td>
+</tr>
 
 <tr>
 <td class="debit center">5141</td>
@@ -838,10 +881,14 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 <td class="montant">9.000,00</td>
 </tr>
 
-<tr class="date"><td colspan="6">Encaissement de la subvention d'exploitation</td></tr>
+<tr class="date">
+<td colspan="6">Encaissement de la subvention d'exploitation</td>
+</tr>
 
 <!-- 15/04/2026 -->
-<tr class="date"><td colspan="6">15/04/2026</td></tr>
+<tr class="date">
+<td colspan="6">15/04/2026</td>
+</tr>
 
 <tr>
 <td class="debit center">2321</td>
@@ -870,10 +917,14 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 <td class="montant">24.000,00</td>
 </tr>
 
-<tr class="date"><td colspan="6">Achèvement de la construction du magasin</td></tr>
+<tr class="date">
+<td colspan="6">Achèvement de la construction du magasin</td>
+</tr>
 
 <!-- 18/04/2026 -->
-<tr class="date"><td colspan="6">18/04/2026</td></tr>
+<tr class="date">
+<td colspan="6">18/04/2026</td>
+</tr>
 
 <tr>
 <td class="debit center">5141</td>
@@ -893,10 +944,14 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 <td class="montant">8.500,00</td>
 </tr>
 
-<tr class="date"><td colspan="6">Encaissement des jetons de présence</td></tr>
+<tr class="date">
+<td colspan="6">Encaissement des jetons de présence</td>
+</tr>
 
 <!-- 20/04/2026 -->
-<tr class="date"><td colspan="6">20/04/2026</td></tr>
+<tr class="date">
+<td colspan="6">20/04/2026</td>
+</tr>
 
 <tr>
 <td class="debit center">5141</td>
@@ -925,10 +980,14 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 <td class="montant">1.200,00</td>
 </tr>
 
-<tr class="date"><td colspan="6">Encaissement du loyer du magasin</td></tr>
+<tr class="date">
+<td colspan="6">Encaissement du loyer du magasin</td>
+</tr>
 
 <!-- 22/04/2026 -->
-<tr class="date"><td colspan="6">22/04/2026</td></tr>
+<tr class="date">
+<td colspan="6">22/04/2026</td>
+</tr>
 
 <tr>
 <td class="debit center">5141</td>
@@ -966,10 +1025,14 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 <td class="montant">50,00</td>
 </tr>
 
-<tr class="date"><td colspan="6">Remboursement de l'annuité du prêt accordé au salarié</td></tr>
+<tr class="date">
+<td colspan="6">Remboursement de l'annuité du prêt accordé au salarié</td>
+</tr>
 
 <!-- 25/04/2026 -->
-<tr class="date"><td colspan="6">25/04/2026</td></tr>
+<tr class="date">
+<td colspan="6">25/04/2026</td>
+</tr>
 
 <tr>
 <td class="debit center">3481</td>
@@ -998,7 +1061,9 @@ pour un montant de <strong>50 000 DH (TVA 20 %)</strong>.
 <td class="montant">10.000,00</td>
 </tr>
 
-<tr class="date"><td colspan="6">Cession à crédit du matériel de transport</td></tr>
+<tr class="date">
+<td colspan="6">Cession à crédit du matériel de transport</td>
+</tr>
 
 </table>
 
@@ -1014,68 +1079,68 @@ Formation en comptabilité générale
 /* ===== MENUS DÉROULANTS ===== */
 function toggleDropdown(button){
 
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
+const menu=button.nextElementSibling;
+const isOpen=button.getAttribute("aria-expanded")==="true";
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
+const otherButton=dropdown.querySelector("button");
+const otherMenu=dropdown.querySelector(".dropdown-content");
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
+if(otherButton && otherMenu && otherButton!==button){
+otherButton.setAttribute("aria-expanded","false");
+otherMenu.style.display="none";
+}
 
-    });
+});
 
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
+button.setAttribute("aria-expanded",String(!isOpen));
+menu.style.display=isOpen?"none":"block";
 }
 
 /* ===== FERMER LES MENUS À L'EXTÉRIEUR ===== */
 document.addEventListener("click",function(event){
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-        if(!dropdown.contains(event.target)){
+if(!dropdown.contains(event.target)){
 
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
+const button=dropdown.querySelector("button");
+const menu=dropdown.querySelector(".dropdown-content");
 
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
+if(button && menu){
+button.setAttribute("aria-expanded","false");
+menu.style.display="none";
+}
 
-        }
+}
 
-    });
+});
 
 });
 
 /* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
 function showSection(id,button){
 
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
+document.querySelectorAll("body > section").forEach(section=>{
+section.classList.remove("active","animationSection");
+});
 
-    const current=document.getElementById(id);
+const current=document.getElementById(id);
 
-    if(current){
-        current.classList.add("active","animationSection");
-    }
+if(current){
+current.classList.add("active","animationSection");
+}
 
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
-    });
+document.querySelectorAll("nav button").forEach(btn=>{
+btn.classList.remove("btnActive");
+});
 
-    if(button){
-        button.classList.add("btnActive");
-    }
+if(button){
+button.classList.add("btnActive");
+}
 
-    window.scrollTo({top:0,behavior:"smooth"});
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
 </script>
