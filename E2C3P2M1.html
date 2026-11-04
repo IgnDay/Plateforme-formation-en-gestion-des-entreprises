@@ -3,326 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IgnDay – E2 Enregistrement des ventes</title>
+<title>IgnDay – E2 Les opérations de vente</title>
 
 <style>
 *{box-sizing:border-box}
 
 html{
-    width:100%;
-    overflow-x:hidden;
-    -webkit-text-size-adjust:100%;
+width:100%;
+overflow-x:hidden;
+-webkit-text-size-adjust:100%;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    width:100%;
-    background:#f4f6f9;
-    color:#1e293b;
-    overflow-x:hidden;
+font-family:Arial,sans-serif;
+margin:0;
+width:100%;
+background:#f4f6f9;
+color:#1e293b;
+overflow-x:hidden;
 }
 
 /* ===== EN-TÊTE IGN DAY ===== */
 header{
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    box-shadow:0 2px 10px #0003;
+background:#2c3e50;
+color:white;
+text-align:center;
+box-shadow:0 2px 10px #0003;
 }
 
 .brandbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    flex-wrap:wrap;
-    padding:12px 22px;
-    background:linear-gradient(120deg,#0f172a,#0f766e);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+flex-wrap:wrap;
+padding:12px 22px;
+background:linear-gradient(120deg,#0f172a,#0f766e);
 }
 
 .brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:19px;
+display:flex;
+align-items:center;
+gap:10px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+font-size:19px;
 }
 
 .brand-logo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:44px;
-    height:44px;
-    flex-shrink:0;
-    border-radius:12px;
-    background:#00b894;
-    font-size:19px;
+display:flex;
+align-items:center;
+justify-content:center;
+width:44px;
+height:44px;
+flex-shrink:0;
+border-radius:12px;
+background:#00b894;
+font-size:19px;
 }
 
 .site-menu{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
+gap:7px;
 }
 
 .site-menu>a{
-    display:block;
-    padding:10px 13px;
-    border-radius:6px;
-    color:white;
-    text-decoration:none;
-    font-size:14px;
+display:block;
+padding:10px 13px;
+border-radius:6px;
+color:white;
+text-decoration:none;
+font-size:14px;
 }
 
 .site-menu>a:hover{
-    background:#ffffff2b;
+background:#ffffff2b;
 }
 
 header h1{
-    padding:20px 10px;
-    margin:0;
-    font-size:35px;
-    overflow-wrap:break-word;
+padding:20px 10px;
+margin:0;
+font-size:35px;
+overflow-wrap:break-word;
 }
 
 header h1 p{
-    margin:10px 0;
-    line-height:1.5;
-    font-size:35px;
+margin:10px 0;
+line-height:1.5;
+font-size:35px;
 }
 
 /* ===== MENUS DÉROULANTS ===== */
 .dropdown{
-    position:relative;
-    display:inline-block;
+position:relative;
+display:inline-block;
 }
 
 .dropdown button{
-    padding:10px 14px;
-    background:transparent;
-    color:white;
-    border:none;
-    cursor:pointer;
-    font-size:14px;
-    border-radius:6px;
-    font-family:inherit;
+padding:10px 14px;
+background:transparent;
+color:white;
+border:none;
+cursor:pointer;
+font-size:14px;
+border-radius:6px;
+font-family:inherit;
 }
 
 .dropdown button:hover{
-    background:#ffffff2b;
+background:#ffffff2b;
 }
 
 .dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:230px;
-    max-width:calc(100vw - 20px);
-    max-height:70vh;
-    overflow-y:auto;
-    overflow-x:hidden;
-    background:white;
-    box-shadow:0 5px 15px #0003;
-    border-radius:6px;
-    z-index:1000;
-    padding:7px;
-    -webkit-overflow-scrolling:touch;
+display:none;
+position:absolute;
+top:100%;
+left:0;
+min-width:230px;
+max-width:calc(100vw - 20px);
+max-height:70vh;
+overflow-y:auto;
+overflow-x:hidden;
+background:white;
+box-shadow:0 5px 15px #0003;
+border-radius:6px;
+z-index:1000;
+padding:7px;
+-webkit-overflow-scrolling:touch;
 }
 
 .dropdown-content a{
-    display:block;
-    padding:11px 14px;
-    color:#1e293b;
-    text-decoration:none;
-    text-align:left;
-    font-size:14px;
-    line-height:1.5;
-    border-radius:5px;
-    overflow-wrap:break-word;
+display:block;
+padding:11px 14px;
+color:#1e293b;
+text-decoration:none;
+text-align:left;
+font-size:14px;
+line-height:1.5;
+border-radius:5px;
+overflow-wrap:break-word;
 }
 
 .dropdown-content a:hover{
-    background:#0f766e;
-    color:white;
+background:#0f766e;
+color:white;
 }
 
 /* ===== NAVIGATION ===== */
 nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:5px;
+background:#34495e;
+padding:10px;
+text-align:center;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
+gap:5px;
 }
 
 nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:0;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    font-family:inherit;
-    transition:.3s;
-    touch-action:manipulation;
+margin:5px;
+padding:12px 18px;
+border:0;
+background:#00b894;
+color:white;
+cursor:pointer;
+border-radius:5px;
+font-size:15px;
+font-family:inherit;
+transition:.3s;
+touch-action:manipulation;
 }
 
 nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
+background:#019875;
+transform:translateY(-2px);
 }
 
 .btnActive{
-    background:#0984e3!important;
-    transform:scale(1.02);
-    box-shadow:0 3px 10px #0003;
+background:#0984e3!important;
+transform:scale(1.02);
+box-shadow:0 3px 10px #0003;
 }
 
 /* ===== SECTIONS ===== */
 section{
-    display:none;
-    padding:30px;
-    margin:20px;
-    min-width:0;
+display:none;
+padding:30px;
+margin:20px;
+min-width:0;
 }
 
 section.active{
-    display:block;
+display:block;
 }
 
 .animationSection{
-    animation:apparition .5s ease;
-    background:white;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px #0002;
+animation:apparition .5s ease;
+background:white;
+border-left:8px solid #00b894;
+border-radius:12px;
+box-shadow:0 5px 15px #0002;
 }
 
 @keyframes apparition{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 /* ===== CONTENU ===== */
 h2{
-    color:#2c3e50;
-    line-height:1.4;
-    overflow-wrap:break-word;
+color:#2c3e50;
+line-height:1.4;
+overflow-wrap:break-word;
 }
 
 h3{
-    color:#00b894;
-    line-height:1.4;
+color:#00b894;
+line-height:1.4;
 }
 
 p,li{
-    line-height:1.7;
-    overflow-wrap:break-word;
+line-height:1.7;
+overflow-wrap:break-word;
 }
 
 ul,ol{
-    padding-left:25px;
+padding-left:25px;
 }
 
 /* ===== TABLEAUX ===== */
 table{
-    width:100%;
-    max-width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
-    background:white;
-    margin:20px 0 30px;
-    box-shadow:0 2px 10px #00000014;
+width:100%;
+max-width:100%;
+border-collapse:collapse;
+table-layout:fixed;
+background:white;
+margin:20px 0 30px;
+box-shadow:0 2px 10px #00000014;
 }
 
 td,th{
-    border:1px solid #ccc;
-    padding:10px;
-    vertical-align:middle;
-    overflow-wrap:anywhere;
-    word-break:normal;
-    white-space:normal;
+border:1px solid #ccc;
+padding:10px;
+vertical-align:middle;
+overflow-wrap:anywhere;
+word-break:normal;
+white-space:normal;
 }
 
 th{
-    background:#dfe6e9;
-    text-align:center;
+background:#dfe6e9;
+text-align:center;
 }
 
 tbody tr:hover td{
-    background:#f1f7ff;
-    transition:.2s;
+background:#f1f7ff;
+transition:.2s;
 }
 
 /* ===== TABLEAUX DES FACTURES ===== */
 .facture-table{
-    border:2px solid #34495e;
+border:2px solid #34495e;
 }
 
 .facture-table .titre{
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    color:#0f766e;
-    background:#e8fff7;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+color:#0f766e;
+background:#e8fff7;
 }
 
 .facture-table .header td{
-    background:#dfe6e9;
-    font-weight:bold;
+background:#dfe6e9;
+font-weight:bold;
 }
 
 .facture-table .right{
-    text-align:right;
-    font-variant-numeric:tabular-nums;
+text-align:right;
+font-variant-numeric:tabular-nums;
 }
 
 .facture-table .bold{
-    font-weight:bold;
+font-weight:bold;
 }
 
 /* ===== TABLEAUX JOURNAL ===== */
 .journal-table{
-    border:2px solid #34495e;
+width:100%;
+max-width:100%;
+table-layout:fixed;
+border:2px solid #34495e;
 }
 
+/* Largeurs des 6 colonnes */
+.journal-table col.code{width:12%}
+.journal-table col.code2{width:12%}
+.journal-table col.libelle{width:23%}
+.journal-table col.libelle2{width:23%}
+.journal-table col.montant{width:20%}
+.journal-table col.montant2{width:20%}
+
 .date{
-    text-align:center;
-    background:#2c3e50!important;
-    color:white!important;
-    font-weight:bold;
+text-align:center;
+background:#2c3e50!important;
+color:white!important;
+font-weight:bold;
 }
 
 .debit{
-    background:#eaf4ff;
-    color:#0b3d91;
-    font-weight:bold;
+background:#eaf4ff;
+color:#0b3d91;
+font-weight:bold;
 }
 
 .credit{
-    background:#fff4e6;
-    color:#b35400;
-    font-weight:bold;
+background:#fff4e6;
+color:#b35400;
+font-weight:bold;
 }
 
 .montant{
-    text-align:right;
-    background:#f8f9fa;
-    font-weight:bold;
-    font-variant-numeric:tabular-nums;
+text-align:right;
+background:#f8f9fa;
+font-weight:bold;
+font-variant-numeric:tabular-nums;
 }
 
 .center{text-align:center}
@@ -331,316 +341,317 @@ tbody tr:hover td{
 
 /* ===== ENCADRÉS ===== */
 .highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-    overflow-wrap:break-word;
+background:#e8fff7;
+border-left:6px solid #00b894;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+overflow-wrap:break-word;
 }
 
 .note{
-    background:#f1f7ff;
-    border-left:6px solid #0984e3;
-    padding:15px;
-    margin:15px 0;
-    border-radius:8px;
+background:#f1f7ff;
+border-left:6px solid #0984e3;
+padding:15px;
+margin:15px 0;
+border-radius:8px;
 }
 
 /* ===== SOLUTION ===== */
 #SOL h2{
-    text-align:center;
-    background:#1e3a5f;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-top:30px;
+text-align:center;
+background:#1e3a5f;
+color:white;
+padding:12px;
+border-radius:8px;
+margin-top:30px;
 }
 
 #SOL h3{
-    color:#0f766e;
-    border-bottom:2px solid #00b894;
-    padding-bottom:8px;
-    margin-top:30px;
+color:#0f766e;
+border-bottom:2px solid #00b894;
+padding-bottom:8px;
+margin-top:30px;
 }
 
 #SOL .titre{
-    color:#0f766e;
+color:#0f766e;
 }
 
 /* ===== PIED DE PAGE ===== */
 footer{
-    text-align:center;
-    padding:15px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-    line-height:1.6;
+text-align:center;
+padding:15px;
+background:#2c3e50;
+color:white;
+margin-top:20px;
+line-height:1.6;
 }
 
 footer a{
-    color:#00ffcc;
-    text-decoration:none;
+color:#00ffcc;
+text-decoration:none;
 }
 
 footer a:hover{
-    text-decoration:underline;
+text-decoration:underline;
 }
 
 /* ===== TABLETTES ===== */
 @media(max-width:900px){
 
-    .brandbar{
-        justify-content:center;
-        gap:12px;
-    }
+.brandbar{
+justify-content:center;
+gap:12px;
+}
 
-    .site-menu{
-        width:100%;
-        justify-content:center;
-    }
+.site-menu{
+width:100%;
+justify-content:center;
+}
 
-    header h1{font-size:23px}
+header h1{font-size:23px}
 
-    section{
-        padding:24px;
-        margin:15px;
-    }
+section{
+padding:24px;
+margin:15px;
+}
 }
 
 /* ===== ÉCRANS DE 760 PX ===== */
 @media(max-width:760px){
 
-    .brandbar{
-        justify-content:center;
-        padding:12px;
-    }
+.brandbar{
+justify-content:center;
+padding:12px;
+}
 
-    .site-menu{width:100%}
+.site-menu{width:100%}
 
-    .site-menu>a{padding:9px}
+.site-menu>a{padding:9px}
 
-    section{
-        padding:18px;
-        margin:12px;
-    }
+section{
+padding:18px;
+margin:12px;
+}
 
-    nav button{
-        padding:10px;
-        font-size:14px;
-    }
+nav button{
+padding:10px;
+font-size:14px;
+}
 
-    header h1{font-size:21px}
+header h1{font-size:21px}
 
-    header h1 p{font-size:16px}
+header h1 p{font-size:16px}
 }
 
 /* ===== TÉLÉPHONES ===== */
 @media(max-width:600px){
 
-    body{font-size:15px}
+body{font-size:12px}
 
-    .brandbar{
-        flex-direction:column;
-        align-items:stretch;
-        gap:12px;
-        padding:12px 10px;
-    }
+.brandbar{
+flex-direction:column;
+align-items:stretch;
+gap:12px;
+padding:12px 10px;
+}
 
-    .brand{
-        justify-content:center;
-        font-size:20px;
-    }
+.brand{
+justify-content:center;
+font-size:20px;
+}
 
-    .brand-logo{
-        width:40px;
-        height:40px;
-    }
+.brand-logo{
+width:40px;
+height:40px;
+}
 
-    .site-menu{
-        width:100%;
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
-        gap:5px;
-    }
+.site-menu{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:stretch;
+gap:5px;
+}
 
-    .site-menu>a{
-        width:100%;
-        text-align:center;
-        padding:11px 8px;
-        background:#ffffff12;
-        font-size:14px;
-    }
+.site-menu>a{
+width:100%;
+text-align:center;
+padding:11px 8px;
+background:#ffffff12;
+font-size:12px;
+}
 
-    .dropdown{
-        display:block;
-        width:100%;
-    }
+.dropdown{
+display:block;
+width:100%;
+}
 
-    .dropdown button{
-        display:block;
-        width:100%;
-        padding:12px 8px;
-        text-align:center;
-        background:#ffffff12;
-        font-size:14px;
-        line-height:1.5;
-    }
+.dropdown button{
+display:block;
+width:100%;
+padding:12px 8px;
+text-align:center;
+background:#ffffff12;
+font-size:12px;
+line-height:1.5;
+}
 
-    .dropdown-content{
-        position:static;
-        width:100%;
-        min-width:0;
-        max-width:100%;
-        max-height:45vh;
-        margin-top:4px;
-        border-radius:6px;
-        box-shadow:inset 0 0 0 1px #e2e8f0;
-    }
+.dropdown-content{
+position:static;
+width:100%;
+min-width:0;
+max-width:100%;
+max-height:45vh;
+margin-top:4px;
+border-radius:6px;
+box-shadow:inset 0 0 0 1px #e2e8f0;
+}
 
-    .dropdown-content a{
-        padding:12px 10px;
-        font-size:14px;
-    }
+.dropdown-content a{
+padding:12px 10px;
+font-size:12px;
+}
 
-    header h1{
-        padding:15px 12px;
-        font-size:20px;
-    }
+header h1{
+padding:15px 12px;
+font-size:20px;
+}
 
-    header h1 p{
-        margin:8px 0;
-        font-size:15px;
-        line-height:1.6;
-    }
+header h1 p{
+margin:8px 0;
+font-size:12px;
+line-height:1.6;
+}
 
-    nav{
-        padding:10px 8px;
-        gap:5px;
-    }
+nav{
+padding:10px 8px;
+gap:5px;
+}
 
-    nav button{
-        flex:1 1 calc(50% - 10px);
-        min-width:0;
-        margin:3px;
-        padding:12px 8px;
-        font-size:14px;
-        transform:none;
-    }
+nav button{
+flex:1 1 calc(50% - 10px);
+min-width:0;
+margin:3px;
+padding:12px 8px;
+font-size:12px;
+transform:none;
+}
 
-    .btnActive{transform:none}
+.btnActive{transform:none}
 
-    section{
-        padding:16px 13px;
-        margin:10px;
-        border-radius:9px;
-    }
+section{
+padding:16px 13px;
+margin:10px;
+border-radius:9px;
+}
 
-    .animationSection{border-left-width:5px}
+.animationSection{border-left-width:5px}
 
-    h2{font-size:20px}
-    h3{font-size:17px}
+h2{font-size:12px}
 
-    p,li{
-        font-size:15px;
-        line-height:1.7;
-    }
+h3{font-size:12px}
 
-    ul,ol{padding-left:21px}
+p,li{
+font-size:12px;
+line-height:1.7;
+}
 
-    .highlight,.note{
-        padding:12px;
-        font-size:14px;
-    }
+ul,ol{padding-left:21px}
 
-    table{
-        width:100%;
-        max-width:100%;
-        min-width:0;
-        table-layout:fixed;
-        font-size:12px;
-    }
+.highlight,.note,.info{
+padding:12px;
+font-size:12px;
+}
 
-    td,th{
-        padding:6px 3px;
-        overflow-wrap:anywhere;
-        white-space:normal;
-        line-height:1.4;
-    }
+table{
+width:100%;
+max-width:100%;
+min-width:0;
+table-layout:fixed;
+font-size:10px;
+}
 
-    .facture-table .titre{font-size:16px}
+td,th{
+padding:6px 3px;
+overflow-wrap:anywhere;
+white-space:normal;
+line-height:1.4;
+}
 
-    .journal-table{font-size:11px}
+.journal-table{
+font-size:10px;
+}
 
-    .journal-table td{
-        padding:6px 3px;
-    }
+.journal-table td{
+padding:6px 3px;
+}
 
-    footer{
-        padding:14px 10px;
-        font-size:14px;
-    }
+footer{
+padding:14px 10px;
+font-size:10px;
+}
 }
 
 /* ===== TRÈS PETITS TÉLÉPHONES ===== */
 @media(max-width:360px){
 
-    body{font-size:14px}
+body{font-size:12px}
 
-    header h1{
-        font-size:18px;
-        padding:12px 8px;
-    }
+header h1{
+font-size:12px;
+padding:12px 8px;
+}
 
-    header h1 p{font-size:13px}
+header h1 p{font-size:12px}
 
-    .brand{font-size:18px}
+.brand{font-size:12px}
 
-    .site-menu>a,
-    .dropdown button{
-        font-size:13px;
-        padding:11px 6px;
-    }
+.site-menu>a,
+.dropdown button{
+font-size:12px;
+padding:11px 6px;
+}
 
-    nav{
-        padding:8px 5px;
-    }
+nav{
+padding:8px 5px;
+}
 
-    nav button{
-        flex-basis:100%;
-        width:100%;
-        margin:3px 0;
-        font-size:14px;
-    }
+nav button{
+flex-basis:100%;
+width:100%;
+margin:3px 0;
+font-size:12px;
+}
 
-    section{
-        margin:7px;
-        padding:13px 10px;
-    }
+section{
+margin:7px;
+padding:13px 10px;
+}
 
-    h2{font-size:18px}
-    h3{font-size:16px}
+h2{font-size:12px}
 
-    table{font-size:10px}
+h3{font-size:12px}
 
-    td,th{padding:5px 2px}
+table{font-size:8px}
 
-    .facture-table .titre{font-size:14px}
+td,th{padding:5px 2px}
 
-    .journal-table{font-size:9px}
+.journal-table{font-size:8px}
 }
 
 /* ===== ACCESSIBILITÉ ===== */
 @media(prefers-reduced-motion:reduce){
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-        scroll-behavior:auto!important;
-        transition-duration:.01ms!important;
-    }
+
+*,
+*::before,
+*::after{
+animation-duration:.01ms!important;
+animation-iteration-count:1!important;
+scroll-behavior:auto!important;
+transition-duration:.01ms!important;
+}
 }
 </style>
 </head>
@@ -662,9 +673,11 @@ footer a:hover{
 <a href="index.html">Accueil</a>
 
 <div class="dropdown">
+
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 Modules ▼
 </button>
+
 <div class="dropdown-content">
 <a href="M1.html">M1 – Comptabilité générale</a>
 <a href="M2.html">M2 – Comptabilité analytique</a>
@@ -676,34 +689,43 @@ Modules ▼
 <a href="M8.html">M8 – Comptabilité approfondie</a>
 <a href="M9.html">M9 – Management</a>
 </div>
+
 </div>
 
 <div class="dropdown">
+
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 M1 - Comptabilité générale ▼
 </button>
+
 <div class="dropdown-content">
 <a href="P1M1.html">P1 – Concepts de base</a>
 <a href="P2M1.html">P2 – Opérations courantes</a>
 <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
 </div>
+
 </div>
 
 <div class="dropdown">
+
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 P2 – Opérations courantes ▼
 </button>
+
 <div class="dropdown-content">
 <a href="C1P2M1.html">T - Résumés des thèmes</a>
 <a href="C2P2M1.html">F - Formulaires interactifs</a>
 <a href="C3P2M1.html">E - Exercices corrigés</a>
 </div>
+
 </div>
 
 <div class="dropdown">
+
 <button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
 E - Exercices corrigés ▼
 </button>
+
 <div class="dropdown-content">
 <a href="E1C3P2M1.html">E1 – Enregistrement des achats</a>
 <a href="E2C3P2M1.html">E2 – Enregistrement des ventes</a>
@@ -712,6 +734,7 @@ E - Exercices corrigés ▼
 <a href="E5C3P2M1.html">E5 – Enregistrement de l’acquisition des immobilisations</a>
 <a href="E6C3P2M1.html">E6 – Enregistrement des règlements financiers</a>
 </div>
+
 </div>
 
 <a href="C3P2M1.html">⬅ Retour</a>
@@ -721,7 +744,7 @@ E - Exercices corrigés ▼
 
 <h1>
 <p>M1 - Comptabilité générale &gt; P2 - Opérations courantes &gt;&gt; E - Exercices corrigés</p>
-<p>E2 - Enregistrement des ventes </p>
+<p>E2 - Les opérations de vente</p>
 </h1>
 
 </header>
@@ -744,7 +767,6 @@ Solution
 <!-- ================================================== -->
 
 <section id="EXE" class="active animationSection">
-
 
 <div class="note">
 <strong>La société EXCELLENCE SARL</strong> a réalisé les opérations suivantes durant le mois de décembre 2025.
@@ -883,22 +905,26 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 
 <section id="SOL">
 
-
 <h3>1- Les factures Doit</h3>
 
 <!-- FACTURE 10521 -->
 <table class="facture-table">
+
 <tr><td colspan="3" class="titre">Facture DOIT N°10521</td></tr>
+
 <tr>
 <td class="bold">Société EXCELLENCE</td>
 <td class="center">DOIT</td>
 <td class="bold right">Société ATLAS DISTRIBUTION</td>
 </tr>
+
 <tr><td colspan="3" class="bold">Casablanca le 04/12/2025</td></tr>
+
 <tr class="header">
 <td colspan="2" class="bold">Éléments</td>
 <td class="bold center">Montant</td>
 </tr>
+
 <tr><td colspan="2">Montant brut</td><td class="right">80.000,00</td></tr>
 <tr><td colspan="2">(-) Montant Remise (MB × 7 %)</td><td class="right">5.600,00</td></tr>
 <tr><td colspan="2">Net commercial (MB - RRR)</td><td class="right">74.400,00</td></tr>
@@ -909,18 +935,21 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <tr><td colspan="2">TVA sur transport (1.800 × 20 %)</td><td class="right">360,00</td></tr>
 <tr><td colspan="2">Frais d'emballages consignés</td><td class="right">5.000,00</td></tr>
 <tr><td colspan="2" class="bold">Montant à payer TTC</td><td class="right bold">94.654,40</td></tr>
+
 </table>
 
 <!-- JOURNAL 10521 -->
 <table class="journal-table">
+
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
+
 <tr class="date"><td colspan="6">04/12/2025</td></tr>
 
 <tr>
@@ -928,52 +957,65 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <td class="debit">Banques</td><td></td>
 <td class="montant">18.930,88</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">3421</td><td></td>
 <td class="debit">Clients</td><td></td>
 <td class="montant">75.723,52</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">6386</td><td></td>
 <td class="debit">Escomptes accordés</td><td></td>
 <td class="montant">1.488,00</td><td></td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">7111</td>
 <td></td><td class="credit">Ventes de marchandises</td>
 <td></td><td class="montant">74.400,00</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">7127</td>
 <td></td><td class="credit">Ventes de produits accessoires</td>
 <td></td><td class="montant">1.800,00</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">4455</td>
 <td></td><td class="credit">État, TVA facturée</td>
 <td></td><td class="montant">14.942,40</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">4425</td>
 <td></td><td class="credit">Clients - dettes pour emballages et MC</td>
 <td></td><td class="montant">5.000,00</td>
 </tr>
+
 <tr class="date"><td colspan="6">Facture Doit N°10521</td></tr>
+
 </table>
 
 <!-- FACTURE 10538 -->
 <table class="facture-table">
+
 <tr><td colspan="3" class="titre">Facture DOIT N°10538</td></tr>
+
 <tr>
 <td class="bold">Société EXCELLENCE</td>
 <td class="center">DOIT</td>
 <td class="bold right">Société INDUSTRIE MODERNE</td>
 </tr>
+
 <tr><td colspan="3" class="bold">Casablanca le 10/12/2025</td></tr>
+
 <tr class="header">
 <td colspan="2" class="bold">Éléments</td>
 <td class="bold center">Montant</td>
 </tr>
+
 <tr><td colspan="2">Montant brut</td><td class="right">120.000,00</td></tr>
 <tr><td colspan="2">(-) Montant Rabais (MB × 5 %)</td><td class="right">6.000,00</td></tr>
 <tr><td colspan="2">Net commercial (MB - RRR)</td><td class="right">114.000,00</td></tr>
@@ -983,18 +1025,21 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <tr><td colspan="2">Frais de transport HT</td><td class="right">2.500,00</td></tr>
 <tr><td colspan="2">TVA sur transport (2.500 × 10 %)</td><td class="right">250,00</td></tr>
 <tr><td colspan="2" class="bold">Montant à payer TTC</td><td class="right bold">138.182,00</td></tr>
+
 </table>
 
 <!-- JOURNAL 10538 -->
 <table class="journal-table">
+
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
+
 <tr class="date"><td colspan="6">10/12/2025</td></tr>
 
 <tr>
@@ -1002,52 +1047,65 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <td class="debit">Caisses</td><td></td>
 <td class="montant">69.091,00</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">3421</td><td></td>
 <td class="debit">Clients</td><td></td>
 <td class="montant">69.091,00</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">6386</td><td></td>
 <td class="debit">Escomptes accordés</td><td></td>
 <td class="montant">1.140,00</td><td></td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">7121</td>
 <td></td><td class="credit">Ventes de biens produits</td>
 <td></td><td class="montant">114.000,00</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">4455</td>
 <td></td><td class="credit">État, TVA facturée</td>
 <td></td><td class="montant">22.572,00</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">6142</td>
 <td></td><td class="credit">Transport</td>
 <td></td><td class="montant">2.500,00</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">3455</td>
 <td></td><td class="credit">État - TVA récupérable</td>
 <td></td><td class="montant">250,00</td>
 </tr>
+
 <tr class="date"><td colspan="6">Facture Doit N°10538</td></tr>
+
 </table>
 
 <!-- FACTURE 10572 -->
 <table class="facture-table">
+
 <tr><td colspan="3" class="titre">Facture DOIT N°10572</td></tr>
+
 <tr>
 <td class="bold">Société EXCELLENCE</td>
 <td class="center">DOIT</td>
 <td class="bold right">Société TECHNOLOGIE PLUS</td>
 </tr>
+
 <tr><td colspan="3" class="bold">Casablanca le 17/12/2025</td></tr>
+
 <tr class="header">
 <td colspan="2" class="bold">Éléments</td>
 <td class="bold center">Montant</td>
 </tr>
+
 <tr><td colspan="2">Montant brut</td><td class="right">35.000,00</td></tr>
 <tr><td colspan="2">(-) Montant Ristourne (MB × 4 %)</td><td class="right">1.400,00</td></tr>
 <tr><td colspan="2">Net commercial (MB - RRR)</td><td class="right">33.600,00</td></tr>
@@ -1055,18 +1113,21 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <tr><td colspan="2">Net financier HT</td><td class="right">33.600,00</td></tr>
 <tr><td colspan="2">TVA sur prestation de services (NF × 20 %)</td><td class="right">6.720,00</td></tr>
 <tr><td colspan="2" class="bold">Montant à payer TTC</td><td class="right bold">40.320,00</td></tr>
+
 </table>
 
 <!-- JOURNAL 10572 -->
 <table class="journal-table">
+
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
+
 <tr class="date"><td colspan="6">17/12/2025</td></tr>
 
 <tr>
@@ -1074,34 +1135,43 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <td class="debit">Clients</td><td></td>
 <td class="montant">40.320,00</td><td></td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">7124</td>
 <td></td><td class="credit">Ventes de services produits</td>
 <td></td><td class="montant">33.600,00</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">4455</td>
 <td></td><td class="credit">État, TVA facturée</td>
 <td></td><td class="montant">6.720,00</td>
 </tr>
+
 <tr class="date"><td colspan="6">Facture Doit N°10572</td></tr>
+
 </table>
 
 <h3>2- Les factures Avoir</h3>
 
 <!-- AVOIR 421 -->
 <table class="facture-table">
+
 <tr><td colspan="3" class="titre">Facture AVOIR N°421</td></tr>
+
 <tr>
 <td class="bold">Société EXCELLENCE</td>
 <td class="center">AVOIR</td>
 <td class="bold right">Société ATLAS DISTRIBUTION</td>
 </tr>
+
 <tr><td colspan="3" class="bold">Casablanca le 22/12/2025</td></tr>
+
 <tr class="header">
 <td colspan="2" class="bold">Éléments</td>
 <td class="bold center">Montant</td>
 </tr>
+
 <tr><td colspan="2">Montant brut</td><td class="right">15.000,00</td></tr>
 <tr><td colspan="2">(-) Montant Remise (MB × 7 %)</td><td class="right">1.050,00</td></tr>
 <tr><td colspan="2">Net commercial (MB - RRR)</td><td class="right">13.950,00</td></tr>
@@ -1109,18 +1179,21 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <tr><td colspan="2">Net financier HT</td><td class="right">13.671,00</td></tr>
 <tr><td colspan="2">TVA sur marchandises (NF × 20 %)</td><td class="right">2.734,20</td></tr>
 <tr><td colspan="2" class="bold">Montant à déduire TTC</td><td class="right bold">16.405,20</td></tr>
+
 </table>
 
 <!-- JOURNAL AVOIR 421 -->
 <table class="journal-table">
+
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
+
 <tr class="date"><td colspan="6">22/12/2025</td></tr>
 
 <tr>
@@ -1128,52 +1201,65 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <td class="debit">Ventes de marchandises</td><td></td>
 <td class="montant">13.950,00</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">4455</td><td></td>
 <td class="debit">État, TVA facturée</td><td></td>
 <td class="montant">2.734,20</td><td></td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">3421</td>
 <td></td><td class="credit">Clients</td>
 <td></td><td class="montant">16.405,20</td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">6386</td>
 <td></td><td class="credit">Escomptes accordés</td>
 <td></td><td class="montant">279,00</td>
 </tr>
+
 <tr class="date"><td colspan="6">Facture Avoir N°421</td></tr>
+
 </table>
 
 <!-- AVOIR 436 -->
 <table class="facture-table">
+
 <tr><td colspan="3" class="titre">Facture AVOIR N°436</td></tr>
+
 <tr>
 <td class="bold">Société EXCELLENCE</td>
 <td class="center">AVOIR</td>
 <td class="bold right">Société INDUSTRIE MODERNE</td>
 </tr>
+
 <tr><td colspan="3" class="bold">Casablanca le 25/12/2025</td></tr>
+
 <tr class="header">
 <td colspan="2" class="bold">Éléments</td>
 <td class="bold center">Montant</td>
 </tr>
+
 <tr><td colspan="2">Montant Ristourne supplémentaire (114.000 × 3 %)</td><td class="right">3.420,00</td></tr>
 <tr><td colspan="2">TVA (3.420 × 20 %)</td><td class="right">684,00</td></tr>
 <tr><td colspan="2" class="bold">Montant à déduire TTC</td><td class="right bold">4.104,00</td></tr>
+
 </table>
 
 <!-- JOURNAL AVOIR 436 -->
 <table class="journal-table">
+
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
+
 <tr class="date"><td colspan="6">25/12/2025</td></tr>
 
 <tr>
@@ -1181,47 +1267,59 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <td class="debit">RRR accordées par l'entreprise</td><td></td>
 <td class="montant">3.420,00</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">4455</td><td></td>
 <td class="debit">État, TVA facturée</td><td></td>
 <td class="montant">684,00</td><td></td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">3421</td>
 <td></td><td class="credit">Clients</td>
 <td></td><td class="montant">4.104,00</td>
 </tr>
+
 <tr class="date"><td colspan="6">Facture Avoir N°436</td></tr>
+
 </table>
 
 <!-- AVOIR 452 -->
 <table class="facture-table">
+
 <tr><td colspan="3" class="titre">Facture AVOIR N°452</td></tr>
+
 <tr>
 <td class="bold">Société EXCELLENCE</td>
 <td class="center">AVOIR</td>
 <td class="bold right">Société TECHNOLOGIE PLUS</td>
 </tr>
+
 <tr><td colspan="3" class="bold">Casablanca le 29/12/2025</td></tr>
+
 <tr class="header">
 <td colspan="2" class="bold">Éléments</td>
 <td class="bold center">Montant</td>
 </tr>
+
 <tr><td colspan="2">Montant Escompte (33.600 × 2 %)</td><td class="right">672,00</td></tr>
 <tr><td colspan="2">TVA (672 × 20 %)</td><td class="right">134,40</td></tr>
 <tr><td colspan="2" class="bold">Montant à déduire TTC</td><td class="right bold">806,40</td></tr>
+
 </table>
 
 <!-- JOURNAL AVOIR 452 -->
 <table class="journal-table">
+
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
+
 <tr class="date"><td colspan="6">29/12/2025</td></tr>
 
 <tr>
@@ -1229,17 +1327,21 @@ La société <strong>EXCELLENCE SARL</strong> lui accorde un escompte de règlem
 <td class="debit">Escomptes accordés</td><td></td>
 <td class="montant">672,00</td><td></td>
 </tr>
+
 <tr>
 <td class="debit center">4455</td><td></td>
 <td class="debit">État, TVA facturée</td><td></td>
 <td class="montant">134,40</td><td></td>
 </tr>
+
 <tr>
 <td></td><td class="credit center">3421</td>
 <td></td><td class="credit">Clients</td>
 <td></td><td class="montant">806,40</td>
 </tr>
+
 <tr class="date"><td colspan="6">Facture Avoir N°452</td></tr>
+
 </table>
 
 </section>
@@ -1254,68 +1356,68 @@ Formation en comptabilité générale
 /* ===== MENUS DÉROULANTS ===== */
 function toggleDropdown(button){
 
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
+const menu=button.nextElementSibling;
+const isOpen=button.getAttribute("aria-expanded")==="true";
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
+const otherButton=dropdown.querySelector("button");
+const otherMenu=dropdown.querySelector(".dropdown-content");
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
+if(otherButton && otherMenu && otherButton!==button){
+otherButton.setAttribute("aria-expanded","false");
+otherMenu.style.display="none";
+}
 
-    });
+});
 
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
+button.setAttribute("aria-expanded",String(!isOpen));
+menu.style.display=isOpen?"none":"block";
 }
 
 /* ===== FERMER LES MENUS À L'EXTÉRIEUR ===== */
 document.addEventListener("click",function(event){
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+document.querySelectorAll(".dropdown").forEach(dropdown=>{
 
-        if(!dropdown.contains(event.target)){
+if(!dropdown.contains(event.target)){
 
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
+const button=dropdown.querySelector("button");
+const menu=dropdown.querySelector(".dropdown-content");
 
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
+if(button && menu){
+button.setAttribute("aria-expanded","false");
+menu.style.display="none";
+}
 
-        }
+}
 
-    });
+});
 
 });
 
 /* ===== NAVIGATION ENTRE LES RUBRIQUES ===== */
 function showSection(id,button){
 
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
+document.querySelectorAll("body > section").forEach(section=>{
+section.classList.remove("active","animationSection");
+});
 
-    const current=document.getElementById(id);
+const current=document.getElementById(id);
 
-    if(current){
-        current.classList.add("active","animationSection");
-    }
+if(current){
+current.classList.add("active","animationSection");
+}
 
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
-    });
+document.querySelectorAll("nav button").forEach(btn=>{
+btn.classList.remove("btnActive");
+});
 
-    if(button){
-        button.classList.add("btnActive");
-    }
+if(button){
+button.classList.add("btnActive");
+}
 
-    window.scrollTo({top:0,behavior:"smooth"});
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
 </script>
