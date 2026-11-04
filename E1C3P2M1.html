@@ -297,8 +297,19 @@ tbody tr:hover td{
 
 /* ===== TABLEAUX JOURNAL ===== */
 .journal-table{
+    width:100%;
+    max-width:100%;
+    table-layout:fixed;
     border:2px solid #34495e;
 }
+
+/* Largeurs des 6 colonnes */
+.journal-table col.code{width:12%}
+.journal-table col.code2{width:12%}
+.journal-table col.libelle{width:23%}
+.journal-table col.libelle2{width:23%}
+.journal-table col.montant{width:20%}
+.journal-table col.montant2{width:20%}
 
 .date{
     text-align:center;
@@ -577,7 +588,7 @@ footer a:hover{
     .journal-table td{
         padding:6px 3px;
     }
-
+    
     footer{
         padding:14px 10px;
         font-size:14px;
@@ -706,14 +717,12 @@ P2 – Opérations courantes ▼
 E - Exercices corrigés ▼
 </button>
 <div class="dropdown-content">
-<a href="E1C3P2M1.html">E1 – Enregistrement des achats </a>
-<a href="E2C3P2M1.html">E2 – Enregistrement des ventes </a>
-<a href="E3C3P2M1.html">E3 – Enregistrement des autres charges </a>
-<a href="E4C3P2M1.html">E4 – Enregistrement des autres produits </a>
-<a href="E5C3P2M1.html">E5 – Enregistrement de l’acquisition des immobilisations </a>
-<a href="E6C3P2M1.html">E6 – Enregistrement des règlements financiers </a>
-
-
+<a href="E1C3P2M1.html">E1 – Enregistrement des achats</a>
+<a href="E2C3P2M1.html">E2 – Enregistrement des ventes</a>
+<a href="E3C3P2M1.html">E3 – Enregistrement des autres charges</a>
+<a href="E4C3P2M1.html">E4 – Enregistrement des autres produits</a>
+<a href="E5C3P2M1.html">E5 – Enregistrement de l’acquisition des immobilisations</a>
+<a href="E6C3P2M1.html">E6 – Enregistrement des règlements financiers</a>
 </div>
 </div>
 
@@ -724,22 +733,15 @@ E - Exercices corrigés ▼
 
 <h1>
 <p>M1 - Comptabilité générale &gt; P2 - Opérations courantes &gt;&gt; E - Exercices corrigés</p>
-<p>E1 - Enregistrement des achats </p>
+<p>E1 - Enregistrement des achats</p>
 </h1>
 
 </header>
 
 <!-- ===== NAVIGATION ===== -->
 <nav>
-
-<button class="btnActive" onclick="showSection('EXE',this)">
-Exercice
-</button>
-
-<button onclick="showSection('SOL',this)">
-Solution
-</button>
-
+<button class="btnActive" onclick="showSection('EXE',this)">Exercice</button>
+<button onclick="showSection('SOL',this)">Solution</button>
 </nav>
 
 <!-- ================================================== -->
@@ -747,7 +749,6 @@ Solution
 <!-- ================================================== -->
 
 <section id="EXE" class="active animationSection">
-
 
 <div class="note">
 <strong>La société HORIZON INDUSTRIE SARL</strong> a réalisé les opérations suivantes au cours du mois de novembre 2025.
@@ -887,7 +888,6 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 
 <section id="SOL">
 
-
 <h3>1- Les factures Doit</h3>
 
 <!-- FACTURE 7845 -->
@@ -917,12 +917,12 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 <!-- JOURNAL 7845 -->
 <table class="journal-table">
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
 <tr class="date"><td colspan="6">03/11/2025</td></tr>
@@ -986,12 +986,12 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 <!-- JOURNAL 5218 -->
 <table class="journal-table">
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
 <tr class="date"><td colspan="6">08/11/2025</td></tr>
@@ -1056,12 +1056,12 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 <!-- JOURNAL 9632 -->
 <table class="journal-table">
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
 <tr class="date"><td colspan="6">14/11/2025</td></tr>
@@ -1125,12 +1125,12 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 <!-- JOURNAL AVOIR 318 -->
 <table class="journal-table">
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
 <tr class="date"><td colspan="6">20/11/2025</td></tr>
@@ -1178,12 +1178,12 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 <!-- JOURNAL AVOIR 447 -->
 <table class="journal-table">
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
 <tr class="date"><td colspan="6">24/11/2025</td></tr>
@@ -1226,12 +1226,12 @@ Le fournisseur <strong>BUREAU SERVICE</strong> lui adresse la facture Avoir n° 
 <!-- JOURNAL AVOIR 172 -->
 <table class="journal-table">
 <colgroup>
-<col style="width:10%">
-<col style="width:10%">
-<col style="width:23%">
-<col style="width:23%">
-<col style="width:17%">
-<col style="width:17%">
+<col class="code">
+<col class="code2">
+<col class="libelle">
+<col class="libelle2">
+<col class="montant">
+<col class="montant2">
 </colgroup>
 
 <tr class="date"><td colspan="6">28/11/2025</td></tr>
@@ -1333,5 +1333,3 @@ function showSection(id,button){
 
 </body>
 </html>
-
-
