@@ -456,7 +456,7 @@ F – Formulaires interactifs ▼
 </tr>
 
 <tr class="section">
-<td colspan="4">Réductions Commerciales « RRR »(B)</td>
+<td colspan="4">(-) Réductions Commerciales « RRR »(B)</td>
 </tr>
 
 </tbody>
@@ -482,22 +482,22 @@ F – Formulaires interactifs ▼
 <tbody>
 
 <tr class="section">
-<td colspan="4">Net commercial (C = A - B)</td>
+<td colspan="4">Net commercial </td>
 </tr>
 
 <tr>
-<td>Net Commercial</td>
+<td>Net Commercial (C = A - B)</td>
 <td></td>
 <td><input type="text" id="netCommercial" readonly></td>
 <td></td>
 </tr>
 
 <tr class="section">
-<td colspan="4">Réduction financière (D)</td>
+<td colspan="4">(-) Réduction financière </td>
 </tr>
 
 <tr>
-<td>Montant Escompte</td>
+<td>Escompte (D)</td>
 <td>
 <input type="number" id="escompteT" oninput="calculer()" onblur="formatInputComptable(this)"> %
 </td>
@@ -506,22 +506,22 @@ F – Formulaires interactifs ▼
 </tr>
 
 <tr class="section">
-<td colspan="4">Net financier (C - D)</td>
+<td colspan="4">Net financier </td>
 </tr>
 
 <tr>
-<td>Net Financier</td>
+<td>Net Financier (E = C - D)</td>
 <td></td>
 <td><input type="text" id="netFinancier" readonly></td>
 <td></td>
 </tr>
 
 <tr class="section">
-<td colspan="4">(+) TVA (E)</td>
+<td colspan="4">(+) TVA / Ventes</td>
 </tr>
 
 <tr>
-<td>Montant TVA</td>
+<td>TVA / Ventes (F)</td>
 <td>
 <input type="number" id="tvaTaux" oninput="calculer()" onblur="formatInputComptable(this)"> %
 </td>
@@ -530,11 +530,11 @@ F – Formulaires interactifs ▼
 </tr>
 
 <tr class="section">
-<td colspan="4">Transport et TVA/Transport</td>
+<td colspan="4">(+) Transport et TVA/Transport</td>
 </tr>
 
 <tr>
-<td>Frais de transport</td>
+<td>Frais de transport (G)</td>
 <td></td>
 <td>
 <input type="number" id="transport" oninput="calculer()" onblur="formatInputComptable(this)">
@@ -543,7 +543,7 @@ F – Formulaires interactifs ▼
 </tr>
 
 <tr>
-<td>TVA sur transport</td>
+<td>TVA sur transport (H)</td>
 <td>
 <input type="number" id="tvaTransportTaux" oninput="calculer()" onblur="formatInputComptable(this)"> %
 </td>
@@ -552,7 +552,7 @@ F – Formulaires interactifs ▼
 </tr>
 
 <tr class="section">
-<td colspan="4">Autres Frais</td>
+<td colspan="4">(+) Autres Frais (I)</td>
 </tr>
 
 </tbody>
@@ -576,14 +576,14 @@ F – Formulaires interactifs ▼
 <tbody>
 
 <tr class="total">
-<td>Prix de Vente TTC</td>
+<td>Prix de Vente TTC (J = E + F + G + H + I)</td>
 <td></td>
 <td><input type="text" id="prixTTC" readonly></td>
 <td></td>
 </tr>
 
 <tr>
-<td>Acompte</td>
+<td>Acompte (K)</td>
 <td></td>
 <td>
 <input type="number" id="acompte" oninput="calculer()" onblur="formatInputComptable(this)">
@@ -592,7 +592,7 @@ F – Formulaires interactifs ▼
 </tr>
 
 <tr class="total">
-<td>Net à Payer</td>
+<td>Net à Payer (L = J – K)</td>
 <td></td>
 <td><input type="text" id="netAPayer" readonly></td>
 <td></td>
