@@ -1,438 +1,3727 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IgnDay Comptabilité Générale</title>
+
+<title>IgnDay - T2 Le bilan comptable</title>
 
 <style>
+
+
 *{box-sizing:border-box}
-body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
-header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 10px #0003}
-.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
-.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
-.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px}
-.brand small{display:block;font-size:10px;letter-spacing:1px;font-weight:normal;margin-top:4px}
-header h1{padding:20px 10px;margin:0}
-.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
-.site-menu>a,.site-menu summary{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;cursor:pointer;font-size:14px;list-style:none}
-.site-menu summary::-webkit-details-marker{display:none}
-.site-menu>a:hover,.site-menu summary:hover{background:#ffffff2b}
-.menu-dropdown{position:relative}
-.dropdown-content{position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;z-index:1000;padding:7px;border-radius:8px;background:white;box-shadow:0 6px 18px #0003}
-.dropdown-content a{display:block;padding:10px;color:#243447;text-decoration:none;border-radius:5px;font-size:14px}
-.dropdown-content a:hover{color:white;background:#0f766e}
 
-nav{background:#34495e;padding:10px;text-align:center}
-nav button,#quizForm button{margin:5px;padding:12px 18px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:15px;transition:.3s}
-nav button:hover,#quizForm button:hover{background:#019875;transform:translateY(-2px)}
-.btnActive{background:#0984e3!important;transform:scale(1.04);box-shadow:0 3px 10px #0003}
-section{display:none;padding:30px;margin:20px}
-section.active{display:block}
-.animationSection{animation:apparition .5s ease;background:white;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px #0002}
-@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-h2{color:#2c3e50}
-h3{color:#00b894}
-table{width:100%;border-collapse:collapse;background:white;margin-top:20px}
-td{border:1px solid #ccc;padding:10px}
-.titre{text-align:center;font-size:24px;font-weight:bold}
-.bold{font-weight:bold}
-.center{text-align:center}
-.right{text-align:right}
-.header{background:#dfe6e9}
-tr:hover td{background:#f1f7ff}
-.q{background:#f8fafc;padding:15px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
-.q p{font-weight:bold}
-#resultat{padding:10px 0}
-footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}
-footer a{color:#00ffcc;text-decoration:none}
-.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
 
-@media(max-width:760px){
-.brandbar{justify-content:center;padding:12px}
-.site-menu{width:100%}
-.site-menu>a,.site-menu summary{padding:9px}
-.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}
-section{padding:18px;margin:12px}
-nav button{padding:10px;font-size:14px}
+html,body{
+
+
+    width:100%;
+
+
+    max-width:100%;
+
+
+    overflow-x:hidden;
+
+
 }
+
+
+body{
+
+
+    font-family:Arial,sans-serif;
+
+
+    margin:0;
+
+
+    background:#f4f6f9;
+
+
+    color:#1e293b;
+
+
+    padding-bottom:40px;
+
+
+}
+
+
+/* EN-TÊTE */
+
+
+header{
+
+
+    background:#2c3e50;
+
+
+    color:white;
+
+
+    text-align:center;
+
+
+    box-shadow:0 2px 8px #0002;
+
+
+}
+
+
+.brandbar{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    gap:8px;
+
+
+    flex-wrap:wrap;
+
+
+    min-height:55px;
+
+
+    padding:10px 14px;
+
+
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+
+
+}
+
+
+.brand{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:7px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-weight:bold;
+
+
+    font-size:15px;
+
+
+}
+
+
+.brand-logo{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    width:30px;
+
+
+    height:30px;
+
+
+    border-radius:7px;
+
+
+    background:#00b894;
+
+
+    font-size:15px;
+
+
+}
+
+
+header h1{
+
+
+    padding:12px 8px;
+
+
+    margin:0;
+
+
+    font-size:70px;
+
+
+    line-height:1.4;
+
+
+}
+
+
+header h1 p{
+
+
+    margin:7px 0;
+
+
+    font-size:70px;
+
+
+    font-weight:bold;
+
+
+    line-height:1.4;
+
+
+}
+
+
+/* MENUS */
+
+
+.site-menu{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    flex-wrap:wrap;
+
+
+    gap:3px;
+
+
+}
+
+
+.site-menu>a{
+
+
+    display:block;
+
+
+    padding:5px 8px;
+
+
+    border-radius:5px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    cursor:pointer;
+
+
+    font-size:12px;
+
+
+}
+
+
+.site-menu>a:hover{background:#ffffff2b}
+
 
 .dropdown{
-position:relative;
-display:inline-block;
-}
-.dropdown button{
-padding:10px 14px;
-background:transparent;
-color:white;
-border:none;
-cursor:pointer;
-font-size:14px;
-}
-.dropdown-content{
-display:none;
-position:absolute;
-top:100%;
-left:0;
-min-width:230px;
-background:white;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-border-radius:6px;
-z-index:1000;
-}
-.dropdown-content a{
-display:block;
-padding:11px 14px;
-color:#1e293b;
-text-decoration:none;
-text-align:left;
-}
-.dropdown-content a:hover{
-background:#0f766e;
-color:white;
+
+
+    position:relative;
+
+
+    display:inline-block;
+
+
 }
 
-.container{
-background:white;
-padding:25px;
-border-left:6px solid #3498db;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-border-radius:8px;
+
+.dropdown button{
+
+
+    padding:5px 8px;
+
+
+    background:transparent;
+
+
+    color:white;
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    font-size:12px;
+
+
+    border-radius:5px;
+
+
 }
+
+
+.dropdown button:hover{background:#ffffff2b}
+
+
+.dropdown-content{
+
+
+    display:none;
+
+
+    position:fixed;
+
+
+    top:0;
+
+
+    left:0;
+
+
+    min-width:230px;
+
+
+    max-width:calc(100vw - 16px);
+
+
+    max-height:calc(100vh - 16px);
+
+
+    overflow-y:auto;
+
+
+    overflow-x:hidden;
+
+
+    overscroll-behavior:contain;
+
+
+    background:white;
+
+
+    box-shadow:0 8px 25px rgba(0,0,0,.28);
+
+
+    border-radius:7px;
+
+
+    z-index:99999;
+
+
+    padding:6px;
+
+
+}
+
+
+.dropdown-content a{
+
+
+    display:block;
+
+
+    padding:9px 12px;
+
+
+    color:#1e293b;
+
+
+    text-decoration:none;
+
+
+    text-align:left;
+
+
+    font-size:13px;
+
+
+    border-radius:5px;
+
+
+    line-height:1.4;
+
+
+    white-space:normal;
+
+
+}
+
+
+.dropdown-content a:hover{
+
+
+    background:#0f766e;
+
+
+    color:white;
+
+
+}
+
+
+/* NAVIGATION DES SECTIONS */
+
+
+nav{
+
+
+    background:#34495e;
+
+
+    padding:7px 10px;
+
+
+    display:flex;
+
+
+    flex-wrap:wrap;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:7px;
+
+
+    text-align:center;
+
+
+}
+
+
+nav button{
+
+
+    margin:0;
+
+
+    padding:10px 17px;
+
+
+    border:0;
+
+
+    background:#00b894;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    border-radius:5px;
+
+
+    font-size:19px;
+
+
+    font-weight:bold;
+
+
+    transition:.25s;
+
+
+    line-height:1.2;
+
+
+    white-space:nowrap;
+
+
+}
+
+
+nav button:hover{
+
+
+    background:#019875;
+
+
+    transform:translateY(-1px);
+
+
+}
+
+
+.btnActive{
+
+
+    background:#0984e3!important;
+
+
+    transform:scale(1.03);
+
+
+    box-shadow:0 2px 7px #0003;
+
+
+}
+
+
+/* MASQUER HEADER ET NAV EN SECTION */
+
+
+body.section-open>header,
+
+
+body.section-open>nav{
+
+
+    display:none!important;
+
+
+}
+
+
+/* SECTIONS */
+
+
+section{
+
+
+    display:none;
+
+
+    padding:25px;
+
+
+    margin:15px;
+
+
+}
+
+
+section.active{display:block}
+
+
+.animationSection{
+
+
+    animation:apparition .4s ease;
+
+
+    background:white;
+
+
+    border-left:6px solid #00b894;
+
+
+    border-radius:9px;
+
+
+    box-shadow:0 4px 12px #0002;
+
+
+}
+
+
+@keyframes apparition{
+
+
+    from{opacity:0}
+
+
+    to{opacity:1}
+
+
+}
+
+
+body.section-open>section.active{
+
+
+    margin:0;
+
+
+    padding:4px 25px 25px;
+
+
+}
+
+
+body.section-open>section.active>h2,
+
+
+body.section-open>section.active>.definition-title{
+
+
+    margin-top:0;
+
+
+}
+
+
+/* CONTENU */
+
+
+h2{
+
+
+    color:#2c3e50;
+
+
+    margin-top:0;
+
+
+}
+
+
+h3{color:#00b894}
+
+
+p,li{line-height:1.7}
+
+
+table{
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
+    background:white;
+
+
+    margin-top:18px;
+
+
+}
+
+
+td,th{
+
+
+    border:1px solid #ccc;
+
+
+    padding:9px;
+
+
+}
+
+
+th{
+
+
+    background:#dfe6e9;
+
+
+    text-align:center;
+
+
+}
+
+
+tr:hover td{background:#f1f7ff}
+
+
+.titre{
+
+
+    text-align:center;
+
+
+    font-size:23px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+.bold{font-weight:bold}
+
+
+.center{text-align:center}
+
+
+.right{text-align:right}
+
+
+.header{background:#dfe6e9}
+
+/* QCU */
+
+.q{
+
+    background:#f8fafc;
+
+    padding:13px;
+
+    margin:13px 0;
+
+    border-radius:7px;
+
+    border:1px solid #e2e8f0;
+
+}
+
+.q p{
+
+    font-weight:bold;
+
+    margin-top:0;
+
+}
+
+.q label{
+
+    display:inline-block;
+
+    margin:3px 0;
+
+    line-height:1.5;
+
+}
+
+.q input{cursor:pointer}
+
+#quizForm button{
+
+    margin:4px;
+
+    padding:8px 14px;
+
+    border:0;
+
+    background:#00b894;
+
+    color:white;
+
+    cursor:pointer;
+
+    border-radius:5px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+#quizForm button:hover{
+
+    background:#019875;
+
+    transform:translateY(-1px);
+
+}
+
+#resultat{
+
+    padding:8px 0;
+
+    color:#0f766e;
+
+    font-weight:bold;
+
+}
+
+/* MISE EN VALEUR */
+
+.highlight{
+
+    background:#e8fff7;
+
+    border-left:5px solid #00b894;
+
+    padding:13px;
+
+    margin-top:13px;
+
+    border-radius:7px;
+
+}
+
+.definition-title{
+
+background:linear-gradient(120deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    padding:12px 15px;
+
+    border-radius:7px;
+
+    text-align:center;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    margin:12px 0;
+
+}
+
+.definition-box{
+
+    background:#fffaf2;
+
+    border:2px solid #e6a23c;
+
+    border-radius:8px;
+
+    padding:15px;
+
+    margin:12px 0;
+
+    font-weight:bold;
+
+}
+
+/* BARRE DES DIAPOSITIVES */
+
+.slide-navigation{
+
+    display:none;
+
+    position:fixed;
+
+    bottom:32px;
+
+    left:0;
+
+    width:100%;
+
+    height:24px;
+
+    min-height:24px;
+
+    z-index:1999;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:5px;
+
+    padding:2px 8px;
+
+    background:#34495e;
+
+    color:white;
+
+    border-top:1px solid #1e293b;
+
+    font-size:10px;
+
+}
+
+.slide-navigation button{
+
+    border:0;
+
+    border-radius:3px;
+
+    padding:3px 8px;
+
+    background:#00b894;
+
+    color:white;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    line-height:1.2;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+}
+
+.slide-navigation button:hover:not(:disabled){background:#0984e3}
+
+.slide-navigation button:disabled{
+
+    opacity:.4;
+
+    cursor:not-allowed;
+
+}
+
+.slide-counter{
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    text-align:center;
+
+}
+
+/* CONTENU DES DIAPOSITIVES */
+
+.content-slide{
+
+    display:none;
+
+    width:100%;
+
+    min-height:100px;
+
+    padding:2px 0 8px;
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+    overscroll-behavior:contain;
+
+}
+
+.content-slide.active-slide{display:block}
+
+.slide-inner{
+
+    width:100%;
+
+    max-width:100%;
+
+    transform:none;
+
+    zoom:1!important;
+
+}
+
+/* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
+
+.slide-measure{
+
+    position:fixed!important;
+
+    left:-100000px!important;
+
+    top:0!important;
+
+    display:block!important;
+
+    width:1000px;
+
+    height:auto!important;
+
+    min-height:0!important;
+
+    max-height:none!important;
+
+    overflow:visible!important;
+
+    visibility:hidden!important;
+
+    pointer-events:none!important;
+
+    z-index:-1!important;
+
+}
+
+body.slides-mode{padding-bottom:58px}
+
+body.slides-mode>section.active{
+
+    display:block;
+
+    margin:0;
+
+    padding:4px 25px 8px;
+
+    border-radius:0;
+
+    box-shadow:none;
+
+    border-left:0;
+
+    min-height:calc(100vh - 58px);
+
+    animation:none;
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+}
+
+body.slides-mode .slide-navigation{display:flex}
+
+body.slides-mode .definition-title{
+
+    margin:3px 0 8px;
+
+    padding:8px 12px;
+
+    font-size:20px;
+
+}
+
+body.slides-mode h2{
+
+    margin-top:0;
+
+    margin-bottom:8px;
+
+}
+
+body.slides-mode h3{
+
+    margin-top:8px;
+
+    margin-bottom:6px;
+
+}
+
+body.slides-mode p,
+
+body.slides-mode li{
+
+    line-height:1.45;
+
+    margin-top:5px;
+
+    margin-bottom:5px;
+
+}
+
+body.slides-mode ul{
+
+    margin-top:5px;
+
+    margin-bottom:5px;
+
+}
+
+body.slides-mode .definition-box{
+
+    margin:6px 0;
+
+    padding:10px;
+
+}
+
+body.slides-mode .highlight{
+
+    margin:6px 0;
+
+    padding:9px;
+
+}
+
+body.slides-mode .q{
+
+    margin:5px 0;
+
+    padding:8px 10px;
+
+}
+
+body.slides-mode .q p{margin:0 0 4px}
+
+body.slides-mode .q label{
+
+    margin:1px 0;
+
+    line-height:1.35;
+
+}
+
+body.slides-mode #quizForm button{
+
+    margin:3px;
+
+    padding:6px 11px;
+
+}
+
+body.slides-mode #resultat{
+
+    margin:4px 0;
+
+    padding:4px 0;
+
+}
+
+body.slides-mode table{margin-top:8px}
+
+body.slides-mode td,
+
+body.slides-mode th{padding:6px 9px}
+
+/* PIED DE PAGE */
+
+footer{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:32px;
+
+    min-height:32px;
+
+    z-index:2000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:6px;
+
+    padding:4px 10px;
+
+    margin:0;
+
+    background:#2c3e50;
+
+    color:white;
+
+    border:1px solid #1e293b;
+
+    box-shadow:none;
+
+    font-size:11px;
+
+    line-height:1.2;
+
+}
+
+footer a{
+
+    color:#00ffcc;
+
+    text-decoration:none;
+
+}
+
+footer>span{white-space:nowrap}
+
+.footer-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:5px;
+
+    margin-left:auto;
+
+}
+
+.btnFooter{
+
+    display:none;
+
+    margin:0;
+
+    padding:4px 9px;
+
+    border:none;
+
+    border-radius:4px;
+
+    color:white;
+
+    font-size:11px;
+
+    line-height:1.2;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:.2s;
+
+}
+
+.btnPrecedent{background:#475569}
+
+.btnSuivant{background:#0f766e}
+
+.btnRetourMenu{background:#0984e3}
+
+.btnFooter.visible{display:block}
+
+.btnFooter:hover:not(:disabled){
+
+    background:#00b894;
+
+    transform:translateY(-1px);
+
+}
+
+.btnFooter:disabled{
+
+    background:#64748b;
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+/* RESPONSIVE */
 
 @media(max-width:760px){
-.container{padding:15px}
+
+    body{padding-bottom:42px}
+
+    .brandbar{
+
+        justify-content:center;
+
+        padding:4px 6px;
+
+        gap:5px;
+
+    }
+
+    .brand{font-size:14px}
+
+    .brand-logo{
+
+        width:27px;
+
+        height:27px;
+
+        font-size:13px;
+
+    }
+
+    .site-menu{
+
+        width:100%;
+
+        gap:2px;
+
+    }
+
+    .site-menu>a{
+
+        padding:5px 6px;
+
+        font-size:11px;
+
+    }
+
+    .dropdown button{
+
+        padding:5px 6px;
+
+        font-size:11px;
+
+    }
+
+    .dropdown-content{min-width:220px}
+
+    header h1{
+
+        padding:5px 6px;
+
+        line-height:1.3;
+
+    }
+
+    header h1 p{
+
+        font-size:16px;
+
+        line-height:1.3;
+
+        margin:3px 0;
+
+    }
+
+    section{
+
+        padding:16px;
+
+        margin:10px;
+
+    }
+
+    body.section-open>section.active{
+
+        margin:0;
+
+        padding:4px 15px 18px;
+
+    }
+
+    nav{
+
+        padding:6px 5px;
+
+        gap:5px;
+
+    }
+
+    nav button{
+
+        padding:6px 9px;
+
+        font-size:12px;
+
+    }
+
+    #quizForm button{
+
+        padding:7px 11px;
+
+        font-size:12px;
+
+    }
+
+    .definition-title{
+
+        font-size:18px;
+
+        padding:11px;
+
+    }
+
+    .definition-box{padding:12px}
+
+    td,th{
+
+        padding:7px;
+
+        font-size:12px;
+
+    }
+
+    .q{
+
+        padding:10px;
+
+        margin:10px 0;
+
+    }
+
+    .q label{font-size:13px}
+
+    footer{
+
+        height:32px;
+
+        min-height:32px;
+
+        flex-wrap:nowrap;
+
+        justify-content:space-between;
+
+        gap:3px;
+
+        padding:3px 5px;
+
+        font-size:9px;
+
+    }
+
+    footer>span{
+
+        width:auto;
+
+        text-align:left;
+
+        font-size:9px;
+
+    }
+
+    .footer-actions{
+
+        width:auto;
+
+        justify-content:flex-end;
+
+        gap:3px;
+
+        margin-left:auto;
+
+    }
+
+    .btnFooter{
+
+        padding:4px 6px;
+
+        font-size:9px;
+
+    }
+
+    .slide-navigation{
+
+        bottom:32px;
+
+        height:24px;
+
+        min-height:24px;
+
+        padding:2px 4px;
+
+        gap:3px;
+
+    }
+
+    .slide-navigation button{
+
+        font-size:9px;
+
+        padding:3px 5px;
+
+    }
+
+    .slide-counter{font-size:9px}
+
+    body.slides-mode>section.active{
+
+        padding:4px 15px 8px;
+
+        min-height:calc(100vh - 58px);
+
+    }
+
+    body.slides-mode .definition-title{
+
+        font-size:17px;
+
+        padding:8px;
+
+    }
+
 }
+
+
+@media(max-width:420px){
+
+    .definition-title{font-size:16px}
+
+    header h1 p{font-size:14px}
+
+    .brandbar{padding:3px 5px}
+
+    .site-menu>a,
+
+    .dropdown button{
+
+        font-size:10px;
+
+        padding:4px 5px;
+
+    }
+
+    section{
+
+        padding:12px;
+
+        margin:8px;
+
+    }
+
+    body.section-open>section.active{
+
+        margin:0;
+
+        padding:4px 12px 14px;
+
+    }
+
+    td,th{
+
+        font-size:11px;
+
+        padding:6px 3px;
+
+    }
+
+    .titre{font-size:18px}
+
+    nav button{
+
+        padding:6px 7px;
+
+        font-size:11px;
+
+    }
+
+    .q label{font-size:12px}
+
+    footer{
+
+        padding:3px 4px;
+
+        font-size:8px;
+
+    }
+
+    footer>span{font-size:8px}
+
+    .btnFooter{
+
+        font-size:8px;
+
+        padding:4px 5px;
+
+    }
+
+    .footer-actions{gap:2px}
+
+    .slide-navigation button{
+
+        font-size:8px;
+
+        padding:3px 4px;
+
+    }
+
+    .slide-counter{font-size:8px}
+
+}
+
+/* MODE DATASHOW */
+
+@media screen and (min-width:1200px) and (min-height:650px){
+
+    body{
+
+        font-size:18px;
+
+        line-height:1.6;
+
+        padding-bottom:40px;
+
+    }
+
+    .brandbar{padding:5px 18px}
+
+    .brand{font-size:17px}
+
+    .brand-logo{
+
+        width:32px;
+
+        height:32px;
+
+        font-size:15px;
+
+    }
+
+    header h1{padding:6px 8px}
+
+    header h1 p{font-size:21px}
+
+    .site-menu>a,
+
+    .dropdown button{
+
+        font-size:13px;
+
+        padding:6px 9px;
+
+    }
+
+    .dropdown-content{min-width:270px}
+
+    .dropdown-content a{
+
+        font-size:15px;
+
+        padding:11px 14px;
+
+    }
+
+    nav{
+
+        padding:8px 12px;
+
+        gap:9px;
+
+    }
+
+    nav button{
+
+        padding:9px 16px;
+
+        font-size:18px;
+
+        border-radius:6px;
+
+    }
+
+    #quizForm button{
+
+        padding:10px 16px;
+
+        font-size:15px;
+
+    }
+
+    section{
+
+        padding:30px 35px;
+
+        margin:18px 22px;
+
+    }
+
+    body.section-open>section.active{
+
+        margin:0;
+
+        padding:4px 35px 30px;
+
+    }
+
+    h2{
+
+        font-size:27px;
+
+        margin-bottom:18px;
+
+    }
+
+    h3{
+
+        font-size:21px;
+
+        margin-top:20px;
+
+    }
+
+    p,li{
+
+        font-size:18px;
+
+        line-height:1.7;
+
+    }
+
+    .definition-title{
+
+        font-size:23px;
+
+        padding:14px;
+
+    }
+
+    .definition-box{padding:17px}
+
+    td,th{
+
+        padding:14px 17px;
+
+        font-size:17px;
+
+        line-height:1.5;
+
+    }
+
+    .q{
+
+        padding:15px;
+
+        margin:15px 0;
+
+    }
+
+    .q label{font-size:17px}
+
+    footer{
+
+        height:32px;
+
+        min-height:32px;
+
+        font-size:11px;
+
+    }
+
+    .btnFooter{
+
+        padding:4px 9px;
+
+        font-size:11px;
+
+    }
+
+    body.slides-mode .definition-title{
+
+        font-size:21px;
+
+        padding:9px 12px;
+
+    }
+
+    body.slides-mode p,
+
+    body.slides-mode li{
+
+        font-size:18px;
+
+        line-height:1.45;
+
+    }
+
+}
+
+/* GRAND ÉCRAN */
+
+@media screen and (min-width:1600px){
+
+    body{
+
+        font-size:19px;
+
+        padding-bottom:40px;
+
+    }
+
+    header h1{padding:6px 8px}
+
+    header h1 p{font-size:22px}
+
+    section{
+
+        max-width:1750px;
+
+        margin:22px auto;
+
+        padding:35px 45px;
+
+    }
+
+    body.section-open>section.active{
+
+        margin:0 auto;
+
+        padding:4px 45px 35px;
+
+    }
+
+    h2{font-size:30px}
+
+    h3{font-size:24px}
+
+    p,li{font-size:20px}
+
+    td,th{
+
+        font-size:19px;
+
+        padding:17px 20px;
+
+    }
+
+    nav button{
+
+        font-size:19px;
+
+        padding:10px 18px;
+
+    }
+
+    #quizForm button{
+
+        font-size:16px;
+
+        padding:11px 17px;
+
+    }
+
+    .definition-title{
+
+        font-size:25px;
+
+        padding:15px;
+
+    }
+
+    footer{
+
+        height:32px;
+
+        min-height:32px;
+
+    }
+
+    body.slides-mode p,
+
+    body.slides-mode li{
+
+        font-size:19px;
+
+        line-height:1.45;
+
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
+
 <header>
-<div class="brandbar">
-<a class="brand" href="index.html">
-<span class="brand-logo">IF</span>
-<span>IgnDay</span>
-</a>
 
-<div class="site-menu">
-<a href="index.html">Accueil</a>
+    <div class="brandbar">
 
-<div class="dropdown" id="modulesDropdown">
-<button type="button" id="modulesButton" aria-expanded="false" onclick="toggleDropdown(this)">
-Modules ▼
-</button>
-<div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a>
-<a href="M2.html">M2 – Comptabilité analytique</a>
-<a href="M3.html">M3 – Analyse financière</a>
-<a href="M4.html">M4 – Fiscalité</a>
-<a href="M5.html">M5 – Mathématiques financières</a>
-<a href="M6.html">M6 – Statistiques</a>
-<a href="M7.html">M7 – Marketing</a>
-<a href="M8.html">M8 – Comptabilité approfondie</a>
-<a href="M9.html">M9 – Management</a>
-</div>
-</div>
+        <a class="brand" href="index.html">
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-M1 - Comptabilité Générale ▼
-</button>
-<div class="dropdown-content">
-<a href="P1M1.html">P1 – Concepts de base</a>
-<a href="P2M1.html">P2 – Opérations courantes</a>
-<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
-</div>
-</div>
+            <span class="brand-logo">IF</span>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-P1 – Concepts de base ▼
-</button>
-<div class="dropdown-content">
-<a href="C1P1M1.html">T - Résumés des thèmes</a>
-<a href="C2P1M1.html">F - Formulaires interactifs</a>
-<a href="C3P1M1.html">E - Exercices corrigés</a>
-</div>
-</div>
+            <span>IgnDay</span>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-T - Résumés des thèmes ▼
-</button>
-<div class="dropdown-content">
-<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
-<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
-<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
-<a href="T4C1P1M1.html">T4 - Notion de compte</a>
-<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
-<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
-<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
-<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
-<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
-<a href="T10C1P1M1.html">T10 - Le grand livre</a>
-<a href="T11C1P1M1.html">T11 - La balance</a>
-</div>
-</div>
+        </a>
 
-<a href="C1P1M1.html">⬅ Retour</a>
-</div>
+        <div class="site-menu">
 
-<script>
-function toggleDropdown(button){
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
+            <a href="index.html">Accueil</a>
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
-    });
+            <div class="dropdown">
 
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
-}
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
 
-document.addEventListener("click",function(event){
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        if(!dropdown.contains(event.target)){
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
+                    M1 - Comptabilité Générale ▼
 
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
-        }
-    });
-});
-</script>
-</div>
+                </button>
 
-<h1>
-<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
-<p>T2 - Le bilan comptable</p>
-</h1>
+                <div class="dropdown-content">
+
+                    <a href="P1M1.html">P1 – Concepts de base</a>
+
+                    <a href="P2M1.html">P2 – Opérations courantes</a>
+
+                    <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+
+                </div>
+
+            </div>
+
+            <div class="dropdown">
+
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+
+                    P1 – Concepts de base ▼
+
+                </button>
+
+                <div class="dropdown-content">
+
+                    <a href="C1P1M1.html">T - Résumés des thèmes</a>
+
+                    <a href="C2P1M1.html">F - Formulaires interactifs</a>
+
+                    <a href="C3P1M1.html">E - Exercices corrigés</a>
+
+                </div>
+
+            </div>
+
+            <div class="dropdown">
+
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+
+                    T - Résumés des thèmes ▼
+
+                </button>
+
+                <div class="dropdown-content">
+
+                    <a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+
+                    <a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+
+                    <a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+
+                    <a href="T4C1P1M1.html">T4 - Notion de compte</a>
+
+                    <a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+
+                    <a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+
+                    <a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+
+                    <a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+
+                    <a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+
+                    <a href="T10C1P1M1.html">T10 - Le grand livre</a>
+
+                    <a href="T11C1P1M1.html">T11 - La balance</a>
+
+                </div>
+
+            </div>
+
+            <a href="C1P1M1.html">⬅ Retour</a>
+
+        </div>
+
+    </div>
+
+    <h1>
+
+        <p>M1 - Comptabilité générale &gt; P1 - Concepts de base</p>
+
+        <p>Thème 2 - Le bilan comptable</p>
+
+    </h1>
+
 </header>
 
 <nav>
-<button class="btnActive" onclick="showSection('def',this)">Définition</button>
-<button onclick="showSection('comp',this)">Composantes</button>
-<button onclick="showSection('structure',this)">Structure</button>
-<button onclick="showSection('classes',this)">Classes</button>
-<button onclick="showSection('variation',this)">Variations</button>
-<button onclick="showSection('resultat',this)">Notion de résultat</button>
-<button onclick="showSection('EXE',this)">Exemple simplifié</button>
-<button onclick="showSection('EE',this)">Exercice d’évaluation</button>
+
+    <button type="button" onclick="showSection('def',this)">1- Définition et Composantes du bilan</button>
+
+
+    <button type="button" onclick="showSection('structure',this)">2- Structure et classes du bilan</button>
+
+
+    <button type="button" onclick="showSection('variation',this)">3- Variations du bilan et Notion de résultat </button>
+
+        <button type="button" onclick="showSection('EE',this)">QCU d’évaluation</button>
+
 </nav>
 
 <section id="def" class="active animationSection">
-<h2>📘 Définition du bilan</h2>
+
+<h2 class="definition-title">1- Définition et composantes du bilan</h2>
+
+
+<h2>A- Définition du bilan</h2>
+
+<div class="definition-box">
+
 
 <p>
+
 Le bilan est un document comptable que chaque entreprise doit produire au moins une fois par an. Il doit obéir à des normes de présentation légales. Le bilan fait le point sur la situation du patrimoine de l’entreprise à un moment donné ; il résume ce que possède l’entreprise et l’origine de ce qu’elle possède.
+
 </p>
 
 <div class="highlight">
+
 ✔ Il montre ce que possède l’entreprise (ACTIF).<br>
+
 ✔ Il montre l’origine des ressources (PASSIF).
+
 </div>
 
 <p>
-Le bilan est donc une photographie du patrimoine de l’entreprise.
-</p>
-</section>
 
-<section id="comp">
-<h2>📊 Les composantes du bilan</h2>
+Le bilan est donc une photographie du patrimoine de l’entreprise.
+
+</p>
+
+</div>
+
+<h2>B- Les composantes du bilan</h2>
+
+<div class="definition-box">
 
 <h3>ACTIF (la partie gauche)</h3>
+
 <ul>
+
 <li>Biens.</li>
+
 <li>Créances.</li>
+
 </ul>
 
 <h3>PASSIF (la partie droite)</h3>
+
 <ul>
+
 <li>Capitaux propres.</li>
+
 <li>Dettes.</li>
+
 </ul>
 
 <div class="highlight">
+
 👉 Actif = emplois des ressources.<br>
+
 👉 Passif = origine des ressources.
+
 </div>
+
+</div>
+
 </section>
 
 <section id="structure">
-<h2>📑 Structure du bilan suivant le Plan comptable général marocain (PCGM)</h2>
+
+<h2 class="definition-title">2- Structure et classes du bilan</h2>
+
+
+<h2>A- Structure du bilan suivant le Plan comptable général marocain (PCGM)</h2>
+
+<div class="definition-box">
 
 <table>
+
 <tr>
+
 <td><b>ACTIF</b></td>
+
 <td><b>PASSIF</b></td>
+
 </tr>
+
 <tr>
+
 <td>Emplois (classes ou masses 02, 03 et 05).</td>
+
 <td>Ressources (classes ou masses 01, 04 et 05).</td>
+
 </tr>
+
 </table>
 
 <div class="highlight">
-⚖️ Total des emplois = Total des ressources.
-</div>
-</section>
 
-<section id="classes">
-<h2>📚 Classes du bilan</h2>
+⚖️ Total des emplois = Total des ressources.
+
+</div>
+
+</div>
+
+
+<h2>B- Classes du bilan</h2>
+
+<div class="definition-box">
 
 <h3>ACTIF</h3>
+
 <ul>
+
 <li><b>Classe 02 : Actif immobilisé</b> (immobilisations en non-valeur, incorporelles, corporelles et financières...).</li>
+
 <li><b>Classe 03 : Actif circulant</b> (stocks, créances de l’actif circulant, titres et valeurs de placement...).</li>
+
 <li><b>Classe 05 : Trésorerie</b> (trésorerie-actif).</li>
+
 </ul>
 
 <h3>PASSIF</h3>
+
 <ul>
+
 <li><b>Classe 01 : Financement permanent</b> (capitaux propres, capitaux propres assimilés et dettes de financement...).</li>
+
 <li><b>Classe 04 : Passif circulant</b> (dettes du passif circulant...).</li>
+
 <li><b>Classe 05 : Trésorerie</b> (trésorerie-passif).</li>
+
 </ul>
+
+</div>
+
 </section>
 
 <section id="variation">
-<h2>📈 Variations du bilan</h2>
+
+<h2 class="definition-title">3- Variations du bilan et notion de résultat</h2>
+
+
+<h2>A- Variations du bilan</h2>
+
+<div class="definition-box">
 
 <p>
+
 À la fin d’un exercice comptable, le bilan présente la situation patrimoniale de l’entreprise. Le résultat de l’exercice contribue à expliquer l’évolution des capitaux propres.
+
 </p>
 
 <div class="highlight">
-Le bilan doit respecter l’égalité fondamentale :
-<br>
-<b>Total de l’actif = Total du passif.</b>
-</div>
-</section>
 
-<section id="resultat">
-<h2>💰 Notion de résultat comptable</h2>
+Le bilan doit respecter l’égalité fondamentale :
+
+<br>
+
+<b>Total de l’actif = Total du passif.</b>
+
+</div>
+
+</div>
+
+<h2>B- Notion de résultat comptable</h2>
+
+<div class="definition-box">
 
 <p>
+
 Le résultat comptable est déterminé par la différence entre les produits et les charges de l’exercice.
+
 </p>
 
 <ul>
+
 <li><b>Produits supérieurs aux charges :</b> bénéfice.</li>
+
 <li><b>Charges supérieures aux produits :</b> perte.</li>
+
 </ul>
 
 <div class="highlight">
-✔ Le résultat influence les capitaux propres.<br>
-✔ Le bénéfice augmente les capitaux propres, tandis que la perte les diminue, toutes choses égales par ailleurs.
-</div>
-</section>
 
-<section id="EXE">
-<h2>🧠 Exemple simplifié (bénéfice/perte)</h2>
+✔ Le résultat influence les capitaux propres.<br>
+
+✔ Le bénéfice augmente les capitaux propres, tandis que la perte les diminue, toutes choses égales par ailleurs.
+
+</div>
+
+</div>
+
+
+<h2>C- Exemple simplifié (bénéfice/perte)</h2>
+
+<div class="definition-box">
 
 <h3>Cas 1 : Bénéfice</h3>
+
 <ul>
+
 <li>Achat : 5 000 DH.</li>
+
 <li>Vente : 8 000 DH.</li>
+
 <li>Résultat simplifié : 8 000 − 5 000 = <b>+3 000 DH.</b></li>
+
 </ul>
 
 <div class="highlight">
+
 L’entreprise réalise un bénéfice simplifié de 3 000 DH.
+
 </div>
 
 <h3>Cas 2 : Perte</h3>
+
 <ul>
+
 <li>Achat : 5 000 DH.</li>
+
 <li>Vente : 3 000 DH.</li>
+
 <li>Résultat simplifié : 3 000 − 5 000 = <b>−2 000 DH.</b></li>
+
 </ul>
 
 <div class="highlight">
+
 L’entreprise réalise une perte simplifiée de 2 000 DH.
+
 </div>
 
 <p>
+
 Ces exemples sont simplifiés et ne tiennent pas compte des autres charges et produits éventuels.
+
 </p>
+
+</div>
+
 </section>
 
 <section id="EE">
-<h2>📝 Exercice d’évaluation : bilan de démarrage</h2>
-
-<div class="container">
-
-
-<p>
-Le 10 juin 2025, trois associés décident de constituer une entreprise dénommée <strong>« ATLAS ELEC »</strong>, spécialisée dans la vente en gros de matériel électrique.
-</p>
-
-<p><strong>Les apports initiaux des associés se présentent comme suit :</strong></p>
-
-<ul>
-<li>Monsieur Atlas apporte un capital de <strong>350 000 MAD</strong> ;</li>
-<li>Monsieur Karim apporte un capital de <strong>250 000 MAD</strong> ;</li>
-<li>Monsieur Yassine apporte un capital de <strong>150 000 MAD</strong>.</li>
-</ul>
-
-<p><strong>Dans le cadre du démarrage de son activité, l’entreprise acquiert les éléments suivants :</strong></p>
-
-<ul>
-<li>Un local pour une valeur de <strong>500 000 MAD</strong> ;</li>
-<li>Un fonds commercial estimé à <strong>120 000 MAD</strong> ;</li>
-<li>Un véhicule d’une valeur de <strong>100 000 MAD</strong>, dont 50 % sont financés par un emprunt bancaire ;</li>
-<li>Un matériel informatique pour un montant de <strong>40 000 MAD</strong> ;</li>
-<li>Un stock de marchandises d’une valeur de <strong>80 000 MAD</strong>, dont <strong>60 000 MAD</strong> sont acquis à crédit auprès d’un fournisseur.</li>
-</ul>
-
-<p>À l’issue de ces opérations, les disponibilités restantes sont réparties comme suit :</p>
-
-<ul>
-<li><strong>15 000 MAD</strong> sont déposés en banque ;</li>
-<li><strong>5 000 MAD</strong> sont conservés en caisse.</li>
-</ul>
-
-<p><strong>Travail à faire :</strong></p>
-<p>Présenter le bilan de démarrage de l’entreprise.</p>
-
-</div>
-
-<div class="highlight">
-💡 Nous vous invitons à recourir à notre formulaire interactif afin d’élaborer le bilan. Nous vous recommandons également de consulter les exercices corrigés mis à votre disposition sur notre site en lien avec ce thème.
-</div>
+<h2 class="definition-title">📝 QCU d’évaluation : le bilan comptable</h2>
+<form id="quizForm">
+<div class="q"><p>1. Le bilan comptable présente :</p>
+<label><input type="radio" name="q1" value="0"> Les opérations réalisées uniquement pendant l’année</label><br>
+<label><input type="radio" name="q1" value="1"> La situation patrimoniale de l’entreprise à une date donnée</label><br>
+<label><input type="radio" name="q1" value="0"> Uniquement les recettes et les dépenses</label></div>
+<div class="q"><p>2. L’actif du bilan regroupe :</p>
+<label><input type="radio" name="q2" value="1"> Les biens et les créances de l’entreprise</label><br>
+<label><input type="radio" name="q2" value="0"> Les capitaux propres et les dettes uniquement</label><br>
+<label><input type="radio" name="q2" value="0"> Les charges et les produits</label></div>
+<div class="q"><p>3. Le passif du bilan représente :</p>
+<label><input type="radio" name="q3" value="0"> L’ensemble des biens détenus par l’entreprise</label><br>
+<label><input type="radio" name="q3" value="1"> Les ressources de financement de l’entreprise</label><br>
+<label><input type="radio" name="q3" value="0"> Les stocks et les disponibilités uniquement</label></div>
+<div class="q"><p>4. Un local utilisé durablement par l’entreprise constitue :</p>
+<label><input type="radio" name="q4" value="1"> Une immobilisation corporelle</label><br>
+<label><input type="radio" name="q4" value="0"> Un stock de marchandises</label><br>
+<label><input type="radio" name="q4" value="0"> Une dette fournisseur</label></div>
+<div class="q"><p>5. Le fonds commercial est classé parmi :</p>
+<label><input type="radio" name="q5" value="0"> Les immobilisations corporelles</label><br>
+<label><input type="radio" name="q5" value="1"> Les immobilisations incorporelles</label><br>
+<label><input type="radio" name="q5" value="0"> Les disponibilités</label></div>
+<div class="q"><p>6. Le stock de marchandises figure :</p>
+<label><input type="radio" name="q6" value="0"> Au passif circulant</label><br>
+<label><input type="radio" name="q6" value="1"> À l’actif circulant</label><br>
+<label><input type="radio" name="q6" value="0"> Dans les capitaux propres</label></div>
+<div class="q"><p>7. Les sommes déposées en banque et conservées en caisse représentent :</p>
+<label><input type="radio" name="q7" value="1"> Les disponibilités</label><br>
+<label><input type="radio" name="q7" value="0"> Les immobilisations financières</label><br>
+<label><input type="radio" name="q7" value="0"> Les dettes de financement</label></div>
+<div class="q"><p>8. Les apports des trois associés d’ATLAS ELEC sont de 350 000 DH, 250 000 DH et 150 000 DH. Le capital total est de :</p>
+<label><input type="radio" name="q8" value="0"> 700 000 DH</label><br>
+<label><input type="radio" name="q8" value="1"> 750 000 DH</label><br>
+<label><input type="radio" name="q8" value="0"> 800 000 DH</label></div>
+<div class="q"><p>9. Un véhicule d’une valeur de 100 000 DH est financé à 50 % par un emprunt bancaire. Le montant de l’emprunt est de :</p>
+<label><input type="radio" name="q9" value="1"> 50 000 DH</label><br>
+<label><input type="radio" name="q9" value="0"> 100 000 DH</label><br>
+<label><input type="radio" name="q9" value="0"> 150 000 DH</label></div>
+<div class="q"><p>10. Le total Actif du bilan doit toujours être :</p>
+<label><input type="radio" name="q10" value="0"> supérieur au total du Passif</label><br>
+<label><input type="radio" name="q10" value="0"> inférieur au total du Passif </label><br>
+<label><input type="radio" name="q10" value="1"> égal au total du Passif</label></div>
+<button type="button" onclick="corrigerQuiz()">Corriger</button>
+<button type="button" onclick="reinitialiserQuiz()">Réinitialiser</button>
+</form>
+<h3 id="resultat" aria-live="polite"></h3>
 </section>
 
+<!-- BARRE DES DIAPOSITIVES -->
+
+<div class="slide-navigation" id="slideNavigation">
+
+    <button type="button" id="btnDiapoPrecedente">← Diapositive précédente</button>
+
+    <span class="slide-counter" id="compteurDiapo">Diapositive 1 / 1</span>
+
+    <button type="button" id="btnDiapoSuivante">Diapositive suivante →</button>
+
+</div>
+
+<!-- PIED DE PAGE -->
+
 <footer>
-<span>Formation en comptabilité générale</span><br><br>
+
+    <span>Formation en comptabilité générale</span>
+
+    <div class="footer-actions">
+
+        <button
+
+            type="button"
+
+            class="btnFooter btnPrecedent"
+
+            id="btnSectionPrecedente"
+
+            onclick="naviguerSection(-1)">
+
+            ← Section précédente
+
+        </button>
+
+        <button
+
+            type="button"
+
+            class="btnFooter btnSuivant"
+
+            id="btnSectionSuivante"
+
+            onclick="naviguerSection(1)">
+
+            Section suivante →
+
+        </button>
+
+        <button
+
+            type="button"
+
+            class="btnFooter btnRetourMenu"
+
+            id="btnRetourMenu"
+
+            onclick="retourMenu()">
+
+            ↑ Retour au menu
+
+        </button>
+
+    </div>
+
 </footer>
 
 <script>
-function showSection(id,button){
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
+
+/* ==========================================
+
+   MENUS DÉROULANTS
+
+========================================== */
+
+function positionDropdown(button,menu){
+
+    const rect=button.getBoundingClientRect();
+
+    const marge=8;
+
+    menu.style.display="block";
+
+    menu.style.position="fixed";
+
+    menu.style.maxWidth=(window.innerWidth-16)+"px";
+
+    menu.style.maxHeight=(window.innerHeight-16)+"px";
+
+    menu.style.top="0";
+
+    menu.style.bottom="auto";
+
+    const hauteurMenu=menu.scrollHeight;
+
+    const espaceBas=window.innerHeight-rect.bottom-marge;
+
+    const espaceHaut=rect.top-marge;
+
+    const ouvrirEnBas=
+
+        hauteurMenu<=espaceBas || espaceBas>=espaceHaut;
+
+    let hauteurDisponible;
+
+    if(ouvrirEnBas){
+
+        menu.style.top=(rect.bottom+4)+"px";
+
+        menu.style.bottom="auto";
+
+        hauteurDisponible=espaceBas-4;
+
+    }else{
+
+        menu.style.bottom=(window.innerHeight-rect.top+4)+"px";
+
+        menu.style.top="auto";
+
+        hauteurDisponible=espaceHaut-4;
+
+    }
+
+    menu.style.maxHeight=Math.max(100,hauteurDisponible)+"px";
+
+    menu.style.width="auto";
+
+    const largeur=Math.min(
+
+        Math.max(menu.offsetWidth,230),
+
+        window.innerWidth-16
+
+    );
+
+    menu.style.width=largeur+"px";
+
+    let positionGauche=rect.left;
+
+    if(positionGauche+largeur>window.innerWidth-marge){
+
+        positionGauche=window.innerWidth-largeur-marge;
+
+    }
+
+    if(positionGauche<marge){
+
+        positionGauche=marge;
+
+    }
+
+    menu.style.left=positionGauche+"px";
+
+}
+
+function toggleDropdown(button){
+
+    const currentMenu=
+
+        button.parentElement.querySelector(".dropdown-content");
+
+    const isOpen=currentMenu.style.display==="block";
+
+    fermerTousLesMenus();
+
+    if(!isOpen){
+
+        positionDropdown(button,currentMenu);
+
+        button.setAttribute("aria-expanded","true");
+
+    }
+
+}
+
+function fermerTousLesMenus(){
+
+    document.querySelectorAll(".dropdown-content").forEach(menu=>{
+
+        menu.style.display="none";
+
+        menu.style.top="auto";
+
+        menu.style.bottom="auto";
+
     });
+
+    document.querySelectorAll(".dropdown button").forEach(button=>{
+
+        button.setAttribute("aria-expanded","false");
+
+    });
+
+}
+
+document.addEventListener("click",function(event){
+
+    if(!event.target.closest(".dropdown")){
+
+        fermerTousLesMenus();
+
+    }
+
+});
+
+function repositionnerMenus(){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const button=dropdown.querySelector("button");
+
+        const menu=dropdown.querySelector(".dropdown-content");
+
+        if(button && menu && menu.style.display==="block"){
+
+            positionDropdown(button,menu);
+
+        }
+
+    });
+
+}
+
+window.addEventListener("resize",repositionnerMenus);
+
+window.addEventListener("scroll",repositionnerMenus,true);
+
+
+/* ==========================================
+
+   MODE DIAPOSITIVES AUTOMATIQUES
+
+========================================== */
+
+
+function zoomImportant(){
+
+    return (
+
+        window.screen.width>=1000 &&
+
+        window.innerWidth<=window.screen.width*0.62
+
+    );
+
+}
+
+
+let currentSlides=[];
+
+let currentSlideIndex=0;
+
+let currentSlideSection=null;
+
+let slideMode=false;
+
+let resizeTimer=null;
+
+
+const slideNavigation=document.getElementById("slideNavigation");
+
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+
+const compteurDiapo=document.getElementById("compteurDiapo");
+
+
+/* MÉMORISER LE CONTENU ORIGINAL */
+
+
+const originalSectionContent=new Map();
+
+
+function memoriserContenu(section){
+
+    if(!originalSectionContent.has(section.id)){
+
+        originalSectionContent.set(
+
+            section.id,
+
+            Array.from(section.childNodes)
+
+        );
+
+    }
+
+}
+
+
+function restaurerContenuOriginal(section){
+
+    if(!section || !originalSectionContent.has(section.id)){
+
+        return;
+
+    }
+
+    const contenuOriginal=originalSectionContent.get(section.id);
+
+    section.replaceChildren(...contenuOriginal);
+
+}
+
+
+/* HAUTEUR DISPONIBLE */
+
+
+function hauteurDisponibleDiapo(){
+
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
+
+    const hauteurNavigation=24;
+
+    return Math.max(
+
+        180,
+
+        window.innerHeight-hauteurFooter-hauteurNavigation-35
+
+    );
+
+}
+
+
+/* IDENTIFIER LES TITRES */
+
+
+function estTitreContenu(node){
+
+    if(node.nodeType!==Node.ELEMENT_NODE){
+
+        return false;
+
+    }
+
+    return node.matches(
+
+        "h2,h3,h4,.definition-title,.sous-titre,.table-title"
+
+    );
+
+}
+
+
+/* CONSTRUIRE LES GROUPES */
+
+
+function construireGroupes(nodes){
+    const groupes=[];
+    let groupeActuel=[];
+
+    nodes.forEach(node=>{
+        if(node.nodeType===Node.TEXT_NODE && !node.textContent.trim()){
+            return;
+        }
+
+        const estTitre = estTitreContenu(node);
+        const contientDejaDuContenu = groupeActuel.some(element =>
+            element.nodeType === Node.ELEMENT_NODE &&
+            !element.matches("h2")
+        );
+
+        /* Un titre ne doit jamais être isolé de son contenu.
+           Le groupe est séparé uniquement si un contenu précède
+           le nouveau titre. */
+        if(estTitre && contientDejaDuContenu){
+            groupes.push(groupeActuel);
+            groupeActuel=[];
+        }
+        groupeActuel.push(node);
+    });
+
+    if(groupeActuel.length){
+        groupes.push(groupeActuel);
+    }
+    return groupes;
+}
+
+
+/* CRÉER UNE DIAPOSITIVE */
+
+
+function creerSlide(section){
+
+    const slide=document.createElement("div");
+
+    slide.className="content-slide";
+
+    section.appendChild(slide);
+
+    currentSlides.push(slide);
+
+    return slide;
+
+}
+
+
+/* ==========================================
+
+   MESURER UN GROUPE DE CONTENU
+
+========================================== */
+
+
+/*
+
+   La mesure est réalisée dans un élément temporaire
+
+   ayant les mêmes règles de présentation que les diapositives.
+
+   Cela évite le problème de scrollHeight égal à zéro
+
+   lorsque les diapositives sont encore masquées.
+
+*/
+
+
+function mesurerGroupe(groupe,largeur,section){
+
+    const mesure=document.createElement("div");
+
+    mesure.className="content-slide slide-measure";
+
+    mesure.style.width=Math.max(300,largeur)+"px";
+
+    mesure.style.maxWidth="none";
+
+    mesure.style.height="auto";
+
+    mesure.style.minHeight="0";
+
+    mesure.style.maxHeight="none";
+
+    mesure.style.overflow="visible";
+
+    mesure.style.display="block";
+
+    mesure.style.visibility="hidden";
+
+    mesure.style.position="fixed";
+
+    mesure.style.left="-100000px";
+
+    mesure.style.top="0";
+
+    mesure.style.padding="2px 0 8px";
+
+    mesure.style.boxSizing="border-box";
+
+    groupe.forEach(node=>{
+
+        mesure.appendChild(node.cloneNode(true));
+
+    });
+
+    document.body.appendChild(mesure);
+
+    const hauteur=Math.ceil(
+
+        Math.max(
+
+            mesure.scrollHeight,
+
+            mesure.getBoundingClientRect().height
+
+        )
+
+    );
+
+    mesure.remove();
+
+    return hauteur;
+
+}
+
+
+/* ==========================================
+
+   DIAPOSITIVES DU QCU
+
+========================================== */
+
+
+/*
+
+   Les questions originales ne sont jamais remplacées.
+
+   Elles restent dans le formulaire.
+
+   Seule leur visibilité change.
+
+   Les réponses cochées sont donc conservées.
+
+*/
+
+
+function construireDiapositivesQuiz(section){
+    const form=section.querySelector("#quizForm");
+    currentSlides=[];
+    if(!form)return;
+    const questions=Array.from(form.querySelectorAll(":scope > .q"));
+    const hauteurMax=hauteurDisponibleDiapo();
+    const largeur=Math.max(300,section.clientWidth-50);
+    const groupes=[];
+    let groupeActuel=[];
+    questions.forEach(question=>{
+        const essai=[...groupeActuel,question];
+        const hauteur=mesurerGroupe(essai,largeur,section);
+        if(hauteur>hauteurMax && groupeActuel.length){
+            groupes.push(groupeActuel);
+            groupeActuel=[question];
+        }else groupeActuel=essai;
+    });
+    if(groupeActuel.length)groupes.push(groupeActuel);
+    currentSlides=groupes;
+    questions.forEach(question=>question.style.display="");
+    form.querySelectorAll(":scope > button").forEach(button=>button.style.display="");
+    const resultat=section.querySelector(":scope > #resultat");
+    if(resultat)resultat.style.display="";
+}
+
+function creerDiapositives(section){
+
+    if(!section)return;
+
+    currentSlides=[];
+    currentSlideIndex=0;
+
+    if(section.id==="EE"){
+        construireDiapositivesQuiz(section);
+        afficherDiapositive(0);
+        return;
+    }
+
+
+    /* RESTAURER LE CONTENU ORIGINAL */
+
+
+    restaurerContenuOriginal(section);
+
+    memoriserContenu(section);
+
+
+    const nodes=Array.from(section.childNodes);
+
+    const groupes=construireGroupes(nodes);
+
+    section.replaceChildren();
+
+
+    const hauteurMax=hauteurDisponibleDiapo();
+
+    const largeur=Math.max(
+
+        300,
+
+        section.clientWidth-50
+
+    );
+
+
+    let slide=null;
+
+    let hauteurUtilisee=0;
+
+
+    /*
+
+       Chaque groupe est mesuré séparément.
+
+       On additionne les hauteurs des groupes pour savoir
+
+       si le groupe suivant peut tenir dans la diapositive.
+
+       Si le groupe est trop grand à lui seul, il reste
+
+       dans une diapositive indépendante avec défilement vertical.
+
+    */
+
+
+    groupes.forEach(groupe=>{
+
+        const hauteurGroupe=mesurerGroupe(
+
+            groupe,
+
+            largeur,
+
+            section
+
+        );
+
+
+        /*
+
+           Créer une nouvelle diapositive :
+
+           - si aucune diapositive n'existe ;
+
+           - si le groupe suivant dépasse la hauteur disponible.
+
+        */
+
+
+        if(
+
+            !slide ||
+
+            (
+
+                hauteurUtilisee>0 &&
+
+                hauteurUtilisee+hauteurGroupe+12>hauteurMax
+
+            )
+
+        ){
+
+            slide=creerSlide(section);
+
+            hauteurUtilisee=0;
+
+        }
+
+
+        /* DÉPLACER LES NŒUDS ORIGINAUX */
+
+
+        groupe.forEach(node=>{
+
+            slide.appendChild(node);
+
+        });
+
+
+        hauteurUtilisee+=hauteurGroupe+12;
+
+    });
+
+
+    /* SÉCURITÉ : SECTION VIDE */
+
+
+    if(currentSlides.length===0){
+
+        creerSlide(section);
+
+    }
+
+
+    afficherDiapositive(0);
+
+}
+
+
+/* ==========================================
+
+   COMPTEUR DES DIAPOSITIVES
+
+========================================== */
+
+
+function actualiserCompteurDiapo(){
+
+    const total=currentSlides.length;
+
+    if(total===0){
+
+        compteurDiapo.textContent="Aucune diapositive";
+
+        btnDiapoPrecedente.disabled=true;
+
+        btnDiapoSuivante.disabled=true;
+
+        return;
+
+    }
+
+    compteurDiapo.textContent=
+
+        "Diapositive "+(currentSlideIndex+1)+" / "+total;
+
+    btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+
+    btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+
+}
+
+
+/* ==========================================
+
+   AJUSTEMENT DU CONTENU
+
+========================================== */
+
+
+function ajusterContenuDiapositive(slide){
+
+    if(!slide)return;
+
+    slide.style.width="100%";
+
+    slide.style.maxWidth="100%";
+
+    slide.style.overflowX="hidden";
+
+    slide.style.overflowY="auto";
+
+
+    slide.querySelectorAll("*").forEach(element=>{
+
+        element.style.maxWidth="100%";
+
+        element.style.minWidth="0";
+
+        element.style.overflowWrap="anywhere";
+
+    });
+
+
+    slide.querySelectorAll("table").forEach(table=>{
+
+        table.style.width="100%";
+
+        table.style.maxWidth="100%";
+
+        table.style.tableLayout="fixed";
+
+    });
+
+
+    slide.querySelectorAll("td,th").forEach(cell=>{
+
+        cell.style.overflowWrap="anywhere";
+
+        cell.style.wordBreak="normal";
+
+    });
+
+}
+
+
+/* ==========================================
+
+   AFFICHER UNE DIAPOSITIVE
+
+========================================== */
+
+
+function afficherDiapositive(index){
+
+    if(!currentSlides.length){ actualiserCompteurDiapo(); return; }
+
+    if(index<0 || index>=currentSlides.length) return;
+
+
+    currentSlideIndex=index;
+
+    if(currentSlideSection && currentSlideSection.id==="EE"){
+        const form=currentSlideSection.querySelector("#quizForm");
+        if(!form)return;
+        const questions=Array.from(form.querySelectorAll(":scope > .q"));
+        const groupeActuel=currentSlides[index];
+        questions.forEach(question=>{
+            question.style.display=groupeActuel.includes(question)?"":"none";
+        });
+        const derniereDiapositive=index===currentSlides.length-1;
+        form.querySelectorAll(":scope > button").forEach(button=>{
+            button.style.display=derniereDiapositive?"":"none";
+        });
+        const resultat=currentSlideSection.querySelector(":scope > #resultat");
+        if(resultat)resultat.style.display=derniereDiapositive?"":"none";
+        actualiserCompteurDiapo();
+        window.scrollTo({top:0,behavior:"auto"});
+        return;
+    }
+
+    currentSlides.forEach((slide,i)=>{
+
+        slide.classList.toggle("active-slide",i===index);
+
+        if(i===index) ajusterContenuDiapositive(slide);
+
+    });
+
+
+    actualiserCompteurDiapo();
+
+    window.scrollTo({top:0,behavior:"auto"});
+
+}
+
+
+/* NAVIGATION DIAPOSITIVES */
+
+
+function naviguerDiapositive(direction){
+
+    afficherDiapositive(currentSlideIndex+direction);
+
+}
+
+
+btnDiapoPrecedente.addEventListener("click",function(){
+
+    naviguerDiapositive(-1);
+
+});
+
+
+btnDiapoSuivante.addEventListener("click",function(){
+
+    naviguerDiapositive(1);
+
+});
+
+
+/* ==========================================
+
+   ACTIVER LE MODE DIAPOSITIVES
+
+========================================== */
+
+
+function activerModeDiapositives(section){
+
+    if(!section)return;
+
+
+    if(
+
+        slideMode &&
+
+        currentSlideSection===section
+
+    ){
+
+        return;
+
+    }
+
+
+    if(currentSlideSection && currentSlideSection!==section){
+
+        desactiverModeDiapositives(currentSlideSection);
+
+    }
+
+
+    currentSlideSection=section;
+
+    document.body.classList.add("slides-mode");
+
+    slideNavigation.style.display="flex";
+
+    slideMode=true;
+
+
+    creerDiapositives(section);
+
+}
+
+
+/* ==========================================
+
+   DÉSACTIVER LE MODE DIAPOSITIVES
+
+========================================== */
+
+
+function desactiverModeDiapositives(section){
+
+    if(!section) section=currentSlideSection;
+
+    if(section && section.id==="EE"){
+        const form=section.querySelector("#quizForm");
+        if(form){
+            form.querySelectorAll(".q").forEach(question=>question.style.display="");
+            form.querySelectorAll(":scope > button").forEach(button=>button.style.display="");
+        }
+        const resultat=section.querySelector(":scope > #resultat");
+        if(resultat)resultat.style.display="";
+    }else if(section){
+        restaurerContenuOriginal(section);
+    }
+
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+
+    currentSlides=[];
+
+    currentSlideIndex=0;
+
+    currentSlideSection=null;
+
+    slideMode=false;
+
+}
+
+
+/* ==========================================
+
+   ACTUALISER L'AFFICHAGE
+
+========================================== */
+
+
+function actualiserAffichageSection(){
+
+    const section=document.querySelector(
+
+        "body > section.active"
+
+    );
+
+
+    if(!section)return;
+
+
+    if(zoomImportant()){
+
+        activerModeDiapositives(section);
+
+    }else if(slideMode){
+
+        desactiverModeDiapositives(section);
+
+    }
+
+}
+
+
+/* ==========================================
+
+   NAVIGATION ENTRE LES SECTIONS
+
+========================================== */
+
+
+const sectionIds=["def","structure","variation","EE"];
+
+
+let currentSectionIndex=-1;
+
+
+/* ACTUALISER LES BOUTONS DU PIED DE PAGE */
+
+
+function actualiserBoutonsNavigation(){
+
+    const precedent=document.getElementById(
+
+        "btnSectionPrecedente"
+
+    );
+
+
+    const suivant=document.getElementById(
+
+        "btnSectionSuivante"
+
+    );
+
+
+    if(currentSectionIndex===-1){
+
+        precedent.classList.remove("visible");
+
+        suivant.classList.remove("visible");
+
+        return;
+
+    }
+
+
+    precedent.disabled=(currentSectionIndex===0);
+
+
+    suivant.disabled=(
+
+        currentSectionIndex===sectionIds.length-1
+
+    );
+
+}
+
+
+/* AFFICHER UNE SECTION */
+
+
+function showSection(id,button){
+
+    const nouvelIndex=sectionIds.indexOf(id);
 
     const current=document.getElementById(id);
-    if(current) current.classList.add("active","animationSection");
 
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
+
+    if(!current || nouvelIndex===-1){
+
+        console.warn("Section introuvable :",id);
+
+        return;
+
+    }
+
+
+    if(slideMode && currentSlideSection){
+
+        desactiverModeDiapositives(currentSlideSection);
+
+    }
+
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+
+    currentSlides=[];
+
+    currentSlideIndex=0;
+
+    currentSlideSection=null;
+
+    slideMode=false;
+
+
+    /* MASQUER LES AUTRES SECTIONS */
+
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+
+            "active",
+
+            "animationSection"
+
+        );
+
     });
 
-    if(button) button.classList.add("btnActive");
+
+    /* RÉINITIALISER LES BOUTONS DU MENU */
+
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+
+        btn.classList.remove("btnActive");
+
+        btn.removeAttribute("aria-pressed");
+
+    });
+
+
+    fermerTousLesMenus();
+
+
+    /* ACTIVER LA SECTION */
+
+
+    currentSectionIndex=nouvelIndex;
+
+    document.body.classList.add("section-open");
+
+
+    current.classList.add(
+
+        "active",
+
+        "animationSection"
+
+    );
+
+
+    /* AFFICHER LES BOUTONS DU PIED DE PAGE */
+
+
+    document.getElementById("btnRetourMenu")
+
+        .classList.add("visible");
+
+
+    document.getElementById("btnSectionPrecedente")
+
+        .classList.add("visible");
+
+
+    document.getElementById("btnSectionSuivante")
+
+        .classList.add("visible");
+
+
+    actualiserBoutonsNavigation();
+
+
+    /* ACTIVER LE BOUTON CORRESPONDANT */
+
+
+    if(!button){
+
+        button=document.querySelectorAll("nav button")[nouvelIndex];
+
+    }
+
+
+    if(button){
+
+        button.classList.add("btnActive");
+
+        button.setAttribute("aria-pressed","true");
+
+    }
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"auto"
+
+    });
+
+
+    requestAnimationFrame(()=>{
+
+        actualiserAffichageSection();
+
+    });
+
 }
+
+
+/* ==========================================
+
+   SECTION PRÉCÉDENTE / SUIVANTE
+
+========================================== */
+
+
+function naviguerSection(direction){
+
+    const nouvelIndex=currentSectionIndex+direction;
+
+
+    if(
+
+        nouvelIndex<0 ||
+
+        nouvelIndex>=sectionIds.length
+
+    ){
+
+        return;
+
+    }
+
+
+    const nouvelId=sectionIds[nouvelIndex];
+
+
+    const boutonsMenu=Array.from(
+
+        document.querySelectorAll("nav button")
+
+    );
+
+
+    const boutonCorrespondant=boutonsMenu[nouvelIndex];
+
+
+    showSection(nouvelId,boutonCorrespondant);
+
+}
+
+
+/* ==========================================
+
+   RETOUR AU MENU
+
+========================================== */
+
+
+function retourMenu(){
+
+    if(slideMode && currentSlideSection){
+
+        desactiverModeDiapositives(currentSlideSection);
+
+    }
+
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+
+    currentSlides=[];
+
+    currentSlideIndex=0;
+
+    currentSlideSection=null;
+
+    slideMode=false;
+
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+
+            "active",
+
+            "animationSection"
+
+        );
+
+    });
+
+
+    document.getElementById("btnRetourMenu")
+
+        .classList.remove("visible");
+
+
+    document.getElementById("btnSectionPrecedente")
+
+        .classList.remove("visible");
+
+
+    document.getElementById("btnSectionSuivante")
+
+        .classList.remove("visible");
+
+
+    currentSectionIndex=-1;
+
+    document.body.classList.remove("section-open");
+
+
+    requestAnimationFrame(()=>{
+
+        const menu=document.querySelector("nav");
+
+
+        if(menu){
+
+            const position=
+
+                menu.getBoundingClientRect().top+
+
+                window.scrollY-12;
+
+
+            window.scrollTo({
+
+                top:Math.max(0,position),
+
+                behavior:"smooth"
+
+            });
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================
+   CORRECTION DU QCU
+========================================== */
+function corrigerQuiz(){
+    let score=0;
+    for(let i=1;i<=10;i++){
+        const answer=document.querySelector('input[name="q'+i+'"]:checked');
+        if(answer && answer.value==="1")score++;
+    }
+    const appreciation=score>=8?"Excellent !":score>=5?"Bon travail, continuez vos révisions.":"Les notions sont à revoir.";
+    document.getElementById("resultat").textContent="Score : "+score+"/10 — "+appreciation;
+}
+function reinitialiserQuiz(){
+    const form=document.getElementById("quizForm");
+    if(!form)return;
+    form.querySelectorAll('input[type="radio"]').forEach(input=>input.checked=false);
+    const resultat=document.getElementById("resultat");
+    if(resultat)resultat.textContent="";
+}
+
+/* ==========================================
+
+   ADAPTATION AU REDIMENSIONNEMENT / ZOOM
+
+========================================== */
+
+
+window.addEventListener("resize",function(){
+
+    clearTimeout(resizeTimer);
+
+
+    resizeTimer=setTimeout(()=>{
+
+        const section=document.querySelector(
+
+            "body > section.active"
+
+        );
+
+
+        if(!section)return;
+
+
+        if(zoomImportant()){
+
+            if(
+
+                !slideMode ||
+
+                currentSlideSection!==section
+
+            ){
+
+                activerModeDiapositives(section);
+
+            }else{
+
+                const ancienneIndex=currentSlideIndex;
+
+
+                /*
+
+                   Reconstruire les diapositives.
+
+                   Pour le QCU, les questions originales
+
+                   et les réponses cochées sont conservées.
+
+                */
+
+
+                if(section.id==="EE"){
+                    construireDiapositivesQuiz(section);
+                }else{
+                    creerDiapositives(section);
+                }
+
+                if(currentSlides.length>0){
+
+                    afficherDiapositive(Math.min(ancienneIndex,currentSlides.length-1));
+
+                }
+
+            }
+
+        }else if(slideMode){
+
+            desactiverModeDiapositives(section);
+
+        }
+
+    },180);
+
+});
+
+
+/* ==========================================
+
+   NAVIGATION AU CLAVIER
+
+========================================== */
+
+
+document.addEventListener("keydown",function(event){
+
+    if(!slideMode)return;
+
+
+    const element=document.activeElement;
+
+
+    if(
+
+        element &&
+
+        (
+
+            element.tagName==="INPUT" ||
+
+            element.tagName==="TEXTAREA" ||
+
+            element.tagName==="SELECT" ||
+
+            element.isContentEditable
+
+        )
+
+    ){
+
+        return;
+
+    }
+
+
+    if(
+
+        event.key==="ArrowRight" ||
+
+        event.key==="PageDown"
+
+    ){
+
+        event.preventDefault();
+
+        naviguerDiapositive(1);
+
+    }
+
+
+    if(
+
+        event.key==="ArrowLeft" ||
+
+        event.key==="PageUp"
+
+    ){
+
+        event.preventDefault();
+
+        naviguerDiapositive(-1);
+
+    }
+
+});
+
+
+/* ==========================================
+
+   INITIALISATION
+
+========================================== */
+
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    slideNavigation.style.display="none";
+
+
+    document.body.classList.remove(
+
+        "slides-mode",
+
+        "section-open"
+
+    );
+
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+
+            "active",
+
+            "animationSection"
+
+        );
+
+    });
+
+
+    document.getElementById("btnRetourMenu")
+
+        .classList.remove("visible");
+
+
+    document.getElementById("btnSectionPrecedente")
+
+        .classList.remove("visible");
+
+
+    document.getElementById("btnSectionSuivante")
+
+        .classList.remove("visible");
+
+
+    currentSectionIndex=-1;
+
+});
+
 </script>
 
 </body>
+
 </html>
+
+
 
