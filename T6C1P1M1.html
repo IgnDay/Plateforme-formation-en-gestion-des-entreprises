@@ -4,67 +4,942 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IgnDay Comptabilité Générale</title>
+<title>IgnDay - T6 Le Cadre Comptable Marocain</title>
 
 <style>
 *{box-sizing:border-box}
-body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b}
-header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 10px #0003}
-.brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 22px;background:linear-gradient(120deg,#0f172a,#0f766e)}
-.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-weight:bold;font-size:19px}
-.brand-logo{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#00b894;font-size:19px}
-.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
-.site-menu>a{display:block;padding:10px 13px;border-radius:6px;color:white;text-decoration:none;font-size:14px}
-.site-menu>a:hover{background:#ffffff2b}
-header h1{padding:20px 10px;margin:0}
-header h1 p{margin:10px 0}
 
-.dropdown{position:relative;display:inline-block}
-.dropdown button{padding:10px 14px;background:transparent;color:white;border:none;cursor:pointer;font-size:14px;border-radius:6px}
-.dropdown button:hover{background:#ffffff2b}
-.dropdown-content{display:none;position:absolute;top:100%;left:0;min-width:230px;max-height:70vh;overflow-y:auto;background:white;box-shadow:0 5px 15px #0003;border-radius:6px;z-index:1000;padding:7px}
-.dropdown-content a{display:block;padding:11px 14px;color:#1e293b;text-decoration:none;text-align:left;font-size:14px;border-radius:5px}
-.dropdown-content a:hover{background:#0f766e;color:white}
+html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
 
-nav{background:#34495e;padding:10px;text-align:center}
-nav button,#quizForm button{margin:5px;padding:12px 18px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:15px;transition:.3s}
-nav button:hover,#quizForm button:hover{background:#019875;transform:translateY(-2px)}
-.btnActive{background:#0984e3!important;transform:scale(1.04);box-shadow:0 3px 10px #0003}
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f4f6f9;
+    color:#1e293b;
+    padding-bottom:40px;
+}
 
-section{display:none;padding:30px;margin:20px}
+/* EN-TÊTE */
+
+header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    box-shadow:0 2px 8px #0002;
+}
+
+.brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    flex-wrap:wrap;
+    min-height:55px;
+    padding:10px 14px;
+    background:linear-gradient(120deg,#0f172a,#0f766e);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.brand-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    border-radius:7px;
+    background:#00b894;
+    font-size:15px;
+}
+
+header h1{
+    padding:12px 8px;
+    margin:0;
+    font-size:45px;
+    line-height:1.4;
+}
+
+header h1 p{
+    margin:7px 0;
+    font-size:45px;
+    font-weight:bold;
+    line-height:1.4;
+}
+
+/* MENUS */
+
+.site-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:3px;
+}
+
+.site-menu>a{
+    display:block;
+    padding:5px 8px;
+    border-radius:5px;
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.site-menu>a:hover{background:#1D4ED8}
+
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropdown button{
+    padding:5px 8px;
+    background:transparent;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:12px;
+    border-radius:5px;
+}
+
+.dropdown button:hover{background:#1D4ED8}
+
+.dropdown-content{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    min-width:230px;
+    max-width:calc(100vw - 16px);
+    max-height:calc(100vh - 16px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    overscroll-behavior:contain;
+    background:white;
+    box-shadow:0 8px 25px rgba(0,0,0,.28);
+    border-radius:7px;
+    z-index:99999;
+    padding:6px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:9px 12px;
+    color:#1e293b;
+    text-decoration:none;
+    text-align:left;
+    font-size:13px;
+    border-radius:5px;
+    line-height:1.4;
+    white-space:normal;
+}
+
+.dropdown-content a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+/* NAVIGATION DES SECTIONS */
+
+nav{
+    background:#34495e;
+    padding:7px 10px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    text-align:center;
+}
+
+nav button{
+    margin:0;
+    padding:10px 17px;
+    border:0;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:19px;
+    font-weight:bold;
+    transition:.25s;
+    line-height:1.2;
+    white-space:nowrap;
+}
+
+nav button:hover{
+    background:#019875;
+    transform:translateY(-1px);
+}
+
+.btnActive{
+    background:#0984e3!important;
+    transform:scale(1.03);
+    box-shadow:0 2px 7px #0003;
+}
+
+/* MASQUER HEADER ET NAV EN SECTION */
+
+body.section-open>header,
+body.section-open>nav{
+    display:none!important;
+}
+
+/* SECTIONS */
+
+section{
+    display:none;
+    padding:25px;
+    margin:15px;
+}
+
 section.active{display:block}
-.animationSection{animation:apparition .5s ease;background:white;border-left:8px solid #00b894;border-radius:12px;box-shadow:0 5px 15px #0002}
-@keyframes apparition{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-h2{color:#2c3e50}
+.animationSection{
+    animation:apparition .4s ease;
+    background:white;
+    border-left:6px solid #00b894;
+    border-radius:9px;
+    box-shadow:0 4px 12px #0002;
+}
+
+@keyframes apparition{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+body.section-open>section.active{
+    margin:0;
+    padding:4px 25px 25px;
+}
+
+body.section-open>section.active>h2,
+body.section-open>section.active>.definition-title{
+    margin-top:0;
+}
+
+/* CONTENU */
+
+h2{
+    color:#2c3e50;
+    margin-top:0;
+}
+
 h3{color:#00b894}
-table{width:100%;border-collapse:collapse;background:white;margin-top:20px}
-td{border:1px solid #ccc;padding:10px}
-.titre{text-align:center;font-size:24px;font-weight:bold}
+
+p,li{line-height:1.7}
+
+ul,ol{line-height:1.7}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:18px;
+}
+
+.table-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+td,th{
+    border:1px solid #ccc;
+    padding:9px;
+    line-height:1.5;
+}
+
+th{
+    background:#dfe6e9;
+    text-align:center;
+}
+
+tr:hover td{background:#f1f7ff}
+
+.titre{
+    text-align:center;
+    font-size:23px;
+    font-weight:bold;
+}
+
 .bold{font-weight:bold}
 .center{text-align:center}
 .right{text-align:right}
 .header{background:#dfe6e9}
-tr:hover td{background:#f1f7ff}
 
-.highlight{background:#e8fff7;border-left:6px solid #00b894;padding:15px;margin-top:15px;border-radius:8px}
-.q{background:#f8fafc;padding:15px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+/* MISE EN VALEUR */
+
+.highlight{
+    background:#e8fff7;
+    border-left:5px solid #00b894;
+    padding:13px;
+    margin-top:13px;
+    border-radius:7px;
+    line-height:1.7;
+}
+
+.definition-title{
+background:linear-gradient(120deg,#be185d,#ec4899);
+    color:white;
+    padding:12px 15px;
+    border-radius:7px;
+    text-align:center;
+    font-size:21px;
+    font-weight:bold;
+    margin:12px 0;
+}
+
+.definition-box{
+    background:#fffaf2;
+    border:2px solid #e6a23c;
+    border-radius:8px;
+    padding:15px;
+    margin:12px 0;
+    font-weight:bold;
+}
+
+/* EXERCICE */
+
+.container{
+    background:#fff;
+    padding:20px;
+    border-left:5px solid #3498db;
+    border-radius:8px;
+    box-shadow:0 2px 8px #00000012;
+}
+
+.container p:first-child{margin-top:0}
+
+.q{
+    background:#f8fafc;
+    padding:15px;
+    margin:15px 0;
+    border-radius:8px;
+    border:1px solid #e2e8f0;
+}
+
 .q p{font-weight:bold}
-.q label{display:inline-block;margin:7px 15px 7px 0;line-height:1.6}
+
+.q label{
+    display:inline-block;
+    margin:7px 15px 7px 0;
+    line-height:1.6;
+}
+
 .correct{color:#00804a;font-weight:bold}
 .wrong{color:#d63031;font-weight:bold}
-#resultat{padding:10px 0;font-size:20px}
-footer{text-align:center;padding:15px;background:#2c3e50;color:white;margin-top:20px}
-footer a{color:#00ffcc;text-decoration:none}
+
+#quizForm button{
+    margin:5px;
+    padding:10px 16px;
+    border:0;
+    background:#00b894;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    font-size:15px;
+}
+
+#quizForm button:hover{background:#019875}
+
+#resultat{
+    padding:10px 0;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* BARRE DES DIAPOSITIVES */
+
+.slide-navigation{
+    display:none;
+    position:fixed;
+    bottom:32px;
+    left:0;
+    width:100%;
+    height:24px;
+    min-height:24px;
+    z-index:1999;
+    align-items:center;
+    justify-content:space-between;
+    gap:5px;
+    padding:2px 8px;
+    background:#34495e;
+    color:white;
+    border-top:1px solid #1e293b;
+    font-size:10px;
+}
+
+.slide-navigation button{
+    border:0;
+    border-radius:3px;
+    padding:3px 8px;
+    background:#00b894;
+    color:white;
+    font-size:10px;
+    font-weight:bold;
+    line-height:1.2;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.slide-navigation button:hover:not(:disabled){background:#0984e3}
+
+.slide-navigation button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.slide-counter{
+    font-size:10px;
+    font-weight:bold;
+    white-space:nowrap;
+    text-align:center;
+}
+
+/* CONTENU DES DIAPOSITIVES */
+
+.content-slide{
+    display:none;
+    width:100%;
+    min-height:100px;
+    padding:2px 0 8px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+}
+
+.content-slide.active-slide{display:block}
+
+.slide-inner{
+    width:100%;
+    max-width:100%;
+    transform:none;
+    zoom:1!important;
+}
+
+/* MESURE DES GROUPES */
+
+.slide-measure{
+    position:fixed!important;
+    left:-100000px!important;
+    top:0!important;
+    display:block!important;
+    width:1000px;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    z-index:-1!important;
+}
+
+body.slides-mode{padding-bottom:58px}
+
+body.slides-mode>section.active{
+    display:block;
+    margin:0;
+    padding:4px 25px 8px;
+    border-radius:0;
+    box-shadow:none;
+    border-left:0;
+    min-height:calc(100vh - 58px);
+    animation:none;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+body.slides-mode .slide-navigation{display:flex}
+
+body.slides-mode .definition-title{
+    margin:3px 0 8px;
+    padding:8px 12px;
+    font-size:20px;
+}
+
+body.slides-mode h2{
+    margin-top:0;
+    margin-bottom:8px;
+}
+
+body.slides-mode h3{
+    margin-top:8px;
+    margin-bottom:6px;
+}
+
+body.slides-mode p,
+body.slides-mode li{
+    line-height:1.45;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+body.slides-mode ul,
+body.slides-mode ol{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+body.slides-mode .definition-box{
+    margin:6px 0;
+    padding:10px;
+}
+
+body.slides-mode .highlight{
+    margin:6px 0;
+    padding:9px;
+}
+
+body.slides-mode .container{padding:12px}
+
+body.slides-mode table{margin-top:8px}
+
+body.slides-mode td,
+body.slides-mode th{padding:6px 9px}
+
+/* PIED DE PAGE */
+
+footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:32px;
+    min-height:32px;
+    z-index:2000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:6px;
+    padding:4px 10px;
+    margin:0;
+    background:#2c3e50;
+    color:white;
+    border:1px solid #1e293b;
+    box-shadow:none;
+    font-size:11px;
+    line-height:1.2;
+}
+
+footer a{
+    color:#00ffcc;
+    text-decoration:none;
+}
+
+footer>span{white-space:nowrap}
+
+.footer-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:5px;
+    margin-left:auto;
+}
+
+.btnFooter{
+    display:none;
+    margin:0;
+    padding:4px 9px;
+    border:none;
+    border-radius:4px;
+    color:white;
+    font-size:11px;
+    line-height:1.2;
+    font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.2s;
+}
+
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+.btnFooter.visible{display:block}
+
+.btnFooter:hover:not(:disabled){
+    background:#00b894;
+    transform:translateY(-1px);
+}
+
+.btnFooter:disabled{
+    background:#64748b;
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* RESPONSIVE */
 
 @media(max-width:760px){
-.brandbar{justify-content:center;padding:12px}
-.site-menu{width:100%}
-.site-menu>a{padding:9px}
-.dropdown-content{left:50%;transform:translateX(-50%);min-width:220px}
-section{padding:18px;margin:12px}
-nav button{padding:10px;font-size:14px}
-header h1{font-size:21px}
+
+    body{padding-bottom:42px}
+
+    .brandbar{
+        justify-content:center;
+        padding:4px 6px;
+        gap:5px;
+    }
+
+    .brand{font-size:14px}
+
+    .brand-logo{
+        width:27px;
+        height:27px;
+        font-size:13px;
+    }
+
+    .site-menu{
+        width:100%;
+        gap:2px;
+    }
+
+    .site-menu>a{
+        padding:5px 6px;
+        font-size:11px;
+    }
+
+    .dropdown button{
+        padding:5px 6px;
+        font-size:11px;
+    }
+
+    .dropdown-content{min-width:220px}
+
+    header h1{
+        padding:5px 6px;
+        line-height:1.3;
+    }
+
+    header h1 p{
+        font-size:16px;
+        line-height:1.3;
+        margin:3px 0;
+    }
+
+    section{
+        padding:16px;
+        margin:10px;
+    }
+
+    body.section-open>section.active{
+        margin:0;
+        padding:4px 15px 18px;
+    }
+
+    nav{
+        padding:6px 5px;
+        gap:5px;
+    }
+
+    nav button{
+        padding:6px 9px;
+        font-size:12px;
+        white-space:normal;
+    }
+
+    .definition-title{
+        font-size:18px;
+        padding:11px;
+    }
+
+    .definition-box{padding:12px}
+
+    td,th{
+        padding:7px;
+        font-size:12px;
+    }
+
+    .container{padding:15px}
+
+    footer{
+        height:32px;
+        min-height:32px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+        gap:3px;
+        padding:3px 5px;
+        font-size:9px;
+    }
+
+    footer>span{
+        width:auto;
+        text-align:left;
+        font-size:9px;
+    }
+
+    .footer-actions{
+        width:auto;
+        justify-content:flex-end;
+        gap:3px;
+        margin-left:auto;
+    }
+
+    .btnFooter{
+        padding:4px 6px;
+        font-size:9px;
+    }
+
+    .slide-navigation{
+        bottom:32px;
+        height:24px;
+        min-height:24px;
+        padding:2px 4px;
+        gap:3px;
+    }
+
+    .slide-navigation button{
+        font-size:9px;
+        padding:3px 5px;
+    }
+
+    .slide-counter{font-size:9px}
+
+    body.slides-mode>section.active{
+        padding:4px 15px 8px;
+        min-height:calc(100vh - 58px);
+    }
+
+    body.slides-mode .definition-title{
+        font-size:17px;
+        padding:8px;
+    }
+}
+
+@media(max-width:420px){
+
+    .definition-title{font-size:16px}
+
+    header h1 p{font-size:14px}
+
+    .brandbar{padding:3px 5px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:10px;
+        padding:4px 5px;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+    }
+
+    body.section-open>section.active{
+        margin:0;
+        padding:4px 12px 14px;
+    }
+
+    td,th{
+        font-size:11px;
+        padding:6px 3px;
+    }
+
+    .titre{font-size:18px}
+
+    nav button{
+        padding:6px 7px;
+        font-size:11px;
+    }
+
+    footer{
+        padding:3px 4px;
+        font-size:8px;
+    }
+
+    footer>span{font-size:8px}
+
+    .btnFooter{
+        font-size:8px;
+        padding:4px 5px;
+    }
+
+    .footer-actions{gap:2px}
+
+    .slide-navigation button{
+        font-size:8px;
+        padding:3px 4px;
+    }
+
+    .slide-counter{font-size:8px}
+}
+
+/* MODE DATASHOW */
+
+@media screen and (min-width:1200px) and (min-height:650px){
+
+    body{
+        font-size:18px;
+        line-height:1.6;
+        padding-bottom:40px;
+    }
+
+    .brandbar{padding:5px 18px}
+    .brand{font-size:17px}
+
+    .brand-logo{
+        width:32px;
+        height:32px;
+        font-size:15px;
+    }
+
+    header h1{padding:6px 8px}
+    header h1 p{font-size:21px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:13px;
+        padding:6px 9px;
+    }
+
+    .dropdown-content{min-width:270px}
+
+    .dropdown-content a{
+        font-size:15px;
+        padding:11px 14px;
+    }
+
+    nav{
+        padding:8px 12px;
+        gap:9px;
+    }
+
+    nav button{
+        padding:9px 16px;
+        font-size:18px;
+        border-radius:6px;
+    }
+
+    section{
+        padding:30px 35px;
+        margin:18px 22px;
+    }
+
+    body.section-open>section.active{
+        margin:0;
+        padding:4px 35px 30px;
+    }
+
+    h2{
+        font-size:27px;
+        margin-bottom:18px;
+    }
+
+    h3{
+        font-size:21px;
+        margin-top:20px;
+    }
+
+    p,li{
+        font-size:18px;
+        line-height:1.7;
+    }
+
+    .definition-title{
+        font-size:23px;
+        padding:14px;
+    }
+
+    .definition-box{padding:17px}
+
+    td,th{
+        padding:14px 17px;
+        font-size:17px;
+        line-height:1.5;
+    }
+
+    .container{padding:22px}
+
+    footer{
+        height:32px;
+        min-height:32px;
+        font-size:11px;
+    }
+
+    .btnFooter{
+        padding:4px 9px;
+        font-size:11px;
+    }
+
+    body.slides-mode .definition-title{
+        font-size:21px;
+        padding:9px 12px;
+    }
+
+    body.slides-mode p,
+    body.slides-mode li{
+        font-size:18px;
+        line-height:1.45;
+    }
+}
+
+/* GRAND ÉCRAN */
+
+@media screen and (min-width:1600px){
+
+    body{
+        font-size:19px;
+        padding-bottom:40px;
+    }
+
+    header h1{padding:6px 8px}
+    header h1 p{font-size:22px}
+
+    section{
+        max-width:1750px;
+        margin:22px auto;
+        padding:35px 45px;
+    }
+
+    body.section-open>section.active{
+        margin:0 auto;
+        padding:4px 45px 35px;
+    }
+
+    h2{font-size:30px}
+    h3{font-size:24px}
+
+    p,li{font-size:20px}
+
+    td,th{
+        font-size:19px;
+        padding:17px 20px;
+    }
+
+    nav button{
+        font-size:19px;
+        padding:10px 18px;
+    }
+
+    .definition-title{
+        font-size:25px;
+        padding:15px;
+    }
+
+    footer{
+        height:32px;
+        min-height:32px;
+    }
+
+    body.slides-mode p,
+    body.slides-mode li{
+        font-size:19px;
+        line-height:1.45;
+    }
 }
 </style>
 </head>
@@ -72,369 +947,490 @@ header h1{font-size:21px}
 <body>
 
 <header>
-<div class="brandbar">
 
-<a class="brand" href="index.html">
-<span class="brand-logo">IF</span>
-<span>IgnDay</span>
-</a>
+    <div class="brandbar">
 
-<div class="site-menu">
+        <a class="brand" href="index.html">
+            <span class="brand-logo">IF</span>
+            <span>IgnDay</span>
+        </a>
 
-<a href="index.html">Accueil</a>
+        <div class="site-menu">
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-Modules ▼
-</button>
-<div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a>
-<a href="M2.html">M2 – Comptabilité analytique</a>
-<a href="M3.html">M3 – Analyse financière</a>
-<a href="M4.html">M4 – Fiscalité</a>
-<a href="M5.html">M5 – Mathématiques financières</a>
-<a href="M6.html">M6 – Statistiques</a>
-<a href="M7.html">M7 – Marketing</a>
-<a href="M8.html">M8 – Comptabilité approfondie</a>
-<a href="M9.html">M9 – Management</a>
-</div>
-</div>
+            <a href="index.html">Accueil</a>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-M1 - Comptabilité Générale ▼
-</button>
-<div class="dropdown-content">
-<a href="P1M1.html">P1 – Concepts de base</a>
-<a href="P2M1.html">P2 – Opérations courantes</a>
-<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
-</div>
-</div>
+            <div class="dropdown">
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+                    M1 - Comptabilité Générale ▼
+                </button>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-P1 – Concepts de base ▼
-</button>
-<div class="dropdown-content">
-<a href="C1P1M1.html">T - Résumés des thèmes</a>
-<a href="C2P1M1.html">F - Formulaires interactifs</a>
-<a href="C3P1M1.html">E - Exercices corrigés</a>
-</div>
-</div>
+                <div class="dropdown-content">
+                    <a href="P1M1.html">P1 – Concepts de base</a>
+                    <a href="P2M1.html">P2 – Opérations courantes</a>
+                    <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+                </div>
+            </div>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-T - Résumés des thèmes ▼
-</button>
-<div class="dropdown-content">
-<a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
-<a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
-<a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
-<a href="T4C1P1M1.html">T4 - Notion de compte</a>
-<a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
-<a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
-<a href="T7C1P1M1.html">T7 - Le virement comptable</a>
-<a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
-<a href="T9C1P1M1.html">T9 - Le journal comptable</a>
-<a href="T10C1P1M1.html">T10 - Le grand livre</a>
-<a href="T11C1P1M1.html">T11 - La balance</a>
-</div>
-</div>
+            <div class="dropdown">
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+                    P1 – Concepts de base ▼
+                </button>
 
-<a href="C1P1M1.html">⬅ Retour</a>
+                <div class="dropdown-content">
+                    <a href="C1P1M1.html">T - Résumés des thèmes</a>
+                    <a href="C2P1M1.html">F - Formulaires interactifs</a>
+                    <a href="C3P1M1.html">E - Exercices corrigés</a>
+                </div>
+            </div>
 
-</div>
-</div>
+            <div class="dropdown">
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+                    T - Résumés des thèmes ▼
+                </button>
 
-<h1>
-<p>M1 - Comptabilité générale &gt; P1 - Concepts de base &gt;&gt; T – Résumés des thèmes</p>
-<p>T6 - Le Cadre Comptable Marocain</p>
-</h1>
+                <div class="dropdown-content">
+                    <a href="T1C1P1M1.html">T1 - Notion de la comptabilité générale</a>
+                    <a href="T2C1P1M1.html">T2 - Le bilan comptable</a>
+                    <a href="T3C1P1M1.html">T3 - L’analyse comptable des opérations</a>
+                    <a href="T4C1P1M1.html">T4 - Notion de compte</a>
+                    <a href="T5C1P1M1.html">T5 - Le compte des produits et charges</a>
+                    <a href="T6C1P1M1.html">T6 - Le cadre comptable marocain</a>
+                    <a href="T7C1P1M1.html">T7 - Le virement comptable</a>
+                    <a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
+                    <a href="T9C1P1M1.html">T9 - Le journal comptable</a>
+                    <a href="T10C1P1M1.html">T10 - Le grand livre</a>
+                    <a href="T11C1P1M1.html">T11 - La balance</a>
+                </div>
+            </div>
+
+            <a href="C1P1M1.html">⬅ Retour</a>
+
+        </div>
+    </div>
+
+    <h1>
+        <p>M1 - Comptabilité générale &gt; P1 - Concepts de base</p>
+        <p>Thème 6 - Le Cadre Comptable Marocain</p>
+    </h1>
+
 </header>
 
+<!-- NAVIGATION DES SECTIONS -->
+
 <nav>
-<button onclick="showSection('plan',this)">Plan comptable</button>
-<button onclick="showSection('classes',this)">Classes</button>
-<button onclick="showSection('principes',this)">Principes</button>
-<button onclick="showSection('etats',this)">États de synthèse</button>
-<button onclick="showSection('EE',this)">Exercice d’évaluation</button>
+
+    <button onclick="showSection('plan',this)">
+        1- Le Plan Comptable Général et les classes
+    </button>
+
+    <button onclick="showSection('principes',this)">
+        2- Principes comptables et états de synthèse
+    </button>
+
+    <button onclick="showSection('EE',this)">
+        Exercice d’évaluation
+    </button>
+
 </nav>
 
-<!-- PLAN COMPTABLE -->
+<!-- SECTION 1 : PLAN COMPTABLE -->
 
-<section id="plan" class="active animationSection">
-<h2>📘 Le Plan Comptable</h2>
+<section id="plan">
 
-<p>
-Le plan comptable est un document qui regroupe
-l’ensemble des comptes utilisés par l’entreprise
-ainsi que les règles de leur fonctionnement.
-</p>
+    <h2 class="definition-title">
+        1- Le Plan Comptable Général (PCG) et la classification des comptes
+    </h2>
 
-<div class="highlight">
-✔ Liste des comptes<br>
-✔ Règles de fonctionnement<br>
-✔ Organisation normalisée
-</div>
+    <h2>A- Le Plan Comptable</h2>
 
-<h3>Deux modèles :</h3>
+    <div class="definition-box">
 
-<ul>
-<li><b>Modèle normal :</b> grandes et moyennes entreprises</li>
-<li><b>Modèle simplifié :</b> petites entreprises</li>
-</ul>
+        <p>
+            Le plan comptable est un document qui regroupe
+            l’ensemble des comptes utilisés par l’entreprise
+            ainsi que les règles de leur fonctionnement.
+        </p>
+
+        <div class="highlight">
+            ✔ Liste des comptes<br>
+            ✔ Règles de fonctionnement<br>
+            ✔ Organisation normalisée
+        </div>
+
+        <h3>Deux modèles :</h3>
+
+        <ul>
+            <li><b>Modèle normal :</b> grandes et moyennes entreprises</li>
+            <li><b>Modèle simplifié :</b> petites entreprises</li>
+        </ul>
+
+    </div>
+
+    <h2>B- Les classes comptables</h2>
+
+    <p>Les comptes sont classés en 10 classes :</p>
+
+    <div class="definition-box">
+
+        <ul>
+            <li><b>Classes 1 à 8 :</b> Comptabilité générale</li>
+            <li><b>Classe 1 :</b> Comptes de financement permanent</li>
+            <li><b>Classe 2 :</b> Comptes d’actif immobilisé</li>
+            <li><b>Classe 3 :</b> Comptes d’actif circulant hors trésorerie</li>
+            <li><b>Classe 4 :</b> Comptes de passif circulant hors trésorerie</li>
+            <li><b>Classe 5 :</b> Comptes de trésorerie</li>
+            <li><b>Classe 6 :</b> Comptes de charges</li>
+            <li><b>Classe 7 :</b> Comptes de produits</li>
+            <li><b>Classe 8 :</b> Comptes de résultats</li>
+            <li><b>Classe 9 :</b> Comptabilité analytique</li>
+            <li><b>Classe 0 :</b> Comptes spéciaux</li>
+        </ul>
+
+        <div class="highlight">
+
+            ✔ Chaque compte possède un numéro (codification).
+
+            <ul>
+                <li><b>1er chiffre :</b> Classe ou masse</li>
+                <li><b>2 premiers chiffres :</b> Rubrique</li>
+                <li><b>3 premiers chiffres :</b> Poste</li>
+                <li><b>4 premiers chiffres :</b> Compte principal</li>
+                <li><b>5 premiers chiffres :</b> Compte divisionnaire</li>
+            </ul>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- CLASSES COMPTABLES -->
-
-<section id="classes">
-<h2>📊 Les classes comptables</h2>
-
-<p>Les comptes sont classés en 10 classes :</p>
-
-<ul>
-<li><b>Classes 1 à 8 :</b> Comptabilité générale</li>
-<li><b>Classe 1 :</b> Comptes de financement permanent</li>
-<li><b>Classe 2 :</b> Comptes d’actif immobilisé</li>
-<li><b>Classe 3 :</b> Comptes d’actif circulant hors trésorerie</li>
-<li><b>Classe 4 :</b> Comptes de passif circulant hors trésorerie</li>
-<li><b>Classe 5 :</b> Comptes de trésorerie</li>
-<li><b>Classe 6 :</b> Comptes de charges</li>
-<li><b>Classe 7 :</b> Comptes de produits</li>
-<li><b>Classe 8 :</b> Comptes de résultats</li>
-<li><b>Classe 9 :</b> Comptabilité analytique</li>
-<li><b>Classe 0 :</b> Comptes spéciaux</li>
-</ul>
-
-<div class="highlight">
-✔ Chaque compte possède un numéro (codification).
-<ul>
-<li><b>1er chiffre :</b> Classe ou masse</li>
-<li><b>2 premiers chiffres :</b> Rubrique</li>
-<li><b>3 premiers chiffres :</b> Poste</li>
-<li><b>4 premiers chiffres :</b> Compte principal</li>
-<li><b>5 premiers chiffres :</b> Compte divisionnaire</li>
-</ul>
-</div>
-</section>
-
-<!-- PRINCIPES COMPTABLES -->
+<!-- SECTION 2 : PRINCIPES COMPTABLES ET ÉTATS DE SYNTHÈSE -->
 
 <section id="principes">
-<h2>⚖️ Principes comptables fondamentaux</h2>
 
-<h3>Les 7 principes :</h3>
+    <h2 class="definition-title">
+        2- Les principes comptables fondamentaux et les états de synthèse
+    </h2>
 
-<ul>
-<li><b>Principe de continuité d’exploitation :</b> l’entreprise est supposée poursuivre ses activités.</li>
-<li><b>Principe de permanence des méthodes :</b> les méthodes comptables doivent rester constantes pour faciliter les comparaisons.</li>
-<li><b>Principe du coût historique :</b> les éléments sont généralement enregistrés à leur coût d’entrée.</li>
-<li><b>Principe de spécialisation des exercices :</b> les charges et les produits sont rattachés à l’exercice concerné.</li>
-<li><b>Principe de prudence :</b> les pertes probables sont prises en compte selon les règles applicables.</li>
-<li><b>Principe de clarté :</b> les opérations doivent être enregistrées et présentées de façon compréhensible.</li>
-<li><b>Principe d’importance significative :</b> les informations importantes susceptibles d’influencer les décisions doivent être présentées.</li>
-</ul>
+    <h2>A- Principes comptables fondamentaux</h2>
 
-<div class="highlight">
-✔ Ces principes contribuent à la fiabilité, à la comparabilité et à la sincérité de l’information comptable.
-</div>
+    <h3>Les 7 principes :</h3>
+
+    <div class="definition-box">
+
+        <ul>
+            <li>
+                <b>Principe de continuité d’exploitation :</b>
+                l’entreprise est supposée poursuivre ses activités.
+            </li>
+
+            <li>
+                <b>Principe de permanence des méthodes :</b>
+                les méthodes comptables doivent rester constantes pour faciliter les comparaisons.
+            </li>
+
+            <li>
+                <b>Principe du coût historique :</b>
+                les éléments sont généralement enregistrés à leur coût d’entrée.
+            </li>
+
+            <li>
+                <b>Principe de spécialisation des exercices :</b>
+                les charges et les produits sont rattachés à l’exercice concerné.
+            </li>
+
+            <li>
+                <b>Principe de prudence :</b>
+                les pertes probables sont prises en compte selon les règles applicables.
+            </li>
+
+            <li>
+                <b>Principe de clarté :</b>
+                les opérations doivent être enregistrées et présentées de façon compréhensible.
+            </li>
+
+            <li>
+                <b>Principe d’importance significative :</b>
+                les informations importantes susceptibles d’influencer les décisions doivent être présentées.
+            </li>
+        </ul>
+
+        <div class="highlight">
+            ✔ Ces principes contribuent à la fiabilité, à la comparabilité et à la sincérité de l’information comptable.
+        </div>
+
+    </div>
+
+    <h2>B- Les états de synthèse</h2>
+
+    <div class="definition-box">
+
+        <p>
+            Les états de synthèse présentent la situation patrimoniale et financière
+            de l’entreprise ainsi que le résultat de son activité.
+        </p>
+
+        <ul>
+            <li>
+                <b>Bilan :</b>
+                présente l’actif et le passif à une date donnée.
+            </li>
+
+            <li>
+                <b>Compte de Produits et Charges (CPC) :</b>
+                récapitule les produits et les charges afin de déterminer le résultat.
+            </li>
+
+            <li>
+                <b>État des Soldes de Gestion (ESG) :</b>
+                présente les principaux soldes de gestion.
+            </li>
+
+            <li>
+                <b>Tableau de financement :</b>
+                présente les emplois et les ressources de l’exercice selon le modèle applicable.
+            </li>
+
+            <li>
+                <b>ETIC :</b>
+                État des Informations Complémentaires qui précise et complète les autres états de synthèse.
+            </li>
+        </ul>
+
+        <div class="highlight">
+            ✔ Les états de synthèse permettent de communiquer une information comptable structurée sur l’entreprise.
+        </div>
+
+    </div>
+
 </section>
 
-<!-- ETATS DE SYNTHESE -->
-
-<section id="etats">
-<h2>📑 Les états de synthèse</h2>
-
-<p>Les états de synthèse présentent la situation patrimoniale et financière de l’entreprise ainsi que le résultat de son activité.</p>
-
-<ul>
-<li><b>Bilan :</b> présente l’actif et le passif à une date donnée.</li>
-<li><b>Compte de Produits et Charges (CPC) :</b> récapitule les produits et les charges afin de déterminer le résultat.</li>
-<li><b>État des Soldes de Gestion (ESG) :</b> présente les principaux soldes de gestion.</li>
-<li><b>Tableau de financement :</b> présente les emplois et les ressources de l’exercice selon le modèle applicable.</li>
-<li><b>ETIC :</b> État des Informations Complémentaires qui précise et complète les autres états de synthèse.</li>
-</ul>
-
-<div class="highlight">
-✔ Les états de synthèse permettent de communiquer une information comptable structurée sur l’entreprise.
-</div>
-</section>
-
-<!-- EXERCICE VRAI / FAUX -->
+<!-- SECTION 3 : EXERCICE D'ÉVALUATION -->
 
 <section id="EE">
-<h2>📝 Exercice d’évaluation : Vrai / Faux</h2>
 
-<p>Pour chaque affirmation, choisissez la bonne réponse puis cliquez sur « Corriger ».</p>
+    <h2 class="definition-title">
+        📝 Exercice d’évaluation : Vrai / Faux
+    </h2>
 
-<form id="quizForm">
+    <div class="container">
 
-<div id="quiz"></div>
+        <p>
+            Pour chaque affirmation, choisissez la bonne réponse puis cliquez sur « Corriger ».
+        </p>
 
-<button type="button" onclick="corrigerQuiz()">✅ Corriger</button>
-<button type="reset" onclick="effacerResultat()">↻ Réinitialiser</button>
+        <form id="quizForm">
 
-</form>
+            <div id="quiz"></div>
 
-<h3 id="resultat"></h3>
+            <button type="button" onclick="corrigerQuiz()">
+                ✅ Corriger
+            </button>
+
+            <button type="reset" onclick="effacerResultat()">
+                ↻ Réinitialiser
+            </button>
+
+        </form>
+
+        <h3 id="resultat"></h3>
+
+    </div>
+
 </section>
 
+<!-- BARRE DES DIAPOSITIVES -->
+
+<div class="slide-navigation" id="slideNavigation">
+
+    <button type="button" id="btnDiapoPrecedente">
+        ← Diapositive précédente
+    </button>
+
+    <span class="slide-counter" id="compteurDiapo">
+        Diapositive 1 / 1
+    </span>
+
+    <button type="button" id="btnDiapoSuivante">
+        Diapositive suivante →
+    </button>
+
+</div>
+
+<!-- PIED DE PAGE -->
+
 <footer>
-<span>Formation en comptabilité générale</span>
-<br><br>
+
+    <span>Formation en comptabilité générale</span>
+
+    <div class="footer-actions">
+
+        <button
+            type="button"
+            class="btnFooter btnPrecedent"
+            id="btnSectionPrecedente"
+            onclick="naviguerSection(-1)">
+            ← Section précédente
+        </button>
+
+        <button
+            type="button"
+            class="btnFooter btnSuivant"
+            id="btnSectionSuivante"
+            onclick="naviguerSection(1)">
+            Section suivante →
+        </button>
+
+        <button
+            type="button"
+            class="btnFooter btnRetourMenu"
+            id="btnRetourMenu"
+            onclick="retourMenu()">
+            ↑ Retour au menu
+        </button>
+
+    </div>
+
 </footer>
 
 <script>
-/* MENU DEROULANT */
-function toggleDropdown(button){
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
+/* ==========================================
+   GÉNÉRATION DU QUIZ
+========================================== */
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
-    });
-
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
-}
-
-/* FERMER LES MENUS EN CLIQUANT A L'EXTERIEUR */
-document.addEventListener("click",function(event){
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        if(!dropdown.contains(event.target)){
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
-
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
-        }
-    });
-});
-
-/* NAVIGATION ENTRE LES SECTIONS */
-function showSection(id,button){
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
-
-    const current=document.getElementById(id);
-
-    if(current){
-        current.classList.add("active","animationSection");
-    }
-
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
-    });
-
-    if(button){
-        button.classList.add("btnActive");
-    }
-}
-
-/* QUESTIONS VRAI / FAUX */
 const questions=[
+
     {
         q:"1. Le plan comptable regroupe les comptes utilisés par l’entreprise et les règles de leur fonctionnement.",
         answer:true
     },
+
     {
         q:"2. Le modèle simplifié est destiné principalement aux grandes entreprises.",
         answer:false
     },
+
     {
         q:"3. Les classes 1 à 8 concernent la comptabilité générale.",
         answer:true
     },
+
     {
         q:"4. La classe 9 est réservée à la comptabilité analytique.",
         answer:true
     },
+
     {
         q:"5. La classe 0 concerne les comptes de trésorerie.",
         answer:false
     },
+
     {
         q:"6. Le principe de prudence consiste notamment à prendre en compte les pertes probables.",
         answer:true
     },
+
     {
         q:"7. Le principe de continuité d’exploitation suppose que l’entreprise va nécessairement cesser son activité.",
         answer:false
     },
+
     {
         q:"8. Le CPC permet de déterminer le résultat de l’entreprise.",
         answer:true
     },
+
     {
         q:"9. Le bilan présente uniquement les charges et les produits.",
         answer:false
     },
+
     {
         q:"10. Les états de synthèse présentent des informations sur la situation et les résultats de l’entreprise.",
         answer:true
     }
+
 ];
 
-/* GENERATION AUTOMATIQUE DU QUIZ */
+/* GÉNÉRATION AUTOMATIQUE DU QUIZ */
+
 function genererQuiz(){
+
     const quizDiv=document.getElementById("quiz");
 
+    if(!quizDiv || quizDiv.children.length>0)return;
+
     questions.forEach((question,i)=>{
+
         const div=document.createElement("div");
+
         div.className="q";
 
         div.innerHTML=`
+
             <p>${question.q}</p>
+
             <label>
                 <input type="radio" name="q${i}" value="true">
                 Vrai
             </label>
+
             <label>
                 <input type="radio" name="q${i}" value="false">
                 Faux
             </label>
+
             <p id="res${i}"></p>
+
         `;
 
         quizDiv.appendChild(div);
+
     });
+
 }
 
 /* CORRECTION DU QUIZ */
+
 function corrigerQuiz(){
+
     let score=0;
 
     questions.forEach((question,i)=>{
-        const answer=document.querySelector('input[name="q'+i+'"]:checked');
+
+        const answer=document.querySelector(
+            'input[name="q'+i+'"]:checked'
+        );
+
         const result=document.getElementById("res"+i);
 
         result.className="";
 
         if(!answer){
+
             result.textContent="⚠ Non répondu";
             result.classList.add("wrong");
+
             return;
         }
 
         const reponseUtilisateur=answer.value==="true";
 
         if(reponseUtilisateur===question.answer){
+
             result.textContent="✔ Bonne réponse";
             result.classList.add("correct");
+
             score++;
+
         }else{
+
             result.textContent="✘ Mauvaise réponse";
             result.classList.add("wrong");
+
         }
+
     });
 
     const appreciation=score>=8
@@ -445,26 +1441,948 @@ function corrigerQuiz(){
 
     document.getElementById("resultat").textContent=
         "🎯 Score : "+score+"/10 — "+appreciation;
+
 }
 
-/* REINITIALISATION */
+/* RÉINITIALISATION */
+
 function effacerResultat(){
+
     document.getElementById("resultat").textContent="";
 
     questions.forEach((question,i)=>{
+
         const result=document.getElementById("res"+i);
 
         if(result){
+
             result.textContent="";
             result.className="";
+
         }
+
     });
+
 }
 
-/* INITIALISATION */
-document.addEventListener("DOMContentLoaded",function(){
-    genererQuiz();
+/* ==========================================
+   MENUS DÉROULANTS
+========================================== */
+
+function positionDropdown(button,menu){
+
+    const rect=button.getBoundingClientRect();
+    const marge=8;
+
+    menu.style.display="block";
+    menu.style.position="fixed";
+    menu.style.maxWidth=(window.innerWidth-16)+"px";
+    menu.style.maxHeight=(window.innerHeight-16)+"px";
+    menu.style.top="0";
+    menu.style.bottom="auto";
+
+    const hauteurMenu=menu.scrollHeight;
+    const espaceBas=window.innerHeight-rect.bottom-marge;
+    const espaceHaut=rect.top-marge;
+
+    const ouvrirEnBas=
+        hauteurMenu<=espaceBas || espaceBas>=espaceHaut;
+
+    let hauteurDisponible;
+
+    if(ouvrirEnBas){
+
+        menu.style.top=(rect.bottom+4)+"px";
+        menu.style.bottom="auto";
+        hauteurDisponible=espaceBas-4;
+
+    }else{
+
+        menu.style.bottom=(window.innerHeight-rect.top+4)+"px";
+        menu.style.top="auto";
+        hauteurDisponible=espaceHaut-4;
+
+    }
+
+    menu.style.maxHeight=Math.max(100,hauteurDisponible)+"px";
+    menu.style.width="auto";
+
+    const largeur=Math.min(
+        Math.max(menu.offsetWidth,230),
+        window.innerWidth-16
+    );
+
+    menu.style.width=largeur+"px";
+
+    let positionGauche=rect.left;
+
+    if(positionGauche+largeur>window.innerWidth-marge){
+        positionGauche=window.innerWidth-largeur-marge;
+    }
+
+    if(positionGauche<marge){
+        positionGauche=marge;
+    }
+
+    menu.style.left=positionGauche+"px";
+
+}
+
+function toggleDropdown(button){
+
+    const currentMenu=
+        button.parentElement.querySelector(".dropdown-content");
+
+    const isOpen=currentMenu.style.display==="block";
+
+    fermerTousLesMenus();
+
+    if(!isOpen){
+
+        positionDropdown(button,currentMenu);
+        button.setAttribute("aria-expanded","true");
+
+    }
+
+}
+
+function fermerTousLesMenus(){
+
+    document.querySelectorAll(".dropdown-content").forEach(menu=>{
+
+        menu.style.display="none";
+        menu.style.top="auto";
+        menu.style.bottom="auto";
+
+    });
+
+    document.querySelectorAll(".dropdown button").forEach(button=>{
+
+        button.setAttribute("aria-expanded","false");
+
+    });
+
+}
+
+document.addEventListener("click",function(event){
+
+    if(!event.target.closest(".dropdown")){
+        fermerTousLesMenus();
+    }
+
 });
+
+function repositionnerMenus(){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const button=dropdown.querySelector("button");
+        const menu=dropdown.querySelector(".dropdown-content");
+
+        if(button && menu && menu.style.display==="block"){
+            positionDropdown(button,menu);
+        }
+
+    });
+
+}
+
+window.addEventListener("resize",repositionnerMenus);
+window.addEventListener("scroll",repositionnerMenus,true);
+
+/* ==========================================
+   MODE DIAPOSITIVES AUTOMATIQUES
+========================================== */
+
+function zoomImportant(){
+
+    return(
+        window.screen.width>=1000 &&
+        window.innerWidth<=window.screen.width*0.62
+    );
+
+}
+
+let currentSlides=[];
+let currentSlideIndex=0;
+let currentSlideSection=null;
+let slideMode=false;
+let resizeTimer=null;
+
+const slideNavigation=document.getElementById("slideNavigation");
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+const compteurDiapo=document.getElementById("compteurDiapo");
+
+/* MÉMORISER LE CONTENU ORIGINAL */
+
+const originalSectionContent=new Map();
+
+function memoriserContenu(section){
+
+    if(!originalSectionContent.has(section.id)){
+
+        originalSectionContent.set(
+            section.id,
+            Array.from(section.childNodes)
+        );
+
+    }
+
+}
+
+function restaurerContenuOriginal(section){
+
+    if(!section || !originalSectionContent.has(section.id)){
+        return;
+    }
+
+    const contenuOriginal=originalSectionContent.get(section.id);
+
+    section.replaceChildren(...contenuOriginal);
+
+}
+
+/* HAUTEUR DISPONIBLE */
+
+function hauteurDisponibleDiapo(){
+
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
+    const hauteurNavigation=24;
+
+    return Math.max(
+        180,
+        window.innerHeight-hauteurFooter-hauteurNavigation-35
+    );
+
+}
+
+/* IDENTIFIER LES TITRES */
+
+function estTitreContenu(node){
+
+    if(node.nodeType!==Node.ELEMENT_NODE){
+        return false;
+    }
+
+    return node.matches(
+        "h2,h3,h4,.definition-title,.sous-titre,.table-title"
+    );
+
+}
+
+/* CONSTRUIRE LES GROUPES */
+
+function construireGroupes(nodes){
+
+    const groupes=[];
+    let groupeActuel=[];
+
+    nodes.forEach(node=>{
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return;
+        }
+
+        if(estTitreContenu(node) && groupeActuel.length){
+
+            groupes.push(groupeActuel);
+            groupeActuel=[];
+
+        }
+
+        groupeActuel.push(node);
+
+    });
+
+    if(groupeActuel.length){
+        groupes.push(groupeActuel);
+    }
+
+    return groupes;
+
+}
+
+/* CRÉER UNE DIAPOSITIVE */
+
+function creerSlide(section){
+
+    const slide=document.createElement("div");
+
+    slide.className="content-slide";
+
+    section.appendChild(slide);
+
+    currentSlides.push(slide);
+
+    return slide;
+
+}
+
+/* MESURER UN GROUPE DE CONTENU */
+
+function mesurerGroupe(groupe,largeur){
+
+    const mesure=document.createElement("div");
+
+    mesure.className="content-slide slide-measure";
+
+    mesure.style.width=Math.max(300,largeur)+"px";
+    mesure.style.maxWidth="none";
+    mesure.style.height="auto";
+    mesure.style.minHeight="0";
+    mesure.style.maxHeight="none";
+    mesure.style.overflow="visible";
+    mesure.style.display="block";
+    mesure.style.visibility="hidden";
+    mesure.style.position="fixed";
+    mesure.style.left="-100000px";
+    mesure.style.top="0";
+    mesure.style.padding="2px 0 8px";
+    mesure.style.boxSizing="border-box";
+
+    groupe.forEach(node=>{
+        mesure.appendChild(node.cloneNode(true));
+    });
+
+    document.body.appendChild(mesure);
+
+    const hauteur=Math.ceil(
+        Math.max(
+            mesure.scrollHeight,
+            mesure.getBoundingClientRect().height
+        )
+    );
+
+    mesure.remove();
+
+    return hauteur;
+
+}
+
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+
+function creerDiapositives(section){
+
+    if(!section)return;
+
+    currentSlides=[];
+    currentSlideIndex=0;
+
+    restaurerContenuOriginal(section);
+    memoriserContenu(section);
+
+    const nodes=Array.from(section.childNodes);
+    const groupes=construireGroupes(nodes);
+
+    section.replaceChildren();
+
+    const hauteurMax=hauteurDisponibleDiapo();
+
+    const largeur=Math.max(
+        300,
+        section.clientWidth-50
+    );
+
+    let slide=null;
+    let hauteurUtilisee=0;
+
+    groupes.forEach(groupe=>{
+
+        const hauteurGroupe=mesurerGroupe(
+            groupe,
+            largeur
+        );
+
+        if(
+            !slide ||
+            (
+                hauteurUtilisee>0 &&
+                hauteurUtilisee+hauteurGroupe+12>hauteurMax
+            )
+        ){
+
+            slide=creerSlide(section);
+            hauteurUtilisee=0;
+
+        }
+
+        groupe.forEach(node=>{
+            slide.appendChild(node);
+        });
+
+        hauteurUtilisee+=hauteurGroupe+12;
+
+    });
+
+    if(currentSlides.length===0){
+        creerSlide(section);
+    }
+
+    afficherDiapositive(0);
+
+}
+
+/* COMPTEUR DES DIAPOSITIVES */
+
+function actualiserCompteurDiapo(){
+
+    const total=currentSlides.length;
+
+    if(total===0){
+
+        compteurDiapo.textContent="Aucune diapositive";
+        btnDiapoPrecedente.disabled=true;
+        btnDiapoSuivante.disabled=true;
+
+        return;
+    }
+
+    compteurDiapo.textContent=
+        "Diapositive "+(currentSlideIndex+1)+" / "+total;
+
+    btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+    btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+
+}
+
+/* AJUSTEMENT DU CONTENU */
+
+function ajusterContenuDiapositive(slide){
+
+    if(!slide)return;
+
+    slide.style.width="100%";
+    slide.style.maxWidth="100%";
+    slide.style.overflowX="hidden";
+    slide.style.overflowY="auto";
+
+    slide.querySelectorAll("*").forEach(element=>{
+
+        element.style.maxWidth="100%";
+        element.style.minWidth="0";
+        element.style.overflowWrap="anywhere";
+
+    });
+
+    slide.querySelectorAll("table").forEach(table=>{
+
+        table.style.width="100%";
+        table.style.maxWidth="100%";
+        table.style.tableLayout="fixed";
+
+    });
+
+    slide.querySelectorAll("td,th").forEach(cell=>{
+
+        cell.style.overflowWrap="anywhere";
+        cell.style.wordBreak="normal";
+
+    });
+
+}
+
+/* AFFICHER UNE DIAPOSITIVE */
+
+function afficherDiapositive(index){
+
+    if(!currentSlides.length){
+
+        actualiserCompteurDiapo();
+        return;
+
+    }
+
+    if(index<0 || index>=currentSlides.length){
+        return;
+    }
+
+    currentSlideIndex=index;
+
+    currentSlides.forEach((slide,i)=>{
+
+        slide.classList.toggle(
+            "active-slide",
+            i===index
+        );
+
+        if(i===index){
+
+            ajusterContenuDiapositive(slide);
+            slide.scrollTop=0;
+
+        }
+
+    });
+
+    actualiserCompteurDiapo();
+
+    window.scrollTo({
+        top:0,
+        behavior:"auto"
+    });
+
+}
+
+/* NAVIGATION DIAPOSITIVES */
+
+function naviguerDiapositive(direction){
+
+    afficherDiapositive(currentSlideIndex+direction);
+
+}
+
+btnDiapoPrecedente.addEventListener("click",function(){
+    naviguerDiapositive(-1);
+});
+
+btnDiapoSuivante.addEventListener("click",function(){
+    naviguerDiapositive(1);
+});
+
+/* ACTIVER LE MODE DIAPOSITIVES */
+
+function activerModeDiapositives(section){
+
+    if(!section)return;
+
+    if(
+        slideMode &&
+        currentSlideSection===section
+    ){
+        return;
+    }
+
+    if(currentSlideSection && currentSlideSection!==section){
+        desactiverModeDiapositives(currentSlideSection);
+    }
+
+    currentSlideSection=section;
+
+    document.body.classList.add("slides-mode");
+
+    slideNavigation.style.display="flex";
+
+    slideMode=true;
+
+    creerDiapositives(section);
+
+}
+
+/* DÉSACTIVER LE MODE DIAPOSITIVES */
+
+function desactiverModeDiapositives(section){
+
+    if(!section){
+        section=currentSlideSection;
+    }
+
+    if(section){
+        restaurerContenuOriginal(section);
+    }
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+    currentSlides=[];
+    currentSlideIndex=0;
+    currentSlideSection=null;
+
+    slideMode=false;
+
+}
+
+/* ACTUALISER L'AFFICHAGE */
+
+function actualiserAffichageSection(){
+
+    const section=document.querySelector(
+        "body > section.active"
+    );
+
+    if(!section)return;
+
+    if(zoomImportant()){
+
+        activerModeDiapositives(section);
+
+    }else if(slideMode){
+
+        desactiverModeDiapositives(section);
+
+    }
+
+}
+
+/* ==========================================
+   NAVIGATION ENTRE LES SECTIONS
+========================================== */
+
+const sectionIds=[
+    "plan",
+    "principes",
+    "EE"
+];
+
+let currentSectionIndex=-1;
+
+/* ACTUALISER LES BOUTONS DU PIED DE PAGE */
+
+function actualiserBoutonsNavigation(){
+
+    const precedent=document.getElementById(
+        "btnSectionPrecedente"
+    );
+
+    const suivant=document.getElementById(
+        "btnSectionSuivante"
+    );
+
+    if(currentSectionIndex===-1){
+
+        precedent.classList.remove("visible");
+        suivant.classList.remove("visible");
+
+        return;
+    }
+
+    precedent.disabled=(currentSectionIndex===0);
+
+    suivant.disabled=(
+        currentSectionIndex===sectionIds.length-1
+    );
+
+}
+
+/* AFFICHER UNE SECTION */
+
+function showSection(id,button){
+
+    const nouvelIndex=sectionIds.indexOf(id);
+    const current=document.getElementById(id);
+
+    if(!current || nouvelIndex===-1){
+
+        console.warn("Section introuvable :",id);
+        return;
+
+    }
+
+    if(slideMode && currentSlideSection){
+        desactiverModeDiapositives(currentSlideSection);
+    }
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+    currentSlides=[];
+    currentSlideIndex=0;
+    currentSlideSection=null;
+    slideMode=false;
+
+    /* MASQUER LES AUTRES SECTIONS */
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+            "active",
+            "animationSection"
+        );
+
+    });
+
+    /* RÉINITIALISER LES BOUTONS DU MENU */
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+
+        btn.classList.remove("btnActive");
+        btn.removeAttribute("aria-pressed");
+
+    });
+
+    fermerTousLesMenus();
+
+    /* ACTIVER LA SECTION */
+
+    currentSectionIndex=nouvelIndex;
+
+    document.body.classList.add("section-open");
+
+    current.classList.add(
+        "active",
+        "animationSection"
+    );
+
+    /* AFFICHER LES BOUTONS DU PIED DE PAGE */
+
+    document.getElementById("btnRetourMenu")
+        .classList.add("visible");
+
+    document.getElementById("btnSectionPrecedente")
+        .classList.add("visible");
+
+    document.getElementById("btnSectionSuivante")
+        .classList.add("visible");
+
+    actualiserBoutonsNavigation();
+
+    /* ACTIVER LE BOUTON CORRESPONDANT */
+
+    if(!button){
+
+        button=document.querySelectorAll("nav button")[nouvelIndex];
+
+    }
+
+    if(button){
+
+        button.classList.add("btnActive");
+        button.setAttribute("aria-pressed","true");
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"auto"
+    });
+
+    requestAnimationFrame(()=>{
+
+        actualiserAffichageSection();
+
+    });
+
+}
+
+/* SECTION PRÉCÉDENTE / SUIVANTE */
+
+function naviguerSection(direction){
+
+    const nouvelIndex=currentSectionIndex+direction;
+
+    if(
+        nouvelIndex<0 ||
+        nouvelIndex>=sectionIds.length
+    ){
+        return;
+    }
+
+    const nouvelId=sectionIds[nouvelIndex];
+
+    const boutonsMenu=Array.from(
+        document.querySelectorAll("nav button")
+    );
+
+    const boutonCorrespondant=boutonsMenu[nouvelIndex];
+
+    showSection(nouvelId,boutonCorrespondant);
+
+}
+
+/* RETOUR AU MENU */
+
+function retourMenu(){
+
+    if(slideMode && currentSlideSection){
+        desactiverModeDiapositives(currentSlideSection);
+    }
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+    currentSlides=[];
+    currentSlideIndex=0;
+    currentSlideSection=null;
+    slideMode=false;
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+            "active",
+            "animationSection"
+        );
+
+    });
+
+    document.getElementById("btnRetourMenu")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionPrecedente")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionSuivante")
+        .classList.remove("visible");
+
+    currentSectionIndex=-1;
+
+    document.body.classList.remove("section-open");
+
+    requestAnimationFrame(()=>{
+
+        const menu=document.querySelector("nav");
+
+        if(menu){
+
+            const position=
+                menu.getBoundingClientRect().top+
+                window.scrollY-12;
+
+            window.scrollTo({
+                top:Math.max(0,position),
+                behavior:"smooth"
+            });
+
+        }
+
+    });
+
+}
+
+/* ==========================================
+   ADAPTATION AU REDIMENSIONNEMENT / ZOOM
+========================================== */
+
+window.addEventListener("resize",function(){
+
+    clearTimeout(resizeTimer);
+
+    resizeTimer=setTimeout(()=>{
+
+        const section=document.querySelector(
+            "body > section.active"
+        );
+
+        if(!section)return;
+
+        if(zoomImportant()){
+
+            if(
+                !slideMode ||
+                currentSlideSection!==section
+            ){
+
+                activerModeDiapositives(section);
+
+            }else{
+
+                const ancienneIndex=currentSlideIndex;
+
+                creerDiapositives(section);
+
+                if(currentSlides.length>0){
+
+                    afficherDiapositive(
+                        Math.min(
+                            ancienneIndex,
+                            currentSlides.length-1
+                        )
+                    );
+
+                }
+
+            }
+
+        }else if(slideMode){
+
+            desactiverModeDiapositives(section);
+
+        }
+
+    },180);
+
+});
+
+/* ==========================================
+   NAVIGATION AU CLAVIER
+========================================== */
+
+document.addEventListener("keydown",function(event){
+
+    if(!slideMode)return;
+
+    const element=document.activeElement;
+
+    if(
+        element &&
+        (
+            element.tagName==="INPUT" ||
+            element.tagName==="TEXTAREA" ||
+            element.tagName==="SELECT" ||
+            element.isContentEditable
+        )
+    ){
+        return;
+    }
+
+    if(
+        event.key==="ArrowRight" ||
+        event.key==="PageDown"
+    ){
+
+        event.preventDefault();
+        naviguerDiapositive(1);
+
+    }
+
+    if(
+        event.key==="ArrowLeft" ||
+        event.key==="PageUp"
+    ){
+
+        event.preventDefault();
+        naviguerDiapositive(-1);
+
+    }
+
+});
+
+/* ==========================================
+   INITIALISATION
+========================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    /* Générer le quiz avant de mémoriser le contenu */
+
+    genererQuiz();
+
+    slideNavigation.style.display="none";
+
+    document.body.classList.remove(
+        "slides-mode",
+        "section-open"
+    );
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+            "active",
+            "animationSection"
+        );
+
+        memoriserContenu(section);
+
+    });
+
+    document.getElementById("btnRetourMenu")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionPrecedente")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionSuivante")
+        .classList.remove("visible");
+
+    currentSectionIndex=-1;
+
+});
+
 </script>
 
 </body>
