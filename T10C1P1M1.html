@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IgnDay - T10 Le Grand Livre</title>
+<title>IgnDay - T11 La Balance des Comptes</title>
 
 <style>
 *{box-sizing:border-box}
@@ -293,7 +294,7 @@ tr:hover td{background:#f1f7ff}
 }
 
 .definition-title{
-    background:linear-gradient(120deg,#164e63,#0e7490);
+    background:linear-gradient(120deg,#14532d,#15803d);
     color:white;
     padding:12px 15px;
     border-radius:7px;
@@ -312,6 +313,43 @@ tr:hover td{background:#f1f7ff}
     font-weight:bold;
 }
 
+/* TABLEAU DE LA BALANCE */
+
+.balance-wrapper{
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.balance-table{
+    width:100%;
+    min-width:650px;
+    table-layout:fixed;
+    border-collapse:collapse;
+}
+
+.balance-table th,
+.balance-table td{
+    border:1px solid #ccc;
+    padding:9px 7px;
+    text-align:center;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+}
+
+.balance-table th{
+    background:#dfe6e9;
+}
+
+.balance-table td:nth-child(2){
+    text-align:left;
+}
+
+.balance-table tbody tr:hover td{
+    background:#f1f7ff;
+}
+
 /* CONTENEUR DE L'EXERCICE */
 
 .container{
@@ -323,36 +361,6 @@ tr:hover td{background:#f1f7ff}
 }
 
 .container p:first-child{margin-top:0}
-
-/* PRÉSENTATION DU GRAND LIVRE */
-
-.ledger-wrapper{
-    width:100%;
-    max-width:100%;
-    overflow-x:visible;
-    margin:15px 0 25px;
-}
-
-.ledger-table{
-    width:100%;
-    min-width:0;
-    table-layout:fixed;
-}
-
-.ledger-table td,
-.ledger-table th{
-    padding:10px 6px;
-    text-align:center;
-    overflow-wrap:anywhere;
-    word-break:normal;
-    white-space:normal;
-}
-
-.ledger-title{
-    text-align:center;
-    font-weight:bold;
-    background:#dfe6e9;
-}
 
 /* BARRE DES DIAPOSITIVES */
 
@@ -422,8 +430,6 @@ tr:hover td{background:#f1f7ff}
     transform:none;
     zoom:1!important;
 }
-
-/* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
 
 .slide-measure{
     position:fixed!important;
@@ -504,6 +510,10 @@ body.slides-mode table{margin-top:8px}
 
 body.slides-mode td,
 body.slides-mode th{padding:6px 9px}
+
+body.slides-mode .balance-table{
+    min-width:650px;
+}
 
 /* PIED DE PAGE */
 
@@ -657,29 +667,6 @@ footer>span{white-space:nowrap}
         font-size:12px;
     }
 
-    .ledger-wrapper{
-        width:100%;
-        max-width:100%;
-        overflow-x:visible;
-        margin:12px 0 20px;
-    }
-
-    .ledger-table{
-        width:100%;
-        min-width:0;
-        table-layout:fixed;
-        font-size:11px;
-    }
-
-    .ledger-table td,
-    .ledger-table th{
-        padding:7px 2px;
-        overflow-wrap:anywhere;
-        white-space:normal;
-    }
-
-    .ledger-table th{font-size:10px}
-
     .container{padding:15px}
 
     footer{
@@ -766,17 +753,6 @@ footer>span{white-space:nowrap}
     }
 
     .titre{font-size:18px}
-
-    .ledger-table{
-        font-size:10px;
-    }
-
-    .ledger-table td,
-    .ledger-table th{
-        padding:6px 1px;
-    }
-
-    .ledger-table th{font-size:9px}
 
     nav button{
         padding:6px 7px;
@@ -889,11 +865,6 @@ footer>span{white-space:nowrap}
         line-height:1.5;
     }
 
-    .ledger-table td,
-    .ledger-table th{
-        padding:14px 10px;
-    }
-
     .container{padding:22px}
 
     footer{
@@ -991,7 +962,6 @@ footer>span{white-space:nowrap}
 
             <a href="index.html">Accueil</a>
 
-            
 
             <div class="dropdown">
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
@@ -1044,7 +1014,7 @@ footer>span{white-space:nowrap}
 
     <h1>
         <p>M1 - Comptabilité générale &gt; P1 - Concepts de base</p>
-        <p>Thème 10 - Le Grand Livre</p>
+        <p>Thème 11 - La Balance des Comptes</p>
     </h1>
 
 </header>
@@ -1054,11 +1024,11 @@ footer>span{white-space:nowrap}
 <nav>
 
     <button onclick="showSection('def',this)">
-        1- Définition et Caractéristiques du Grand livre
+        1- Définition et rôle de la Balance
     </button>
 
     <button onclick="showSection('presentation',this)">
-        2- Présentation du Grand livre
+        2- Présentation de la Balance des comptes
     </button>
 
     <button onclick="showSection('EE',this)">
@@ -1067,104 +1037,106 @@ footer>span{white-space:nowrap}
 
 </nav>
 
-<!-- SECTION 1 : DÉFINITION -->
+<!-- SECTION 1 : DÉFINITION ET RÔLE -->
 
 <section id="def">
 
-    <h2 class="definition-title">
-        1- Définition et caractéristiques du Grand livre
-    </h2>
+    <h2 class="definition-title">1- Définition et rôle de la Balance</h2>
 
-    <h2>A- Définition du grand livre</h2>
+    <h2>A- Définition de la balance</h2>
 
     <div class="definition-box">
 
         <p>
-            Le grand livre est un document comptable obligatoire qui regroupe,
-            par compte, toutes les opérations enregistrées dans le journal.
+            La balance est un document comptable de synthèse qui présente,
+            à une date donnée, l’ensemble des comptes de l’entreprise.
         </p>
 
         <div class="highlight">
-            ✔ Regroupe les opérations par nature<br>
-            ✔ Reprend les écritures du journal<br>
-            ✔ Permet le suivi de chaque compte
+            ✔ Document périodique<br>
+            ✔ Liste de tous les comptes<br>
+            ✔ Classement selon le plan comptable
         </div>
+
+        <p>👉 Pour chaque compte, on indique :</p>
+
+        <ul>
+            <li>Total Débit</li>
+            <li>Total Crédit</li>
+            <li>Solde (Débiteur ou Créditeur)</li>
+        </ul>
 
     </div>
 
-    <h2>B- Caractéristiques du grand livre</h2>
+    <h2>B- Rôle de la balance</h2>
 
     <div class="definition-box">
 
         <ul>
-            <li>Document obligatoire</li>
-            <li>Regroupe tous les comptes</li>
-            <li>Classe les opérations par compte</li>
-            <li>Pas besoin d’être coté ni paraphé</li>
+            <li>✔ Vérifier l’égalité : Total Débit = Total Crédit</li>
+            <li>✔ Contrôler les erreurs comptables</li>
+            <li>✔ Préparer les états de synthèse</li>
+            <li>✔ Donner une vue globale des comptes</li>
         </ul>
 
         <div class="highlight">
-            ✔ Chaque compte possède sa propre page ou fiche
+            ✔ Outil essentiel de contrôle et d’analyse
         </div>
-
-        <p>
-            👉 Il est souvent présenté sous forme de classeur ou fichier.
-        </p>
 
     </div>
 
 </section>
 
-<!-- SECTION 2 : PRÉSENTATION DU GRAND LIVRE -->
+<!-- SECTION 2 : PRÉSENTATION DE LA BALANCE -->
 
 <section id="presentation">
 
-    <h2 class="definition-title">
-        2- Présentation du grand livre
-    </h2>
+    <h2 class="definition-title">2- Présentation de la balance</h2>
 
     <div class="definition-box">
 
-        <h3>Exemple d’un compte :</h3>
+        <div class="balance-wrapper">
 
-        <div class="ledger-wrapper">
-
-            <table class="ledger-table">
+            <table class="balance-table">
 
                 <thead>
-
                     <tr>
-                        <th colspan="5" class="ledger-title">
-                            Compte : Fournisseur (4411)
-                        </th>
+                        <th>Compte</th>
+                        <th>Intitulé</th>
+                        <th>Total Débit</th>
+                        <th>Total Crédit</th>
+                        <th>Solde Débiteur</th>
+                        <th>Solde Créditeur</th>
                     </tr>
-
-                    <tr>
-                        <th>Date</th>
-                        <th>Libellé</th>
-                        <th>Débit</th>
-                        <th>Crédit</th>
-                        <th>Solde</th>
-                    </tr>
-
                 </thead>
 
                 <tbody>
 
                     <tr>
-                        <td>01/01</td>
-                        <td>Achat marchandise</td>
+                        <td>1111</td>
+                        <td>Capital</td>
                         <td></td>
-                        <td class="right">10 000</td>
-                        <td class="right">10 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
 
                     <tr>
-                        <td>05/01</td>
-                        <td>Paiement fournisseur</td>
-                        <td class="right">4 000</td>
+                        <td>3421</td>
+                        <td>Clients</td>
                         <td></td>
-                        <td class="right">6 000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>4411</td>
+                        <td>Fournisseurs</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
 
                 </tbody>
@@ -1174,8 +1146,8 @@ footer>span{white-space:nowrap}
         </div>
 
         <div class="highlight">
-            ✔ Chaque compte retrace ses mouvements (Débit / Crédit)<br>
-            ✔ Permet de calculer facilement le solde
+            ✔ La somme Total débit = somme Total crédit<br>
+            ✔ La somme des soldes débiteurs = somme des soldes créditeurs
         </div>
 
     </div>
@@ -1186,15 +1158,13 @@ footer>span{white-space:nowrap}
 
 <section id="EE">
 
-    <h2 class="definition-title">
-        📝 Exercice d’évaluation
-    </h2>
+    <h2 class="definition-title">📝 Exercice d’évaluation</h2>
 
     <div class="container">
 
         <p>
-            ► Élaborer le grand livre des comptes de la société AL AMAL,
-            objet de l'exercice d'évaluation du thème N° 09 relatif au journal comptable.
+            ► Élaborer la balance des comptes de la société AL AMAL, objet de
+            l'exercice d'évaluation du thème N° 09 relatif au journal comptable.
         </p>
 
     </div>
@@ -1491,11 +1461,9 @@ function creerSlide(section){
     return slide;
 }
 
-/* ==========================================
-   MESURER UN GROUPE DE CONTENU
-========================================== */
+/* MESURER UN GROUPE DE CONTENU */
 
-function mesurerGroupe(groupe,largeur,section){
+function mesurerGroupe(groupe,largeur){
 
     const mesure=document.createElement("div");
 
@@ -1533,9 +1501,7 @@ function mesurerGroupe(groupe,largeur,section){
     return hauteur;
 }
 
-/* ==========================================
-   CRÉER LES DIAPOSITIVES D'UNE SECTION
-========================================== */
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
 
 function creerDiapositives(section){
 
@@ -1566,13 +1532,13 @@ function creerDiapositives(section){
 
         const hauteurGroupe=mesurerGroupe(
             groupe,
-            largeur,
-            section
+            largeur
         );
 
         /*
-           Créer une nouvelle diapositive si le groupe
-           suivant dépasse la hauteur disponible.
+           Le groupe est conservé intégralement.
+           Un groupe trop grand reste dans une seule
+           diapositive avec défilement vertical.
         */
 
         if(
@@ -1587,11 +1553,6 @@ function creerDiapositives(section){
             hauteurUtilisee=0;
         }
 
-        /*
-           Déplacer les éléments originaux :
-           le contenu n'est pas supprimé ni recréé.
-        */
-
         groupe.forEach(node=>{
             slide.appendChild(node);
         });
@@ -1600,8 +1561,6 @@ function creerDiapositives(section){
 
     });
 
-    /* SÉCURITÉ : SECTION VIDE */
-
     if(currentSlides.length===0){
         creerSlide(section);
     }
@@ -1609,9 +1568,7 @@ function creerDiapositives(section){
     afficherDiapositive(0);
 }
 
-/* ==========================================
-   COMPTEUR DES DIAPOSITIVES
-========================================== */
+/* COMPTEUR DES DIAPOSITIVES */
 
 function actualiserCompteurDiapo(){
 
@@ -1633,9 +1590,7 @@ function actualiserCompteurDiapo(){
     btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
 }
 
-/* ==========================================
-   AJUSTEMENT DU CONTENU
-========================================== */
+/* AJUSTEMENT DU CONTENU */
 
 function ajusterContenuDiapositive(slide){
 
@@ -1665,11 +1620,15 @@ function ajusterContenuDiapositive(slide){
         cell.style.overflowWrap="anywhere";
         cell.style.wordBreak="normal";
     });
+
+    /* Préserver la largeur utile du tableau de balance */
+
+    slide.querySelectorAll(".balance-table").forEach(table=>{
+        table.style.minWidth="650px";
+    });
 }
 
-/* ==========================================
-   AFFICHER UNE DIAPOSITIVE
-========================================== */
+/* AFFICHER UNE DIAPOSITIVE */
 
 function afficherDiapositive(index){
 
@@ -1694,9 +1653,6 @@ function afficherDiapositive(index){
         if(i===index){
 
             ajusterContenuDiapositive(slide);
-
-            /* Revenir en haut de la diapositive */
-
             slide.scrollTop=0;
         }
     });
@@ -1724,9 +1680,7 @@ btnDiapoSuivante.addEventListener("click",function(){
     naviguerDiapositive(1);
 });
 
-/* ==========================================
-   ACTIVER LE MODE DIAPOSITIVES
-========================================== */
+/* ACTIVER LE MODE DIAPOSITIVES */
 
 function activerModeDiapositives(section){
 
@@ -1754,9 +1708,7 @@ function activerModeDiapositives(section){
     creerDiapositives(section);
 }
 
-/* ==========================================
-   DÉSACTIVER LE MODE DIAPOSITIVES
-========================================== */
+/* DÉSACTIVER LE MODE DIAPOSITIVES */
 
 function desactiverModeDiapositives(section){
 
@@ -1779,9 +1731,7 @@ function desactiverModeDiapositives(section){
     slideMode=false;
 }
 
-/* ==========================================
-   ACTUALISER L'AFFICHAGE
-========================================== */
+/* ACTUALISER L'AFFICHAGE */
 
 function actualiserAffichageSection(){
 
@@ -1801,9 +1751,7 @@ function actualiserAffichageSection(){
     }
 }
 
-/* ==========================================
-   NAVIGATION ENTRE LES SECTIONS
-========================================== */
+/* NAVIGATION ENTRE LES SECTIONS */
 
 const sectionIds=[
     "def",
@@ -1863,8 +1811,6 @@ function showSection(id,button){
     currentSlideSection=null;
     slideMode=false;
 
-    /* MASQUER LES AUTRES SECTIONS */
-
     document.querySelectorAll("body > section").forEach(section=>{
 
         section.classList.remove(
@@ -1872,8 +1818,6 @@ function showSection(id,button){
             "animationSection"
         );
     });
-
-    /* RÉINITIALISER LES BOUTONS DU MENU */
 
     document.querySelectorAll("nav button").forEach(btn=>{
 
@@ -1883,8 +1827,6 @@ function showSection(id,button){
 
     fermerTousLesMenus();
 
-    /* ACTIVER LA SECTION */
-
     currentSectionIndex=nouvelIndex;
 
     document.body.classList.add("section-open");
@@ -1893,8 +1835,6 @@ function showSection(id,button){
         "active",
         "animationSection"
     );
-
-    /* AFFICHER LES BOUTONS DU PIED DE PAGE */
 
     document.getElementById("btnRetourMenu")
         .classList.add("visible");
@@ -1906,8 +1846,6 @@ function showSection(id,button){
         .classList.add("visible");
 
     actualiserBoutonsNavigation();
-
-    /* ACTIVER LE BOUTON CORRESPONDANT */
 
     if(!button){
         button=document.querySelectorAll("nav button")[nouvelIndex];
@@ -1924,15 +1862,11 @@ function showSection(id,button){
     });
 
     requestAnimationFrame(()=>{
-
         actualiserAffichageSection();
-
     });
 }
 
-/* ==========================================
-   SECTION PRÉCÉDENTE / SUIVANTE
-========================================== */
+/* SECTION PRÉCÉDENTE / SUIVANTE */
 
 function naviguerSection(direction){
 
@@ -1956,9 +1890,7 @@ function naviguerSection(direction){
     showSection(nouvelId,boutonCorrespondant);
 }
 
-/* ==========================================
-   RETOUR AU MENU
-========================================== */
+/* RETOUR AU MENU */
 
 function retourMenu(){
 
@@ -2014,9 +1946,7 @@ function retourMenu(){
     });
 }
 
-/* ==========================================
-   ADAPTATION AU REDIMENSIONNEMENT / ZOOM
-========================================== */
+/* ADAPTATION AU REDIMENSIONNEMENT / ZOOM */
 
 window.addEventListener("resize",function(){
 
@@ -2043,11 +1973,6 @@ window.addEventListener("resize",function(){
 
                 const ancienneIndex=currentSlideIndex;
 
-                /*
-                   Reconstruire les diapositives en conservant
-                   le contenu original de la section.
-                */
-
                 creerDiapositives(section);
 
                 if(currentSlides.length>0){
@@ -2070,9 +1995,7 @@ window.addEventListener("resize",function(){
 
 });
 
-/* ==========================================
-   NAVIGATION AU CLAVIER
-========================================== */
+/* NAVIGATION AU CLAVIER */
 
 document.addEventListener("keydown",function(event){
 
@@ -2112,9 +2035,7 @@ document.addEventListener("keydown",function(event){
 
 });
 
-/* ==========================================
-   INITIALISATION
-========================================== */
+/* INITIALISATION */
 
 document.addEventListener("DOMContentLoaded",function(){
 
@@ -2152,4 +2073,5 @@ document.addEventListener("DOMContentLoaded",function(){
 
 </body>
 </html>
+
 
