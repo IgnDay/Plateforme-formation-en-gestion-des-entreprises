@@ -332,54 +332,6 @@ tr:hover td{background:#f1f7ff}
     font-weight:bold;
 }
 
-/* BARRE DES DIAPOSITIVES */
-
-.slide-navigation{
-    display:none;
-    position:fixed;
-    bottom:32px;
-    left:0;
-    width:100%;
-    height:24px;
-    min-height:24px;
-    z-index:1999;
-    align-items:center;
-    justify-content:space-between;
-    gap:5px;
-    padding:2px 8px;
-    background:#34495e;
-    color:white;
-    border-top:1px solid #1e293b;
-    font-size:10px;
-}
-
-.slide-navigation button{
-    border:0;
-    border-radius:3px;
-    padding:3px 8px;
-    background:#00b894;
-    color:white;
-    font-size:10px;
-    font-weight:bold;
-    line-height:1.2;
-    cursor:pointer;
-    white-space:nowrap;
-}
-
-.slide-navigation button:hover:not(:disabled){background:#0984e3}
-
-.slide-navigation button:disabled{
-    opacity:.4;
-    cursor:not-allowed;
-}
-
-.slide-counter{
-    font-size:10px;
-    font-weight:bold;
-    white-space:nowrap;
-    text-align:center;
-}
-
 /* CONTENU DES DIAPOSITIVES */
 
 .content-slide{
@@ -401,6 +353,27 @@ tr:hover td{background:#f1f7ff}
     zoom:1!important;
 }
 
+/* DIAPOSITIVE DU TITRE PRINCIPAL : CENTRAGE HORIZONTAL ET VERTICAL */
+
+body.slides-mode .content-slide.title-only-slide{
+    align-items:center;
+    justify-content:center;
+    min-height:calc(100vh - 100px);
+    padding:0 15px;
+    text-align:center;
+}
+
+body.slides-mode .content-slide.title-only-slide.active-slide{
+    display:flex;
+}
+
+body.slides-mode .content-slide.title-only-slide .definition-title{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    text-align:center;
+}
+
 /* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
 
 .slide-measure{
@@ -418,7 +391,11 @@ tr:hover td{background:#f1f7ff}
     z-index:-1!important;
 }
 
-body.slides-mode{padding-bottom:58px}
+/* MODE DIAPOSITIVES */
+
+body.slides-mode{
+    padding-bottom:48px;
+}
 
 body.slides-mode>section.active{
     display:block;
@@ -427,13 +404,11 @@ body.slides-mode>section.active{
     border-radius:0;
     box-shadow:none;
     border-left:0;
-    min-height:calc(100vh - 58px);
+    min-height:calc(100vh - 48px);
     animation:none;
     overflow-x:hidden;
     overflow-y:auto;
 }
-
-body.slides-mode .slide-navigation{display:flex}
 
 body.slides-mode .definition-title{
     margin:3px 0 8px;
@@ -490,13 +465,12 @@ footer{
     bottom:0;
     left:0;
     width:100%;
-    height:32px;
-    min-height:32px;
+    min-height:36px;
     z-index:2000;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:6px;
+    gap:8px;
     padding:4px 10px;
     margin:0;
     background:#2c3e50;
@@ -512,7 +486,66 @@ footer a{
     text-decoration:none;
 }
 
-footer>span{white-space:nowrap}
+footer>span{
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+/* NAVIGATION DES DIAPOSITIVES DANS LE PIED DE PAGE */
+
+.slide-navigation{
+    display:none;
+    position:static;
+    width:auto;
+    height:auto;
+    min-height:0;
+    flex:1;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:0;
+    margin:0;
+    background:transparent;
+    color:white;
+    border:0;
+    font-size:10px;
+    z-index:auto;
+}
+
+body.slides-mode .slide-navigation{
+    display:flex;
+}
+
+.slide-navigation button{
+    border:0;
+    border-radius:4px;
+    padding:4px 8px;
+    background:#00b894;
+    color:white;
+    font-size:10px;
+    font-weight:bold;
+    line-height:1.2;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.slide-navigation button:hover:not(:disabled){
+    background:#0984e3;
+}
+
+.slide-navigation button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.slide-counter{
+    font-size:10px;
+    font-weight:bold;
+    white-space:nowrap;
+    text-align:center;
+}
+
+/* BOUTONS DE NAVIGATION DES SECTIONS */
 
 .footer-actions{
     display:flex;
@@ -520,6 +553,7 @@ footer>span{white-space:nowrap}
     justify-content:flex-end;
     gap:5px;
     margin-left:auto;
+    flex-shrink:0;
 }
 
 .btnFooter{
@@ -638,11 +672,10 @@ footer>span{white-space:nowrap}
     .container{padding:15px}
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
         flex-wrap:nowrap;
         justify-content:space-between;
-        gap:3px;
+        gap:4px;
         padding:3px 5px;
         font-size:9px;
     }
@@ -650,6 +683,21 @@ footer>span{white-space:nowrap}
     footer>span{
         width:auto;
         text-align:left;
+        font-size:9px;
+    }
+
+    .slide-navigation{
+        flex:1;
+        gap:3px;
+        min-width:0;
+    }
+
+    .slide-navigation button{
+        font-size:9px;
+        padding:4px 5px;
+    }
+
+    .slide-counter{
         font-size:9px;
     }
 
@@ -665,29 +713,33 @@ footer>span{white-space:nowrap}
         font-size:9px;
     }
 
-    .slide-navigation{
-        bottom:32px;
-        height:24px;
-        min-height:24px;
-        padding:2px 4px;
-        gap:3px;
-    }
-
-    .slide-navigation button{
-        font-size:9px;
-        padding:3px 5px;
-    }
-
-    .slide-counter{font-size:9px}
-
     body.slides-mode>section.active{
         padding:4px 15px 8px;
-        min-height:calc(100vh - 58px);
+        min-height:calc(100vh - 48px);
     }
 
     body.slides-mode .definition-title{
         font-size:17px;
         padding:8px;
+    }
+
+    body.slides-mode .content-slide.title-only-slide{
+        min-height:calc(100vh - 110px);
+    }
+}
+
+@media(max-width:520px){
+
+    footer>span{
+        display:none;
+    }
+
+    .slide-navigation{
+        justify-content:flex-start;
+    }
+
+    .footer-actions{
+        margin-left:0;
     }
 }
 
@@ -730,9 +782,8 @@ footer>span{white-space:nowrap}
     footer{
         padding:3px 4px;
         font-size:8px;
+        gap:2px;
     }
-
-    footer>span{font-size:8px}
 
     .btnFooter{
         font-size:8px;
@@ -741,9 +792,13 @@ footer>span{white-space:nowrap}
 
     .footer-actions{gap:2px}
 
+    .slide-navigation{
+        gap:2px;
+    }
+
     .slide-navigation button{
         font-size:8px;
-        padding:3px 4px;
+        padding:4px 4px;
     }
 
     .slide-counter{font-size:8px}
@@ -836,8 +891,7 @@ footer>span{white-space:nowrap}
     .container{padding:22px}
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:36px;
         font-size:11px;
     }
 
@@ -902,8 +956,7 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:36px;
     }
 
     body.slides-mode p,
@@ -929,8 +982,6 @@ footer>span{white-space:nowrap}
         <div class="site-menu">
 
             <a href="index.html">Accueil</a>
-
-            
 
             <div class="dropdown">
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
@@ -971,8 +1022,7 @@ footer>span{white-space:nowrap}
                     <a href="T7C1P1M1.html">T7 - Le virement comptable</a>
                     <a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
                     <a href="T9C1P1M1.html">T9 - Le journal comptable</a>
-                    <a href="T10C1P1M1.html">T10 - Le grand livre</a>
-                    <a href="T11C1P1M1.html">T11 - La balance</a>
+                    <a href="T10C1P1M1.html">T10 - Le grand livre et La balance </a>
                 </div>
             </div>
 
@@ -1359,29 +1409,30 @@ footer>span{white-space:nowrap}
 
 </section>
 
-<!-- BARRE DES DIAPOSITIVES -->
-
-<div class="slide-navigation" id="slideNavigation">
-
-    <button type="button" id="btnDiapoPrecedente">
-        ← Diapositive précédente
-    </button>
-
-    <span class="slide-counter" id="compteurDiapo">
-        Diapositive 1 / 1
-    </span>
-
-    <button type="button" id="btnDiapoSuivante">
-        Diapositive suivante →
-    </button>
-
-</div>
-
-<!-- PIED DE PAGE -->
+<!-- PIED DE PAGE : NAVIGATION DES DIAPOSITIVES ET DES SECTIONS -->
 
 <footer>
 
-    <span>Formation en comptabilité générale</span>
+
+    <!-- NAVIGATION DES DIAPOSITIVES DANS LE PIED DE PAGE -->
+
+    <div class="slide-navigation" id="slideNavigation">
+
+        <button type="button" id="btnDiapoPrecedente">
+            ← Diapositive précédente
+        </button>
+
+        <span class="slide-counter" id="compteurDiapo">
+            Diapositive 1 / 1
+        </span>
+
+        <button type="button" id="btnDiapoSuivante">
+            Diapositive suivante →
+        </button>
+
+    </div>
+
+    <!-- NAVIGATION DES SECTIONS -->
 
     <div class="footer-actions">
 
@@ -1580,12 +1631,11 @@ function restaurerContenuOriginal(section){
 
 function hauteurDisponibleDiapo(){
 
-    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
-    const hauteurNavigation=24;
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 36;
 
     return Math.max(
         180,
-        window.innerHeight-hauteurFooter-hauteurNavigation-35
+        window.innerHeight-hauteurFooter-35
     );
 }
 
@@ -1706,9 +1756,58 @@ function creerDiapositives(section){
     memoriserContenu(section);
 
     const nodes=Array.from(section.childNodes);
-    const groupes=construireGroupes(nodes);
+
+    /*
+       IDENTIFIER LE TITRE PRINCIPAL DE LA SECTION
+    */
+
+    const titrePrincipal=nodes.find(node=>{
+
+        return (
+            node.nodeType===Node.ELEMENT_NODE &&
+            node.matches(".definition-title")
+        );
+
+    });
+
+    /*
+       EXCLURE LE TITRE PRINCIPAL DU CONTENU
+       POUR ÉVITER SA RÉPÉTITION
+    */
+
+    const nodesContenu=nodes.filter(node=>{
+
+        if(node===titrePrincipal){
+            return false;
+        }
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return false;
+        }
+
+        return true;
+    });
+
+    const groupes=construireGroupes(nodesContenu);
 
     section.replaceChildren();
+
+    /*
+       PREMIÈRE DIAPOSITIVE :
+       TITRE PRINCIPAL UNIQUEMENT
+    */
+
+    if(titrePrincipal){
+
+        const slideTitre=creerSlide(section);
+
+        slideTitre.classList.add("title-only-slide");
+
+        slideTitre.appendChild(titrePrincipal);
+    }
 
     const hauteurMax=hauteurDisponibleDiapo();
 
@@ -1719,6 +1818,11 @@ function creerDiapositives(section){
 
     let slide=null;
     let hauteurUtilisee=0;
+
+    /*
+       DIAPOSITIVES SUIVANTES :
+       CONTENU DE LA SECTION
+    */
 
     groupes.forEach(groupe=>{
 
@@ -1903,8 +2007,6 @@ function activerModeDiapositives(section){
 
     document.body.classList.add("slides-mode");
 
-    slideNavigation.style.display="flex";
-
     slideMode=true;
 
     creerDiapositives(section);
@@ -1925,8 +2027,6 @@ function desactiverModeDiapositives(section){
     }
 
     document.body.classList.remove("slides-mode");
-
-    slideNavigation.style.display="none";
 
     currentSlides=[];
     currentSlideIndex=0;
@@ -2011,8 +2111,6 @@ function showSection(id,button){
     }
 
     document.body.classList.remove("slides-mode");
-
-    slideNavigation.style.display="none";
 
     currentSlides=[];
     currentSlideIndex=0;
@@ -2123,8 +2221,6 @@ function retourMenu(){
     }
 
     document.body.classList.remove("slides-mode");
-
-    slideNavigation.style.display="none";
 
     currentSlides=[];
     currentSlideIndex=0;
@@ -2268,8 +2364,6 @@ document.addEventListener("keydown",function(event){
 ========================================== */
 
 document.addEventListener("DOMContentLoaded",function(){
-
-    slideNavigation.style.display="none";
 
     document.body.classList.remove(
         "slides-mode",
