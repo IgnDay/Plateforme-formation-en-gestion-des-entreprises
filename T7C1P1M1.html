@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,7 +19,7 @@ body{
     margin:0;
     background:#f4f6f9;
     color:#1e293b;
-    padding-bottom:40px;
+    padding-bottom:42px;
 }
 
 /* EN-TÊTE */
@@ -294,7 +293,7 @@ tr:hover td{background:#f1f7ff}
 }
 
 .definition-title{
-   background:linear-gradient(120deg,#1e3a5f,#256d85);
+    background:linear-gradient(120deg,#1e3a5f,#256d85);
     color:white;
     padding:12px 15px;
     border-radius:7px;
@@ -376,31 +375,25 @@ tr:hover td{background:#f1f7ff}
     background:#019875;
 }
 
-/* BARRE DES DIAPOSITIVES */
+/* NAVIGATION DES DIAPOSITIVES DANS LE PIED DE PAGE */
 
 .slide-navigation{
     display:none;
-    position:fixed;
-    bottom:32px;
-    left:0;
-    width:100%;
-    height:24px;
-    min-height:24px;
-    z-index:1999;
     align-items:center;
-    justify-content:space-between;
-    gap:5px;
-    padding:2px 8px;
-    background:#34495e;
+    justify-content:center;
+    gap:8px;
+    flex:1;
+    min-width:0;
+    padding:0 8px;
+    background:transparent;
     color:white;
-    border-top:1px solid #1e293b;
-    font-size:10px;
+    border:0;
 }
 
 .slide-navigation button{
     border:0;
-    border-radius:3px;
-    padding:3px 8px;
+    border-radius:4px;
+    padding:4px 9px;
     background:#00b894;
     color:white;
     font-size:10px;
@@ -447,6 +440,28 @@ tr:hover td{background:#f1f7ff}
     zoom:1!important;
 }
 
+/* DIAPOSITIVE DE TITRE INDÉPENDANTE */
+
+.content-slide.title-only-slide{
+    min-height:calc(100vh - 55px);
+    padding:15px 0;
+    align-items:center;
+    justify-content:center;
+}
+
+.content-slide.title-only-slide.active-slide{
+    display:flex;
+}
+
+.title-only-slide .definition-title{
+    width:100%;
+    margin:0;
+    padding:18px 20px;
+    font-size:25px;
+}
+
+/* ÉLÉMENT DE MESURE */
+
 .slide-measure{
     position:fixed!important;
     left:-100000px!important;
@@ -462,7 +477,11 @@ tr:hover td{background:#f1f7ff}
     z-index:-1!important;
 }
 
-body.slides-mode{padding-bottom:58px}
+/* MODE DIAPOSITIVES */
+
+body.slides-mode{
+    padding-bottom:42px;
+}
 
 body.slides-mode>section.active{
     display:block;
@@ -471,13 +490,15 @@ body.slides-mode>section.active{
     border-radius:0;
     box-shadow:none;
     border-left:0;
-    min-height:calc(100vh - 58px);
+    min-height:calc(100vh - 42px);
     animation:none;
     overflow-x:hidden;
     overflow-y:auto;
 }
 
-body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .slide-navigation{
+    display:flex;
+}
 
 body.slides-mode .definition-title{
     margin:3px 0 8px;
@@ -546,13 +567,14 @@ footer{
     bottom:0;
     left:0;
     width:100%;
-    height:32px;
-    min-height:32px;
+    min-height:38px;
+    height:auto;
     z-index:2000;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:6px;
+    flex-wrap:wrap;
+    gap:5px;
     padding:4px 10px;
     margin:0;
     background:#2c3e50;
@@ -568,7 +590,9 @@ footer a{
     text-decoration:none;
 }
 
-footer>span{white-space:nowrap}
+footer>span{
+    white-space:nowrap;
+}
 
 .footer-actions{
     display:flex;
@@ -608,6 +632,66 @@ footer>span{white-space:nowrap}
     opacity:.45;
     cursor:not-allowed;
     transform:none;
+}
+
+/* ZONE GAUCHE : TITRE ET RETOUR MENU */
+
+.footer-left{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:8px;
+    flex:0 0 auto;
+    min-width:0;
+}
+
+.footer-title{
+    white-space:nowrap;
+    font-size:11px;
+}
+
+.btnFooter{
+    display:none;
+    margin:0;
+    padding:4px 8px;
+    border:none;
+    border-radius:4px;
+    color:white;
+    font-size:10px;
+    line-height:1.2;
+    font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.2s;
+}
+
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+
+.btnFooter.visible{display:block}
+
+.btnFooter:hover:not(:disabled){
+    background:#00b894;
+    transform:translateY(-1px);
+}
+
+.btnFooter:disabled{
+    background:#64748b;
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* ZONE DROITE : NAVIGATION ENTRE SECTIONS */
+
+.footer-right{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:5px;
+    flex:0 0 auto;
+    min-width:0;
 }
 
 /* RESPONSIVE */
@@ -693,58 +777,93 @@ footer>span{white-space:nowrap}
 
     .container{padding:15px}
 
+    /* PIED DE PAGE MOBILE */
+
     footer{
-        height:32px;
-        min-height:32px;
-        flex-wrap:nowrap;
-        justify-content:space-between;
+        height:42px;
+        min-height:42px;
         gap:3px;
         padding:3px 5px;
+    }
+
+    .footer-left{
+        gap:4px;
+    }
+
+    .footer-title{
         font-size:9px;
     }
 
-    footer>span{
-        width:auto;
-        text-align:left;
-        font-size:9px;
-    }
-
-    .footer-actions{
-        width:auto;
-        justify-content:flex-end;
+    .footer-right{
         gap:3px;
-        margin-left:auto;
     }
 
     .btnFooter{
-        padding:4px 6px;
+        padding:4px 5px;
         font-size:9px;
     }
 
     .slide-navigation{
-        bottom:32px;
-        height:24px;
-        min-height:24px;
-        padding:2px 4px;
         gap:3px;
+        padding:0 3px;
     }
 
     .slide-navigation button{
         font-size:9px;
-        padding:3px 5px;
+        padding:4px 5px;
     }
 
     .slide-counter{font-size:9px}
 
     body.slides-mode>section.active{
         padding:4px 15px 8px;
-        min-height:calc(100vh - 58px);
+        min-height:calc(100vh - 42px);
     }
 
     body.slides-mode .definition-title{
         font-size:17px;
         padding:8px;
     }
+
+    .title-only-slide .definition-title{
+        font-size:20px;
+        padding:14px;
+    }
+}
+
+@media(max-width:520px){
+
+    footer{
+        gap:2px;
+        padding:3px 4px;
+    }
+
+    .footer-title{
+        font-size:8px;
+    }
+
+    .footer-left{
+        gap:3px;
+    }
+
+    .btnFooter{
+        font-size:8px;
+        padding:4px 4px;
+    }
+
+    .footer-right{gap:2px}
+
+    .slide-navigation{
+        gap:2px;
+        padding:0 2px;
+    }
+
+    .slide-navigation button{
+        font-size:8px;
+        padding:4px 3px;
+    }
+
+    .slide-counter{font-size:8px}
 }
 
 @media(max-width:420px){
@@ -783,26 +902,25 @@ footer>span{white-space:nowrap}
         font-size:11px;
     }
 
-    footer{
-        padding:3px 4px;
-        font-size:8px;
+    .footer-title{
+        font-size:7px;
     }
-
-    footer>span{font-size:8px}
 
     .btnFooter{
-        font-size:8px;
-        padding:4px 5px;
+        font-size:7px;
+        padding:4px 3px;
     }
-
-    .footer-actions{gap:2px}
 
     .slide-navigation button{
-        font-size:8px;
-        padding:3px 4px;
+        font-size:7px;
+        padding:4px 3px;
     }
 
-    .slide-counter{font-size:8px}
+    .slide-counter{font-size:7px}
+
+    .title-only-slide .definition-title{
+        font-size:18px;
+    }
 }
 
 /* MODE DATASHOW */
@@ -812,7 +930,7 @@ footer>span{white-space:nowrap}
     body{
         font-size:18px;
         line-height:1.6;
-        padding-bottom:40px;
+        padding-bottom:42px;
     }
 
     .brandbar{padding:5px 18px}
@@ -892,10 +1010,12 @@ footer>span{white-space:nowrap}
     .container{padding:22px}
 
     footer{
-        height:32px;
-        min-height:32px;
+        height:42px;
+        min-height:42px;
         font-size:11px;
     }
+
+    .footer-title{font-size:11px}
 
     .btnFooter{
         padding:4px 9px;
@@ -912,6 +1032,11 @@ footer>span{white-space:nowrap}
         font-size:18px;
         line-height:1.45;
     }
+
+    .title-only-slide .definition-title{
+        font-size:28px;
+        padding:20px;
+    }
 }
 
 /* GRAND ÉCRAN */
@@ -920,7 +1045,7 @@ footer>span{white-space:nowrap}
 
     body{
         font-size:19px;
-        padding-bottom:40px;
+        padding-bottom:42px;
     }
 
     header h1{padding:6px 8px}
@@ -958,14 +1083,18 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        height:32px;
-        min-height:32px;
+        height:42px;
+        min-height:42px;
     }
 
     body.slides-mode p,
     body.slides-mode li{
         font-size:19px;
         line-height:1.45;
+    }
+
+    .title-only-slide .definition-title{
+        font-size:30px;
     }
 }
 </style>
@@ -985,8 +1114,6 @@ footer>span{white-space:nowrap}
         <div class="site-menu">
 
             <a href="index.html">Accueil</a>
-
-            
 
             <div class="dropdown">
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
@@ -1027,8 +1154,8 @@ footer>span{white-space:nowrap}
                     <a href="T7C1P1M1.html">T7 - Le virement comptable</a>
                     <a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
                     <a href="T9C1P1M1.html">T9 - Le journal comptable</a>
-                    <a href="T10C1P1M1.html">T10 - Le grand livre</a>
-                    <a href="T11C1P1M1.html">T11 - La balance</a>
+<a href="T10C1P1M1.html">T10 - Le grand livre et La balance </a>
+
                 </div>
             </div>
 
@@ -1246,29 +1373,25 @@ footer>span{white-space:nowrap}
 
 </section>
 
-<!-- BARRE DES DIAPOSITIVES -->
-
-<div class="slide-navigation" id="slideNavigation">
-
-    <button type="button" id="btnDiapoPrecedente">
-        ← Diapositive précédente
-    </button>
-
-    <span class="slide-counter" id="compteurDiapo">
-        Diapositive 1 / 1
-    </span>
-
-    <button type="button" id="btnDiapoSuivante">
-        Diapositive suivante →
-    </button>
-
-</div>
-
 <!-- PIED DE PAGE -->
 
 <footer>
 
-    <span>Formation en comptabilité générale</span>
+    <div class="slide-navigation" id="slideNavigation">
+
+        <button type="button" id="btnDiapoPrecedente">
+            ← Diapo précédente
+        </button>
+
+        <span class="slide-counter" id="compteurDiapo">
+            Diapo 1 / 1
+        </span>
+
+        <button type="button" id="btnDiapoSuivante">
+            Diapo suivante →
+        </button>
+
+    </div>
 
     <div class="footer-actions">
 
@@ -1657,9 +1780,15 @@ let slideMode=false;
 let resizeTimer=null;
 
 const slideNavigation=document.getElementById("slideNavigation");
-const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
-const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
-const compteurDiapo=document.getElementById("compteurDiapo");
+
+const btnDiapoPrecedente=
+    document.getElementById("btnDiapoPrecedente");
+
+const btnDiapoSuivante=
+    document.getElementById("btnDiapoSuivante");
+
+const compteurDiapo=
+    document.getElementById("compteurDiapo");
 
 /* MÉMORISER LE CONTENU ORIGINAL */
 
@@ -1691,12 +1820,12 @@ function restaurerContenuOriginal(section){
 
 function hauteurDisponibleDiapo(){
 
-    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
-    const hauteurNavigation=24;
+    const hauteurFooter=
+        document.querySelector("footer")?.offsetHeight || 42;
 
     return Math.max(
         180,
-        window.innerHeight-hauteurFooter-hauteurNavigation-35
+        window.innerHeight-hauteurFooter-35
     );
 }
 
@@ -1713,7 +1842,7 @@ function estTitreContenu(node){
     );
 }
 
-/* CONSTRUIRE LES GROUPES */
+/* CONSTRUIRE LES GROUPES DE CONTENU */
 
 function construireGroupes(nodes){
 
@@ -1747,11 +1876,15 @@ function construireGroupes(nodes){
 
 /* CRÉER UNE DIAPOSITIVE */
 
-function creerSlide(section){
+function creerSlide(section,classeSupplementaire=""){
 
     const slide=document.createElement("div");
 
     slide.className="content-slide";
+
+    if(classeSupplementaire){
+        slide.classList.add(classeSupplementaire);
+    }
 
     section.appendChild(slide);
 
@@ -1800,7 +1933,9 @@ function mesurerGroupe(groupe,largeur){
     return hauteur;
 }
 
-/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+/* ==========================================
+   CRÉER LES DIAPOSITIVES D'UNE SECTION
+========================================== */
 
 function creerDiapositives(section){
 
@@ -1813,7 +1948,6 @@ function creerDiapositives(section){
     memoriserContenu(section);
 
     const nodes=Array.from(section.childNodes);
-    const groupes=construireGroupes(nodes);
 
     section.replaceChildren();
 
@@ -1823,6 +1957,41 @@ function creerDiapositives(section){
         300,
         section.clientWidth-50
     );
+
+    /*
+       ÉTAPE 1 :
+       Récupérer le premier titre .definition-title.
+
+       Ce titre sera placé seul sur une diapositive
+       indépendante, sans aucun contenu supplémentaire.
+    */
+
+    const indexTitre=nodes.findIndex(node=>
+        node.nodeType===Node.ELEMENT_NODE &&
+        node.matches(".definition-title")
+    );
+
+    if(indexTitre!==-1){
+
+        const titreSection=nodes[indexTitre];
+
+        const slideTitre=creerSlide(
+            section,
+            "title-only-slide"
+        );
+
+        slideTitre.appendChild(titreSection);
+
+        nodes.splice(indexTitre,1);
+    }
+
+    /*
+       ÉTAPE 2 :
+       Construire les groupes avec les autres éléments.
+       Le contenu commence donc sur la diapositive suivante.
+    */
+
+    const groupes=construireGroupes(nodes);
 
     let slide=null;
     let hauteurUtilisee=0;
@@ -1861,7 +2030,9 @@ function creerDiapositives(section){
     afficherDiapositive(0);
 }
 
-/* COMPTEUR DES DIAPOSITIVES */
+/* ==========================================
+   COMPTEUR DES DIAPOSITIVES
+========================================== */
 
 function actualiserCompteurDiapo(){
 
@@ -1870,6 +2041,7 @@ function actualiserCompteurDiapo(){
     if(total===0){
 
         compteurDiapo.textContent="Aucune diapositive";
+
         btnDiapoPrecedente.disabled=true;
         btnDiapoSuivante.disabled=true;
 
@@ -1880,10 +2052,15 @@ function actualiserCompteurDiapo(){
         "Diapositive "+(currentSlideIndex+1)+" / "+total;
 
     btnDiapoPrecedente.disabled=(currentSlideIndex===0);
-    btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+
+    btnDiapoSuivante.disabled=(
+        currentSlideIndex===total-1
+    );
 }
 
-/* AJUSTEMENT DU CONTENU */
+/* ==========================================
+   AJUSTEMENT DU CONTENU
+========================================== */
 
 function ajusterContenuDiapositive(slide){
 
@@ -1915,7 +2092,9 @@ function ajusterContenuDiapositive(slide){
     });
 }
 
-/* AFFICHER UNE DIAPOSITIVE */
+/* ==========================================
+   AFFICHER UNE DIAPOSITIVE
+========================================== */
 
 function afficherDiapositive(index){
 
@@ -1953,7 +2132,9 @@ function afficherDiapositive(index){
     });
 }
 
-/* NAVIGATION DIAPOSITIVES */
+/* ==========================================
+   NAVIGATION ENTRE DIAPOSITIVES
+========================================== */
 
 function naviguerDiapositive(direction){
 
@@ -1961,14 +2142,20 @@ function naviguerDiapositive(direction){
 }
 
 btnDiapoPrecedente.addEventListener("click",function(){
+
     naviguerDiapositive(-1);
+
 });
 
 btnDiapoSuivante.addEventListener("click",function(){
+
     naviguerDiapositive(1);
+
 });
 
-/* ACTIVER LE MODE DIAPOSITIVES */
+/* ==========================================
+   ACTIVER LE MODE DIAPOSITIVES
+========================================== */
 
 function activerModeDiapositives(section){
 
@@ -1989,14 +2176,14 @@ function activerModeDiapositives(section){
 
     document.body.classList.add("slides-mode");
 
-    slideNavigation.style.display="flex";
-
     slideMode=true;
 
     creerDiapositives(section);
 }
 
-/* DÉSACTIVER LE MODE DIAPOSITIVES */
+/* ==========================================
+   DÉSACTIVER LE MODE DIAPOSITIVES
+========================================== */
 
 function desactiverModeDiapositives(section){
 
@@ -2010,8 +2197,6 @@ function desactiverModeDiapositives(section){
 
     document.body.classList.remove("slides-mode");
 
-    slideNavigation.style.display="none";
-
     currentSlides=[];
     currentSlideIndex=0;
     currentSlideSection=null;
@@ -2019,7 +2204,9 @@ function desactiverModeDiapositives(section){
     slideMode=false;
 }
 
-/* ACTUALISER L'AFFICHAGE */
+/* ==========================================
+   ACTUALISER L'AFFICHAGE
+========================================== */
 
 function actualiserAffichageSection(){
 
@@ -2083,6 +2270,7 @@ function actualiserBoutonsNavigation(){
 function showSection(id,button){
 
     const nouvelIndex=sectionIds.indexOf(id);
+
     const current=document.getElementById(id);
 
     if(!current || nouvelIndex===-1){
@@ -2095,8 +2283,6 @@ function showSection(id,button){
     }
 
     document.body.classList.remove("slides-mode");
-
-    slideNavigation.style.display="none";
 
     currentSlides=[];
     currentSlideIndex=0;
@@ -2184,7 +2370,9 @@ function naviguerSection(direction){
     showSection(nouvelId,boutonCorrespondant);
 }
 
-/* RETOUR AU MENU */
+/* ==========================================
+   RETOUR AU MENU
+========================================== */
 
 function retourMenu(){
 
@@ -2193,8 +2381,6 @@ function retourMenu(){
     }
 
     document.body.classList.remove("slides-mode");
-
-    slideNavigation.style.display="none";
 
     currentSlides=[];
     currentSlideIndex=0;
@@ -2343,8 +2529,6 @@ document.addEventListener("DOMContentLoaded",function(){
 
     genererQuiz();
 
-    slideNavigation.style.display="none";
-
     document.body.classList.remove(
         "slides-mode",
         "section-open"
@@ -2371,11 +2555,12 @@ document.addEventListener("DOMContentLoaded",function(){
 
     currentSectionIndex=-1;
 
+    actualiserBoutonsNavigation();
+
 });
 
 </script>
 
 </body>
 </html>
-
 
