@@ -1,276 +1,2100 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>IgnDay - T3 Facture Doit comportant des majorations</title>
+
 <style>
+
+
 *{box-sizing:border-box}
+
+
+
 html,body{
+
     width:100%;
+
     max-width:100%;
+
     overflow-x:hidden;
+
 }
+
+
+
 body{
+
     font-family:Arial,sans-serif;
+
     margin:0;
+
     background:#f4f6f9;
+
     color:#1e293b;
+
     padding-bottom:40px;
+
 }
+
+
+
 /* EN-TÊTE */
+
+
+
 header{
+
     background:#2c3e50;
+
     color:white;
+
     text-align:center;
+
     box-shadow:0 2px 8px #0002;
+
 }
+
+
+
 .brandbar{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:8px;
+
     flex-wrap:wrap;
+
     min-height:55px;
+
     padding:10px 14px;
+
     background:linear-gradient(120deg,#0f172a,#0f766e);
+
 }
+
+
+
 .brand{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
+
     color:white;
+
     text-decoration:none;
+
     font-weight:bold;
+
     font-size:15px;
+
 }
+
+
+
 .brand-logo{
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     width:30px;
+
     height:30px;
+
     border-radius:7px;
+
     background:#00b894;
+
     font-size:15px;
+
 }
+
+
+
 header h1{
+
     padding:12px 8px;
+
     margin:0;
-    font-size:45px;
+
+    font-size:40px;
+
     line-height:1.4;
+
 }
+
+
+
 header h1 p{
+
     margin:7px 0;
-    font-size:45px;
+
+    font-size:40px;
+
     font-weight:bold;
+
     line-height:1.4;
+
 }
+
+
+
 /* MENUS */
+
+
+
 .site-menu{
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     flex-wrap:wrap;
+
     gap:3px;
+
 }
+
+
+
 .site-menu>a{
+
     display:block;
+
     padding:5px 8px;
+
     border-radius:5px;
+
     color:white;
+
     text-decoration:none;
+
     cursor:pointer;
+
     font-size:12px;
+
 }
+
+
+
 .site-menu>a:hover{background:#1D4ED8}
+
+
+
 .dropdown{
+
     position:relative;
+
     display:inline-block;
+
 }
+
+
+
 .dropdown button{
+
     padding:5px 8px;
+
     background:transparent;
+
     color:white;
+
     border:none;
+
     cursor:pointer;
+
     font-size:12px;
+
     border-radius:5px;
+
 }
+
+
+
 .dropdown button:hover{background:#1D4ED8}
+
+
+
 .dropdown-content{
+
     display:none;
+
     position:fixed;
+
     top:0;
+
     left:0;
+
     min-width:230px;
+
     max-width:calc(100vw - 16px);
+
     max-height:calc(100vh - 16px);
+
     overflow-y:auto;
+
     overflow-x:hidden;
+
     overscroll-behavior:contain;
+
     background:white;
+
     box-shadow:0 8px 25px rgba(0,0,0,.28);
+
     border-radius:7px;
+
     z-index:99999;
+
     padding:6px;
+
 }
+
+
+
 .dropdown-content a{
+
     display:block;
+
     padding:9px 12px;
+
     color:#1e293b;
+
     text-decoration:none;
+
     text-align:left;
+
     font-size:13px;
+
     border-radius:5px;
+
     line-height:1.4;
+
     white-space:normal;
+
 }
+
+
+
 .dropdown-content a:hover{
+
     background:#0f766e;
+
     color:white;
+
 }
+
+
+
 /* NAVIGATION DES SECTIONS */
+
+
+
 nav{
+
     background:#34495e;
+
     padding:7px 10px;
+
     display:flex;
+
     flex-wrap:wrap;
+
     justify-content:center;
+
     align-items:center;
+
     gap:7px;
+
     text-align:center;
+
 }
+
+
+
 nav button{
+
     margin:0;
+
     padding:10px 17px;
+
     border:0;
+
     background:#00b894;
+
     color:white;
+
     cursor:pointer;
+
     border-radius:5px;
+
     font-size:19px;
+
     font-weight:bold;
+
     transition:.25s;
+
     line-height:1.2;
-    white-space:normal;
+
+    white-space:nowrap;
+
 }
+
+
+
 nav button:hover{
+
     background:#019875;
+
     transform:translateY(-1px);
+
 }
+
+
+
 .btnActive{
+
     background:#0984e3!important;
+
     transform:scale(1.03);
+
     box-shadow:0 2px 7px #0003;
+
 }
+
+
+
 /* MASQUER HEADER ET NAV EN SECTION */
+
+
+
 body.section-open>header,
+
 body.section-open>nav{
+
     display:none!important;
+
 }
+
+
+
 /* SECTIONS */
+
+
+
 section{
+
     display:none;
+
     padding:25px;
+
     margin:15px;
+
 }
+
+
+
 section.active{display:block}
+
+
+
 .animationSection{
+
     animation:apparition .4s ease;
+
     background:white;
+
     border-left:6px solid #00b894;
+
     border-radius:9px;
+
     box-shadow:0 4px 12px #0002;
+
 }
+
+
+
 @keyframes apparition{
+
     from{opacity:0}
+
     to{opacity:1}
+
 }
+
+
+
 body.section-open>section.active{
+
     margin:0;
+
     padding:4px 25px 25px;
+
 }
+
+
+
 body.section-open>section.active>h2,
+
 body.section-open>section.active>.definition-title{
+
     margin-top:0;
+
 }
+
+
+
 /* CONTENU */
+
+
+
 h2{
+
     color:#2c3e50;
+
     margin-top:0;
+
 }
+
+
+
 h3{color:#00b894}
+
+
+
 p,li{line-height:1.7}
+
+
+
 ul,ol{line-height:1.7}
+
+
+
 table{
+
     width:100%;
+
     border-collapse:collapse;
+
     background:white;
+
     margin-top:18px;
+
 }
+
+
+
 .table-wrapper{
+
     width:100%;
+
     max-width:100%;
+
     overflow-x:auto;
+
     -webkit-overflow-scrolling:touch;
+
 }
+
+
+
 td,th{
+
     border:1px solid #ccc;
+
     padding:9px;
+
     line-height:1.5;
+
 }
+
+
+
 th{
+
     background:#dfe6e9;
+
     text-align:center;
+
 }
+
+
+
 tr:hover td{background:#f1f7ff}
+
+
+
 .titre{
+
     text-align:center;
+
     font-size:23px;
+
     font-weight:bold;
+
 }
+
+
+
 .bold{font-weight:bold}
+
 .center{text-align:center}
+
 .right{text-align:right}
-.header{background:#dfe6e9}
-/* MISE EN VALEUR */
-.highlight{
-    background:#e8fff7;
-    border-left:5px solid #00b894;
-    padding:13px;
-    margin-top:13px;
-    border-radius:7px;
-    line-height:1.7;
+
+.header-cell{background:#dfe6e9;font-weight:bold}
+
+
+
+/* TABLEAU FACTURE */
+
+
+
+.facture-table{
+
+    width:75%;
+
+    min-width:450px;
+
+    border:2px solid #1e293b;
+
 }
-.definition-title{
-    background:linear-gradient(120deg,#6d28d9,#a78bfa);
-    color:white;
-    padding:12px 15px;
-    border-radius:7px;
+
+
+
+.facture-table td{
+
+    border:1px solid #1e293b;
+
+}
+
+
+
+.facture-table .titre{font-size:26px}
+
+
+
+/* TABLEAUX JOURNAUX */
+
+
+
+.journal-table{
+
+    width:100%;
+
+    min-width:0;
+
+    table-layout:fixed;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.journal-table td,
+
+.journal-table th{
+
+    padding:10px 6px;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    vertical-align:middle;
+
+    overflow-wrap:anywhere;
+
+    word-wrap:break-word;
+
+    white-space:normal;
+
+}
+
+
+
+.journal-table .date td{
+
     text-align:center;
+
+    background:#2c3e50;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+
+
+.journal-table .debit{
+
+    background:#eaf4ff;
+
+    color:#0b3d91;
+
+    font-weight:bold;
+
+}
+
+
+
+.journal-table .credit{
+
+    background:#fff2e6;
+
+    color:#a34b00;
+
+    font-weight:bold;
+
+}
+
+
+
+.journal-table .montant{
+
+    text-align:right;
+
+    font-weight:bold;
+
+    background:#f8fafc;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+}
+
+
+
+.journal-table tr:hover td{background:#f1f7ff}
+
+
+
+.journal-table .date:hover td{
+
+    background:#2c3e50;
+
+    color:white;
+
+}
+
+
+
+/* MISE EN VALEUR */
+
+
+
+.example{
+
+    background:#e8fff7;
+
+    border-left:6px solid #00b894;
+
+    padding:13px 16px;
+
+    margin:18px 0;
+
+    border-radius:7px;
+
+    font-weight:bold;
+
+}
+
+
+
+.highlight{
+
+    background:#e8fff7;
+
+    border-left:5px solid #00b894;
+
+    padding:13px;
+
+    margin-top:13px;
+
+    border-radius:7px;
+
+    line-height:1.7;
+
+}
+
+
+
+.definition-title{
+
+    background:linear-gradient(120deg,#0f766e,#14b8a6);
+
+    color:white;
+
+    padding:12px 15px;
+
+    border-radius:7px;
+
+    text-align:center;
+
     font-size:21px;
+
     font-weight:bold;
+
     margin:12px 0;
+
 }
+
+
+
 .definition-box{
+
     background:#fffaf2;
+
     border:2px solid #e6a23c;
+
     border-radius:8px;
+
     padding:15px;
+
     margin:12px 0;
+
     font-weight:bold;
+
 }
-/* SCHÉMAS */
-.section-title{
-    font-size:22px;
+
+
+
+/* BARRE DES DIAPOSITIVES DANS LE PIED DE PAGE */
+
+
+
+.slide-navigation{
+
+    display:none;
+
+    position:static;
+
+    width:auto;
+
+    height:auto;
+
+    min-height:0;
+
+    z-index:auto;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    padding:0;
+
+    background:transparent;
+
+    color:white;
+
+    border:0;
+
+    font-size:10px;
+
+    flex-shrink:0;
+
+}
+
+
+
+.slide-navigation button{
+
+    border:0;
+
+    border-radius:3px;
+
+    padding:4px 7px;
+
+    background:#00b894;
+
+    color:white;
+
+    font-size:10px;
+
     font-weight:bold;
-    background:#cfcfcf;
-    display:inline-block;
-    padding:10px 20px;
-    margin-bottom:25px;
+
+    line-height:1.2;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+}
+
+
+
+.slide-navigation button:hover:not(:disabled){
+
+    background:#0984e3;
+
+}
+
+
+
+.slide-navigation button:disabled{
+
+    opacity:.4;
+
+    cursor:not-allowed;
+
+}
+
+
+
+.slide-counter{
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    text-align:center;
+
+}
+
+
+
+/* CONTENU DES DIAPOSITIVES */
+
+
+
+.content-slide{
+
+    display:none;
+
+    width:100%;
+
+    min-height:100px;
+
+    padding:2px 0 8px;
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+    overscroll-behavior:contain;
+
+}
+
+
+
+.content-slide.active-slide{display:block}
+
+
+
+.slide-inner{
+
+    width:100%;
+
     max-width:100%;
+
+    transform:none;
+
+    zoom:1!important;
+
 }
+
+
+
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+
+
+
+body.slides-mode .content-slide.title-only-slide{
+
+    display:none;
+
+    width:100%;
+
+    min-height:calc(100vh - 100px);
+
+    padding:0 15px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+}
+
+
+
+body.slides-mode .content-slide.title-only-slide.active-slide{
+
+    display:flex;
+
+}
+
+
+
+body.slides-mode .content-slide.title-only-slide .definition-title{
+
+    width:100%;
+
+    max-width:100%;
+
+    margin:0;
+
+    text-align:center;
+
+}
+
+
+
+/* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
+
+
+
+.slide-measure{
+
+    position:fixed!important;
+
+    left:-100000px!important;
+
+    top:0!important;
+
+    display:block!important;
+
+    width:1000px;
+
+    height:auto!important;
+
+    min-height:0!important;
+
+    max-height:none!important;
+
+    overflow:visible!important;
+
+    visibility:hidden!important;
+
+    pointer-events:none!important;
+
+    z-index:-1!important;
+
+}
+
+
+
+body.slides-mode{
+
+    padding-bottom:48px;
+
+}
+
+
+
+body.slides-mode>section.active{
+
+    display:block;
+
+    margin:0;
+
+    padding:4px 25px 8px;
+
+    border-radius:0;
+
+    box-shadow:none;
+
+    border-left:0;
+
+    min-height:calc(100vh - 48px);
+
+    animation:none;
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+}
+
+
+
+body.slides-mode .slide-navigation{
+
+    display:flex;
+
+}
+
+
+
+body.slides-mode .definition-title{
+
+    margin:3px 0 8px;
+
+    padding:8px 12px;
+
+    font-size:20px;
+
+}
+
+
+
+body.slides-mode h2{
+
+    margin-top:0;
+
+    margin-bottom:8px;
+
+}
+
+
+
+body.slides-mode h3{
+
+    margin-top:8px;
+
+    margin-bottom:6px;
+
+}
+
+
+
+body.slides-mode p,
+
+body.slides-mode li{
+
+    line-height:1.45;
+
+    margin-top:5px;
+
+    margin-bottom:5px;
+
+}
+
+
+
+body.slides-mode ul,
+
+body.slides-mode ol{
+
+    margin-top:5px;
+
+    margin-bottom:5px;
+
+}
+
+
+
+body.slides-mode .definition-box{
+
+    margin:6px 0;
+
+    padding:10px;
+
+}
+
+
+
+body.slides-mode .highlight{
+
+    margin:6px 0;
+
+    padding:9px;
+
+}
+
+
+
+body.slides-mode .example{
+
+    margin:6px 0;
+
+    padding:9px;
+
+}
+
+
+
+body.slides-mode table{margin-top:8px}
+
+
+
+body.slides-mode td,
+
+body.slides-mode th{padding:6px 9px}
+
+
+
+/* PIED DE PAGE */
+
+
+
+footer{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    min-height:38px;
+
+    height:auto;
+
+    z-index:2000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:5px;
+
+    padding:4px 10px;
+
+    margin:0;
+
+    background:#2c3e50;
+
+    color:white;
+
+    border:1px solid #1e293b;
+
+    box-shadow:none;
+
+    font-size:11px;
+
+    line-height:1.2;
+
+}
+
+
+
+footer a{
+
+    color:#00ffcc;
+
+    text-decoration:none;
+
+}
+
+
+
+footer>span{
+
+    white-space:nowrap;
+
+}
+
+
+
+.footer-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:5px;
+
+    margin-left:auto;
+
+}
+
+
+
+.btnFooter{
+
+    display:none;
+
+    margin:0;
+
+    padding:4px 9px;
+
+    border:none;
+
+    border-radius:4px;
+
+    color:white;
+
+    font-size:11px;
+
+    line-height:1.2;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:.2s;
+
+}
+
+
+
+.btnPrecedent{background:#475569}
+
+.btnSuivant{background:#0f766e}
+
+.btnRetourMenu{background:#0984e3}
+
+.btnFooter.visible{display:block}
+
+
+
+.btnFooter:hover:not(:disabled){
+
+    background:#00b894;
+
+    transform:translateY(-1px);
+
+}
+
+
+
+.btnFooter:disabled{
+
+    background:#64748b;
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+
+/* RESPONSIVE */
+
+
+
+@media(max-width:760px){
+
+
+
+    body{padding-bottom:48px}
+
+
+
+    .brandbar{
+
+        justify-content:center;
+
+        padding:4px 6px;
+
+        gap:5px;
+
+    }
+
+
+
+    .brand{font-size:14px}
+
+
+
+    .brand-logo{
+
+        width:27px;
+
+        height:27px;
+
+        font-size:13px;
+
+    }
+
+
+
+    .site-menu{
+
+        width:100%;
+
+        gap:2px;
+
+    }
+
+
+
+    .site-menu>a{
+
+        padding:5px 6px;
+
+        font-size:11px;
+
+    }
+
+
+
+    .dropdown button{
+
+        padding:5px 6px;
+
+        font-size:11px;
+
+    }
+
+
+
+    .dropdown-content{min-width:220px}
+
+
+
+    header h1{
+
+        padding:5px 6px;
+
+        line-height:1.3;
+
+    }
+
+
+
+    header h1 p{
+
+        font-size:16px;
+
+        line-height:1.3;
+
+        margin:3px 0;
+
+    }
+
+
+
+    section{
+
+        padding:16px;
+
+        margin:10px;
+
+    }
+
+
+
+    body.section-open>section.active{
+
+        margin:0;
+
+        padding:4px 15px 18px;
+
+    }
+
+
+
+    nav{
+
+        padding:6px 5px;
+
+        gap:5px;
+
+    }
+
+
+
+    nav button{
+
+        padding:6px 9px;
+
+        font-size:12px;
+
+        white-space:normal;
+
+    }
+
+
+
+    .definition-title{
+
+        font-size:18px;
+
+        padding:11px;
+
+    }
+
+
+
+    .definition-box{padding:12px}
+
+
+
+    td,th{
+
+        padding:7px;
+
+        font-size:12px;
+
+    }
+
+
+
+    .facture-table{
+
+        width:100%;
+
+    }
+
+
+
+    .journal-table{
+
+        width:100%;
+
+        min-width:0;
+
+        table-layout:fixed;
+
+    }
+
+
+
+    .journal-table td,
+
+    .journal-table th{
+
+        padding:7px 4px;
+
+        font-size:12px;
+
+        line-height:1.4;
+
+    }
+
+
+
+    .container{padding:15px}
+
+
+
+    footer{
+
+        min-height:38px;
+
+        height:auto;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:4px;
+
+        padding:4px 5px;
+
+        font-size:9px;
+
+    }
+
+
+
+    footer>span{
+
+        display:none;
+
+    }
+
+
+
+    .footer-actions{
+
+        width:auto;
+
+        justify-content:center;
+
+        gap:3px;
+
+        margin-left:0;
+
+    }
+
+
+
+    .btnFooter{
+
+        padding:4px 6px;
+
+        font-size:9px;
+
+    }
+
+
+
+    .slide-navigation{
+
+        gap:3px;
+
+        padding:0;
+
+    }
+
+
+
+    .slide-navigation button{
+
+        font-size:9px;
+
+        padding:4px 5px;
+
+    }
+
+
+
+    .slide-counter{font-size:9px}
+
+
+
+    body.slides-mode>section.active{
+
+        padding:4px 15px 8px;
+
+        min-height:calc(100vh - 48px);
+
+    }
+
+
+
+    body.slides-mode .definition-title{
+
+        font-size:17px;
+
+        padding:8px;
+
+    }
+
+
+
+    body.slides-mode .content-slide.title-only-slide{
+
+        min-height:calc(100vh - 115px);
+
+        padding:0 8px;
+
+    }
+
+}
+
+
+
+@media(max-width:420px){
+
+
+
+    .definition-title{font-size:16px}
+
+
+
+    header h1 p{font-size:14px}
+
+
+
+    .brandbar{padding:3px 5px}
+
+
+
+    .site-menu>a,
+
+    .dropdown button{
+
+        font-size:10px;
+
+        padding:4px 5px;
+
+    }
+
+
+
+    section{
+
+        padding:12px;
+
+        margin:8px;
+
+    }
+
+
+
+    body.section-open>section.active{
+
+        margin:0;
+
+        padding:4px 12px 14px;
+
+    }
+
+
+
+    td,th{
+
+        font-size:11px;
+
+        padding:6px 3px;
+
+    }
+
+
+
+    .titre{font-size:18px}
+
+
+
+    nav button{
+
+        padding:6px 7px;
+
+        font-size:11px;
+
+    }
+
+
+
+    .journal-table td,
+
+    .journal-table th{
+
+        font-size:10px;
+
+        padding:6px 2px;
+
+        line-height:1.35;
+
+    }
+
+
+
+    .journal-table .montant{
+
+        text-align:center;
+
+        font-size:10px;
+
+    }
+
+
+
+    .journal-table .date td{
+
+        font-size:11px;
+
+        padding:8px 3px;
+
+    }
+
+
+
+    footer{
+
+        padding:4px 3px;
+
+        gap:3px;
+
+    }
+
+
+
+    .btnFooter{
+
+        font-size:8px;
+
+        padding:4px 4px;
+
+    }
+
+
+
+    .footer-actions{gap:2px}
+
+
+
+    .slide-navigation{gap:2px}
+
+
+
+    .slide-navigation button{
+
+        font-size:8px;
+
+        padding:4px 3px;
+
+    }
+
+
+
+    .slide-counter{font-size:8px}
+
+}
+
+
+
+/* MODE DATASHOW */
+
+
+
+@media screen and (min-width:1200px) and (min-height:650px){
+
+
+
+    body{
+
+        font-size:18px;
+
+        line-height:1.6;
+
+        padding-bottom:40px;
+
+    }
+
+
+
+    .brandbar{padding:5px 18px}
+
+    .brand{font-size:17px}
+
+
+
+    .brand-logo{
+
+        width:32px;
+
+        height:32px;
+
+        font-size:15px;
+
+    }
+
+
+
+    header h1{padding:6px 8px}
+
+    header h1 p{font-size:21px}
+
+
+
+    .site-menu>a,
+
+    .dropdown button{
+
+        font-size:13px;
+
+        padding:6px 9px;
+
+    }
+
+
+
+    .dropdown-content{min-width:270px}
+
+
+
+    .dropdown-content a{
+
+        font-size:15px;
+
+        padding:11px 14px;
+
+    }
+
+
+
+    nav{
+
+        padding:8px 12px;
+
+        gap:9px;
+
+    }
+
+
+
+    nav button{
+
+        padding:9px 16px;
+
+        font-size:18px;
+
+        border-radius:6px;
+
+    }
+
+
+
+    section{
+
+        padding:30px 35px;
+
+        margin:18px 22px;
+
+    }
+
+
+
+    body.section-open>section.active{
+
+        margin:0;
+
+        padding:4px 35px 30px;
+
+    }
+
+
+
+    h2{
+
+        font-size:27px;
+
+        margin-bottom:18px;
+
+    }
+
+
+
+    h3{
+
+        font-size:21px;
+
+        margin-top:20px;
+
+    }
+
+
+
+    p,li{
+
+        font-size:18px;
+
+        line-height:1.7;
+
+    }
+
+
+
+    .definition-title{
+
+        font-size:23px;
+
+        padding:14px;
+
+    }
+
+
+
+    .definition-box{padding:17px}
+
+
+
+    td,th{
+
+        padding:14px 17px;
+
+        font-size:17px;
+
+        line-height:1.5;
+
+    }
+
+
+
+    .journal-table td,
+
+    .journal-table th{
+
+        font-size:17px;
+
+        padding:12px 8px;
+
+    }
+
+
+
+    footer{
+
+        min-height:38px;
+
+        height:auto;
+
+        font-size:11px;
+
+    }
+
+
+
+    .btnFooter{
+
+        padding:4px 9px;
+
+        font-size:11px;
+
+    }
+
+
+
+    body.slides-mode .definition-title{
+
+        font-size:21px;
+
+        padding:9px 12px;
+
+    }
+
+
+
+    body.slides-mode p,
+
+    body.slides-mode li{
+
+        font-size:18px;
+
+        line-height:1.45;
+
+    }
+
+}
+
+
+
+/* GRAND ÉCRAN */
+
+
+
+@media screen and (min-width:1600px){
+
+
+
+    body{
+
+        font-size:19px;
+
+        padding-bottom:40px;
+
+    }
+
+
+
+    header h1{padding:6px 8px}
+
+    header h1 p{font-size:22px}
+
+
+
+    section{
+
+        max-width:1750px;
+
+        margin:22px auto;
+
+        padding:35px 45px;
+
+    }
+
+
+
+    body.section-open>section.active{
+
+        margin:0 auto;
+
+        padding:4px 45px 35px;
+
+    }
+
+
+
+    h2{font-size:30px}
+
+    h3{font-size:24px}
+
+
+
+    p,li{font-size:20px}
+
+
+
+    td,th{
+
+        font-size:19px;
+
+        padding:17px 20px;
+
+    }
+
+
+
+    .journal-table td,
+
+    .journal-table th{
+
+        font-size:18px;
+
+        padding:14px 10px;
+
+    }
+
+
+
+    nav button{
+
+        font-size:19px;
+
+        padding:10px 18px;
+
+    }
+
+
+
+    .definition-title{
+
+        font-size:25px;
+
+        padding:15px;
+
+    }
+
+
+
+    footer{
+
+        min-height:38px;
+
+        height:auto;
+
+    }
+
+
+
+    body.slides-mode p,
+
+    body.slides-mode li{
+
+        font-size:19px;
+
+        line-height:1.45;
+
+    }
+
+}
+
+
+/* ÉLÉMENTS SPÉCIFIQUES À LA FACTURE AVEC MAJORATIONS */
 .schema{
     display:flex;
     align-items:center;
@@ -293,21 +2117,10 @@ tr:hover td{background:#f1f7ff}
 .big{width:280px;font-size:24px}
 .medium{width:260px;font-size:20px}
 .small{width:220px;font-size:18px}
-.column{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-.line{
-    width:80px;
-    height:3px;
-    background:#44546a;
-}
-.row{
-    display:flex;
-    align-items:center;
-}
-/* FACTURE */
+.column{display:flex;flex-direction:column;gap:20px}
+.line{width:80px;height:3px;background:#44546a}
+.row{display:flex;align-items:center}
+
 #TVA .invoice-table{
     width:100%;
     margin:12px auto;
@@ -321,19 +2134,12 @@ tr:hover td{background:#f1f7ff}
 #TVA .invoice-table .titre{font-size:23px}
 #TVA .invoice-table .header{background:#e6e6e6}
 
-/* ENREGISTREMENT COMPTABLE */
-#EC h2{
-    color:#2c3e50;
-    margin-top:0;
-}
-
 #EC .table-wrapper{
     width:100%;
     max-width:100%;
     overflow-x:hidden;
     margin:0;
 }
-
 #EC .journal-table{
     width:100%;
     min-width:0;
@@ -344,7 +2150,6 @@ tr:hover td{background:#f1f7ff}
     margin-bottom:22px;
     background:white;
 }
-
 #EC .journal-table td,
 #EC .journal-table th{
     border:1px solid #ccc;
@@ -356,26 +2161,22 @@ tr:hover td{background:#f1f7ff}
     word-wrap:break-word;
     white-space:normal;
 }
-
 #EC .journal-table .date td{
     text-align:center;
     background:#2c3e50;
     color:white;
     font-weight:bold;
 }
-
 #EC .journal-table .debit{
     background:#eaf4ff;
     color:#0b3d91;
     font-weight:bold;
 }
-
 #EC .journal-table .credit{
     background:#fff2e6;
     color:#a34b00;
     font-weight:bold;
 }
-
 #EC .journal-table .montant{
     text-align:right;
     font-weight:bold;
@@ -383,25 +2184,21 @@ tr:hover td{background:#f1f7ff}
     white-space:normal;
     overflow-wrap:anywhere;
 }
-
-#EC .journal-table tr:hover td{
-    background:#f1f7ff;
-}
-
+#EC .journal-table tr:hover td{background:#f1f7ff}
 #EC .journal-table .date:hover td{
     background:#2c3e50;
     color:white;
 }
 
-/* ADAPTATION DES JOURNAUX AU TELEPHONE */
 @media(max-width:760px){
-
+    .schema{flex-direction:column;gap:12px;margin-bottom:20px}
+    .box{max-width:100%;width:100%;font-size:15px;padding:14px}
+    #TVA .invoice-table{width:100%}
     #EC .table-wrapper{
         width:100%;
         max-width:100%;
         overflow-x:hidden;
     }
-
     #EC .journal-table{
         width:100%;
         min-width:0;
@@ -409,7 +2206,6 @@ tr:hover td{background:#f1f7ff}
         table-layout:fixed;
         margin-top:12px;
     }
-
     #EC .journal-table td,
     #EC .journal-table th{
         padding:6px 3px;
@@ -418,34 +2214,26 @@ tr:hover td{background:#f1f7ff}
         overflow-wrap:anywhere;
         word-break:normal;
     }
-
-    /* Colonnes des comptes */
     #EC .journal-table td:nth-child(1),
     #EC .journal-table td:nth-child(2){
         width:13%;
         text-align:center;
     }
-
-    /* Colonnes des intitulés */
     #EC .journal-table td:nth-child(3),
     #EC .journal-table td:nth-child(4){
         width:27%;
         text-align:left;
     }
-
-    /* Colonnes des montants */
     #EC .journal-table td:nth-child(5),
     #EC .journal-table td:nth-child(6){
         width:10%;
         text-align:right;
     }
-
     #EC .journal-table .date td{
         font-size:12px;
         padding:7px 3px;
         text-align:center;
     }
-
     #EC .journal-table .montant{
         font-size:10px;
         padding:6px 2px;
@@ -453,1653 +2241,2834 @@ tr:hover td{background:#f1f7ff}
         overflow-wrap:anywhere;
     }
 }
-
-/* PETITS TELEPHONES */
 @media(max-width:420px){
-
     #EC .journal-table td,
     #EC .journal-table th{
         padding:5px 2px;
         font-size:10px;
         line-height:1.3;
     }
-
     #EC .journal-table td:nth-child(1),
-    #EC .journal-table td:nth-child(2){
-        width:13%;
-    }
-
+    #EC .journal-table td:nth-child(2){width:13%}
     #EC .journal-table td:nth-child(3),
-    #EC .journal-table td:nth-child(4){
-        width:27%;
-    }
-
+    #EC .journal-table td:nth-child(4){width:27%}
     #EC .journal-table td:nth-child(5),
-    #EC .journal-table td:nth-child(6){
-        width:10%;
-    }
-
+    #EC .journal-table td:nth-child(6){width:10%}
     #EC .journal-table .montant{
         font-size:9px;
         padding:5px 1px;
     }
 }
-/* BARRE DES DIAPOSITIVES */
-.slide-navigation{
-    display:none;
-    position:fixed;
-    bottom:32px;
-    left:0;
-    width:100%;
-    height:24px;
-    min-height:24px;
-    z-index:1999;
-    align-items:center;
-    justify-content:space-between;
-    gap:5px;
-    padding:2px 8px;
-    background:#34495e;
-    color:white;
-    border-top:1px solid #1e293b;
-    font-size:10px;
-}
-.slide-navigation button{
-    border:0;
-    border-radius:3px;
-    padding:3px 8px;
-    background:#00b894;
-    color:white;
-    font-size:10px;
-    font-weight:bold;
-    line-height:1.2;
-    cursor:pointer;
-    white-space:nowrap;
-}
-.slide-navigation button:hover:not(:disabled){
-    background:#0984e3;
-}
-.slide-navigation button:disabled{
-    opacity:.4;
-    cursor:not-allowed;
-}
-.slide-counter{
-    font-size:10px;
-    font-weight:bold;
-    white-space:nowrap;
-    text-align:center;
-}
-/* CONTENU DES DIAPOSITIVES */
-.content-slide{
-    display:none;
-    width:100%;
-    min-height:100px;
-    padding:2px 0 8px;
-    overflow-x:hidden;
-    overflow-y:auto;
-    overscroll-behavior:contain;
-}
-.content-slide.active-slide{display:block}
-.slide-inner{
-    width:100%;
-    max-width:100%;
-    transform:none;
-    zoom:1!important;
-}
-/* MESURE DES GROUPES */
-.slide-measure{
-    position:fixed!important;
-    left:-100000px!important;
-    top:0!important;
-    display:block!important;
-    width:1000px;
-    height:auto!important;
-    min-height:0!important;
-    max-height:none!important;
-    overflow:visible!important;
-    visibility:hidden!important;
-    pointer-events:none!important;
-    z-index:-1!important;
-}
-body.slides-mode{padding-bottom:58px}
-body.slides-mode>section.active{
-    display:block;
-    margin:0;
-    padding:4px 25px 8px;
-    border-radius:0;
-    box-shadow:none;
-    border-left:0;
-    min-height:calc(100vh - 58px);
-    animation:none;
-    overflow-x:hidden;
-    overflow-y:auto;
-}
-body.slides-mode .slide-navigation{display:flex}
-body.slides-mode .definition-title{
-    margin:3px 0 8px;
-    padding:8px 12px;
-    font-size:20px;
-}
-body.slides-mode h2{
-    margin-top:0;
-    margin-bottom:8px;
-}
-body.slides-mode h3{
-    margin-top:8px;
-    margin-bottom:6px;
-}
-body.slides-mode p,
-body.slides-mode li{
-    line-height:1.45;
-    margin-top:5px;
-    margin-bottom:5px;
-}
-body.slides-mode ul,
-body.slides-mode ol{
-    margin-top:5px;
-    margin-bottom:5px;
-}
-body.slides-mode #EC .journal-table{
-    width:100%;
-    min-width:0;
-    max-width:100%;
-    table-layout:fixed;
-}
 
-body.slides-mode #EC .journal-table td,
-body.slides-mode #EC .journal-table th{
-    overflow-wrap:anywhere;
-    word-break:normal;
-}
-
-@media(max-width:760px){
-    body.slides-mode #EC .journal-table{
-        width:100%;
-        table-layout:fixed;
-    }
-}
-body.slides-mode .definition-box{
-    margin:6px 0;
-    padding:10px;
-}
-body.slides-mode .highlight{
-    margin:6px 0;
-    padding:9px;
-}
-body.slides-mode .section-title{
-    margin-bottom:12px;
-    padding:8px 12px;
-    font-size:17px;
-}
-body.slides-mode .schema{
-    gap:12px;
-    margin-bottom:15px;
-}
-body.slides-mode .box{
-    padding:12px;
-}
-body.slides-mode table{margin-top:8px}
-body.slides-mode td,
-body.slides-mode th{padding:6px 9px}
-/* PIED DE PAGE */
-footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:32px;
-    min-height:32px;
-    z-index:2000;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:6px;
-    padding:4px 10px;
-    margin:0;
-    background:#2c3e50;
-    color:white;
-    border:1px solid #1e293b;
-    box-shadow:none;
-    font-size:11px;
-    line-height:1.2;
-}
-footer a{
-    color:#00ffcc;
-    text-decoration:none;
-}
-footer>span{white-space:nowrap}
-.footer-actions{
-    display:flex;
-    align-items:center;
-    justify-content:flex-end;
-    gap:5px;
-    margin-left:auto;
-}
-.btnFooter{
-    display:none;
-    margin:0;
-    padding:4px 9px;
-    border:none;
-    border-radius:4px;
-    color:white;
-    font-size:11px;
-    line-height:1.2;
-    font-weight:bold;
-    cursor:pointer;
-    white-space:nowrap;
-    transition:.2s;
-}
-.btnPrecedent{background:#475569}
-.btnSuivant{background:#0f766e}
-.btnRetourMenu{background:#0984e3}
-.btnFooter.visible{display:block}
-.btnFooter:hover:not(:disabled){
-    background:#00b894;
-    transform:translateY(-1px);
-}
-.btnFooter:disabled{
-    background:#64748b;
-    opacity:.45;
-    cursor:not-allowed;
-    transform:none;
-}
-/* RESPONSIVE */
-@media(max-width:760px){
-    body{padding-bottom:42px}
-    .brandbar{
-        justify-content:center;
-        padding:4px 6px;
-        gap:5px;
-    }
-    .brand{font-size:14px}
-    .brand-logo{
-        width:27px;
-        height:27px;
-        font-size:13px;
-    }
-    .site-menu{
-        width:100%;
-        gap:2px;
-    }
-    .site-menu>a{
-        padding:5px 6px;
-        font-size:11px;
-    }
-    .dropdown button{
-        padding:5px 6px;
-        font-size:11px;
-    }
-    .dropdown-content{min-width:220px}
-    header h1{
-        padding:5px 6px;
-        line-height:1.3;
-    }
-    header h1 p{
-        font-size:16px;
-        line-height:1.3;
-        margin:3px 0;
-    }
-    section{
-        padding:16px;
-        margin:10px;
-    }
-    body.section-open>section.active{
-        margin:0;
-        padding:4px 15px 18px;
-    }
-    nav{
-        padding:6px 5px;
-        gap:5px;
-    }
-    nav button{
-        padding:6px 9px;
-        font-size:12px;
-        white-space:normal;
-    }
-    .definition-title{
-        font-size:18px;
-        padding:11px;
-    }
-    .definition-box{padding:12px}
-    .schema{
-        flex-direction:column;
-        gap:12px;
-        margin-bottom:20px;
-    }
-    .box{
-        max-width:100%;
-        width:100%;
-        font-size:15px;
-        padding:14px;
-    }
-    .section-title{
-        font-size:16px;
-        padding:8px 12px;
-        margin-bottom:12px;
-    }
-    #TVA .invoice-table{width:100%}
-    #EC table{width:100%}
-    #EC td{
-        padding:6px 4px;
-        font-size:11px;
-    }
-    footer{
-        height:32px;
-        min-height:32px;
-        flex-wrap:nowrap;
-        justify-content:space-between;
-        gap:3px;
-        padding:3px 5px;
-        font-size:9px;
-    }
-    footer>span{
-        width:auto;
-        text-align:left;
-        font-size:9px;
-    }
-    .footer-actions{
-        width:auto;
-        justify-content:flex-end;
-        gap:3px;
-        margin-left:auto;
-    }
-    .btnFooter{
-        padding:4px 6px;
-        font-size:9px;
-    }
-    .slide-navigation{
-        bottom:32px;
-        height:24px;
-        min-height:24px;
-        padding:2px 4px;
-        gap:3px;
-    }
-    .slide-navigation button{
-        font-size:9px;
-        padding:3px 5px;
-    }
-    .slide-counter{font-size:9px}
-    body.slides-mode>section.active{
-        padding:4px 15px 8px;
-        min-height:calc(100vh - 58px);
-    }
-    body.slides-mode .definition-title{
-        font-size:17px;
-        padding:8px;
-    }
-}
-@media(max-width:420px){
-    .definition-title{font-size:16px}
-    header h1 p{font-size:14px}
-    .brandbar{padding:3px 5px}
-    .site-menu>a,
-    .dropdown button{
-        font-size:10px;
-        padding:4px 5px;
-    }
-    section{
-        padding:12px;
-        margin:8px;
-    }
-    body.section-open>section.active{
-        margin:0;
-        padding:4px 12px 14px;
-    }
-    td,th{
-        font-size:11px;
-        padding:6px 3px;
-    }
-    .titre{font-size:18px}
-    nav button{
-        padding:6px 7px;
-        font-size:11px;
-    }
-    footer{
-        padding:3px 4px;
-        font-size:8px;
-    }
-    footer>span{font-size:8px}
-    .btnFooter{
-        font-size:8px;
-        padding:4px 5px;
-    }
-    .footer-actions{gap:2px}
-    .slide-navigation button{
-        font-size:8px;
-        padding:3px 4px;
-    }
-    .slide-counter{font-size:8px}
-}
-/* MODE DATASHOW */
-@media screen and (min-width:1200px) and (min-height:650px){
-    body{
-        font-size:18px;
-        line-height:1.6;
-        padding-bottom:40px;
-    }
-    .brandbar{padding:5px 18px}
-    .brand{font-size:17px}
-    .brand-logo{
-        width:32px;
-        height:32px;
-        font-size:15px;
-    }
-    header h1{padding:6px 8px}
-    header h1 p{font-size:21px}
-    .site-menu>a,
-    .dropdown button{
-        font-size:13px;
-        padding:6px 9px;
-    }
-    .dropdown-content{min-width:270px}
-    .dropdown-content a{
-        font-size:15px;
-        padding:11px 14px;
-    }
-    nav{
-        padding:8px 12px;
-        gap:9px;
-    }
-    nav button{
-        padding:9px 16px;
-        font-size:18px;
-        border-radius:6px;
-    }
-    section{
-        padding:30px 35px;
-        margin:18px 22px;
-    }
-    body.section-open>section.active{
-        margin:0;
-        padding:4px 35px 30px;
-    }
-    h2{
-        font-size:27px;
-        margin-bottom:18px;
-    }
-    h3{
-        font-size:21px;
-        margin-top:20px;
-    }
-    p,li{
-        font-size:18px;
-        line-height:1.7;
-    }
-    .definition-title{
-        font-size:23px;
-        padding:14px;
-    }
-    .definition-box{padding:17px}
-    td,th{
-        padding:14px 17px;
-        font-size:17px;
-        line-height:1.5;
-    }
-    .section-title{font-size:20px}
-    .box{font-size:18px}
-    footer{
-        height:32px;
-        min-height:32px;
-        font-size:11px;
-    }
-    .btnFooter{
-        padding:4px 9px;
-        font-size:11px;
-    }
-    body.slides-mode .definition-title{
-        font-size:21px;
-        padding:9px 12px;
-    }
-    body.slides-mode p,
-    body.slides-mode li{
-        font-size:18px;
-        line-height:1.45;
-    }
-}
-/* GRAND ÉCRAN */
-@media screen and (min-width:1600px){
-    body{
-        font-size:19px;
-        padding-bottom:40px;
-    }
-    header h1{padding:6px 8px}
-    header h1 p{font-size:22px}
-    section{
-        max-width:1750px;
-        margin:22px auto;
-        padding:35px 45px;
-    }
-    body.section-open>section.active{
-        margin:0 auto;
-        padding:4px 45px 35px;
-    }
-    h2{font-size:30px}
-    h3{font-size:24px}
-    p,li{font-size:20px}
-    td,th{
-        font-size:19px;
-        padding:17px 20px;
-    }
-    nav button{
-        font-size:19px;
-        padding:10px 18px;
-    }
-    .definition-title{
-        font-size:25px;
-        padding:15px;
-    }
-    footer{
-        height:32px;
-        min-height:32px;
-    }
-    body.slides-mode p,
-    body.slides-mode li{
-        font-size:19px;
-        line-height:1.45;
-    }
-}
 </style>
+
 </head>
+
 <body>
+
 <header>
+
     <div class="brandbar">
+
         <a class="brand" href="index.html">
+
             <span class="brand-logo">IF</span>
+
             <span>IgnDay</span>
+
         </a>
+
         <div class="site-menu">
+
             <a href="index.html">Accueil</a>
+
             <div class="dropdown">
+
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+
                     M1 - Comptabilité générale ▼
+
                 </button>
+
                 <div class="dropdown-content">
+
                     <a href="P1M1.html">P1 – Concepts de base</a>
+
                     <a href="P2M1.html">P2 – Opérations courantes</a>
+
                     <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+
                 </div>
+
             </div>
+
             <div class="dropdown">
+
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+
                     P2 – Opérations courantes ▼
+
                 </button>
+
                 <div class="dropdown-content">
+
                     <a href="C1P2M1.html">T – Résumés des thèmes</a>
+
                     <a href="C2P2M1.html">F – Formulaires interactifs</a>
+
                     <a href="C3P2M1.html">E – Exercices corrigés</a>
+
                 </div>
+
             </div>
+
             <div class="dropdown">
+
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+
                     T – Résumés des thèmes ▼
+
                 </button>
+
                 <div class="dropdown-content">
+
                     <a href="T1C1P2M1.html">T1 - Facture « Doit » simple (sans réductions ni majorations)</a>
+
                     <a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a>
+
                     <a href="T3C1P2M1.html">T3 - Facture « Doit » comportant des majorations</a>
+
                     <a href="T4C1P2M1.html">T4 - Facture « Avoir »</a>
+
                     <a href="T5C1P2M1.html">T5 - Autres éléments du compte de produits et de charges</a>
+
                     <a href="T6C1P2M1.html">T6 - Acquisition des immobilisations</a>
+
                     <a href="T7C1P2M1.html">T7 - Règlements financiers</a>
+
                 </div>
+
             </div>
+
             <a href="C1P2M1.html">⬅ Retour</a>
+
         </div>
+
     </div>
+
     <h1>
+
         <p>M1 – Comptabilité générale &gt; P2 – Opérations courantes</p>
+
         <p>Thème 3 - Enregistrement des opérations d’achat et de vente : Facture « Doit » comportant des majorations</p>
+
     </h1>
+
 </header>
+
 <!-- NAVIGATION DES SECTIONS -->
+
 <nav>
-    <button class="btnActive" onclick="showSection('TVA',this)">
+
+    <button onclick="showSection('TVA',this)">
+
         1- Facture « Doit » comportant des majorations
+
     </button>
+
     <button onclick="showSection('EC',this)">
+
         2- Enregistrement comptable
+
     </button>
+
 </nav>
+
 <!-- SECTION 1 : FACTURE DOIT COMPORTANT DES MAJORATIONS -->
+
 <section id="TVA">
+
     <h2 class="definition-title">
+
         1- Facture « Doit » comportant des majorations
+
     </h2>
+
     <h2>A- Les types de majorations</h2>
+
     <h3>a- Majoration de la TVA</h3>
+
     <div class="definition-box">
+
         <table>
+
             <tr><td class="bold">► Définition</td></tr>
+
             <tr><td>La T.V.A. (Taxe sur la Valeur Ajoutée) est une taxe indirecte appliquée sur la consommation des biens et services.</td></tr>
+
             <tr><td class="bold">► Formules importantes</td></tr>
+
             <tr><td>Montant TVA = Montant HT × Taux TVA</td></tr>
+
             <tr><td>Montant TTC = HT + TVA = HT × (1+t)</td></tr>
+
             <tr><td>Montant HT = TTC ÷ (1+t)</td></tr>
+
             <tr><td class="bold">► Exemple :</td></tr>
+
             <tr><td>Produit = 1 000 DH HT avec TVA 20%</td></tr>
+
             <tr><td>TVA = 1000 × 0.20 = 200 DH</td></tr>
+
             <tr><td>TTC = 1000 + 200 = 1200 DH</td></tr>
+
         </table>
+
     </div>
+
     <h3>b- Majoration de Transport</h3>
+
     <div class="definition-box">
+
         <div class="section-title">
+
             → Transport est assuré par des tiers transporteurs
+
         </div>
+
         <div class="schema">
+
             <div class="box">
+
                 Les frais de transport sont payés par le fournisseur au départ des marchandises et restent à la charge du client
+
             </div>
+
             <span style="font-size:40px;color:black;">►</span>
+
             <div class="box">
+
                 Montant débours « Exacte »<br>
+
                 à récupérer<br>
+
                 Ou<br>
+
                 Montant débours « Forfaitaire »<br>
+
                 Considéré comme une vente de produits accessoires
+
             </div>
+
         </div>
+
         <div class="section-title">
+
             → Transport est assuré par le fournisseur avec ses moyens de transport
+
         </div>
+
         <div class="schema">
+
             <div class="box">
+
                 Frais de port non inclus<br>
+
                 dans le prix des<br>
+
                 marchandises
+
             </div>
+
             <span style="font-size:40px;color:black;">►</span>
+
             <div class="box">
+
                 Montant « Forfaitaire »<br>
+
                 Considéré comme une vente de produits accessoires
+
             </div>
+
         </div>
+
     </div>
+
     <h3>c- Majoration de l’Emballage</h3>
+
     <div class="definition-box">
+
         <div class="schema">
+
             <div class="box">
+
                 Les emballages récupérables consignés :<br>
+
                 La consignation de l’emballage est un prêt au client moyennant un dépôt d’argent comme garantie qui devra être restitué au client.
+
             </div>
+
             <span style="font-size:40px;color:black;">►</span>
+
             <div class="box">
+
                 Le montant de la consignation est un dépôt de garantie.<br>
+
                 Normalement il ne doit pas être soumis à la TVA.
+
             </div>
+
         </div>
+
     </div>
+
     <h2>B- Facture avec Majorations</h2>
+
     <div class="definition-box">
+
         <table class="invoice-table">
+
             <tr>
+
                 <td colspan="3" class="titre">Facture</td>
+
             </tr>
+
             <tr>
+
                 <td class="bold">Société X (Frs)</td>
+
                 <td class="center">DOIT</td>
+
                 <td class="bold right">Société Y (Clt)</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="3" class="bold">Facture DOIT N° ........</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="3" class="bold">Lieu + Date : .......................................................</td>
+
             </tr>
+
             <tr class="header">
+
                 <td colspan="2" class="bold">Éléments</td>
+
                 <td class="bold center">Montant</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">Montant Brut</td>
+
                 <td class="right">20.000,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">(-) Montant Remise ou Rabais ou Ristourne (MB × 3%)</td>
+
                 <td class="right">600,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">Net commercial (MB - RRR)</td>
+
                 <td class="right">19.400,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">(-) Montant Escompte (NC × 2%)</td>
+
                 <td class="right">388,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">Net financier « HT » (NC - Escompte)</td>
+
                 <td class="right">19.012,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">(+) Montant TVA sur ventes (NF × Taux de TVA de 20%)</td>
+
                 <td class="right">3.802,40</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">(+) Frais de Transport « HT »</td>
+
                 <td class="right">500,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">(+) Montant TVA sur le transport (taux de TVA de 10%)</td>
+
                 <td class="right">50,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">(+) Frais d'emballages</td>
+
                 <td class="right">300,00</td>
+
             </tr>
+
             <tr>
+
                 <td colspan="2">Montant à payer TTC (NF + Frais Transport + Montant total TVA + Frais d’emballages)</td>
+
                 <td class="right">23.664,40</td>
+
             </tr>
+
         </table>
+
     </div>
+
 </section>
+
 <!-- SECTION 2 : ENREGISTREMENT COMPTABLE -->
+
 <section id="EC">
+
     <h2 class="definition-title">
+
         2- Enregistrement Comptable
+
     </h2>
+
     <h3>A- Chez l'Acheteur (Client)</h3>
+
     <div class="table-wrapper">
+
         <table class="journal-table">
+
             <tr class="date">
+
                 <td colspan="6">Date opération (XX/XX/XXXX)</td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">611X / 612X</td>
+
                 <td></td>
+
                 <td class="debit">Achats de marchandises et/ou achats consommés de matières et fournitures</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">6142</td>
+
                 <td></td>
+
                 <td class="debit">Transports</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">3455</td>
+
                 <td></td>
+
                 <td class="debit">État - TVA récupérable (sur les achats et sur le transport)</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">3413</td>
+
                 <td></td>
+
                 <td class="debit">Fournisseurs - créances pour emballages et matériel à rendre</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">5141 / 5161 / 4411</td>
+
                 <td></td>
+
                 <td class="credit">Banques et/ou Caisses et/ou Fournisseurs</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">7386</td>
+
                 <td></td>
+
                 <td class="credit">Escomptes obtenus</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
             </tr>
+
             <tr class="date">
+
                 <td colspan="6">Facture N°.....................</td>
+
             </tr>
+
         </table>
+
     </div>
+
     <div class="definition-box">
+
         <p>
+
             ► Exemple : Achats de marchandises par chèque bancaire (Montant brut 20 000, remise 3% et escompte 2%, transport 500, emballages consignés 300, TVA sur ventes 20% et TVA sur transports 10%).
+
         </p>
+
     </div>
+
     <div class="table-wrapper">
+
         <table class="journal-table">
+
             <tr class="date">
+
                 <td colspan="6">15/04/2026</td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">6111</td>
+
                 <td></td>
+
                 <td class="debit">Achats de marchandises</td>
+
                 <td></td>
+
                 <td class="montant">19.400,00</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">6142</td>
+
                 <td></td>
+
                 <td class="debit">Transports</td>
+
                 <td></td>
+
                 <td class="montant">500,00</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">3455</td>
+
                 <td></td>
+
                 <td class="debit">État - TVA récupérable</td>
+
                 <td></td>
+
                 <td class="montant">3.852,40</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">3413</td>
+
                 <td></td>
+
                 <td class="debit">Fournisseurs - créances pour emballages et matériel à rendre</td>
+
                 <td></td>
+
                 <td class="montant">300,00</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">5141</td>
+
                 <td></td>
+
                 <td class="credit">Banques</td>
+
                 <td></td>
+
                 <td class="montant">23.664,40</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">7386</td>
+
                 <td></td>
+
                 <td class="credit">Escomptes obtenus</td>
+
                 <td></td>
+
                 <td class="montant">388,00</td>
+
             </tr>
+
             <tr class="date">
+
                 <td colspan="6">Facture N°70-2026</td>
+
             </tr>
+
         </table>
+
     </div>
+
     <h3>B- Chez le Vendeur (Fournisseur)</h3>
+
     <div class="table-wrapper">
+
         <table class="journal-table">
+
             <tr class="date">
+
                 <td colspan="6">Date opération (XX/XX/XXXX)</td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">5141 / 5161 / 3421</td>
+
                 <td></td>
+
                 <td class="debit">Banques et/ou Caisses et/ou Clients</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">6386</td>
+
                 <td></td>
+
                 <td class="debit">Escomptes accordés</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">711X / 712X</td>
+
                 <td></td>
+
                 <td class="credit">Ventes de marchandises et/ou ventes de biens et services produits</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">7127</td>
+
                 <td></td>
+
                 <td class="credit">Ventes de produits accessoires</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">4455</td>
+
                 <td></td>
+
                 <td class="credit">État, TVA facturée (sur les ventes et sur le transport)</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">4425</td>
+
                 <td></td>
+
                 <td class="credit">Clients - dettes pour emballages et matériel consignés</td>
+
                 <td></td>
+
                 <td class="montant">Montant</td>
+
             </tr>
+
             <tr class="date">
+
                 <td colspan="6">Facture N°.....................</td>
+
             </tr>
+
         </table>
+
     </div>
+
     <div class="highlight">
+
         <strong>NB :</strong> Lorsque les frais de transport payé par le fournisseur à un tiers transporteurs (débours à récupérer), il convient de créditer le compte 6142 – Transports, au lieu du compte 7127 – Ventes de produits accessoires, et de créditer également le compte 3455 – État, TVA récupérable.
+
     </div>
+
     <div class="definition-box">
+
         <p>
+
             ► Exemple : Ventes de marchandises par chèque bancaire (Montant brut 20 000, remise 3% et escompte 2%, transport forfaitaire 500, emballages consignés 300, TVA sur ventes 20% et TVA sur transports 10%).
+
         </p>
+
     </div>
+
     <div class="table-wrapper">
+
         <table class="journal-table">
+
             <tr class="date">
+
                 <td colspan="6">15/04/2026</td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">5141</td>
+
                 <td></td>
+
                 <td class="debit">Banques</td>
+
                 <td></td>
+
                 <td class="montant">23.664,40</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td class="debit center">6386</td>
+
                 <td></td>
+
                 <td class="debit">Escomptes accordés</td>
+
                 <td></td>
+
                 <td class="montant">388,00</td>
+
                 <td></td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">7111</td>
+
                 <td></td>
+
                 <td class="credit">Ventes de marchandises</td>
+
                 <td></td>
+
                 <td class="montant">19.400,00</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">7127</td>
+
                 <td></td>
+
                 <td class="credit">Ventes de produits accessoires</td>
+
                 <td></td>
+
                 <td class="montant">500,00</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">4455</td>
+
                 <td></td>
+
                 <td class="credit">État, TVA facturée</td>
+
                 <td></td>
+
                 <td class="montant">3.852,40</td>
+
             </tr>
+
             <tr>
+
                 <td></td>
+
                 <td class="credit center">4425</td>
+
                 <td></td>
+
                 <td class="credit">Clients - dettes pour emballages et matériel consignés</td>
+
                 <td></td>
+
                 <td class="montant">300,00</td>
+
             </tr>
+
             <tr class="date">
+
                 <td colspan="6">Facture N°70-2026</td>
+
             </tr>
+
         </table>
+
     </div>
+
 </section>
-<!-- BARRE DES DIAPOSITIVES -->
-<div class="slide-navigation" id="slideNavigation">
-    <button type="button" id="btnDiapoPrecedente">
-        ← Diapositive précédente
-    </button>
-    <span class="slide-counter" id="compteurDiapo">
-        Diapositive 1 / 1
-    </span>
-    <button type="button" id="btnDiapoSuivante">
-        Diapositive suivante →
-    </button>
-</div>
-<!-- PIED DE PAGE -->
+
+<!-- PIED DE PAGE : NAVIGATION DES DIAPOSITIVES ET DES SECTIONS -->
+
 <footer>
-    <span>Formation en comptabilité générale</span>
-    <div class="footer-actions">
-        <button
-            type="button"
-            class="btnFooter btnPrecedent"
-            id="btnSectionPrecedente"
-            onclick="naviguerSection(-1)">
-            ← Section précédente
+
+
+
+    <div class="slide-navigation" id="slideNavigation">
+
+
+
+        <button type="button" id="btnDiapoPrecedente">
+
+            ← Diapo précédente
+
         </button>
-        <button
-            type="button"
-            class="btnFooter btnSuivant"
-            id="btnSectionSuivante"
-            onclick="naviguerSection(1)">
-            Section suivante →
+
+
+
+        <span class="slide-counter" id="compteurDiapo">
+
+            Diapositive 1 / 1
+
+        </span>
+
+
+
+        <button type="button" id="btnDiapoSuivante">
+
+            Diapo suivante →
+
         </button>
-        <button
-            type="button"
-            class="btnFooter btnRetourMenu"
-            id="btnRetourMenu"
-            onclick="retourMenu()">
-            ↑ Retour au menu
-        </button>
+
+
+
     </div>
+
+
+
+    <div class="footer-actions">
+
+
+
+        <button
+
+            type="button"
+
+            class="btnFooter btnPrecedent"
+
+            id="btnSectionPrecedente"
+
+            onclick="naviguerSection(-1)">
+
+            ← Section précédente
+
+        </button>
+
+
+
+        <button
+
+            type="button"
+
+            class="btnFooter btnSuivant"
+
+            id="btnSectionSuivante"
+
+            onclick="naviguerSection(1)">
+
+            Section suivante →
+
+        </button>
+
+
+
+        <button
+
+            type="button"
+
+            class="btnFooter btnRetourMenu"
+
+            id="btnRetourMenu"
+
+            onclick="retourMenu()">
+
+            ↑ Retour au menu
+
+        </button>
+
+
+
+    </div>
+
+
+
 </footer>
+
 <script>
+
+
+
+
 /* ==========================================
+
    MENUS DÉROULANTS
-========================================== */
+
+\========================================== */
+
+
+
 function positionDropdown(button,menu){
+
+
+
     const rect=button.getBoundingClientRect();
+
     const marge=8;
+
+
+
     menu.style.display="block";
+
     menu.style.position="fixed";
+
     menu.style.maxWidth=(window.innerWidth-16)+"px";
+
     menu.style.maxHeight=(window.innerHeight-16)+"px";
+
     menu.style.top="0";
+
     menu.style.bottom="auto";
+
+
+
     const hauteurMenu=menu.scrollHeight;
+
     const espaceBas=window.innerHeight-rect.bottom-marge;
+
     const espaceHaut=rect.top-marge;
+
+
+
     const ouvrirEnBas=
+
         hauteurMenu<=espaceBas || espaceBas>=espaceHaut;
+
+
+
     let hauteurDisponible;
+
+
+
     if(ouvrirEnBas){
+
+
+
         menu.style.top=(rect.bottom+4)+"px";
+
         menu.style.bottom="auto";
+
         hauteurDisponible=espaceBas-4;
+
+
+
     }else{
+
+
+
         menu.style.bottom=(window.innerHeight-rect.top+4)+"px";
+
         menu.style.top="auto";
+
         hauteurDisponible=espaceHaut-4;
+
     }
+
+
+
     menu.style.maxHeight=Math.max(100,hauteurDisponible)+"px";
+
     menu.style.width="auto";
+
+
+
     const largeur=Math.min(
+
         Math.max(menu.offsetWidth,230),
+
         window.innerWidth-16
+
     );
+
+
+
     menu.style.width=largeur+"px";
+
+
+
     let positionGauche=rect.left;
+
+
+
     if(positionGauche+largeur>window.innerWidth-marge){
+
         positionGauche=window.innerWidth-largeur-marge;
+
     }
+
+
+
     if(positionGauche<marge){
+
         positionGauche=marge;
+
     }
+
+
+
     menu.style.left=positionGauche+"px";
+
 }
+
+
+
 function toggleDropdown(button){
+
+
+
     const currentMenu=
+
         button.parentElement.querySelector(".dropdown-content");
+
+
+
     const isOpen=currentMenu.style.display==="block";
+
+
+
     fermerTousLesMenus();
+
+
+
     if(!isOpen){
+
         positionDropdown(button,currentMenu);
+
         button.setAttribute("aria-expanded","true");
+
     }
+
 }
+
+
+
 function fermerTousLesMenus(){
+
+
+
     document.querySelectorAll(".dropdown-content").forEach(menu=>{
+
         menu.style.display="none";
+
         menu.style.top="auto";
+
         menu.style.bottom="auto";
+
     });
+
+
+
     document.querySelectorAll(".dropdown button").forEach(button=>{
+
         button.setAttribute("aria-expanded","false");
+
     });
+
 }
+
+
+
 document.addEventListener("click",function(event){
+
+
+
     if(!event.target.closest(".dropdown")){
+
         fermerTousLesMenus();
+
     }
+
 });
+
+
+
 function repositionnerMenus(){
+
+
+
     document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+
+
         const button=dropdown.querySelector("button");
+
         const menu=dropdown.querySelector(".dropdown-content");
+
+
+
         if(button && menu && menu.style.display==="block"){
+
             positionDropdown(button,menu);
+
         }
+
     });
+
 }
+
+
+
 window.addEventListener("resize",repositionnerMenus);
+
 window.addEventListener("scroll",repositionnerMenus,true);
+
+
+
 /* ==========================================
+
    MODE DIAPOSITIVES AUTOMATIQUES
-========================================== */
+
+\========================================== */
+
+
+
 function zoomImportant(){
+
+
+
     return (
+
         window.screen.width>=1000 &&
+
         window.innerWidth<=window.screen.width*0.62
+
     );
+
 }
+
+
+
 let currentSlides=[];
+
 let currentSlideIndex=0;
+
 let currentSlideSection=null;
+
 let slideMode=false;
+
 let resizeTimer=null;
+
+
+
 const slideNavigation=document.getElementById("slideNavigation");
+
 const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+
 const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+
 const compteurDiapo=document.getElementById("compteurDiapo");
+
+
+
 /* MÉMORISER LE CONTENU ORIGINAL */
+
+
+
 const originalSectionContent=new Map();
+
+
+
 function memoriserContenu(section){
+
+
+
     if(!originalSectionContent.has(section.id)){
+
+
+
         originalSectionContent.set(
+
             section.id,
+
             Array.from(section.childNodes)
+
         );
+
     }
+
 }
+
+
+
 function restaurerContenuOriginal(section){
+
+
+
     if(!section || !originalSectionContent.has(section.id)){
+
         return;
+
     }
+
+
+
     const contenuOriginal=originalSectionContent.get(section.id);
+
+
+
     section.replaceChildren(...contenuOriginal);
+
 }
+
+
+
 /* HAUTEUR DISPONIBLE */
+
+
+
 function hauteurDisponibleDiapo(){
-    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
-    const hauteurNavigation=24;
+
+
+
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 38;
+
+
+
     return Math.max(
+
         180,
-        window.innerHeight-hauteurFooter-hauteurNavigation-35
+
+        window.innerHeight-hauteurFooter-35
+
     );
+
 }
+
+
+
 /* IDENTIFIER LES TITRES */
+
+
+
 function estTitreContenu(node){
+
+
+
     if(node.nodeType!==Node.ELEMENT_NODE){
+
         return false;
+
     }
+
+
+
     return node.matches(
+
         "h2,h3,h4,.definition-title,.sous-titre,.table-title"
+
     );
+
 }
+
+
+
 /* CONSTRUIRE LES GROUPES */
+
+
+
 function construireGroupes(nodes){
+
+
+
     const groupes=[];
+
     let groupeActuel=[];
+
+
+
     nodes.forEach(node=>{
+
+
+
         if(
+
             node.nodeType===Node.TEXT_NODE &&
+
             !node.textContent.trim()
+
         ){
+
             return;
+
         }
+
+
+
         if(estTitreContenu(node) && groupeActuel.length){
+
+
+
             groupes.push(groupeActuel);
+
             groupeActuel=[];
+
         }
+
+
+
         groupeActuel.push(node);
+
     });
+
+
+
     if(groupeActuel.length){
+
         groupes.push(groupeActuel);
+
     }
+
+
+
     return groupes;
+
 }
+
+
+
 /* CRÉER UNE DIAPOSITIVE */
+
+
+
 function creerSlide(section){
+
+
+
     const slide=document.createElement("div");
+
+
+
     slide.className="content-slide";
+
+
+
     section.appendChild(slide);
+
+
+
     currentSlides.push(slide);
+
+
+
     return slide;
+
 }
-/* ==========================================
-   MESURER UN GROUPE DE CONTENU
-========================================== */
-function mesurerGroupe(groupe,largeur){
+
+
+
+/* MESURER UN GROUPE DE CONTENU */
+
+
+
+function mesurerGroupe(groupe,largeur,section){
+
+
+
     const mesure=document.createElement("div");
+
+
+
     mesure.className="content-slide slide-measure";
+
+
+
     mesure.style.width=Math.max(300,largeur)+"px";
+
     mesure.style.maxWidth="none";
+
     mesure.style.height="auto";
+
     mesure.style.minHeight="0";
+
     mesure.style.maxHeight="none";
+
     mesure.style.overflow="visible";
+
     mesure.style.display="block";
+
     mesure.style.visibility="hidden";
+
     mesure.style.position="fixed";
+
     mesure.style.left="-100000px";
+
     mesure.style.top="0";
+
     mesure.style.padding="2px 0 8px";
+
     mesure.style.boxSizing="border-box";
+
+
+
     groupe.forEach(node=>{
+
         mesure.appendChild(node.cloneNode(true));
+
     });
+
+
+
     document.body.appendChild(mesure);
+
+
+
     const hauteur=Math.ceil(
+
         Math.max(
+
             mesure.scrollHeight,
+
             mesure.getBoundingClientRect().height
+
         )
+
     );
+
+
+
     mesure.remove();
+
+
+
     return hauteur;
+
 }
-/* ==========================================
-   CRÉER LES DIAPOSITIVES D'UNE SECTION
-========================================== */
+
+
+
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+
+
+
 function creerDiapositives(section){
+
+
+
     if(!section)return;
-    const ancienneIndex=currentSlideIndex;
+
+
+
     currentSlides=[];
+
     currentSlideIndex=0;
+
+
+
     restaurerContenuOriginal(section);
+
     memoriserContenu(section);
+
+
+
     const nodes=Array.from(section.childNodes);
-    const groupes=construireGroupes(nodes);
+
+
+
+    /*
+
+       LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL
+
+       SUR LA PREMIÈRE DIAPOSITIVE.
+
+    */
+
+
+
+    let titrePrincipal=null;
+
+
+
+    const premierNodeUtile=nodes.find(node=>{
+
+
+
+        return !(
+
+            node.nodeType===Node.TEXT_NODE &&
+
+            !node.textContent.trim()
+
+        );
+
+    });
+
+
+
+    if(
+
+        premierNodeUtile &&
+
+        premierNodeUtile.nodeType===Node.ELEMENT_NODE &&
+
+        premierNodeUtile.classList.contains("definition-title")
+
+    ){
+
+
+
+        titrePrincipal=premierNodeUtile;
+
+    }
+
+
+
     section.replaceChildren();
+
+
+
     const hauteurMax=hauteurDisponibleDiapo();
+
+
+
     const largeur=Math.max(
+
         300,
+
         section.clientWidth-50
+
     );
-    let slide=null;
-    let hauteurUtilisee=0;
-    groupes.forEach(groupe=>{
-        const hauteurGroupe=mesurerGroupe(
-            groupe,
-            largeur
-        );
-        /*
-           Créer une nouvelle diapositive si le groupe
-           suivant dépasse la hauteur disponible.
-        */
+
+
+
+    /*
+
+       PREMIÈRE DIAPOSITIVE :
+
+       TITRE PRINCIPAL SEUL ET CENTRÉ.
+
+    */
+
+
+
+    if(titrePrincipal){
+
+
+
+        const slideTitre=creerSlide(section);
+
+
+
+        slideTitre.classList.add("title-only-slide");
+
+
+
+        slideTitre.appendChild(titrePrincipal);
+
+    }
+
+
+
+    /*
+
+       CONSTRUIRE LES GROUPES DU CONTENU RESTANT.
+
+    */
+
+
+
+    const nodesContenu=nodes.filter(node=>{
+
+
+
+        if(node===titrePrincipal){
+
+            return false;
+
+        }
+
+
+
         if(
-            !slide ||
-            (
-                hauteurUtilisee>0 &&
-                hauteurUtilisee+hauteurGroupe+12>hauteurMax
-            )
+
+            node.nodeType===Node.TEXT_NODE &&
+
+            !node.textContent.trim()
+
         ){
-            slide=creerSlide(section);
-            hauteurUtilisee=0;
+
+            return false;
+
         }
+
+
+
+        return true;
+
+    });
+
+
+
+    const groupes=construireGroupes(nodesContenu);
+
+
+
+    let slide=null;
+
+    let hauteurUtilisee=0;
+
+
+
+    groupes.forEach(groupe=>{
+
+
+
+        const hauteurGroupe=mesurerGroupe(
+
+            groupe,
+
+            largeur,
+
+            section
+
+        );
+
+
+
         /*
-           Déplacer les éléments originaux :
-           le contenu n'est pas supprimé ni recréé.
+
+           LE CONTENU COMMENCE TOUJOURS
+
+           SUR UNE NOUVELLE DIAPOSITIVE.
+
         */
+
+
+
+        if(
+
+            !slide ||
+
+            (
+
+                hauteurUtilisee>0 &&
+
+                hauteurUtilisee+hauteurGroupe+12>hauteurMax
+
+            )
+
+        ){
+
+
+
+            slide=creerSlide(section);
+
+            hauteurUtilisee=0;
+
+        }
+
+
+
         groupe.forEach(node=>{
+
             slide.appendChild(node);
+
         });
+
+
+
         hauteurUtilisee+=hauteurGroupe+12;
+
+
+
     });
-    /* SÉCURITÉ : SECTION VIDE */
+
+
+
     if(currentSlides.length===0){
+
         creerSlide(section);
+
     }
-    afficherDiapositive(
-        Math.min(ancienneIndex,currentSlides.length-1)
-    );
+
+
+
+    afficherDiapositive(0);
+
 }
-/* ==========================================
-   COMPTEUR DES DIAPOSITIVES
-========================================== */
+
+
+
+/* COMPTEUR DES DIAPOSITIVES */
+
+
+
 function actualiserCompteurDiapo(){
+
+
+
     const total=currentSlides.length;
+
+
+
     if(total===0){
+
+
+
         compteurDiapo.textContent="Aucune diapositive";
+
         btnDiapoPrecedente.disabled=true;
+
         btnDiapoSuivante.disabled=true;
+
+
+
         return;
+
     }
+
+
+
     compteurDiapo.textContent=
-        "Diapositive "+(currentSlideIndex+1)+" / "+total;
+
+        " "+(currentSlideIndex+1)+" / "+total;
+
+
+
     btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+
     btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+
 }
-/* ==========================================
-   AJUSTEMENT DU CONTENU
-========================================== */
+
+
+
+/* AJUSTEMENT DU CONTENU */
+
+
+
 function ajusterContenuDiapositive(slide){
+
+
+
     if(!slide)return;
+
+
+
     slide.style.width="100%";
+
     slide.style.maxWidth="100%";
+
     slide.style.overflowX="hidden";
+
     slide.style.overflowY="auto";
+
+
+
     slide.querySelectorAll("*").forEach(element=>{
+
+
+
         element.style.maxWidth="100%";
+
         element.style.minWidth="0";
+
         element.style.overflowWrap="anywhere";
+
     });
+
+
+
     slide.querySelectorAll("table").forEach(table=>{
+
+
+
         table.style.width="100%";
+
         table.style.maxWidth="100%";
+
         table.style.tableLayout="fixed";
+
     });
+
+
+
     slide.querySelectorAll("td,th").forEach(cell=>{
+
+
+
         cell.style.overflowWrap="anywhere";
+
         cell.style.wordBreak="normal";
+
     });
+
 }
-/* ==========================================
-   AFFICHER UNE DIAPOSITIVE
-========================================== */
+
+
+
+/* AFFICHER UNE DIAPOSITIVE */
+
+
+
 function afficherDiapositive(index){
+
+
+
     if(!currentSlides.length){
+
         actualiserCompteurDiapo();
+
         return;
+
     }
+
+
+
     if(index<0 || index>=currentSlides.length){
+
         return;
+
     }
+
+
+
     currentSlideIndex=index;
+
+
+
     currentSlides.forEach((slide,i)=>{
+
+
+
         slide.classList.toggle(
+
             "active-slide",
+
             i===index
+
         );
+
+
+
         if(i===index){
+
+
+
             ajusterContenuDiapositive(slide);
+
             slide.scrollTop=0;
+
         }
+
     });
+
+
+
     actualiserCompteurDiapo();
+
+
+
     window.scrollTo({
+
         top:0,
+
         behavior:"auto"
+
     });
+
 }
+
+
+
 /* NAVIGATION DIAPOSITIVES */
+
+
+
 function naviguerDiapositive(direction){
+
+
+
     afficherDiapositive(currentSlideIndex+direction);
+
 }
+
+
+
 btnDiapoPrecedente.addEventListener("click",function(){
+
     naviguerDiapositive(-1);
+
 });
+
+
+
 btnDiapoSuivante.addEventListener("click",function(){
+
     naviguerDiapositive(1);
+
 });
-/* ==========================================
-   ACTIVER LE MODE DIAPOSITIVES
-========================================== */
+
+
+
+/* ACTIVER LE MODE DIAPOSITIVES */
+
+
+
 function activerModeDiapositives(section){
+
+
+
     if(!section)return;
+
+
+
     if(
+
         slideMode &&
+
         currentSlideSection===section
+
     ){
+
         return;
+
     }
+
+
+
     if(currentSlideSection && currentSlideSection!==section){
+
         desactiverModeDiapositives(currentSlideSection);
+
     }
+
+
+
     currentSlideSection=section;
+
+
+
     document.body.classList.add("slides-mode");
+
+
+
     slideNavigation.style.display="flex";
+
+
+
     slideMode=true;
+
+
+
     creerDiapositives(section);
+
 }
-/* ==========================================
-   DÉSACTIVER LE MODE DIAPOSITIVES
-========================================== */
+
+
+
+/* DÉSACTIVER LE MODE DIAPOSITIVES */
+
+
+
 function desactiverModeDiapositives(section){
+
+
+
     if(!section){
+
         section=currentSlideSection;
+
     }
+
+
+
     if(section){
+
         restaurerContenuOriginal(section);
+
     }
+
+
+
     document.body.classList.remove("slides-mode");
+
+
+
     slideNavigation.style.display="none";
+
+
+
     currentSlides=[];
+
     currentSlideIndex=0;
+
     currentSlideSection=null;
+
+
+
     slideMode=false;
+
 }
-/* ==========================================
-   ACTUALISER L'AFFICHAGE
-========================================== */
+
+
+
+/* ACTUALISER L'AFFICHAGE */
+
+
+
 function actualiserAffichageSection(){
+
+
+
     const section=document.querySelector(
+
         "body > section.active"
+
     );
+
+
+
     if(!section)return;
+
+
+
     if(zoomImportant()){
+
+
+
         activerModeDiapositives(section);
+
+
+
     }else if(slideMode){
+
+
+
         desactiverModeDiapositives(section);
+
     }
+
 }
-/* ==========================================
-   NAVIGATION ENTRE LES SECTIONS
-========================================== */
+
+
+
+/* NAVIGATION ENTRE LES SECTIONS */
+
+
+
 const sectionIds=[
+
     "TVA",
+
     "EC"
+
 ];
+
+
 let currentSectionIndex=-1;
+
+
+
 /* ACTUALISER LES BOUTONS DU PIED DE PAGE */
+
+
+
 function actualiserBoutonsNavigation(){
+
+
+
     const precedent=document.getElementById(
+
         "btnSectionPrecedente"
+
     );
+
+
+
     const suivant=document.getElementById(
+
         "btnSectionSuivante"
+
     );
+
+
+
     if(currentSectionIndex===-1){
+
         precedent.classList.remove("visible");
+
         suivant.classList.remove("visible");
+
         return;
+
     }
+
+
+
     precedent.disabled=(currentSectionIndex===0);
+
+
+
     suivant.disabled=(
+
         currentSectionIndex===sectionIds.length-1
+
     );
+
 }
+
+
+
 /* AFFICHER UNE SECTION */
+
+
+
 function showSection(id,button){
+
+
+
     const nouvelIndex=sectionIds.indexOf(id);
+
     const current=document.getElementById(id);
+
+
+
     if(!current || nouvelIndex===-1){
+
         console.warn("Section introuvable :",id);
+
         return;
+
     }
+
+
+
     if(slideMode && currentSlideSection){
+
         desactiverModeDiapositives(currentSlideSection);
+
     }
+
+
+
     document.body.classList.remove("slides-mode");
+
+
+
     slideNavigation.style.display="none";
+
+
+
     currentSlides=[];
+
     currentSlideIndex=0;
+
     currentSlideSection=null;
+
     slideMode=false;
+
+
+
     /* MASQUER LES AUTRES SECTIONS */
+
+
+
     document.querySelectorAll("body > section").forEach(section=>{
+
+
+
         section.classList.remove(
+
             "active",
+
             "animationSection"
+
         );
+
     });
+
+
+
     /* RÉINITIALISER LES BOUTONS DU MENU */
+
+
+
     document.querySelectorAll("nav button").forEach(btn=>{
+
+
+
         btn.classList.remove("btnActive");
+
         btn.removeAttribute("aria-pressed");
+
     });
+
+
+
     fermerTousLesMenus();
+
+
+
     /* ACTIVER LA SECTION */
+
+
+
     currentSectionIndex=nouvelIndex;
+
+
+
     document.body.classList.add("section-open");
+
+
+
     current.classList.add(
+
         "active",
+
         "animationSection"
+
     );
+
+
+
     /* AFFICHER LES BOUTONS DU PIED DE PAGE */
+
+
+
     document.getElementById("btnRetourMenu")
+
         .classList.add("visible");
+
+
+
     document.getElementById("btnSectionPrecedente")
+
         .classList.add("visible");
+
+
+
     document.getElementById("btnSectionSuivante")
+
         .classList.add("visible");
+
+
+
     actualiserBoutonsNavigation();
+
+
+
     /* ACTIVER LE BOUTON CORRESPONDANT */
+
+
+
     if(!button){
+
         button=document.querySelectorAll("nav button")[nouvelIndex];
+
     }
+
+
+
     if(button){
+
         button.classList.add("btnActive");
+
         button.setAttribute("aria-pressed","true");
+
     }
+
+
+
     window.scrollTo({
+
         top:0,
+
         behavior:"auto"
+
     });
+
+
+
     requestAnimationFrame(()=>{
+
+
+
         actualiserAffichageSection();
+
+
+
     });
+
 }
-/* ==========================================
-   SECTION PRÉCÉDENTE / SUIVANTE
-========================================== */
+
+
+
+/* SECTION PRÉCÉDENTE / SUIVANTE */
+
+
+
 function naviguerSection(direction){
+
+
+
     const nouvelIndex=currentSectionIndex+direction;
+
+
+
     if(
+
         nouvelIndex<0 ||
+
         nouvelIndex>=sectionIds.length
+
     ){
+
         return;
+
     }
+
+
+
     const nouvelId=sectionIds[nouvelIndex];
+
+
+
     const boutonsMenu=Array.from(
+
         document.querySelectorAll("nav button")
+
     );
+
+
+
     const boutonCorrespondant=boutonsMenu[nouvelIndex];
+
+
+
     showSection(nouvelId,boutonCorrespondant);
+
 }
-/* ==========================================
-   RETOUR AU MENU
-========================================== */
+
+
+
+/* RETOUR AU MENU */
+
+
+
 function retourMenu(){
+
+
+
     if(slideMode && currentSlideSection){
+
         desactiverModeDiapositives(currentSlideSection);
+
     }
+
+
+
     document.body.classList.remove("slides-mode");
+
+
+
     slideNavigation.style.display="none";
+
+
+
     currentSlides=[];
+
     currentSlideIndex=0;
+
     currentSlideSection=null;
+
     slideMode=false;
+
+
+
     document.querySelectorAll("body > section").forEach(section=>{
+
+
+
         section.classList.remove(
+
             "active",
+
             "animationSection"
+
         );
+
     });
+
+
+
     document.getElementById("btnRetourMenu")
+
         .classList.remove("visible");
+
+
+
     document.getElementById("btnSectionPrecedente")
+
         .classList.remove("visible");
+
+
+
     document.getElementById("btnSectionSuivante")
+
         .classList.remove("visible");
+
+
+
     currentSectionIndex=-1;
+
+
+
     document.body.classList.remove("section-open");
+
+
+
     requestAnimationFrame(()=>{
+
+
+
         const menu=document.querySelector("nav");
+
+
+
         if(menu){
+
+
+
             const position=
+
                 menu.getBoundingClientRect().top+
+
                 window.scrollY-12;
+
+
+
             window.scrollTo({
+
                 top:Math.max(0,position),
+
                 behavior:"smooth"
+
             });
+
         }
+
     });
+
 }
-/* ==========================================
-   ADAPTATION AU REDIMENSIONNEMENT / ZOOM
-========================================== */
+
+
+
+/* ADAPTATION AU REDIMENSIONNEMENT / ZOOM */
+
+
+
 window.addEventListener("resize",function(){
+
+
+
     clearTimeout(resizeTimer);
+
+
+
     resizeTimer=setTimeout(()=>{
+
+
+
         const section=document.querySelector(
+
             "body > section.active"
+
         );
+
+
+
         if(!section)return;
+
+
+
         if(zoomImportant()){
+
+
+
             if(
+
                 !slideMode ||
+
                 currentSlideSection!==section
+
             ){
+
+
+
                 activerModeDiapositives(section);
+
+
+
             }else{
+
+
+
                 const ancienneIndex=currentSlideIndex;
+
+
+
                 creerDiapositives(section);
+
+
+
                 if(currentSlides.length>0){
+
+
+
                     afficherDiapositive(
+
                         Math.min(
+
                             ancienneIndex,
+
                             currentSlides.length-1
+
                         )
+
                     );
+
                 }
+
             }
+
+
+
         }else if(slideMode){
+
+
+
             desactiverModeDiapositives(section);
+
         }
+
+
+
     },180);
+
+
+
 });
-/* ==========================================
-   NAVIGATION AU CLAVIER
-========================================== */
+
+
+
+/* NAVIGATION AU CLAVIER */
+
+
+
 document.addEventListener("keydown",function(event){
+
+
+
     if(!slideMode)return;
+
+
+
     const element=document.activeElement;
+
+
+
     if(
+
         element &&
+
         (
+
             element.tagName==="INPUT" ||
+
             element.tagName==="TEXTAREA" ||
+
             element.tagName==="SELECT" ||
+
             element.isContentEditable
+
         )
+
     ){
+
         return;
+
     }
+
+
+
     if(
+
         event.key==="ArrowRight" ||
+
         event.key==="PageDown"
+
     ){
+
+
+
         event.preventDefault();
+
         naviguerDiapositive(1);
+
     }
+
+
+
     if(
+
         event.key==="ArrowLeft" ||
+
         event.key==="PageUp"
+
     ){
+
+
+
         event.preventDefault();
+
         naviguerDiapositive(-1);
+
     }
+
+
+
 });
-/* ==========================================
-   INITIALISATION
-========================================== */
+
+
+
+/* INITIALISATION */
+
+
+
 document.addEventListener("DOMContentLoaded",function(){
+
+
+
     slideNavigation.style.display="none";
+
+
+
     document.body.classList.remove(
+
         "slides-mode",
+
         "section-open"
+
     );
+
+
+
     document.querySelectorAll("body > section").forEach(section=>{
+
+
+
         section.classList.remove(
+
             "active",
+
             "animationSection"
+
         );
+
+
+
         memoriserContenu(section);
+
     });
+
+
+
     document.getElementById("btnRetourMenu")
+
         .classList.remove("visible");
+
+
+
     document.getElementById("btnSectionPrecedente")
+
         .classList.remove("visible");
+
+
+
     document.getElementById("btnSectionSuivante")
+
         .classList.remove("visible");
+
+
+
     currentSectionIndex=-1;
+
+
+
 });
+
+
+
+
 </script>
+
 </body>
+
 </html>
-
-
