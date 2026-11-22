@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,13 +66,13 @@ header{
 header h1{
     padding:12px 8px;
     margin:0;
-    font-size:45px;
+    font-size:40px;
     line-height:1.4;
 }
 
 header h1 p{
     margin:7px 0;
-    font-size:45px;
+    font-size:40px;
     font-weight:bold;
     line-height:1.4;
 }
@@ -325,31 +324,30 @@ tr:hover td{background:#f1f7ff}
 
 .container p:first-child{margin-top:0}
 
-/* BARRE DES DIAPOSITIVES */
+/* BARRE DES DIAPOSITIVES DANS LE PIED DE PAGE */
 
 .slide-navigation{
     display:none;
-    position:fixed;
-    bottom:32px;
-    left:0;
-    width:100%;
-    height:24px;
-    min-height:24px;
-    z-index:1999;
+    position:static;
+    width:auto;
+    height:auto;
+    min-height:0;
+    z-index:auto;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
     gap:5px;
-    padding:2px 8px;
-    background:#34495e;
+    padding:0;
+    background:transparent;
     color:white;
-    border-top:1px solid #1e293b;
+    border:0;
     font-size:10px;
+    flex-shrink:0;
 }
 
 .slide-navigation button{
     border:0;
     border-radius:3px;
-    padding:3px 8px;
+    padding:4px 7px;
     background:#00b894;
     color:white;
     font-size:10px;
@@ -359,7 +357,9 @@ tr:hover td{background:#f1f7ff}
     white-space:nowrap;
 }
 
-.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:hover:not(:disabled){
+    background:#0984e3;
+}
 
 .slide-navigation button:disabled{
     opacity:.4;
@@ -394,6 +394,30 @@ tr:hover td{background:#f1f7ff}
     zoom:1!important;
 }
 
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+
+body.slides-mode .content-slide.title-only-slide{
+    display:none;
+    width:100%;
+    min-height:calc(100vh - 100px);
+    padding:0 15px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+body.slides-mode .content-slide.title-only-slide.active-slide{
+    display:flex;
+}
+
+body.slides-mode .content-slide.title-only-slide .definition-title{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    text-align:center;
+}
+
 /* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
 
 .slide-measure{
@@ -411,7 +435,9 @@ tr:hover td{background:#f1f7ff}
     z-index:-1!important;
 }
 
-body.slides-mode{padding-bottom:58px}
+body.slides-mode{
+    padding-bottom:48px;
+}
 
 body.slides-mode>section.active{
     display:block;
@@ -420,13 +446,15 @@ body.slides-mode>section.active{
     border-radius:0;
     box-shadow:none;
     border-left:0;
-    min-height:calc(100vh - 58px);
+    min-height:calc(100vh - 48px);
     animation:none;
     overflow-x:hidden;
     overflow-y:auto;
 }
 
-body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .slide-navigation{
+    display:flex;
+}
 
 body.slides-mode .definition-title{
     margin:3px 0 8px;
@@ -483,13 +511,14 @@ footer{
     bottom:0;
     left:0;
     width:100%;
-    height:32px;
-    min-height:32px;
+    min-height:38px;
+    height:auto;
     z-index:2000;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:6px;
+    flex-wrap:wrap;
+    gap:5px;
     padding:4px 10px;
     margin:0;
     background:#2c3e50;
@@ -505,7 +534,9 @@ footer a{
     text-decoration:none;
 }
 
-footer>span{white-space:nowrap}
+footer>span{
+    white-space:nowrap;
+}
 
 .footer-actions{
     display:flex;
@@ -551,7 +582,7 @@ footer>span{white-space:nowrap}
 
 @media(max-width:760px){
 
-    body{padding-bottom:42px}
+    body{padding-bottom:48px}
 
     .brandbar{
         justify-content:center;
@@ -631,26 +662,24 @@ footer>span{white-space:nowrap}
     .container{padding:15px}
 
     footer{
-        height:32px;
-        min-height:32px;
-        flex-wrap:nowrap;
-        justify-content:space-between;
-        gap:3px;
-        padding:3px 5px;
+        min-height:38px;
+        height:auto;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:4px;
+        padding:4px 5px;
         font-size:9px;
     }
 
     footer>span{
-        width:auto;
-        text-align:left;
-        font-size:9px;
+        display:none;
     }
 
     .footer-actions{
         width:auto;
-        justify-content:flex-end;
+        justify-content:center;
         gap:3px;
-        margin-left:auto;
+        margin-left:0;
     }
 
     .btnFooter{
@@ -659,28 +688,30 @@ footer>span{white-space:nowrap}
     }
 
     .slide-navigation{
-        bottom:32px;
-        height:24px;
-        min-height:24px;
-        padding:2px 4px;
         gap:3px;
+        padding:0;
     }
 
     .slide-navigation button{
         font-size:9px;
-        padding:3px 5px;
+        padding:4px 5px;
     }
 
     .slide-counter{font-size:9px}
 
     body.slides-mode>section.active{
         padding:4px 15px 8px;
-        min-height:calc(100vh - 58px);
+        min-height:calc(100vh - 48px);
     }
 
     body.slides-mode .definition-title{
         font-size:17px;
         padding:8px;
+    }
+
+    body.slides-mode .content-slide.title-only-slide{
+        min-height:calc(100vh - 115px);
+        padding:0 8px;
     }
 }
 
@@ -721,22 +752,22 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        padding:3px 4px;
-        font-size:8px;
+        padding:4px 3px;
+        gap:3px;
     }
-
-    footer>span{font-size:8px}
 
     .btnFooter{
         font-size:8px;
-        padding:4px 5px;
+        padding:4px 4px;
     }
 
     .footer-actions{gap:2px}
 
+    .slide-navigation{gap:2px}
+
     .slide-navigation button{
         font-size:8px;
-        padding:3px 4px;
+        padding:4px 3px;
     }
 
     .slide-counter{font-size:8px}
@@ -829,8 +860,8 @@ footer>span{white-space:nowrap}
     .container{padding:22px}
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
+        height:auto;
         font-size:11px;
     }
 
@@ -895,8 +926,8 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
+        height:auto;
     }
 
     body.slides-mode p,
@@ -922,8 +953,6 @@ footer>span{white-space:nowrap}
         <div class="site-menu">
 
             <a href="index.html">Accueil</a>
-
-            
 
             <div class="dropdown">
                 <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
@@ -964,8 +993,8 @@ footer>span{white-space:nowrap}
                     <a href="T7C1P1M1.html">T7 - Le virement comptable</a>
                     <a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
                     <a href="T9C1P1M1.html">T9 - Le journal comptable</a>
-                    <a href="T10C1P1M1.html">T10 - Le grand livre</a>
-                    <a href="T11C1P1M1.html">T11 - La balance</a>
+                    <a href="T10C1P1M1.html">T10 - Le grand livre et La balance </a>
+
                 </div>
             </div>
 
@@ -1070,27 +1099,28 @@ footer>span{white-space:nowrap}
 
 <section id="principe">
 
-    
-
     <h2 class="definition-title">2- Principe fondamental</h2>
+
     <div class="definition-box">
 
-    <p>Toute opération comptable comporte :</p>
+        <p>Toute opération comptable comporte :</p>
 
-    <div class="highlight">
-        ✔ Au moins une ressource (origine).<br>
-        ✔ Au moins un emploi (utilisation).
+        <div class="highlight">
+            ✔ Au moins une ressource (origine).<br>
+            ✔ Au moins un emploi (utilisation).
+        </div>
+
+        <p>
+            👉 Analyser une opération consiste à répondre à deux questions :
+        </p>
+
+        <ul>
+            <li>D’où vient l’argent ? (Ressource)</li>
+            <li>Comment est-il utilisé ? (Emploi)</li>
+        </ul>
+
     </div>
 
-    <p>
-        👉 Analyser une opération consiste à répondre à deux questions :
-    </p>
-
-    <ul>
-        <li>D’où vient l’argent ? (Ressource)</li>
-        <li>Comment est-il utilisé ? (Emploi)</li>
-    </ul>
-</div>
     <h2>Exemples d’analyse</h2>
 
     <div class="table-wrapper">
@@ -1206,33 +1236,27 @@ footer>span{white-space:nowrap}
 
     </div>
 
-    
-
 </section>
 
-<!-- BARRE DES DIAPOSITIVES -->
-
-<div class="slide-navigation" id="slideNavigation">
-
-    <button type="button" id="btnDiapoPrecedente">
-        ← Diapositive précédente
-    </button>
-
-    <span class="slide-counter" id="compteurDiapo">
-        Diapositive 1 / 1
-    </span>
-
-    <button type="button" id="btnDiapoSuivante">
-        Diapositive suivante →
-    </button>
-
-</div>
-
-<!-- PIED DE PAGE -->
+<!-- PIED DE PAGE AVEC NAVIGATION DES DIAPOSITIVES -->
 
 <footer>
 
-    <span>Formation en comptabilité générale</span>
+    <div class="slide-navigation" id="slideNavigation">
+
+        <button type="button" id="btnDiapoPrecedente">
+            ← Diapo précédente
+        </button>
+
+        <span class="slide-counter" id="compteurDiapo">
+            Diapo 1 / 1
+        </span>
+
+        <button type="button" id="btnDiapoSuivante">
+            Diapo suivante →
+        </button>
+
+    </div>
 
     <div class="footer-actions">
 
@@ -1431,12 +1455,11 @@ function restaurerContenuOriginal(section){
 
 function hauteurDisponibleDiapo(){
 
-    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
-    const hauteurNavigation=24;
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 38;
 
     return Math.max(
         180,
-        window.innerHeight-hauteurFooter-hauteurNavigation-35
+        window.innerHeight-hauteurFooter-35
     );
 }
 
@@ -1500,9 +1523,7 @@ function creerSlide(section){
     return slide;
 }
 
-/* ==========================================
-   MESURER UN GROUPE DE CONTENU
-========================================== */
+/* MESURER UN GROUPE DE CONTENU */
 
 function mesurerGroupe(groupe,largeur,section){
 
@@ -1542,9 +1563,7 @@ function mesurerGroupe(groupe,largeur,section){
     return hauteur;
 }
 
-/* ==========================================
-   CRÉER LES DIAPOSITIVES D'UNE SECTION
-========================================== */
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
 
 function creerDiapositives(section){
 
@@ -1557,7 +1576,30 @@ function creerDiapositives(section){
     memoriserContenu(section);
 
     const nodes=Array.from(section.childNodes);
-    const groupes=construireGroupes(nodes);
+
+    /*
+       LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL
+       SUR LA PREMIÈRE DIAPOSITIVE.
+    */
+
+    let titrePrincipal=null;
+
+    const premierNodeUtile=nodes.find(node=>{
+
+        return !(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        );
+    });
+
+    if(
+        premierNodeUtile &&
+        premierNodeUtile.nodeType===Node.ELEMENT_NODE &&
+        premierNodeUtile.classList.contains("definition-title")
+    ){
+
+        titrePrincipal=premierNodeUtile;
+    }
 
     section.replaceChildren();
 
@@ -1567,6 +1609,42 @@ function creerDiapositives(section){
         300,
         section.clientWidth-50
     );
+
+    /*
+       PREMIÈRE DIAPOSITIVE :
+       TITRE PRINCIPAL SEUL ET CENTRÉ.
+    */
+
+    if(titrePrincipal){
+
+        const slideTitre=creerSlide(section);
+
+        slideTitre.classList.add("title-only-slide");
+
+        slideTitre.appendChild(titrePrincipal);
+    }
+
+    /*
+       CONSTRUIRE LES GROUPES DU CONTENU RESTANT.
+    */
+
+    const nodesContenu=nodes.filter(node=>{
+
+        if(node===titrePrincipal){
+            return false;
+        }
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return false;
+        }
+
+        return true;
+    });
+
+    const groupes=construireGroupes(nodesContenu);
 
     let slide=null;
     let hauteurUtilisee=0;
@@ -1580,8 +1658,8 @@ function creerDiapositives(section){
         );
 
         /*
-           Créer une nouvelle diapositive si le groupe
-           suivant dépasse la hauteur disponible.
+           LE CONTENU COMMENCE TOUJOURS
+           SUR UNE NOUVELLE DIAPOSITIVE.
         */
 
         if(
@@ -1596,11 +1674,6 @@ function creerDiapositives(section){
             hauteurUtilisee=0;
         }
 
-        /*
-           Déplacer les éléments originaux :
-           le contenu n'est pas supprimé ni recréé.
-        */
-
         groupe.forEach(node=>{
             slide.appendChild(node);
         });
@@ -1609,8 +1682,6 @@ function creerDiapositives(section){
 
     });
 
-    /* SÉCURITÉ : SECTION VIDE */
-
     if(currentSlides.length===0){
         creerSlide(section);
     }
@@ -1618,9 +1689,7 @@ function creerDiapositives(section){
     afficherDiapositive(0);
 }
 
-/* ==========================================
-   COMPTEUR DES DIAPOSITIVES
-========================================== */
+/* COMPTEUR DES DIAPOSITIVES */
 
 function actualiserCompteurDiapo(){
 
@@ -1636,15 +1705,13 @@ function actualiserCompteurDiapo(){
     }
 
     compteurDiapo.textContent=
-        "Diapositive "+(currentSlideIndex+1)+" / "+total;
+        " "+(currentSlideIndex+1)+" / "+total;
 
     btnDiapoPrecedente.disabled=(currentSlideIndex===0);
     btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
 }
 
-/* ==========================================
-   AJUSTEMENT DU CONTENU
-========================================== */
+/* AJUSTEMENT DU CONTENU */
 
 function ajusterContenuDiapositive(slide){
 
@@ -1676,9 +1743,7 @@ function ajusterContenuDiapositive(slide){
     });
 }
 
-/* ==========================================
-   AFFICHER UNE DIAPOSITIVE
-========================================== */
+/* AFFICHER UNE DIAPOSITIVE */
 
 function afficherDiapositive(index){
 
@@ -1703,10 +1768,6 @@ function afficherDiapositive(index){
         if(i===index){
 
             ajusterContenuDiapositive(slide);
-
-            /* Revenir en haut de la diapositive */
-
-            slide.scrollTop=0;
         }
     });
 
@@ -1733,9 +1794,7 @@ btnDiapoSuivante.addEventListener("click",function(){
     naviguerDiapositive(1);
 });
 
-/* ==========================================
-   ACTIVER LE MODE DIAPOSITIVES
-========================================== */
+/* ACTIVER LE MODE DIAPOSITIVES */
 
 function activerModeDiapositives(section){
 
@@ -1763,9 +1822,7 @@ function activerModeDiapositives(section){
     creerDiapositives(section);
 }
 
-/* ==========================================
-   DÉSACTIVER LE MODE DIAPOSITIVES
-========================================== */
+/* DÉSACTIVER LE MODE DIAPOSITIVES */
 
 function desactiverModeDiapositives(section){
 
@@ -1788,9 +1845,7 @@ function desactiverModeDiapositives(section){
     slideMode=false;
 }
 
-/* ==========================================
-   ACTUALISER L'AFFICHAGE
-========================================== */
+/* ACTUALISER L'AFFICHAGE */
 
 function actualiserAffichageSection(){
 
@@ -1810,9 +1865,7 @@ function actualiserAffichageSection(){
     }
 }
 
-/* ==========================================
-   NAVIGATION ENTRE LES SECTIONS
-========================================== */
+/* NAVIGATION ENTRE LES SECTIONS */
 
 const sectionIds=[
     "def",
@@ -1939,9 +1992,7 @@ function showSection(id,button){
     });
 }
 
-/* ==========================================
-   SECTION PRÉCÉDENTE / SUIVANTE
-========================================== */
+/* SECTION PRÉCÉDENTE / SUIVANTE */
 
 function naviguerSection(direction){
 
@@ -1965,9 +2016,7 @@ function naviguerSection(direction){
     showSection(nouvelId,boutonCorrespondant);
 }
 
-/* ==========================================
-   RETOUR AU MENU
-========================================== */
+/* RETOUR AU MENU */
 
 function retourMenu(){
 
@@ -2023,9 +2072,7 @@ function retourMenu(){
     });
 }
 
-/* ==========================================
-   ADAPTATION AU REDIMENSIONNEMENT / ZOOM
-========================================== */
+/* ADAPTATION AU REDIMENSIONNEMENT / ZOOM */
 
 window.addEventListener("resize",function(){
 
@@ -2052,11 +2099,6 @@ window.addEventListener("resize",function(){
 
                 const ancienneIndex=currentSlideIndex;
 
-                /*
-                   Reconstruire les diapositives en conservant
-                   le contenu original de la section.
-                */
-
                 creerDiapositives(section);
 
                 if(currentSlides.length>0){
@@ -2079,9 +2121,7 @@ window.addEventListener("resize",function(){
 
 });
 
-/* ==========================================
-   NAVIGATION AU CLAVIER
-========================================== */
+/* NAVIGATION AU CLAVIER */
 
 document.addEventListener("keydown",function(event){
 
@@ -2121,9 +2161,7 @@ document.addEventListener("keydown",function(event){
 
 });
 
-/* ==========================================
-   INITIALISATION
-========================================== */
+/* INITIALISATION */
 
 document.addEventListener("DOMContentLoaded",function(){
 
@@ -2161,5 +2199,4 @@ document.addEventListener("DOMContentLoaded",function(){
 
 </body>
 </html>
-
 
