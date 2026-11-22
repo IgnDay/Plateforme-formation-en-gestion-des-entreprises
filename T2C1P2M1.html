@@ -67,13 +67,13 @@ header{
 header h1{
     padding:12px 8px;
     margin:0;
-    font-size:45px;
+    font-size:40px;
     line-height:1.4;
 }
 
 header h1 p{
     margin:7px 0;
-    font-size:45px;
+    font-size:40px;
     font-weight:bold;
     line-height:1.4;
 }
@@ -390,31 +390,30 @@ tr:hover td{background:#f1f7ff}
     font-weight:bold;
 }
 
-/* BARRE DES DIAPOSITIVES */
+/* BARRE DES DIAPOSITIVES DANS LE PIED DE PAGE */
 
 .slide-navigation{
     display:none;
-    position:fixed;
-    bottom:32px;
-    left:0;
-    width:100%;
-    height:24px;
-    min-height:24px;
-    z-index:1999;
+    position:static;
+    width:auto;
+    height:auto;
+    min-height:0;
+    z-index:auto;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
     gap:5px;
-    padding:2px 8px;
-    background:#34495e;
+    padding:0;
+    background:transparent;
     color:white;
-    border-top:1px solid #1e293b;
+    border:0;
     font-size:10px;
+    flex-shrink:0;
 }
 
 .slide-navigation button{
     border:0;
     border-radius:3px;
-    padding:3px 8px;
+    padding:4px 7px;
     background:#00b894;
     color:white;
     font-size:10px;
@@ -424,7 +423,9 @@ tr:hover td{background:#f1f7ff}
     white-space:nowrap;
 }
 
-.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:hover:not(:disabled){
+    background:#0984e3;
+}
 
 .slide-navigation button:disabled{
     opacity:.4;
@@ -459,6 +460,32 @@ tr:hover td{background:#f1f7ff}
     zoom:1!important;
 }
 
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+
+body.slides-mode .content-slide.title-only-slide{
+    display:none;
+    width:100%;
+    min-height:calc(100vh - 100px);
+    padding:0 15px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+body.slides-mode .content-slide.title-only-slide.active-slide{
+    display:flex;
+}
+
+body.slides-mode .content-slide.title-only-slide .definition-title{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    text-align:center;
+}
+
+/* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
+
 .slide-measure{
     position:fixed!important;
     left:-100000px!important;
@@ -474,7 +501,9 @@ tr:hover td{background:#f1f7ff}
     z-index:-1!important;
 }
 
-body.slides-mode{padding-bottom:58px}
+body.slides-mode{
+    padding-bottom:48px;
+}
 
 body.slides-mode>section.active{
     display:block;
@@ -483,13 +512,15 @@ body.slides-mode>section.active{
     border-radius:0;
     box-shadow:none;
     border-left:0;
-    min-height:calc(100vh - 58px);
+    min-height:calc(100vh - 48px);
     animation:none;
     overflow-x:hidden;
     overflow-y:auto;
 }
 
-body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .slide-navigation{
+    display:flex;
+}
 
 body.slides-mode .definition-title{
     margin:3px 0 8px;
@@ -547,13 +578,14 @@ footer{
     bottom:0;
     left:0;
     width:100%;
-    height:32px;
-    min-height:32px;
+    min-height:38px;
+    height:auto;
     z-index:2000;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:6px;
+    flex-wrap:wrap;
+    gap:5px;
     padding:4px 10px;
     margin:0;
     background:#2c3e50;
@@ -569,7 +601,9 @@ footer a{
     text-decoration:none;
 }
 
-footer>span{white-space:nowrap}
+footer>span{
+    white-space:nowrap;
+}
 
 .footer-actions{
     display:flex;
@@ -615,7 +649,7 @@ footer>span{white-space:nowrap}
 
 @media(max-width:760px){
 
-    body{padding-bottom:42px}
+    body{padding-bottom:48px}
 
     .brandbar{
         justify-content:center;
@@ -709,27 +743,27 @@ footer>span{white-space:nowrap}
         line-height:1.4;
     }
 
+    .container{padding:15px}
+
     footer{
-        height:32px;
-        min-height:32px;
-        flex-wrap:nowrap;
-        justify-content:space-between;
-        gap:3px;
-        padding:3px 5px;
+        min-height:38px;
+        height:auto;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:4px;
+        padding:4px 5px;
         font-size:9px;
     }
 
     footer>span{
-        width:auto;
-        text-align:left;
-        font-size:9px;
+        display:none;
     }
 
     .footer-actions{
         width:auto;
-        justify-content:flex-end;
+        justify-content:center;
         gap:3px;
-        margin-left:auto;
+        margin-left:0;
     }
 
     .btnFooter{
@@ -738,28 +772,30 @@ footer>span{white-space:nowrap}
     }
 
     .slide-navigation{
-        bottom:32px;
-        height:24px;
-        min-height:24px;
-        padding:2px 4px;
         gap:3px;
+        padding:0;
     }
 
     .slide-navigation button{
         font-size:9px;
-        padding:3px 5px;
+        padding:4px 5px;
     }
 
     .slide-counter{font-size:9px}
 
     body.slides-mode>section.active{
         padding:4px 15px 8px;
-        min-height:calc(100vh - 58px);
+        min-height:calc(100vh - 48px);
     }
 
     body.slides-mode .definition-title{
         font-size:17px;
         padding:8px;
+    }
+
+    body.slides-mode .content-slide.title-only-slide{
+        min-height:calc(100vh - 115px);
+        padding:0 8px;
     }
 }
 
@@ -817,22 +853,22 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        padding:3px 4px;
-        font-size:8px;
+        padding:4px 3px;
+        gap:3px;
     }
-
-    footer>span{font-size:8px}
 
     .btnFooter{
         font-size:8px;
-        padding:4px 5px;
+        padding:4px 4px;
     }
 
     .footer-actions{gap:2px}
 
+    .slide-navigation{gap:2px}
+
     .slide-navigation button{
         font-size:8px;
-        padding:3px 4px;
+        padding:4px 3px;
     }
 
     .slide-counter{font-size:8px}
@@ -929,8 +965,8 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
+        height:auto;
         font-size:11px;
     }
 
@@ -1001,8 +1037,8 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
+        height:auto;
     }
 
     body.slides-mode p,
@@ -1133,7 +1169,6 @@ footer>span{white-space:nowrap}
 
     <h2>B- Facture « Doit » comportant des réductions</h2>
 
-
     <div class="table-wrapper">
 
         <table class="facture-table">
@@ -1194,7 +1229,7 @@ footer>span{white-space:nowrap}
 
         <ul>
             <li>Les réductions commerciales se calculent successivement, c’est-à-dire les unes après les autres ou « en cascade ».</li>
-            <li>Les rabais, remises et ristournes mentionnés sur facture « Doit » ne se comptabilisent pas. Seul le dernier net commercial est comptabilisé. </li>
+            <li>Les rabais, remises et ristournes mentionnés sur facture « Doit » ne se comptabilisent pas. Seul le dernier net commercial est comptabilisé.</li>
         </ul>
 
     </div>
@@ -1411,29 +1446,25 @@ footer>span{white-space:nowrap}
 
 </section>
 
-<!-- BARRE DES DIAPOSITIVES -->
-
-<div class="slide-navigation" id="slideNavigation">
-
-    <button type="button" id="btnDiapoPrecedente">
-        ← Diapositive précédente
-    </button>
-
-    <span class="slide-counter" id="compteurDiapo">
-        Diapositive 1 / 1
-    </span>
-
-    <button type="button" id="btnDiapoSuivante">
-        Diapositive suivante →
-    </button>
-
-</div>
-
-<!-- PIED DE PAGE -->
+<!-- PIED DE PAGE AVEC NAVIGATION DES DIAPOSITIVES -->
 
 <footer>
 
-    <span>Formation en Comptabilité Générale</span>
+    <div class="slide-navigation" id="slideNavigation">
+
+        <button type="button" id="btnDiapoPrecedente">
+            ← Diapo précédente
+        </button>
+
+        <span class="slide-counter" id="compteurDiapo">
+            Diapo 1 / 1
+        </span>
+
+        <button type="button" id="btnDiapoSuivante">
+            Diapo suivante →
+        </button>
+
+    </div>
 
     <div class="footer-actions">
 
@@ -1632,12 +1663,11 @@ function restaurerContenuOriginal(section){
 
 function hauteurDisponibleDiapo(){
 
-    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
-    const hauteurNavigation=24;
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 38;
 
     return Math.max(
         180,
-        window.innerHeight-hauteurFooter-hauteurNavigation-35
+        window.innerHeight-hauteurFooter-35
     );
 }
 
@@ -1754,7 +1784,30 @@ function creerDiapositives(section){
     memoriserContenu(section);
 
     const nodes=Array.from(section.childNodes);
-    const groupes=construireGroupes(nodes);
+
+    /*
+       LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL
+       SUR LA PREMIÈRE DIAPOSITIVE.
+    */
+
+    let titrePrincipal=null;
+
+    const premierNodeUtile=nodes.find(node=>{
+
+        return !(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        );
+    });
+
+    if(
+        premierNodeUtile &&
+        premierNodeUtile.nodeType===Node.ELEMENT_NODE &&
+        premierNodeUtile.classList.contains("definition-title")
+    ){
+
+        titrePrincipal=premierNodeUtile;
+    }
 
     section.replaceChildren();
 
@@ -1764,6 +1817,42 @@ function creerDiapositives(section){
         300,
         section.clientWidth-50
     );
+
+    /*
+       PREMIÈRE DIAPOSITIVE :
+       TITRE PRINCIPAL SEUL ET CENTRÉ.
+    */
+
+    if(titrePrincipal){
+
+        const slideTitre=creerSlide(section);
+
+        slideTitre.classList.add("title-only-slide");
+
+        slideTitre.appendChild(titrePrincipal);
+    }
+
+    /*
+       CONSTRUIRE LES GROUPES DU CONTENU RESTANT.
+    */
+
+    const nodesContenu=nodes.filter(node=>{
+
+        if(node===titrePrincipal){
+            return false;
+        }
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return false;
+        }
+
+        return true;
+    });
+
+    const groupes=construireGroupes(nodesContenu);
 
     let slide=null;
     let hauteurUtilisee=0;
@@ -1775,6 +1864,11 @@ function creerDiapositives(section){
             largeur,
             section
         );
+
+        /*
+           LE CONTENU COMMENCE TOUJOURS
+           SUR UNE NOUVELLE DIAPOSITIVE.
+        */
 
         if(
             !slide ||
@@ -1819,7 +1913,7 @@ function actualiserCompteurDiapo(){
     }
 
     compteurDiapo.textContent=
-        "Diapositive "+(currentSlideIndex+1)+" / "+total;
+        " "+(currentSlideIndex+1)+" / "+total;
 
     btnDiapoPrecedente.disabled=(currentSlideIndex===0);
     btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
@@ -1989,7 +2083,7 @@ const sectionIds=[
 
 let currentSectionIndex=-1;
 
-/* BOUTONS DU PIED DE PAGE */
+/* ACTUALISER LES BOUTONS DU PIED DE PAGE */
 
 function actualiserBoutonsNavigation(){
 
@@ -2039,6 +2133,8 @@ function showSection(id,button){
     currentSlideSection=null;
     slideMode=false;
 
+    /* MASQUER LES AUTRES SECTIONS */
+
     document.querySelectorAll("body > section").forEach(section=>{
 
         section.classList.remove(
@@ -2046,6 +2142,8 @@ function showSection(id,button){
             "animationSection"
         );
     });
+
+    /* RÉINITIALISER LES BOUTONS DU MENU */
 
     document.querySelectorAll("nav button").forEach(btn=>{
 
@@ -2055,6 +2153,8 @@ function showSection(id,button){
 
     fermerTousLesMenus();
 
+    /* ACTIVER LA SECTION */
+
     currentSectionIndex=nouvelIndex;
 
     document.body.classList.add("section-open");
@@ -2063,6 +2163,8 @@ function showSection(id,button){
         "active",
         "animationSection"
     );
+
+    /* AFFICHER LES BOUTONS DU PIED DE PAGE */
 
     document.getElementById("btnRetourMenu")
         .classList.add("visible");
@@ -2074,6 +2176,8 @@ function showSection(id,button){
         .classList.add("visible");
 
     actualiserBoutonsNavigation();
+
+    /* ACTIVER LE BOUTON CORRESPONDANT */
 
     if(!button){
         button=document.querySelectorAll("nav button")[nouvelIndex];
