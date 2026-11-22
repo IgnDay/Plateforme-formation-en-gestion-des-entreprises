@@ -67,13 +67,13 @@ header{
 header h1{
     padding:12px 8px;
     margin:0;
-    font-size:45px;
+    font-size:40px;
     line-height:1.4;
 }
 
 header h1 p{
     margin:7px 0;
-    font-size:45px;
+    font-size:40px;
     font-weight:bold;
     line-height:1.4;
 }
@@ -294,7 +294,7 @@ tr:hover td{background:#f1f7ff}
 }
 
 .definition-title{
-background:linear-gradient(120deg,#be185d,#ec4899);
+    background:linear-gradient(120deg,#164e63,#0e7490);
     color:white;
     padding:12px 15px;
     border-radius:7px;
@@ -363,31 +363,30 @@ background:linear-gradient(120deg,#be185d,#ec4899);
     font-weight:bold;
 }
 
-/* BARRE DES DIAPOSITIVES */
+/* BARRE DES DIAPOSITIVES DANS LE PIED DE PAGE */
 
 .slide-navigation{
     display:none;
-    position:fixed;
-    bottom:32px;
-    left:0;
-    width:100%;
-    height:24px;
-    min-height:24px;
-    z-index:1999;
+    position:static;
+    width:auto;
+    height:auto;
+    min-height:0;
+    z-index:auto;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
     gap:5px;
-    padding:2px 8px;
-    background:#34495e;
+    padding:0;
+    background:transparent;
     color:white;
-    border-top:1px solid #1e293b;
+    border:0;
     font-size:10px;
+    flex-shrink:0;
 }
 
 .slide-navigation button{
     border:0;
     border-radius:3px;
-    padding:3px 8px;
+    padding:4px 7px;
     background:#00b894;
     color:white;
     font-size:10px;
@@ -397,7 +396,9 @@ background:linear-gradient(120deg,#be185d,#ec4899);
     white-space:nowrap;
 }
 
-.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:hover:not(:disabled){
+    background:#0984e3;
+}
 
 .slide-navigation button:disabled{
     opacity:.4;
@@ -432,7 +433,31 @@ background:linear-gradient(120deg,#be185d,#ec4899);
     zoom:1!important;
 }
 
-/* MESURE DES GROUPES */
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+
+body.slides-mode .content-slide.title-only-slide{
+    display:none;
+    width:100%;
+    min-height:calc(100vh - 100px);
+    padding:0 15px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+body.slides-mode .content-slide.title-only-slide.active-slide{
+    display:flex;
+}
+
+body.slides-mode .content-slide.title-only-slide .definition-title{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    text-align:center;
+}
+
+/* ÉLÉMENT UTILISÉ POUR MESURER LES GROUPES */
 
 .slide-measure{
     position:fixed!important;
@@ -449,7 +474,9 @@ background:linear-gradient(120deg,#be185d,#ec4899);
     z-index:-1!important;
 }
 
-body.slides-mode{padding-bottom:58px}
+body.slides-mode{
+    padding-bottom:48px;
+}
 
 body.slides-mode>section.active{
     display:block;
@@ -458,13 +485,15 @@ body.slides-mode>section.active{
     border-radius:0;
     box-shadow:none;
     border-left:0;
-    min-height:calc(100vh - 58px);
+    min-height:calc(100vh - 48px);
     animation:none;
     overflow-x:hidden;
     overflow-y:auto;
 }
 
-body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .slide-navigation{
+    display:flex;
+}
 
 body.slides-mode .definition-title{
     margin:3px 0 8px;
@@ -505,7 +534,9 @@ body.slides-mode .highlight{
     padding:9px;
 }
 
-body.slides-mode .container{padding:12px}
+body.slides-mode .container{
+    padding:12px;
+}
 
 body.slides-mode table{margin-top:8px}
 
@@ -519,13 +550,14 @@ footer{
     bottom:0;
     left:0;
     width:100%;
-    height:32px;
-    min-height:32px;
+    min-height:38px;
+    height:auto;
     z-index:2000;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:6px;
+    flex-wrap:wrap;
+    gap:5px;
     padding:4px 10px;
     margin:0;
     background:#2c3e50;
@@ -587,7 +619,7 @@ footer>span{white-space:nowrap}
 
 @media(max-width:760px){
 
-    body{padding-bottom:42px}
+    body{padding-bottom:48px}
 
     .brandbar{
         justify-content:center;
@@ -667,26 +699,22 @@ footer>span{white-space:nowrap}
     .container{padding:15px}
 
     footer{
-        height:32px;
-        min-height:32px;
-        flex-wrap:nowrap;
-        justify-content:space-between;
-        gap:3px;
-        padding:3px 5px;
+        min-height:38px;
+        height:auto;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:4px;
+        padding:4px 5px;
         font-size:9px;
     }
 
-    footer>span{
-        width:auto;
-        text-align:left;
-        font-size:9px;
-    }
+    footer>span{display:none}
 
     .footer-actions{
         width:auto;
-        justify-content:flex-end;
+        justify-content:center;
         gap:3px;
-        margin-left:auto;
+        margin-left:0;
     }
 
     .btnFooter{
@@ -695,28 +723,30 @@ footer>span{white-space:nowrap}
     }
 
     .slide-navigation{
-        bottom:32px;
-        height:24px;
-        min-height:24px;
-        padding:2px 4px;
         gap:3px;
+        padding:0;
     }
 
     .slide-navigation button{
         font-size:9px;
-        padding:3px 5px;
+        padding:4px 5px;
     }
 
     .slide-counter{font-size:9px}
 
     body.slides-mode>section.active{
         padding:4px 15px 8px;
-        min-height:calc(100vh - 58px);
+        min-height:calc(100vh - 48px);
     }
 
     body.slides-mode .definition-title{
         font-size:17px;
         padding:8px;
+    }
+
+    body.slides-mode .content-slide.title-only-slide{
+        min-height:calc(100vh - 115px);
+        padding:0 8px;
     }
 }
 
@@ -757,22 +787,22 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        padding:3px 4px;
-        font-size:8px;
+        padding:4px 3px;
+        gap:3px;
     }
-
-    footer>span{font-size:8px}
 
     .btnFooter{
         font-size:8px;
-        padding:4px 5px;
+        padding:4px 4px;
     }
 
     .footer-actions{gap:2px}
 
+    .slide-navigation{gap:2px}
+
     .slide-navigation button{
         font-size:8px;
-        padding:3px 4px;
+        padding:4px 3px;
     }
 
     .slide-counter{font-size:8px}
@@ -865,8 +895,8 @@ footer>span{white-space:nowrap}
     .container{padding:22px}
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
+        height:auto;
         font-size:11px;
     }
 
@@ -931,8 +961,8 @@ footer>span{white-space:nowrap}
     }
 
     footer{
-        height:32px;
-        min-height:32px;
+        min-height:38px;
+        height:auto;
     }
 
     body.slides-mode p,
@@ -998,8 +1028,8 @@ footer>span{white-space:nowrap}
                     <a href="T7C1P1M1.html">T7 - Le virement comptable</a>
                     <a href="T8C1P1M1.html">T8 - L’organisation comptable</a>
                     <a href="T9C1P1M1.html">T9 - Le journal comptable</a>
-                    <a href="T10C1P1M1.html">T10 - Le grand livre</a>
-                    <a href="T11C1P1M1.html">T11 - La balance</a>
+                    <a href="T10C1P1M1.html">T10 - Le grand livre et La balance </a>
+                    
                 </div>
             </div>
 
@@ -1239,29 +1269,25 @@ footer>span{white-space:nowrap}
 
 </section>
 
-<!-- BARRE DES DIAPOSITIVES -->
-
-<div class="slide-navigation" id="slideNavigation">
-
-    <button type="button" id="btnDiapoPrecedente">
-        ← Diapositive précédente
-    </button>
-
-    <span class="slide-counter" id="compteurDiapo">
-        Diapositive 1 / 1
-    </span>
-
-    <button type="button" id="btnDiapoSuivante">
-        Diapositive suivante →
-    </button>
-
-</div>
-
-<!-- PIED DE PAGE -->
+<!-- PIED DE PAGE AVEC NAVIGATION DES DIAPOSITIVES -->
 
 <footer>
 
-    <span>Formation en comptabilité générale</span>
+    <div class="slide-navigation" id="slideNavigation">
+
+        <button type="button" id="btnDiapoPrecedente">
+            ← Diapo précédente
+        </button>
+
+        <span class="slide-counter" id="compteurDiapo">
+            Diapo 1 / 1
+        </span>
+
+        <button type="button" id="btnDiapoSuivante">
+            Diapo suivante →
+        </button>
+
+    </div>
 
     <div class="footer-actions">
 
@@ -1501,7 +1527,6 @@ function positionDropdown(button,menu){
         menu.style.bottom=(window.innerHeight-rect.top+4)+"px";
         menu.style.top="auto";
         hauteurDisponible=espaceHaut-4;
-
     }
 
     menu.style.maxHeight=Math.max(100,hauteurDisponible)+"px";
@@ -1525,7 +1550,6 @@ function positionDropdown(button,menu){
     }
 
     menu.style.left=positionGauche+"px";
-
 }
 
 function toggleDropdown(button){
@@ -1538,30 +1562,22 @@ function toggleDropdown(button){
     fermerTousLesMenus();
 
     if(!isOpen){
-
         positionDropdown(button,currentMenu);
         button.setAttribute("aria-expanded","true");
-
     }
-
 }
 
 function fermerTousLesMenus(){
 
     document.querySelectorAll(".dropdown-content").forEach(menu=>{
-
         menu.style.display="none";
         menu.style.top="auto";
         menu.style.bottom="auto";
-
     });
 
     document.querySelectorAll(".dropdown button").forEach(button=>{
-
         button.setAttribute("aria-expanded","false");
-
     });
-
 }
 
 document.addEventListener("click",function(event){
@@ -1569,7 +1585,6 @@ document.addEventListener("click",function(event){
     if(!event.target.closest(".dropdown")){
         fermerTousLesMenus();
     }
-
 });
 
 function repositionnerMenus(){
@@ -1582,9 +1597,7 @@ function repositionnerMenus(){
         if(button && menu && menu.style.display==="block"){
             positionDropdown(button,menu);
         }
-
     });
-
 }
 
 window.addEventListener("resize",repositionnerMenus);
@@ -1596,11 +1609,10 @@ window.addEventListener("scroll",repositionnerMenus,true);
 
 function zoomImportant(){
 
-    return(
+    return (
         window.screen.width>=1000 &&
         window.innerWidth<=window.screen.width*0.62
     );
-
 }
 
 let currentSlides=[];
@@ -1626,9 +1638,7 @@ function memoriserContenu(section){
             section.id,
             Array.from(section.childNodes)
         );
-
     }
-
 }
 
 function restaurerContenuOriginal(section){
@@ -1640,21 +1650,18 @@ function restaurerContenuOriginal(section){
     const contenuOriginal=originalSectionContent.get(section.id);
 
     section.replaceChildren(...contenuOriginal);
-
 }
 
 /* HAUTEUR DISPONIBLE */
 
 function hauteurDisponibleDiapo(){
 
-    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 32;
-    const hauteurNavigation=24;
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 38;
 
     return Math.max(
         180,
-        window.innerHeight-hauteurFooter-hauteurNavigation-35
+        window.innerHeight-hauteurFooter-35
     );
-
 }
 
 /* IDENTIFIER LES TITRES */
@@ -1668,7 +1675,6 @@ function estTitreContenu(node){
     return node.matches(
         "h2,h3,h4,.definition-title,.sous-titre,.table-title"
     );
-
 }
 
 /* CONSTRUIRE LES GROUPES */
@@ -1691,11 +1697,9 @@ function construireGroupes(nodes){
 
             groupes.push(groupeActuel);
             groupeActuel=[];
-
         }
 
         groupeActuel.push(node);
-
     });
 
     if(groupeActuel.length){
@@ -1703,7 +1707,6 @@ function construireGroupes(nodes){
     }
 
     return groupes;
-
 }
 
 /* CRÉER UNE DIAPOSITIVE */
@@ -1719,12 +1722,11 @@ function creerSlide(section){
     currentSlides.push(slide);
 
     return slide;
-
 }
 
 /* MESURER UN GROUPE DE CONTENU */
 
-function mesurerGroupe(groupe,largeur){
+function mesurerGroupe(groupe,largeur,section){
 
     const mesure=document.createElement("div");
 
@@ -1760,7 +1762,6 @@ function mesurerGroupe(groupe,largeur){
     mesure.remove();
 
     return hauteur;
-
 }
 
 /* CRÉER LES DIAPOSITIVES D'UNE SECTION */
@@ -1776,7 +1777,30 @@ function creerDiapositives(section){
     memoriserContenu(section);
 
     const nodes=Array.from(section.childNodes);
-    const groupes=construireGroupes(nodes);
+
+    /*
+       LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL
+       SUR LA PREMIÈRE DIAPOSITIVE.
+    */
+
+    let titrePrincipal=null;
+
+    const premierNodeUtile=nodes.find(node=>{
+
+        return !(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        );
+    });
+
+    if(
+        premierNodeUtile &&
+        premierNodeUtile.nodeType===Node.ELEMENT_NODE &&
+        premierNodeUtile.classList.contains("definition-title")
+    ){
+
+        titrePrincipal=premierNodeUtile;
+    }
 
     section.replaceChildren();
 
@@ -1787,6 +1811,42 @@ function creerDiapositives(section){
         section.clientWidth-50
     );
 
+    /*
+       PREMIÈRE DIAPOSITIVE :
+       TITRE PRINCIPAL SEUL ET CENTRÉ.
+    */
+
+    if(titrePrincipal){
+
+        const slideTitre=creerSlide(section);
+
+        slideTitre.classList.add("title-only-slide");
+
+        slideTitre.appendChild(titrePrincipal);
+    }
+
+    /*
+       CONSTRUIRE LES GROUPES DU CONTENU RESTANT.
+    */
+
+    const nodesContenu=nodes.filter(node=>{
+
+        if(node===titrePrincipal){
+            return false;
+        }
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return false;
+        }
+
+        return true;
+    });
+
+    const groupes=construireGroupes(nodesContenu);
+
     let slide=null;
     let hauteurUtilisee=0;
 
@@ -1794,8 +1854,14 @@ function creerDiapositives(section){
 
         const hauteurGroupe=mesurerGroupe(
             groupe,
-            largeur
+            largeur,
+            section
         );
+
+        /*
+           LE CONTENU COMMENCE TOUJOURS
+           SUR UNE NOUVELLE DIAPOSITIVE.
+        */
 
         if(
             !slide ||
@@ -1807,7 +1873,6 @@ function creerDiapositives(section){
 
             slide=creerSlide(section);
             hauteurUtilisee=0;
-
         }
 
         groupe.forEach(node=>{
@@ -1823,7 +1888,6 @@ function creerDiapositives(section){
     }
 
     afficherDiapositive(0);
-
 }
 
 /* COMPTEUR DES DIAPOSITIVES */
@@ -1842,11 +1906,10 @@ function actualiserCompteurDiapo(){
     }
 
     compteurDiapo.textContent=
-        "Diapositive "+(currentSlideIndex+1)+" / "+total;
+        " "+(currentSlideIndex+1)+" / "+total;
 
     btnDiapoPrecedente.disabled=(currentSlideIndex===0);
     btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
-
 }
 
 /* AJUSTEMENT DU CONTENU */
@@ -1865,7 +1928,6 @@ function ajusterContenuDiapositive(slide){
         element.style.maxWidth="100%";
         element.style.minWidth="0";
         element.style.overflowWrap="anywhere";
-
     });
 
     slide.querySelectorAll("table").forEach(table=>{
@@ -1873,16 +1935,13 @@ function ajusterContenuDiapositive(slide){
         table.style.width="100%";
         table.style.maxWidth="100%";
         table.style.tableLayout="fixed";
-
     });
 
     slide.querySelectorAll("td,th").forEach(cell=>{
 
         cell.style.overflowWrap="anywhere";
         cell.style.wordBreak="normal";
-
     });
-
 }
 
 /* AFFICHER UNE DIAPOSITIVE */
@@ -1890,10 +1949,8 @@ function ajusterContenuDiapositive(slide){
 function afficherDiapositive(index){
 
     if(!currentSlides.length){
-
         actualiserCompteurDiapo();
         return;
-
     }
 
     if(index<0 || index>=currentSlides.length){
@@ -1912,10 +1969,7 @@ function afficherDiapositive(index){
         if(i===index){
 
             ajusterContenuDiapositive(slide);
-            slide.scrollTop=0;
-
         }
-
     });
 
     actualiserCompteurDiapo();
@@ -1924,7 +1978,6 @@ function afficherDiapositive(index){
         top:0,
         behavior:"auto"
     });
-
 }
 
 /* NAVIGATION DIAPOSITIVES */
@@ -1932,7 +1985,6 @@ function afficherDiapositive(index){
 function naviguerDiapositive(direction){
 
     afficherDiapositive(currentSlideIndex+direction);
-
 }
 
 btnDiapoPrecedente.addEventListener("click",function(){
@@ -1969,7 +2021,6 @@ function activerModeDiapositives(section){
     slideMode=true;
 
     creerDiapositives(section);
-
 }
 
 /* DÉSACTIVER LE MODE DIAPOSITIVES */
@@ -1993,7 +2044,6 @@ function desactiverModeDiapositives(section){
     currentSlideSection=null;
 
     slideMode=false;
-
 }
 
 /* ACTUALISER L'AFFICHAGE */
@@ -2013,9 +2063,7 @@ function actualiserAffichageSection(){
     }else if(slideMode){
 
         desactiverModeDiapositives(section);
-
     }
-
 }
 
 /* ==========================================
@@ -2055,7 +2103,6 @@ function actualiserBoutonsNavigation(){
     suivant.disabled=(
         currentSectionIndex===sectionIds.length-1
     );
-
 }
 
 /* AFFICHER UNE SECTION */
@@ -2066,10 +2113,8 @@ function showSection(id,button){
     const current=document.getElementById(id);
 
     if(!current || nouvelIndex===-1){
-
         console.warn("Section introuvable :",id);
         return;
-
     }
 
     if(slideMode && currentSlideSection){
@@ -2093,7 +2138,6 @@ function showSection(id,button){
             "active",
             "animationSection"
         );
-
     });
 
     /* RÉINITIALISER LES BOUTONS DU MENU */
@@ -2102,7 +2146,6 @@ function showSection(id,button){
 
         btn.classList.remove("btnActive");
         btn.removeAttribute("aria-pressed");
-
     });
 
     fermerTousLesMenus();
@@ -2134,16 +2177,12 @@ function showSection(id,button){
     /* ACTIVER LE BOUTON CORRESPONDANT */
 
     if(!button){
-
         button=document.querySelectorAll("nav button")[nouvelIndex];
-
     }
 
     if(button){
-
         button.classList.add("btnActive");
         button.setAttribute("aria-pressed","true");
-
     }
 
     window.scrollTo({
@@ -2156,7 +2195,6 @@ function showSection(id,button){
         actualiserAffichageSection();
 
     });
-
 }
 
 /* SECTION PRÉCÉDENTE / SUIVANTE */
@@ -2181,7 +2219,6 @@ function naviguerSection(direction){
     const boutonCorrespondant=boutonsMenu[nouvelIndex];
 
     showSection(nouvelId,boutonCorrespondant);
-
 }
 
 /* RETOUR AU MENU */
@@ -2207,7 +2244,6 @@ function retourMenu(){
             "active",
             "animationSection"
         );
-
     });
 
     document.getElementById("btnRetourMenu")
@@ -2237,11 +2273,8 @@ function retourMenu(){
                 top:Math.max(0,position),
                 behavior:"smooth"
             });
-
         }
-
     });
-
 }
 
 /* ==========================================
@@ -2283,15 +2316,12 @@ window.addEventListener("resize",function(){
                             currentSlides.length-1
                         )
                     );
-
                 }
-
             }
 
         }else if(slideMode){
 
             desactiverModeDiapositives(section);
-
         }
 
     },180);
@@ -2327,7 +2357,6 @@ document.addEventListener("keydown",function(event){
 
         event.preventDefault();
         naviguerDiapositive(1);
-
     }
 
     if(
@@ -2337,7 +2366,6 @@ document.addEventListener("keydown",function(event){
 
         event.preventDefault();
         naviguerDiapositive(-1);
-
     }
 
 });
@@ -2348,7 +2376,7 @@ document.addEventListener("keydown",function(event){
 
 document.addEventListener("DOMContentLoaded",function(){
 
-    /* Générer le quiz avant de mémoriser le contenu */
+    /* GÉNÉRER LE QUIZ AVANT DE MÉMORISER LE CONTENU */
 
     genererQuiz();
 
@@ -2367,7 +2395,6 @@ document.addEventListener("DOMContentLoaded",function(){
         );
 
         memoriserContenu(section);
-
     });
 
     document.getElementById("btnRetourMenu")
@@ -2387,5 +2414,3 @@ document.addEventListener("DOMContentLoaded",function(){
 
 </body>
 </html>
-
-
