@@ -4,129 +4,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IgnDay Comptabilité Générale - Autres éléments du compte de produits et de charges</title>
+<title>IgnDay - T5 Autres éléments du compte de produits et de charges</title>
 
 <style>
 *{box-sizing:border-box}
+
+html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
 
 body{
     font-family:Arial,sans-serif;
     margin:0;
     background:#f4f6f9;
     color:#1e293b;
+    padding-bottom:40px;
 }
 
-/* ===== EN-TÊTE IGN DAY ===== */
+/* EN-TÊTE */
+
 header{
     background:#2c3e50;
     color:white;
     text-align:center;
-    box-shadow:0 2px 10px #0003;
+    box-shadow:0 2px 8px #0002;
 }
 
 .brandbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:18px;
+    gap:8px;
     flex-wrap:wrap;
-    padding:12px 22px;
+    min-height:55px;
+    padding:10px 14px;
     background:linear-gradient(120deg,#0f172a,#0f766e);
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:7px;
     color:white;
     text-decoration:none;
     font-weight:bold;
-    font-size:19px;
+    font-size:15px;
 }
 
 .brand-logo{
     display:flex;
     align-items:center;
     justify-content:center;
-    width:44px;
-    height:44px;
-    border-radius:12px;
+    width:30px;
+    height:30px;
+    border-radius:7px;
     background:#00b894;
-    font-size:19px;
+    font-size:15px;
 }
+
+header h1{
+    padding:12px 8px;
+    margin:0;
+    font-size:40px;
+    line-height:1.4;
+}
+
+header h1 p{
+    margin:7px 0;
+    font-size:40px;
+    font-weight:bold;
+    line-height:1.4;
+}
+
+/* MENUS */
 
 .site-menu{
     display:flex;
     align-items:center;
     justify-content:center;
     flex-wrap:wrap;
-    gap:7px;
+    gap:3px;
 }
 
 .site-menu>a{
     display:block;
-    padding:10px 13px;
-    border-radius:6px;
+    padding:5px 8px;
+    border-radius:5px;
     color:white;
     text-decoration:none;
-    font-size:14px;
+    cursor:pointer;
+    font-size:12px;
 }
 
-.site-menu>a:hover{
-    background:#ffffff2b;
-}
+.site-menu>a:hover{background:#1D4ED8}
 
-header h1{
-    padding:18px 12px;
-    margin:0;
-    font-size:23px;
-    line-height:1.5;
-}
-
-/* ===== MENUS DÉROULANTS ===== */
 .dropdown{
     position:relative;
     display:inline-block;
 }
 
 .dropdown button{
-    padding:10px 14px;
+    padding:5px 8px;
     background:transparent;
     color:white;
     border:none;
     cursor:pointer;
-    font-size:14px;
-    border-radius:6px;
+    font-size:12px;
+    border-radius:5px;
 }
 
-.dropdown button:hover,
-.dropdown button[aria-expanded="true"]{
-    background:#ffffff2b;
-}
+.dropdown button:hover{background:#1D4ED8}
 
 .dropdown-content{
     display:none;
-    position:absolute;
-    top:100%;
+    position:fixed;
+    top:0;
     left:0;
     min-width:230px;
-    max-height:70vh;
+    max-width:calc(100vw - 16px);
+    max-height:calc(100vh - 16px);
     overflow-y:auto;
+    overflow-x:hidden;
+    overscroll-behavior:contain;
     background:white;
-    box-shadow:0 5px 15px #0003;
+    box-shadow:0 8px 25px rgba(0,0,0,.28);
     border-radius:7px;
-    z-index:1000;
+    z-index:99999;
     padding:6px;
 }
 
 .dropdown-content a{
     display:block;
-    padding:11px 14px;
+    padding:9px 12px;
     color:#1e293b;
     text-decoration:none;
     text-align:left;
-    font-size:14px;
+    font-size:13px;
     border-radius:5px;
+    line-height:1.4;
+    white-space:normal;
 }
 
 .dropdown-content a:hover{
@@ -134,94 +152,112 @@ header h1{
     color:white;
 }
 
-/* ===== NAVIGATION DES THÈMES ===== */
+/* NAVIGATION DES SECTIONS */
+
 nav{
     background:#34495e;
-    padding:10px;
+    padding:7px 10px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
     text-align:center;
 }
 
 nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
+    margin:0;
+    padding:10px 17px;
+    border:0;
     background:#00b894;
     color:white;
     cursor:pointer;
     border-radius:5px;
-    font-size:15px;
-    transition:.3s;
+    font-size:19px;
+    font-weight:bold;
+    transition:.25s;
+    line-height:1.2;
+    white-space:nowrap;
 }
 
 nav button:hover{
     background:#019875;
-    transform:translateY(-2px);
+    transform:translateY(-1px);
 }
 
 .btnActive{
     background:#0984e3!important;
-    transform:scale(1.04);
-    box-shadow:0 3px 10px #0003;
+    transform:scale(1.03);
+    box-shadow:0 2px 7px #0003;
 }
 
-/* ===== SECTIONS ===== */
+/* MASQUER HEADER ET NAV EN SECTION */
+
+body.section-open>header,
+body.section-open>nav{
+    display:none!important;
+}
+
+/* SECTIONS */
+
 section{
     display:none;
-    padding:30px;
-    margin:20px;
+    padding:25px;
+    margin:15px;
 }
 
-section.active{
-    display:block;
-}
+section.active{display:block}
 
 .animationSection{
-    animation:apparition .5s ease;
+    animation:apparition .4s ease;
     background:white;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px #0002;
+    border-left:6px solid #00b894;
+    border-radius:9px;
+    box-shadow:0 4px 12px #0002;
 }
 
 @keyframes apparition{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
+    from{opacity:0}
+    to{opacity:1}
 }
 
-/* ===== TITRES ET TEXTE ===== */
+body.section-open>section.active{
+    margin:0;
+    padding:4px 25px 25px;
+}
+
+body.section-open>section.active>h2,
+body.section-open>section.active>.definition-title{
+    margin-top:0;
+}
+
+/* CONTENU */
+
 h2{
     color:#2c3e50;
-    margin-top:25px;
+    margin-top:0;
     margin-bottom:15px;
     font-size:21px;
     line-height:1.5;
 }
 
 h3{
-    color:#0f766e;
-    margin-top:22px;
+    color:#00b894;
+    margin-top:20px;
     font-size:18px;
 }
 
-p{
-    line-height:1.7;
-}
+p,li{line-height:1.7}
 
-.compte-intro{
-    margin:15px 0;
-    padding:12px 15px;
-    background:#eef7f5;
-    border-left:5px solid #00b894;
-    border-radius:6px;
-    line-height:1.7;
-}
+ul,ol{line-height:1.7}
 
-/* ===== TABLEAUX ===== */
+/* TABLEAUX COMPTABLES */
+
 .table-wrapper{
     width:100%;
     max-width:100%;
     overflow-x:auto;
-    margin:15px 0 30px;
+    margin:15px 0 25px;
     -webkit-overflow-scrolling:touch;
 }
 
@@ -273,9 +309,7 @@ p{
     overflow-wrap:anywhere;
 }
 
-.journal-table .center{
-    text-align:center;
-}
+.journal-table .center{text-align:center}
 
 .journal-table tr:hover td{
     background:#f1f7ff;
@@ -286,32 +320,263 @@ p{
     color:white;
 }
 
-.example{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:13px 16px;
-    margin:22px 0 12px;
-    border-radius:7px;
-    font-weight:bold;
-    line-height:1.7;
-}
+/* MISE EN VALEUR */
 
 .highlight{
     background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-    line-height:1.9;
+    border-left:5px solid #00b894;
+    padding:13px;
+    margin-top:13px;
+    border-radius:7px;
+    line-height:1.7;
 }
 
-/* ===== PIED DE PAGE ===== */
-footer{
+.definition-title{
+    background:linear-gradient(120deg,#6d28d9,#a78bfa);
+    color:white;
+    padding:12px 15px;
+    border-radius:7px;
     text-align:center;
-    padding:18px;
+    font-size:21px;
+    font-weight:bold;
+    margin:12px 0;
+}
+
+.definition-box{
+    background:#fffaf2;
+    border:2px solid #e6a23c;
+    border-radius:8px;
+    padding:15px;
+    margin:12px 0;
+    font-weight:bold;
+}
+
+.example{
+    background:#e8fff7;
+    border-left:5px solid #00b894;
+    padding:13px;
+    margin:8px 0;
+    border-radius:7px;
+    line-height:1.7;
+}
+
+.compte-intro{
+    margin:15px 0;
+    padding:12px 15px;
+    background:#eef7f5;
+    border-left:5px solid #00b894;
+    border-radius:6px;
+    line-height:1.7;
+}
+
+/* BARRE DES DIAPOSITIVES */
+
+.slide-navigation{
+    display:none;
+    position:static;
+    width:auto;
+    height:auto;
+    min-height:0;
+    z-index:auto;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:0;
+    background:transparent;
+    color:white;
+    border:0;
+    font-size:10px;
+    flex-shrink:0;
+}
+
+.slide-navigation button{
+    border:0;
+    border-radius:3px;
+    padding:4px 7px;
+    background:#00b894;
+    color:white;
+    font-size:10px;
+    font-weight:bold;
+    line-height:1.2;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.slide-navigation button:hover:not(:disabled){
+    background:#0984e3;
+}
+
+.slide-navigation button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.slide-counter{
+    font-size:10px;
+    font-weight:bold;
+    white-space:nowrap;
+    text-align:center;
+}
+
+/* CONTENU DES DIAPOSITIVES */
+
+.content-slide{
+    display:none;
+    width:100%;
+    min-height:100px;
+    padding:2px 0 8px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+}
+
+.content-slide.active-slide{display:block}
+
+.slide-inner{
+    width:100%;
+    max-width:100%;
+    transform:none;
+    zoom:1!important;
+}
+
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+
+body.slides-mode .content-slide.title-only-slide{
+    display:none;
+    width:100%;
+    min-height:calc(100vh - 100px);
+    padding:0 15px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+body.slides-mode .content-slide.title-only-slide.active-slide{
+    display:flex;
+}
+
+body.slides-mode .content-slide.title-only-slide .definition-title{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    text-align:center;
+}
+
+/* MESURE DES GROUPES */
+
+.slide-measure{
+    position:fixed!important;
+    left:-100000px!important;
+    top:0!important;
+    display:block!important;
+    width:1000px;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    z-index:-1!important;
+}
+
+/* MODE DIAPOSITIVES */
+
+body.slides-mode{
+    padding-bottom:48px;
+}
+
+body.slides-mode>section.active{
+    display:block;
+    margin:0;
+    padding:4px 25px 8px;
+    border-radius:0;
+    box-shadow:none;
+    border-left:0;
+    min-height:calc(100vh - 48px);
+    animation:none;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+body.slides-mode .slide-navigation{
+    display:flex;
+}
+
+body.slides-mode .definition-title{
+    margin:3px 0 8px;
+    padding:8px 12px;
+    font-size:20px;
+}
+
+body.slides-mode h2{
+    margin-top:0;
+    margin-bottom:8px;
+}
+
+body.slides-mode h3{
+    margin-top:8px;
+    margin-bottom:6px;
+}
+
+body.slides-mode p,
+body.slides-mode li{
+    line-height:1.45;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+body.slides-mode ul,
+body.slides-mode ol{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+body.slides-mode .definition-box{
+    margin:6px 0;
+    padding:10px;
+}
+
+body.slides-mode .highlight{
+    margin:6px 0;
+    padding:9px;
+}
+
+body.slides-mode .example{
+    margin:6px 0;
+    padding:9px;
+}
+
+body.slides-mode table{margin-top:8px}
+
+body.slides-mode .journal-table td,
+body.slides-mode .journal-table th{
+    padding:6px 9px;
+}
+
+/* PIED DE PAGE */
+
+footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    min-height:38px;
+    height:auto;
+    z-index:2000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:5px;
+    padding:4px 10px;
+    margin:0;
     background:#2c3e50;
     color:white;
-    margin-top:20px;
+    border:1px solid #1e293b;
+    box-shadow:none;
+    font-size:11px;
+    line-height:1.2;
 }
 
 footer a{
@@ -319,133 +584,406 @@ footer a{
     text-decoration:none;
 }
 
-footer a:hover{
-    text-decoration:underline;
+footer>span{white-space:nowrap}
+
+.footer-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:5px;
+    margin-left:auto;
 }
 
-/* ===== TABLETTES ===== */
-@media(max-width:768px){
+.btnFooter{
+    display:none;
+    margin:0;
+    padding:4px 9px;
+    border:none;
+    border-radius:4px;
+    color:white;
+    font-size:11px;
+    line-height:1.2;
+    font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.2s;
+}
+
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+.btnFooter.visible{display:block}
+
+.btnFooter:hover:not(:disabled){
+    background:#00b894;
+    transform:translateY(-1px);
+}
+
+.btnFooter:disabled{
+    background:#64748b;
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:760px){
+
+    body{padding-bottom:48px}
+
     .brandbar{
         justify-content:center;
-        padding:12px;
+        padding:4px 6px;
+        gap:5px;
+    }
+
+    .brand{font-size:14px}
+
+    .brand-logo{
+        width:27px;
+        height:27px;
+        font-size:13px;
     }
 
     .site-menu{
         width:100%;
+        gap:2px;
     }
 
     .site-menu>a{
-        padding:9px;
+        padding:5px 6px;
+        font-size:11px;
     }
 
     .dropdown button{
-        padding:9px;
+        padding:5px 6px;
+        font-size:11px;
     }
 
-    .dropdown-content{
-        left:50%;
-        transform:translateX(-50%);
-        min-width:220px;
-    }
+    .dropdown-content{min-width:220px}
 
     header h1{
-        font-size:19px;
+        padding:5px 6px;
+        line-height:1.3;
+    }
+
+    header h1 p{
+        font-size:16px;
+        line-height:1.3;
+        margin:3px 0;
     }
 
     section{
-        padding:18px;
-        margin:12px;
+        padding:16px;
+        margin:10px;
+    }
+
+    body.section-open>section.active{
+        margin:0;
+        padding:4px 15px 18px;
+    }
+
+    nav{
+        padding:6px 5px;
+        gap:5px;
     }
 
     nav button{
-        padding:10px;
-        font-size:13px;
+        padding:6px 9px;
+        font-size:12px;
+        white-space:normal;
     }
+
+    .definition-title{
+        font-size:18px;
+        padding:11px;
+    }
+
+    .definition-box{padding:12px}
 
     .journal-table td,
     .journal-table th{
         padding:7px 4px;
         font-size:12px;
     }
-}
 
-/* ===== TÉLÉPHONES ===== */
-@media(max-width:480px){
-    section{
-        padding:10px;
-        margin:7px;
-        border-left-width:5px;
+    footer{
+        min-height:38px;
+        height:auto;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:4px;
+        padding:4px 5px;
+        font-size:9px;
     }
 
-    section h2{
+    footer>span{display:none}
+
+    .footer-actions{
+        width:auto;
+        justify-content:center;
+        gap:3px;
+        margin-left:0;
+    }
+
+    .btnFooter{
+        padding:4px 6px;
+        font-size:9px;
+    }
+
+    .slide-navigation{
+        gap:3px;
+        padding:0;
+    }
+
+    .slide-navigation button{
+        font-size:9px;
+        padding:4px 5px;
+    }
+
+    .slide-counter{font-size:9px}
+
+    body.slides-mode>section.active{
+        padding:4px 15px 8px;
+        min-height:calc(100vh - 48px);
+    }
+
+    body.slides-mode .definition-title{
+        font-size:17px;
+        padding:8px;
+    }
+
+    body.slides-mode .content-slide.title-only-slide{
+        min-height:calc(100vh - 115px);
+        padding:0 8px;
+    }
+}
+
+@media(max-width:420px){
+
+    .definition-title{font-size:16px}
+
+    header h1 p{font-size:14px}
+
+    .brandbar{padding:3px 5px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:10px;
+        padding:4px 5px;
+    }
+
+    section{
+        padding:12px;
+        margin:8px;
+    }
+
+    body.section-open>section.active{
+        margin:0;
+        padding:4px 12px 14px;
+    }
+
+    .journal-table td,
+    .journal-table th{
+        font-size:11px;
+        padding:6px 3px;
+    }
+
+    .journal-table .montant{
+        font-size:10px;
+    }
+
+    nav button{
+        padding:6px 7px;
+        font-size:11px;
+    }
+
+    footer{
+        padding:4px 3px;
+        gap:3px;
+    }
+
+    .btnFooter{
+        font-size:8px;
+        padding:4px 4px;
+    }
+
+    .footer-actions{gap:2px}
+
+    .slide-navigation{gap:2px}
+
+    .slide-navigation button{
+        font-size:8px;
+        padding:4px 3px;
+    }
+
+    .slide-counter{font-size:8px}
+}
+
+/* MODE DATASHOW */
+
+@media screen and (min-width:1200px) and (min-height:650px){
+
+    body{
+        font-size:18px;
+        line-height:1.6;
+        padding-bottom:40px;
+    }
+
+    .brandbar{padding:5px 18px}
+    .brand{font-size:17px}
+
+    .brand-logo{
+        width:32px;
+        height:32px;
+        font-size:15px;
+    }
+
+    header h1{padding:6px 8px}
+    header h1 p{font-size:21px}
+
+    .site-menu>a,
+    .dropdown button{
+        font-size:13px;
+        padding:6px 9px;
+    }
+
+    .dropdown-content{min-width:270px}
+
+    .dropdown-content a{
+        font-size:15px;
+        padding:11px 14px;
+    }
+
+    nav{
+        padding:8px 12px;
+        gap:9px;
+    }
+
+    nav button{
+        padding:9px 16px;
+        font-size:18px;
+        border-radius:6px;
+    }
+
+    section{
+        padding:30px 35px;
+        margin:18px 22px;
+    }
+
+    body.section-open>section.active{
+        margin:0;
+        padding:4px 35px 30px;
+    }
+
+    h2{
+        font-size:27px;
+        margin-bottom:18px;
+    }
+
+    h3{
+        font-size:21px;
+        margin-top:20px;
+    }
+
+    p,li{
+        font-size:18px;
+        line-height:1.7;
+    }
+
+    .definition-title{
+        font-size:23px;
+        padding:14px;
+    }
+
+    .definition-box{padding:17px}
+
+    .journal-table td,
+    .journal-table th{
+        padding:14px 17px;
         font-size:17px;
         line-height:1.5;
     }
 
-    section h3{
-        font-size:15px;
-    }
+    .example{padding:16px}
 
-    nav{
-        padding:7px;
-    }
-
-    nav button{
-        padding:9px 8px;
-        font-size:12px;
-        margin:3px;
-    }
-
-    .table-wrapper{
-        overflow-x:hidden;
-    }
-
-    .journal-table{
-        width:100%;
-        table-layout:fixed;
-    }
-
-    .journal-table td,
-    .journal-table th{
-        padding:5px 2px;
-        font-size:10px;
-        line-height:1.4;
-        overflow-wrap:anywhere;
-        word-break:normal;
-    }
-
-    .journal-table .date td{
+    footer{
+        min-height:38px;
+        height:auto;
         font-size:11px;
-        padding:8px 3px;
     }
 
-    .journal-table .montant{
-        text-align:center;
-        font-size:10px;
+    .btnFooter{
+        padding:4px 9px;
+        font-size:11px;
     }
 
-    .example,
-    .highlight,
-    .compte-intro{
-        padding:10px;
-        font-size:12px;
-        line-height:1.6;
+    body.slides-mode .definition-title{
+        font-size:21px;
+        padding:9px 12px;
+    }
+
+    body.slides-mode p,
+    body.slides-mode li{
+        font-size:18px;
+        line-height:1.45;
     }
 }
 
-@media(max-width:360px){
+/* GRAND ÉCRAN */
+
+@media screen and (min-width:1600px){
+
+    body{
+        font-size:19px;
+        padding-bottom:40px;
+    }
+
+    header h1{padding:6px 8px}
+    header h1 p{font-size:22px}
+
+    section{
+        max-width:1750px;
+        margin:22px auto;
+        padding:35px 45px;
+    }
+
+    body.section-open>section.active{
+        margin:0 auto;
+        padding:4px 45px 35px;
+    }
+
+    h2{font-size:30px}
+    h3{font-size:24px}
+
+    p,li{font-size:20px}
+
     .journal-table td,
     .journal-table th{
-        padding:4px 1px;
-        font-size:9px;
+        font-size:19px;
+        padding:17px 20px;
     }
 
-    .journal-table .montant{
-        font-size:9px;
+    nav button{
+        font-size:19px;
+        padding:10px 18px;
     }
 
-    header h1{
-        font-size:17px;
+    .definition-title{
+        font-size:25px;
+        padding:15px;
+    }
+
+    footer{
+        min-height:38px;
+        height:auto;
+    }
+
+    body.slides-mode p,
+    body.slides-mode li{
+        font-size:19px;
+        line-height:1.45;
     }
 }
 </style>
@@ -455,944 +993,1850 @@ footer a:hover{
 
 <header>
 
-<div class="brandbar">
+    <div class="brandbar">
 
-<a class="brand" href="index.html">
-    <span class="brand-logo">IF</span>
-    <span>IgnDay</span>
-</a>
+        <a class="brand" href="index.html">
+            <span class="brand-logo">IF</span>
+            <span>IgnDay</span>
+        </a>
 
-<div class="site-menu">
+        <div class="site-menu">
 
-<a href="index.html">Accueil</a>
+            <a href="index.html">Accueil</a>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-Modules ▼
-</button>
-<div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a>
-<a href="M2.html">M2 – Comptabilité analytique</a>
-<a href="M3.html">M3 – Analyse financière</a>
-<a href="M4.html">M4 – Fiscalité</a>
-<a href="M5.html">M5 – Mathématiques financières</a>
-<a href="M6.html">M6 – Statistiques</a>
-<a href="M7.html">M7 – Marketing</a>
-<a href="M8.html">M8 – Comptabilité approfondie</a>
-<a href="M9.html">M9 – Management</a>
-</div>
-</div>
+            
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-M1 - Comptabilité générale ▼
-</button>
-<div class="dropdown-content">
-<a href="P1M1.html">P1 – Concepts de base</a>
-<a href="P2M1.html">P2 – Opérations courantes</a>
-<a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
-</div>
-</div>
+            <div class="dropdown">
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+                    M1 - Comptabilité générale ▼
+                </button>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-P2 – Opérations courantes ▼
-</button>
-<div class="dropdown-content">
-<a href="C1P2M1.html">T – Résumés des thèmes</a>
-<a href="C2P2M1.html">F – Formulaires interactifs</a>
-<a href="C3P2M1.html">E – Exercices corrigés</a>
-</div>
-</div>
+                <div class="dropdown-content">
+                    <a href="P1M1.html">P1 – Concepts de base</a>
+                    <a href="P2M1.html">P2 – Opérations courantes</a>
+                    <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
+                </div>
+            </div>
 
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-T – Résumés des thèmes ▼
-</button>
-<div class="dropdown-content">
-<a href="T1C1P2M1.html">T1 - Facture « Doit » simple</a>
-<a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a>
-<a href="T3C1P2M1.html">T3 - Facture « Doit » comportant des majorations</a>
-<a href="T4C1P2M1.html">T4 - Facture « Avoir »</a>
-<a href="T5C1P2M1.html">T5 - Autres éléments du compte de produits et de charges</a>
-<a href="T6C1P2M1.html">T6 - Acquisition des immobilisations</a>
-<a href="T7C1P2M1.html">T7 - Règlements financiers</a>
-</div>
-</div>
+            <div class="dropdown">
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+                    P2 – Opérations courantes ▼
+                </button>
 
-<a href="C1P2M1.html">⬅ Retour</a>
+                <div class="dropdown-content">
+                    <a href="C1P2M1.html">T – Résumés des thèmes</a>
+                    <a href="C2P2M1.html">F – Formulaires interactifs</a>
+                    <a href="C3P2M1.html">E – Exercices corrigés</a>
+                </div>
+            </div>
 
-</div>
-</div>
+            <div class="dropdown">
+                <button type="button" onclick="toggleDropdown(this)" aria-expanded="false">
+                    T – Résumés des thèmes ▼
+                </button>
 
-<h1>
-<p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p>
-<p>T5 - L'enregistrement des autres éléments du compte de produits et de charges</p>
-</h1>
+                <div class="dropdown-content">
+                    <a href="T1C1P2M1.html">T1 - Facture « Doit » simple</a>
+                    <a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a>
+                    <a href="T3C1P2M1.html">T3 - Facture « Doit » comportant des majorations</a>
+                    <a href="T4C1P2M1.html">T4 - Facture « Avoir »</a>
+                    <a href="T5C1P2M1.html">T5 - Autres éléments du compte de produits et de charges</a>
+                    <a href="T6C1P2M1.html">T6 - Acquisition des immobilisations</a>
+                    <a href="T7C1P2M1.html">T7 - Règlements financiers</a>
+                </div>
+            </div>
+
+            <a href="C1P2M1.html">⬅ Retour</a>
+
+        </div>
+    </div>
+
+    <h1>
+        <p>M1 - Comptabilité générale &gt; P2 - Opérations courantes</p>
+        <p>Thème 5 - L'enregistrement des autres éléments du compte de produits et de charges</p>
+    </h1>
 
 </header>
 
+<!-- NAVIGATION DES SECTIONS -->
+
 <nav>
-<button class="btnActive" onclick="showSection('CE',this)">Charges d’exploitation 61</button>
-<button onclick="showSection('PE',this)">Produits d’exploitation 71</button>
-<button onclick="showSection('CF',this)">Charges financières 63</button>
-<button onclick="showSection('PF',this)">Produits financiers 73</button>
-<button onclick="showSection('CNC',this)">Charges non courantes 65</button>
-<button onclick="showSection('PNC',this)">Produits non courants 75</button>
+
+    <button onclick="showSection('CE',this)">
+        1- Charges et Produits d’exploitation
+    </button>
+
+    <button onclick="showSection('CF',this)">
+        2- Charges et Produits financiers
+    </button>
+
+    <button onclick="showSection('CNC',this)">
+        3- Charges et Produits non courants
+    </button>
+
 </nav>
 
-<!-- ====================================================== -->
-<!-- SECTION 1 : CHARGES D'EXPLOITATION -->
-<!-- ====================================================== -->
 
-<section id="CE" class="active animationSection">
+<!-- SECTION 1 : CHARGES ET PRODUITS D'EXPLOITATION -->
 
-<h2>► Enregistrement comptable des charges d’exploitation</h2>
+<section id="CE">
 
-<p class="compte-intro">
-611X et 612X sont déjà traités dans les opérations d’achat et de vente.
-</p>
+    <h2 class="definition-title">
+        1- Charges et Produits d’exploitation
+    </h2>
 
-<div class="table-wrapper">
-<table class="journal-table">
+    <h2>A- Enregistrement comptable des charges d’exploitation</h2>
 
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
+    <div class="definition-box">
+        611X et 612X sont déjà traités dans les opérations d’achat et de vente.
+    </div>
 
-<tr>
-<td class="debit center">613X<br>614X<br>616X<br>617X<br>618X</td>
-<td></td>
-<td class="debit">Autres charges externes (613) ou (614) et/ou<br>
-Impôts et taxes et/ou<br>
-Charges de personnel et/ou<br>
-Autres charges d'exploitation</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">3455</td>
-<td></td>
-<td class="debit">Etat - TVA récupérable (En cas de majoration de TVA)</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">5141<br>5161<br>4411</td>
-<td></td>
-<td class="credit">Banques et/ou<br>Caisses et/ou<br>Fournisseurs...</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td></tr>
+            <tr>
+                <td class="debit center">613X<br>614X<br>616X<br>617X<br>618X</td>
+                <td></td>
+                <td class="debit">
+                    Autres charges externes/ <br>
+                    Impôts et taxes/ <br>
+                    Charges de personnel/ <br>
+                    Autres charges d'exploitation
+                </td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Facture N°.....................</td>
-</tr>
+            <tr>
+                <td class="debit center">3455</td>
+                <td></td>
+                <td class="debit">Etat - TVA récupérable (En cas de majoration de TVA)</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
 
-</table>
-</div>
+            <tr>
+                <td></td>
+                <td class="credit center">5141<br>5161<br>4411</td>
+                <td></td>
+                <td class="credit">Banques et/ou<br>Caisses et/ou<br>Fournisseurs...</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
 
-<div class="example">
-► Exemple 1 : Règlement du loyer de 5.000,00 DH par chèque
-</div>
+            <tr class="date">
+                <td colspan="6">Facture N°.....................</td>
+            </tr>
 
-<div class="table-wrapper">
-<table class="journal-table">
+        </table>
+    </div>
 
-<tr class="date">
-<td colspan="6">30/04/2026</td>
-</tr>
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple 1 : Règlement du loyer de 5.000,00 DH par chèque
+        </div>
+    </div>
 
-<tr>
-<td class="debit center">6131</td>
-<td></td>
-<td class="debit">Locations et charges locatives</td>
-<td></td>
-<td class="montant">5.000,00</td>
-<td class="montant">—</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td></td>
-<td class="credit center">5141</td>
-<td></td>
-<td class="credit">Banques</td>
-<td class="montant">—</td>
-<td class="montant">5.000,00</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">30/04/2026</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Chèque N°T720001</td>
-</tr>
+            <tr>
+                <td class="debit center">6131</td>
+                <td></td>
+                <td class="debit">Locations et charges locatives</td>
+                <td></td>
+                <td class="montant">5.000,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-</table>
-</div>
+            <tr>
+                <td></td>
+                <td class="credit center">5141</td>
+                <td></td>
+                <td class="credit">Banques</td>
+                <td class="montant">—</td>
+                <td class="montant">5.000,00</td>
+            </tr>
 
-<div class="example">
-► Exemple 2 : Paiement d’une annonce publicitaire de 3.500,00 DH HT par chèque (TVA 20%)
-</div>
+            <tr class="date">
+                <td colspan="6">Chèque N°T720001</td>
+            </tr>
 
-<div class="table-wrapper">
-<table class="journal-table">
+        </table>
+    </div>
 
-<tr class="date">
-<td colspan="6">02/05/2026</td>
-</tr>
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple 2 : Paiement d’une annonce publicitaire de 3.500,00 DH HT par chèque (TVA 20%)
+        </div>
+    </div>
 
-<tr>
-<td class="debit center">6144</td>
-<td></td>
-<td class="debit">Publicité, publications et relations publiques</td>
-<td></td>
-<td class="montant">3.500,00</td>
-<td class="montant">—</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">3455</td>
-<td></td>
-<td class="debit">Etat - TVA récupérable</td>
-<td></td>
-<td class="montant">700,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">02/05/2026</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">5141</td>
-<td></td>
-<td class="credit">Banques</td>
-<td class="montant">—</td>
-<td class="montant">4.200,00</td>
-</tr>
+            <tr>
+                <td class="debit center">6144</td>
+                <td></td>
+                <td class="debit">Publicité, publications et relations publiques</td>
+                <td></td>
+                <td class="montant">3.500,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Facture N°50-2026</td>
-</tr>
+            <tr>
+                <td class="debit center">3455</td>
+                <td></td>
+                <td class="debit">Etat - TVA récupérable</td>
+                <td></td>
+                <td class="montant">700,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-</table>
-</div>
+            <tr>
+                <td></td>
+                <td class="credit center">5141</td>
+                <td></td>
+                <td class="credit">Banques</td>
+                <td class="montant">—</td>
+                <td class="montant">4.200,00</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Facture N°50-2026</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <h2>B- Enregistrement comptable des produits d’exploitation</h2>
+
+    <div class="definition-box">
+        711X et 712X sont déjà traités dans les opérations d’achat et de vente.
+    </div>
+
+    <h3>714X – Immobilisations produites par l’entreprise pour elle-même</h3>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">2XXX</td>
+                <td></td>
+                <td class="debit">Compte de l’immobilisation</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">714X</td>
+                <td></td>
+                <td class="credit">Immobilisations produites par l’entreprise pour elle-même</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">4455</td>
+                <td></td>
+                <td class="credit">Etat, TVA facturée</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Immobilisation ...... livrée à soi-même</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <h3>716X – Subventions d’exploitation</h3>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">716X</td>
+                <td></td>
+                <td class="credit">Subventions d’exploitation</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">4455</td>
+                <td></td>
+                <td class="credit">Etat, TVA facturée</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Avis de crédit N°.....................</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="highlight">
+        <strong>718X – Autres produits d’exploitation :</strong>
+        à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
+    </div>
+
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple : Réception jetons de présence de 30.000,00
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">21/04/2026</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">30.000,00</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">7181</td>
+                <td></td>
+                <td class="credit">Jetons de présence reçus</td>
+                <td class="montant">—</td>
+                <td class="montant">30.000,00</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Avis de crédit N°08-2026</td>
+            </tr>
+
+        </table>
+    </div>
 
 </section>
 
-<!-- ====================================================== -->
-<!-- SECTION 2 : PRODUITS D'EXPLOITATION -->
-<!-- ====================================================== -->
 
-<section id="PE">
-
-<h2>► Enregistrement comptable des produits d’exploitation</h2>
-
-<p class="compte-intro">
-711X et 712X sont déjà traités dans les opérations d’achat et de vente.
-</p>
-
-<h3>714X – Immobilisations produites par l’entreprise pour elle-même</h3>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
-
-<tr>
-<td class="debit center">2XXX</td>
-<td></td>
-<td class="debit">Compte de l’immobilisation</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">714X</td>
-<td></td>
-<td class="credit">Immobilisations produites par l’entreprise pour elle-même</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">4455</td>
-<td></td>
-<td class="credit">Etat, TVA facturée</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Immobilisation ...... livrée à soi-même</td>
-</tr>
-
-</table>
-</div>
-
-<h3>716X – Subventions d’exploitation</h3>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
-
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">716X</td>
-<td></td>
-<td class="credit">Subventions d’exploitation</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">4455</td>
-<td></td>
-<td class="credit">Etat, TVA facturée</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Avis de crédit N°.....................</td>
-</tr>
-
-</table>
-</div>
-
-<div class="highlight">
-<strong>718X – Autres produits d’exploitation :</strong>
-à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
-</div>
-
-<div class="example">
-► Exemple : Réception jetons de présence de 30.000,00
-</div>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">21/04/2026</td>
-</tr>
-
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">30.000,00</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">7181</td>
-<td></td>
-<td class="credit">Jetons de présence reçus</td>
-<td class="montant">—</td>
-<td class="montant">30.000,00</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Avis de crédit N°08-2026</td>
-</tr>
-
-</table>
-</div>
-
-</section>
-
-<!-- ====================================================== -->
-<!-- SECTION 3 : CHARGES FINANCIÈRES -->
-<!-- ====================================================== -->
+<!-- SECTION 2 : CHARGES ET PRODUITS FINANCIERS -->
 
 <section id="CF">
 
-<h2>► Enregistrement comptable des charges financières</h2>
+    <h2 class="definition-title">
+        2- Charges et Produits financiers
+    </h2>
 
-<h3>631X – Charges d’intérêts</h3>
+    <h2>A- Enregistrement comptable des charges financières</h2>
 
-<div class="table-wrapper">
-<table class="journal-table">
+    <h3>631X – Charges d’intérêts</h3>
 
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">631X</td>
-<td></td>
-<td class="debit">Charges d’intérêts</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
 
-<tr>
-<td class="debit center">3455</td>
-<td></td>
-<td class="debit">Etat - TVA récupérable</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
+            <tr>
+                <td class="debit center">631X</td>
+                <td></td>
+                <td class="debit">Charges d’intérêts</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">5141</td>
-<td></td>
-<td class="credit">Banques</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
+            <tr>
+                <td class="debit center">3455</td>
+                <td></td>
+                <td class="debit">Etat - TVA récupérable</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Avis de débit N°.....................</td>
-</tr>
+            <tr>
+                <td></td>
+                <td class="credit center">5141</td>
+                <td></td>
+                <td class="credit">Banques</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
 
-</table>
-</div>
+            <tr class="date">
+                <td colspan="6">Avis de débit N°.....................</td>
+            </tr>
 
-<h3>633X – Pertes de change</h3>
+        </table>
+    </div>
 
-<div class="table-wrapper">
-<table class="journal-table">
+    <h3>633X – Pertes de change</h3>
 
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">633X</td>
-<td></td>
-<td class="debit">Pertes de change</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
 
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
+            <tr>
+                <td class="debit center">633X</td>
+                <td></td>
+                <td class="debit">Pertes de change</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">3421</td>
-<td></td>
-<td class="credit">Clients</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Avis de crédit N°.....................</td>
-</tr>
+            <tr>
+                <td></td>
+                <td class="credit center">3421</td>
+                <td></td>
+                <td class="credit">Clients</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
 
-</table>
-</div>
+            <tr class="date">
+                <td colspan="6">Avis de crédit N°.....................</td>
+            </tr>
 
-<div class="highlight">
-<strong>618X – Autres charges financières :</strong>
-à débiter et à créditer en contrepartie le(s) compte(s) adéquat(s).
-</div>
+        </table>
+    </div>
 
-<div class="example">
-► Exemple 1 : Réception d’un avis de débit relatif au règlement d’une annuité de crédit (Principal 15 000 DH et intérêts 1 050 DH HT, TVA 10%)
-</div>
+    <div class="definition-box">
+        <strong>618X – Autres charges financières :</strong>
+        à débiter et à créditer en contrepartie le(s) compte(s) adéquat(s).
+    </div>
 
-<div class="table-wrapper">
-<table class="journal-table">
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple 1 : Réception d’un avis de débit relatif au règlement d’une annuité de crédit (Principal 15 000 DH et intérêts 1 050 DH HT, TVA 10%)
+        </div>
+    </div>
 
-<tr class="date">
-<td colspan="6">01/05/2026</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">6311</td>
-<td></td>
-<td class="debit">Intérêts des emprunts et dettes</td>
-<td></td>
-<td class="montant">1.050,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">01/05/2026</td>
+            </tr>
 
-<tr>
-<td class="debit center">3455</td>
-<td></td>
-<td class="debit">Etat - TVA récupérable</td>
-<td></td>
-<td class="montant">105,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr>
+                <td class="debit center">6311</td>
+                <td></td>
+                <td class="debit">Intérêts des emprunts et dettes</td>
+                <td></td>
+                <td class="montant">1.050,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr>
-<td class="debit center">1481</td>
-<td></td>
-<td class="debit">Emprunts auprès des établissements de crédit</td>
-<td></td>
-<td class="montant">15.000,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr>
+                <td class="debit center">3455</td>
+                <td></td>
+                <td class="debit">Etat - TVA récupérable</td>
+                <td></td>
+                <td class="montant">105,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">5141</td>
-<td></td>
-<td class="credit">Banques</td>
-<td class="montant">—</td>
-<td class="montant">16.155,00</td>
-</tr>
+            <tr>
+                <td class="debit center">1481</td>
+                <td></td>
+                <td class="debit">Emprunts auprès des établissements de crédit</td>
+                <td></td>
+                <td class="montant">15.000,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Avis de débit 03-2026</td>
-</tr>
+            <tr>
+                <td></td>
+                <td class="credit center">5141</td>
+                <td></td>
+                <td class="credit">Banques</td>
+                <td class="montant">—</td>
+                <td class="montant">16.155,00</td>
+            </tr>
 
-</table>
-</div>
+            <tr class="date">
+                <td colspan="6">Avis de débit 03-2026</td>
+            </tr>
 
-<div class="example">
-► Exemple 2 : Ventes de marchandises à l’étranger à crédit en date du 20/04/2026 (10 000 Euro / 1 Euro = 10 DH). Le 03/05/2026, réception du virement (1 Euro = 9 DH).
-</div>
+        </table>
+    </div>
 
-<div class="table-wrapper">
-<table class="journal-table">
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple 2 : Ventes de marchandises à l’étranger à crédit en date du 20/04/2026 (10 000 Euro / 1 Euro = 10 DH). Le 03/05/2026, réception du virement (1 Euro = 9 DH).
+        </div>
+    </div>
 
-<tr class="date">
-<td colspan="6">03/05/2026</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">6331</td>
-<td></td>
-<td class="debit">Pertes de change propres à l’exercice</td>
-<td></td>
-<td class="montant">10.000,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">03/05/2026</td>
+            </tr>
 
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">90.000,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr>
+                <td class="debit center">6331</td>
+                <td></td>
+                <td class="debit">Pertes de change propres à l’exercice</td>
+                <td></td>
+                <td class="montant">10.000,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">3421</td>
-<td></td>
-<td class="credit">Clients</td>
-<td class="montant">—</td>
-<td class="montant">100.000,00</td>
-</tr>
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">90.000,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Avis de crédit N°12-2026</td>
-</tr>
+            <tr>
+                <td></td>
+                <td class="credit center">3421</td>
+                <td></td>
+                <td class="credit">Clients</td>
+                <td class="montant">—</td>
+                <td class="montant">100.000,00</td>
+            </tr>
 
-</table>
-</div>
+            <tr class="date">
+                <td colspan="6">Avis de crédit N°12-2026</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <h2>B- Enregistrement comptable des produits financiers</h2>
+
+    <h3>732X – Produits des titres de participation et des autres titres immobilisés</h3>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">732X</td>
+                <td></td>
+                <td class="credit">Produits des titres de participation et des autres titres immobilisés</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Avis de crédit N° ......</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <h3>733X – Gains de change</h3>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">Date opération (XX/XX/XXXX)</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">Montant</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">733X</td>
+                <td></td>
+                <td class="credit">Gains de change</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">3421</td>
+                <td></td>
+                <td class="credit">Clients</td>
+                <td class="montant">—</td>
+                <td class="montant">Montant</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Avis de crédit N° ......</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="definition-box">
+        <strong>738X – Autres produits financiers :</strong>
+        à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
+    </div>
+
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple 1 : Ventes de marchandises à l’étranger à crédit en date du 25/04/2026 (10 000 Euro / 1 Euro = 10 DH). Le 05/05/2026, réception du virement (1 Euro = 11 DH).
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">05/05/2026</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">110.000,00</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">7331</td>
+                <td></td>
+                <td class="credit">Gains de change propres à l’exercice</td>
+                <td class="montant">—</td>
+                <td class="montant">10.000,00</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">3421</td>
+                <td></td>
+                <td class="credit">Clients</td>
+                <td class="montant">—</td>
+                <td class="montant">100.000,00</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Avis de crédit N°15-2026</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple 2 : Réception d’un avis de crédit relatif au remboursement d’une annuité sur un prêt accordé à un salarié (Principal 1 500 DH, intérêts 75 DH, TVA 10%).
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">15/05/2026</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">5141</td>
+                <td></td>
+                <td class="debit">Banques</td>
+                <td></td>
+                <td class="montant">1.582,50</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">7381</td>
+                <td></td>
+                <td class="credit">Intérêts et produits assimilés</td>
+                <td class="montant">—</td>
+                <td class="montant">75,00</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">4455</td>
+                <td></td>
+                <td class="credit">Etat, TVA facturée</td>
+                <td class="montant">—</td>
+                <td class="montant">7,50</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">2441</td>
+                <td></td>
+                <td class="credit">Prêts au personnel</td>
+                <td class="montant">—</td>
+                <td class="montant">1.500,00</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Avis de crédit N°17-2026</td>
+            </tr>
+
+        </table>
+    </div>
 
 </section>
 
-<!-- ====================================================== -->
-<!-- SECTION 4 : PRODUITS FINANCIERS -->
-<!-- ====================================================== -->
 
-<section id="PF">
-
-<h2>► Enregistrement comptable des produits financiers</h2>
-
-<h3>732X – Produits des titres de participation et des autres titres immobilisés</h3>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
-
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">732X</td>
-<td></td>
-<td class="credit">Produits des titres de participation et des autres titres immobilisés</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Avis de crédit N° ......</td>
-</tr>
-
-</table>
-</div>
-
-<h3>733X – Gains de change</h3>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">Date opération (XX/XX/XXXX)</td>
-</tr>
-
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">733X</td>
-<td></td>
-<td class="credit">Gains de change</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">3421</td>
-<td></td>
-<td class="credit">Clients</td>
-<td class="montant">—</td>
-<td class="montant">Montant</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Avis de crédit N° ......</td>
-</tr>
-
-</table>
-</div>
-
-<div class="highlight">
-<strong>738X – Autres produits financiers :</strong>
-à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
-</div>
-
-<div class="example">
-► Exemple 1 : Ventes de marchandises à l’étranger à crédit en date du 25/04/2026 (10 000 Euro / 1 Euro = 10 DH). Le 05/05/2026, réception du virement (1 Euro = 11 DH).
-</div>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">05/05/2026</td>
-</tr>
-
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">110.000,00</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">7331</td>
-<td></td>
-<td class="credit">Gains de change propres à l’exercice</td>
-<td class="montant">—</td>
-<td class="montant">10.000,00</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">3421</td>
-<td></td>
-<td class="credit">Clients</td>
-<td class="montant">—</td>
-<td class="montant">100.000,00</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Avis de crédit N°15-2026</td>
-</tr>
-
-</table>
-</div>
-
-<div class="example">
-► Exemple 2 : Réception d’un avis de crédit relatif au remboursement d’une annuité sur un prêt accordé à un salarié (Principal 1 500 DH, intérêts 75 DH, TVA 10%).
-</div>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">15/05/2026</td>
-</tr>
-
-<tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">1.582,50</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">7381</td>
-<td></td>
-<td class="credit">Intérêts et produits assimilés</td>
-<td class="montant">—</td>
-<td class="montant">75,00</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">4455</td>
-<td></td>
-<td class="credit">Etat, TVA facturée</td>
-<td class="montant">—</td>
-<td class="montant">7,50</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">2441</td>
-<td></td>
-<td class="credit">Prêts au personnel</td>
-<td class="montant">—</td>
-<td class="montant">1.500,00</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Avis de crédit N°17-2026</td>
-</tr>
-
-</table>
-</div>
-
-</section>
-
-<!-- ====================================================== -->
-<!-- SECTION 5 : CHARGES NON COURANTES -->
-<!-- ====================================================== -->
+<!-- SECTION 3 : CHARGES ET PRODUITS NON COURANTS -->
 
 <section id="CNC">
 
-<h2>► Enregistrement comptable des charges non courantes</h2>
+    <h2 class="definition-title">
+        3- Charges et Produits non courants
+    </h2>
 
-<div class="highlight">
-<strong>65XX :</strong> compte de charge non courante à débiter et à créditer en contrepartie le(s) compte(s) adéquat(s).
-</div>
+    <h2>A- Enregistrement comptable des charges non courantes</h2>
 
-<div class="example">
-► Exemple : Un groupe accorde par virement bancaire une subvention à une de ses filiales.
-</div>
+    <div class="definition-box">
+        <strong>65XX :</strong>
+        compte de charge non courante à débiter et à créditer en contrepartie le(s) compte(s) adéquat(s).
+    </div>
 
-<div class="table-wrapper">
-<table class="journal-table">
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple : Un groupe accorde par virement bancaire une subvention à une de ses filiales.
+        </div>
+    </div>
 
-<tr class="date">
-<td colspan="6">07/05/2026</td>
-</tr>
+    <div class="table-wrapper">
+        <table class="journal-table">
 
-<tr>
-<td class="debit center">6561</td>
-<td></td>
-<td class="debit">Subventions accordées de l’exercice</td>
-<td></td>
-<td class="montant">200.000,00</td>
-<td class="montant">—</td>
-</tr>
+            <tr class="date">
+                <td colspan="6">07/05/2026</td>
+            </tr>
 
-<tr>
-<td></td>
-<td class="credit center">5141</td>
-<td></td>
-<td class="credit">Banques</td>
-<td class="montant">—</td>
-<td class="montant">200.000,00</td>
-</tr>
+            <tr>
+                <td class="debit center">6561</td>
+                <td></td>
+                <td class="debit">Subventions accordées de l’exercice</td>
+                <td></td>
+                <td class="montant">200.000,00</td>
+                <td class="montant">—</td>
+            </tr>
 
-<tr class="date">
-<td colspan="6">Virement N°123565</td>
-</tr>
+            <tr>
+                <td></td>
+                <td class="credit center">5141</td>
+                <td></td>
+                <td class="credit">Banques</td>
+                <td class="montant">—</td>
+                <td class="montant">200.000,00</td>
+            </tr>
 
-</table>
-</div>
+            <tr class="date">
+                <td colspan="6">Virement N°123565</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <h2>B- Enregistrement comptable des produits non courants</h2>
+
+    <div class="definition-box">
+        <strong>75XX :</strong>
+        compte de produits non courants à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
+    </div>
+
+    <div class="definition-box">
+        <div class="example">
+            ► Exemple : Cession à crédit sur 02 mois d’un matériel (50.000,00 DH / TVA 20%).
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="journal-table">
+
+            <tr class="date">
+                <td colspan="6">10/05/2026</td>
+            </tr>
+
+            <tr>
+                <td class="debit center">3481</td>
+                <td></td>
+                <td class="debit">Créances sur cessions d'immobilisations</td>
+                <td></td>
+                <td class="montant">60.000,00</td>
+                <td class="montant">—</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">7513</td>
+                <td></td>
+                <td class="credit">Produits des cessions des immobilisations corporelles</td>
+                <td class="montant">—</td>
+                <td class="montant">50.000,00</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="credit center">4455</td>
+                <td></td>
+                <td class="credit">Etat, TVA facturée</td>
+                <td class="montant">—</td>
+                <td class="montant">10.000,00</td>
+            </tr>
+
+            <tr class="date">
+                <td colspan="6">Facture N°25-2026</td>
+            </tr>
+
+        </table>
+    </div>
 
 </section>
 
-<!-- ====================================================== -->
-<!-- SECTION 6 : PRODUITS NON COURANTS -->
-<!-- ====================================================== -->
 
-<section id="PNC">
-
-<h2>► Enregistrement comptable des produits non courants</h2>
-
-<div class="highlight">
-<strong>75XX :</strong> compte de produits non courants à créditer et à débiter en contrepartie le(s) compte(s) adéquat(s).
-</div>
-
-<div class="example">
-► Exemple : Cession à crédit sur 02 mois d’un matériel (50.000,00 DH / TVA 20%).
-</div>
-
-<div class="table-wrapper">
-<table class="journal-table">
-
-<tr class="date">
-<td colspan="6">10/05/2026</td>
-</tr>
-
-<tr>
-<td class="debit center">3481</td>
-<td></td>
-<td class="debit">Créances sur cessions d'immobilisations</td>
-<td></td>
-<td class="montant">60.000,00</td>
-<td class="montant">—</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">7513</td>
-<td></td>
-<td class="credit">Produits des cessions des immobilisations corporelles</td>
-<td class="montant">—</td>
-<td class="montant">50.000,00</td>
-</tr>
-
-<tr>
-<td></td>
-<td class="credit center">4455</td>
-<td></td>
-<td class="credit">Etat, TVA facturée</td>
-<td class="montant">—</td>
-<td class="montant">10.000,00</td>
-</tr>
-
-<tr class="date">
-<td colspan="6">Facture N°25-2026</td>
-</tr>
-
-</table>
-</div>
-
-</section>
+<!-- PIED DE PAGE AVEC NAVIGATION DES DIAPOSITIVES -->
 
 <footer>
-Formation en Comptabilité Générale
+
+    <div class="slide-navigation" id="slideNavigation">
+
+        <button type="button" id="btnDiapoPrecedente">
+            ← Diapo précédente
+        </button>
+
+        <span class="slide-counter" id="compteurDiapo">
+            1 / 1
+        </span>
+
+        <button type="button" id="btnDiapoSuivante">
+            Diapo suivante →
+        </button>
+
+    </div>
+
+    <div class="footer-actions">
+
+        <button
+            type="button"
+            class="btnFooter btnPrecedent"
+            id="btnSectionPrecedente"
+            onclick="naviguerSection(-1)">
+            ← Section précédente
+        </button>
+
+        <button
+            type="button"
+            class="btnFooter btnSuivant"
+            id="btnSectionSuivante"
+            onclick="naviguerSection(1)">
+            Section suivante →
+        </button>
+
+        <button
+            type="button"
+            class="btnFooter btnRetourMenu"
+            id="btnRetourMenu"
+            onclick="retourMenu()">
+            ↑ Retour au menu
+        </button>
+
+    </div>
+
 </footer>
 
+
 <script>
-/* ===== MENUS DÉROULANTS ===== */
-function toggleDropdown(button){
 
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
+/* ==========================================
+   MENUS DÉROULANTS
+========================================== */
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+function positionDropdown(button,menu){
 
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
+    const rect=button.getBoundingClientRect();
+    const marge=8;
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
-    });
+    menu.style.display="block";
+    menu.style.position="fixed";
+    menu.style.maxWidth=(window.innerWidth-16)+"px";
+    menu.style.maxHeight=(window.innerHeight-16)+"px";
+    menu.style.top="0";
+    menu.style.bottom="auto";
 
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
-}
+    const hauteurMenu=menu.scrollHeight;
+    const espaceBas=window.innerHeight-rect.bottom-marge;
+    const espaceHaut=rect.top-marge;
 
-/* Fermer les menus en cliquant à l'extérieur */
-document.addEventListener("click",function(event){
+    const ouvrirEnBas=
+        hauteurMenu<=espaceBas || espaceBas>=espaceHaut;
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+    let hauteurDisponible;
 
-        if(!dropdown.contains(event.target)){
+    if(ouvrirEnBas){
 
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
+        menu.style.top=(rect.bottom+4)+"px";
+        menu.style.bottom="auto";
+        hauteurDisponible=espaceBas-4;
 
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
-        }
-    });
-});
+    }else{
 
-/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
-function showSection(id,button){
-
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
-
-    const current=document.getElementById(id);
-
-    if(current){
-        current.classList.add("active","animationSection");
+        menu.style.bottom=(window.innerHeight-rect.top+4)+"px";
+        menu.style.top="auto";
+        hauteurDisponible=espaceHaut-4;
     }
 
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
+    menu.style.maxHeight=Math.max(100,hauteurDisponible)+"px";
+    menu.style.width="auto";
+
+    const largeur=Math.min(
+        Math.max(menu.offsetWidth,230),
+        window.innerWidth-16
+    );
+
+    menu.style.width=largeur+"px";
+
+    let positionGauche=rect.left;
+
+    if(positionGauche+largeur>window.innerWidth-marge){
+        positionGauche=window.innerWidth-largeur-marge;
+    }
+
+    if(positionGauche<marge){
+        positionGauche=marge;
+    }
+
+    menu.style.left=positionGauche+"px";
+}
+
+function toggleDropdown(button){
+
+    const currentMenu=
+        button.parentElement.querySelector(".dropdown-content");
+
+    const isOpen=currentMenu.style.display==="block";
+
+    fermerTousLesMenus();
+
+    if(!isOpen){
+        positionDropdown(button,currentMenu);
+        button.setAttribute("aria-expanded","true");
+    }
+}
+
+function fermerTousLesMenus(){
+
+    document.querySelectorAll(".dropdown-content").forEach(menu=>{
+        menu.style.display="none";
+        menu.style.top="auto";
+        menu.style.bottom="auto";
     });
+
+    document.querySelectorAll(".dropdown button").forEach(button=>{
+        button.setAttribute("aria-expanded","false");
+    });
+}
+
+document.addEventListener("click",function(event){
+
+    if(!event.target.closest(".dropdown")){
+        fermerTousLesMenus();
+    }
+});
+
+function repositionnerMenus(){
+
+    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+
+        const button=dropdown.querySelector("button");
+        const menu=dropdown.querySelector(".dropdown-content");
+
+        if(button && menu && menu.style.display==="block"){
+            positionDropdown(button,menu);
+        }
+    });
+}
+
+window.addEventListener("resize",repositionnerMenus);
+window.addEventListener("scroll",repositionnerMenus,true);
+
+
+/* ==========================================
+   MODE DIAPOSITIVES AUTOMATIQUES
+========================================== */
+
+function zoomImportant(){
+
+    return (
+        window.screen.width>=1000 &&
+        window.innerWidth<=window.screen.width*0.62
+    );
+}
+
+let currentSlides=[];
+let currentSlideIndex=0;
+let currentSlideSection=null;
+let slideMode=false;
+let resizeTimer=null;
+
+const slideNavigation=document.getElementById("slideNavigation");
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+const compteurDiapo=document.getElementById("compteurDiapo");
+
+/* MÉMORISER LE CONTENU ORIGINAL */
+
+const originalSectionContent=new Map();
+
+function memoriserContenu(section){
+
+    if(!originalSectionContent.has(section.id)){
+
+        originalSectionContent.set(
+            section.id,
+            Array.from(section.childNodes)
+        );
+    }
+}
+
+function restaurerContenuOriginal(section){
+
+    if(!section || !originalSectionContent.has(section.id)){
+        return;
+    }
+
+    const contenuOriginal=originalSectionContent.get(section.id);
+
+    section.replaceChildren(...contenuOriginal);
+}
+
+/* HAUTEUR DISPONIBLE */
+
+function hauteurDisponibleDiapo(){
+
+    const hauteurFooter=document.querySelector("footer")?.offsetHeight || 38;
+
+    return Math.max(
+        180,
+        window.innerHeight-hauteurFooter-35
+    );
+}
+
+/* IDENTIFIER LES TITRES */
+
+function estTitreContenu(node){
+
+    if(node.nodeType!==Node.ELEMENT_NODE){
+        return false;
+    }
+
+    return node.matches(
+        "h2,h3,h4,.definition-title,.sous-titre,.table-title"
+    );
+}
+
+/* CONSTRUIRE LES GROUPES */
+
+function construireGroupes(nodes){
+
+    const groupes=[];
+    let groupeActuel=[];
+
+    nodes.forEach(node=>{
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return;
+        }
+
+        if(estTitreContenu(node) && groupeActuel.length){
+
+            groupes.push(groupeActuel);
+            groupeActuel=[];
+        }
+
+        groupeActuel.push(node);
+    });
+
+    if(groupeActuel.length){
+        groupes.push(groupeActuel);
+    }
+
+    return groupes;
+}
+
+/* CRÉER UNE DIAPOSITIVE */
+
+function creerSlide(section){
+
+    const slide=document.createElement("div");
+
+    slide.className="content-slide";
+
+    section.appendChild(slide);
+
+    currentSlides.push(slide);
+
+    return slide;
+}
+
+/* MESURER UN GROUPE DE CONTENU */
+
+function mesurerGroupe(groupe,largeur,section){
+
+    const mesure=document.createElement("div");
+
+    mesure.className="content-slide slide-measure";
+
+    mesure.style.width=Math.max(300,largeur)+"px";
+    mesure.style.maxWidth="none";
+    mesure.style.height="auto";
+    mesure.style.minHeight="0";
+    mesure.style.maxHeight="none";
+    mesure.style.overflow="visible";
+    mesure.style.display="block";
+    mesure.style.visibility="hidden";
+    mesure.style.position="fixed";
+    mesure.style.left="-100000px";
+    mesure.style.top="0";
+    mesure.style.padding="2px 0 8px";
+    mesure.style.boxSizing="border-box";
+
+    groupe.forEach(node=>{
+        mesure.appendChild(node.cloneNode(true));
+    });
+
+    document.body.appendChild(mesure);
+
+    const hauteur=Math.ceil(
+        Math.max(
+            mesure.scrollHeight,
+            mesure.getBoundingClientRect().height
+        )
+    );
+
+    mesure.remove();
+
+    return hauteur;
+}
+
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+
+function creerDiapositives(section){
+
+    if(!section)return;
+
+    currentSlides=[];
+    currentSlideIndex=0;
+
+    restaurerContenuOriginal(section);
+    memoriserContenu(section);
+
+    const nodes=Array.from(section.childNodes);
+
+    /*
+       LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL
+       SUR LA PREMIÈRE DIAPOSITIVE.
+    */
+
+    let titrePrincipal=null;
+
+    const premierNodeUtile=nodes.find(node=>{
+
+        return !(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        );
+    });
+
+    if(
+        premierNodeUtile &&
+        premierNodeUtile.nodeType===Node.ELEMENT_NODE &&
+        premierNodeUtile.classList.contains("definition-title")
+    ){
+
+        titrePrincipal=premierNodeUtile;
+    }
+
+    section.replaceChildren();
+
+    const hauteurMax=hauteurDisponibleDiapo();
+
+    const largeur=Math.max(
+        300,
+        section.clientWidth-50
+    );
+
+    /*
+       PREMIÈRE DIAPOSITIVE :
+       TITRE PRINCIPAL SEUL ET CENTRÉ.
+    */
+
+    if(titrePrincipal){
+
+        const slideTitre=creerSlide(section);
+
+        slideTitre.classList.add("title-only-slide");
+
+        slideTitre.appendChild(titrePrincipal);
+    }
+
+    /*
+       CONSTRUIRE LES GROUPES DU CONTENU RESTANT.
+    */
+
+    const nodesContenu=nodes.filter(node=>{
+
+        if(node===titrePrincipal){
+            return false;
+        }
+
+        if(
+            node.nodeType===Node.TEXT_NODE &&
+            !node.textContent.trim()
+        ){
+            return false;
+        }
+
+        return true;
+    });
+
+    const groupes=construireGroupes(nodesContenu);
+
+    let slide=null;
+    let hauteurUtilisee=0;
+
+    groupes.forEach(groupe=>{
+
+        const hauteurGroupe=mesurerGroupe(
+            groupe,
+            largeur,
+            section
+        );
+
+        /*
+           LE CONTENU COMMENCE TOUJOURS
+           SUR UNE NOUVELLE DIAPOSITIVE.
+        */
+
+        if(
+            !slide ||
+            (
+                hauteurUtilisee>0 &&
+                hauteurUtilisee+hauteurGroupe+12>hauteurMax
+            )
+        ){
+
+            slide=creerSlide(section);
+            hauteurUtilisee=0;
+        }
+
+        groupe.forEach(node=>{
+            slide.appendChild(node);
+        });
+
+        hauteurUtilisee+=hauteurGroupe+12;
+
+    });
+
+    if(currentSlides.length===0){
+        creerSlide(section);
+    }
+
+    afficherDiapositive(0);
+}
+
+/* COMPTEUR DES DIAPOSITIVES */
+
+function actualiserCompteurDiapo(){
+
+    const total=currentSlides.length;
+
+    if(total===0){
+
+        compteurDiapo.textContent="Aucune diapositive";
+        btnDiapoPrecedente.disabled=true;
+        btnDiapoSuivante.disabled=true;
+
+        return;
+    }
+
+    compteurDiapo.textContent=
+        " "+(currentSlideIndex+1)+" / "+total;
+
+    btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+    btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+}
+
+/* AJUSTEMENT DU CONTENU */
+
+function ajusterContenuDiapositive(slide){
+
+    if(!slide)return;
+
+    slide.style.width="100%";
+    slide.style.maxWidth="100%";
+    slide.style.overflowX="hidden";
+    slide.style.overflowY="auto";
+
+    slide.querySelectorAll("*").forEach(element=>{
+
+        element.style.maxWidth="100%";
+        element.style.minWidth="0";
+        element.style.overflowWrap="anywhere";
+    });
+
+    slide.querySelectorAll("table").forEach(table=>{
+
+        table.style.width="100%";
+        table.style.maxWidth="100%";
+        table.style.tableLayout="fixed";
+    });
+
+    slide.querySelectorAll("td,th").forEach(cell=>{
+
+        cell.style.overflowWrap="anywhere";
+        cell.style.wordBreak="normal";
+    });
+}
+
+/* AFFICHER UNE DIAPOSITIVE */
+
+function afficherDiapositive(index){
+
+    if(!currentSlides.length){
+        actualiserCompteurDiapo();
+        return;
+    }
+
+    if(index<0 || index>=currentSlides.length){
+        return;
+    }
+
+    currentSlideIndex=index;
+
+    currentSlides.forEach((slide,i)=>{
+
+        slide.classList.toggle(
+            "active-slide",
+            i===index
+        );
+
+        if(i===index){
+            ajusterContenuDiapositive(slide);
+        }
+    });
+
+    actualiserCompteurDiapo();
+
+    window.scrollTo({
+        top:0,
+        behavior:"auto"
+    });
+}
+
+/* NAVIGATION DIAPOSITIVES */
+
+function naviguerDiapositive(direction){
+
+    afficherDiapositive(currentSlideIndex+direction);
+}
+
+btnDiapoPrecedente.addEventListener("click",function(){
+    naviguerDiapositive(-1);
+});
+
+btnDiapoSuivante.addEventListener("click",function(){
+    naviguerDiapositive(1);
+});
+
+/* ACTIVER LE MODE DIAPOSITIVES */
+
+function activerModeDiapositives(section){
+
+    if(!section)return;
+
+    if(
+        slideMode &&
+        currentSlideSection===section
+    ){
+        return;
+    }
+
+    if(currentSlideSection && currentSlideSection!==section){
+        desactiverModeDiapositives(currentSlideSection);
+    }
+
+    currentSlideSection=section;
+
+    document.body.classList.add("slides-mode");
+
+    slideNavigation.style.display="flex";
+
+    slideMode=true;
+
+    creerDiapositives(section);
+}
+
+/* DÉSACTIVER LE MODE DIAPOSITIVES */
+
+function desactiverModeDiapositives(section){
+
+    if(!section){
+        section=currentSlideSection;
+    }
+
+    if(section){
+        restaurerContenuOriginal(section);
+    }
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+    currentSlides=[];
+    currentSlideIndex=0;
+    currentSlideSection=null;
+
+    slideMode=false;
+}
+
+/* ACTUALISER L'AFFICHAGE */
+
+function actualiserAffichageSection(){
+
+    const section=document.querySelector(
+        "body > section.active"
+    );
+
+    if(!section)return;
+
+    if(zoomImportant()){
+
+        activerModeDiapositives(section);
+
+    }else if(slideMode){
+
+        desactiverModeDiapositives(section);
+    }
+}
+
+
+/* ==========================================
+   NAVIGATION ENTRE LES SECTIONS
+========================================== */
+
+const sectionIds=[
+    "CE",
+    "CF",
+    "CNC"
+];
+
+let currentSectionIndex=-1;
+
+/* ACTUALISER LES BOUTONS DU PIED DE PAGE */
+
+function actualiserBoutonsNavigation(){
+
+    const precedent=document.getElementById(
+        "btnSectionPrecedente"
+    );
+
+    const suivant=document.getElementById(
+        "btnSectionSuivante"
+    );
+
+    if(currentSectionIndex===-1){
+        precedent.classList.remove("visible");
+        suivant.classList.remove("visible");
+        return;
+    }
+
+    precedent.disabled=(currentSectionIndex===0);
+
+    suivant.disabled=(
+        currentSectionIndex===sectionIds.length-1
+    );
+}
+
+/* AFFICHER UNE SECTION */
+
+function showSection(id,button){
+
+    const nouvelIndex=sectionIds.indexOf(id);
+    const current=document.getElementById(id);
+
+    if(!current || nouvelIndex===-1){
+        console.warn("Section introuvable :",id);
+        return;
+    }
+
+    if(slideMode && currentSlideSection){
+        desactiverModeDiapositives(currentSlideSection);
+    }
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+    currentSlides=[];
+    currentSlideIndex=0;
+    currentSlideSection=null;
+    slideMode=false;
+
+    /* MASQUER LES AUTRES SECTIONS */
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+            "active",
+            "animationSection"
+        );
+    });
+
+    /* RÉINITIALISER LES BOUTONS DU MENU */
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+
+        btn.classList.remove("btnActive");
+        btn.removeAttribute("aria-pressed");
+    });
+
+    fermerTousLesMenus();
+
+    /* ACTIVER LA SECTION */
+
+    currentSectionIndex=nouvelIndex;
+
+    document.body.classList.add("section-open");
+
+    current.classList.add(
+        "active",
+        "animationSection"
+    );
+
+    /* AFFICHER LES BOUTONS DU PIED DE PAGE */
+
+    document.getElementById("btnRetourMenu")
+        .classList.add("visible");
+
+    document.getElementById("btnSectionPrecedente")
+        .classList.add("visible");
+
+    document.getElementById("btnSectionSuivante")
+        .classList.add("visible");
+
+    actualiserBoutonsNavigation();
+
+    /* ACTIVER LE BOUTON CORRESPONDANT */
+
+    if(!button){
+        button=document.querySelectorAll("nav button")[nouvelIndex];
+    }
 
     if(button){
         button.classList.add("btnActive");
+        button.setAttribute("aria-pressed","true");
     }
 
     window.scrollTo({
-        top:document.querySelector("nav").offsetTop,
-        behavior:"smooth"
+        top:0,
+        behavior:"auto"
+    });
+
+    requestAnimationFrame(()=>{
+
+        actualiserAffichageSection();
+
     });
 }
+
+/* SECTION PRÉCÉDENTE / SUIVANTE */
+
+function naviguerSection(direction){
+
+    const nouvelIndex=currentSectionIndex+direction;
+
+    if(
+        nouvelIndex<0 ||
+        nouvelIndex>=sectionIds.length
+    ){
+        return;
+    }
+
+    const nouvelId=sectionIds[nouvelIndex];
+
+    const boutonsMenu=Array.from(
+        document.querySelectorAll("nav button")
+    );
+
+    const boutonCorrespondant=boutonsMenu[nouvelIndex];
+
+    showSection(nouvelId,boutonCorrespondant);
+}
+
+/* RETOUR AU MENU */
+
+function retourMenu(){
+
+    if(slideMode && currentSlideSection){
+        desactiverModeDiapositives(currentSlideSection);
+    }
+
+    document.body.classList.remove("slides-mode");
+
+    slideNavigation.style.display="none";
+
+    currentSlides=[];
+    currentSlideIndex=0;
+    currentSlideSection=null;
+    slideMode=false;
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+            "active",
+            "animationSection"
+        );
+    });
+
+    document.getElementById("btnRetourMenu")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionPrecedente")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionSuivante")
+        .classList.remove("visible");
+
+    currentSectionIndex=-1;
+
+    document.body.classList.remove("section-open");
+
+    fermerTousLesMenus();
+
+    requestAnimationFrame(()=>{
+
+        const menu=document.querySelector("nav");
+
+        if(menu){
+
+            const position=
+                menu.getBoundingClientRect().top+
+                window.scrollY-12;
+
+            window.scrollTo({
+                top:Math.max(0,position),
+                behavior:"smooth"
+            });
+        }
+    });
+}
+
+
+/* ==========================================
+   ADAPTATION AU REDIMENSIONNEMENT / ZOOM
+========================================== */
+
+window.addEventListener("resize",function(){
+
+    clearTimeout(resizeTimer);
+
+    resizeTimer=setTimeout(()=>{
+
+        const section=document.querySelector(
+            "body > section.active"
+        );
+
+        if(!section)return;
+
+        if(zoomImportant()){
+
+            if(
+                !slideMode ||
+                currentSlideSection!==section
+            ){
+
+                activerModeDiapositives(section);
+
+            }else{
+
+                const ancienneIndex=currentSlideIndex;
+
+                creerDiapositives(section);
+
+                if(currentSlides.length>0){
+
+                    afficherDiapositive(
+                        Math.min(
+                            ancienneIndex,
+                            currentSlides.length-1
+                        )
+                    );
+                }
+            }
+
+        }else if(slideMode){
+
+            desactiverModeDiapositives(section);
+        }
+
+    },180);
+
+});
+
+
+/* ==========================================
+   NAVIGATION AU CLAVIER
+========================================== */
+
+document.addEventListener("keydown",function(event){
+
+    if(!slideMode)return;
+
+    const element=document.activeElement;
+
+    if(
+        element &&
+        (
+            element.tagName==="INPUT" ||
+            element.tagName==="TEXTAREA" ||
+            element.tagName==="SELECT" ||
+            element.isContentEditable
+        )
+    ){
+        return;
+    }
+
+    if(
+        event.key==="ArrowRight" ||
+        event.key==="PageDown"
+    ){
+
+        event.preventDefault();
+        naviguerDiapositive(1);
+    }
+
+    if(
+        event.key==="ArrowLeft" ||
+        event.key==="PageUp"
+    ){
+
+        event.preventDefault();
+        naviguerDiapositive(-1);
+    }
+
+});
+
+
+/* ==========================================
+   INITIALISATION
+========================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    slideNavigation.style.display="none";
+
+    document.body.classList.remove(
+        "slides-mode",
+        "section-open"
+    );
+
+    document.querySelectorAll("body > section").forEach(section=>{
+
+        section.classList.remove(
+            "active",
+            "animationSection"
+        );
+
+        memoriserContenu(section);
+    });
+
+    document.getElementById("btnRetourMenu")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionPrecedente")
+        .classList.remove("visible");
+
+    document.getElementById("btnSectionSuivante")
+        .classList.remove("visible");
+
+    currentSectionIndex=-1;
+
+});
+
 </script>
 
 </body>
 </html>
-
-
