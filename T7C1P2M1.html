@@ -3,515 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IgnDay Comptabilité Générale - Règlements financiers</title>
-
+<title>IgnDay - T7 Règlements financiers</title>
 <style>
 *{box-sizing:border-box}
-
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#f4f6f9;
-    color:#1e293b;
-    overflow-x:hidden;
-}
-
-/* ===== EN-TÊTE IGN DAY ===== */
-header{
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    box-shadow:0 2px 10px #0003;
-}
-
-.brandbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    flex-wrap:wrap;
-    padding:12px 22px;
-    background:linear-gradient(120deg,#0f172a,#0f766e);
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:19px;
-}
-
-.brand-logo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    background:#00b894;
-    font-size:19px;
-    flex-shrink:0;
-}
-
-.site-menu{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
-}
-
-.site-menu>a{
-    display:block;
-    padding:10px 13px;
-    border-radius:6px;
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.site-menu>a:hover{
-    background:#ffffff2b;
-}
-
-header h1{
-    padding:18px 12px;
-    margin:0;
-    font-size:23px;
-    line-height:1.5;
-}
-
-header h1 p{margin:5px 0}
-
-/* ===== MENUS DÉROULANTS ===== */
-.dropdown{
-    position:relative;
-    display:inline-block;
-}
-
-.dropdown button{
-    padding:10px 14px;
-    background:transparent;
-    color:white;
-    border:none;
-    cursor:pointer;
-    font-size:14px;
-    border-radius:6px;
-}
-
-.dropdown button:hover,
-.dropdown button[aria-expanded="true"]{
-    background:#ffffff2b;
-}
-
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:230px;
-    max-width:min(320px,90vw);
-    max-height:70vh;
-    overflow-y:auto;
-    background:white;
-    box-shadow:0 5px 15px #0003;
-    border-radius:7px;
-    z-index:1000;
-    padding:6px;
-}
-
-.dropdown-content a{
-    display:block;
-    padding:11px 14px;
-    color:#1e293b;
-    text-decoration:none;
-    text-align:left;
-    font-size:14px;
-    border-radius:5px;
-}
-
-.dropdown-content a:hover{
-    background:#0f766e;
-    color:white;
-}
-
-/* ===== NAVIGATION DES SECTIONS ===== */
-nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-}
-
-nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    transition:.3s;
-}
-
-nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
-}
-
-.btnActive{
-    background:#0984e3!important;
-    transform:scale(1.04);
-    box-shadow:0 3px 10px #0003;
-}
-
-/* ===== SECTIONS ===== */
-section{
-    display:none;
-    padding:30px;
-    margin:20px;
-    min-width:0;
-}
-
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b;padding-bottom:40px}
+/* EN-TÊTE */
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 8px #0002}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;min-height:55px;padding:10px 14px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:7px;color:white;text-decoration:none;font-weight:bold;font-size:15px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;background:#00b894;font-size:15px}
+header h1{padding:12px 8px;margin:0;font-size:40px;line-height:1.4}
+header h1 p{margin:7px 0;font-size:40px;font-weight:bold;line-height:1.4}
+/* MENUS */
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:3px}
+.site-menu>a{display:block;padding:5px 8px;border-radius:5px;color:white;text-decoration:none;cursor:pointer;font-size:12px}
+.site-menu>a:hover{background:#1D4ED8}
+.dropdown{position:relative;display:inline-block}
+.dropdown button{padding:5px 8px;background:transparent;color:white;border:none;cursor:pointer;font-size:12px;border-radius:5px}
+.dropdown button:hover{background:#1D4ED8}
+.dropdown-content{display:none;position:fixed;top:0;left:0;min-width:230px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:white;box-shadow:0 8px 25px rgba(0,0,0,.28);border-radius:7px;z-index:99999;padding:6px}
+.dropdown-content a{display:block;padding:9px 12px;color:#1e293b;text-decoration:none;text-align:left;font-size:13px;border-radius:5px;line-height:1.4;white-space:normal}
+.dropdown-content a:hover{background:#0f766e;color:white}
+/* NAVIGATION DES SECTIONS */
+nav{background:#34495e;padding:7px 10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px;text-align:center}
+nav button{margin:0;padding:10px 17px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:19px;font-weight:bold;transition:.25s;line-height:1.2;white-space:nowrap}
+nav button:hover{background:#019875;transform:translateY(-1px)}
+.btnActive{background:#0984e3!important;transform:scale(1.03);box-shadow:0 2px 7px #0003}
+/* MASQUER HEADER ET NAV EN SECTION */
+body.section-open>header,body.section-open>nav{display:none!important}
+/* SECTIONS */
+section{display:none;padding:25px;margin:15px}
 section.active{display:block}
-
-.animationSection{
-    animation:apparition .5s ease;
-    background:white;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px #0002;
-}
-
-@keyframes apparition{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
-}
-
-/* ===== TITRES ===== */
-h2{
-    color:#2c3e50;
-    margin-top:25px;
-    margin-bottom:15px;
-    font-size:21px;
-    line-height:1.5;
-    padding:12px;
-    background:#eef3f7;
-    border-left:5px solid #0f766e;
-    border-radius:6px;
-}
-
-h3{
-    color:#0f766e;
-    margin-top:22px;
-    font-size:18px;
-    line-height:1.5;
-}
-
-h4{
-    color:#334155;
-    line-height:1.7;
-    margin-top:18px;
-}
-
-p{
-    line-height:1.7;
-    overflow-wrap:anywhere;
-}
-
-/* ===== TABLEAUX COMPTABLES ===== */
-.table-wrapper{
-    display:block;
-    width:100%;
-    max-width:100%;
-    overflow-x:auto;
-    margin:15px 0 30px;
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior-x:contain;
-    border-radius:5px;
-}
-
-.journal-table{
-    width:100%;
-    min-width:600px;
-    table-layout:fixed;
-    border-collapse:collapse;
-    background:white;
-    margin:0 auto;
-    box-shadow:0 3px 10px #00000012;
-}
-
-.journal-table td,
-.journal-table th{
-    border:1px solid #cbd5e1;
-    padding:10px 6px;
-    font-size:14px;
-    line-height:1.5;
-    vertical-align:middle;
-    overflow-wrap:anywhere;
-    word-wrap:break-word;
-}
-
-.journal-table .date td{
-    text-align:center;
-    background:#2c3e50;
-    color:white;
-    font-weight:bold;
-}
-
-.journal-table .debit{
-    background:#eaf4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
-
-.journal-table .credit{
-    background:#fff2e6;
-    color:#a34b00;
-    font-weight:bold;
-}
-
-.journal-table .montant{
-    text-align:right;
-    font-weight:bold;
-    background:#f8fafc;
-    white-space:normal;
-    overflow-wrap:anywhere;
-}
-
-.journal-table .center{text-align:center}
-
+.animationSection{animation:apparition .4s ease;background:white;border-left:6px solid #00b894;border-radius:9px;box-shadow:0 4px 12px #0002}
+@keyframes apparition{from{opacity:0}to{opacity:1}}
+body.section-open>section.active{margin:0;padding:4px 25px 25px}
+body.section-open>section.active>h2,body.section-open>section.active>.definition-title{margin-top:0}
+/* CONTENU */
+h2{color:#2c3e50;margin-top:0}
+h3{color:#00b894}
+h4{color:#334155;line-height:1.6;margin-top:18px;font-size:16px}
+p,li{line-height:1.7}
+ul,ol{line-height:1.7}
+table{width:100%;border-collapse:collapse;background:white;margin-top:18px}
+.table-wrapper{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+td,th{border:1px solid #ccc;padding:9px;line-height:1.5}
+th{background:#dfe6e9;text-align:center}
+tr:hover td{background:#f1f7ff}
+.titre{text-align:center;font-size:23px;font-weight:bold}
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+.header-cell{background:#dfe6e9}
+/* MISE EN VALEUR */
+.highlight{background:#e8fff7;border-left:5px solid #00b894;padding:13px;margin-top:13px;border-radius:7px;line-height:1.7}
+.definition-title{ background:linear-gradient(120deg,#dc2626,#f87171);
+color:white;padding:12px 15px;border-radius:7px;text-align:center;font-size:21px;font-weight:bold;margin:12px 0}
+.definition-box{background:#fffaf2;border:2px solid #e6a23c;border-radius:8px;padding:15px;margin:12px 0}
+/* TABLEAUX JOURNAUX */
+.journal-table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse}
+.journal-table td,.journal-table th{padding:10px 6px;font-size:14px;line-height:1.5;vertical-align:middle;overflow-wrap:anywhere;word-wrap:break-word;white-space:normal}
+.journal-table .date td{text-align:center;background:#2c3e50;color:white;font-weight:bold}
+.journal-table .debit{background:#eaf4ff;color:#0b3d91;font-weight:bold}
+.journal-table .credit{background:#fff2e6;color:#a34b00;font-weight:bold}
+.journal-table .montant{text-align:right;font-weight:bold;background:#f8fafc;white-space:normal;overflow-wrap:anywhere}
 .journal-table tr:hover td{background:#f1f7ff}
-
-.journal-table .date:hover td{
-    background:#2c3e50;
-    color:white;
+.journal-table .date:hover td{background:#2c3e50;color:white}
+.example{background:#e8fff7;border-left:6px solid #00b894;padding:13px 16px;margin:18px 0;border-radius:7px;font-weight:bold}
+/* BARRE DES DIAPOSITIVES */
+.slide-navigation{display:none;position:static;width:auto;height:auto;min-height:0;z-index:auto;align-items:center;justify-content:center;gap:5px;padding:0;background:transparent;color:white;border:0;font-size:10px;flex-shrink:0}
+.slide-navigation button{border:0;border-radius:3px;padding:4px 7px;background:#00b894;color:white;font-size:10px;font-weight:bold;line-height:1.2;cursor:pointer;white-space:nowrap}
+.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:disabled{opacity:.4;cursor:not-allowed}
+.slide-counter{font-size:10px;font-weight:bold;white-space:nowrap;text-align:center}
+/* CONTENU DES DIAPOSITIVES */
+.content-slide{display:none;width:100%;min-height:100px;padding:2px 0 8px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.content-slide.active-slide{display:block}
+.slide-inner{width:100%;max-width:100%;transform:none;zoom:1!important}
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+body.slides-mode .content-slide.title-only-slide{display:none;width:100%;min-height:calc(100vh - 100px);padding:0 15px;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+body.slides-mode .content-slide.title-only-slide.active-slide{display:flex}
+body.slides-mode .content-slide.title-only-slide .definition-title{width:100%;max-width:100%;margin:0;text-align:center}
+/* ÉLÉMENT DE MESURE */
+.slide-measure{position:fixed!important;left:-100000px!important;top:0!important;display:block!important;width:1000px;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;visibility:hidden!important;pointer-events:none!important;z-index:-1!important}
+body.slides-mode{padding-bottom:48px}
+body.slides-mode>section.active{display:block;margin:0;padding:4px 25px 8px;border-radius:0;box-shadow:none;border-left:0;min-height:calc(100vh - 48px);animation:none;overflow-x:hidden;overflow-y:auto}
+body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .definition-title{margin:3px 0 8px;padding:8px 12px;font-size:20px}
+body.slides-mode h2{margin-top:0;margin-bottom:8px}
+body.slides-mode h3{margin-top:8px;margin-bottom:6px}
+body.slides-mode h4{margin-top:7px;margin-bottom:5px}
+body.slides-mode p,body.slides-mode li{line-height:1.45;margin-top:5px;margin-bottom:5px}
+body.slides-mode ul,body.slides-mode ol{margin-top:5px;margin-bottom:5px}
+body.slides-mode .definition-box{margin:6px 0;padding:10px}
+body.slides-mode .highlight{margin:6px 0;padding:9px}
+body.slides-mode .example{margin:6px 0;padding:9px}
+body.slides-mode table{margin-top:8px}
+body.slides-mode td,body.slides-mode th{padding:6px 9px}
+/* PIED DE PAGE */
+footer{position:fixed;bottom:0;left:0;width:100%;min-height:38px;height:auto;z-index:2000;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;padding:4px 10px;margin:0;background:#2c3e50;color:white;border:1px solid #1e293b;box-shadow:none;font-size:11px;line-height:1.2}
+footer a{color:#00ffcc;text-decoration:none}
+footer>span{white-space:nowrap}
+.footer-actions{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-left:auto}
+.btnFooter{display:none;margin:0;padding:4px 9px;border:none;border-radius:4px;color:white;font-size:11px;line-height:1.2;font-weight:bold;cursor:pointer;white-space:nowrap;transition:.2s}
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+.btnFooter.visible{display:block}
+.btnFooter:hover:not(:disabled){background:#00b894;transform:translateY(-1px)}
+.btnFooter:disabled{background:#64748b;opacity:.45;cursor:not-allowed;transform:none}
+/* RESPONSIVE */
+@media(max-width:760px){
+body{padding-bottom:48px}
+.brandbar{justify-content:center;padding:4px 6px;gap:5px}
+.brand{font-size:14px}
+.brand-logo{width:27px;height:27px;font-size:13px}
+.site-menu{width:100%;gap:2px}
+.site-menu>a{padding:5px 6px;font-size:11px}
+.dropdown button{padding:5px 6px;font-size:11px}
+.dropdown-content{min-width:220px}
+header h1{padding:5px 6px;line-height:1.3}
+header h1 p{font-size:16px;line-height:1.3;margin:3px 0}
+section{padding:16px;margin:10px}
+body.section-open>section.active{margin:0;padding:4px 15px 18px}
+nav{padding:6px 5px;gap:5px}
+nav button{padding:6px 9px;font-size:12px;white-space:normal}
+.definition-title{font-size:18px;padding:11px}
+.definition-box{padding:12px}
+td,th{padding:7px;font-size:12px}
+.journal-table{width:100%;min-width:0;table-layout:fixed}
+.journal-table td,.journal-table th{padding:7px 4px;font-size:12px;line-height:1.4}
+footer{min-height:38px;height:auto;flex-wrap:wrap;justify-content:center;gap:4px;padding:4px 5px;font-size:9px}
+footer>span{display:none}
+.footer-actions{width:auto;justify-content:center;gap:3px;margin-left:0}
+.btnFooter{padding:4px 6px;font-size:9px}
+.slide-navigation{gap:3px;padding:0}
+.slide-navigation button{font-size:9px;padding:4px 5px}
+.slide-counter{font-size:9px}
+body.slides-mode>section.active{padding:4px 15px 8px;min-height:calc(100vh - 48px)}
+body.slides-mode .definition-title{font-size:17px;padding:8px}
+body.slides-mode .content-slide.title-only-slide{min-height:calc(100vh - 115px);padding:0 8px}
+body.slides-mode .journal-table{width:100%;min-width:0}
 }
-
-.example{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:13px 16px;
-    margin:22px 0 12px;
-    border-radius:7px;
-    font-weight:bold;
-    line-height:1.7;
-    overflow-wrap:anywhere;
+@media(max-width:420px){
+.definition-title{font-size:16px}
+header h1 p{font-size:14px}
+.brandbar{padding:3px 5px}
+.site-menu>a,.dropdown button{font-size:10px;padding:4px 5px}
+section{padding:12px;margin:8px}
+body.section-open>section.active{margin:0;padding:4px 12px 14px}
+td,th{font-size:11px;padding:6px 3px}
+.titre{font-size:18px}
+nav button{padding:6px 7px;font-size:11px}
+footer{padding:4px 3px;gap:3px}
+.btnFooter{font-size:8px;padding:4px 4px}
+.footer-actions{gap:2px}
+.slide-navigation{gap:2px}
+.slide-navigation button{font-size:8px;padding:4px 3px}
+.slide-counter{font-size:8px}
+.journal-table td,.journal-table th{font-size:10px;padding:6px 2px}
+.journal-table .montant{text-align:center;font-size:10px}
+.journal-table .date td{font-size:11px;padding:8px 3px}
 }
-
-/* ===== PIED DE PAGE ===== */
-footer{
-    text-align:center;
-    padding:18px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
+/* MODE DATASHOW */
+@media screen and (min-width:1200px) and (min-height:650px){
+body{font-size:18px;line-height:1.6;padding-bottom:40px}
+.brandbar{padding:5px 18px}
+.brand{font-size:17px}
+.brand-logo{width:32px;height:32px;font-size:15px}
+header h1{padding:6px 8px}
+header h1 p{font-size:21px}
+.site-menu>a,.dropdown button{font-size:13px;padding:6px 9px}
+.dropdown-content{min-width:270px}
+.dropdown-content a{font-size:15px;padding:11px 14px}
+nav{padding:8px 12px;gap:9px}
+nav button{padding:9px 16px;font-size:18px;border-radius:6px}
+section{padding:30px 35px;margin:18px 22px}
+body.section-open>section.active{margin:0;padding:4px 35px 30px}
+h2{font-size:27px;margin-bottom:18px}
+h3{font-size:21px;margin-top:20px}
+h4{font-size:18px}
+p,li{font-size:18px;line-height:1.7}
+.definition-title{font-size:23px;padding:14px}
+.definition-box{padding:17px}
+td,th{padding:14px 17px;font-size:17px;line-height:1.5}
+.journal-table td,.journal-table th{font-size:17px;padding:12px 8px}
+footer{min-height:38px;height:auto;font-size:11px}
+.btnFooter{padding:4px 9px;font-size:11px}
+body.slides-mode .definition-title{font-size:21px;padding:9px 12px}
+body.slides-mode p,body.slides-mode li{font-size:18px;line-height:1.45}
 }
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-    .brandbar{
-        justify-content:center;
-        padding:12px;
-    }
-
-    .brand{
-        justify-content:center;
-    }
-
-    .site-menu{
-        width:100%;
-        justify-content:center;
-    }
-
-    .site-menu>a{padding:9px}
-
-    .dropdown button{
-        padding:9px;
-    }
-
-    .dropdown-content{
-        left:50%;
-        transform:translateX(-50%);
-        min-width:220px;
-    }
-
-    header h1{
-        font-size:19px;
-    }
-
-    section{
-        padding:18px;
-        margin:12px;
-    }
-
-    nav button{
-        padding:10px;
-        font-size:13px;
-    }
-
-    .journal-table td,
-    .journal-table th{
-        padding:7px 4px;
-        font-size:12px;
-    }
-}
-
-@media(max-width:480px){
-    .brandbar{
-        gap:10px;
-    }
-
-    .site-menu{
-        gap:4px;
-    }
-
-    .site-menu>a,
-    .dropdown button{
-        font-size:12px;
-        padding:9px 7px;
-    }
-
-    .dropdown-content{
-        min-width:210px;
-        max-width:90vw;
-    }
-
-    header h1{
-        font-size:17px;
-        padding:14px 9px;
-    }
-
-    section{
-        padding:10px;
-        margin:7px;
-        border-left-width:5px;
-    }
-
-    section h2{
-        font-size:17px;
-        line-height:1.5;
-        padding:9px;
-    }
-
-    section h3{font-size:15px}
-    section h4{font-size:14px}
-
-    nav{
-        padding:7px;
-    }
-
-    nav button{
-        padding:9px 8px;
-        font-size:12px;
-        margin:3px;
-    }
-
-    .journal-table{
-        min-width:520px;
-    }
-
-    .journal-table td,
-    .journal-table th{
-        padding:5px 3px;
-        font-size:10px;
-        line-height:1.4;
-        overflow-wrap:anywhere;
-    }
-
-    .journal-table .date td{
-        font-size:11px;
-        padding:8px 3px;
-    }
-
-    .journal-table .montant{
-        text-align:center;
-        font-size:10px;
-    }
-
-    .example{
-        padding:10px;
-        font-size:12px;
-        line-height:1.6;
-    }
-}
-
-@media(max-width:360px){
-    .journal-table{
-        min-width:500px;
-    }
-
-    .journal-table td,
-    .journal-table th{
-        padding:4px 2px;
-        font-size:9px;
-    }
-
-    .journal-table .montant{font-size:9px}
-
-    header h1{font-size:16px}
-
-    .brand{
-        font-size:17px;
-    }
+/* GRAND ÉCRAN */
+@media screen and (min-width:1600px){
+body{font-size:19px;padding-bottom:40px}
+header h1{padding:6px 8px}
+header h1 p{font-size:22px}
+section{max-width:1750px;margin:22px auto;padding:35px 45px}
+body.section-open>section.active{margin:0 auto;padding:4px 45px 35px}
+h2{font-size:30px}
+h3{font-size:24px}
+h4{font-size:20px}
+p,li{font-size:20px}
+td,th{font-size:19px;padding:17px 20px}
+nav button{font-size:19px;padding:10px 18px}
+.definition-title{font-size:25px;padding:15px}
+footer{min-height:38px;height:auto}
+body.slides-mode p,body.slides-mode li{font-size:19px;line-height:1.45}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-
 <div class="brandbar">
-
-<a class="brand" href="index.html">
-    <span class="brand-logo">IF</span>
-    <span>IgnDay</span>
-</a>
-
+<a class="brand" href="index.html"><span class="brand-logo">IF</span><span>IgnDay</span></a>
 <div class="site-menu">
-
 <a href="index.html">Accueil</a>
-
 <div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">Modules ▼</button>
-<div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a>
-<a href="M2.html">M2 – Comptabilité analytique</a>
-<a href="M3.html">M3 – Analyse financière</a>
-<a href="M4.html">M4 – Fiscalité</a>
-<a href="M5.html">M5 – Mathématiques financières</a>
-<a href="M6.html">M6 – Statistiques</a>
-<a href="M7.html">M7 – Marketing</a>
-<a href="M8.html">M8 – Comptabilité approfondie</a>
-<a href="M9.html">M9 – Management</a>
-</div>
-</div>
-
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">M1 - Comptabilité générale ▼</button>
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">M1 - Comptabilité générale ▼</button>
 <div class="dropdown-content">
 <a href="P1M1.html">P1 – Concepts de base</a>
 <a href="P2M1.html">P2 – Opérations courantes</a>
 <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
 </div>
 </div>
-
 <div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">P2 – Opérations courantes ▼</button>
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">P2 – Opérations courantes ▼</button>
 <div class="dropdown-content">
 <a href="C1P2M1.html">T – Résumés des thèmes</a>
 <a href="C2P2M1.html">F – Formulaires interactifs</a>
 <a href="C3P2M1.html">E – Exercices corrigés</a>
 </div>
 </div>
-
 <div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">T – Résumés des thèmes ▼</button>
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">T – Résumés des thèmes ▼</button>
 <div class="dropdown-content">
 <a href="T1C1P2M1.html">T1 - Facture « Doit » simple</a>
 <a href="T2C1P2M1.html">T2 - Facture « Doit » comportant des réductions</a>
@@ -522,45 +247,39 @@ footer{
 <a href="T7C1P2M1.html">T7 - Règlements financiers</a>
 </div>
 </div>
-
 <a href="C1P2M1.html">⬅ Retour</a>
-
 </div>
 </div>
-
 <h1>
-<p>M1 – Comptabilité générale &gt; P2 – Opérations courantes &gt;&gt; T – Résumés des thèmes</p>
-<p>T7 - L’enregistrement des opérations relatives aux règlements financiers</p>
+<p>M1 – Comptabilité générale &gt; P2 – Opérations courantes</p>
+<p>Thème 7 - L’enregistrement des opérations relatives aux règlements financiers</p>
 </h1>
-
 </header>
 
+<!-- NAVIGATION DES SECTIONS -->
 <nav>
-<button class="btnActive" onclick="showSection('RE',this)">Règlements en espèces</button>
-<button onclick="showSection('RC',this)">Règlements par chèque</button>
-<button onclick="showSection('IF',this)">Effets de commerce</button>
+<button onclick="showSection('RE',this)">1- Règlements en espèces</button>
+<button onclick="showSection('RC',this)">2- Règlements par chèque</button>
+<button onclick="showSection('IF',this)">3- Règlements par effet de commerce</button>
 </nav>
 
-<!-- ===================================================== -->
-<!-- SECTION 1 : RÈGLEMENTS EN ESPÈCES -->
-<!-- ===================================================== -->
+<!-- SECTIONS -->
 
-<section id="RE" class="active animationSection">
+<section id="RE">
 
-<h2>► Enregistrement comptable des règlements en espèces</h2>
+<h2 class="definition-title">1- Enregistrement comptable des règlements en espèces</h2>
 
-<h3>Chez l'Acheteur (Client)</h3>
-
+<h2>A- Chez l'Acheteur (Client)</h2>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">44XX<br>6XXX<br>51XX</td>
-<td></td>
-<td class="debit">Compte de dettes ou<br>Compte de charges ou<br>Compte de trésorerie</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">44XX<br>6XXX<br>51XX</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Compte de dettes ou<br>Compte de charges ou<br>Compte de trésorerie</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -573,19 +292,21 @@ footer{
 <tr class="date"><td colspan="6">Pièce N°.....................</td></tr>
 </table>
 </div>
-
-<div class="example">► Exemple : Règlement d’une dette fournisseur en espèces</div>
-
+<div class="definition-box">
+<div class="example">
+► Exemple : Règlement d’une dette fournisseur en espèces
+</div>
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">25/04/2026</td></tr>
 <tr>
-<td class="debit center">4411</td>
-<td></td>
-<td class="debit">Fournisseurs</td>
-<td></td>
-<td class="montant">30.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4411</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">30.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -598,19 +319,17 @@ footer{
 <tr class="date"><td colspan="6">Pièce N°31-2026</td></tr>
 </table>
 </div>
-
-<h3>Chez le Vendeur (Fournisseur)</h3>
-
+<h2>B- Chez le Vendeur (Fournisseur)</h2>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5161</td>
-<td></td>
-<td class="debit">Caisses</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5161</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Caisses</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -623,19 +342,21 @@ footer{
 <tr class="date"><td colspan="6">Pièce N°.....................</td></tr>
 </table>
 </div>
-
-<div class="example">► Exemple : Encaissement d’une créance client en espèces</div>
-
+<div class="definition-box">
+<div class="example">
+► Exemple : Encaissement d’une créance client en espèces
+</div>
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">25/04/2026</td></tr>
 <tr>
-<td class="debit center">5161</td>
-<td></td>
-<td class="debit">Caisses</td>
-<td></td>
-<td class="montant">25.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5161</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Caisses</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">25.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -650,27 +371,21 @@ footer{
 </div>
 
 </section>
-
-<!-- ===================================================== -->
-<!-- SECTION 2 : RÈGLEMENTS PAR CHÈQUE -->
-<!-- ===================================================== -->
-
 <section id="RC">
 
-<h2>► Enregistrement comptable des règlements par chèque</h2>
+<h2 class="definition-title">2- Enregistrement comptable des règlements par chèque</h2>
 
-<h3>Chez l’acheteur (Client)</h3>
-
+<h2>A- Chez l’acheteur (Client)</h2>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">44XX<br>6XXX<br>51XX</td>
-<td></td>
-<td class="debit">Compte de dettes ou<br>Compte de charges ou<br>Compte de trésorerie</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">44XX<br>6XXX<br>51XX</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Compte de dettes ou<br>Compte de charges ou<br>Compte de trésorerie</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -683,19 +398,21 @@ footer{
 <tr class="date"><td colspan="6">Chèque N°.....................</td></tr>
 </table>
 </div>
-
-<div class="example">► Exemple : Règlement d’une dette fournisseur par chèque</div>
-
+<div class="definition-box">
+<div class="example">
+► Exemple : Règlement d’une dette fournisseur par chèque
+</div>
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">26/04/2026</td></tr>
 <tr>
-<td class="debit center">4411</td>
-<td></td>
-<td class="debit">Fournisseurs</td>
-<td></td>
-<td class="montant">45.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4411</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">45.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -708,21 +425,18 @@ footer{
 <tr class="date"><td colspan="6">Pièce N°31-2026</td></tr>
 </table>
 </div>
-
-<h3>Chez le Vendeur (Fournisseur)</h3>
-
-<h4>1- Chèques à encaisser ou présentation du chèque à l’encaissement</h4>
-
+<h2>B- Chez le Vendeur (Fournisseur)</h2>
+<h3>a- Chèques à encaisser ou présentation du chèque à l’encaissement</h3>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5111</td>
-<td></td>
-<td class="debit">Chèques à encaisser ou à l'encaissement</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5111</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Chèques à encaisser ou à l'encaissement</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -735,19 +449,17 @@ footer{
 <tr class="date"><td colspan="6">Chèque N°.....................</td></tr>
 </table>
 </div>
-
-<h4>2- Réception de l’avis de crédit de l’encaissement du chèque</h4>
-
+<h3>b- Réception de l’avis de crédit de l’encaissement du chèque</h3>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5141</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Banques</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6147</td>
@@ -776,21 +488,21 @@ footer{
 <tr class="date"><td colspan="6">Avis de crédit N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : 15/03/2026 Chèque à l’encaissement pour règlement d’une créance et 20/03/2026 Réception de l’avis de crédit de l’encaissement de ce chèque (Commission bancaire 20 DH HT / TVA 10%)
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">15/03/2026</td></tr>
 <tr>
-<td class="debit center">5111</td>
-<td></td>
-<td class="debit">Chèques à encaisser ou à l'encaissement</td>
-<td></td>
-<td class="montant">40.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5111</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Chèques à encaisser ou à l'encaissement</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">40.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -803,17 +515,16 @@ footer{
 <tr class="date"><td colspan="6">Chèque N°625384</td></tr>
 </table>
 </div>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">20/03/2026</td></tr>
 <tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">39.978,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5141</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Banques</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">39.978,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6147</td>
@@ -842,47 +553,34 @@ footer{
 <tr class="date"><td colspan="6">Avis de crédit N°36-2026</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <p><strong>NB :</strong> Le même mécanisme s’applique en cas de règlement par chèques postaux (5146).</p>
+</div>
 
 </section>
-
-<!-- ===================================================== -->
-<!-- SECTION 3 : EFFETS DE COMMERCE -->
-<!-- ===================================================== -->
-
 <section id="IF">
 
-<h2>► Définition d’un effet de commerce</h2>
+<h2 class="definition-title">3- Règlement par effet de commerce</h2>
 
-<p>
-Un effet de commerce est un titre négociable représentant une créance payable à court terme et mobilisable. Il faut distinguer entre les deux types suivants :
-</p>
-
-<p>
-<strong>La lettre de change :</strong> un document par lequel un créancier (Tireur) donne l'ordre à son débiteur (Tiré) de payer à son ordre ou à l'ordre d'un tiers (Bénéficiaire) une somme déterminée à une date fixée (Échéance).
-</p>
-
-<p>
-<strong>Le billet à ordre :</strong> un document par lequel un débiteur (Souscripteur) s’engage à payer une somme déterminée à une date fixe (Échéance) à l'ordre d'une autre personne (Bénéficiaire).
-</p>
-
-<h2>► Enregistrement comptable</h2>
-
-<h3>1- Création d’un effet de commerce</h3>
-
+<h2>A- Définition d’un effet de commerce</h2>
+<div class="definition-box">
+<p>Un effet de commerce est un titre négociable représentant une créance payable à court terme et mobilisable. Il faut distinguer entre les deux types suivants :</p>
+<p><strong>La lettre de change :</strong> un document par lequel un créancier (Tireur) donne l'ordre à son débiteur (Tiré) de payer à son ordre ou à l'ordre d'un tiers (Bénéficiaire) une somme déterminée à une date fixée (Échéance).</p>
+<p><strong>Le billet à ordre :</strong> un document par lequel un débiteur (Souscripteur) s’engage à payer une somme déterminée à une date fixe (Échéance) à l'ordre d'une autre personne (Bénéficiaire).</p>
+</div>
+<h2>B- Enregistrement comptable</h2>
+<h3>a- Création d’un effet de commerce</h3>
 <h4>Chez l’acheteur (Client)</h4>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">4411</td>
-<td></td>
-<td class="debit">Fournisseurs</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4411</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -895,21 +593,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : Le client (A) a accepté la lettre de change n°15 (Échéance 30/07/2026) en règlement de sa dette envers son fournisseur (B).
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">20/05/2026</td></tr>
 <tr>
-<td class="debit center">4411</td>
-<td></td>
-<td class="debit">Fournisseurs</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4411</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -922,19 +620,17 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°15</td></tr>
 </table>
 </div>
-
 <h4>Chez le Vendeur (Fournisseur)</h4>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">3425</td>
-<td></td>
-<td class="debit">Clients - effets à recevoir</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">3425</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Clients - effets à recevoir</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -947,19 +643,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°.....................</td></tr>
 </table>
 </div>
-
-<div class="example">► Exemple : Le client (A) accepte la lettre de change n°15.</div>
-
+<div class="definition-box">
+<div class="example">
+► Exemple : Le client (A) accepte la lettre de change n°15.
+</div>
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">20/05/2026</td></tr>
 <tr>
-<td class="debit center">3425</td>
-<td></td>
-<td class="debit">Clients - effets à recevoir</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">3425</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Clients - effets à recevoir</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -972,23 +670,19 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°15</td></tr>
 </table>
 </div>
-
-<h3>2- Circulation d’un effet de commerce</h3>
-
-<h3>a- Endossement au profit d’un tiers</h3>
-
+<h3>b- Circulation d’un effet de commerce</h3>
+<h3>► Cas de l’endossement au profit d’un tiers</h3>
 <h4>Chez l’endosseur</h4>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">4411</td>
-<td></td>
-<td class="debit">Fournisseurs</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4411</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1001,21 +695,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : Le fournisseur (B) a transmis par endossement la lettre de change n°15 à son fournisseur (C).
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">28/05/2026</td></tr>
 <tr>
-<td class="debit center">4411</td>
-<td></td>
-<td class="debit">Fournisseurs</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4411</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1028,19 +722,17 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°15</td></tr>
 </table>
 </div>
-
 <h4>Chez l’endossataire</h4>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">3425</td>
-<td></td>
-<td class="debit">Clients - effets à recevoir</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">3425</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Clients - effets à recevoir</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1053,21 +745,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : Le fournisseur (C) a reçu par endossement la lettre de change n°15 de son client (B).
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">28/05/2026</td></tr>
 <tr>
-<td class="debit center">3425</td>
-<td></td>
-<td class="debit">Clients - effets à recevoir</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">3425</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Clients - effets à recevoir</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1080,25 +772,20 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">LC N°15</td></tr>
 </table>
 </div>
-
 <p><strong>Chez le signataire :</strong> Aucune écriture.</p>
-
-<h3>b- Escompte auprès de la banque d’un effet de commerce</h3>
-
+<h3>► Cas de l’escompte auprès de la banque d’un effet de commerce</h3>
 <h4>Étape 1 : La date de remise à l’escompte (aucune écriture)</h4>
-
 <h4>Étape 2 : Réception du bordereau d’escompte</h4>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5141</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Banques</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6311</td>
@@ -1135,24 +822,25 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Bordereau d’escompte de la LC N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <p>* Intérêts d’escompte = (Montant nominal × Taux d’intérêt × Nombre de jours) / 360</p>
 <p>** Agios = Intérêts + Services bancaires.</p>
-
+</div>
+<div class="definition-box">
 <div class="example">
 ► Exemple : Réception d’un bordereau d’escompte de la lettre de change n°15 remise à l’escompte le 01/06/2026 (Taux d’intérêt 10 %, commission bancaire 30 DH et TVA 10 %).
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">05/06/2026</td></tr>
 <tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">34.336,03</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5141</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Banques</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">34.336,03</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6311</td>
@@ -1189,21 +877,20 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Bordereau d’escompte de la LC N°15</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <p>* Intérêts d’escompte = (35 000 × 10 % × 59) / 360.</p>
-
+</div>
 <h4>Étape 3 : À la date d’échéance de l’effet</h4>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5520</td>
-<td></td>
-<td class="debit">Crédits d'escompte</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5520</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Crédits d'escompte</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1216,21 +903,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Échéance LC N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : Arrivée de la date d’échéance de la lettre de change n°15 objet de l’escompte.
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">30/07/2026</td></tr>
 <tr>
-<td class="debit center">5520</td>
-<td></td>
-<td class="debit">Crédits d'escompte</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5520</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Crédits d'escompte</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1243,21 +930,18 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Échéance LC N°15</td></tr>
 </table>
 </div>
-
-<h3>3- Paiement et encaissement d’un effet de commerce</h3>
-
+<h3>c- Paiement et encaissement normal d’un effet de commerce</h3>
 <h3>Chez le signataire</h3>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">4415</td>
-<td></td>
-<td class="debit">Fournisseurs - effets à payer</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4415</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs - effets à payer</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6147</td>
@@ -1286,21 +970,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Avis de débit N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : Paiement normal de la lettre de change n°15 (commission prélevée 15 DH HT + TVA 10 %).
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">01/08/2026</td></tr>
 <tr>
-<td class="debit center">4415</td>
-<td></td>
-<td class="debit">Fournisseurs - effets à payer</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">4415</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Fournisseurs - effets à payer</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6147</td>
@@ -1329,21 +1013,18 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Avis de débit N°25-2026</td></tr>
 </table>
 </div>
-
 <h3>Chez le bénéficiaire</h3>
-
-<h4>1- Effets à encaisser ou à l’encaissement</h4>
-
+<h4>▐ Effets à encaisser ou à l’encaissement</h4>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5113</td>
-<td></td>
-<td class="debit">Effets à encaisser ou à l'encaissement</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5113</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Effets à encaisser ou à l'encaissement</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1356,19 +1037,17 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Remise à l’encaissement LC N°.....................</td></tr>
 </table>
 </div>
-
-<h4>2- Réception de l’avis de crédit de l’encaissement de l’effet</h4>
-
+<h4>▐ Réception de l’avis de crédit de l’encaissement de l’effet</h4>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">Date opération (XX/XX/XXXX)</td></tr>
 <tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">Montant</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5141</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Banques</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">Montant</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6147</td>
@@ -1397,21 +1076,21 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Avis de crédit N°.....................</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <div class="example">
 ► Exemple : 29/07/2026 Remise de la LC n°15 à l’encaissement et 01/08/2026 Réception de l’avis de crédit de l’encaissement de cette lettre de change (Commission bancaire 25 DH HT / TVA 10 %).
 </div>
-
+</div>
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">29/07/2026</td></tr>
 <tr>
-<td class="debit center">5113</td>
-<td></td>
-<td class="debit">Effets à encaisser ou à l'encaissement</td>
-<td></td>
-<td class="montant">35.000,00</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5113</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Effets à encaisser ou à l'encaissement</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">35.000,00</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td></td>
@@ -1424,17 +1103,16 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Remise à l’encaissement LC N°15</td></tr>
 </table>
 </div>
-
 <div class="table-wrapper">
 <table class="journal-table">
 <tr class="date"><td colspan="6">01/08/2026</td></tr>
 <tr>
-<td class="debit center">5141</td>
-<td></td>
-<td class="debit">Banques</td>
-<td></td>
-<td class="montant">34.972,50</td>
-<td class="montant">—</td>
+<td class="debit center" style="width:10%;">5141</td>
+<td style="width:3%;"></td>
+<td class="debit" style="width:42%;">Banques</td>
+<td style="width:3%;"></td>
+<td class="montant" style="width:21%;">34.972,50</td>
+<td class="montant" style="width:21%;">—</td>
 </tr>
 <tr>
 <td class="debit center">6147</td>
@@ -1463,76 +1141,334 @@ Un effet de commerce est un titre négociable représentant une créance payable
 <tr class="date"><td colspan="6">Avis de crédit N°31-2026</td></tr>
 </table>
 </div>
-
+<div class="definition-box">
 <p><strong>NB :</strong> Ce résumé ne traite pas certains incidents liés aux effets de commerce, notamment le renouvellement des effets et le retour des effets impayés.</p>
+</div>
 
 </section>
 
+<!-- PIED DE PAGE AVEC NAVIGATION DES DIAPOSITIVES -->
 <footer>
-Formation en Comptabilité Générale
+<div class="slide-navigation" id="slideNavigation">
+<button type="button" id="btnDiapoPrecedente">← Diapo précédente</button>
+<span class="slide-counter" id="compteurDiapo">Diapo 1 / 1</span>
+<button type="button" id="btnDiapoSuivante">Diapo suivante →</button>
+</div>
+<div class="footer-actions">
+<button type="button" class="btnFooter btnPrecedent" id="btnSectionPrecedente" onclick="naviguerSection(-1)">← Section précédente</button>
+<button type="button" class="btnFooter btnSuivant" id="btnSectionSuivante" onclick="naviguerSection(1)">Section suivante →</button>
+<button type="button" class="btnFooter btnRetourMenu" id="btnRetourMenu" onclick="retourMenu()">↑ Retour au menu</button>
+</div>
 </footer>
 
 <script>
-/* ===== MENUS DÉROULANTS ===== */
+/* MENUS DÉROULANTS */
+function positionDropdown(button,menu){
+const rect=button.getBoundingClientRect();const marge=8;
+menu.style.display="block";menu.style.position="fixed";
+menu.style.maxWidth=(window.innerWidth-16)+"px";menu.style.maxHeight=(window.innerHeight-16)+"px";
+menu.style.top="0";menu.style.bottom="auto";
+const hauteurMenu=menu.scrollHeight;
+const espaceBas=window.innerHeight-rect.bottom-marge;
+const espaceHaut=rect.top-marge;
+const ouvrirEnBas=hauteurMenu<=espaceBas||espaceBas>=espaceHaut;
+let hd;
+if(ouvrirEnBas){menu.style.top=(rect.bottom+4)+"px";menu.style.bottom="auto";hd=espaceBas-4;}
+else{menu.style.bottom=(window.innerHeight-rect.top+4)+"px";menu.style.top="auto";hd=espaceHaut-4;}
+menu.style.maxHeight=Math.max(100,hd)+"px";
+menu.style.width="auto";
+const largeur=Math.min(Math.max(menu.offsetWidth,230),window.innerWidth-16);
+menu.style.width=largeur+"px";
+let pg=rect.left;
+if(pg+largeur>window.innerWidth-marge)pg=window.innerWidth-largeur-marge;
+if(pg<marge)pg=marge;
+menu.style.left=pg+"px";
+}
 function toggleDropdown(button){
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
+const m=button.parentElement.querySelector(".dropdown-content");
+const isOpen=m.style.display==="block";
+fermerTousLesMenus();
+if(!isOpen){positionDropdown(button,m);button.setAttribute("aria-expanded","true");}
+}
+function fermerTousLesMenus(){
+document.querySelectorAll(".dropdown-content").forEach(m=>{m.style.display="none";m.style.top="auto";m.style.bottom="auto";});
+document.querySelectorAll(".dropdown button").forEach(b=>b.setAttribute("aria-expanded","false"));
+}
+document.addEventListener("click",function(e){if(!e.target.closest(".dropdown"))fermerTousLesMenus();});
+function repositionnerMenus(){
+document.querySelectorAll(".dropdown").forEach(d=>{
+const b=d.querySelector("button");const m=d.querySelector(".dropdown-content");
+if(b&&m&&m.style.display==="block")positionDropdown(b,m);
+});
+}
+window.addEventListener("resize",repositionnerMenus);
+window.addEventListener("scroll",repositionnerMenus,true);
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
+/* MODE DIAPOSITIVES AUTOMATIQUES */
+function zoomImportant(){return(window.screen.width>=1000&&window.innerWidth<=window.screen.width*0.62);}
+let currentSlides=[];let currentSlideIndex=0;let currentSlideSection=null;let slideMode=false;let resizeTimer=null;
+const slideNavigation=document.getElementById("slideNavigation");
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+const compteurDiapo=document.getElementById("compteurDiapo");
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
-    });
-
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
+/* MÉMORISER LE CONTENU ORIGINAL */
+const originalSectionContent=new Map();
+function memoriserContenu(section){
+if(!originalSectionContent.has(section.id)){originalSectionContent.set(section.id,Array.from(section.childNodes));}
+}
+function restaurerContenuOriginal(section){
+if(!section||!originalSectionContent.has(section.id))return;
+section.replaceChildren(...originalSectionContent.get(section.id));
 }
 
-/* Fermer les menus en cliquant à l'extérieur */
-document.addEventListener("click",function(event){
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        if(!dropdown.contains(event.target)){
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
+/* HAUTEUR DISPONIBLE */
+function hauteurDisponibleDiapo(){
+const hf=document.querySelector("footer")?.offsetHeight||38;
+return Math.max(180,window.innerHeight-hf-35);
+}
 
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
-        }
-    });
+/* IDENTIFIER LES TITRES */
+function estTitreContenu(node){
+if(node.nodeType!==Node.ELEMENT_NODE)return false;
+return node.matches("h2,h3,h4,.definition-title,.sous-titre,.table-title");
+}
+
+/* CONSTRUIRE LES GROUPES */
+function construireGroupes(nodes){
+const groupes=[];let g=[];
+nodes.forEach(node=>{
+if(node.nodeType===Node.TEXT_NODE&&!node.textContent.trim())return;
+if(estTitreContenu(node)&&g.length){groupes.push(g);g=[];}
+g.push(node);
+});
+if(g.length)groupes.push(g);
+return groupes;
+}
+
+/* CRÉER UNE DIAPOSITIVE */
+function creerSlide(section){
+const slide=document.createElement("div");
+slide.className="content-slide";
+section.appendChild(slide);
+currentSlides.push(slide);
+return slide;
+}
+
+/* MESURER UN GROUPE DE CONTENU */
+function mesurerGroupe(groupe,largeur){
+const m=document.createElement("div");
+m.className="content-slide slide-measure";
+m.style.width=Math.max(300,largeur)+"px";m.style.maxWidth="none";m.style.height="auto";m.style.minHeight="0";m.style.maxHeight="none";
+m.style.overflow="visible";m.style.display="block";m.style.visibility="hidden";m.style.position="fixed";
+m.style.left="-100000px";m.style.top="0";m.style.padding="2px 0 8px";m.style.boxSizing="border-box";
+groupe.forEach(n=>m.appendChild(n.cloneNode(true)));
+document.body.appendChild(m);
+const h=Math.ceil(Math.max(m.scrollHeight,m.getBoundingClientRect().height));
+m.remove();
+return h;
+}
+
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+function creerDiapositives(section){
+if(!section)return;
+currentSlides=[];currentSlideIndex=0;
+restaurerContenuOriginal(section);
+memoriserContenu(section);
+const nodes=Array.from(section.childNodes);
+
+/* LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL SUR LA PREMIÈRE DIAPOSITIVE */
+let titrePrincipal=null;
+const premier=nodes.find(n=>!(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim()));
+if(premier&&premier.nodeType===Node.ELEMENT_NODE&&premier.classList.contains("definition-title")){titrePrincipal=premier;}
+
+section.replaceChildren();
+const hauteurMax=hauteurDisponibleDiapo();
+const largeur=Math.max(300,section.clientWidth-50);
+
+if(titrePrincipal){
+const st=creerSlide(section);
+st.classList.add("title-only-slide");
+st.appendChild(titrePrincipal);
+}
+
+const nodesContenu=nodes.filter(n=>{
+if(n===titrePrincipal)return false;
+if(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim())return false;
+return true;
+});
+const groupes=construireGroupes(nodesContenu);
+let slide=null;let hu=0;
+groupes.forEach(groupe=>{
+const hg=mesurerGroupe(groupe,largeur);
+if(!slide||(hu>0&&hu+hg+12>hauteurMax)){slide=creerSlide(section);hu=0;}
+groupe.forEach(n=>slide.appendChild(n));
+hu+=hg+12;
+});
+if(currentSlides.length===0)creerSlide(section);
+afficherDiapositive(0);
+}
+
+/* COMPTEUR DES DIAPOSITIVES */
+function actualiserCompteurDiapo(){
+const total=currentSlides.length;
+if(total===0){compteurDiapo.textContent="Aucune diapositive";btnDiapoPrecedente.disabled=true;btnDiapoSuivante.disabled=true;return;}
+compteurDiapo.textContent=" "+(currentSlideIndex+1)+" / "+total;
+btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+}
+
+/* AJUSTEMENT DU CONTENU */
+function ajusterContenuDiapositive(slide){
+if(!slide)return;
+slide.style.width="100%";slide.style.maxWidth="100%";slide.style.overflowX="hidden";slide.style.overflowY="auto";
+slide.querySelectorAll("*").forEach(el=>{el.style.maxWidth="100%";el.style.minWidth="0";el.style.overflowWrap="anywhere";});
+slide.querySelectorAll("table").forEach(t=>{t.style.width="100%";t.style.maxWidth="100%";t.style.tableLayout="fixed";});
+slide.querySelectorAll("td,th").forEach(c=>{c.style.overflowWrap="anywhere";c.style.wordBreak="normal";});
+}
+
+/* AFFICHER UNE DIAPOSITIVE */
+function afficherDiapositive(index){
+if(!currentSlides.length){actualiserCompteurDiapo();return;}
+if(index<0||index>=currentSlides.length)return;
+currentSlideIndex=index;
+currentSlides.forEach((s,i)=>{
+s.classList.toggle("active-slide",i===index);
+if(i===index)ajusterContenuDiapositive(s);
+});
+actualiserCompteurDiapo();
+window.scrollTo({top:0,behavior:"auto"});
+}
+
+/* NAVIGATION DIAPOSITIVES */
+function naviguerDiapositive(d){afficherDiapositive(currentSlideIndex+d);}
+btnDiapoPrecedente.addEventListener("click",()=>naviguerDiapositive(-1));
+btnDiapoSuivante.addEventListener("click",()=>naviguerDiapositive(1));
+
+/* ACTIVER / DÉSACTIVER LE MODE DIAPOSITIVES */
+function activerModeDiapositives(section){
+if(!section)return;
+if(slideMode&&currentSlideSection===section)return;
+if(currentSlideSection&&currentSlideSection!==section)desactiverModeDiapositives(currentSlideSection);
+currentSlideSection=section;
+document.body.classList.add("slides-mode");
+slideNavigation.style.display="flex";
+slideMode=true;
+creerDiapositives(section);
+}
+function desactiverModeDiapositives(section){
+if(!section)section=currentSlideSection;
+if(section)restaurerContenuOriginal(section);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+}
+
+/* ACTUALISER L'AFFICHAGE */
+function actualiserAffichageSection(){
+const section=document.querySelector("body > section.active");
+if(!section)return;
+if(zoomImportant()){activerModeDiapositives(section);}
+else if(slideMode){desactiverModeDiapositives(section);}
+}
+
+/* NAVIGATION ENTRE LES SECTIONS */
+const sectionIds=["RE","RC","IF"];
+let currentSectionIndex=-1;
+
+function actualiserBoutonsNavigation(){
+const p=document.getElementById("btnSectionPrecedente");
+const s=document.getElementById("btnSectionSuivante");
+if(currentSectionIndex===-1){p.classList.remove("visible");s.classList.remove("visible");return;}
+p.disabled=(currentSectionIndex===0);
+s.disabled=(currentSectionIndex===sectionIds.length-1);
+}
+
+function showSection(id,button){
+const nouvelIndex=sectionIds.indexOf(id);
+const current=document.getElementById(id);
+if(!current||nouvelIndex===-1){console.warn("Section introuvable :",id);return;}
+if(slideMode&&currentSlideSection)desactiverModeDiapositives(currentSlideSection);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+document.querySelectorAll("body > section").forEach(s=>s.classList.remove("active","animationSection"));
+document.querySelectorAll("nav button").forEach(b=>{b.classList.remove("btnActive");b.removeAttribute("aria-pressed");});
+fermerTousLesMenus();
+currentSectionIndex=nouvelIndex;
+document.body.classList.add("section-open");
+current.classList.add("active","animationSection");
+document.getElementById("btnRetourMenu").classList.add("visible");
+document.getElementById("btnSectionPrecedente").classList.add("visible");
+document.getElementById("btnSectionSuivante").classList.add("visible");
+actualiserBoutonsNavigation();
+if(!button)button=document.querySelectorAll("nav button")[nouvelIndex];
+if(button){button.classList.add("btnActive");button.setAttribute("aria-pressed","true");}
+window.scrollTo({top:0,behavior:"auto"});
+requestAnimationFrame(()=>{actualiserAffichageSection();});
+}
+
+function naviguerSection(direction){
+const ni=currentSectionIndex+direction;
+if(ni<0||ni>=sectionIds.length)return;
+showSection(sectionIds[ni],Array.from(document.querySelectorAll("nav button"))[ni]);
+}
+
+function retourMenu(){
+if(slideMode&&currentSlideSection)desactiverModeDiapositives(currentSlideSection);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+document.querySelectorAll("body > section").forEach(s=>s.classList.remove("active","animationSection"));
+document.getElementById("btnRetourMenu").classList.remove("visible");
+document.getElementById("btnSectionPrecedente").classList.remove("visible");
+document.getElementById("btnSectionSuivante").classList.remove("visible");
+currentSectionIndex=-1;
+document.body.classList.remove("section-open");
+requestAnimationFrame(()=>{
+const menu=document.querySelector("nav");
+if(menu){const pos=menu.getBoundingClientRect().top+window.scrollY-12;window.scrollTo({top:Math.max(0,pos),behavior:"smooth"});}
+});
+}
+
+/* ADAPTATION AU REDIMENSIONNEMENT / ZOOM */
+window.addEventListener("resize",function(){
+clearTimeout(resizeTimer);
+resizeTimer=setTimeout(()=>{
+const section=document.querySelector("body > section.active");
+if(!section)return;
+if(zoomImportant()){
+if(!slideMode||currentSlideSection!==section){activerModeDiapositives(section);}
+else{
+const ancien=currentSlideIndex;
+creerDiapositives(section);
+if(currentSlides.length>0)afficherDiapositive(Math.min(ancien,currentSlides.length-1));
+}
+}else if(slideMode){desactiverModeDiapositives(section);}
+},180);
 });
 
-/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
-function showSection(id,button){
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
+/* NAVIGATION AU CLAVIER */
+document.addEventListener("keydown",function(event){
+if(!slideMode)return;
+const el=document.activeElement;
+if(el&&(el.tagName==="INPUT"||el.tagName==="TEXTAREA"||el.tagName==="SELECT"||el.isContentEditable))return;
+if(event.key==="ArrowRight"||event.key==="PageDown"){event.preventDefault();naviguerDiapositive(1);}
+if(event.key==="ArrowLeft"||event.key==="PageUp"){event.preventDefault();naviguerDiapositive(-1);}
+});
 
-    const current=document.getElementById(id);
-
-    if(current){
-        current.classList.add("active","animationSection");
-    }
-
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
-    });
-
-    if(button){
-        button.classList.add("btnActive");
-    }
-
-    window.scrollTo({
-        top:document.querySelector("nav").offsetTop,
-        behavior:"smooth"
-    });
-}
+/* INITIALISATION */
+document.addEventListener("DOMContentLoaded",function(){
+slideNavigation.style.display="none";
+document.body.classList.remove("slides-mode","section-open");
+document.querySelectorAll("body > section").forEach(s=>{s.classList.remove("active","animationSection");memoriserContenu(s);});
+document.getElementById("btnRetourMenu").classList.remove("visible");
+document.getElementById("btnSectionPrecedente").classList.remove("visible");
+document.getElementById("btnSectionSuivante").classList.remove("visible");
+currentSectionIndex=-1;
+});
 </script>
 
 </body>
 </html>
+
