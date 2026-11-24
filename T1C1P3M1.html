@@ -4,688 +4,348 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IgnDay Comptabilité Générale - Travaux de fin d’exercice</title>
-
 <style>
 *{box-sizing:border-box}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b;padding-bottom:40px}
+/* EN-TÊTE */
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 8px #0002}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;min-height:55px;padding:10px 14px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:7px;color:white;text-decoration:none;font-weight:bold;font-size:15px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;background:#00b894;font-size:15px}
+header h1{padding:12px 8px;margin:0;font-size:40px;line-height:1.4}
+header h1 p{margin:7px 0;font-size:40px;font-weight:bold;line-height:1.4}
+/* MENUS */
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:3px}
+.site-menu>a{display:block;padding:5px 8px;border-radius:5px;color:white;text-decoration:none;cursor:pointer;font-size:12px}
+.site-menu>a:hover{background:#1D4ED8}
+.dropdown{position:relative;display:inline-block}
+.dropdown button{padding:5px 8px;background:transparent;color:white;border:none;cursor:pointer;font-size:12px;border-radius:5px}
+.dropdown button:hover{background:#1D4ED8}
+.dropdown-content{display:none;position:fixed;top:0;left:0;min-width:230px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:white;box-shadow:0 8px 25px rgba(0,0,0,.28);border-radius:7px;z-index:99999;padding:6px}
+.dropdown-content a{display:block;padding:9px 12px;color:#1e293b;text-decoration:none;text-align:left;font-size:13px;border-radius:5px;line-height:1.4;white-space:normal}
+.dropdown-content a:hover{background:#0f766e;color:white}
+/* NAVIGATION DES SECTIONS */
+nav{background:#34495e;padding:7px 10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px;text-align:center}
+nav button{margin:0;padding:10px 17px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:19px;font-weight:bold;transition:.25s;line-height:1.2;white-space:nowrap}
+nav button:hover{background:#019875;transform:translateY(-1px)}
+.btnActive{background:#0984e3!important;transform:scale(1.03);box-shadow:0 2px 7px #0003}
+/* MASQUER HEADER ET NAV EN SECTION */
+body.section-open>header,body.section-open>nav{display:none!important}
+/* SECTIONS */
+section{display:none;padding:25px;margin:15px}
+section.active{display:block}
+.animationSection{animation:apparition .4s ease;background:white;border-left:6px solid #00b894;border-radius:9px;box-shadow:0 4px 12px #0002}
+@keyframes apparition{from{opacity:0}to{opacity:1}}
+body.section-open>section.active{margin:0;padding:4px 25px 25px}
+body.section-open>section.active>h2,body.section-open>section.active>.definition-title{margin-top:0}
+/* CONTENU */
+h2{color:#2c3e50;margin-top:0}
+h3{color:#00b894}
+h4{color:#0f766e}
+p,li{line-height:1.7}
+ul,ol{line-height:1.7}
+table{width:100%;border-collapse:collapse;background:white;margin-top:18px}
+.table-wrapper{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+td,th{border:1px solid #ccc;padding:9px;line-height:1.5}
+th{background:#dfe6e9;text-align:center}
+tr:hover td{background:#f1f7ff}
+.titre{text-align:center;font-size:23px;font-weight:bold}
+.bold{font-weight:bold}
+.center{text-align:center}
+.right{text-align:right}
+.header-cell{background:#dfe6e9}
+/* MISE EN VALEUR */
+.highlight{background:#e8fff7;border-left:5px solid #00b894;padding:13px;margin-top:13px;border-radius:7px;line-height:1.7}
+.definition-title{background:linear-gradient(120deg,#164e63,#0e7490);color:white;padding:12px 15px;border-radius:7px;text-align:center;font-size:21px;font-weight:bold;margin:12px 0}
+.definition-box{background:#fffaf2;border:2px solid #e6a23c;border-radius:8px;padding:15px;margin:12px 0}
+/* TABLEAUX JOURNAUX */
+.journal-table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse}
+.journal-table td,.journal-table th{padding:10px 6px;font-size:14px;line-height:1.5;vertical-align:middle;overflow-wrap:anywhere;word-wrap:break-word;white-space:normal}
+.journal-table .date td{text-align:center;background:#2c3e50;color:white;font-weight:bold}
+.journal-table .debit{background:#eaf4ff;color:#0b3d91;font-weight:bold}
+.journal-table .credit{background:#fff2e6;color:#a34b00;font-weight:bold}
+.journal-table .montant{text-align:right;font-weight:bold;background:#f8fafc;white-space:normal;overflow-wrap:anywhere}
+.journal-table tr:hover td{background:#f1f7ff}
+.journal-table .date:hover td{background:#2c3e50;color:white}
+.example{background:#e8fff7;border-left:6px solid #00b894;padding:13px 16px;margin:18px 0;border-radius:7px;font-weight:bold}
+/* BARRE DES DIAPOSITIVES */
+.slide-navigation{display:none;position:static;width:auto;height:auto;min-height:0;z-index:auto;align-items:center;justify-content:center;gap:5px;padding:0;background:transparent;color:white;border:0;font-size:10px;flex-shrink:0}
+.slide-navigation button{border:0;border-radius:3px;padding:4px 7px;background:#00b894;color:white;font-size:10px;font-weight:bold;line-height:1.2;cursor:pointer;white-space:nowrap}
+.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:disabled{opacity:.4;cursor:not-allowed}
+.slide-counter{font-size:10px;font-weight:bold;white-space:nowrap;text-align:center}
+/* CONTENU DES DIAPOSITIVES */
+.content-slide{display:none;width:100%;min-height:100px;padding:2px 0 8px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.content-slide.active-slide{display:block}
+.slide-inner{width:100%;max-width:100%;transform:none;zoom:1!important}
+/* DIAPOSITIVE DU TITRE PRINCIPAL */
+body.slides-mode .content-slide.title-only-slide{display:none;width:100%;min-height:calc(100vh - 100px);padding:0 15px;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+body.slides-mode .content-slide.title-only-slide.active-slide{display:flex}
+body.slides-mode .content-slide.title-only-slide .definition-title{width:100%;max-width:100%;margin:0;text-align:center}
+/* ÉLÉMENT DE MESURE */
+.slide-measure{position:fixed!important;left:-100000px!important;top:0!important;display:block!important;width:1000px;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;visibility:hidden!important;pointer-events:none!important;z-index:-1!important}
+body.slides-mode{padding-bottom:48px}
+body.slides-mode>section.active{display:block;margin:0;padding:4px 25px 8px;border-radius:0;box-shadow:none;border-left:0;min-height:calc(100vh - 48px);animation:none;overflow-x:hidden;overflow-y:auto}
+body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .definition-title{margin:3px 0 8px;padding:8px 12px;font-size:20px}
+body.slides-mode h2{margin-top:0;margin-bottom:8px}
+body.slides-mode h3{margin-top:8px;margin-bottom:6px}
+body.slides-mode h4{margin-top:7px;margin-bottom:5px}
+body.slides-mode p,body.slides-mode li{line-height:1.45;margin-top:5px;margin-bottom:5px}
+body.slides-mode ul,body.slides-mode ol{margin-top:5px;margin-bottom:5px}
+body.slides-mode .definition-box{margin:6px 0;padding:10px}
+body.slides-mode .highlight{margin:6px 0;padding:9px}
+body.slides-mode .example{margin:6px 0;padding:9px}
+body.slides-mode table{margin-top:8px}
+body.slides-mode td,body.slides-mode th{padding:6px 9px}
+/* PIED DE PAGE */
+footer{position:fixed;bottom:0;left:0;width:100%;min-height:38px;height:auto;z-index:2000;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;padding:4px 10px;margin:0;background:#2c3e50;color:white;border:1px solid #1e293b;box-shadow:none;font-size:11px;line-height:1.2}
+footer a{color:#00ffcc;text-decoration:none}
+footer>span{white-space:nowrap}
+.footer-actions{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-left:auto}
+.btnFooter{display:none;margin:0;padding:4px 9px;border:none;border-radius:4px;color:white;font-size:11px;line-height:1.2;font-weight:bold;cursor:pointer;white-space:nowrap;transition:.2s}
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+.btnFooter.visible{display:block}
+.btnFooter:hover:not(:disabled){background:#00b894;transform:translateY(-1px)}
+.btnFooter:disabled{background:#64748b;opacity:.45;cursor:not-allowed;transform:none}
 
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#f4f6f9;
-    color:#1e293b;
-}
-
-/* ===== EN-TÊTE ===== */
-header{
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    box-shadow:0 2px 10px #0003;
-}
-
-.brandbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    flex-wrap:wrap;
-    padding:12px 22px;
-    background:linear-gradient(120deg,#0f172a,#0f766e);
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:19px;
-}
-
-.brand-logo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    background:#00b894;
-    font-size:19px;
-}
-
-.site-menu{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
-}
-
-.site-menu>a{
-    display:block;
-    padding:10px 13px;
-    border-radius:6px;
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.site-menu>a:hover{
-    background:#ffffff2b;
-}
-
-header h1{
-    padding:18px 12px;
-    margin:0;
-    font-size:23px;
-    line-height:1.5;
-}
-
-header h1 p{
-    margin:5px 0;
-}
-
-/* ===== MENUS DÉROULANTS ===== */
-.dropdown{
-    position:relative;
-    display:inline-block;
-}
-
-.dropdown button{
-    padding:10px 14px;
-    background:transparent;
-    color:white;
-    border:none;
-    cursor:pointer;
-    font-size:14px;
-    border-radius:6px;
-}
-
-.dropdown button:hover,
-.dropdown button[aria-expanded="true"]{
-    background:#ffffff2b;
-}
-
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:230px;
-    max-height:70vh;
-    overflow-y:auto;
-    background:white;
-    box-shadow:0 5px 15px #0003;
-    border-radius:7px;
-    z-index:1000;
-    padding:6px;
-}
-
-.dropdown-content a{
-    display:block;
-    padding:11px 14px;
-    color:#1e293b;
-    text-decoration:none;
-    text-align:left;
-    font-size:14px;
-    border-radius:5px;
-    line-height:1.5;
-}
-
-.dropdown-content a:hover{
-    background:#0f766e;
-    color:white;
-}
-
-/* ===== NAVIGATION DU COURS ===== */
-nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-}
-
-nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    transition:.3s;
-}
-
-nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
-}
-
-.btnActive{
-    background:#0984e3!important;
-    transform:scale(1.04);
-    box-shadow:0 3px 10px #0003;
-}
-
-/* ===== SECTIONS ===== */
-section{
-    display:none;
-    padding:30px;
-    margin:20px;
-}
-
-section.active{
-    display:block;
-}
-
-.animationSection{
-    animation:apparition .5s ease;
-    background:white;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px #0002;
-}
-
-@keyframes apparition{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* ===== TITRES ET TEXTE ===== */
-h2{
-    color:#2c3e50;
-    margin-top:0;
-}
-
-h3{
-    color:#00b894;
-    margin-top:25px;
-}
-
-h4{
-    color:#0f766e;
-}
-
-p{
-    line-height:1.7;
-}
-
-ul{
-    line-height:1.8;
-}
-
-/* ===== BLOCS DE CONTENU ===== */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin:15px 0;
-    border-radius:8px;
-    line-height:1.9;
-}
-
-.content-block{
-    background:#f8fafc;
-    padding:18px;
-    margin:15px 0;
-    border-radius:8px;
-    border:1px solid #e2e8f0;
-}
-
-.legal{
-    background:#f8fafc;
-    border-left:5px solid #64748b;
-    padding:14px 18px;
-    margin:12px 0;
-    border-radius:6px;
-    line-height:1.8;
-}
-
-.legal strong{
-    color:#0f766e;
-}
-
-/* ===== TABLEAUX ===== */
-.table-wrapper{
-    width:100%;
-    overflow-x:auto;
-    margin:20px 0 30px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    margin:15px auto 25px;
-    box-shadow:0 3px 10px #00000012;
-}
-
-td,th{
-    border:1px solid #cbd5e1;
-    padding:10px;
-    font-size:14px;
-}
-
-.center{
-    text-align:center;
-}
-
-.right{
-    text-align:right;
-}
-
-.bold{
-    font-weight:bold;
-}
-
-.header-cell{
-    background:#dfe6e9;
-    font-weight:bold;
-}
-
-/* ===== OBJECTIFS ===== */
-.objective{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:9px;
-    padding:18px;
-    margin:18px 0;
-}
-
-.objective h3{
-    margin-top:0;
-}
-
-/* ===== SCHÉMA DU PROCESSUS ===== */
-.process-container{
-    max-width:850px;
-    margin:25px auto;
-    background:white;
-    padding:22px;
-    border:2px solid #cbd5e1;
-    border-radius:12px;
-    box-shadow:0 3px 12px #00000012;
-}
-
-.step{
-    text-align:center;
-    font-size:17px;
-    font-weight:bold;
-    color:#0b2c5f;
-    margin:12px 0;
-    line-height:1.5;
-}
-
-.arrow{
-    text-align:center;
-    font-size:27px;
-    color:#00b894;
-    margin:8px 0;
-}
-
-.process-row{
-    display:flex;
-    justify-content:center;
-    align-items:stretch;
-    gap:15px;
-    flex-wrap:wrap;
-    margin:18px 0;
-}
-
-.process-box{
-    flex:1 1 240px;
-    max-width:350px;
-    border:2px solid #0f766e;
-    border-radius:8px;
-    background:#fafafa;
-    overflow:hidden;
-}
-
-.process-box h3{
-    background:#0b2c5f;
-    color:white;
-    margin:0;
-    padding:11px;
-    text-align:center;
-    font-size:15px;
-}
-
-.process-box ul{
-    margin:0;
-    padding:14px 30px;
-    font-size:14px;
-}
-
-.process-info{
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    padding:15px;
-    background:#f8fafc;
-    font-size:14px;
-    line-height:1.7;
-    margin:12px auto;
-    max-width:650px;
-    text-align:center;
-}
-
-.documents{
-    max-width:350px;
-    margin:15px auto;
-}
-
-.formule{
-    margin-top:25px;
-    padding:16px 8px 5px;
-    border-top:2px solid #0f766e;
-    text-align:center;
-    font-size:15px;
-    font-weight:bold;
-    color:#0b2c5f;
-    line-height:1.8;
-}
-
-/* ===== PIED DE PAGE ===== */
-footer{
-    text-align:center;
-    padding:18px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-}
-
-footer a{
-    color:#00ffcc;
-    text-decoration:none;
-}
-
-footer a:hover{
-    text-decoration:underline;
-}
-
-/* ===== RESPONSIVE ===== */
+/* BLOCS DE CONTENU */
+.content-block{background:#f8fafc;padding:18px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+.legal{background:#f8fafc;border-left:5px solid #64748b;padding:14px 18px;margin:12px 0;border-radius:6px;line-height:1.8}
+.legal strong{color:#0f766e}
+.objective{background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;padding:18px;margin:18px 0}
+.objective h3{margin-top:0}
+/* SCHÉMA DU PROCESSUS */
+.process-container{max-width:850px;margin:25px auto;background:white;padding:22px;border:2px solid #cbd5e1;border-radius:12px;box-shadow:0 3px 12px #00000012}
+.step{text-align:center;font-size:17px;font-weight:bold;color:#0b2c5f;margin:12px 0;line-height:1.5}
+.arrow{text-align:center;font-size:27px;color:#00b894;margin:8px 0}
+.process-row{display:flex;justify-content:center;align-items:stretch;gap:15px;flex-wrap:wrap;margin:18px 0}
+.process-box{flex:1 1 240px;max-width:350px;border:2px solid #0f766e;border-radius:8px;background:#fafafa;overflow:hidden}
+.process-box h3{background:#0b2c5f;color:white;margin:0;padding:11px;text-align:center;font-size:15px}
+.process-box ul{margin:0;padding:14px 30px;font-size:14px}
+.process-info{border:1px solid #cbd5e1;border-radius:8px;padding:15px;background:#f8fafc;font-size:14px;line-height:1.7;margin:12px auto;max-width:650px;text-align:center}
+.documents{max-width:350px;margin:15px auto}
+.formule{margin-top:25px;padding:16px 8px 5px;border-top:2px solid #0f766e;text-align:center;font-size:15px;font-weight:bold;color:#0b2c5f;line-height:1.8}
+body.slides-mode .content-block,body.slides-mode .objective,body.slides-mode .legal{margin:6px 0;padding:10px}
+body.slides-mode .process-container{margin:8px auto;padding:12px}
+body.slides-mode .step{margin:6px 0}
+body.slides-mode .arrow{margin:3px 0;font-size:22px}
+body.slides-mode .process-info{margin:6px auto;padding:9px}
+@media(max-width:760px){.process-container{padding:12px}.process-box{flex-basis:100%}}
+/* RESPONSIVE */
 @media(max-width:760px){
-    .brandbar{
-        justify-content:center;
-        padding:12px;
-    }
-
-    .site-menu{
-        width:100%;
-    }
-
-    .site-menu>a{
-        padding:9px;
-    }
-
-    .dropdown button{
-        padding:9px;
-    }
-
-    .dropdown-content{
-        left:50%;
-        transform:translateX(-50%);
-        min-width:220px;
-    }
-
-    header h1{
-        font-size:19px;
-    }
-
-    section{
-        padding:18px;
-        margin:12px;
-    }
-
-    nav button{
-        padding:10px;
-        font-size:14px;
-    }
-
-    .process-container{
-        padding:12px;
-    }
-
-    .process-box{
-        flex-basis:100%;
-    }
+body{padding-bottom:48px}
+.brandbar{justify-content:center;padding:4px 6px;gap:5px}
+.brand{font-size:14px}
+.brand-logo{width:27px;height:27px;font-size:13px}
+.site-menu{width:100%;gap:2px}
+.site-menu>a{padding:5px 6px;font-size:11px}
+.dropdown button{padding:5px 6px;font-size:11px}
+.dropdown-content{min-width:220px}
+header h1{padding:5px 6px;line-height:1.3}
+header h1 p{font-size:16px;line-height:1.3;margin:3px 0}
+section{padding:16px;margin:10px}
+body.section-open>section.active{margin:0;padding:4px 15px 18px}
+nav{padding:6px 5px;gap:5px}
+nav button{padding:6px 9px;font-size:12px;white-space:normal}
+.definition-title{font-size:18px;padding:11px}
+.definition-box{padding:12px}
+td,th{padding:7px;font-size:12px}
+.journal-table{width:100%;min-width:0;table-layout:fixed}
+.journal-table td,.journal-table th{padding:7px 4px;font-size:12px;line-height:1.4}
+footer{min-height:38px;height:auto;flex-wrap:wrap;justify-content:center;gap:4px;padding:4px 5px;font-size:9px}
+footer>span{display:none}
+.footer-actions{width:auto;justify-content:center;gap:3px;margin-left:0}
+.btnFooter{padding:4px 6px;font-size:9px}
+.slide-navigation{gap:3px;padding:0}
+.slide-navigation button{font-size:9px;padding:4px 5px}
+.slide-counter{font-size:9px}
+body.slides-mode>section.active{padding:4px 15px 8px;min-height:calc(100vh - 48px)}
+body.slides-mode .definition-title{font-size:17px;padding:8px}
+body.slides-mode .content-slide.title-only-slide{min-height:calc(100vh - 115px);padding:0 8px}
+body.slides-mode .journal-table{width:100%;min-width:0}
+}
+@media(max-width:420px){
+.definition-title{font-size:16px}
+header h1 p{font-size:14px}
+.brandbar{padding:3px 5px}
+.site-menu>a,.dropdown button{font-size:10px;padding:4px 5px}
+section{padding:12px;margin:8px}
+body.section-open>section.active{margin:0;padding:4px 12px 14px}
+td,th{font-size:11px;padding:6px 3px}
+.titre{font-size:18px}
+nav button{padding:6px 7px;font-size:11px}
+footer{padding:4px 3px;gap:3px}
+.btnFooter{font-size:8px;padding:4px 4px}
+.footer-actions{gap:2px}
+.slide-navigation{gap:2px}
+.slide-navigation button{font-size:8px;padding:4px 3px}
+.slide-counter{font-size:8px}
+.journal-table td,.journal-table th{font-size:10px;padding:6px 2px}
+.journal-table .montant{text-align:center;font-size:10px}
+.journal-table .date td{font-size:11px;padding:8px 3px}
+}
+/* MODE DATASHOW */
+@media screen and (min-width:1200px) and (min-height:650px){
+body{font-size:18px;line-height:1.6;padding-bottom:40px}
+.brandbar{padding:5px 18px}
+.brand{font-size:17px}
+.brand-logo{width:32px;height:32px;font-size:15px}
+header h1{padding:6px 8px}
+header h1 p{font-size:21px}
+.site-menu>a,.dropdown button{font-size:13px;padding:6px 9px}
+.dropdown-content{min-width:270px}
+.dropdown-content a{font-size:15px;padding:11px 14px}
+nav{padding:8px 12px;gap:9px}
+nav button{padding:9px 16px;font-size:18px;border-radius:6px}
+section{padding:30px 35px;margin:18px 22px}
+body.section-open>section.active{margin:0;padding:4px 35px 30px}
+h2{font-size:27px;margin-bottom:18px}
+h3{font-size:21px;margin-top:20px}
+h4{font-size:18px}
+p,li{font-size:18px;line-height:1.7}
+.definition-title{font-size:23px;padding:14px}
+.definition-box{padding:17px}
+td,th{padding:14px 17px;font-size:17px;line-height:1.5}
+.journal-table td,.journal-table th{font-size:17px;padding:12px 8px}
+footer{min-height:38px;height:auto;font-size:11px}
+.btnFooter{padding:4px 9px;font-size:11px}
+body.slides-mode .definition-title{font-size:21px;padding:9px 12px}
+body.slides-mode p,body.slides-mode li{font-size:18px;line-height:1.45}
+}
+/* GRAND ÉCRAN */
+@media screen and (min-width:1600px){
+body{font-size:19px;padding-bottom:40px}
+header h1{padding:6px 8px}
+header h1 p{font-size:22px}
+section{max-width:1750px;margin:22px auto;padding:35px 45px}
+body.section-open>section.active{margin:0 auto;padding:4px 45px 35px}
+h2{font-size:30px}
+h3{font-size:24px}
+h4{font-size:20px}
+p,li{font-size:20px}
+td,th{font-size:19px;padding:17px 20px}
+nav button{font-size:19px;padding:10px 18px}
+.definition-title{font-size:25px;padding:15px}
+footer{min-height:38px;height:auto}
+body.slides-mode p,body.slides-mode li{font-size:19px;line-height:1.45}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-
 <div class="brandbar">
-
-<a class="brand" href="index.html">
-<span class="brand-logo">IF</span>
-<span>IgnDay</span>
-</a>
-
+<a class="brand" href="index.html"><span class="brand-logo">IF</span><span>IgnDay</span></a>
 <div class="site-menu">
-
 <a href="index.html">Accueil</a>
-
 <div class="dropdown">
-<button type="button" aria-expanded="false"
-onclick="toggleDropdown(this)">
-Modules ▼
-</button>
-
-<div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a>
-<a href="M2.html">M2 – Comptabilité analytique</a>
-<a href="M3.html">M3 – Analyse financière</a>
-<a href="M4.html">M4 – Fiscalité</a>
-<a href="M5.html">M5 – Mathématiques financières</a>
-<a href="M6.html">M6 – Statistiques</a>
-<a href="M7.html">M7 – Marketing</a>
-<a href="M8.html">M8 – Comptabilité approfondie</a>
-<a href="M9.html">M9 – Management</a>
-</div>
-</div>
-
-<div class="dropdown">
-<button type="button" aria-expanded="false"
-onclick="toggleDropdown(this)">
-M1 - Comptabilité générale ▼
-</button>
-
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">M1 - Comptabilité générale ▼</button>
 <div class="dropdown-content">
 <a href="P1M1.html">P1 – Concepts de base</a>
 <a href="P2M1.html">P2 – Opérations courantes</a>
 <a href="P3M1.html">P3 – Travaux de fin d’exercice</a>
 </div>
 </div>
-
 <div class="dropdown">
-<button type="button" aria-expanded="false"
-onclick="toggleDropdown(this)">
-P3 – Travaux de fin d’exercice ▼
-</button>
-
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">P3 – Travaux de fin d’exercice ▼</button>
 <div class="dropdown-content">
 <a href="C1P3M1.html">T – Résumés des thèmes</a>
 <a href="C2P3M1.html">F – Formulaires interactifs</a>
 <a href="C3P3M1.html">E – Exercices corrigés</a>
 </div>
 </div>
-
 <div class="dropdown">
-<button type="button" aria-expanded="false"
-onclick="toggleDropdown(this)">
-T – Résumés des thèmes ▼
-</button>
-
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">T – Résumés des thèmes ▼</button>
 <div class="dropdown-content">
-<a href="T1C1P3M1.html" class="card">
-       T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation
-    </a>
-
-    <a href="T2C1P3M1.html" class="card">
-        T2 - La régularisation des stocks
-    </a>
-
-    <a href="T3C1P3M1.html" class="card">
-        T3 - Les amortissements
-    </a>
-
-    <a href="T4C1P3M1.html" class="card">
-       T4 - Les provisions pour dépréciation des immobilisations
-    </a>
-
-    <a href="T5C1P3M1.html" class="card">
-T5 - Les provisions pour dépréciation des éléments de l’actif circulant
-    </a>
-
-    <a href="T6C1P3M1.html" class="card">
-        T6 - Les provisions pour risques et charges
-    </a>
-
-    <a href="T7C1P3M1.html" class="card">
-        T7 - La régularisation des charges
-    </a>
-
-    <a href="T8C1P3M1.html" class="card">
-        T8 - La régularisation des produits
-    </a>
-
+<a href="T1C1P3M1.html">T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation</a>
+<a href="T2C1P3M1.html">T2 - La régularisation des stocks</a>
+<a href="T3C1P3M1.html">T3 - Les amortissements</a>
+<a href="T4C1P3M1.html">T4 - Les provisions pour dépréciation des immobilisations</a>
+<a href="T5C1P3M1.html">T5 - Les provisions pour dépréciation des éléments de l’actif circulant</a>
+<a href="T6C1P3M1.html">T6 - Les provisions pour risques et charges</a>
+<a href="T7C1P3M1.html">T7 - La régularisation des charges</a>
+<a href="T8C1P3M1.html">T8 - La régularisation des produits</a>
 </div>
 </div>
-
 <a href="C1P3M1.html">⬅ Retour</a>
-
 </div>
 </div>
-
 <h1>
-<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
-<p>T1 – L’intérêt des travaux de fin d’exercice et les opérations de régularisation</p>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice</p>
+<p>Thème 1 – L’intérêt des travaux de fin d’exercice et les opérations de régularisation</p>
 </h1>
-
 </header>
 
+<!-- NAVIGATION DES SECTIONS -->
 <nav>
-<button onclick="showSection('INV',this)">L’inventaire</button>
-<button onclick="showSection('UTI',this)">Objectifs des travaux d’inventaire</button>
-<button onclick="showSection('BAI',this)">Balance avant inventaire</button>
-<button onclick="showSection('PRO',this)">Processus des travaux de fin d’exercice</button>
+<button onclick="showSection('INV',this)">1- Notion et objectifs des travaux d’inventaire</button>
+<button onclick="showSection('BAI',this)">2- La balance avant inventaire et le processus des travaux de fin d’exercice</button>
 </nav>
 
-<!-- ===== SECTION 1 : INVENTAIRE ===== -->
-<section id="INV" class="active animationSection">
+<!-- SECTIONS -->
 
-<h2>📘 Définition de l’inventaire</h2>
+<section id="INV">
 
-<p>
-L’inventaire consiste à établir une liste exhaustive des éléments figurant dans le bilan.
-</p>
+<h2 class="definition-title">1- Notion et objectifs des travaux d’inventaire</h2>
 
-<p>
-Avant d’établir le bilan, il est nécessaire de procéder à un inventaire dans l’entreprise. Cet inventaire consiste à :
-</p>
-
+<h2>A- Définition de l’inventaire</h2>
+<div class="definition-box">
+<p>L’inventaire consiste à établir une liste exhaustive des éléments figurant dans le bilan.</p>
+<p>Avant d’établir le bilan, il est nécessaire de procéder à un inventaire dans l’entreprise. Cet inventaire consiste à :</p>
 <div class="highlight">
 ✔ Dénombrer les éléments de l’actif et du passif.<br>
 ✔ Évaluer ces éléments, c’est-à-dire leur donner une valeur réelle exprimée en monnaie nationale.
 </div>
+</div>
 
 <h3>a – Aspect légal de l’inventaire</h3>
-
-<p>
-La loi comptable impose aux entreprises qui tiennent une comptabilité de procéder aux opérations d’inventaire et d’établir les états de synthèse conformément aux dispositions légales applicables.
-</p>
-
+<div class="definition-box">
+<p>La loi comptable impose aux entreprises qui tiennent une comptabilité de procéder aux opérations d’inventaire et d’établir les états de synthèse conformément aux dispositions légales applicables.</p>
 <div class="highlight">
 ✔ Arrêter les comptes en fin d’exercice.<br>
 ✔ Établir les états de synthèse : bilan, CPC et autres états requis.
 </div>
-
-<p>
-Si nécessaire, des écritures de régularisation sont comptabilisées afin que les comptes représentent la situation réelle de l’entreprise et donnent une image fidèle de son patrimoine et de ses résultats.
-</p>
+<p>Si nécessaire, des écritures de régularisation sont comptabilisées afin que les comptes représentent la situation réelle de l’entreprise et donnent une image fidèle de son patrimoine et de ses résultats.</p>
+</div>
 
 <h3>Articles de la loi n° 9-88 relative aux obligations comptables du commerçant</h3>
-
-<div class="legal">
-<strong>Article 5 :</strong>
-Les éléments d’actif et de passif de l’entreprise doivent faire l’objet d’un inventaire au moins une fois par exercice, à la fin de celui-ci.
-</div>
-
-<div class="legal">
-<strong>Article 6 :</strong>
-Il doit être tenu un livre sur lequel sont transcrits le bilan et le compte de produits et de charges de chaque exercice.
-</div>
-
-<div class="legal">
-<strong>Article 7 :</strong>
-La durée de l’exercice est de douze mois. Elle peut exceptionnellement être inférieure à douze mois pour un exercice donné.
-</div>
-
-<div class="legal">
-<strong>Article 18 :</strong>
-L’établissement des états de synthèse doit respecter le délai légal applicable après la clôture de l’exercice, sous réserve des dispositions et exceptions prévues par la réglementation.
-</div>
+<div class="legal"><strong>Article 5 :</strong> Les éléments d’actif et de passif de l’entreprise doivent faire l’objet d’un inventaire au moins une fois par exercice, à la fin de celui-ci.</div>
+<div class="legal"><strong>Article 6 :</strong> Il doit être tenu un livre sur lequel sont transcrits le bilan et le compte de produits et de charges de chaque exercice.</div>
+<div class="legal"><strong>Article 7 :</strong> La durée de l’exercice est de douze mois. Elle peut exceptionnellement être inférieure à douze mois pour un exercice donné.</div>
+<div class="legal"><strong>Article 18 :</strong> L’établissement des états de synthèse doit respecter le délai légal applicable après la clôture de l’exercice, sous réserve des dispositions et exceptions prévues par la réglementation.</div>
 
 <h3>b – Aspect comptable : Code général de normalisation comptable</h3>
-
-<p>
-Les travaux de fin d’exercice sont effectués conformément aux principes comptables suivants :
-</p>
-
+<div class="definition-box">
+<p>Les travaux de fin d’exercice sont effectués conformément aux principes comptables suivants :</p>
 <div class="highlight">
-<strong>✔ Principe de spécialisation des exercices :</strong>
-les charges et les produits doivent être rattachés à l’exercice qui les concerne effectivement et à celui-là seulement.
+<strong>✔ Principe de spécialisation des exercices :</strong> les charges et les produits doivent être rattachés à l’exercice qui les concerne effectivement et à celui-là seulement.
 <br><br>
-
-<strong>✔ Principe de prudence :</strong>
-les produits ne sont pris en compte que s’ils sont certains et définitivement acquis à l’entreprise ; en revanche, les charges sont prises en compte dès lors qu’elles sont probables.
+<strong>✔ Principe de prudence :</strong> les produits ne sont pris en compte que s’ils sont certains et définitivement acquis à l’entreprise ; en revanche, les charges sont prises en compte dès lors qu’elles sont probables.
 <br><br>
-
-<strong>✔ Principe de continuité d’exploitation :</strong>
-l’entreprise établit ses états de synthèse dans la perspective d’une poursuite normale de ses activités.
+<strong>✔ Principe de continuité d’exploitation :</strong> l’entreprise établit ses états de synthèse dans la perspective d’une poursuite normale de ses activités.
+</div>
 </div>
 
 <h3>c – Périodicité des travaux d’inventaire</h3>
-
-<p>
-Les opérations de fin d’exercice, ou « travaux d’inventaire », sont réalisées à la clôture de l’exercice comptable.
-</p>
-
-<p>
-La plupart des entreprises clôturent leur exercice comptable le 31 décembre de chaque année civile.
-</p>
-
+<div class="definition-box">
+<p>Les opérations de fin d’exercice, ou « travaux d’inventaire », sont réalisées à la clôture de l’exercice comptable.</p>
+<p>La plupart des entreprises clôturent leur exercice comptable le 31 décembre de chaque année civile.</p>
 <div class="highlight">
-<strong>À retenir :</strong>
-la date de clôture dépend de la situation de l’entreprise et des règles qui lui sont applicables. Elle ne correspond pas nécessairement au 31 décembre.
+<strong>À retenir :</strong> la date de clôture dépend de la situation de l’entreprise et des règles qui lui sont applicables. Elle ne correspond pas nécessairement au 31 décembre.
+</div>
 </div>
 
-</section>
-
-<!-- ===== SECTION 2 : OBJECTIFS ===== -->
-<section id="UTI">
-
-<h2>🎯 Objectifs des travaux d’inventaire</h2>
-
-<div class="objective">
+<h2>B- Objectifs des travaux d’inventaire</h2>
 
 <h3>a – Objectifs comptables</h3>
-
-<p>
-Les travaux d’inventaire sont indispensables pour contrôler et ajuster la comptabilité d’une entreprise en vue d’établir les comptes annuels à la clôture d’un exercice.
-</p>
-
+<div class="objective">
+<div class="definition-box">
+<p>Les travaux d’inventaire sont indispensables pour contrôler et ajuster la comptabilité d’une entreprise en vue d’établir les comptes annuels à la clôture d’un exercice.</p>
 <p>Ces opérations permettent notamment de :</p>
-
 <ul>
 <li>Déterminer le résultat comptable de l’entreprise.</li>
 <li>Évaluer les stocks à la clôture de l’exercice.</li>
@@ -695,78 +355,57 @@ Les travaux d’inventaire sont indispensables pour contrôler et ajuster la com
 <li>Régulariser les charges et les produits afin de respecter le principe de spécialisation des exercices.</li>
 <li>Présenter des états de synthèse donnant une image fidèle de la situation de l’entreprise.</li>
 </ul>
-
+</div>
 </div>
 
-<div class="objective">
-
 <h3>b – Objectifs fiscaux</h3>
-
-<p>
-Les travaux d’inventaire contribuent à déterminer le résultat fiscal et, selon les règles fiscales applicables, le montant de l’impôt à payer.
-</p>
-
+<div class="objective">
+<div class="definition-box">
+<p>Les travaux d’inventaire contribuent à déterminer le résultat fiscal et, selon les règles fiscales applicables, le montant de l’impôt à payer.</p>
 <ul>
 <li>Identifier les charges et les produits de l’exercice.</li>
 <li>Tenir compte des réintégrations et des déductions fiscales nécessaires.</li>
 <li>Déterminer le résultat fiscal servant de base au calcul de l’impôt, conformément à la réglementation en vigueur.</li>
 </ul>
-
 </div>
-
 <div class="highlight">
-<strong>Synthèse :</strong>
-les travaux d’inventaire permettent de corriger les comptes, de déterminer le résultat de l’exercice et de préparer les états de synthèse.
+<strong>Synthèse :</strong> les travaux d’inventaire permettent de corriger les comptes, de déterminer le résultat de l’exercice et de préparer les états de synthèse.
+</div>
 </div>
 
 </section>
 
-<!-- ===== SECTION 3 : BALANCE AVANT INVENTAIRE ===== -->
 <section id="BAI">
 
-<h2>📊 La balance avant inventaire</h2>
+<h2 class="definition-title">2- La balance avant inventaire et le processus des travaux de fin d’exercice</h2>
 
+<h2>A- La balance avant inventaire</h2>
 <div class="content-block">
-
-<p>
-Avant de commencer les travaux de fin d’exercice proprement dits, il est nécessaire d’établir une balance qui regroupe et synthétise les opérations comptabilisées par l’entreprise durant l’exercice.
-</p>
-
-<p>
-Juste après son établissement, cette balance doit faire l’objet d’un contrôle arithmétique. Ce contrôle consiste à vérifier l’égalité entre le total des mouvements de la balance et le total des mouvements du journal général.
-</p>
-
-<p>
-Après vérification de la concordance entre ces totaux, il convient de procéder à un contrôle de vraisemblance et au pointage des comptes afin de déceler les erreurs éventuelles.
-</p>
-
+<div class="definition-box">
+<p>Avant de commencer les travaux de fin d’exercice proprement dits, il est nécessaire d’établir une balance qui regroupe et synthétise les opérations comptabilisées par l’entreprise durant l’exercice.</p>
+<p>Juste après son établissement, cette balance doit faire l’objet d’un contrôle arithmétique. Ce contrôle consiste à vérifier l’égalité entre le total des mouvements de la balance et le total des mouvements du journal général.</p>
+<p>Après vérification de la concordance entre ces totaux, il convient de procéder à un contrôle de vraisemblance et au pointage des comptes afin de déceler les erreurs éventuelles.</p>
+</div>
 </div>
 
 <h3>Principales erreurs à rechercher</h3>
-
 <div class="objective">
-
+<div class="definition-box">
 <ul>
 <li><strong>Les erreurs d’imputation :</strong> une opération est enregistrée dans un compte inapproprié.</li>
-
 <li><strong>Les erreurs d’omission :</strong> une pièce justificative ou une opération n’a pas été comptabilisée.</li>
-
 <li><strong>Les erreurs de saisie :</strong> une pièce est enregistrée pour un montant différent de celui qui y figure.</li>
-
 <li><strong>Les erreurs de calcul :</strong> une erreur arithmétique affecte un montant ou un total.</li>
 </ul>
-
 </div>
-
 <div class="highlight">
-<strong>Important :</strong>
-l’égalité de la balance ne garantit pas l’absence de toutes les erreurs comptables. Certaines erreurs d’imputation ou d’omission peuvent subsister malgré l’équilibre des totaux.
+<strong>Important :</strong> l’égalité de la balance ne garantit pas l’absence de toutes les erreurs comptables. Certaines erreurs d’imputation ou d’omission peuvent subsister malgré l’équilibre des totaux.
+</div>
 </div>
 
 <h3>Étapes du contrôle de la balance</h3>
-
 <div class="content-block">
-
+<div class="definition-box">
 <ol>
 <li>Vérifier l’égalité des mouvements débiteurs et créditeurs.</li>
 <li>Comparer les totaux de la balance avec ceux du journal général.</li>
@@ -774,42 +413,21 @@ l’égalité de la balance ne garantit pas l’absence de toutes les erreurs co
 <li>Identifier les anomalies et corriger les erreurs détectées.</li>
 <li>Préparer les travaux d’inventaire et les écritures de régularisation.</li>
 </ol>
-
+</div>
 </div>
 
-</section>
-
-<!-- ===== SECTION 4 : PROCESSUS ===== -->
-<section id="PRO">
-
-<h2>🔄 Processus des travaux de fin d’exercice</h2>
-
-<p>
-Après l’établissement de la balance avant inventaire, il faut effectuer les travaux d’inventaire pour procéder aux différentes régularisations nécessaires à la fin de l’exercice comptable.
-</p>
-
-<p>
-Ces opérations ont pour objectif de produire des états de synthèse qui reflètent fidèlement le patrimoine, la situation financière et le résultat de l’entreprise.
-</p>
+<h2>B- Processus des travaux de fin d’exercice</h2>
+<div class="definition-box">
+<p>Après l’établissement de la balance avant inventaire, il faut effectuer les travaux d’inventaire pour procéder aux différentes régularisations nécessaires à la fin de l’exercice comptable.</p>
+<p>Ces opérations ont pour objectif de produire des états de synthèse qui reflètent fidèlement le patrimoine, la situation financière et le résultat de l’entreprise.</p>
+</div>
 
 <div class="process-container">
-
-<div class="step">
-Balance avant inventaire
-</div>
-
-<div class="process-info">
-Comptes issus des opérations courantes : achats, ventes, salaires, loyers et autres opérations de l’exercice.
-</div>
-
+<div class="step">Balance avant inventaire</div>
+<div class="process-info">Comptes issus des opérations courantes : achats, ventes, salaires, loyers et autres opérations de l’exercice.</div>
 <div class="arrow">⬇</div>
-
-<div class="step">
-Travaux d’inventaire et écritures de régularisation
-</div>
-
+<div class="step">Travaux d’inventaire et écritures de régularisation</div>
 <div class="process-row">
-
 <div class="process-box">
 <h3>Comptes du bilan</h3>
 <ul>
@@ -819,7 +437,6 @@ Travaux d’inventaire et écritures de régularisation
 <li>Régularisation des comptes de tiers</li>
 </ul>
 </div>
-
 <div class="process-box">
 <h3>Comptes de CPC</h3>
 <ul>
@@ -829,35 +446,15 @@ Travaux d’inventaire et écritures de régularisation
 <li>Dotations aux amortissements et aux provisions</li>
 </ul>
 </div>
-
 </div>
-
 <div class="arrow">⬇</div>
-
-<div class="step">
-Balance après inventaire
-</div>
-
-<div class="process-info">
-Balance établie après l’enregistrement et la vérification des écritures de régularisation.
-</div>
-
+<div class="step">Balance après inventaire</div>
+<div class="process-info">Balance établie après l’enregistrement et la vérification des écritures de régularisation.</div>
 <div class="arrow">⬇</div>
-
-<div class="step">
-Détermination du résultat comptable
-</div>
-
-<div class="process-info">
-Comparaison des produits et des charges de l’exercice pour déterminer le bénéfice ou la perte.
-</div>
-
+<div class="step">Détermination du résultat comptable</div>
+<div class="process-info">Comparaison des produits et des charges de l’exercice pour déterminer le bénéfice ou la perte.</div>
 <div class="arrow">⬇</div>
-
-<div class="step">
-Établissement des états de synthèse
-</div>
-
+<div class="step">Établissement des états de synthèse</div>
 <div class="process-box documents">
 <h3>Documents de synthèse</h3>
 <ul>
@@ -868,85 +465,337 @@ Comparaison des produits et des charges de l’exercice pour déterminer le bén
 <li>État des informations complémentaires (ETIC)</li>
 </ul>
 </div>
-
-<div class="formule">
-Balance avant inventaire + Écritures de régularisation = Balance après inventaire
+<div class="formule">Balance avant inventaire + Écritures de régularisation = Balance après inventaire</div>
 </div>
 
-</div>
-
+<div class="definition-box">
 <div class="highlight">
-<strong>Conclusion :</strong>
-les travaux de fin d’exercice assurent la régularisation des comptes avant l’établissement des états de synthèse et la détermination du résultat définitif.
+<strong>Conclusion :</strong> les travaux de fin d’exercice assurent la régularisation des comptes avant l’établissement des états de synthèse et la détermination du résultat définitif.
+</div>
 </div>
 
 </section>
 
+<!-- PIED DE PAGE AVEC NAVIGATION DES DIAPOSITIVES -->
 <footer>
-Formation en Comptabilité Générale<br><br>
+<div class="slide-navigation" id="slideNavigation">
+<button type="button" id="btnDiapoPrecedente">← Diapo précédente</button>
+<span class="slide-counter" id="compteurDiapo">Diapo 1 / 1</span>
+<button type="button" id="btnDiapoSuivante">Diapo suivante →</button>
+</div>
+<div class="footer-actions">
+<button type="button" class="btnFooter btnPrecedent" id="btnSectionPrecedente" onclick="naviguerSection(-1)">← Section précédente</button>
+<button type="button" class="btnFooter btnSuivant" id="btnSectionSuivante" onclick="naviguerSection(1)">Section suivante →</button>
+<button type="button" class="btnFooter btnRetourMenu" id="btnRetourMenu" onclick="retourMenu()">↑ Retour au menu</button>
+</div>
 </footer>
 
 <script>
-/* ===== MENUS DÉROULANTS ===== */
+/* MENUS DÉROULANTS */
+function positionDropdown(button,menu){
+const rect=button.getBoundingClientRect();const marge=8;
+menu.style.display="block";menu.style.position="fixed";
+menu.style.maxWidth=(window.innerWidth-16)+"px";menu.style.maxHeight=(window.innerHeight-16)+"px";
+menu.style.top="0";menu.style.bottom="auto";
+const hauteurMenu=menu.scrollHeight;
+const espaceBas=window.innerHeight-rect.bottom-marge;
+const espaceHaut=rect.top-marge;
+const ouvrirEnBas=hauteurMenu<=espaceBas||espaceBas>=espaceHaut;
+let hd;
+if(ouvrirEnBas){menu.style.top=(rect.bottom+4)+"px";menu.style.bottom="auto";hd=espaceBas-4;}
+else{menu.style.bottom=(window.innerHeight-rect.top+4)+"px";menu.style.top="auto";hd=espaceHaut-4;}
+menu.style.maxHeight=Math.max(100,hd)+"px";
+menu.style.width="auto";
+const largeur=Math.min(Math.max(menu.offsetWidth,230),window.innerWidth-16);
+menu.style.width=largeur+"px";
+let pg=rect.left;
+if(pg+largeur>window.innerWidth-marge)pg=window.innerWidth-largeur-marge;
+if(pg<marge)pg=marge;
+menu.style.left=pg+"px";
+}
 function toggleDropdown(button){
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
+const m=button.parentElement.querySelector(".dropdown-content");
+const isOpen=m.style.display==="block";
+fermerTousLesMenus();
+if(!isOpen){positionDropdown(button,m);button.setAttribute("aria-expanded","true");}
+}
+function fermerTousLesMenus(){
+document.querySelectorAll(".dropdown-content").forEach(m=>{m.style.display="none";m.style.top="auto";m.style.bottom="auto";});
+document.querySelectorAll(".dropdown button").forEach(b=>b.setAttribute("aria-expanded","false"));
+}
+document.addEventListener("click",function(e){if(!e.target.closest(".dropdown"))fermerTousLesMenus();});
+function repositionnerMenus(){
+document.querySelectorAll(".dropdown").forEach(d=>{
+const b=d.querySelector("button");const m=d.querySelector(".dropdown-content");
+if(b&&m&&m.style.display==="block")positionDropdown(b,m);
+});
+}
+window.addEventListener("resize",repositionnerMenus);
+window.addEventListener("scroll",repositionnerMenus,true);
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
+/* MODE DIAPOSITIVES AUTOMATIQUES */
+function zoomImportant(){return(window.screen.width>=1000&&window.innerWidth<=window.screen.width*0.62);}
+let currentSlides=[];let currentSlideIndex=0;let currentSlideSection=null;let slideMode=false;let resizeTimer=null;
+const slideNavigation=document.getElementById("slideNavigation");
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+const compteurDiapo=document.getElementById("compteurDiapo");
 
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
-    });
-
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
+/* MÉMORISER LE CONTENU ORIGINAL */
+const originalSectionContent=new Map();
+function memoriserContenu(section){
+if(!originalSectionContent.has(section.id)){originalSectionContent.set(section.id,Array.from(section.childNodes));}
+}
+function restaurerContenuOriginal(section){
+if(!section||!originalSectionContent.has(section.id))return;
+section.replaceChildren(...originalSectionContent.get(section.id));
 }
 
-/* Fermer les menus en cliquant à l'extérieur */
-document.addEventListener("click",function(event){
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-        if(!dropdown.contains(event.target)){
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
+/* HAUTEUR DISPONIBLE */
+function hauteurDisponibleDiapo(){
+const hf=document.querySelector("footer")?.offsetHeight||38;
+return Math.max(180,window.innerHeight-hf-35);
+}
 
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
-        }
-    });
+/* IDENTIFIER LES TITRES */
+function estTitreContenu(node){
+if(node.nodeType!==Node.ELEMENT_NODE)return false;
+return node.matches("h2,h3,h4,.definition-title,.sous-titre,.table-title");
+}
+
+/* CONSTRUIRE LES GROUPES */
+function construireGroupes(nodes){
+const groupes=[];let g=[];
+nodes.forEach(node=>{
+if(node.nodeType===Node.TEXT_NODE&&!node.textContent.trim())return;
+if(estTitreContenu(node)&&g.length){groupes.push(g);g=[];}
+g.push(node);
+});
+if(g.length)groupes.push(g);
+return groupes;
+}
+
+/* CRÉER UNE DIAPOSITIVE */
+function creerSlide(section){
+const slide=document.createElement("div");
+slide.className="content-slide";
+section.appendChild(slide);
+currentSlides.push(slide);
+return slide;
+}
+
+/* MESURER UN GROUPE DE CONTENU */
+function mesurerGroupe(groupe,largeur){
+const m=document.createElement("div");
+m.className="content-slide slide-measure";
+m.style.width=Math.max(300,largeur)+"px";m.style.maxWidth="none";m.style.height="auto";m.style.minHeight="0";m.style.maxHeight="none";
+m.style.overflow="visible";m.style.display="block";m.style.visibility="hidden";m.style.position="fixed";
+m.style.left="-100000px";m.style.top="0";m.style.padding="2px 0 8px";m.style.boxSizing="border-box";
+groupe.forEach(n=>m.appendChild(n.cloneNode(true)));
+document.body.appendChild(m);
+const h=Math.ceil(Math.max(m.scrollHeight,m.getBoundingClientRect().height));
+m.remove();
+return h;
+}
+
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+function creerDiapositives(section){
+if(!section)return;
+currentSlides=[];currentSlideIndex=0;
+restaurerContenuOriginal(section);
+memoriserContenu(section);
+const nodes=Array.from(section.childNodes);
+
+/* LE PREMIER TITRE PRINCIPAL EST PLACÉ SEUL SUR LA PREMIÈRE DIAPOSITIVE */
+let titrePrincipal=null;
+const premier=nodes.find(n=>!(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim()));
+if(premier&&premier.nodeType===Node.ELEMENT_NODE&&premier.classList.contains("definition-title")){titrePrincipal=premier;}
+
+section.replaceChildren();
+const hauteurMax=hauteurDisponibleDiapo();
+const largeur=Math.max(300,section.clientWidth-50);
+
+if(titrePrincipal){
+const st=creerSlide(section);
+st.classList.add("title-only-slide");
+st.appendChild(titrePrincipal);
+}
+
+const nodesContenu=nodes.filter(n=>{
+if(n===titrePrincipal)return false;
+if(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim())return false;
+return true;
+});
+const groupes=construireGroupes(nodesContenu);
+let slide=null;let hu=0;
+groupes.forEach(groupe=>{
+const hg=mesurerGroupe(groupe,largeur);
+if(!slide||(hu>0&&hu+hg+12>hauteurMax)){slide=creerSlide(section);hu=0;}
+groupe.forEach(n=>slide.appendChild(n));
+hu+=hg+12;
+});
+if(currentSlides.length===0)creerSlide(section);
+afficherDiapositive(0);
+}
+
+/* COMPTEUR DES DIAPOSITIVES */
+function actualiserCompteurDiapo(){
+const total=currentSlides.length;
+if(total===0){compteurDiapo.textContent="Aucune diapositive";btnDiapoPrecedente.disabled=true;btnDiapoSuivante.disabled=true;return;}
+compteurDiapo.textContent=" "+(currentSlideIndex+1)+" / "+total;
+btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+}
+
+/* AJUSTEMENT DU CONTENU */
+function ajusterContenuDiapositive(slide){
+if(!slide)return;
+slide.style.width="100%";slide.style.maxWidth="100%";slide.style.overflowX="hidden";slide.style.overflowY="auto";
+slide.querySelectorAll("*").forEach(el=>{el.style.maxWidth="100%";el.style.minWidth="0";el.style.overflowWrap="anywhere";});
+slide.querySelectorAll("table").forEach(t=>{t.style.width="100%";t.style.maxWidth="100%";t.style.tableLayout="fixed";});
+slide.querySelectorAll("td,th").forEach(c=>{c.style.overflowWrap="anywhere";c.style.wordBreak="normal";});
+}
+
+/* AFFICHER UNE DIAPOSITIVE */
+function afficherDiapositive(index){
+if(!currentSlides.length){actualiserCompteurDiapo();return;}
+if(index<0||index>=currentSlides.length)return;
+currentSlideIndex=index;
+currentSlides.forEach((s,i)=>{
+s.classList.toggle("active-slide",i===index);
+if(i===index)ajusterContenuDiapositive(s);
+});
+actualiserCompteurDiapo();
+window.scrollTo({top:0,behavior:"auto"});
+}
+
+/* NAVIGATION DIAPOSITIVES */
+function naviguerDiapositive(d){afficherDiapositive(currentSlideIndex+d);}
+btnDiapoPrecedente.addEventListener("click",()=>naviguerDiapositive(-1));
+btnDiapoSuivante.addEventListener("click",()=>naviguerDiapositive(1));
+
+/* ACTIVER / DÉSACTIVER LE MODE DIAPOSITIVES */
+function activerModeDiapositives(section){
+if(!section)return;
+if(slideMode&&currentSlideSection===section)return;
+if(currentSlideSection&&currentSlideSection!==section)desactiverModeDiapositives(currentSlideSection);
+currentSlideSection=section;
+document.body.classList.add("slides-mode");
+slideNavigation.style.display="flex";
+slideMode=true;
+creerDiapositives(section);
+}
+function desactiverModeDiapositives(section){
+if(!section)section=currentSlideSection;
+if(section)restaurerContenuOriginal(section);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+}
+
+/* ACTUALISER L'AFFICHAGE */
+function actualiserAffichageSection(){
+const section=document.querySelector("body > section.active");
+if(!section)return;
+if(zoomImportant()){activerModeDiapositives(section);}
+else if(slideMode){desactiverModeDiapositives(section);}
+}
+
+/* NAVIGATION ENTRE LES SECTIONS */
+const sectionIds=["INV","BAI"];
+let currentSectionIndex=-1;
+
+function actualiserBoutonsNavigation(){
+const p=document.getElementById("btnSectionPrecedente");
+const s=document.getElementById("btnSectionSuivante");
+if(currentSectionIndex===-1){p.classList.remove("visible");s.classList.remove("visible");return;}
+p.disabled=(currentSectionIndex===0);
+s.disabled=(currentSectionIndex===sectionIds.length-1);
+}
+
+function showSection(id,button){
+const nouvelIndex=sectionIds.indexOf(id);
+const current=document.getElementById(id);
+if(!current||nouvelIndex===-1){console.warn("Section introuvable :",id);return;}
+if(slideMode&&currentSlideSection)desactiverModeDiapositives(currentSlideSection);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+document.querySelectorAll("body > section").forEach(s=>s.classList.remove("active","animationSection"));
+document.querySelectorAll("nav button").forEach(b=>{b.classList.remove("btnActive");b.removeAttribute("aria-pressed");});
+fermerTousLesMenus();
+currentSectionIndex=nouvelIndex;
+document.body.classList.add("section-open");
+current.classList.add("active","animationSection");
+document.getElementById("btnRetourMenu").classList.add("visible");
+document.getElementById("btnSectionPrecedente").classList.add("visible");
+document.getElementById("btnSectionSuivante").classList.add("visible");
+actualiserBoutonsNavigation();
+if(!button)button=document.querySelectorAll("nav button")[nouvelIndex];
+if(button){button.classList.add("btnActive");button.setAttribute("aria-pressed","true");}
+window.scrollTo({top:0,behavior:"auto"});
+requestAnimationFrame(()=>{actualiserAffichageSection();});
+}
+
+function naviguerSection(direction){
+const ni=currentSectionIndex+direction;
+if(ni<0||ni>=sectionIds.length)return;
+showSection(sectionIds[ni],Array.from(document.querySelectorAll("nav button"))[ni]);
+}
+
+function retourMenu(){
+if(slideMode&&currentSlideSection)desactiverModeDiapositives(currentSlideSection);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+document.querySelectorAll("body > section").forEach(s=>s.classList.remove("active","animationSection"));
+document.getElementById("btnRetourMenu").classList.remove("visible");
+document.getElementById("btnSectionPrecedente").classList.remove("visible");
+document.getElementById("btnSectionSuivante").classList.remove("visible");
+currentSectionIndex=-1;
+document.body.classList.remove("section-open");
+requestAnimationFrame(()=>{
+const menu=document.querySelector("nav");
+if(menu){const pos=menu.getBoundingClientRect().top+window.scrollY-12;window.scrollTo({top:Math.max(0,pos),behavior:"smooth"});}
+});
+}
+
+/* ADAPTATION AU REDIMENSIONNEMENT / ZOOM */
+window.addEventListener("resize",function(){
+clearTimeout(resizeTimer);
+resizeTimer=setTimeout(()=>{
+const section=document.querySelector("body > section.active");
+if(!section)return;
+if(zoomImportant()){
+if(!slideMode||currentSlideSection!==section){activerModeDiapositives(section);}
+else{
+const ancien=currentSlideIndex;
+creerDiapositives(section);
+if(currentSlides.length>0)afficherDiapositive(Math.min(ancien,currentSlides.length-1));
+}
+}else if(slideMode){desactiverModeDiapositives(section);}
+},180);
 });
 
-/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
-function showSection(id,button){
+/* NAVIGATION AU CLAVIER */
+document.addEventListener("keydown",function(event){
+if(!slideMode)return;
+const el=document.activeElement;
+if(el&&(el.tagName==="INPUT"||el.tagName==="TEXTAREA"||el.tagName==="SELECT"||el.isContentEditable))return;
+if(event.key==="ArrowRight"||event.key==="PageDown"){event.preventDefault();naviguerDiapositive(1);}
+if(event.key==="ArrowLeft"||event.key==="PageUp"){event.preventDefault();naviguerDiapositive(-1);}
+});
 
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
-
-    const current=document.getElementById(id);
-
-    if(current){
-        current.classList.add("active","animationSection");
-    }
-
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
-    });
-
-    if(button){
-        button.classList.add("btnActive");
-    }
-
-    window.scrollTo({
-        top:document.querySelector("nav").offsetTop,
-        behavior:"smooth"
-    });
-}
+/* INITIALISATION */
+document.addEventListener("DOMContentLoaded",function(){
+slideNavigation.style.display="none";
+document.body.classList.remove("slides-mode","section-open");
+document.querySelectorAll("body > section").forEach(s=>{s.classList.remove("active","animationSection");memoriserContenu(s);});
+document.getElementById("btnRetourMenu").classList.remove("visible");
+document.getElementById("btnSectionPrecedente").classList.remove("visible");
+document.getElementById("btnSectionSuivante").classList.remove("visible");
+currentSectionIndex=-1;
+});
 </script>
 
 </body>
