@@ -1,883 +1,271 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IgnDay – T2 La régularisation des stocks</title>
+<title>IgnDay Comptabilité Générale - La régularisation des stocks</title>
 
 <style>
 *{box-sizing:border-box}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b;padding-bottom:40px}
 
-html{
-    width:100%;
-    overflow-x:hidden;
-    scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
-}
+/* EN-TÊTE */
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 8px #0002}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;min-height:55px;padding:10px 14px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:7px;color:white;text-decoration:none;font-weight:bold;font-size:15px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;background:#00b894;font-size:15px}
+header h1{padding:12px 8px;margin:0;font-size:40px;line-height:1.4}
+header h1 p{margin:7px 0;font-size:40px;font-weight:bold;line-height:1.4}
 
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    width:100%;
-    background:#f4f6f9;
-    color:#1e293b;
-    line-height:1.6;
-    overflow-x:hidden;
-}
+/* MENUS */
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:3px}
+.site-menu>a{display:block;padding:5px 8px;border-radius:5px;color:white;text-decoration:none;cursor:pointer;font-size:12px}
+.site-menu>a:hover{background:#1D4ED8}
+.dropdown{position:relative;display:inline-block}
+.dropdown button{padding:5px 8px;background:transparent;color:white;border:none;cursor:pointer;font-size:12px;border-radius:5px}
+.dropdown button:hover{background:#1D4ED8}
+.dropdown-content{display:none;position:fixed;top:0;left:0;min-width:230px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:white;box-shadow:0 8px 25px rgba(0,0,0,.28);border-radius:7px;z-index:99999;padding:6px}
+.dropdown-content a{display:block;padding:9px 12px;color:#1e293b;text-decoration:none;text-align:left;font-size:13px;border-radius:5px;line-height:1.4;white-space:normal}
+.dropdown-content a:hover{background:#0f766e;color:white}
 
-/* ===== EN-TÊTE IGN DAY ===== */
-header{
-    background:#2c3e50;
-    color:white;
-    text-align:center;
-    box-shadow:0 2px 10px #0003;
-}
+/* NAVIGATION */
+nav{background:#34495e;padding:7px 10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px;text-align:center}
+nav button{margin:0;padding:10px 17px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:19px;font-weight:bold;transition:.25s;line-height:1.2;white-space:nowrap}
+nav button:hover{background:#019875;transform:translateY(-1px)}
+.btnActive{background:#0984e3!important;transform:scale(1.03);box-shadow:0 2px 7px #0003}
 
-.brandbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    flex-wrap:wrap;
-    padding:12px 22px;
-    background:linear-gradient(120deg,#0f172a,#0f766e);
-}
+/* MASQUER HEADER ET NAV */
+body.section-open>header,body.section-open>nav{display:none!important}
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:19px;
-}
+/* SECTIONS */
+section{display:none;padding:25px;margin:15px}
+section.active{display:block}
+.animationSection{animation:apparition .4s ease;background:white;border-left:6px solid #00b894;border-radius:9px;box-shadow:0 4px 12px #0002}
+@keyframes apparition{from{opacity:0}to{opacity:1}}
+body.section-open>section.active{margin:0;padding:4px 25px 25px}
+body.section-open>section.active>h2,body.section-open>section.active>.definition-title{margin-top:0}
 
-.brand-logo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:44px;
-    height:44px;
-    flex-shrink:0;
-    border-radius:12px;
-    background:#00b894;
-    font-size:19px;
-}
-
-.site-menu{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
-}
-
-.site-menu>a{
-    display:block;
-    padding:10px 13px;
-    border-radius:6px;
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.site-menu>a:hover{
-    background:#ffffff2b;
-}
-
-header h1{
-    padding:20px 10px;
-    margin:0;
-    font-size:23px;
-    overflow-wrap:break-word;
-}
-
-header h1 p{
-    margin:8px 0;
-    line-height:1.5;
-    font-size:20px;
-}
-
-/* ===== MENUS DÉROULANTS ===== */
-.dropdown{
-    position:relative;
-    display:inline-block;
-}
-
-.dropdown button{
-    padding:10px 14px;
-    background:transparent;
-    color:white;
-    border:none;
-    cursor:pointer;
-    font-size:14px;
-    border-radius:6px;
-    font-family:inherit;
-}
-
-.dropdown button:hover,
-.dropdown button[aria-expanded="true"]{
-    background:#ffffff2b;
-}
-
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:230px;
-    max-width:calc(100vw - 20px);
-    max-height:70vh;
-    overflow-y:auto;
-    overflow-x:hidden;
-    background:white;
-    box-shadow:0 5px 15px #0003;
-    border-radius:7px;
-    z-index:1000;
-    padding:7px;
-    -webkit-overflow-scrolling:touch;
-}
-
-.dropdown-content a{
-    display:block;
-    padding:11px 14px;
-    color:#1e293b;
-    text-decoration:none;
-    text-align:left;
-    font-size:14px;
-    line-height:1.5;
-    border-radius:5px;
-    overflow-wrap:break-word;
-}
-
-.dropdown-content a:hover{
-    background:#0f766e;
-    color:white;
-}
-
-/* ===== NAVIGATION DU COURS ===== */
-nav{
-    background:#34495e;
-    padding:10px;
-    text-align:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:5px;
-}
-
-nav button{
-    margin:5px;
-    padding:12px 18px;
-    border:none;
-    background:#00b894;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-    font-size:15px;
-    font-family:inherit;
-    transition:.3s;
-    touch-action:manipulation;
-}
-
-nav button:hover{
-    background:#019875;
-    transform:translateY(-2px);
-}
-
-nav button.btnActive{
-    background:#0984e3!important;
-    transform:scale(1.03);
-    box-shadow:0 3px 10px #0003;
-}
-
-/* ===== SECTIONS ===== */
-section{
-    display:none;
-    padding:30px;
-    margin:20px;
-    min-width:0;
-}
-
-section.active{
-    display:block;
-}
-
-.animationSection{
-    animation:apparition .5s ease;
-    background:white;
-    border-left:8px solid #00b894;
-    border-radius:12px;
-    box-shadow:0 5px 15px #0002;
-}
-
-@keyframes apparition{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1;transform:translateY(0)}
-}
-
-/* ===== TITRES ET TEXTE ===== */
-h2{
-    color:#2c3e50;
-    margin-top:0;
-    line-height:1.4;
-    overflow-wrap:break-word;
-}
-
-h3{
-    color:#0f766e;
-    margin-top:25px;
-    line-height:1.5;
-    overflow-wrap:break-word;
-}
-
-h5{
-    line-height:1.7;
-    font-size:14px;
-}
-
-p,li{
-    line-height:1.7;
-    overflow-wrap:break-word;
-}
-
-ul,ol{
-    padding-left:25px;
-}
-
-.container{
-    width:100%;
-    max-width:100%;
-    min-width:0;
-    margin:20px auto;
-}
-
-/* ===== ENCADRÉS ===== */
-.highlight{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:15px;
-    margin-top:15px;
-    border-radius:8px;
-    line-height:1.9;
-    overflow-wrap:break-word;
-}
-
-.example{
-    background:#e8fff7;
-    border-left:6px solid #00b894;
-    padding:13px 16px;
-    margin:18px 0;
-    border-radius:7px;
-    font-weight:bold;
-}
-
-.note{
-    background:#f1f7ff;
-    border-left:6px solid #0984e3;
-    padding:15px;
-    margin:15px 0;
-    border-radius:8px;
-}
-
-/* ===== FORMULES ET SCHÉMAS ===== */
-.formule{
-    text-align:center;
-    font-size:clamp(18px,3vw,30px);
-    font-weight:bold;
-    margin:20px 0 30px;
-    color:#082567;
-    overflow-wrap:anywhere;
-}
-
-.content{
-    width:100%;
-    min-width:0;
-}
-
-.block{
-    width:100%;
-    min-width:0;
-    margin-bottom:25px;
-}
-
-.box{
-    display:block;
-    width:fit-content;
-    max-width:100%;
-    background:white;
-    border:3px solid #082567;
-    padding:18px 25px;
-    font-size:17px;
-    font-weight:bold;
-    margin-bottom:20px;
-    box-shadow:0 4px 12px #0002;
-    overflow-wrap:anywhere;
-}
-
-.line{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
-}
-
-.text{
-    font-size:16px;
-    min-width:0;
-    overflow-wrap:anywhere;
-}
-
-.green{color:green}
-.red{color:#c0392b}
-
+/* CONTENU */
+h2{color:#2c3e50;margin-top:0}
+h3{color:#00b894}
+h4{color:#0f766e}
+h5{line-height:1.7}
+p,li{line-height:1.7}
+ul,ol{line-height:1.7}
+table{width:100%;border-collapse:collapse;background:white;margin-top:18px}
+.table-wrapper{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+td,th{border:1px solid #ccc;padding:9px;line-height:1.5;overflow-wrap:anywhere;word-wrap:break-word}
+th{background:#dfe6e9;text-align:center}
+tr:hover td{background:#f1f7ff}
+.titre{text-align:center;font-size:23px;font-weight:bold}
 .bold{font-weight:bold}
 .center{text-align:center}
 .right{text-align:right}
+.header-cell{background:#dfe6e9}
 
-/* ===== TABLEAUX GÉNÉRAUX ===== */
-.table-wrapper{
-    width:100%;
-    max-width:100%;
-    min-width:0;
-    margin:20px 0 30px;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-}
+/* MISE EN VALEUR */
+.highlight{background:#e8fff7;border-left:5px solid #00b894;padding:13px;margin-top:13px;border-radius:7px;line-height:1.7}
+.definition-title{background:linear-gradient(120deg,#164e63,#0e7490);color:white;padding:12px 15px;border-radius:7px;text-align:center;font-size:21px;font-weight:bold;margin:12px 0}
+.definition-box{background:#fffaf2;border:2px solid #e6a23c;border-radius:8px;padding:15px;margin:12px 0}
+.content-block{background:#f8fafc;padding:18px;margin:15px 0;border-radius:8px;border:1px solid #e2e8f0}
+.objective{background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;padding:18px;margin:18px 0}
+.objective h3{margin-top:0}
+.example{background:#e8fff7;border-left:6px solid #00b894;padding:13px 16px;margin:18px 0;border-radius:7px;font-weight:bold}
 
-table{
-    width:100%;
-    max-width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
-    background:white;
-    margin:20px 0 30px;
-    box-shadow:0 3px 10px #00000012;
-}
+/* FORMULES ET SCHÉMAS */
+.formule{margin-top:25px;padding:16px 8px 5px;border-top:2px solid #0f766e;text-align:center;font-size:clamp(17px,2vw,25px);font-weight:bold;color:#0b2c5f;line-height:1.8}
+.schema{width:100%;max-width:100%}
+.content{width:100%;min-width:0}
+.block{width:100%;margin:18px 0}
+.box{display:block;width:fit-content;max-width:100%;border:2px solid #0f766e;border-radius:8px;padding:15px 20px;margin:12px 0;background:#f8fafc;font-weight:bold;line-height:1.7}
+.green{color:green}
+.red{color:#c0392b}
+.line{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:12px}
+.text{font-size:16px;min-width:0;overflow-wrap:anywhere}
 
-td,th{
-    border:1px solid #cbd5e1;
-    padding:10px;
-    font-size:14px;
-    vertical-align:middle;
-    overflow-wrap:anywhere;
-    word-wrap:break-word;
-    white-space:normal;
-}
-
-th{
-    background:#dfe6e9;
-    font-weight:bold;
-    text-align:center;
-}
-
-tbody tr:hover td{
-    background:#f1f7ff;
-    transition:.2s;
-}
-
-/* ===== TABLEAUX JOURNAL : STRUCTURE IDENTIQUE À E2 ===== */
-.journal-table{
-    width:100%;
-    max-width:100%;
-    border:2px solid #34495e;
-    border-collapse:collapse;
-    table-layout:fixed;
-    margin:20px 0 30px;
-    background:white;
-    box-shadow:0 4px 12px #0002;
-}
-
-/* Répartition des six colonnes */
+/* TABLEAUX JOURNAUX */
+.journal-table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;border:2px solid #34495e}
 .journal-table col.code{width:12%}
 .journal-table col.code2{width:12%}
 .journal-table col.libelle{width:23%}
 .journal-table col.libelle2{width:23%}
 .journal-table col.montant{width:15%}
 .journal-table col.montant2{width:15%}
+.journal-table td,.journal-table th{padding:10px 6px;font-size:14px;line-height:1.5;vertical-align:middle;overflow-wrap:anywhere;word-wrap:break-word;white-space:normal}
+.journal-table .date td{text-align:center;background:#2c3e50;color:white;font-weight:bold}
+.journal-table .debit{background:#eaf4ff;color:#0b3d91;font-weight:bold}
+.journal-table .credit{background:#fff2e6;color:#a34b00;font-weight:bold}
+.journal-table .montant{text-align:right;font-weight:bold;background:#f8fafc;white-space:normal;overflow-wrap:anywhere}
+.journal-table tr:hover td{background:#f1f7ff}
+.journal-table .date:hover td{background:#2c3e50;color:white}
 
-.journal-table td{
-    border:1px solid #cfd8e3;
-    padding:9px 7px;
-    font-size:13px;
-    line-height:1.5;
-    vertical-align:middle;
-    overflow-wrap:anywhere;
-    word-break:normal;
-    white-space:normal;
-}
+/* BARRE DES DIAPOSITIVES */
+.slide-navigation{display:none;position:static;width:auto;height:auto;min-height:0;z-index:auto;align-items:center;justify-content:center;gap:5px;padding:0;background:transparent;color:white;border:0;font-size:10px;flex-shrink:0}
+.slide-navigation button{border:0;border-radius:3px;padding:4px 7px;background:#00b894;color:white;font-size:10px;font-weight:bold;line-height:1.2;cursor:pointer;white-space:nowrap}
+.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:disabled{opacity:.4;cursor:not-allowed}
+.slide-counter{font-size:10px;font-weight:bold;white-space:nowrap;text-align:center}
 
-/* Ligne de date et intitulé */
-.journal-table .date td{
-    text-align:center;
-    background:#2c3e50!important;
-    color:white!important;
-    font-weight:bold;
-    font-size:14px;
-    padding:11px 6px;
-}
+/* CONTENU DES DIAPOSITIVES */
+.content-slide{display:none;width:100%;min-height:100px;padding:2px 0 8px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.content-slide.active-slide{display:block}
+.slide-inner{width:100%;max-width:100%;transform:none;zoom:1!important}
 
-/* Débit */
-.journal-table .debit{
-    background:#eaf4ff;
-    color:#0b3d91;
-    font-weight:bold;
-}
+/* TITRE PRINCIPAL EN DIAPOSITIVE */
+body.slides-mode .content-slide.title-only-slide{display:none;width:100%;min-height:calc(100vh - 100px);padding:0 15px;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+body.slides-mode .content-slide.title-only-slide.active-slide{display:flex}
+body.slides-mode .content-slide.title-only-slide .definition-title{width:100%;max-width:100%;margin:0;text-align:center}
 
-/* Crédit */
-.journal-table .credit{
-    background:#fff4e6;
-    color:#b35400;
-    font-weight:bold;
-}
+/* MESURE DES DIAPOSITIVES */
+.slide-measure{position:fixed!important;left:-100000px!important;top:0!important;display:block!important;width:1000px;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;visibility:hidden!important;pointer-events:none!important;z-index:-1!important}
 
-/* Montants */
-.journal-table .montant{
-    text-align:right;
-    background:#f8f9fa;
-    font-weight:bold;
-    font-variant-numeric:tabular-nums;
-    color:#0b5e8e;
-}
+/* MODE DIAPOSITIVES */
+body.slides-mode{padding-bottom:48px}
+body.slides-mode>section.active{display:block;margin:0;padding:4px 25px 8px;border-radius:0;box-shadow:none;border-left:0;min-height:calc(100vh - 48px);animation:none;overflow-x:hidden;overflow-y:auto}
+body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .definition-title{margin:3px 0 8px;padding:8px 12px;font-size:20px}
+body.slides-mode h2{margin-top:0;margin-bottom:8px}
+body.slides-mode h3{margin-top:8px;margin-bottom:6px}
+body.slides-mode h4{margin-top:7px;margin-bottom:5px}
+body.slides-mode p,body.slides-mode li{line-height:1.45;margin-top:5px;margin-bottom:5px}
+body.slides-mode ul,body.slides-mode ol{margin-top:5px;margin-bottom:5px}
+body.slides-mode .definition-box{margin:6px 0;padding:10px}
+body.slides-mode .highlight{margin:6px 0;padding:9px}
+body.slides-mode .example{margin:6px 0;padding:9px}
+body.slides-mode .objective{margin:6px 0;padding:10px}
+body.slides-mode .content-block{margin:6px 0;padding:10px}
+body.slides-mode table{margin-top:8px}
+body.slides-mode td,body.slides-mode th{padding:6px 9px}
+body.slides-mode .box{margin:6px 0;padding:10px}
+body.slides-mode .line{margin-bottom:6px}
 
-/* Effet au survol */
-.journal-table tbody tr:not(.date):hover td{
-    background:#f1f7ff;
-}
+/* PIED DE PAGE */
+footer{position:fixed;bottom:0;left:0;width:100%;min-height:38px;height:auto;z-index:2000;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;padding:4px 10px;margin:0;background:#2c3e50;color:white;border:1px solid #1e293b;box-shadow:none;font-size:11px;line-height:1.2}
+footer a{color:#00ffcc;text-decoration:none}
+footer>span{white-space:nowrap}
+.footer-actions{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-left:auto}
+.btnFooter{display:none;margin:0;padding:4px 9px;border:none;border-radius:4px;color:white;font-size:11px;line-height:1.2;font-weight:bold;cursor:pointer;white-space:nowrap;transition:.2s}
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+.btnFooter.visible{display:block}
+.btnFooter:hover:not(:disabled){background:#00b894;transform:translateY(-1px)}
+.btnFooter:disabled{background:#64748b;opacity:.45;cursor:not-allowed;transform:none}
 
-/* ===== PIED DE PAGE ===== */
-footer{
-    text-align:center;
-    padding:18px;
-    background:#2c3e50;
-    color:white;
-    margin-top:20px;
-    line-height:1.6;
-}
-
-footer a{
-    color:#00ffcc;
-    text-decoration:none;
-}
-
-footer a:hover{
-    text-decoration:underline;
-}
-
-/* ===== TABLETTES ===== */
-@media(max-width:900px){
-
-    .brandbar{
-        justify-content:center;
-        gap:12px;
-    }
-
-    .site-menu{
-        width:100%;
-        justify-content:center;
-    }
-
-    header h1{
-        font-size:21px;
-    }
-
-    section{
-        padding:24px;
-        margin:15px;
-    }
-}
-
-/* ===== ÉCRANS DE 760 PX ===== */
+/* RESPONSIVE */
 @media(max-width:760px){
-
-    .brandbar{
-        justify-content:center;
-        padding:12px;
-    }
-
-    .site-menu{
-        width:100%;
-    }
-
-    .site-menu>a{
-        padding:9px;
-    }
-
-    section{
-        padding:18px;
-        margin:12px;
-    }
-
-    nav button{
-        padding:10px;
-        font-size:14px;
-    }
-
-    header h1{
-        font-size:19px;
-    }
-
-    header h1 p{
-        font-size:16px;
-    }
-
-    td,th{
-        padding:8px;
-        font-size:13px;
-    }
-
-    .journal-table td{
-        padding:7px 5px;
-        font-size:12px;
-    }
+body{padding-bottom:48px}
+.brandbar{justify-content:center;padding:4px 6px;gap:5px}
+.brand{font-size:14px}
+.brand-logo{width:27px;height:27px;font-size:13px}
+.site-menu{width:100%;gap:2px}
+.site-menu>a{padding:5px 6px;font-size:11px}
+.dropdown button{padding:5px 6px;font-size:11px}
+.dropdown-content{min-width:220px}
+header h1{padding:5px 6px;line-height:1.3}
+header h1 p{font-size:16px;line-height:1.3;margin:3px 0}
+section{padding:16px;margin:10px}
+body.section-open>section.active{margin:0;padding:4px 15px 18px}
+nav{padding:6px 5px;gap:5px}
+nav button{padding:6px 9px;font-size:12px;white-space:normal}
+.definition-title{font-size:18px;padding:11px}
+.definition-box{padding:12px}
+td,th{padding:7px;font-size:12px}
+.journal-table{width:100%;min-width:0;table-layout:fixed}
+.journal-table td,.journal-table th{padding:7px 4px;font-size:12px;line-height:1.4}
+footer{min-height:38px;height:auto;flex-wrap:wrap;justify-content:center;gap:4px;padding:4px 5px;font-size:9px}
+footer>span{display:none}
+.footer-actions{width:auto;justify-content:center;gap:3px;margin-left:0}
+.btnFooter{padding:4px 6px;font-size:9px}
+.slide-navigation{gap:3px;padding:0}
+.slide-navigation button{font-size:9px;padding:4px 5px}
+.slide-counter{font-size:9px}
+body.slides-mode>section.active{padding:4px 15px 8px;min-height:calc(100vh - 48px)}
+body.slides-mode .definition-title{font-size:17px;padding:8px}
+body.slides-mode .content-slide.title-only-slide{min-height:calc(100vh - 115px);padding:0 8px}
+body.slides-mode .journal-table{width:100%;min-width:0}
+}
+@media(max-width:420px){
+.definition-title{font-size:16px}
+header h1 p{font-size:14px}
+.brandbar{padding:3px 5px}
+.site-menu>a,.dropdown button{font-size:10px;padding:4px 5px}
+section{padding:12px;margin:8px}
+body.section-open>section.active{margin:0;padding:4px 12px 14px}
+td,th{font-size:11px;padding:6px 3px}
+.titre{font-size:18px}
+nav button{padding:6px 7px;font-size:11px}
+footer{padding:4px 3px;gap:3px}
+.btnFooter{font-size:8px;padding:4px 4px}
+.footer-actions{gap:2px}
+.slide-navigation{gap:2px}
+.slide-navigation button{font-size:8px;padding:4px 3px}
+.slide-counter{font-size:8px}
+.journal-table td,.journal-table th{font-size:10px;padding:6px 2px}
+.journal-table .montant{text-align:center;font-size:10px}
+.journal-table .date td{font-size:11px;padding:8px 3px}
 }
 
-/* ===== TÉLÉPHONES ===== */
-@media(max-width:600px){
-
-    body{
-        font-size:12px;
-    }
-
-    .brandbar{
-        flex-direction:column;
-        align-items:stretch;
-        gap:12px;
-        padding:12px 10px;
-    }
-
-    .brand{
-        justify-content:center;
-        font-size:20px;
-    }
-
-    .brand-logo{
-        width:40px;
-        height:40px;
-    }
-
-    .site-menu{
-        width:100%;
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
-        gap:5px;
-    }
-
-    .site-menu>a{
-        width:100%;
-        text-align:center;
-        padding:11px 8px;
-        background:#ffffff12;
-        font-size:12px;
-    }
-
-    .dropdown{
-        display:block;
-        width:100%;
-    }
-
-    .dropdown button{
-        display:block;
-        width:100%;
-        padding:12px 8px;
-        text-align:center;
-        background:#ffffff12;
-        font-size:12px;
-        line-height:1.5;
-    }
-
-    .dropdown-content{
-        position:static;
-        width:100%;
-        min-width:0;
-        max-width:100%;
-        max-height:45vh;
-        margin-top:4px;
-        border-radius:6px;
-        box-shadow:inset 0 0 0 1px #e2e8f0;
-    }
-
-    .dropdown-content a{
-        padding:12px 10px;
-        font-size:12px;
-    }
-
-    header h1{
-        padding:15px 12px;
-        font-size:18px;
-    }
-
-    header h1 p{
-        margin:8px 0;
-        font-size:12px;
-        line-height:1.6;
-    }
-
-    nav{
-        padding:10px 8px;
-        gap:5px;
-    }
-
-    nav button{
-        flex:1 1 calc(50% - 10px);
-        min-width:0;
-        margin:3px;
-        padding:12px 8px;
-        font-size:12px;
-        line-height:1.5;
-        transform:none;
-    }
-
-    nav button.btnActive{
-        transform:none;
-    }
-
-    section{
-        padding:16px 13px;
-        margin:10px;
-        border-radius:9px;
-    }
-
-    .animationSection{
-        border-left-width:5px;
-    }
-
-    h2{font-size:17px}
-    h3{font-size:15px}
-
-    p,li{
-        font-size:12px;
-        line-height:1.7;
-    }
-
-    ul,ol{
-        padding-left:21px;
-    }
-
-    .highlight,.note{
-        padding:12px;
-        font-size:12px;
-    }
-
-    .container{
-        margin:12px auto;
-    }
-
-    /* Tableaux généraux */
-    .table-wrapper{
-        width:100%;
-        max-width:100%;
-        overflow-x:auto;
-    }
-
-    table{
-        width:100%;
-        max-width:100%;
-        min-width:0;
-        table-layout:fixed;
-        font-size:10px;
-    }
-
-    td,th{
-        padding:6px 3px;
-        font-size:10px;
-        overflow-wrap:anywhere;
-        white-space:normal;
-        line-height:1.4;
-    }
-
-    /* Journal : conserver les six colonnes comme dans E2 */
-    .journal-table{
-        width:100%;
-        min-width:0;
-        max-width:100%;
-        table-layout:fixed;
-        font-size:10px;
-    }
-
-    .journal-table td{
-        padding:6px 3px;
-        font-size:10px;
-        line-height:1.4;
-        overflow-wrap:anywhere;
-        word-break:normal;
-        white-space:normal;
-    }
-
-    .journal-table .date td{
-        padding:8px 3px;
-        font-size:11px;
-        line-height:1.4;
-    }
-
-    .journal-table .montant{
-        text-align:center;
-        font-size:10px;
-        padding:5px 2px;
-    }
-
-    .formule{
-        font-size:18px;
-        line-height:1.5;
-    }
-
-    .box{
-        font-size:14px;
-        padding:12px;
-    }
-
-    .text{
-        font-size:13px;
-    }
-
-    .line{
-        gap:8px;
-    }
-
-    footer{
-        padding:14px 10px;
-        font-size:10px;
-    }
+/* MODE DATASHOW */
+@media screen and (min-width:1200px) and (min-height:650px){
+body{font-size:18px;line-height:1.6;padding-bottom:40px}
+.brandbar{padding:5px 18px}
+.brand{font-size:17px}
+.brand-logo{width:32px;height:32px;font-size:15px}
+header h1{padding:6px 8px}
+header h1 p{font-size:21px}
+.site-menu>a,.dropdown button{font-size:13px;padding:6px 9px}
+.dropdown-content{min-width:270px}
+.dropdown-content a{font-size:15px;padding:11px 14px}
+nav{padding:8px 12px;gap:9px}
+nav button{padding:9px 16px;font-size:18px;border-radius:6px}
+section{padding:30px 35px;margin:18px 22px}
+body.section-open>section.active{margin:0;padding:4px 35px 30px}
+h2{font-size:27px;margin-bottom:18px}
+h3{font-size:21px;margin-top:20px}
+h4{font-size:18px}
+p,li{font-size:18px;line-height:1.7}
+.definition-title{font-size:23px;padding:14px}
+.definition-box{padding:17px}
+td,th{padding:14px 17px;font-size:17px;line-height:1.5}
+.journal-table td,.journal-table th{font-size:17px;padding:12px 8px}
+footer{min-height:38px;height:auto;font-size:11px}
+.btnFooter{padding:4px 9px;font-size:11px}
+body.slides-mode .definition-title{font-size:21px;padding:9px 12px}
+body.slides-mode p,body.slides-mode li{font-size:18px;line-height:1.45}
 }
-
-/* ===== TRÈS PETITS TÉLÉPHONES ===== */
-@media(max-width:360px){
-
-    body{
-        font-size:12px;
-    }
-
-    header h1{
-        font-size:15px;
-        padding:12px 8px;
-    }
-
-    header h1 p{
-        font-size:11px;
-    }
-
-    .brand{
-        font-size:16px;
-    }
-
-    .site-menu>a,
-    .dropdown button{
-        font-size:11px;
-        padding:11px 6px;
-    }
-
-    nav{
-        padding:8px 5px;
-    }
-
-    nav button{
-        flex-basis:100%;
-        width:100%;
-        margin:3px 0;
-        font-size:11px;
-    }
-
-    section{
-        margin:7px;
-        padding:13px 10px;
-    }
-
-    h2{font-size:16px}
-    h3{font-size:14px}
-
-    table{
-        font-size:8px;
-    }
-
-    td,th{
-        padding:5px 2px;
-        font-size:9px;
-    }
-
-    .journal-table{
-        font-size:8px;
-    }
-
-    .journal-table td{
-        padding:5px 2px;
-        font-size:8px;
-        line-height:1.35;
-    }
-
-    .journal-table .date td{
-        font-size:9px;
-    }
-
-    .journal-table .montant{
-        font-size:8px;
-        padding:4px 1px;
-    }
-
-    .formule{
-        font-size:16px;
-    }
-}
-
-/* ===== ACCESSIBILITÉ ===== */
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-        scroll-behavior:auto!important;
-        transition-duration:.01ms!important;
-    }
+@media screen and (min-width:1600px){
+body{font-size:19px;padding-bottom:40px}
+header h1{padding:6px 8px}
+header h1 p{font-size:22px}
+section{max-width:1750px;margin:22px auto;padding:35px 45px}
+body.section-open>section.active{margin:0 auto;padding:4px 45px 35px}
+h2{font-size:30px}
+h3{font-size:24px}
+h4{font-size:20px}
+p,li{font-size:20px}
+td,th{font-size:19px;padding:17px 20px}
+nav button{font-size:19px;padding:10px 18px}
+.definition-title{font-size:25px;padding:15px}
+footer{min-height:38px;height:auto}
+body.slides-mode p,body.slides-mode li{font-size:19px;line-height:1.45}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== EN-TÊTE IGN DAY ===== -->
 <header>
-
 <div class="brandbar">
-
-<a class="brand" href="index.html">
-    <span class="brand-logo">IF</span>
-    <span>IgnDay</span>
-</a>
+<a class="brand" href="index.html"><span class="brand-logo">IF</span><span>IgnDay</span></a>
 
 <div class="site-menu">
-
 <a href="index.html">Accueil</a>
 
 <div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-Modules ▼
-</button>
-
-<div class="dropdown-content">
-<a href="M1.html">M1 – Comptabilité générale</a>
-<a href="M2.html">M2 – Comptabilité analytique</a>
-<a href="M3.html">M3 – Analyse financière</a>
-<a href="M4.html">M4 – Fiscalité</a>
-<a href="M5.html">M5 – Mathématiques financières</a>
-<a href="M6.html">M6 – Statistiques</a>
-<a href="M7.html">M7 – Marketing</a>
-<a href="M8.html">M8 – Comptabilité approfondie</a>
-<a href="M9.html">M9 – Management</a>
-</div>
-</div>
-
-<div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-M1 - Comptabilité générale ▼
-</button>
-
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">M1 - Comptabilité générale ▼</button>
 <div class="dropdown-content">
 <a href="P1M1.html">P1 – Concepts de base</a>
 <a href="P2M1.html">P2 – Opérations courantes</a>
@@ -886,10 +274,7 @@ M1 - Comptabilité générale ▼
 </div>
 
 <div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-P3 – Travaux de fin d’exercice ▼
-</button>
-
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">P3 – Travaux de fin d’exercice ▼</button>
 <div class="dropdown-content">
 <a href="C1P3M1.html">T – Résumés des thèmes</a>
 <a href="C2P3M1.html">F – Formulaires interactifs</a>
@@ -898,99 +283,47 @@ P3 – Travaux de fin d’exercice ▼
 </div>
 
 <div class="dropdown">
-<button type="button" aria-expanded="false" onclick="toggleDropdown(this)">
-T – Résumés des thèmes ▼
-</button>
-
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">T – Résumés des thèmes ▼</button>
 <div class="dropdown-content">
-
-<a href="T1C1P3M1.html">
-T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation
-</a>
-
-<a href="T2C1P3M1.html">
-T2 - La régularisation des stocks
-</a>
-
-<a href="T3C1P3M1.html">
-T3 - Les amortissements
-</a>
-
-<a href="T4C1P3M1.html">
-T4 - Les provisions pour dépréciation des immobilisations
-</a>
-
-<a href="T5C1P3M1.html">
-T5 - Les provisions pour dépréciation des éléments de l’actif circulant
-</a>
-
-<a href="T6C1P3M1.html">
-T6 - Les provisions pour risques et charges
-</a>
-
-<a href="T7C1P3M1.html">
-T7 - La régularisation des charges
-</a>
-
-<a href="T8C1P3M1.html">
-T8 - La régularisation des produits
-</a>
-
+<a href="T1C1P3M1.html">T1 - L’intérêt des travaux de fin d'exercice et les différentes opérations de régularisation</a>
+<a href="T2C1P3M1.html">T2 - La régularisation des stocks</a>
+<a href="T3C1P3M1.html">T3 - Les amortissements</a>
+<a href="T4C1P3M1.html">T4 - Les provisions pour dépréciation des immobilisations</a>
+<a href="T5C1P3M1.html">T5 - Les provisions pour dépréciation des éléments de l’actif circulant</a>
+<a href="T6C1P3M1.html">T6 - Les provisions pour risques et charges</a>
+<a href="T7C1P3M1.html">T7 - La régularisation des charges</a>
+<a href="T8C1P3M1.html">T8 - La régularisation des produits</a>
 </div>
 </div>
 
 <a href="C1P3M1.html">⬅ Retour</a>
-
 </div>
 </div>
 
 <h1>
-<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice &gt;&gt; T – Résumés des thèmes</p>
-<p>T2 - La régularisation des stocks</p>
+<p>M1 – Comptabilité générale &gt; P3 – Travaux de fin d’exercice</p>
+<p>Thème 2 – La régularisation des stocks</p>
 </h1>
-
 </header>
 
-<!-- ===== NAVIGATION ===== -->
+<!-- NAVIGATION DES SECTIONS -->
 <nav>
-
-<button class="btnActive" onclick="showSection('DEF',this)">
-Définition de stock
-</button>
-
-<button onclick="showSection('INV',this)">
-Inventaire de stock
-</button>
-
-<button onclick="showSection('VAR',this)">
-Calcul et signification de la variation de stock
-</button>
-
-<button onclick="showSection('UTI',this)">
-Utilisation de la variation de stock
-</button>
-
-<button onclick="showSection('COMP',this)">
-Comptabilisation de la régularisation de stock
-</button>
-
+<button onclick="showSection('DEF',this)">1- Notions de stock et d’inventaire</button>
+<button onclick="showSection('VAR',this)">2- Calcul et signification de la variation de stock</button>
+<button onclick="showSection('COMP',this)">3- Comptabilisation de la régularisation de stock</button>
 </nav>
 
-<!-- ===================================================== -->
-<!-- SECTION 1 : DÉFINITION DU STOCK                       -->
-<!-- ===================================================== -->
+<!-- SECTION 1 -->
+<section id="DEF">
 
-<section id="DEF" class="active animationSection">
+<h2 class="definition-title">1- Notions de stock et d’inventaire de stock</h2>
 
-<h2>Définition de Stock</h2>
+<h2>A- Définition du stock</h2>
+<div class="definition-box">
 
-<p>
-Le stock désigne l’ensemble des biens entrant dans le cycle d’exploitation de l’entreprise.
-</p>
+<p>Le stock désigne l’ensemble des biens entrant dans le cycle d’exploitation de l’entreprise.</p>
 
-<p>
-Ces éléments représentent des biens appartenant à l’entreprise et contribuent à l’augmentation de son patrimoine (actif circulant). Ils doivent être inventoriés à la clôture de l’exercice. Ils peuvent être classés comme suit :
-</p>
+<p>Ces éléments représentent des biens appartenant à l’entreprise et contribuent à l’augmentation de son patrimoine (actif circulant). Ils doivent être inventoriés à la clôture de l’exercice. Ils peuvent être classés comme suit :</p>
 
 <div class="highlight">
 ✔ Vendus en l’état (marchandises).<br>
@@ -998,414 +331,253 @@ Ces éléments représentent des biens appartenant à l’entreprise et contribu
 ✔ Utilisés pour obtenir des produits finis (matières premières et fournitures).
 </div>
 
-<div class="container">
+</div>
 
-<h2>Les principaux stocks</h2>
-
+<h2>B- Les principaux stocks</h2>
 <div class="table-wrapper">
 <table>
-
 <thead>
 <tr>
 <th>Type de stock</th>
 <th>Description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td class="bold">Le stock de marchandises</td>
 <td>Stocks des commerçants destinés à la revente sans transformation.</td>
 </tr>
-
 <tr>
 <td class="bold">Le stock de matières premières</td>
 <td>Articles achetés auprès des fournisseurs pour être transformés.</td>
 </tr>
-
 <tr>
 <td class="bold">Le stock des produits en cours de fabrication (semi-finis)</td>
 <td>Articles non encore vendables et nécessitant des transformations supplémentaires.</td>
 </tr>
-
 <tr>
 <td class="bold">Le stock des produits terminés (produits finis)</td>
 <td>Produits fabriqués prêts à être vendus par l’entreprise.</td>
 </tr>
-
 <tr>
 <td class="bold">Les emballages</td>
 <td>Objets destinés à contenir les produits ou marchandises livrés aux clients.</td>
 </tr>
 </tbody>
-
 </table>
 </div>
+
+<h2>C- Définition de l’inventaire</h2>
+<div class="definition-box">
+<p>L’inventaire comptable permanent est une « organisation des comptes qui, par l’enregistrement des mouvements permet de connaître de façon constante, en cours de l’exercice, les existants chiffrés en quantité et en valeur. » (Plan Comptable Marocain)</p>
 </div>
 
-</section>
-
-<!-- ===================================================== -->
-<!-- SECTION 2 : INVENTAIRE                                -->
-<!-- ===================================================== -->
-
-<section id="INV">
-
-<h2>Définition de l’inventaire</h2>
-
-<p>
-L’inventaire comptable permanent est une « organisation des comptes qui, par l’enregistrement des mouvements permet de connaitre de façon constante, en cours de l’exercice, les existants chiffrés en quantité et en valeur. » (Plan Comptable Marocain)
-</p>
-
-<div class="container">
-
-<h2>Les 03 Types d’inventaire de stock</h2>
-
+<h2>D- Les trois types d’inventaire de stock</h2>
 <div class="table-wrapper">
 <table>
-
 <thead>
 <tr>
 <th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td class="bold">1 - L’inventaire permanent</td>
 <td>Le stock est suivi en temps réel après chaque entrée et sortie.</td>
 </tr>
-
 <tr>
-<td class="bold">2 - L'inventaire intermittent</td>
-<td>Le stock est calculé à la fin d’une période. Généralement à la fin de l’exercice.</td>
+<td class="bold">2 - L’inventaire intermittent</td>
+<td>Le stock est calculé à la fin d’une période, généralement à la fin de l’exercice.</td>
 </tr>
-
 <tr>
 <td class="bold">3 - L’inventaire physique</td>
 <td>Comptage réel des articles en stock pour vérifier les quantités existantes.</td>
 </tr>
 </tbody>
-
 </table>
 </div>
 
-</div>
 
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 3 : CALCUL ET SIGNIFICATION                   -->
-<!-- ===================================================== -->
-
+<!-- SECTION 2 -->
 <section id="VAR">
 
-<h2>📊 Calcul et signification de la variation de stock</h2>
+<h2 class="definition-title">2- Calcul et signification de la variation de stock</h2>
 
+<h2>A- Calcul de la variation de stock</h2>
 <div class="formule">
 Variation des stocks = Stock final − Stock initial
 </div>
 
-<div class="schema">
-<div class="content">
+<h2>B- Signification de la variation de stock</h2>
+<div class="content-block">
+<div class="definition-box">
 
-<!-- VARIATION POSITIVE -->
+
 <div class="block">
-
 <div class="box green">
-SI &lt; SF (Variation positive)
-<br>
-↗ Stockage
-<br>
+SI &lt; SF (Variation positive)<br>
+↗ Stockage<br>
 Augmentation du niveau de stock
 </div>
 
 <div class="line">
 <div class="text">
-<strong>Marchandises, matières et fournitures consommables</strong>
-<br>
+<strong>Marchandises, matières et fournitures consommables</strong><br>
 ➜ Diminution des charges C6
 </div>
 </div>
-
 <div class="line">
 <div class="text">
-<strong>Produits en cours, produits finis, produits intermédiaires et résiduels</strong>
-<br>
+<strong>Produits en cours, produits finis, produits intermédiaires et résiduels</strong><br>
 ➜ Augmentation des produits C7
 </div>
 </div>
-
 </div>
+</div>
+<div class="definition-box">
 
-<!-- VARIATION NÉGATIVE -->
 <div class="block">
-
 <div class="box red">
-SI &gt; SF (Variation négative)
-<br>
-↘ Déstockage
-<br>
+SI &gt; SF (Variation négative)<br>
+↘ Déstockage<br>
 Diminution du niveau de stock
 </div>
 
 <div class="line">
 <div class="text">
-<strong>Marchandises, matières et fournitures consommables</strong>
-<br>
+<strong>Marchandises, matières et fournitures consommables</strong><br>
 ➜ Augmentation des charges C6
 </div>
 </div>
-
 <div class="line">
 <div class="text">
-<strong>Produits en cours, produits finis, produits intermédiaires et résiduels</strong>
-<br>
+<strong>Produits en cours, produits finis, produits intermédiaires et résiduels</strong><br>
 ➜ Diminution des produits C7
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
 
-<div class="highlight">
-<strong>À retenir :</strong>
-<br>
-Stock final supérieur au stock initial : stockage.
-<br>
-Stock final inférieur au stock initial : déstockage.
 </div>
 
-</section>
+<h2>C- Utilisation de la variation de stock</h2>
 
-<!-- ===================================================== -->
-<!-- SECTION 4 : UTILISATION                               -->
-<!-- ===================================================== -->
-
-<section id="UTI">
-
-<h2>Utilisation de la variation de stock</h2>
-
-<div class="container">
-
-<!-- ENTREPRISE COMMERCIALE -->
-<div class="block">
-
-<h3>Cas de l’entreprise commerciale :</h3>
-
-<div class="text">
-Les comptes enregistrant les variations de stocks sont les suivants :
-</div>
-
+<h3>a- Cas de l’entreprise commerciale</h3>
+<div class="definition-box">
+<p>Les comptes enregistrant les variations de stocks sont les suivants :</p>
 <div class="table-wrapper">
 <table>
 <tbody>
-<tr>
-<td>6114 - variation de stocks de marchandises.</td>
-</tr>
-
-<tr>
-<td>6124 – variation de stocks de matières et fournitures.</td>
-</tr>
+<tr><td>6114 - Variation de stocks de marchandises.</td></tr>
+<tr><td>6124 – Variation de stocks de matières et fournitures.</td></tr>
 </tbody>
 </table>
 </div>
-
 </div>
 
-<!-- ENTREPRISE INDUSTRIELLE -->
-<div class="block">
-
-<h3>Cas de l’entreprise industrielle</h3>
-
-<div class="text">
-Outre le compte 6124 – variation de stocks de M/F, on utilise les comptes :
-</div>
-
+<h3>b- Cas de l’entreprise industrielle ou de prestations de service</h3>
+<div class="definition-box">
+<p>Outre le compte 6124 – Variation de stocks de M/F, on utilise les comptes :</p>
 <div class="table-wrapper">
 <table>
 <tbody>
-<tr>
-<td>7131 : variation de stocks de produits en cours.</td>
-</tr>
-
-<tr>
-<td>7132 : variation de stocks de biens produits.</td>
-</tr>
-
-<tr>
-<td>7134 : variations de stocks de services en cours.</td>
-</tr>
+<tr><td>7131 : Variation de stocks de produits en cours.</td></tr>
+<tr><td>7132 : Variation de stocks de biens produits.</td></tr>
+<tr><td>7134 : Variations de stocks de services en cours.</td></tr>
 </tbody>
 </table>
 </div>
-
 </div>
 
-</div>
 
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 5 : COMPTABILISATION                          -->
-<!-- ===================================================== -->
-
+<!-- SECTION 3 -->
 <section id="COMP">
 
-<h2>Comptabilisation de la régularisation de stock</h2>
+<h2 class="definition-title">3- Comptabilisation de la régularisation de stock</h2>
 
-<h3>Annulation stock initial</h3>
-
-<!-- ===== ÉCRITURE 1 : ANNULATION DU STOCK INITIAL ===== -->
+<h2>A- Annulation du stock initial</h2>
 
 <table class="journal-table">
-
 <colgroup>
-<col class="code">
-<col class="code2">
-<col class="libelle">
-<col class="libelle2">
-<col class="montant">
-<col class="montant2">
+<col class="code"><col class="code2"><col class="libelle"><col class="libelle2"><col class="montant"><col class="montant2">
 </colgroup>
-
 <tbody>
-
 <tr class="date">
 <td colspan="6">31/12/N – Annulation du stock initial</td>
 </tr>
-
 <tr>
-<td class="debit center">
-            <option>6114</option>
-<option>6124</option>
-<option>7131</option>
-<option>7132</option>
-<option>7134</option>
-</td>
+<td class="debit center">6114<br>6124<br>7131<br>7132<br>7134</td>
 <td></td>
 <td class="debit">Variation de stock de.....</td>
 <td></td>
 <td class="montant">Montant</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
-<td class="credit center">
-<option>311X</option>
-<option>312X</option>
-<option>313X </option>
-<option>314X </option>
-<option>315X </option>
-
-</td>
+<td class="credit center">311X<br>312X<br>313X<br>314X<br>315X</td>
 <td></td>
 <td class="credit">Stocks de .....</td>
 <td></td>
 <td class="montant">Montant</td>
 </tr>
-
-
-
-
-
 </tbody>
 </table>
 
-<!-- ===== ÉCRITURE 2 : CONSTATATION DU STOCK FINAL ===== -->
-
-<h3>Constatation de stock final</h3>
+<h2>B- Constatation du stock final</h2>
 
 <table class="journal-table">
-
 <colgroup>
-<col class="code">
-<col class="code2">
-<col class="libelle">
-<col class="libelle2">
-<col class="montant">
-<col class="montant2">
+<col class="code"><col class="code2"><col class="libelle"><col class="libelle2"><col class="montant"><col class="montant2">
 </colgroup>
-
 <tbody>
-
 <tr class="date">
 <td colspan="6">31/12/N – Constatation du stock final</td>
 </tr>
-
 <tr>
-<td class="debit center">
-<option>311X</option>
-<option>312X</option>
-<option>313X </option>
-<option>314X </option>
-<option>315X </option>
-
-</td>
+<td class="debit center">311X<br>312X<br>313X<br>314X<br>315X</td>
 <td></td>
 <td class="debit">Stocks de .....</td>
 <td></td>
 <td class="montant">Montant</td>
 <td></td>
 </tr>
-
-
-
-
-
 <tr>
 <td></td>
-<td class="credit center">
-            <option>6114</option>
-<option>6124</option>
-<option>7131</option>
-<option>7132</option>
-<option>7134</option>
-
-</td>
+<td class="credit center">6114<br>6124<br>7131<br>7132<br>7134</td>
 <td></td>
 <td class="credit">Variation de stock de.....</td>
 <td></td>
 <td class="montant">Montant</td>
 </tr>
-
 </tbody>
 </table>
 
-<h5>
-NB : Si la balance avant inventaire comporte des comptes de variation de stocks, une seule écriture suffit : la constatation des stocks finaux, les stocks initiaux ayant déjà été annulés.
-</h5>
+<div class="definition-box">
+<h5>NB : Si la balance avant inventaire comporte des comptes de variation de stocks, une seule écriture suffit : la constatation des stocks finaux, les stocks initiaux ayant déjà été annulés.</h5>
+</div>
 
-<!-- ===== EXEMPLE ===== -->
-
-<h3>
-► Exemple : Stock initial de marchandises au 01/01/2025 : 20 000 DH.
+<h2>C- Exemple d’application</h2>
+<div class="example">
+► Exemple : Stock initial de marchandises au 01/01/2025 : 20 000 DH.<br>
 Stock final au 31/12/2025 : 50 000 DH.
-</h3>
+</div>
 
-<!-- ===== ANNULATION DU STOCK INITIAL : EXEMPLE ===== -->
+<h3>1- Annulation du stock initial</h3>
 
 <table class="journal-table">
-
 <colgroup>
-<col class="code">
-<col class="code2">
-<col class="libelle">
-<col class="libelle2">
-<col class="montant">
-<col class="montant2">
+<col class="code"><col class="code2"><col class="libelle"><col class="libelle2"><col class="montant"><col class="montant2">
 </colgroup>
-
 <tbody>
-
 <tr class="date">
 <td colspan="6">31/12/2025 – Annulation du stock initial</td>
 </tr>
-
 <tr>
 <td class="debit center">6114</td>
 <td></td>
@@ -1414,7 +586,6 @@ Stock final au 31/12/2025 : 50 000 DH.
 <td class="montant">20.000,00</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td class="credit center">3111</td>
@@ -1423,30 +594,19 @@ Stock final au 31/12/2025 : 50 000 DH.
 <td></td>
 <td class="montant">20.000,00</td>
 </tr>
-
-
 </tbody>
 </table>
 
-<!-- ===== CONSTATATION DU STOCK FINAL : EXEMPLE ===== -->
+<h3>2- Constatation du stock final</h3>
 
 <table class="journal-table">
-
 <colgroup>
-<col class="code">
-<col class="code2">
-<col class="libelle">
-<col class="libelle2">
-<col class="montant">
-<col class="montant2">
+<col class="code"><col class="code2"><col class="libelle"><col class="libelle2"><col class="montant"><col class="montant2">
 </colgroup>
-
 <tbody>
-
 <tr class="date">
 <td colspan="6">31/12/2025 – Constatation du stock final</td>
 </tr>
-
 <tr>
 <td class="debit center">3111</td>
 <td></td>
@@ -1455,7 +615,6 @@ Stock final au 31/12/2025 : 50 000 DH.
 <td class="montant">50.000,00</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td class="credit center">6114</td>
@@ -1464,11 +623,12 @@ Stock final au 31/12/2025 : 50 000 DH.
 <td></td>
 <td class="montant">50.000,00</td>
 </tr>
-
-
 </tbody>
 </table>
 
+<h3>3- Calcul de la variation de stock</h3>
+
+<div class="definition-box">
 <div class="highlight">
 <strong>Calcul de la variation de stock :</strong>
 <br><br>
@@ -1478,92 +638,541 @@ Variation de stock = 50.000,00 − 20.000,00
 <br>
 <strong>Variation de stock = + 30.000,00 DH</strong>
 <br><br>
-<span class="green">
-Il s'agit d'une variation positive : le stock a augmenté.
-</span>
+<span class="green">Il s'agit d'une variation positive : le stock a augmenté.</span>
 </div>
+</div>
+
 
 </section>
 
-<!-- ===== PIED DE PAGE ===== -->
+<!-- PIED DE PAGE -->
 <footer>
-Formation en Comptabilité Générale
+
+<div class="slide-navigation" id="slideNavigation">
+<button type="button" id="btnDiapoPrecedente">← Diapo précédente</button>
+<span class="slide-counter" id="compteurDiapo">Diapo 1 / 1</span>
+<button type="button" id="btnDiapoSuivante">Diapo suivante →</button>
+</div>
+
+<div class="footer-actions">
+<button type="button" class="btnFooter btnPrecedent" id="btnSectionPrecedente" onclick="naviguerSection(-1)">← Section précédente</button>
+<button type="button" class="btnFooter btnSuivant" id="btnSectionSuivante" onclick="naviguerSection(1)">Section suivante →</button>
+<button type="button" class="btnFooter btnRetourMenu" id="btnRetourMenu" onclick="retourMenu()">↑ Retour au menu</button>
+</div>
+
 </footer>
 
 <script>
 
-/* ===== MENUS DÉROULANTS ===== */
-function toggleDropdown(button){
+/* MENUS DÉROULANTS */
 
-    const menu=button.nextElementSibling;
-    const isOpen=button.getAttribute("aria-expanded")==="true";
-
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
-
-        const otherButton=dropdown.querySelector("button");
-        const otherMenu=dropdown.querySelector(".dropdown-content");
-
-        if(otherButton && otherMenu && otherButton!==button){
-            otherButton.setAttribute("aria-expanded","false");
-            otherMenu.style.display="none";
-        }
-
-    });
-
-    button.setAttribute("aria-expanded",String(!isOpen));
-    menu.style.display=isOpen?"none":"block";
+function positionDropdown(button,menu){
+const rect=button.getBoundingClientRect();const marge=8;
+menu.style.display="block";menu.style.position="fixed";
+menu.style.maxWidth=(window.innerWidth-16)+"px";menu.style.maxHeight=(window.innerHeight-16)+"px";
+menu.style.top="0";menu.style.bottom="auto";
+const hauteurMenu=menu.scrollHeight;
+const espaceBas=window.innerHeight-rect.bottom-marge;
+const espaceHaut=rect.top-marge;
+const ouvrirEnBas=hauteurMenu<=espaceBas||espaceBas>=espaceHaut;
+let hd;
+if(ouvrirEnBas){menu.style.top=(rect.bottom+4)+"px";menu.style.bottom="auto";hd=espaceBas-4;}
+else{menu.style.bottom=(window.innerHeight-rect.top+4)+"px";menu.style.top="auto";hd=espaceHaut-4;}
+menu.style.maxHeight=Math.max(100,hd)+"px";
+menu.style.width="auto";
+const largeur=Math.min(Math.max(menu.offsetWidth,230),window.innerWidth-16);
+menu.style.width=largeur+"px";
+let pg=rect.left;
+if(pg+largeur>window.innerWidth-marge)pg=window.innerWidth-largeur-marge;
+if(pg<marge)pg=marge;
+menu.style.left=pg+"px";
 }
 
-/* ===== FERMER LES MENUS EN CLIQUANT À L'EXTÉRIEUR ===== */
-document.addEventListener("click",function(event){
+function toggleDropdown(button){
+const m=button.parentElement.querySelector(".dropdown-content");
+const isOpen=m.style.display==="block";
+fermerTousLesMenus();
+if(!isOpen){positionDropdown(button,m);button.setAttribute("aria-expanded","true");}
+}
 
-    document.querySelectorAll(".dropdown").forEach(dropdown=>{
+function fermerTousLesMenus(){
+document.querySelectorAll(".dropdown-content").forEach(m=>{m.style.display="none";m.style.top="auto";m.style.bottom="auto";});
+document.querySelectorAll(".dropdown button").forEach(b=>b.setAttribute("aria-expanded","false"));
+}
 
-        if(!dropdown.contains(event.target)){
-
-            const button=dropdown.querySelector("button");
-            const menu=dropdown.querySelector(".dropdown-content");
-
-            if(button && menu){
-                button.setAttribute("aria-expanded","false");
-                menu.style.display="none";
-            }
-
-        }
-
-    });
-
+document.addEventListener("click",function(e){
+if(!e.target.closest(".dropdown"))fermerTousLesMenus();
 });
 
-/* ===== NAVIGATION ENTRE LES SECTIONS ===== */
-function showSection(id,button){
-
-    document.querySelectorAll("body > section").forEach(section=>{
-        section.classList.remove("active","animationSection");
-    });
-
-    const current=document.getElementById(id);
-
-    if(current){
-        current.classList.add("active","animationSection");
-    }
-
-    document.querySelectorAll("nav button").forEach(btn=>{
-        btn.classList.remove("btnActive");
-    });
-
-    if(button){
-        button.classList.add("btnActive");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+function repositionnerMenus(){
+document.querySelectorAll(".dropdown").forEach(d=>{
+const b=d.querySelector("button");const m=d.querySelector(".dropdown-content");
+if(b&&m&&m.style.display==="block")positionDropdown(b,m);
+});
 }
+
+window.addEventListener("resize",repositionnerMenus);
+window.addEventListener("scroll",repositionnerMenus,true);
+
+/* MODE DIAPOSITIVES AUTOMATIQUES */
+
+function zoomImportant(){
+return(window.screen.width>=1000&&window.innerWidth<=window.screen.width*0.62);
+}
+
+let currentSlides=[];
+let currentSlideIndex=0;
+let currentSlideSection=null;
+let slideMode=false;
+let resizeTimer=null;
+
+const slideNavigation=document.getElementById("slideNavigation");
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+const compteurDiapo=document.getElementById("compteurDiapo");
+
+/* MÉMORISER LE CONTENU ORIGINAL */
+
+const originalSectionContent=new Map();
+
+function memoriserContenu(section){
+if(!originalSectionContent.has(section.id)){
+originalSectionContent.set(section.id,Array.from(section.childNodes));
+}
+}
+
+function restaurerContenuOriginal(section){
+if(!section||!originalSectionContent.has(section.id))return;
+section.replaceChildren(...originalSectionContent.get(section.id));
+}
+
+/* HAUTEUR DISPONIBLE */
+
+function hauteurDisponibleDiapo(){
+const hf=document.querySelector("footer")?.offsetHeight||38;
+return Math.max(180,window.innerHeight-hf-35);
+}
+
+/* IDENTIFIER LES TITRES */
+
+function estTitreContenu(node){
+if(node.nodeType!==Node.ELEMENT_NODE)return false;
+return node.matches("h2,h3,h4,.definition-title,.sous-titre,.table-title");
+}
+
+/* CONSTRUIRE LES GROUPES */
+
+function construireGroupes(nodes){
+const groupes=[];let g=[];
+nodes.forEach(node=>{
+if(node.nodeType===Node.TEXT_NODE&&!node.textContent.trim())return;
+if(estTitreContenu(node)&&g.length){groupes.push(g);g=[];}
+g.push(node);
+});
+if(g.length)groupes.push(g);
+return groupes;
+}
+
+/* CRÉER UNE DIAPOSITIVE */
+
+function creerSlide(section){
+const slide=document.createElement("div");
+slide.className="content-slide";
+section.appendChild(slide);
+currentSlides.push(slide);
+return slide;
+}
+
+/* MESURER UN GROUPE */
+
+function mesurerGroupe(groupe,largeur){
+const m=document.createElement("div");
+m.className="content-slide slide-measure";
+m.style.width=Math.max(300,largeur)+"px";
+m.style.maxWidth="none";
+m.style.height="auto";
+m.style.minHeight="0";
+m.style.maxHeight="none";
+m.style.overflow="visible";
+m.style.display="block";
+m.style.visibility="hidden";
+m.style.position="fixed";
+m.style.left="-100000px";
+m.style.top="0";
+m.style.padding="2px 0 8px";
+m.style.boxSizing="border-box";
+groupe.forEach(n=>m.appendChild(n.cloneNode(true)));
+document.body.appendChild(m);
+const h=Math.ceil(Math.max(m.scrollHeight,m.getBoundingClientRect().height));
+m.remove();
+return h;
+}
+
+/* CRÉER LES DIAPOSITIVES D'UNE SECTION */
+
+function creerDiapositives(section){
+if(!section)return;
+
+currentSlides=[];
+currentSlideIndex=0;
+
+restaurerContenuOriginal(section);
+memoriserContenu(section);
+
+const nodes=Array.from(section.childNodes);
+
+let titrePrincipal=null;
+const premier=nodes.find(n=>!(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim()));
+
+if(premier&&premier.nodeType===Node.ELEMENT_NODE&&premier.classList.contains("definition-title")){
+titrePrincipal=premier;
+}
+
+section.replaceChildren();
+
+const hauteurMax=hauteurDisponibleDiapo();
+const largeur=Math.max(300,section.clientWidth-50);
+
+if(titrePrincipal){
+const st=creerSlide(section);
+st.classList.add("title-only-slide");
+st.appendChild(titrePrincipal);
+}
+
+const nodesContenu=nodes.filter(n=>{
+if(n===titrePrincipal)return false;
+if(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim())return false;
+return true;
+});
+
+const groupes=construireGroupes(nodesContenu);
+let slide=null;
+let hu=0;
+
+groupes.forEach(groupe=>{
+const hg=mesurerGroupe(groupe,largeur);
+if(!slide||(hu>0&&hu+hg+12>hauteurMax)){
+slide=creerSlide(section);
+hu=0;
+}
+groupe.forEach(n=>slide.appendChild(n));
+hu+=hg+12;
+});
+
+if(currentSlides.length===0)creerSlide(section);
+
+afficherDiapositive(0);
+}
+
+/* COMPTEUR DES DIAPOSITIVES */
+
+function actualiserCompteurDiapo(){
+const total=currentSlides.length;
+if(total===0){
+compteurDiapo.textContent="Aucune diapositive";
+btnDiapoPrecedente.disabled=true;
+btnDiapoSuivante.disabled=true;
+return;
+}
+compteurDiapo.textContent=" "+(currentSlideIndex+1)+" / "+total;
+btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+}
+
+/* AJUSTEMENT DU CONTENU */
+
+function ajusterContenuDiapositive(slide){
+if(!slide)return;
+slide.style.width="100%";
+slide.style.maxWidth="100%";
+slide.style.overflowX="hidden";
+slide.style.overflowY="auto";
+
+slide.querySelectorAll("*").forEach(el=>{
+el.style.maxWidth="100%";
+el.style.minWidth="0";
+el.style.overflowWrap="anywhere";
+});
+
+slide.querySelectorAll("table").forEach(t=>{
+t.style.width="100%";
+t.style.maxWidth="100%";
+t.style.tableLayout="fixed";
+});
+
+slide.querySelectorAll("td,th").forEach(c=>{
+c.style.overflowWrap="anywhere";
+c.style.wordBreak="normal";
+});
+}
+
+/* AFFICHER UNE DIAPOSITIVE */
+
+function afficherDiapositive(index){
+if(!currentSlides.length){
+actualiserCompteurDiapo();
+return;
+}
+
+if(index<0||index>=currentSlides.length)return;
+
+currentSlideIndex=index;
+
+currentSlides.forEach((s,i)=>{
+s.classList.toggle("active-slide",i===index);
+if(i===index)ajusterContenuDiapositive(s);
+});
+
+actualiserCompteurDiapo();
+window.scrollTo({top:0,behavior:"auto"});
+}
+
+/* NAVIGATION DIAPOSITIVES */
+
+function naviguerDiapositive(d){
+afficherDiapositive(currentSlideIndex+d);
+}
+
+btnDiapoPrecedente.addEventListener("click",()=>naviguerDiapositive(-1));
+btnDiapoSuivante.addEventListener("click",()=>naviguerDiapositive(1));
+
+/* ACTIVER / DÉSACTIVER LE MODE DIAPOSITIVES */
+
+function activerModeDiapositives(section){
+if(!section)return;
+if(slideMode&&currentSlideSection===section)return;
+
+if(currentSlideSection&&currentSlideSection!==section){
+desactiverModeDiapositives(currentSlideSection);
+}
+
+currentSlideSection=section;
+document.body.classList.add("slides-mode");
+slideNavigation.style.display="flex";
+slideMode=true;
+creerDiapositives(section);
+}
+
+function desactiverModeDiapositives(section){
+if(!section)section=currentSlideSection;
+if(section)restaurerContenuOriginal(section);
+
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];
+currentSlideIndex=0;
+currentSlideSection=null;
+slideMode=false;
+}
+
+/* ACTUALISER L'AFFICHAGE */
+
+function actualiserAffichageSection(){
+const section=document.querySelector("body > section.active");
+if(!section)return;
+
+if(zoomImportant()){
+activerModeDiapositives(section);
+}else if(slideMode){
+desactiverModeDiapositives(section);
+}
+}
+
+/* NAVIGATION ENTRE LES SECTIONS */
+
+const sectionIds=["DEF","VAR","COMP"];
+let currentSectionIndex=-1;
+
+function actualiserBoutonsNavigation(){
+const p=document.getElementById("btnSectionPrecedente");
+const s=document.getElementById("btnSectionSuivante");
+
+if(currentSectionIndex===-1){
+p.classList.remove("visible");
+s.classList.remove("visible");
+return;
+}
+
+p.disabled=(currentSectionIndex===0);
+s.disabled=(currentSectionIndex===sectionIds.length-1);
+}
+
+/* AFFICHER UNE SECTION */
+
+function showSection(id,button){
+const nouvelIndex=sectionIds.indexOf(id);
+const current=document.getElementById(id);
+
+if(!current||nouvelIndex===-1){
+console.warn("Section introuvable :",id);
+return;
+}
+
+if(slideMode&&currentSlideSection){
+desactiverModeDiapositives(currentSlideSection);
+}
+
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];
+currentSlideIndex=0;
+currentSlideSection=null;
+slideMode=false;
+
+document.querySelectorAll("body > section").forEach(s=>{
+s.classList.remove("active","animationSection");
+});
+
+document.querySelectorAll("nav button").forEach(b=>{
+b.classList.remove("btnActive");
+b.removeAttribute("aria-pressed");
+});
+
+fermerTousLesMenus();
+
+currentSectionIndex=nouvelIndex;
+document.body.classList.add("section-open");
+
+current.classList.add("active","animationSection");
+
+document.getElementById("btnRetourMenu").classList.add("visible");
+document.getElementById("btnSectionPrecedente").classList.add("visible");
+document.getElementById("btnSectionSuivante").classList.add("visible");
+
+actualiserBoutonsNavigation();
+
+if(!button){
+button=document.querySelectorAll("nav button")[nouvelIndex];
+}
+
+if(button){
+button.classList.add("btnActive");
+button.setAttribute("aria-pressed","true");
+}
+
+window.scrollTo({top:0,behavior:"auto"});
+
+requestAnimationFrame(()=>{
+actualiserAffichageSection();
+});
+}
+
+/* SECTION PRÉCÉDENTE / SUIVANTE */
+
+function naviguerSection(direction){
+const ni=currentSectionIndex+direction;
+if(ni<0||ni>=sectionIds.length)return;
+
+showSection(
+sectionIds[ni],
+Array.from(document.querySelectorAll("nav button"))[ni]
+);
+}
+
+/* RETOUR AU MENU */
+
+function retourMenu(){
+if(slideMode&&currentSlideSection){
+desactiverModeDiapositives(currentSlideSection);
+}
+
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+
+currentSlides=[];
+currentSlideIndex=0;
+currentSlideSection=null;
+slideMode=false;
+
+document.querySelectorAll("body > section").forEach(s=>{
+s.classList.remove("active","animationSection");
+});
+
+document.getElementById("btnRetourMenu").classList.remove("visible");
+document.getElementById("btnSectionPrecedente").classList.remove("visible");
+document.getElementById("btnSectionSuivante").classList.remove("visible");
+
+currentSectionIndex=-1;
+document.body.classList.remove("section-open");
+
+requestAnimationFrame(()=>{
+const menu=document.querySelector("nav");
+if(menu){
+const pos=menu.getBoundingClientRect().top+window.scrollY-12;
+window.scrollTo({top:Math.max(0,pos),behavior:"smooth"});
+}
+});
+}
+
+/* ADAPTATION AU REDIMENSIONNEMENT / ZOOM */
+
+window.addEventListener("resize",function(){
+clearTimeout(resizeTimer);
+
+resizeTimer=setTimeout(()=>{
+const section=document.querySelector("body > section.active");
+if(!section)return;
+
+if(zoomImportant()){
+if(!slideMode||currentSlideSection!==section){
+activerModeDiapositives(section);
+}else{
+const ancien=currentSlideIndex;
+creerDiapositives(section);
+if(currentSlides.length>0){
+afficherDiapositive(Math.min(ancien,currentSlides.length-1));
+}
+}
+}else if(slideMode){
+desactiverModeDiapositives(section);
+}
+},180);
+});
+
+/* NAVIGATION AU CLAVIER */
+
+document.addEventListener("keydown",function(event){
+if(!slideMode)return;
+
+const el=document.activeElement;
+
+if(el&&(el.tagName==="INPUT"||el.tagName==="TEXTAREA"||el.tagName==="SELECT"||el.isContentEditable))return;
+
+if(event.key==="ArrowRight"||event.key==="PageDown"){
+event.preventDefault();
+naviguerDiapositive(1);
+}
+
+if(event.key==="ArrowLeft"||event.key==="PageUp"){
+event.preventDefault();
+naviguerDiapositive(-1);
+}
+});
+
+/* INITIALISATION */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+slideNavigation.style.display="none";
+
+document.body.classList.remove("slides-mode","section-open");
+
+document.querySelectorAll("body > section").forEach(s=>{
+s.classList.remove("active","animationSection");
+memoriserContenu(s);
+});
+
+document.getElementById("btnRetourMenu").classList.remove("visible");
+document.getElementById("btnSectionPrecedente").classList.remove("visible");
+document.getElementById("btnSectionSuivante").classList.remove("visible");
+
+currentSectionIndex=-1;
+
+});
 
 </script>
 
 </body>
 </html>
+
 
