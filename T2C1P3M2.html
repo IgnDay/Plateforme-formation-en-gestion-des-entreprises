@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IgnDay - T2 Coût variable et seuil de rentabilité</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#1e293b;padding-bottom:40px}
+header{background:#2c3e50;color:white;text-align:center;box-shadow:0 2px 8px #0002}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;min-height:55px;padding:10px 14px;background:linear-gradient(120deg,#0f172a,#0f766e)}
+.brand{display:flex;align-items:center;gap:7px;color:white;text-decoration:none;font-weight:bold;font-size:15px}
+.brand-logo{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;background:#00b894;font-size:15px}
+header h1{padding:12px 8px;margin:0;font-size:40px;line-height:1.4}
+header h1 p{margin:7px 0;font-size:40px;font-weight:bold;line-height:1.4}
+.site-menu{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:3px}
+.site-menu>a{display:block;padding:5px 8px;border-radius:5px;color:white;text-decoration:none;cursor:pointer;font-size:12px}
+.site-menu>a:hover{background:#1D4ED8}
+.dropdown{position:relative;display:inline-block}
+.dropdown button{padding:5px 8px;background:transparent;color:white;border:none;cursor:pointer;font-size:12px;border-radius:5px}
+.dropdown button:hover{background:#1D4ED8}
+.dropdown-content{display:none;position:fixed;top:0;left:0;min-width:230px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:white;box-shadow:0 8px 25px rgba(0,0,0,.28);border-radius:7px;z-index:99999;padding:6px}
+.dropdown-content a{display:block;padding:9px 12px;color:#1e293b;text-decoration:none;text-align:left;font-size:13px;border-radius:5px;line-height:1.4;white-space:normal}
+.dropdown-content a:hover{background:#0f766e;color:white}
+nav{background:#34495e;padding:7px 10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px;text-align:center}
+nav button{margin:0;padding:10px 17px;border:0;background:#00b894;color:white;cursor:pointer;border-radius:5px;font-size:19px;font-weight:bold;transition:.25s;line-height:1.2}
+nav button:hover{background:#019875;transform:translateY(-1px)}
+.btnActive{background:#0984e3!important;transform:scale(1.03);box-shadow:0 2px 7px #0003}
+body.section-open>header,body.section-open>nav{display:none!important}
+section{display:none;padding:25px;margin:15px}
+section.active{display:block}
+.animationSection{animation:apparition .4s ease;background:white;border-left:6px solid #00b894;border-radius:9px;box-shadow:0 4px 12px #0002}
+@keyframes apparition{from{opacity:0}to{opacity:1}}
+body.section-open>section.active{margin:0;padding:4px 25px 25px}
+body.section-open>section.active>h2,body.section-open>section.active>.definition-title{margin-top:0}
+h2{color:#2c3e50;margin-top:0}
+h3{color:#00b894}
+p,li,ul,ol{line-height:1.7}
+table{width:100%;border-collapse:collapse;background:white;margin-top:18px;table-layout:fixed}
+td,th{border:1px solid #ccc;padding:9px;line-height:1.5;overflow-wrap:anywhere;vertical-align:middle}
+th{background:#e2e8f0;color:#1e293b;text-align:center}
+tr:hover td{background:#f1f7ff}
+.center{text-align:center}
+.bold{font-weight:bold}
+.orange{color:#c26a08}
+.teal{color:#0f766e}
+.blue{color:#0984e3}
+.purple{color:#8e44ad}
+.red{color:#dc2626}
+.highlight{background:#e8fff7;border-left:5px solid #00b894;padding:13px;margin-top:13px;border-radius:7px}
+.definition-title{background:linear-gradient(120deg,#164e63,#0e7490);color:white;padding:12px 15px;border-radius:7px;text-align:center;font-size:21px;font-weight:bold;margin:12px 0}
+.definition-box{background:#fffaf2;border:2px solid #e6a23c;border-radius:8px;padding:15px;margin:12px 0;font-weight:bold}
+.info{background:#fff4d6;border-left:6px solid #f1c40f;padding:15px;margin:15px 0;border-radius:8px}
+.example{background:#f1f5f9;border-left:5px solid #3498db;padding:15px;margin:15px 0;border-radius:7px}
+.table-title{text-align:center;color:#0f766e;font-size:22px;font-weight:bold;margin:20px 0 10px;border-bottom:2px solid #0f766e;padding-bottom:10px}
+/* CHARGES */
+.charge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:20px 0}
+.charge-box{padding:18px;border-radius:12px;background:#fff;border:2px solid #dbe4ec;margin:12px 0;font-weight:normal}
+.charge-grid .charge-box{margin:0}
+.charge-box.variable{border-top:7px solid #0984e3}
+.charge-box.fix{border-top:7px solid #d97706}
+.charge-box.mixte{border-top:7px solid #8e44ad}
+.charge-box h3{text-align:center;margin-top:0}
+.charge-box ul{padding-left:22px}
+/* SCHEMAS */
+.flow{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:10px;margin:20px 0}
+.flow-box{flex:1 1 180px;max-width:260px;padding:16px 12px;text-align:center;border-radius:10px;background:#e8fff7;border:2px solid #00b894;font-weight:bold}
+.flow-arrow{display:flex;align-items:center;justify-content:center;color:#0984e3;font-size:27px;font-weight:bold}
+/* FORMULES */
+.formula{background:#eff6ff;border:2px solid #60a5fa;padding:16px;border-radius:10px;text-align:center;font-size:19px;font-weight:bold;color:#1d4ed8;margin:18px 0}
+.formula.green{background:#ecfdf5;border-color:#34d399;color:#047857}
+.formula.orange{background:#fff7ed;border-color:#fb923c;color:#c2410c}
+.formula.purple{background:#faf5ff;border-color:#c084fc;color:#7e22ce}
+/* ETAPES */
+.step{display:flex;gap:15px;align-items:flex-start;background:#f8fafc;padding:15px;border-radius:9px;margin:12px 0;border:1px solid #dbe4ec}
+.step-number{min-width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:#00b894;color:white;border-radius:50%;font-weight:bold}
+.step-content{flex:1;min-width:0}
+/* DIAPOSITIVES */
+.slide-navigation{display:none;align-items:center;justify-content:center;gap:5px;color:white;font-size:10px;flex-shrink:0}
+.slide-navigation button{border:0;border-radius:3px;padding:4px 7px;background:#00b894;color:white;font-size:10px;font-weight:bold;cursor:pointer;white-space:nowrap}
+.slide-navigation button:hover:not(:disabled){background:#0984e3}
+.slide-navigation button:disabled{opacity:.4;cursor:not-allowed}
+.slide-counter{font-size:10px;font-weight:bold;white-space:nowrap}
+.content-slide{display:none;width:100%;min-height:100px;padding:2px 0 8px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.content-slide.active-slide{display:block}
+body.slides-mode .content-slide.title-only-slide{display:none;min-height:calc(100vh - 100px);padding:0 15px;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+body.slides-mode .content-slide.title-only-slide.active-slide{display:flex}
+body.slides-mode .content-slide.title-only-slide .definition-title{width:100%;margin:0}
+body.slides-mode{padding-bottom:48px}
+body.slides-mode>section.active{display:block;margin:0;padding:4px 25px 8px;border-radius:0;box-shadow:none;border-left:0;min-height:calc(100vh - 48px);animation:none;overflow-x:hidden;overflow-y:auto}
+body.slides-mode .slide-navigation{display:flex}
+body.slides-mode .definition-title{margin:3px 0 8px;padding:8px 12px;font-size:20px}
+body.slides-mode h2{margin:0 0 8px}
+body.slides-mode h3{margin:8px 0 6px}
+body.slides-mode p,body.slides-mode li{line-height:1.45;margin:5px 0}
+body.slides-mode .definition-box,body.slides-mode .highlight,body.slides-mode .info,body.slides-mode .example,body.slides-mode .step,body.slides-mode .formula{margin:6px 0;padding:10px}
+body.slides-mode .charge-grid,body.slides-mode .flow{margin:8px 0}
+body.slides-mode td,body.slides-mode th{padding:6px 9px}
+body.slides-mode table{margin-top:8px}
+/* FOOTER */
+footer{position:fixed;bottom:0;left:0;width:100%;min-height:38px;z-index:2000;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;padding:4px 10px;background:#2c3e50;color:white;border:1px solid #1e293b;font-size:11px;line-height:1.2}
+footer>span{white-space:nowrap}
+.footer-actions{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-left:auto}
+.btnFooter{display:none;margin:0;padding:4px 9px;border:none;border-radius:4px;color:white;font-size:11px;font-weight:bold;cursor:pointer;white-space:nowrap;transition:.2s}
+.btnPrecedent{background:#475569}
+.btnSuivant{background:#0f766e}
+.btnRetourMenu{background:#0984e3}
+.btnFooter.visible{display:block}
+.btnFooter:hover:not(:disabled){background:#00b894;transform:translateY(-1px)}
+.btnFooter:disabled{background:#64748b;opacity:.45;cursor:not-allowed;transform:none}
+@media(max-width:760px){
+body{padding-bottom:48px}
+.brandbar{justify-content:center;padding:4px 6px;gap:5px}
+.site-menu{width:100%;gap:2px}
+.site-menu>a,.dropdown button{padding:5px 6px;font-size:11px}
+.dropdown-content{min-width:220px}
+header h1{padding:5px 6px}
+header h1 p{font-size:16px;line-height:1.3;margin:3px 0}
+section{padding:16px;margin:10px}
+body.section-open>section.active{padding:4px 15px 18px}
+nav{padding:6px 5px;gap:5px}
+nav button{padding:6px 9px;font-size:12px;white-space:normal}
+.definition-title{font-size:18px;padding:11px}
+td,th{padding:7px;font-size:12px}
+.charge-grid{grid-template-columns:1fr}
+.flow-arrow{transform:rotate(90deg)}
+.formula{font-size:16px}
+.table-title{font-size:19px}
+.step{gap:9px;padding:10px}
+footer{flex-wrap:wrap;justify-content:center;gap:4px;padding:4px 5px;font-size:9px}
+footer>span{display:none}
+.footer-actions{justify-content:center;gap:3px;margin-left:0}
+.btnFooter{padding:4px 6px;font-size:9px}
+.slide-navigation{gap:3px}
+.slide-navigation button{font-size:9px;padding:4px 5px}
+.slide-counter{font-size:9px}
+body.slides-mode>section.active{padding:4px 15px 8px}
+body.slides-mode .definition-title{font-size:17px;padding:8px}
+body.slides-mode .content-slide.title-only-slide{min-height:calc(100vh - 115px);padding:0 8px}
+}
+@media(max-width:420px){
+.definition-title{font-size:16px}
+header h1 p{font-size:14px}
+.site-menu>a,.dropdown button{font-size:10px;padding:4px 5px}
+section{padding:12px;margin:8px}
+body.section-open>section.active{padding:4px 12px 14px}
+td,th{font-size:11px;padding:6px 3px}
+nav button{padding:6px 7px;font-size:11px}
+.table-title{font-size:17px}
+.step-number{min-width:30px;height:30px}
+.flow-box{font-size:13px}
+.btnFooter{font-size:8px;padding:4px}
+.slide-navigation button,.slide-counter{font-size:8px}
+}
+@media screen and (min-width:1200px) and (min-height:650px){
+body{font-size:18px;padding-bottom:40px}
+.brandbar{padding:5px 18px}
+.brand{font-size:17px}
+.brand-logo{width:32px;height:32px}
+header h1{padding:6px 8px}
+header h1 p{font-size:21px}
+.site-menu>a,.dropdown button{font-size:13px;padding:6px 9px}
+.dropdown-content{min-width:270px}
+.dropdown-content a{font-size:15px;padding:11px 14px}
+nav{padding:8px 12px;gap:9px}
+nav button{padding:9px 16px;font-size:18px;border-radius:6px}
+section{padding:30px 35px;margin:18px 22px}
+body.section-open>section.active{padding:4px 35px 30px}
+h2{font-size:27px;margin-bottom:18px}
+h3{font-size:21px}
+p,li{font-size:18px;line-height:1.7}
+.definition-title{font-size:23px;padding:14px}
+td,th{padding:14px 17px;font-size:17px}
+body.slides-mode .definition-title{font-size:21px;padding:9px 12px}
+body.slides-mode p,body.slides-mode li{font-size:18px;line-height:1.45}
+}
+@media screen and (min-width:1600px){
+body{font-size:19px}
+header h1 p{font-size:22px}
+section{max-width:1750px;margin:22px auto;padding:35px 45px}
+body.section-open>section.active{margin:0 auto;padding:4px 45px 35px}
+h2{font-size:30px}
+h3{font-size:24px}
+p,li{font-size:20px}
+td,th{font-size:19px}
+nav button{font-size:19px;padding:10px 18px}
+.definition-title{font-size:25px}
+body.slides-mode p,body.slides-mode li{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="brandbar">
+<a class="brand" href="index.html"><span class="brand-logo">IF</span><span>IgnDay</span></a>
+<div class="site-menu">
+<a href="index.html">Accueil</a>
+<div class="dropdown">
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">M2 - Comptabilité analytique ▼</button>
+<div class="dropdown-content">
+<a href="P1M2.html">P1 – Les bases de la CAE</a>
+<a href="P2M2.html">P2 – L’évaluation des stocks</a>
+<a href="P3M2.html">P3 – Les méthodes de calcul des coûts</a>
+</div>
+</div>
+<div class="dropdown">
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">P3 – Les méthodes de calcul des coûts ▼</button>
+<div class="dropdown-content">
+<a href="C1P3M2.html">T – Résumés des thèmes</a>
+<a href="C2P3M2.html">F – Formulaires interactifs</a>
+<a href="C3P3M2.html">E – Exercices corrigés</a>
+</div>
+</div>
+<div class="dropdown">
+<button type="button" onclick="toggleDropdown(this)" aria-expanded="false">T – Résumés des thèmes ▼</button>
+<div class="dropdown-content">
+<a href="T1C1P3M2.html">T1 – La méthode des coûts complets</a>
+<a href="T2C1P3M2.html">T2 – La méthode du coût variable</a>
+<a href="T3C1P3M2.html">T3 – L’imputation rationnelle des charges fixes</a>
+</div>
+</div>
+<a href="P3M2.html">⬅ Retour</a>
+</div>
+</div>
+<h1>
+<p>M2 – Comptabilité analytique d’exploitation &gt; P3 – Les méthodes de calcul ou d’évaluation des coûts</p>
+<p>Thème 2 – La méthode du coût variable et le seuil de rentabilité</p>
+</h1>
+</header>
+
+<nav>
+<button onclick="showSection('definition',this)">1- Les charges variables, fixes et semi-variables</button>
+<button onclick="showSection('marge',this)">2- La marge sur coût variable et le Tableau du résultat différentiel</button>
+<button onclick="showSection('direct',this)">3- Principe du Direct simple Costing</button>
+<button onclick="showSection('seuil',this)">4- Le seuil de rentabilité</button>
+</nav>
+
+<section id="definition">
+<h2 class="definition-title">1- Les charges variables, fixes et semi-variables</h2>
+
+<h2>A- Principe de la méthode des coûts variables</h2>
+<div class="definition-box">
+<p>La méthode des coûts variables, appelée aussi Direct Costing, est une méthode de calcul des coûts partiels. Contrairement à la méthode des coûts complets, elle ne retient que les charges variables dans le coût des produits.</p>
+<p class="orange">▶ Les charges fixes ne sont pas incorporées au coût des produits. Elles sont déduites globalement de la marge sur coût variable.</p>
+</div>
+
+<h2>B- Les différentes catégories de charges</h2>
+<div class="definition-box">
+<div class="charge-box variable">
+<h3 class="blue">1 – Les charges variables (CV)</h3>
+<p>Les charges variables sont des charges qui évoluent selon le volume d'activité. Elles augmentent lorsque la production augmente et diminuent lorsque l'activité baisse.</p>
+<strong>Exemples :</strong>
+<ul>
+<li>Matières premières.</li>
+<li>Main-d'œuvre directe.</li>
+<li>Énergie liée à la production.</li>
+<li>Commissions sur ventes.</li>
+</ul>
+<div class="info">Elles sont proportionnelles à l'activité, mais restent généralement fixes par unité produite.</div>
+</div>
+<div class="charge-box fix">
+<h3 class="orange">2 – Les charges fixes (CF)</h3>
+<p>Les charges fixes restent constantes pour une structure donnée de l'entreprise, quel que soit le niveau d'activité, dans une certaine limite.</p>
+<strong>Exemples :</strong>
+<ul>
+<li>Amortissements.</li>
+<li>Assurances.</li>
+<li>Loyers.</li>
+<li>Salaires administratifs.</li>
+</ul>
+<div class="info">Leur montant total reste constant, mais leur coût unitaire diminue lorsque la production augmente.</div>
+</div>
+<div class="charge-box mixte">
+<h3 class="purple">3 – Les charges semi-variables</h3>
+<p>Les charges semi-variables comportent deux parties :</p>
+<ul>
+<li>Une partie fixe.</li>
+<li>Une partie variable.</li>
+</ul>
+<strong>Exemple :</strong>
+<p>Une facture d'électricité comprenant un abonnement fixe et une consommation variable.</p>
+<div class="formula">Charge semi-variable = Partie fixe + Partie variable</div>
+</div>
+</div>
+
+<h2>C. Le comportement des charges</h2>
+<h3>a – Le comportement des charges variables</h3>
+<div class="definition-box">
+<p>Les charges variables totales évoluent proportionnellement à la quantité produite, tandis que le coût variable unitaire reste constant.</p>
+<div class="formula">CV unitaire = Charges variables totales / Quantité produite</div>
+<div class="table-title">Évolution des charges variables</div>
+<table>
+<colgroup><col style="width:33%"><col style="width:33%"><col style="width:34%"></colgroup>
+<tr><th>Production</th><th>Charges variables</th><th>CV unitaire</th></tr>
+<tr><td class="center">10 unités</td><td class="center">150 DH</td><td class="center blue bold">15 DH</td></tr>
+<tr><td class="center">20 unités</td><td class="center">300 DH</td><td class="center blue bold">15 DH</td></tr>
+<tr><td class="center">100 unités</td><td class="center">1 500 DH</td><td class="center blue bold">15 DH</td></tr>
+</table>
+<div class="highlight"><strong>Observation :</strong> Le coût variable unitaire reste constant à 15 DH, même lorsque la production augmente.</div>
+</div>
+
+<h3>b – Le comportement des charges fixes</h3>
+<div class="definition-box">
+<p>Les charges fixes restent constantes en montant total pour une structure donnée. En revanche, les charges fixes unitaires diminuent lorsque la production augmente.</p>
+<div class="formula orange">CF unitaire = Charges fixes totales / Quantité produite</div>
+<div class="table-title">Évolution des charges fixes</div>
+<table>
+<colgroup><col style="width:33%"><col style="width:33%"><col style="width:34%"></colgroup>
+<tr><th>Production</th><th>Charges fixes</th><th>CF unitaire</th></tr>
+<tr><td class="center">10 000 unités</td><td class="center">60 000 DH</td><td class="center orange bold">6 DH</td></tr>
+<tr><td class="center">15 000 unités</td><td class="center">60 000 DH</td><td class="center orange bold">4 DH</td></tr>
+<tr><td class="center">20 000 unités</td><td class="center">60 000 DH</td><td class="center orange bold">3 DH</td></tr>
+</table>
+<div class="info"><strong>Observation :</strong> Les charges fixes totales restent à 60 000 DH, tandis que leur montant unitaire diminue de 6 DH à 3 DH.</div>
+</div>
+
+<h3>c – Les charges semi-variables</h3>
+<div class="definition-box">
+<p>Les charges semi-variables comprennent une partie fixe et une partie variable.</p>
+<div class="formula">Charge semi-variable = CF + CV</div>
+<div class="example">
+<strong>Exemple :</strong> Une facture d'électricité comprend :
+<ul>
+<li>Un abonnement fixe : 300 DH.</li>
+<li>Une consommation variable : 2 DH par unité.</li>
+</ul>
+<table>
+<tr><th>Consommation</th><th>Part variable</th><th>Facture totale</th></tr>
+<tr><td class="center">100 unités</td><td class="center">200 DH</td><td class="center">500 DH</td></tr>
+<tr><td class="center">200 unités</td><td class="center">400 DH</td><td class="center">700 DH</td></tr>
+<tr><td class="center">300 unités</td><td class="center">600 DH</td><td class="center">900 DH</td></tr>
+</table>
+<div class="formula green">Facture = 300 + (2 × Consommation)</div>
+</div>
+</div>
+</section>
+
+<section id="marge">
+<h2 class="definition-title">2- La marge sur coût variable et le tableau de résultat différentiel</h2>
+
+<h2>A- La marge sur coût variable</h2>
+<div class="definition-box">
+<p>La marge sur coût variable représente la différence entre le chiffre d'affaires et les charges variables correspondantes.</p>
+<p class="orange">▶ Elle permet de mesurer la contribution des ventes à la couverture des charges fixes et à la réalisation du bénéfice.</p>
+</div>
+<div class="formula green">MCV = Chiffre d'affaires − Charges variables</div>
+
+<h3>a – La marge sur coût variable totale</h3>
+<div class="example">
+<p>Une entreprise réalise un chiffre d'affaires de 100 000 DH et supporte des charges variables de 62 500 DH.</p>
+<div class="formula green">MCV = 100 000 − 62 500 = 37 500 DH</div>
+</div>
+
+<h3>b – La marge sur coût variable unitaire</h3>
+<div class="formula">MCV unitaire = Prix de vente unitaire − CV unitaire</div>
+<div class="example">
+<ul>
+<li>Prix de vente unitaire : 100 DH.</li>
+<li>Coût variable unitaire : 60 DH.</li>
+</ul>
+<div class="formula green">MCV unitaire = 100 − 60 = 40 DH</div>
+</div>
+
+<h3>c – Le taux de marge sur coût variable</h3>
+<div class="formula">Taux de MCV = (MCV / Chiffre d'affaires) × 100</div>
+<div class="example">
+<div class="formula green">Taux de MCV = (37 500 / 100 000) × 100 = 37,50 %</div>
+<p>Cela signifie que chaque 100 DH de chiffre d'affaires génère 37,50 DH de marge sur coût variable.</p>
+</div>
+
+<h2>B. Le compte de résultat différentiel</h2>
+<div class="definition-box">
+<p>Le compte de résultat différentiel est un tableau qui classe les produits et les charges selon leur variabilité afin de déterminer la marge sur coût variable et le résultat de l'entreprise.</p>
+</div>
+<div class="table-title">COMPTE DE RÉSULTAT DIFFÉRENTIEL</div>
+<table>
+<colgroup><col style="width:48%"><col style="width:26%"><col style="width:26%"></colgroup>
+<tr><th>Éléments</th><th>Montant (DH)</th><th>%</th></tr>
+<tr><td class="bold">Chiffre d'affaires</td><td class="center">100 000</td><td class="center">100 %</td></tr>
+<tr><td>− Charges variables</td><td class="center">(62 500)</td><td class="center">62,50 %</td></tr>
+<tr><th class="blue">Marge sur coût variable</th><th class="blue">37 500</th><th class="blue">37,50 %</th></tr>
+<tr><td>− Charges fixes</td><td class="center">(26 250)</td><td class="center">26,25 %</td></tr>
+<tr><th class="teal">Résultat</th><th class="teal">11 250</th><th class="teal">11,25 %</th></tr>
+</table>
+<div class="formula green">Résultat = Marge sur coût variable − Charges fixes</div>
+
+<h3>Interprétation du résultat</h3>
+<div class="charge-grid">
+<div class="charge-box variable">
+<h3 class="blue">Résultat positif</h3>
+<div class="formula green">MCV &gt; CF</div>
+<p class="center bold teal">Bénéfice</p>
+</div>
+<div class="charge-box fix">
+<h3 class="orange">Résultat nul</h3>
+<div class="formula orange">MCV = CF</div>
+<p class="center bold orange">Équilibre</p>
+</div>
+<div class="charge-box mixte">
+<h3 class="purple">Résultat négatif</h3>
+<div class="formula">MCV &lt; CF</div>
+<p class="center bold red">Perte</p>
+</div>
+</div>
+</section>
+
+<section id="direct">
+<h2 class="definition-title">3- Le Direct Costing simple</h2>
+<div class="definition-box">
+<p>Le Direct Costing simple consiste à ne retenir dans le coût des produits que les charges variables. Les charges fixes sont déduites globalement de la marge sur coût variable pour déterminer le résultat de l'entreprise.</p>
+</div>
+
+<h3>Schéma de calcul</h3>
+<div class="flow">
+<div class="flow-box">CHIFFRE D'AFFAIRES</div>
+<div class="flow-arrow">−</div>
+<div class="flow-box">CHARGES VARIABLES</div>
+<div class="flow-arrow">=</div>
+<div class="flow-box">MCV</div>
+</div>
+<div class="flow">
+<div class="flow-box">MCV</div>
+<div class="flow-arrow">−</div>
+<div class="flow-box">CHARGES FIXES</div>
+<div class="flow-arrow">=</div>
+<div class="flow-box" style="background:#d1fae5;border-color:#059669">RÉSULTAT</div>
+</div>
+
+<div class="definition-box">
+<h3>Exemple pratique : rentabilité de trois marques</h3>
+<div class="highlight">
+<p>Une entreprise commercialise trois marques A, B et C. Elle souhaite déterminer la marge sur coût variable dégagée par chaque marque et calculer son résultat global.</p>
+</div>
+</div>
+
+<div class="table-title">TABLEAU DE CALCUL DES MARGES SUR COÛT VARIABLE</div>
+<table>
+<colgroup><col style="width:40%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>
+<tr><th>Éléments</th><th>Marque A</th><th>Marque B</th><th>Marque C</th></tr>
+<tr><td class="bold">Chiffre d'affaires</td><td class="center">150 000</td><td class="center">200 000</td><td class="center">250 000</td></tr>
+<tr><td>Charges variables</td><td class="center">(100 000)</td><td class="center">(160 000)</td><td class="center">(270 000)</td></tr>
+<tr><th class="teal">Marge sur CV</th><th class="teal">50 000</th><th class="teal">40 000</th><th class="red">-20 000</th></tr>
+</table>
+
+<h3>Analyse des marges par marque</h3>
+<div class="charge-grid">
+<div class="charge-box variable">
+<h3 class="blue">Marque A</h3>
+<div class="formula green">50 000 DH</div>
+<p>La marque A dégage une marge positive de 50 000 DH.</p>
+</div>
+<div class="charge-box variable">
+<h3 class="blue">Marque B</h3>
+<div class="formula green">40 000 DH</div>
+<p>La marque B dégage une marge positive de 40 000 DH.</p>
+</div>
+<div class="charge-box mixte">
+<h3 class="red">Marque C</h3>
+<div class="formula orange">-20 000 DH</div>
+<p>La marque C présente une marge négative de 20 000 DH.</p>
+</div>
+</div>
+
+<h3>Calcul de la marge globale</h3>
+<table>
+<tr><th>Éléments</th><th>Montant (DH)</th></tr>
+<tr><td>Marge de la marque A</td><td class="center">50 000</td></tr>
+<tr><td>Marge de la marque B</td><td class="center">40 000</td></tr>
+<tr><td>Marge de la marque C</td><td class="center">(20 000)</td></tr>
+<tr><th>Marge globale</th><th class="teal">70 000</th></tr>
+</table>
+<div class="formula green">MCV globale = 50 000 + 40 000 − 20 000 = 70 000 DH</div>
+
+<h3>Calcul du résultat global</h3>
+<table>
+<tr><th>Éléments</th><th>Montant (DH)</th></tr>
+<tr><td>Marge globale sur coût variable</td><td class="center">70 000</td></tr>
+<tr><td>− Charges fixes</td><td class="center">(50 000)</td></tr>
+<tr><th>Résultat global</th><th class="teal">20 000</th></tr>
+</table>
+<div class="formula green">Résultat = 70 000 − 50 000 = 20 000 DH</div>
+</section>
+
+<section id="seuil">
+<h2 class="definition-title">4- Le seuil de rentabilité</h2>
+<div class="definition-box">
+<p>Le seuil de rentabilité représente le niveau d'activité pour lequel l'entreprise couvre la totalité de ses charges variables et fixes.</p>
+<p class="orange">▶ Au seuil de rentabilité, l'entreprise ne réalise ni bénéfice ni perte.</p>
+</div>
+
+<h3>a – La situation de l'entreprise selon le seuil de rentabilité</h3>
+<div class="charge-grid">
+<div class="charge-box variable">
+<h3 class="blue">CA supérieur au SR</h3>
+<div class="formula green">CA &gt; SR</div>
+<p class="center bold teal">Bénéfice</p>
+<p>Le chiffre d'affaires dépasse le seuil de rentabilité : l'entreprise réalise un bénéfice.</p>
+</div>
+<div class="charge-box fix">
+<h3 class="orange">CA égal au SR</h3>
+<div class="formula orange">CA = SR</div>
+<p class="center bold orange">Équilibre</p>
+<p>L'entreprise couvre exactement toutes ses charges : son résultat est nul.</p>
+</div>
+<div class="charge-box mixte">
+<h3 class="purple">CA inférieur au SR</h3>
+<div class="formula">CA &lt; SR</div>
+<p class="center bold red">Perte</p>
+<p>Le chiffre d'affaires est insuffisant pour couvrir toutes les charges : l'entreprise réalise une perte.</p>
+</div>
+</div>
+
+<div class="highlight">
+<strong>Au seuil de rentabilité :</strong>
+<div class="formula green">Résultat = 0</div>
+<p class="center bold">Marge sur coût variable = Charges fixes</p>
+</div>
+
+<h3>b – Calcul du seuil de rentabilité</h3>
+<div class="definition-box">
+<p>Le résultat de l'entreprise se calcule à partir de la marge sur coût variable et des charges fixes :</p>
+<div class="formula">Résultat = MCV − Charges fixes</div>
+<p>Au seuil de rentabilité, le résultat est nul. La marge sur coût variable couvre exactement les charges fixes.</p>
+<div class="formula orange">(Taux de MCV × SR) − Charges fixes = 0</div>
+<div class="formula green">SR = Charges fixes / Taux de marge sur coût variable</div>
+</div>
+<div class="info">
+<strong>Attention :</strong> Pour appliquer directement cette formule, le taux de MCV doit être exprimé sous forme décimale (exemple : 40 % = 0,40). Si le taux est exprimé en pourcentage, il faut diviser les charges fixes par le taux puis multiplier par 100.
+</div>
+
+<div class="definition-box">
+<h3>Exemple : calcul du seuil de rentabilité</h3>
+<div class="highlight">
+<p>Une entreprise commercialise un article dont le prix de vente unitaire est de 200 DH. Les charges variables unitaires s'élèvent à 120 DH et les charges fixes totales sont de 80 000 DH.</p>
+<p>La quantité vendue pendant la période est de 3 000 articles.</p>
+</div>
+</div>
+
+<div class="table-title">DONNÉES DE L'EXEMPLE</div>
+<table>
+<colgroup><col style="width:60%"><col style="width:40%"></colgroup>
+<tr><th>Données</th><th>Montant</th></tr>
+<tr><td>Prix de vente unitaire</td><td class="center bold">200 DH</td></tr>
+<tr><td>Charges variables unitaires</td><td class="center bold">120 DH</td></tr>
+<tr><td>Charges fixes</td><td class="center bold">80 000 DH</td></tr>
+<tr><td>Quantité vendue</td><td class="center bold">3 000 articles</td></tr>
+</table>
+
+<h3>1 – Calcul du résultat</h3>
+<div class="step"><div class="step-number">1</div><div class="step-content">
+<strong>Calcul du chiffre d'affaires</strong>
+<div class="formula">CA = Quantité vendue × Prix de vente unitaire</div>
+<div class="formula green">CA = 3 000 × 200 = 600 000 DH</div>
+</div></div>
+<div class="step"><div class="step-number">2</div><div class="step-content">
+<strong>Calcul des charges variables</strong>
+<div class="formula">CV = Quantité vendue × CV unitaire</div>
+<div class="formula green">CV = 3 000 × 120 = 360 000 DH</div>
+</div></div>
+<div class="step"><div class="step-number">3</div><div class="step-content">
+<strong>Calcul de la marge sur coût variable</strong>
+<div class="formula">MCV = CA − CV</div>
+<div class="formula green">MCV = 600 000 − 360 000 = 240 000 DH</div>
+</div></div>
+<div class="step"><div class="step-number">4</div><div class="step-content">
+<strong>Calcul du résultat</strong>
+<div class="formula">Résultat = MCV − Charges fixes</div>
+<div class="formula green">Résultat = 240 000 − 80 000 = 160 000 DH</div>
+</div></div>
+<div class="highlight">
+<strong>Conclusion :</strong>
+<p>L'entreprise réalise un bénéfice de 160 000 DH pour 3 000 articles vendus.</p>
+</div>
+
+<h3>2 – Calcul du seuil de rentabilité</h3>
+<div class="step"><div class="step-number">1</div><div class="step-content">
+<strong>Calcul du taux de marge sur coût variable</strong>
+<div class="formula">Taux de MCV = MCV / CA</div>
+<div class="formula green">Taux de MCV = 240 000 / 600 000 = 0,40 = 40 %</div>
+</div></div>
+<div class="step"><div class="step-number">2</div><div class="step-content">
+<strong>Calcul du seuil de rentabilité</strong>
+<div class="formula">SR = Charges fixes / Taux de MCV</div>
+<div class="formula green">SR = 80 000 / 0,40 = 200 000 DH</div>
+</div></div>
+<div class="info">
+<strong>Interprétation :</strong>
+<p>L'entreprise doit réaliser un chiffre d'affaires de 200 000 DH pour couvrir exactement l'ensemble de ses charges. À ce niveau d'activité, son résultat est nul.</p>
+</div>
+
+<h3>3 – Vérification du seuil de rentabilité</h3>
+<p>Au seuil de rentabilité, la marge sur coût variable doit être égale au montant des charges fixes.</p>
+<table>
+<tr><th>Éléments</th><th>Calcul</th><th>Montant</th></tr>
+<tr><td>Chiffre d'affaires au SR</td><td class="center">—</td><td class="center">200 000 DH</td></tr>
+<tr><td>Charges variables</td><td class="center">200 000 × 60 %</td><td class="center">120 000 DH</td></tr>
+<tr><td>Marge sur coût variable</td><td class="center">200 000 − 120 000</td><td class="center">80 000 DH</td></tr>
+<tr><td>Charges fixes</td><td class="center">—</td><td class="center">80 000 DH</td></tr>
+<tr><th>Résultat</th><th class="center">80 000 − 80 000</th><th class="teal center">0 DH</th></tr>
+</table>
+<div class="formula green">Au SR : MCV = CF → Résultat = 0 DH</div>
+
+<h3>c – Le point mort</h3>
+<div class="definition-box">
+<p>Le point mort est la date à laquelle l'entreprise atteint son seuil de rentabilité. Il indique le moment où l'entreprise commence à réaliser un bénéfice.</p>
+</div>
+<div class="formula">Point mort = (SR × 12) / Chiffre d'affaires annuel</div>
+<div class="definition-box">
+<div class="example">
+<strong>Exemple :</strong>
+<ul>
+<li>Seuil de rentabilité : 200 000 DH.</li>
+<li>Chiffre d'affaires annuel : 600 000 DH.</li>
+</ul>
+<div class="formula green">Point mort = (200 000 × 12) / 600 000</div>
+<div class="formula green">Point mort = 4 mois</div>
+<p>L'entreprise atteint son seuil de rentabilité après 4 mois d'activité, si le chiffre d'affaires est réalisé régulièrement au cours de l'année.</p>
+</div>
+<div class="info">
+<strong>Remarque :</strong>
+<p>Le point mort est généralement exprimé en mois ou en jours. Le calcul en mois suppose une répartition régulière du chiffre d'affaires sur l'année.</p>
+</div>
+</div>
+
+<h3>d – La marge de sécurité</h3>
+<div class="definition-box">
+<p>La marge de sécurité représente l'excédent du chiffre d'affaires réalisé sur le seuil de rentabilité.</p>
+</div>
+<div class="formula">Marge de sécurité = CA − SR</div>
+<div class="definition-box">
+<div class="example">
+<strong>Exemple :</strong>
+<ul>
+<li>Chiffre d'affaires : 600 000 DH.</li>
+<li>Seuil de rentabilité : 200 000 DH.</li>
+</ul>
+<div class="formula green">Marge de sécurité = 600 000 − 200 000</div>
+<div class="formula green">Marge de sécurité = 400 000 DH</div>
+<p>L'entreprise peut enregistrer une baisse de son chiffre d'affaires de 400 000 DH avant d'atteindre son seuil de rentabilité, toutes choses égales par ailleurs.</p>
+</div>
+</div>
+
+<h3>e – L'indice de sécurité</h3>
+<div class="definition-box">
+<p>L'indice de sécurité mesure la part du chiffre d'affaires que l'entreprise peut perdre avant de devenir déficitaire.</p>
+</div>
+<div class="formula">Indice de sécurité = (Marge de sécurité × 100) / CA</div>
+<div class="definition-box">
+<div class="example">
+<strong>Exemple :</strong>
+<ul>
+<li>Marge de sécurité : 400 000 DH.</li>
+<li>Chiffre d'affaires : 600 000 DH.</li>
+</ul>
+<div class="formula green">Indice de sécurité = (400 000 × 100) / 600 000</div>
+<div class="formula green">Indice de sécurité = 66,67 %</div>
+<p>L'entreprise peut supporter une baisse de son chiffre d'affaires d'environ 66,67 % avant d'atteindre son seuil de rentabilité.</p>
+</div>
+</div>
+
+<h3>Tableau récapitulatif de l'exemple</h3>
+<div class="table-title">SYNTHÈSE DES CALCULS</div>
+<table>
+<colgroup><col style="width:58%"><col style="width:42%"></colgroup>
+<tr><th>Indicateurs</th><th>Résultats</th></tr>
+<tr><td>Chiffre d'affaires</td><td class="center">600 000 DH</td></tr>
+<tr><td>Charges variables</td><td class="center">360 000 DH</td></tr>
+<tr><td>Marge sur coût variable</td><td class="center">240 000 DH</td></tr>
+<tr><td>Taux de MCV</td><td class="center">40 %</td></tr>
+<tr><td>Charges fixes</td><td class="center">80 000 DH</td></tr>
+<tr><td>Résultat</td><td class="center teal bold">160 000 DH</td></tr>
+<tr><td>Seuil de rentabilité</td><td class="center teal bold">200 000 DH</td></tr>
+<tr><td>Point mort</td><td class="center">4 mois</td></tr>
+<tr><td>Marge de sécurité</td><td class="center">400 000 DH</td></tr>
+<tr><td>Indice de sécurité</td><td class="center">66,67 %</td></tr>
+</table>
+
+<div class="highlight">
+<h3>Conclusion générale</h3>
+<p>L'entreprise réalise un chiffre d'affaires de 600 000 DH et un bénéfice de 160 000 DH. Son seuil de rentabilité est de 200 000 DH. Elle atteint ce seuil après 4 mois d'activité, selon l'hypothèse d'une activité régulière.</p>
+<p class="bold teal">La marge de sécurité est de 400 000 DH et l'indice de sécurité est de 66,67 %.</p>
+</div>
+</section>
+
+<footer>
+<div class="slide-navigation" id="slideNavigation">
+<button type="button" id="btnDiapoPrecedente">← Diapo précédente</button>
+<span class="slide-counter" id="compteurDiapo">Diapo 1 / 1</span>
+<button type="button" id="btnDiapoSuivante">Diapo suivante →</button>
+</div>
+<div class="footer-actions">
+<button type="button" class="btnFooter btnPrecedent" id="btnSectionPrecedente" onclick="naviguerSection(-1)">← Section précédente</button>
+<button type="button" class="btnFooter btnSuivant" id="btnSectionSuivante" onclick="naviguerSection(1)">Section suivante →</button>
+<button type="button" class="btnFooter btnRetourMenu" id="btnRetourMenu" onclick="retourMenu()">↑ Retour au menu</button>
+</div>
+</footer>
+
+<script>
+/* MENUS DÉROULANTS */
+function positionDropdown(button,menu){
+const rect=button.getBoundingClientRect();const marge=8;
+menu.style.display="block";menu.style.position="fixed";
+menu.style.maxWidth=(window.innerWidth-16)+"px";menu.style.maxHeight=(window.innerHeight-16)+"px";
+menu.style.top="0";menu.style.bottom="auto";
+const hauteurMenu=menu.scrollHeight;
+const espaceBas=window.innerHeight-rect.bottom-marge;
+const espaceHaut=rect.top-marge;
+const ouvrirEnBas=hauteurMenu<=espaceBas||espaceBas>=espaceHaut;
+let hd;
+if(ouvrirEnBas){menu.style.top=(rect.bottom+4)+"px";menu.style.bottom="auto";hd=espaceBas-4;}
+else{menu.style.bottom=(window.innerHeight-rect.top+4)+"px";menu.style.top="auto";hd=espaceHaut-4;}
+menu.style.maxHeight=Math.max(100,hd)+"px";
+menu.style.width="auto";
+const largeur=Math.min(Math.max(menu.offsetWidth,230),window.innerWidth-16);
+menu.style.width=largeur+"px";
+let pg=rect.left;
+if(pg+largeur>window.innerWidth-marge)pg=window.innerWidth-largeur-marge;
+if(pg<marge)pg=marge;
+menu.style.left=pg+"px";
+}
+function toggleDropdown(button){
+const m=button.parentElement.querySelector(".dropdown-content");
+const isOpen=m.style.display==="block";
+fermerTousLesMenus();
+if(!isOpen){positionDropdown(button,m);button.setAttribute("aria-expanded","true");}
+}
+function fermerTousLesMenus(){
+document.querySelectorAll(".dropdown-content").forEach(m=>{m.style.display="none";m.style.top="auto";m.style.bottom="auto";});
+document.querySelectorAll(".dropdown button").forEach(b=>b.setAttribute("aria-expanded","false"));
+}
+document.addEventListener("click",e=>{if(!e.target.closest(".dropdown"))fermerTousLesMenus();});
+function repositionnerMenus(){
+document.querySelectorAll(".dropdown").forEach(d=>{
+const b=d.querySelector("button"),m=d.querySelector(".dropdown-content");
+if(b&&m&&m.style.display==="block")positionDropdown(b,m);
+});
+}
+window.addEventListener("resize",repositionnerMenus);
+window.addEventListener("scroll",repositionnerMenus,true);
+
+/* MODE DIAPOSITIVES AUTOMATIQUES */
+function zoomImportant(){return(window.screen.width>=1000&&window.innerWidth<=window.screen.width*0.62);}
+let currentSlides=[],currentSlideIndex=0,currentSlideSection=null,slideMode=false,resizeTimer=null;
+const slideNavigation=document.getElementById("slideNavigation");
+const btnDiapoPrecedente=document.getElementById("btnDiapoPrecedente");
+const btnDiapoSuivante=document.getElementById("btnDiapoSuivante");
+const compteurDiapo=document.getElementById("compteurDiapo");
+const originalSectionContent=new Map();
+function memoriserContenu(s){if(!originalSectionContent.has(s.id))originalSectionContent.set(s.id,Array.from(s.childNodes));}
+function restaurerContenuOriginal(s){if(!s||!originalSectionContent.has(s.id))return;s.replaceChildren(...originalSectionContent.get(s.id));}
+function hauteurDisponibleDiapo(){const hf=document.querySelector("footer")?.offsetHeight||38;return Math.max(180,window.innerHeight-hf-35);}
+function estTitreContenu(n){return n.nodeType===Node.ELEMENT_NODE&&n.matches("h2,h3,h4,.definition-title,.table-title");}
+function construireGroupes(nodes){
+const groupes=[];let g=[];
+nodes.forEach(n=>{
+if(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim())return;
+if(estTitreContenu(n)&&g.length){groupes.push(g);g=[];}
+g.push(n);
+});
+if(g.length)groupes.push(g);
+return groupes;
+}
+function creerSlide(section){
+const s=document.createElement("div");s.className="content-slide";
+section.appendChild(s);currentSlides.push(s);return s;
+}
+function mesurerGroupe(groupe,largeur){
+const m=document.createElement("div");
+m.className="content-slide";
+m.style.cssText="display:block;visibility:hidden;position:fixed;left:-100000px;top:0;height:auto;min-height:0;max-height:none;overflow:visible;padding:2px 0 8px;box-sizing:border-box;max-width:none;width:"+Math.max(300,largeur)+"px";
+groupe.forEach(n=>m.appendChild(n.cloneNode(true)));
+document.body.appendChild(m);
+const h=Math.ceil(Math.max(m.scrollHeight,m.getBoundingClientRect().height));
+m.remove();return h;
+}
+function creerDiapositives(section){
+if(!section)return;
+currentSlides=[];currentSlideIndex=0;
+restaurerContenuOriginal(section);memoriserContenu(section);
+const nodes=Array.from(section.childNodes);
+let titrePrincipal=null;
+const premier=nodes.find(n=>!(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim()));
+if(premier&&premier.nodeType===Node.ELEMENT_NODE&&premier.classList.contains("definition-title"))titrePrincipal=premier;
+section.replaceChildren();
+const hauteurMax=hauteurDisponibleDiapo();
+const largeur=Math.max(300,section.clientWidth-50);
+if(titrePrincipal){const st=creerSlide(section);st.classList.add("title-only-slide");st.appendChild(titrePrincipal);}
+const contenu=nodes.filter(n=>n!==titrePrincipal&&!(n.nodeType===Node.TEXT_NODE&&!n.textContent.trim()));
+let slide=null,hu=0;
+construireGroupes(contenu).forEach(groupe=>{
+const hg=mesurerGroupe(groupe,largeur);
+if(!slide||(hu>0&&hu+hg+12>hauteurMax)){slide=creerSlide(section);hu=0;}
+groupe.forEach(n=>slide.appendChild(n));
+hu+=hg+12;
+});
+if(currentSlides.length===0)creerSlide(section);
+afficherDiapositive(0);
+}
+function actualiserCompteurDiapo(){
+const total=currentSlides.length;
+if(total===0){compteurDiapo.textContent="Aucune diapositive";btnDiapoPrecedente.disabled=true;btnDiapoSuivante.disabled=true;return;}
+compteurDiapo.textContent=" "+(currentSlideIndex+1)+" / "+total;
+btnDiapoPrecedente.disabled=(currentSlideIndex===0);
+btnDiapoSuivante.disabled=(currentSlideIndex===total-1);
+}
+function ajusterContenuDiapositive(slide){
+if(!slide)return;
+slide.style.width="100%";slide.style.maxWidth="100%";slide.style.overflowX="hidden";slide.style.overflowY="auto";
+slide.querySelectorAll("*").forEach(el=>{el.style.maxWidth="100%";el.style.minWidth="0";el.style.overflowWrap="anywhere";});
+slide.querySelectorAll("table").forEach(t=>{t.style.width="100%";t.style.maxWidth="100%";t.style.tableLayout="fixed";});
+}
+function afficherDiapositive(index){
+if(!currentSlides.length){actualiserCompteurDiapo();return;}
+if(index<0||index>=currentSlides.length)return;
+currentSlideIndex=index;
+currentSlides.forEach((s,i)=>{s.classList.toggle("active-slide",i===index);if(i===index)ajusterContenuDiapositive(s);});
+actualiserCompteurDiapo();
+window.scrollTo({top:0,behavior:"auto"});
+}
+function naviguerDiapositive(d){afficherDiapositive(currentSlideIndex+d);}
+btnDiapoPrecedente.addEventListener("click",()=>naviguerDiapositive(-1));
+btnDiapoSuivante.addEventListener("click",()=>naviguerDiapositive(1));
+
+function activerModeDiapositives(section){
+if(!section)return;
+if(slideMode&&currentSlideSection===section)return;
+if(currentSlideSection&&currentSlideSection!==section)desactiverModeDiapositives(currentSlideSection);
+currentSlideSection=section;
+document.body.classList.add("slides-mode");
+slideNavigation.style.display="flex";
+slideMode=true;
+creerDiapositives(section);
+}
+function desactiverModeDiapositives(section){
+if(!section)section=currentSlideSection;
+if(section)restaurerContenuOriginal(section);
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+}
+function actualiserAffichageSection(){
+const section=document.querySelector("body > section.active");
+if(!section)return;
+if(zoomImportant())activerModeDiapositives(section);
+else if(slideMode)desactiverModeDiapositives(section);
+}
+
+/* NAVIGATION ENTRE LES SECTIONS */
+const sectionIds=["definition","marge","direct","seuil"];
+let currentSectionIndex=-1;
+function actualiserBoutonsNavigation(){
+const p=document.getElementById("btnSectionPrecedente"),s=document.getElementById("btnSectionSuivante");
+if(currentSectionIndex===-1){p.classList.remove("visible");s.classList.remove("visible");return;}
+p.disabled=(currentSectionIndex===0);
+s.disabled=(currentSectionIndex===sectionIds.length-1);
+}
+function resetSlides(){
+document.body.classList.remove("slides-mode");
+slideNavigation.style.display="none";
+currentSlides=[];currentSlideIndex=0;currentSlideSection=null;slideMode=false;
+}
+function showSection(id,button){
+const ni=sectionIds.indexOf(id);
+const current=document.getElementById(id);
+if(!current||ni===-1)return;
+if(slideMode&&currentSlideSection)desactiverModeDiapositives(currentSlideSection);
+resetSlides();
+document.querySelectorAll("body > section").forEach(s=>s.classList.remove("active","animationSection"));
+document.querySelectorAll("nav button").forEach(b=>{b.classList.remove("btnActive");b.removeAttribute("aria-pressed");});
+fermerTousLesMenus();
+currentSectionIndex=ni;
+document.body.classList.add("section-open");
+current.classList.add("active","animationSection");
+["btnRetourMenu","btnSectionPrecedente","btnSectionSuivante"].forEach(i=>document.getElementById(i).classList.add("visible"));
+actualiserBoutonsNavigation();
+if(!button)button=document.querySelectorAll("nav button")[ni];
+if(button){button.classList.add("btnActive");button.setAttribute("aria-pressed","true");}
+window.scrollTo({top:0,behavior:"auto"});
+requestAnimationFrame(actualiserAffichageSection);
+}
+function naviguerSection(d){
+const ni=currentSectionIndex+d;
+if(ni<0||ni>=sectionIds.length)return;
+showSection(sectionIds[ni],document.querySelectorAll("nav button")[ni]);
+}
+function retourMenu(){
+if(slideMode&&currentSlideSection)desactiverModeDiapositives(currentSlideSection);
+resetSlides();
+document.querySelectorAll("body > section").forEach(s=>s.classList.remove("active","animationSection"));
+["btnRetourMenu","btnSectionPrecedente","btnSectionSuivante"].forEach(i=>document.getElementById(i).classList.remove("visible"));
+currentSectionIndex=-1;
+document.body.classList.remove("section-open");
+requestAnimationFrame(()=>{
+const menu=document.querySelector("nav");
+if(menu)window.scrollTo({top:Math.max(0,menu.getBoundingClientRect().top+window.scrollY-12),behavior:"smooth"});
+});
+}
+window.addEventListener("resize",()=>{
+clearTimeout(resizeTimer);
+resizeTimer=setTimeout(()=>{
+const section=document.querySelector("body > section.active");
+if(!section)return;
+if(zoomImportant()){
+if(!slideMode||currentSlideSection!==section)activerModeDiapositives(section);
+else{const a=currentSlideIndex;creerDiapositives(section);if(currentSlides.length>0)afficherDiapositive(Math.min(a,currentSlides.length-1));}
+}else if(slideMode)desactiverModeDiapositives(section);
+},180);
+});
+document.addEventListener("keydown",e=>{
+if(!slideMode)return;
+const el=document.activeElement;
+if(el&&(["INPUT","TEXTAREA","SELECT"].includes(el.tagName)||el.isContentEditable))return;
+if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();naviguerDiapositive(1);}
+if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();naviguerDiapositive(-1);}
+});
+document.addEventListener("DOMContentLoaded",()=>{
+slideNavigation.style.display="none";
+document.body.classList.remove("slides-mode","section-open");
+document.querySelectorAll("body > section").forEach(s=>{s.classList.remove("active","animationSection");memoriserContenu(s);});
+["btnRetourMenu","btnSectionPrecedente","btnSectionSuivante"].forEach(i=>document.getElementById(i).classList.remove("visible"));
+currentSectionIndex=-1;
+});
+</script>
+</body>
+</html>
+
